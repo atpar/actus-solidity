@@ -1,0 +1,50 @@
+[
+    {
+        "eventDate": "2013-01-01T00:00:00.000Z",
+        "eventType": "3",
+        "eventValue": -3000,
+        "nominalValue": 3000,
+        "nominalRate": 0.1,
+        "nominalAccrued": 0
+    },
+    {
+        "eventDate": "2013-01-01T00:00:00.000Z",
+        "eventType": "4",
+        "eventValue": 0,
+        "nominalValue": 3000,
+        "nominalRate": 0.1,
+        "nominalAccrued": 0
+    },
+    {
+        "eventDate": "2014-01-01T00:00:00.000Z",
+        "eventType": "4",
+        "eventValue": 300,
+        "nominalValue": 3000,
+        "nominalRate": 0.1,
+        "nominalAccrued": 0
+    },
+    {
+        "eventDate": "2015-01-01T00:00:00.000Z",
+        "eventType": "4",
+        "eventValue": 300,
+        "nominalValue": 3000,
+        "nominalRate": 0.1,
+        "nominalAccrued": 0
+    },
+    {
+        "eventDate": "2016-01-01T00:00:00.000Z",
+        "eventType": "4",
+        "eventValue": 300,
+        "nominalValue": 3000,
+        "nominalRate": 0.1,
+        "nominalAccrued": 0
+    },
+    {
+        "eventDate": "2016-01-01T00:00:00.000Z",
+        "eventType": "5",
+        "eventValue": 3000,
+        "nominalValue": 0,
+        "nominalRate": 0,
+        "nominalAccrued": 0
+    }
+]

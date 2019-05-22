@@ -1,0 +1,11 @@
+{
+  "contractName": "DayCountConventions",
+  "abi": [],
+  "bytecode": "0x6080604052348015600f57600080fd5b50604380601d6000396000f3fe6080604052600080fdfea265627a7a72305820ba07b40f29620f2f407dbc175ae01362c244c4cde0b878bdfc12c2d4dbc2da016c6578706572696d656e74616cf50037",
+  "compiler": {
+    "name": "solc",
+    "version": "0.5.2+commit.1df8f40c.Emscripten.clang"
+  },
+  "networks": {},
+  "updatedAt": "2019-05-21T21:46:58.695Z"
+}

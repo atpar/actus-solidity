@@ -1,0 +1,46 @@
+{
+  "name": "actus-solidity",
+  "version": "0.0.0",
+  "description": "ACTUS smart contracts",
+  "author": "atpar AG",
+  "authors": [
+    "jo-es <johannes.escherich+github@atpar.io>"
+  ],
+  "license": "Apache-2.0",
+  "repository": "https://github.com/atpar/actus-solidity",
+  "bugs": {
+    "url": "https://github.com/atpar/actus-solidity/issues"
+  },
+  "keywords": [
+    "Ethereum",
+    "Solidity",
+    "ACTUS"
+  ],
+  "files": [
+    "actus-resources",
+    "artifacts/",
+    "contracts/",
+    "deployments/",
+    "scripts/",
+    "test/",
+    "truffle-config.js"
+  ],
+  "scripts": {
+    "build": "npm run compile && npm run generate-artifacts",
+    "compile": "truffle compile",
+    "generate-artifacts": "./scripts/truffle-minimize.sh ./build/contracts ./artifacts",
+    "lint": "solium -d contracts/",
+    "lint:fix": "solium -d contracts/ --fix",
+    "test": "./scripts/test.sh"
+  },
+  "devDependencies": {
+    "bignumber.js": "^7.2.1",
+    "csvtojson": "^2.0.8",
+    "eth-sig-util": "2.1.1",
+    "ethlint": "^1.2.3",
+    "openzeppelin-solidity": "^2.1.2",
+    "openzeppelin-test-helpers": "^0.1.2",
+    "truffle": "^5.0.2",
+    "web3-utils": "1.0.0-beta.46"
+  }
+}

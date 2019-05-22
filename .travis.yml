@@ -1,0 +1,27 @@
+sudo: false
+
+group: beta
+
+language: node_js
+
+node_js:
+  - "8"
+
+before_install:
+  - npm install -g npm
+  - npm install -g ganache-cli truffle
+
+install:
+  - npm install
+
+script:
+  - npm run test
+
+deploy:
+  provider: npm
+  email: johannes.escherich+npm@atpar.io
+  api_key:
+    secure: WhpHgCybOO8IGIERTGL677ZOFQca9vnUO5+7ndzQK7K6ToQxlyTUTRpXgWU7T0SgqWDLrBi0zCXSs8ycC6x7+mZuf1mSAacS7z7CiB/oRyfMmHvANbjZx8wQu3hrbPChbe+fAoNoNuVivscsl8fDJerG0ns5UWN4fcRdkOpSqVjhEBTrhA3V+ilNa3W0tYZNKCrgJ6QaOH1LxHBB3LS0pZxEhC5sMznpjPe5lLR270XhwEBIs55hURzkBztknMTDYqPJov/PCP77YHpAVazCy97oaeHu7R7BXUFB3unrFF0bGsHc2DPal9iqnJPfAdR3G/VH7dIgtS3sSClpdUWq6SoDz4z/ZyRqHdVh2ee47oI3wBZtoWQPArB+1bljrN8IQCRLmkE0jlRfOdr36E0JGfsii3dDxA2nPbD/Xu+U/bLnGxIzaQ2RZhg1774dmqi3VWJwA4IySAs/BLkw/dOCTW9QUFA9lMu0kxZdJBCokAZJVroJFa5gucpUnBD+lSrH7jcL0Mq6LWc5JCyGHXHc2M7Kw4PPLAn5f/Gb1v8zZRFXHiaErNXavn06DZbJY18J/+kbfFnIW0R0T5AXFWYj/8Dz4sgKlwQ/aMOrhUZ1pQZ6APoRONhmjBJDpaxCJY//8k3jWWoZoxx2EZalKMoOvw7qlf2ZgmhKFNweNBIEeT4=
+  on:
+    branch: master
+    tags: true
