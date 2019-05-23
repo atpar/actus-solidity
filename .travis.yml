@@ -8,11 +8,13 @@ before_install:
 - npm install -g ganache-cli truffle
 install: yarn
 script:
+- npm run build
 - npm run test
 deploy:
   provider: npm
   email: "$NPM_EMAIL"
   api_key: "$NPM_TOKEN"
+  skip_cleanup: true
   on:
     tags: true
     repo: atpar/actus-solidity

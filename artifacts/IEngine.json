@@ -1402,11 +1402,12 @@
       "type": "function"
     }
   ],
+  "metadata": "",
   "bytecode": "0x",
   "compiler": {
     "name": "solc",
     "version": "0.5.2+commit.1df8f40c.Emscripten.clang"
   },
   "networks": {},
-  "updatedAt": "2019-05-21T21:46:58.686Z"
+  "updatedAt": "2019-05-23T17:26:42.619Z"
 }
