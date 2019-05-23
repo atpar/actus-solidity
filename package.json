@@ -19,6 +19,7 @@
   "files": [
     "actus-resources",
     "artifacts/",
+    "build/",
     "contracts/",
     "deployments/",
     "scripts/",
