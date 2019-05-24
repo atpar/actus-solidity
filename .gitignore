@@ -2,6 +2,7 @@
 build/
 
 # confidential
+mnemonic.js
 ref-test-results/
 ref-test-terms/
 

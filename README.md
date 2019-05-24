@@ -35,3 +35,11 @@ yarn install
 # contracts/
 yarn test
 ```
+
+### Deployments
+| Network  | FloatMath                                  | PAMEngine                                  |
+|----------|--------------------------------------------|--------------------------------------------|
+| Görli    | 0x9240caa74A84C9b0648A1FB1fa5a7F4d9250C313 | 0x598e2Ea93b68F8a0B5fDb259E81ee59f10f7ac4A |
+| Kovan    | 0xd48E171D4869271e0ED90C7B0F131a01988ab50e | 0xF3cff5a88aFf021976bb1Fa421Ed2f5d4C299E32 |
+| Rinkeby  | 0xd48E171D4869271e0ED90C7B0F131a01988ab50e | 0xF3cff5a88aFf021976bb1Fa421Ed2f5d4C299E32 | 
+| Ropsten  | 0xd48E171D4869271e0ED90C7B0F131a01988ab50e | 0xF3cff5a88aFf021976bb1Fa421Ed2f5d4C299E32 |

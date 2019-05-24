@@ -30,6 +30,10 @@
     "build": "npm run compile && npm run generate-artifacts",
     "compile": "truffle compile",
     "generate-artifacts": "./scripts/truffle-minimize.sh ./build/contracts ./artifacts",
+    "migrate:goerli": "truffle migrate --network goerli",
+    "migrate:kovan": "truffle migrate --network kovan",
+    "migrate:rinkeby": "truffle migrate --network rinkeby",
+    "migrate:ropsten": "truffle migrate --network ropsten",
     "lint": "solium -d contracts/",
     "lint:fix": "solium -d contracts/ --fix",
     "test": "./scripts/test.sh"
@@ -42,6 +46,7 @@
     "openzeppelin-solidity": "^2.1.2",
     "openzeppelin-test-helpers": "^0.1.2",
     "truffle": "^5.0.2",
+    "truffle-hdwallet-provider": "^1.0.9",
     "web3-utils": "1.0.0-beta.46"
   }
 }
