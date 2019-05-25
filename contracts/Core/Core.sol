@@ -45,14 +45,16 @@ contract Core is Definitions, DayCountConventions, EndOfMonthConventions {
 		returns (int256)
 	{
 		require(endTimestamp >= startTimestamp, "Core.yearFraction: UNMET_CONDITION");
-		if (ipdc == DayCountConvention.A_360) {
-			return int256(actualThreeSixty(startTimestamp, endTimestamp));
+		if (ipdc == DayCountConvention.A_AISDA) {
+			return actualActualISDA(startTimestamp, endTimestamp);
+		} else if (ipdc == DayCountConvention.A_360) {
+			return actualThreeSixty(startTimestamp, endTimestamp);
 		} else if (ipdc == DayCountConvention.A_365) {
-			return int256(actualThreeSixtyFive(startTimestamp, endTimestamp));
+			return actualThreeSixtyFive(startTimestamp, endTimestamp);
 		} else if (ipdc == DayCountConvention._30E_360) {
-			return int256(thirtyEThreeSixty(startTimestamp, endTimestamp));
+			return thirtyEThreeSixty(startTimestamp, endTimestamp);
 		} else {
-			return 1;
+			return 1000000000000000000;
 		}
 	}
 
