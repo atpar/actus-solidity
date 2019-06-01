@@ -28,85 +28,14 @@
       "payable": false,
       "stateMutability": "view",
       "type": "function"
-    },
-    {
-      "constant": true,
-      "inputs": [
-        {
-          "name": "self",
-          "type": "int256"
-        },
-        {
-          "name": "b",
-          "type": "int256"
-        }
-      ],
-      "name": "floatMult",
-      "outputs": [
-        {
-          "name": "",
-          "type": "int256"
-        }
-      ],
-      "payable": false,
-      "stateMutability": "pure",
-      "type": "function"
-    },
-    {
-      "constant": true,
-      "inputs": [
-        {
-          "name": "self",
-          "type": "int256"
-        },
-        {
-          "name": "b",
-          "type": "int256"
-        }
-      ],
-      "name": "floatDiv",
-      "outputs": [
-        {
-          "name": "",
-          "type": "int256"
-        }
-      ],
-      "payable": false,
-      "stateMutability": "pure",
-      "type": "function"
     }
   ],
-  "metadata": "{\"compiler\":{\"version\":\"0.5.2+commit.1df8f40c\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"constant\":true,\"inputs\":[{\"name\":\"self\",\"type\":\"int256\"},{\"name\":\"b\",\"type\":\"int256\"}],\"name\":\"floatDiv\",\"outputs\":[{\"name\":\"\",\"type\":\"int256\"}],\"payable\":false,\"stateMutability\":\"pure\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"MULTIPLICATOR\",\"outputs\":[{\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"name\":\"self\",\"type\":\"int256\"},{\"name\":\"b\",\"type\":\"int256\"}],\"name\":\"floatMult\",\"outputs\":[{\"name\":\"\",\"type\":\"int256\"}],\"payable\":false,\"stateMutability\":\"pure\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"PRECISION\",\"outputs\":[{\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"}],\"devdoc\":{\"methods\":{\"floatMult(int256,int256)\":{\"details\":\"The product of self and b has to be less than INT256_MAX (~10 ** 76), as devision (normalization) is performed after multiplication Upper boundary would be (10 ** 58) * (MULTIPLICATOR) == ~10 ** 76\"}}},\"userdoc\":{\"methods\":{}}},\"settings\":{\"compilationTarget\":{\"/Users/johannes/Documents/dev/actus-protocol/actus-solidity/contracts/Core/FloatMath.sol\":\"FloatMath\"},\"evmVersion\":\"byzantium\",\"libraries\":{},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[]},\"sources\":{\"/Users/johannes/Documents/dev/actus-protocol/actus-solidity/contracts/Core/FloatMath.sol\":{\"keccak256\":\"0xd20a8b9ca421fe88820209eb5a46426586b4aade7dcb2ba682c00d7aed26193e\",\"urls\":[\"bzzr://ff18ab84461698176cd5b91bab3c85209a6800218d18e30493a85981ad7d9ba2\"]}},\"version\":1}",
-  "bytecode": "0x6104a7610030600b82828239805160001a6073146000811461002057610022565bfe5b5030600052607381538281f3fe7300000000000000000000000000000000000000003014608060405260043610610072577c0100000000000000000000000000000000000000000000000000000000600035046308c8e60781146100775780630b540720146100ac57806372446d42146100b4578063aaf5eb68146100d7575b600080fd5b61009a6004803603604081101561008d57600080fd5b50803590602001356100df565b60408051918252519081900360200190f35b61009a610253565b61009a600480360360408110156100ca57600080fd5b508035906020013561025f565b61009a610383565b60008115156101225760405160e560020a62461bcd0281526004018080602001828103825260228152602001806103ae6022913960400191505060405180910390fd5b8215156101315750600061024d565b670de0b6b3a764000083810290848281151561014957fe5b05146101895760405160e560020a62461bcd0281526004018080602001828103825260258152602001806104006025913960400191505060405180910390fd5b826000191480156101b957507f800000000000000000000000000000000000000000000000000000000000000084145b156101f85760405160e560020a62461bcd0281526004018080602001828103825260258152602001806103896025913960400191505060405180910390fd5b6000838281151561020557fe5b0590508015156102495760405160e560020a62461bcd0281526004018080602001828103825260308152602001806103d06030913960400191505060405180910390fd5b9150505b92915050565b670de0b6b3a764000081565b600082158061026c575081155b156102795750600061024d565b826000191480156102a957507f800000000000000000000000000000000000000000000000000000000000000082145b156102e85760405160e560020a62461bcd0281526004018080602001828103825260268152602001806104566026913960400191505060405180910390fd5b8282028284828115156102f757fe5b05146103375760405160e560020a62461bcd0281526004018080602001828103825260268152602001806104566026913960400191505060405180910390fd5b670de0b6b3a764000081058015156102495760405160e560020a62461bcd0281526004018080602001828103825260318152602001806104256031913960400191505060405180910390fd5b60128156fe466c6f61744d4154482e666c6f61744469763a204f564552464c4f575f4445544543544544466c6f61744d6174682e666c6f61744469763a204449564944454442595f5a45524f466c6f61744d6174682e666c6f61744469763a2043414e4e4f545f524550524553454e545f4752414e554c4152495459466c6f61744d6174682e666c6f61744469763a204f564552464c4f575f4445544543544544466c6f61744d6174682e666c6f61744d756c743a2043414e4e4f545f524550524553454e545f4752414e554c4152495459466c6f61744d6174682e666c6f61744d756c743a204f564552464c4f575f4445544543544544a165627a7a7230582084d9aa91bae1fec9d29d6c36ddd1be72c9c1a5a1e577ea0ed21bd1b346a223520029",
+  "metadata": "{\"compiler\":{\"version\":\"0.5.2+commit.1df8f40c\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"constant\":true,\"inputs\":[],\"name\":\"MULTIPLICATOR\",\"outputs\":[{\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"PRECISION\",\"outputs\":[{\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"}],\"devdoc\":{\"methods\":{}},\"userdoc\":{\"methods\":{}}},\"settings\":{\"compilationTarget\":{\"/Users/johannes/Documents/dev/actus-protocol/actus-solidity/contracts/Core/FloatMath.sol\":\"FloatMath\"},\"evmVersion\":\"byzantium\",\"libraries\":{},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[]},\"sources\":{\"/Users/johannes/Documents/dev/actus-protocol/actus-solidity/contracts/Core/FloatMath.sol\":{\"keccak256\":\"0x71718cf44d269061771a723614bf690529e9b075a1f097e4da1d6df403bf569a\",\"urls\":[\"bzzr://ed403773f4f2e44d37057a90dd1de129d4db9ed15e21c8b64f49918454b8caa7\"]}},\"version\":1}",
+  "bytecode": "0x60b961002f600b82828239805160001a6073146000811461001f57610021565bfe5b5030600052607381538281f3fe73000000000000000000000000000000000000000030146080604052600436106059577c010000000000000000000000000000000000000000000000000000000060003504630b5407208114605e578063aaf5eb68146076575b600080fd5b6064607c565b60408051918252519081900360200190f35b60646088565b670de0b6b3a764000081565b60128156fea165627a7a72305820f8abae5b99f2781e606d4673d88727bcba565258e18dc2c298ab3ff0ce49f3f50029",
   "compiler": {
     "name": "solc",
     "version": "0.5.2+commit.1df8f40c.Emscripten.clang"
   },
-  "networks": {
-    "3": {
-      "events": {},
-      "links": {},
-      "address": "0xd48E171D4869271e0ED90C7B0F131a01988ab50e",
-      "transactionHash": "0xfe6e15fd4e6aa76528af154ba317a91075b079e57f4988aed21b093d4e1a0ef0"
-    },
-    "4": {
-      "events": {},
-      "links": {},
-      "address": "0xd48E171D4869271e0ED90C7B0F131a01988ab50e",
-      "transactionHash": "0xfe6e15fd4e6aa76528af154ba317a91075b079e57f4988aed21b093d4e1a0ef0"
-    },
-    "5": {
-      "events": {},
-      "links": {},
-      "address": "0x9240caa74A84C9b0648A1FB1fa5a7F4d9250C313",
-      "transactionHash": "0xbc24a4b7fcb8c96257e0f0e74a7d5748e2985bfa989e52fc627325304f7ce492"
-    },
-    "42": {
-      "events": {},
-      "links": {},
-      "address": "0xd48E171D4869271e0ED90C7B0F131a01988ab50e",
-      "transactionHash": "0xfe6e15fd4e6aa76528af154ba317a91075b079e57f4988aed21b093d4e1a0ef0"
-    }
-  },
-  "updatedAt": "2019-05-24T17:48:28.199Z"
+  "networks": {},
+  "updatedAt": "2019-06-01T21:23:02.671Z"
 }
