@@ -84,28 +84,48 @@ contract Core is Definitions, DayCountConventions, EndOfMonthConventions {
 
 	function sortProtoEventSchedule(
 		ProtoEvent[MAX_EVENT_SCHEDULE_SIZE] memory protoEventSchedule,
-		int left,
-		int right
+		uint256 numberOfProtoEvents
 	)
 		internal
 		pure
 	{
-		int i = left;
-		int j = right;
+		quickSortProtoEventSchedule(protoEventSchedule, uint(0), uint(protoEventSchedule.length - 1));
 
-		if (i==j || i == 0 || j == 0) return;
+		for (uint256 i = 0; i < numberOfProtoEvents; i++) {
+			protoEventSchedule[i] = protoEventSchedule[protoEventSchedule.length - numberOfProtoEvents + i];
+			delete protoEventSchedule[protoEventSchedule.length - numberOfProtoEvents + i];
+		}
+	}
 
-		uint pivot = protoEventSchedule[uint(left + (right - left) / 2)].scheduledTimeWithEpochOffset;
+	function quickSortProtoEventSchedule(
+		ProtoEvent[MAX_EVENT_SCHEDULE_SIZE] memory protoEventSchedule,
+		uint left,
+		uint right
+	)
+		internal
+		pure
+	{
+		uint i = left;
+		uint j = right;
 
+		if (i == j) return;
+
+		// pick event in the middle of the schedule
+		uint pivot = protoEventSchedule[left + (right - left) / 2].scheduledTimeWithEpochOffset;
+
+		// do until pivot event is reached
 		while (i <= j) {
-			while (protoEventSchedule[uint(i)].scheduledTimeWithEpochOffset < pivot) i++;
-			while (pivot < protoEventSchedule[uint(j)].scheduledTimeWithEpochOffset) j--;
+			// search for event that is scheduled later than the pivot event
+			while (protoEventSchedule[i].scheduledTimeWithEpochOffset < pivot) i++;
+			// search for event that is scheduled earlier than the pivot event
+			while (pivot < protoEventSchedule[j].scheduledTimeWithEpochOffset) j--;
+			// if the event that is scheduled later comes before the event that is scheduled earlier, swap events
 			if (i <= j) {
 				(
-					protoEventSchedule[uint(i)], protoEventSchedule[uint(j)]
+					protoEventSchedule[i], protoEventSchedule[j]
 				) = (
-					protoEventSchedule[uint(j)],
-					protoEventSchedule[uint(i)]
+					protoEventSchedule[j],
+					protoEventSchedule[i]
 				);
 				i++;
 				j--;
@@ -113,9 +133,9 @@ contract Core is Definitions, DayCountConventions, EndOfMonthConventions {
 		}
 
 		if (left < j)
-			sortProtoEventSchedule(protoEventSchedule, left, j);
+			quickSortProtoEventSchedule(protoEventSchedule, left, j);
 		if (i < right)
-			sortProtoEventSchedule(protoEventSchedule, i, right);
+			quickSortProtoEventSchedule(protoEventSchedule, i, right);
 	}
 
 	/**
@@ -167,6 +187,32 @@ contract Core is Definitions, DayCountConventions, EndOfMonthConventions {
 		return newTimestamp;
 	}
 
+	function getNextCycleDate(IPS memory cycle, uint256 cycleStart, uint256 cycleIndex)
+		internal
+		pure
+		returns (uint256)
+	{
+		uint256 newTimestamp;
+
+		if (cycle.p == P.D) {
+			newTimestamp = BokkyPooBahsDateTimeLibrary.addDays(cycleStart, cycle.i * cycleIndex);
+		} else if (cycle.p == P.W) {
+			newTimestamp = BokkyPooBahsDateTimeLibrary.addDays(cycleStart, cycle.i * 7 * cycleIndex);
+		} else if (cycle.p == P.M) {
+			newTimestamp = BokkyPooBahsDateTimeLibrary.addMonths(cycleStart, cycle.i * cycleIndex);
+		} else if (cycle.p == P.Q) {
+			newTimestamp = BokkyPooBahsDateTimeLibrary.addMonths(cycleStart, cycle.i * 3 * cycleIndex);
+		} else if (cycle.p == P.H) {
+			newTimestamp = BokkyPooBahsDateTimeLibrary.addMonths(cycleStart, cycle.i * 6 * cycleIndex);
+		} else if (cycle.p == P.Y) {
+			newTimestamp = BokkyPooBahsDateTimeLibrary.addYears(cycleStart, cycle.i * cycleIndex);
+		} else {
+			revert("Core.getNextCycleDate: ATTRIBUTE_NOT_FOUND");
+		}
+
+		return newTimestamp;
+	}
+
 	function computeDatesFromCycleSegment(
 		uint256 cycleStart,
 		uint256 cycleEnd,
@@ -198,6 +244,7 @@ contract Core is Definitions, DayCountConventions, EndOfMonthConventions {
 
 		EndOfMonthConvention actualEOMC = getEndOfMonthConvention(eomc, cycleStart, cycle);
 		uint256 date = cycleStart;
+		uint256 cycleIndex = 0;
 
 		while (date < cycleEnd) {
 			if (isInPeriod(date, segmentStart, segmentEnd)) {
@@ -205,10 +252,13 @@ contract Core is Definitions, DayCountConventions, EndOfMonthConventions {
 				dates[index] = date;
 				index++;
 			}
+
+			cycleIndex++;
+
 			if (actualEOMC == EndOfMonthConvention.EOM) {
-				date = shiftEndOfMonth(getTimestampPlusPeriod(cycle, date));
+				date = shiftEndOfMonth(getNextCycleDate(cycle, cycleStart, cycleIndex));
 			} else {
-				date = shiftSameDay(getTimestampPlusPeriod(cycle, date));
+				date = shiftSameDay(getNextCycleDate(cycle, cycleStart, cycleIndex));
 			}
 		}
 
