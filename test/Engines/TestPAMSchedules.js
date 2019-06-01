@@ -54,12 +54,12 @@ contract('PAMEngine', () => {
   })
 
   // requires AISDA
-  // it('should yield the expected evaluated contract schedule for test PAM10003', async () => {
-  //   const contractTerms = this.testTerms['10003']
-  //   const evaluatedSchedule = await evaluateEventSchedule(contractTerms)
+  it('should yield the expected evaluated contract schedule for test PAM10003', async () => {
+    const contractTerms = this.testTerms['10003']
+    const evaluatedSchedule = await evaluateEventSchedule(contractTerms)
 
-  //   assert.deepEqual(evaluatedSchedule, this.refTestResults['10003'])
-  // })
+    assert.deepEqual(evaluatedSchedule, this.refTestResults['10003'])
+  })
 
   it('should yield the expected evaluated contract schedule for test PAM10004', async () => {
     const contractTerms = this.testTerms['10004']
