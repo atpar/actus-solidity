@@ -15,7 +15,7 @@ contract Core is Definitions, DayCountConventions, EndOfMonthConventions {
 		pure
 		returns (int8)
 	{
-		if (contractStatus == ContractStatus.DF) { return 0; }
+		if (contractStatus == ContractStatus.DF) return 0;
 		return 1;
 	}
 
@@ -24,8 +24,8 @@ contract Core is Definitions, DayCountConventions, EndOfMonthConventions {
 		pure
 		returns (int8)
 	{
-		if (contractRole == ContractRole.RPA) { return 1; }
-		if (contractRole == ContractRole.RPL) { return -1; }
+		if (contractRole == ContractRole.RPA) return 1;
+		if (contractRole == ContractRole.RPL) return -1;
 		revert("Core.roleSign: ATTRIBUTE_NOT_FOUND");
 	}
 
@@ -63,24 +63,24 @@ contract Core is Definitions, DayCountConventions, EndOfMonthConventions {
 		pure
 		returns (uint256)
 	{
-		if (eventType == EventType.IED) { return 20; }
-		if (eventType == EventType.IP) { return 30; }
-		if (eventType == EventType.IPCI) { return 40; }
-		if (eventType == EventType.FP) { return 50; }
-		if (eventType == EventType.DV) { return 60; }
-		if (eventType == EventType.PR) { return 70; }
-		if (eventType == EventType.MR) { return 80; }
-		if (eventType == EventType.RRY) { return 90; }
-		if (eventType == EventType.RR) { return 100; }
-		if (eventType == EventType.SC) { return 110; }
-		if (eventType == EventType.IPCB) { return 120; }
-		if (eventType == EventType.PRD) { return 130; }
-		if (eventType == EventType.TD) { return 140; }
-		if (eventType == EventType.STD) { return 150; }
-		if (eventType == EventType.MD) { return 160; }
-		if (eventType == EventType.SD) { return 900; }
-		if (eventType == EventType.AD) { return 950; }
-		if (eventType == EventType.Child) { return 10; }
+		if (eventType == EventType.IED) return 20;
+		if (eventType == EventType.IP) return 30;
+		if (eventType == EventType.IPCI) return 40;
+		if (eventType == EventType.FP) return 50;
+		if (eventType == EventType.DV) return 60;
+		if (eventType == EventType.PR) return 70;
+		if (eventType == EventType.MR) return 80;
+		if (eventType == EventType.RRY) return 90;
+		if (eventType == EventType.RR) return 100;
+		if (eventType == EventType.SC) return 110;
+		if (eventType == EventType.IPCB) return 120;
+		if (eventType == EventType.PRD) return 130;
+		if (eventType == EventType.TD) return 140;
+		if (eventType == EventType.STD) return 150;
+		if (eventType == EventType.MD) return 160;
+		if (eventType == EventType.SD) return 900;
+		if (eventType == EventType.AD) return 950;
+		if (eventType == EventType.Child) return 10;
 		return 0;
 	}
 
@@ -134,10 +134,8 @@ contract Core is Definitions, DayCountConventions, EndOfMonthConventions {
 			}
 		}
 
-		if (left < j)
-			quickSortProtoEventSchedule(protoEventSchedule, left, j);
-		if (i < right)
-			quickSortProtoEventSchedule(protoEventSchedule, i, right);
+		if (left < j) quickSortProtoEventSchedule(protoEventSchedule, left, j);
+		if (i < right) quickSortProtoEventSchedule(protoEventSchedule, i, right);
 	}
 
 	/**
@@ -157,9 +155,7 @@ contract Core is Definitions, DayCountConventions, EndOfMonthConventions {
 		pure
 		returns (bool)
 	{
-		if (startTimestamp < timestamp && endTimestamp >= timestamp) {
-			return true;
-		}
+		if (startTimestamp < timestamp && endTimestamp >= timestamp) return true;
 		return false;
 	}
 
@@ -237,7 +233,7 @@ contract Core is Definitions, DayCountConventions, EndOfMonthConventions {
 				index++;
 			}
 			if (isInPeriod(cycleEnd, segmentStart, segmentEnd)) {
-				if (addEndTime == true) { dates[index] = cycleEnd; }
+				if (addEndTime == true) dates[index] = cycleEnd;
 			}
 			return dates;
 		}

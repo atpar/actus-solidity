@@ -13,12 +13,12 @@ async function getTestCases () {
 }
 
 async function getTestResults () {
-  const files = []
-  const testResults = {}
+  const files = [];
+  const testResults = {};
 
   fs.readdirSync(PAMTestResultDirectory).forEach(file => {
-    if (file.split('.')[1] !== 'csv') { return }
-    files.push(file)
+    if (file.split('.')[1] !== 'csv') { return; }
+    files.push(file);
   })
 
   let promises = files.map(async (file) => {
@@ -27,8 +27,8 @@ async function getTestResults () {
     testResults[testName] = result;
   })
 
-  await Promise.all(promises)
-  return testResults
+  await Promise.all(promises);
+  return testResults;
 }
 
 function getContractTypeAsText (contractType) {
@@ -49,7 +49,7 @@ function getContractTypeAsText (contractType) {
 
   const testResults = await getTestResults();  
   for (testResult of Object.keys(testResults)) {
-    const fileName = 'Result-' + testResult
+    const fileName = 'Result-' + testResult;
     fs.writeFileSync(OUTPUT_DIR_RESULTS + fileName + '.json', JSON.stringify(testResults[testResult], null, 4));
   }
 
@@ -57,4 +57,4 @@ function getContractTypeAsText (contractType) {
 })();
 
 
-process.on('uncaughtException', (err) => console.log(err))
+process.on('uncaughtException', (err) => console.log(err));

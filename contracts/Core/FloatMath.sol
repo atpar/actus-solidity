@@ -18,7 +18,7 @@ library FloatMath {
 		pure
 		returns (int256)
 	{
-		if (a == 0 || b == 0) { return 0; }
+		if (a == 0 || b == 0) return 0;
 
 		require(!(a == -1 && b == INT256_MIN), "FloatMath.floatMult: OVERFLOW_DETECTED");
 		int256 c = a * b;
@@ -39,7 +39,7 @@ library FloatMath {
 		require(b != 0, "FloatMath.floatDiv: DIVIDEDBY_ZERO");
 
 		// normalize (multiply by MULTIPLICATOR)
-		if (a == 0) { return 0; }
+		if (a == 0) return 0;
 		int256 c = a * int256(MULTIPLICATOR);
 		require(c / a == int256(MULTIPLICATOR), "FloatMath.floatDiv: OVERFLOW_DETECTED");
 

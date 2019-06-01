@@ -8,10 +8,8 @@
     "indentation": "off",
     "linebreak-style": "off",
     "no-empty-blocks": "off",
-    "whitespace": "off",
     "operator-whitespace": "off",
     "lbrace": "off",
-    "no-experimental": "off",
-    "mixedcase": "off"
+    "no-experimental": "off"
   }
 }

@@ -64,7 +64,7 @@ contract PAMEngine is Core, IEngine {
 		);
 
 		for (uint8 index = 0; index < MAX_EVENT_SCHEDULE_SIZE; index++) {
-			if (pendingProtoEventSchedule[index].scheduledTime == 0) { continue; }
+			if (pendingProtoEventSchedule[index].scheduledTime == 0) continue;
 
 			nextContractEvents[index] = ContractEvent(
 				pendingProtoEventSchedule[index].scheduledTime,
@@ -202,9 +202,12 @@ contract PAMEngine is Core, IEngine {
 			}
 			for (uint8 i = 0; i < MAX_CYCLE_SIZE; i++) {
 				if (interestPaymentSchedule[i] != 0) {
-					if (isInPeriod(interestPaymentSchedule[i], segmentStart, segmentEnd) == false) { continue; }
-					if (contractTerms.capitalizationEndDate != 0 && interestPaymentSchedule[i] <= contractTerms.capitalizationEndDate) {
-						if (interestPaymentSchedule[i] == contractTerms.capitalizationEndDate) { continue; }
+					if (isInPeriod(interestPaymentSchedule[i], segmentStart, segmentEnd) == false) continue;
+					if (
+						contractTerms.capitalizationEndDate != 0 &&
+						interestPaymentSchedule[i] <= contractTerms.capitalizationEndDate
+					) {
+						if (interestPaymentSchedule[i] == contractTerms.capitalizationEndDate) continue;
 						protoEventSchedule[index] = ProtoEvent(
 							interestPaymentSchedule[i],
 							interestPaymentSchedule[i].add(getEpochOffset(EventType.IPCI)),
@@ -225,7 +228,7 @@ contract PAMEngine is Core, IEngine {
 						);
 						index++;
 					}
-				} else { break; }
+				} else break;
 			}
 		}
 		// capitalization end date
@@ -256,7 +259,7 @@ contract PAMEngine is Core, IEngine {
 			);
 			for (uint8 i = 0; i < MAX_CYCLE_SIZE; i++) {
 				if (rateResetSchedule[i] != 0) {
-					if (isInPeriod(rateResetSchedule[i], segmentStart, segmentEnd) == false) { continue; }
+					if (isInPeriod(rateResetSchedule[i], segmentStart, segmentEnd) == false) continue;
 					protoEventSchedule[index] = ProtoEvent(
 						rateResetSchedule[i],
 						rateResetSchedule[i].add(getEpochOffset(EventType.RR)),
@@ -266,7 +269,7 @@ contract PAMEngine is Core, IEngine {
 						EventType.RR
 					);
 					index++;
-				} else { break; }
+				} else break;
 			}
 			// ... nextRateReset
 		}
@@ -284,7 +287,7 @@ contract PAMEngine is Core, IEngine {
 			);
 			for (uint8 i = 0; i < MAX_CYCLE_SIZE; i++) {
 				if (feeSchedule[i] != 0) {
-					if (isInPeriod(feeSchedule[i], segmentStart, segmentEnd) == false) { continue; }
+					if (isInPeriod(feeSchedule[i], segmentStart, segmentEnd) == false) continue;
 					protoEventSchedule[index] = ProtoEvent(
 						feeSchedule[i],
 						feeSchedule[i].add(getEpochOffset(EventType.FP)),
@@ -294,7 +297,7 @@ contract PAMEngine is Core, IEngine {
 						EventType.FP
 					);
 					index++;
-				} else { break; }
+				} else break;
 			}
 		}
 
@@ -313,7 +316,7 @@ contract PAMEngine is Core, IEngine {
 			);
 			for (uint8 i = 0; i < MAX_CYCLE_SIZE; i++) {
 				if (scalingSchedule[i] != 0) {
-					if (isInPeriod(scalingSchedule[i], segmentStart, segmentEnd) == false) { continue; }
+					if (isInPeriod(scalingSchedule[i], segmentStart, segmentEnd) == false) continue;
 					protoEventSchedule[index] = ProtoEvent(
 						scalingSchedule[i],
 						scalingSchedule[i].add(getEpochOffset(EventType.SC)),
@@ -323,7 +326,7 @@ contract PAMEngine is Core, IEngine {
 						EventType.SC
 					);
 					index++;
-				} else { break; }
+				} else break;
 			}
 		}
 
@@ -576,12 +579,12 @@ contract PAMEngine is Core, IEngine {
 		pure
 		returns (int256 payoff)
 	{
-		if (eventType == EventType.AD) { return 0; }
-		if (eventType == EventType.CD) { return 0; }
-		if (eventType == EventType.IPCI) { return 0; }
-		if (eventType == EventType.RRY) { return 0; }
-		if (eventType == EventType.RR) { return 0; }
-		if (eventType == EventType.SC) { return 0; }
+		if (eventType == EventType.AD) return 0;
+		if (eventType == EventType.CD) return 0;
+		if (eventType == EventType.IPCI) return 0;
+		if (eventType == EventType.RRY) return 0;
+		if (eventType == EventType.RR) return 0;
+		if (eventType == EventType.SC) return 0;
 		if (eventType == EventType.FP) {
 			if (contractTerms.feeBasis == FeeBasis.A) {
 				return (
@@ -672,7 +675,7 @@ contract PAMEngine is Core, IEngine {
 				// riskFactor(timestamp, contractState, contractTerms, contractTerms.marketObjectCodeOfRateReset);
 				int256 risk = 0;
 				int256 param = 0;
-				if (contractState.nominalRate - risk > 0) { param = contractState.nominalRate - risk; }
+				if (contractState.nominalRate - risk > 0) param = contractState.nominalRate - risk;
 				return (
 					performanceIndicator(contractState.contractStatus)
 					* roleSign(contractTerms.contractRole)
