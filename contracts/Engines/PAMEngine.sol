@@ -187,10 +187,24 @@ contract PAMEngine is Core, IEngine {
 				segmentStart,
 				segmentEnd
 			);
+			if (contractTerms.capitalizationEndDate != 0) {
+				if (isInPeriod(contractTerms.capitalizationEndDate, segmentStart, segmentEnd)) {
+					protoEventSchedule[index] = ProtoEvent(
+						contractTerms.capitalizationEndDate,
+						contractTerms.capitalizationEndDate.add(getEpochOffset(EventType.IPCI)),
+						EventType.IPCI,
+						contractTerms.currency,
+						EventType.IPCI,
+						EventType.IPCI
+					);
+					index++;
+				}
+			}
 			for (uint8 i = 0; i < MAX_CYCLE_SIZE; i++) {
 				if (interestPaymentSchedule[i] != 0) {
 					if (isInPeriod(interestPaymentSchedule[i], segmentStart, segmentEnd) == false) { continue; }
 					if (contractTerms.capitalizationEndDate != 0 && interestPaymentSchedule[i] <= contractTerms.capitalizationEndDate) {
+						if (interestPaymentSchedule[i] == contractTerms.capitalizationEndDate) { continue; }
 						protoEventSchedule[index] = ProtoEvent(
 							interestPaymentSchedule[i],
 							interestPaymentSchedule[i].add(getEpochOffset(EventType.IPCI)),
@@ -341,7 +355,7 @@ contract PAMEngine is Core, IEngine {
 			index++;
 		}
 
-		sortProtoEventSchedule(protoEventSchedule, int(0), int(protoEventSchedule.length - 1));
+		sortProtoEventSchedule(protoEventSchedule, index);
 
 		return protoEventSchedule;
 	}
@@ -429,7 +443,7 @@ contract PAMEngine is Core, IEngine {
 		}
 		if (eventType == EventType.IPCI) {
 			contractState.timeFromLastEvent = yearFraction(contractState.lastEventTime, timestamp, contractTerms.dayCountConvention);
-			contractState.nominalAccrued = contractState.nominalAccrued.add(contractState.nominalAccrued.add(contractState.nominalRate.floatMult(contractState.nominalValue).floatMult(contractState.timeFromLastEvent)));
+			contractState.nominalValue = contractState.nominalValue.add(contractState.nominalAccrued.add(contractState.nominalRate.floatMult(contractState.nominalValue).floatMult(contractState.timeFromLastEvent)));
 			contractState.nominalAccrued = 0;
 			contractState.feeAccrued = contractState.feeAccrued.add(contractTerms.feeRate.floatMult(contractState.nominalValue).floatMult(contractState.timeFromLastEvent));
 			contractState.lastEventTime = timestamp;

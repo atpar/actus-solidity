@@ -47,6 +47,7 @@
     "openzeppelin-test-helpers": "^0.1.2",
     "truffle": "^5.0.2",
     "truffle-hdwallet-provider": "^1.0.9",
+    "truffle-security": "^1.4.4",
     "web3-utils": "1.0.0-beta.46"
   }
 }
