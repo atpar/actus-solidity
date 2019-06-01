@@ -13,7 +13,7 @@ Demo: [**ACTUS Solidity Calculator**](https://www.atpar.io/actus-solidity-tool/d
 Contains banking-grade financial logic such as ACTUS day-count & end-of-month conventions, ACTUS datatypes and floating point arithmetic used throughout all ACTUS engines. 
 
 ### Engines
-Contains ACTUS state machine engines for each ACTUS Contract Type. An Engine implements the state transition & payoff functions and the schedule generation logic for an ACTUS Contract Type. An Engine is a stateless smart contract that can be used in various ways (e.g. on-chain or off-chain state derivation).
+Contains ACTUS state machine engines for each ACTUS Contract Type. An Engine implements the state transition & payoff functions and the schedule generation logic for an ACTUS Contract Type. Engines are stateless smart contracts, thus can be used on-chain as well as off-chain (e.g. by using the EVM as a TEE).
 
 ## Development
 
