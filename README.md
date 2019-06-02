@@ -46,3 +46,30 @@ yarn test
 | Kovan    | 0xd48E171D4869271e0ED90C7B0F131a01988ab50e | 0xF3cff5a88aFf021976bb1Fa421Ed2f5d4C299E32 |
 | Rinkeby  | 0xd48E171D4869271e0ED90C7B0F131a01988ab50e | 0xF3cff5a88aFf021976bb1Fa421Ed2f5d4C299E32 | 
 | Ropsten  | 0xd48E171D4869271e0ED90C7B0F131a01988ab50e | 0xF3cff5a88aFf021976bb1Fa421Ed2f5d4C299E32 |
+
+## Implemented Conventions
+- [x] Contract-Role-Sign-Convention (for PAM)
+- [x] Contract-Default-Convention
+
+### Business-Day-Count-Conventions
+- [ ] SCF (Shift/Calculate following)
+- [ ] SCMF (Shift/Calculate modified following)
+- [ ] CSF (Calculate/Shift following)
+- [ ] CSMF (Calculate/Shift modified following)
+- [ ] SCP (Shift/Calculate preceding)
+- [ ] SCMP (Shift/Calculate modified preceding)
+- [ ] CSP (Calculate/Shift preceding)
+- [ ] CSMP (Calculate/Shift modified preceding)
+
+### Year-Fraction-Conventions (Day-Count-Methods)
+- [x] A/AISDA (Actual Actual ISDA)
+- [x] A/360 (Actual Three Sixty)
+- [x] A/365 (Actual Three Sixty Five)
+- [ ] 30E/360ISDA (Thirty E Three Sixty ISDA)
+- [x] 30E/360 (Thirty E Three Sixty)
+- [ ] 30/360 (Thirty Three Sixty)
+- [x] 1/1
+
+### End-Of-Month-Conventions
+- [x] Same Day Shift
+- [x] End-Of-Month Shift
