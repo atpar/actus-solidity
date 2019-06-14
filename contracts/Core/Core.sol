@@ -5,10 +5,11 @@ import "../external/BokkyPooBah/BokkyPooBahsDateTimeLibrary.sol";
 
 import "./Definitions.sol";
 import "./DayCountConventions.sol";
+import "./BusinessDayConventions.sol";
 import "./EndOfMonthConventions.sol";
 
 
-contract Core is Definitions, DayCountConventions, EndOfMonthConventions {
+contract Core is Definitions, DayCountConventions, BusinessDayConventions, EndOfMonthConventions {
 
 	function performanceIndicator(ContractStatus contractStatus)
 		internal
@@ -113,14 +114,14 @@ contract Core is Definitions, DayCountConventions, EndOfMonthConventions {
 		if (i == j) return;
 
 		// pick event in the middle of the schedule
-		uint pivot = protoEventSchedule[left + (right - left) / 2].scheduledTimeWithEpochOffset;
+		uint pivot = protoEventSchedule[left + (right - left) / 2].eventTimeWithEpochOffset;
 
 		// do until pivot event is reached
 		while (i <= j) {
 			// search for event that is scheduled later than the pivot event
-			while (protoEventSchedule[i].scheduledTimeWithEpochOffset < pivot) i++;
+			while (protoEventSchedule[i].eventTimeWithEpochOffset < pivot) i++;
 			// search for event that is scheduled earlier than the pivot event
-			while (pivot < protoEventSchedule[j].scheduledTimeWithEpochOffset) j--;
+			while (pivot < protoEventSchedule[j].eventTimeWithEpochOffset) j--;
 			// if the event that is scheduled later comes before the event that is scheduled earlier, swap events
 			if (i <= j) {
 				(

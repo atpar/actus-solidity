@@ -23,12 +23,12 @@ contract('PAMEngine', () => {
     let contractState = initialContractState;
 
     for (let i = 0; i < 20; i++) {
-      if (protoEventSchedule[i].scheduledTime == 0) { break; }
+      if (protoEventSchedule[i].scheduleTime == 0) { break; }
       const { 0: nextContractState, 1: contractEvent } = await this.PAMEngineInstance.computeNextStateForProtoEvent(
         contractTerms, 
         contractState, 
         protoEventSchedule[i], 
-        protoEventSchedule[i].scheduledTime
+        protoEventSchedule[i].scheduleTime
       );
 
       contractState = nextContractState;
@@ -77,52 +77,52 @@ contract('PAMEngine', () => {
   });
 
   // EOM convention (EOM), Business Day Count conventions
-  // it('should yield the expected evaluated contract schedule for test PAM10007', async () => {
-  //   const contractTerms = this.testTerms['10007'];
-  //   const evaluatedSchedule = await evaluateEventSchedule(contractTerms);
+  it('should yield the expected evaluated contract schedule for test PAM10007', async () => {
+    const contractTerms = this.testTerms['10007'];
+    const evaluatedSchedule = await evaluateEventSchedule(contractTerms);
 
-  //   assert.deepEqual(evaluatedSchedule, this.refTestResults['10007']);
-  // });
-
-  // EOM conventions, Business Day Count conventions
-  // it('should yield the expected evaluated contract schedule for test PAM10008', async () => {
-  //   const contractTerms = this.testTerms['10008'];
-  //   const evaluatedSchedule = await evaluateEventSchedule(contractTerms);
-
-  //   assert.deepEqual(evaluatedSchedule, this.refTestResults['10008']);
-  // });
+    assert.deepEqual(evaluatedSchedule, this.refTestResults['10007']);
+  });
 
   // EOM conventions, Business Day Count conventions
-  // it('should yield the expected evaluated contract schedule for test PAM10009', async () => {
-  //   const contractTerms = this.testTerms['10009'];
-  //   const evaluatedSchedule = await evaluateEventSchedule(contractTerms);
+  it('should yield the expected evaluated contract schedule for test PAM10008', async () => {
+    const contractTerms = this.testTerms['10008'];
+    const evaluatedSchedule = await evaluateEventSchedule(contractTerms);
 
-  //   assert.deepEqual(evaluatedSchedule, this.refTestResults['10009']);
-  // });
+    assert.deepEqual(evaluatedSchedule, this.refTestResults['10008']);
+  });
+
+  // EOM conventions, Business Day Count conventions
+  it('should yield the expected evaluated contract schedule for test PAM10009', async () => {
+    const contractTerms = this.testTerms['10009'];
+    const evaluatedSchedule = await evaluateEventSchedule(contractTerms);
+
+    assert.deepEqual(evaluatedSchedule, this.refTestResults['10009']);
+  });
 
 // EOM conventions, Business Day Count conventions
-  // it('should yield the expected evaluated contract schedule for test PAM10010', async () => {
-  //   const contractTerms = this.testTerms['10010'];
-  //   const evaluatedSchedule = await evaluateEventSchedule(contractTerms);
+  it('should yield the expected evaluated contract schedule for test PAM10010', async () => {
+    const contractTerms = this.testTerms['10010'];
+    const evaluatedSchedule = await evaluateEventSchedule(contractTerms);
 
-  //   assert.deepEqual(evaluatedSchedule, this.refTestResults['10010']);
-  // });
-
-  // EOM conventions, Business Day Count conventions
-  // it('should yield the expected evaluated contract schedule for test PAM10011', async () => {
-  //   const contractTerms = this.testTerms['10011'];
-  //   const evaluatedSchedule = await evaluateEventSchedule(contractTerms);
-
-  //   assert.deepEqual(evaluatedSchedule, this.refTestResults['10011']);
-  // });
+    assert.deepEqual(evaluatedSchedule, this.refTestResults['10010']);
+  });
 
   // EOM conventions, Business Day Count conventions
-  // it('should yield the expected evaluated contract schedule for test PAM10012', async () => {
-  //   const contractTerms = this.testTerms['10012'];
-  //   const evaluatedSchedule = await evaluateEventSchedule(contractTerms);
+  it('should yield the expected evaluated contract schedule for test PAM10011', async () => {
+    const contractTerms = this.testTerms['10011'];
+    const evaluatedSchedule = await evaluateEventSchedule(contractTerms);
 
-  //   assert.deepEqual(evaluatedSchedule, this.refTestResults['10012']);
-  // });
+    assert.deepEqual(evaluatedSchedule, this.refTestResults['10011']);
+  });
+
+  // EOM conventions, Business Day Count conventions
+  it('should yield the expected evaluated contract schedule for test PAM10012', async () => {
+    const contractTerms = this.testTerms['10012'];
+    const evaluatedSchedule = await evaluateEventSchedule(contractTerms);
+
+    assert.deepEqual(evaluatedSchedule, this.refTestResults['10012']);
+  });
 
   // accrued interest for first IP?
   it('should yield the expected evaluated contract schedule for test PAM10016', async () => {

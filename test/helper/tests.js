@@ -63,7 +63,7 @@ async function getTestResults () {
 
 function toTestEvent (contractEvent, contractState) {
   return {
-    'eventDate': unixToISO(contractEvent['scheduledTime']),
+    'eventDate': unixToISO(contractEvent['eventTime']),
     'eventType': contractEvent['eventType'],
     'eventValue': fromPrecision(contractEvent['payoff']),
     'nominalValue': fromPrecision(contractState['nominalValue']),
