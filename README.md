@@ -52,14 +52,14 @@ yarn test
 - [x] Contract-Default-Convention
 
 ### Business-Day-Count-Conventions
-- [ ] SCF (Shift/Calculate following)
-- [ ] SCMF (Shift/Calculate modified following)
-- [ ] CSF (Calculate/Shift following)
-- [ ] CSMF (Calculate/Shift modified following)
-- [ ] SCP (Shift/Calculate preceding)
-- [ ] SCMP (Shift/Calculate modified preceding)
-- [ ] CSP (Calculate/Shift preceding)
-- [ ] CSMP (Calculate/Shift modified preceding)
+- [x] SCF (Shift/Calculate following)
+- [x] SCMF (Shift/Calculate modified following)
+- [x] CSF (Calculate/Shift following)
+- [x] CSMF (Calculate/Shift modified following)
+- [x] SCP (Shift/Calculate preceding)
+- [x] SCMP (Shift/Calculate modified preceding)
+- [x] CSP (Calculate/Shift preceding)
+- [x] CSMP (Calculate/Shift modified preceding)
 
 ### Year-Fraction-Conventions (Day-Count-Methods)
 - [x] A/AISDA (Actual Actual ISDA)
