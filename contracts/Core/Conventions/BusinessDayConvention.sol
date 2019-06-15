@@ -1,11 +1,11 @@
 pragma solidity ^0.5.2;
 
-import "../external/BokkyPooBah/BokkyPooBahsDateTimeLibrary.sol";
+import "../../external/BokkyPooBah/BokkyPooBahsDateTimeLibrary.sol";
 
-import "./Definitions.sol";
+import "../Definitions.sol";
 
 
-contract BusinessDayConventions is Definitions {
+contract BusinessDayConvention is Definitions {
 
   // used in POFs and STFs for DCFs
   function shiftCalcTime(
