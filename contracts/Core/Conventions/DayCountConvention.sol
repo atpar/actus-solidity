@@ -1,15 +1,13 @@
 pragma solidity ^0.5.2;
-pragma experimental ABIEncoderV2;
-
 
 import "openzeppelin-solidity/contracts/math/SafeMath.sol";
 import "openzeppelin-solidity/contracts/drafts/SignedSafeMath.sol";
-import "../external/BokkyPooBah/BokkyPooBahsDateTimeLibrary.sol";
+import "../../external/BokkyPooBah/BokkyPooBahsDateTimeLibrary.sol";
 
-import "./FloatMath.sol";
+import "../FloatMath.sol";
 
 
-contract DayCountConventions {
+contract DayCountConvention {
 
 	using SafeMath for uint;
 	using SignedSafeMath for int;
