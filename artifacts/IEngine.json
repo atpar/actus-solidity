@@ -669,7 +669,7 @@
         {
           "components": [
             {
-              "name": "scheduledTime",
+              "name": "eventTime",
               "type": "uint256"
             },
             {
@@ -995,11 +995,15 @@
         {
           "components": [
             {
-              "name": "scheduledTime",
+              "name": "eventTime",
               "type": "uint256"
             },
             {
-              "name": "scheduledTimeWithEpochOffset",
+              "name": "eventTimeWithEpochOffset",
+              "type": "uint256"
+            },
+            {
+              "name": "scheduleTime",
               "type": "uint256"
             },
             {
@@ -1078,7 +1082,7 @@
         {
           "components": [
             {
-              "name": "scheduledTime",
+              "name": "eventTime",
               "type": "uint256"
             },
             {
@@ -1369,11 +1373,15 @@
         {
           "components": [
             {
-              "name": "scheduledTime",
+              "name": "eventTime",
               "type": "uint256"
             },
             {
-              "name": "scheduledTimeWithEpochOffset",
+              "name": "eventTimeWithEpochOffset",
+              "type": "uint256"
+            },
+            {
+              "name": "scheduleTime",
               "type": "uint256"
             },
             {
@@ -1409,5 +1417,5 @@
     "version": "0.5.2+commit.1df8f40c.Emscripten.clang"
   },
   "networks": {},
-  "updatedAt": "2019-06-01T23:07:19.914Z"
+  "updatedAt": "2019-06-15T15:23:56.801Z"
 }

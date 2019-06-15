@@ -1,0 +1,12 @@
+{
+  "contractName": "DayCountConvention",
+  "abi": [],
+  "metadata": "{\"compiler\":{\"version\":\"0.5.2+commit.1df8f40c\"},\"language\":\"Solidity\",\"output\":{\"abi\":[],\"devdoc\":{\"methods\":{}},\"userdoc\":{\"methods\":{}}},\"settings\":{\"compilationTarget\":{\"/Users/johannes/Documents/dev/actus-protocol/actus-solidity/contracts/Core/Conventions/DayCountConvention.sol\":\"DayCountConvention\"},\"evmVersion\":\"byzantium\",\"libraries\":{},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[]},\"sources\":{\"/Users/johannes/Documents/dev/actus-protocol/actus-solidity/contracts/Core/Conventions/DayCountConvention.sol\":{\"keccak256\":\"0xf12c5dddd0bdd21042307b99c6f49e10e8388082e18d23d479810c5b6e6c2bbc\",\"urls\":[\"bzzr://8c1dcd9d37e9ed903dde32169448faab664eeb482a4414589cd8f98c627f8a70\"]},\"/Users/johannes/Documents/dev/actus-protocol/actus-solidity/contracts/Core/FloatMath.sol\":{\"keccak256\":\"0xc87915b47f5abee81fbe657a32f8937967c880022eb5e0963f54036f42cfbf5c\",\"urls\":[\"bzzr://8cf8fbc4b71edc6d1b3bf2fa70289d0fe554324b9300bfdb733e3268ed2918f9\"]},\"/Users/johannes/Documents/dev/actus-protocol/actus-solidity/contracts/external/BokkyPooBah/BokkyPooBahsDateTimeLibrary.sol\":{\"keccak256\":\"0x55ce115963ca5ee7a98b7b2e644e6decfbfdd70ada0b18e09a60344d9cdfe345\",\"urls\":[\"bzzr://9e24ebbec8dc7775ab45c4e41f9ac1958bb5710daf538df1f5cfd70b27650cb1\"]},\"openzeppelin-solidity/contracts/drafts/SignedSafeMath.sol\":{\"keccak256\":\"0x1595e83a618a9cb0f240820db86dd209c48831b0d186583cd1582b89523a9bd9\",\"urls\":[\"bzzr://d25a9ed067bfa76a87c46d6c421e30da8f485431f33421894651e844ae491adc\"]},\"openzeppelin-solidity/contracts/math/SafeMath.sol\":{\"keccak256\":\"0xc2a200a877c4a9b2475c246c54ffecc69ffde3e11af83319c63c2dc5458bac80\",\"urls\":[\"bzzr://c8876e2c39b60f155d748d71d715c8f3903fae5a405ac599adcb6ad2f9a583f9\"]}},\"version\":1}",
+  "bytecode": "0x6080604052348015600f57600080fd5b50603580601d6000396000f3fe6080604052600080fdfea165627a7a72305820156e58cd5c560d22986621df89b3e10d1abec796b4f04847146ba24db51b680a0029",
+  "compiler": {
+    "name": "solc",
+    "version": "0.5.2+commit.1df8f40c.Emscripten.clang"
+  },
+  "networks": {},
+  "updatedAt": "2019-06-15T15:23:56.787Z"
+}
