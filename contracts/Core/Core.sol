@@ -33,25 +33,6 @@ contract Core is
 		}
 	}
 
-	function yearFraction(uint256 startTimestamp, uint256 endTimestamp, DayCountConvention ipdc)
-		internal
-		pure
-		returns (int256)
-	{
-		require(endTimestamp >= startTimestamp, "Core.yearFraction: UNMET_CONDITION");
-		if (ipdc == DayCountConvention.A_AISDA) {
-			return actualActualISDA(startTimestamp, endTimestamp);
-		} else if (ipdc == DayCountConvention.A_360) {
-			return actualThreeSixty(startTimestamp, endTimestamp);
-		} else if (ipdc == DayCountConvention.A_365) {
-			return actualThreeSixtyFive(startTimestamp, endTimestamp);
-		} else if (ipdc == DayCountConvention._30E_360) {
-			return thirtyEThreeSixty(startTimestamp, endTimestamp);
-		} else {
-			return 1000000000000000000;
-		}
-	}
-
 	function getEpochOffset(EventType eventType)
 		internal
 		pure

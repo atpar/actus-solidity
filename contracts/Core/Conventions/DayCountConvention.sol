@@ -4,14 +4,34 @@ import "openzeppelin-solidity/contracts/math/SafeMath.sol";
 import "openzeppelin-solidity/contracts/drafts/SignedSafeMath.sol";
 import "../../external/BokkyPooBah/BokkyPooBahsDateTimeLibrary.sol";
 
+import "../Definitions.sol";
 import "../FloatMath.sol";
 
 
-contract DayCountConvention {
+contract DayCountConvention is Definitions {
 
 	using SafeMath for uint;
 	using SignedSafeMath for int;
 	using FloatMath for int;
+
+	function yearFraction(uint256 startTimestamp, uint256 endTimestamp, DayCountConvention ipdc)
+		internal
+		pure
+		returns (int256)
+	{
+		require(endTimestamp >= startTimestamp, "Core.yearFraction: UNMET_CONDITION");
+		if (ipdc == DayCountConvention.A_AISDA) {
+			return actualActualISDA(startTimestamp, endTimestamp);
+		} else if (ipdc == DayCountConvention.A_360) {
+			return actualThreeSixty(startTimestamp, endTimestamp);
+		} else if (ipdc == DayCountConvention.A_365) {
+			return actualThreeSixtyFive(startTimestamp, endTimestamp);
+		} else if (ipdc == DayCountConvention._30E_360) {
+			return thirtyEThreeSixty(startTimestamp, endTimestamp);
+		} else {
+			return 1000000000000000000;
+		}
+	}
 
 	function actualActualISDA(uint256 startTime, uint256 endTime)
 		internal
