@@ -26,9 +26,21 @@ contract TestCore is Core {
   }
 
   function testYearFraction() public {
-    Assert.equal(yearFraction(1506816000, 1538352000, DayCountConvention.A_360), 1013888888888888888, "YearFraction should be 1.013888888888888888");
-    Assert.equal(yearFraction(1506816000, 1538352000, DayCountConvention.A_365), 1000000000000000000, "YearFraction should be 1.0");
-    Assert.equal(yearFraction(1506816000, 1538352000, DayCountConvention._30E_360), 1000000000000000000, "YearFraction should be 1.0");
+    Assert.equal(
+      yearFraction(1506816000, 1538352000, DayCountConvention.A_360, 0),
+      1013888888888888888,
+      "YearFraction should be 1.013888888888888888"
+    );
+    Assert.equal(
+      yearFraction(1506816000, 1538352000, DayCountConvention.A_365, 0),
+      1000000000000000000,
+      "YearFraction should be 1.0"
+    );
+    Assert.equal(
+      yearFraction(1506816000, 1538352000, DayCountConvention._30E_360, 0),
+      1000000000000000000,
+      "YearFraction should be 1.0"
+    );
   }
 
   function testSortProtoEventSchedule() public {
