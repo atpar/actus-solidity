@@ -124,6 +124,8 @@ contract('PAMEngine', () => {
     assert.deepEqual(evaluatedSchedule, this.refTestResults['10012']);
   });
 
+
+
   // accrued interest for first IP?
   it('should yield the expected evaluated contract schedule for test PAM10016', async () => {
     const contractTerms = this.testTerms['10016'];
@@ -160,4 +162,44 @@ contract('PAMEngine', () => {
     // todo fix granularity in testTerms for 10021
     // assert.deepEqual(evaluatedSchedule, this.refTestResults['10021']);
   });
+
+  // it('should yield the expected evaluated contract schedule for test PAM10023', async () => {
+  //   const contractTerms = this.testTerms['10023'];
+  //   const evaluatedSchedule = await evaluateEventSchedule(contractTerms);
+
+  //   // todo fix granularity in testTerms for 10023
+  //   // assert.deepEqual(evaluatedSchedule, this.refTestResults['10023']);
+  // });
+
+  // it('should yield the expected evaluated contract schedule for test PAM10025', async () => {
+  //   const contractTerms = this.testTerms['10025'];
+  //   const evaluatedSchedule = await evaluateEventSchedule(contractTerms);
+
+  //   // todo fix granularity in testTerms for 10025
+  //   assert.deepEqual(evaluatedSchedule, this.refTestResults['10025']);
+  // });
+
+  // it('should yield the expected evaluated contract schedule for test PAM10026', async () => {
+  //   const contractTerms = this.testTerms['10026'];
+  //   const evaluatedSchedule = await evaluateEventSchedule(contractTerms);
+
+  //   // todo fix granularity in testTerms for 10026
+  //   assert.deepEqual(evaluatedSchedule, this.refTestResults['10026']);
+  // });
+
+  // it('should yield the expected evaluated contract schedule for test PAM10029', async () => {
+  //   const contractTerms = this.testTerms['10029'];
+  //   const evaluatedSchedule = await evaluateEventSchedule(contractTerms);
+
+  //   // todo fix granularity in testTerms for 10029
+  //   assert.deepEqual(evaluatedSchedule, this.refTestResults['10029']);
+  // });
+
+  // it('should yield the expected evaluated contract schedule for test PAM10030', async () => {
+  //   const contractTerms = this.testTerms['10030'];
+  //   const evaluatedSchedule = await evaluateEventSchedule(contractTerms);
+
+  //   // todo fix granularity in testTerms for 10030
+  //   assert.deepEqual(evaluatedSchedule, this.refTestResults['10030']);
+  // });
 });
