@@ -61,7 +61,7 @@ contract Definitions {
 		// int256 interestCalculationBase;
 		int256 interestScalingMultiplier;
 		int256 nominalScalingMultiplier;
-		// int256 nextPrincipalRedemptionPayment;
+		int256 nextPrincipalRedemptionPayment;
 		// int256 secondaryNominalValue; // analytical result
 		// int256 lastInterestPayment;
 		// int256 payoffAtSettlement;

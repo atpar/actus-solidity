@@ -129,6 +129,10 @@ contract ANNEngine is Core, IEngine {
 
 	/**
 	 * computes a schedule segment of contract events based on the contract terms and the specified period
+	 * TODO: add missing contract features:
+	 * - rate reset
+	 * - scaling
+	 * - interest calculation base
 	 * @param contractTerms terms of the contract
 	 * @param segmentStart start timestamp of the segment
 	 * @param segmentEnd end timestamp of the segement
@@ -174,16 +178,18 @@ contract ANNEngine is Core, IEngine {
 			}
 		}
 
-		// interest payment related (e.g. for reoccurring interest payments)
-		if (contractTerms.nominalInterestRate != 0 && (
-			contractTerms.cycleOfInterestPayment.isSet == true && contractTerms.cycleAnchorDateOfInterestPayment != 0)
-		) {
+		// interest payment related (covers pre-repayment period only,
+		//    starting with PRANX interest is paid following the PR schedule)
+		if (contractTerms.cycleOfInterestPayment.isSet == true &&
+			contractTerms.cycleAnchorDateOfInterestPayment != 0 &&
+			contractTerms.cycleAnchorDateOfInterestPayment < contractTerms.cycleAnchorDateOfPrincipalRedemption)
+			{
 			uint256[MAX_CYCLE_SIZE] memory interestPaymentSchedule = computeDatesFromCycleSegment(
 				contractTerms.cycleAnchorDateOfInterestPayment,
-				contractTerms.maturityDate,
+				contractTerms.cycleAnchorDateOfPrincipalRedemption, // pure IP schedule ends at beginning of combined IP/PR schedule
 				contractTerms.cycleOfInterestPayment,
 				contractTerms.endOfMonthConvention,
-				true,
+				false, // do not create an event for cycleAnchorDateOfPrincipalRedemption as covered with the PR schedule
 				segmentStart,
 				segmentEnd
 			);
@@ -214,8 +220,10 @@ contract ANNEngine is Core, IEngine {
 				} else { break; }
 			}
 		}
+
 		// capitalization end date
-		else if (contractTerms.capitalizationEndDate != 0) {
+		else if (contractTerms.capitalizationEndDate != 0 &&
+				contractTerms.capitalizationEndDate < contractTerms.cycleAnchorDateOfPrincipalRedemption) {
 			if (isInPeriod(contractTerms.capitalizationEndDate, segmentStart, segmentEnd)) {
 				protoEventSchedule[index] = ProtoEvent(
 					contractTerms.capitalizationEndDate,
@@ -227,34 +235,6 @@ contract ANNEngine is Core, IEngine {
 				);
 				index++;
 			}
-		}
-
-		// rate reset
-		if (contractTerms.cycleOfRateReset.isSet == true && contractTerms.cycleAnchorDateOfRateReset != 0) {
-			uint256[MAX_CYCLE_SIZE] memory rateResetSchedule = computeDatesFromCycleSegment(
-				contractTerms.cycleAnchorDateOfRateReset,
-				contractTerms.maturityDate,
-				contractTerms.cycleOfRateReset,
-				contractTerms.endOfMonthConvention,
-				false,
-				segmentStart,
-				segmentEnd
-			);
-			for (uint8 i = 0; i < MAX_CYCLE_SIZE; i++) {
-				if (rateResetSchedule[i] != 0) {
-					if (isInPeriod(rateResetSchedule[i], segmentStart, segmentEnd) == false) { continue; }
-					protoEventSchedule[index] = ProtoEvent(
-						rateResetSchedule[i],
-						rateResetSchedule[i].add(getEpochOffset(EventType.RR)),
-						EventType.RR,
-						contractTerms.currency,
-						EventType.RR,
-						EventType.RR
-					);
-					index++;
-				} else { break; }
-			}
-			// ... nextRateReset
 		}
 
 		// fees
@@ -284,35 +264,6 @@ contract ANNEngine is Core, IEngine {
 			}
 		}
 
-		// scaling
-		if ((contractTerms.scalingEffect != ScalingEffect._000 || contractTerms.scalingEffect != ScalingEffect._00M)
-			&& contractTerms.cycleAnchorDateOfScalingIndex != 0
-		) {
-			uint256[MAX_CYCLE_SIZE] memory scalingSchedule = computeDatesFromCycleSegment(
-				contractTerms.cycleAnchorDateOfScalingIndex,
-				contractTerms.maturityDate,
-				contractTerms.cycleOfScalingIndex,
-				contractTerms.endOfMonthConvention,
-				true,
-				segmentStart,
-				segmentEnd
-			);
-			for (uint8 i = 0; i < MAX_CYCLE_SIZE; i++) {
-				if (scalingSchedule[i] != 0) {
-					if (isInPeriod(scalingSchedule[i], segmentStart, segmentEnd) == false) { continue; }
-					protoEventSchedule[index] = ProtoEvent(
-						scalingSchedule[i],
-						scalingSchedule[i].add(getEpochOffset(EventType.SC)),
-						EventType.SC,
-						contractTerms.currency,
-						EventType.SC,
-						EventType.SC
-					);
-					index++;
-				} else { break; }
-			}
-		}
-
 		// termination
 		if (contractTerms.terminationDate != 0) {
 			if (isInPeriod(contractTerms.terminationDate, segmentStart, segmentEnd)) {
@@ -328,26 +279,49 @@ contract ANNEngine is Core, IEngine {
 			}
 		}
 
-		// principal redemption
-		if (isInPeriod(contractTerms.maturityDate, segmentStart, segmentEnd)) {
-			protoEventSchedule[index] = ProtoEvent(
-				contractTerms.maturityDate,
-				contractTerms.maturityDate.add(getEpochOffset(EventType.PR)),
-				EventType.PR,
-				contractTerms.currency,
-				EventType.PR,
-				EventType.PR
-			);
-			index++;
+		// principal redemption related (covers also interest events post PRANX)
+		uint256[MAX_CYCLE_SIZE] memory principalRedemptionSchedule = computeDatesFromCycleSegment(
+			contractTerms.cycleAnchorDateOfPrincipalRedemption,
+			contractTerms.maturityDate,
+			contractTerms.cycleOfPrincipalRedemption,
+			contractTerms.endOfMonthConvention,
+			true,
+			segmentStart,
+			segmentEnd
+		);
+		for (uint8 i = 0; i < MAX_CYCLE_SIZE; i++) {
+			if (principalRedemptionSchedule[i] != 0) {
+				if (isInPeriod(principalRedemptionSchedule[i], segmentStart, segmentEnd) == false) { continue; }
+				protoEventSchedule[index] = ProtoEvent(
+					principalRedemptionSchedule[i],
+					principalRedemptionSchedule[i].add(getEpochOffset(EventType.PR)),
+					EventType.PR,
+					contractTerms.currency,
+					EventType.PR,
+					EventType.PR
+				);
+				index++;
+				protoEventSchedule[index] = ProtoEvent(
+					principalRedemptionSchedule[i],
+					principalRedemptionSchedule[i].add(getEpochOffset(EventType.IP)),
+					EventType.IP,
+					contractTerms.currency,
+					EventType.IP,
+					EventType.IP
+				);
+				index++;
+			} else { break; }
 		}
 
-		sortProtoEventSchedule(protoEventSchedule, index);
+		sortProtoEventSchedule(protoEventSchedule, int(0), int(protoEventSchedule.length - 1));
 
 		return protoEventSchedule;
 	}
 
 	/**
 	 * initialize contract state space based on the contract terms
+	 * TODO:
+	 * - implement annuity calculator
 	 * @dev see initStateSpace()
 	 * @param contractTerms terms of the contract
 	 * @return initial contract state
@@ -368,12 +342,18 @@ contract ANNEngine is Core, IEngine {
 		contractState.nominalRate = contractTerms.nominalInterestRate;
 		contractState.nominalAccrued = contractTerms.accruedInterest;
 		contractState.feeAccrued = contractTerms.feeAccrued;
+		contractState.nextPrincipalRedemptionPayment = roleSign(contractTerms.contractRole) *
+			 contractTerms.nextPrincipalRedemptionPayment; // annuity calculator to be implemented
 
 		return contractState;
 	}
 
 	/**
 	 * computes the next contract state based on the contract terms, state and the event type
+	 * TODO:
+	 * - annuity calculator for RR/RRF events
+	 * - IPCB events and Icb state variable
+	 * - Icb state variable updates in Nac-updating events
 	 * @param timestamp current timestamp
 	 * @param contractTerms terms of the contract
 	 * @param contractState current state of the contract
@@ -459,10 +439,9 @@ contract ANNEngine is Core, IEngine {
 		}
 		if (eventType == EventType.PR) {
 			contractState.timeFromLastEvent = yearFraction(contractState.lastEventTime, timestamp, contractTerms.dayCountConvention);
-			contractState.nominalValue = 0;
-			contractState.nominalRate = 0;
-			contractState.nominalAccrued = 0;
-			contractState.feeAccrued = 0;
+			contractState.nominalValue = contractState.nominalValue - (contractState.nextPrincipalRedemptionPayment - contractState.nominalAccrued);
+			contractState.nominalAccrued = contractState.nominalAccrued.add(contractState.nominalRate.floatMult(contractState.nominalValue).floatMult(contractState.timeFromLastEvent));
+			contractState.feeAccrued = contractState.feeAccrued.add(contractTerms.feeRate.floatMult(contractState.nominalValue).floatMult(contractState.timeFromLastEvent));
 			contractState.lastEventTime = timestamp;
 			return contractState;
 		}
@@ -505,6 +484,7 @@ contract ANNEngine is Core, IEngine {
 			contractState.timeFromLastEvent = yearFraction(contractState.lastEventTime, timestamp, contractTerms.dayCountConvention);
 			contractState.nominalAccrued = contractState.nominalAccrued.add(contractState.nominalRate.floatMult(contractState.nominalValue).floatMult(contractState.timeFromLastEvent));
 			contractState.nominalRate = rate;
+			contractState.nextPrincipalRedemptionPayment = 0; // TODO: implement annuity calculator
 			contractState.lastEventTime = timestamp;
 			return contractState;
 		}
@@ -540,12 +520,14 @@ contract ANNEngine is Core, IEngine {
 			contractState.lastEventTime = timestamp;
 			return contractState;
 		}
-		revert("PAMEngine.stateTransitionFunction: ATTRIBUTE_NOT_FOUND");
+		revert("ANNEngine.stateTransitionFunction: ATTRIBUTE_NOT_FOUND");
 	}
 
 	/**
 	 * calculates the payoff for the current time based on the contract terms,
-	 * state and the event type
+	 * state and the event type	 
+	 * - IPCB events and Icb state variable
+	 * - Icb state variable updates in IP-paying events
 	 * @param timestamp current timestamp
 	 * @param contractTerms terms of the contract
 	 * @param contractState current state of the contract
@@ -636,7 +618,12 @@ contract ANNEngine is Core, IEngine {
 			return (
 				performanceIndicator(contractState.contractStatus)
 				* contractState.nominalScalingMultiplier
-					.floatMult(contractState.nominalValue)
+					.floatMult(contractState.nextPrincipalRedemptionPayment
+						- contractState.nominalAccrued
+						- yearFraction(contractState.lastEventTime, timestamp, contractTerms.dayCountConvention)
+							.floatMult(contractState.nominalRate)
+							.floatMult(contractState.nominalValue)
+					)
 			);
 		}
 		if (eventType == EventType.PY) {
@@ -681,6 +668,6 @@ contract ANNEngine is Core, IEngine {
 					)
 			);
 		}
-		revert("PAMEngine.payoffFunction: ATTRIBUTE_NOT_FOUND");
+		revert("ANNEngine.payoffFunction: ATTRIBUTE_NOT_FOUND");
 	}
 }
