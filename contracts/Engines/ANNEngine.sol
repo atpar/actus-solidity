@@ -313,7 +313,7 @@ contract ANNEngine is Core, IEngine {
 			} else { break; }
 		}
 
-		sortProtoEventSchedule(protoEventSchedule, int(0), int(protoEventSchedule.length - 1));
+		sortProtoEventSchedule(protoEventSchedule, index);
 
 		return protoEventSchedule;
 	}

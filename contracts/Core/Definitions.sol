@@ -136,5 +136,9 @@ contract Definitions {
 		int256 lifeFloor;
 		int256 periodCap;
 		int256 periodFloor;
+
+		uint256 cycleAnchorDateOfPrincipalRedemption;
+		IPS cycleOfPrincipalRedemption;
+		int256 nextPrincipalRedemptionPayment;
 	}
 }
