@@ -13,7 +13,6 @@ contract('PAMEngine', () => {
 
   it('should yield the initial contract state', async () => {
     const initialState = await this.PAMEngineInstance.computeInitialState(this.terms, {})
-
     assert.isTrue(Number(initialState['lastEventTime']) === Number(this.terms['statusDate']))
   })
 
@@ -23,7 +22,6 @@ contract('PAMEngine', () => {
       this.terms['statusDate'],
       this.terms['maturityDate'],
     )
-
     assert.isTrue(removeNullEvents(protoEventSchedule).length > 0)
   })
 
@@ -69,11 +67,10 @@ contract('PAMEngine', () => {
     protoEventSchedule = [...protoEventSchedule, ...response]
     
     protoEventSchedule = removeNullEvents(protoEventSchedule)
-    
     assert.isTrue(protoEventSchedule.toString() === entireProtoEventSchedule.toString())
   })
 
-  it('should yield the next next contract state and the contract events', async() => {
+  it('should yield the next contract state and the contract events', async() => {
     const initialState = await this.PAMEngineInstance.computeInitialState(this.terms, {})
     await this.PAMEngineInstance.computeNextState(this.terms, initialState, this.terms['maturityDate'])
   })

@@ -40,5 +40,8 @@
   "lifeCap",
   "lifeFloor",
   "periodCap",
-  "periodFloor"
+  "periodFloor",
+  "cycleAnchorDateOfPrincipalRedemption",
+  "cycleOfPrincipalRedemption",
+  "nextPrincipalRedemptionPayment"
 ]

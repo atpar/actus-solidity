@@ -2,9 +2,9 @@ const web3Utils = require('web3-utils')
 const BigNumber = require('bignumber.js')
 const csv = require('csvtojson')
 
-const ContractEventDefinitions = require('./definitions/ContractEventDefinitions.json')
-const ContractTermsDefinitions = require('./definitions/ContractTermsDefinitions.json')
-const CoveredTerms = require('./definitions/covered-terms.json')
+const ContractEventDefinitions = require('../../actus-resources/definitions/ContractEventDefinitions.json')
+const ContractTermsDefinitions = require('../../actus-resources/definitions/ContractTermsDefinitions.json')
+const CoveredTerms = require('../../actus-resources/definitions/covered-terms.json')
 
 const PRECISION = 18
 
@@ -49,11 +49,12 @@ const parseCycleToIPS = (cycle) => {
   return { i: i, p: p, s: s, isSet: true }
 }
 
-const parseTermsRow = (terms) => {
+
+const parseTermsFromObject = (terms) => {
   const parsedTerms = {}
 
   for (const attribute of CoveredTerms) {
-    const value = terms[capitalize(attribute)]
+    const value = terms[attribute]
 
     if (ContractTermsDefinitions[attribute].type === 'enum') {
       parsedTerms[attribute] = (value) ? getIndexOfAttribute(attribute, value) : 0
@@ -73,47 +74,34 @@ const parseTermsRow = (terms) => {
   return parsedTerms;
 }
 
-const parseResultsFromPath = async (pathToFile) => {  
-  const csvAsJSON = await csv().fromFile(pathToFile)
-  const testResults = []
+const parseResultsFromObject = async (schedule) => {  
+  const parsedResults = []
 
-  for (const object of csvAsJSON) {
-    const eventTypeIndex = ContractEventDefinitions.eventType.options.indexOf(object['Event Type'])
+  for (const event of schedule) {
+    const eventTypeIndex = ContractEventDefinitions.eventType.options.indexOf(event['eventType'])
     if (eventTypeIndex === 2) { continue } // filter out AD events
-    testResults.push({
-      'eventDate': new Date(object['Event Date'] + 'Z').toISOString(),
+    parsedResults.push({
+      'eventDate': new Date(event['eventDate'] + 'Z').toISOString(),
       'eventType': eventTypeIndex.toString(),
-      'eventValue': Number(object['Event Value']),
-      'nominalValue': Number(object['Nominal Value']),
-      'nominalRate': Number(object['Nominal Rate']),
-      'nominalAccrued': Number(object['Nominal Accrued'])
+      'eventValue': Number(event['eventValue']),
+      'nominalValue': Number(event['nominalValue']),
+      'nominalRate': Number(event['nominalRate']),
+      'nominalAccrued': Number(event['nominalAccrued'])
     })
   }
 
-  return testResults
+  return parsedResults
 }
 
-const parseTermsFromPath = async (pathToFile) => {
-  const csvAsJSON = await csv().fromFile(pathToFile)
-  const testTerms = {}
-
-  for (const object of csvAsJSON) {
-    testTerms[object['ContractID']] = parseTermsRow(object)
-  }
-
-  return testTerms
+function parseEventFromEth (contractEvent, contractState) {
+  return {
+    'eventDate': unixToISO(contractEvent['actualEventTime']),
+    'eventType': contractEvent['eventType'],
+    'eventValue': fromPrecision(contractEvent['payoff']),
+    'nominalValue': fromPrecision(contractState['nominalValue']),
+    'nominalRate': fromPrecision(contractState['nominalRate']),
+    'nominalAccrued': fromPrecision(contractState['nominalAccrued'])
+  };
 }
 
-const parseTermsFromCSVString = async (csvString) => {
-  const csvAsJSON = await csv().fromString(csvString)
-  const testTerms = {}
-
-  for (const object of csvAsJSON) {
-    testTerms[object['ContractID']] = parseTermsRow(object)
-  }
-
-  return testTerms
-}
-
-
-module.exports = { parseTermsFromPath, parseTermsFromCSVString, parseResultsFromPath, fromPrecision, unixToISO }
+module.exports = { parseTermsFromObject, parseResultsFromObject, parseEventFromEth, fromPrecision, unixToISO }

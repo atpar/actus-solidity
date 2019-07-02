@@ -272,5 +272,20 @@
     "id": "cycleOfFee",
     "name": "Cycle Of Fee",
     "type": "cycle"
+  },
+  "cycleAnchorDateOfPrincipalRedemption": {
+    "id": "cycleAnchorDateOfPrincipalRedemption",
+    "name": "Cycle Anchor Date Of Principal Redemption",
+    "type": "date"
+  },
+  "cycleOfPrincipalRedemption": {
+    "id": "cycleOfPrincipalRedemption",
+    "name": "Cycle Of PrincipalRedemption",
+    "type": "cycle"
+  },
+  "nextPrincipalRedemptionPayment": {
+    "id": "nextPrincipalRedemptionPayment",
+    "name": "Next Principal Redemption Payment",
+    "type": "number"
   }
 }
