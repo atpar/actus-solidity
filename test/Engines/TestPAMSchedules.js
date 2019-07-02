@@ -8,7 +8,7 @@ contract('PAMEngine', () => {
 
   before(async () => {    
     this.PAMEngineInstance = await PAMEngine.new()
-    this.testCases = await getTestCases()
+    this.testCases = await getTestCases( "PAM" )
   })
 
   const evaluateEventSchedule = async (contractTerms) => {

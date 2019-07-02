@@ -1,6 +1,6 @@
 const PAMEngine = artifacts.require('PAMEngine.sol')
 
-const { getDefaultTerms } = require('../helper/tests')
+const { getTestCases } = require('../helper/tests')
 const { removeNullEvents } = require('../helper/schedule')
 
 
@@ -8,7 +8,7 @@ contract('PAMEngine', () => {
 
   before(async () => {        
     this.PAMEngineInstance = await PAMEngine.new()
-    this.terms = await getDefaultTerms()
+    this.terms = (await getTestCases( "PAM" ))[ '10001' ]
   })
 
   it('should yield the initial contract state', async () => {

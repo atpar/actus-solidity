@@ -4,7 +4,8 @@
     "name": "Contract Type",
     "type": "enum",
     "options": [
-      "PAM"
+      "PAM",
+      "ANN"
     ]
   },
   "calendar": {

@@ -10,8 +10,8 @@ const {
 const TEST_TERMS_DIR = './actus-resources/tests/';
  
 
-async function getTestCases () {
-  const testCases = require('../.' + TEST_TERMS_DIR + "actus-tests-PAM.json");
+async function getTestCases ( contract ) {
+  const testCases = require('../.' + TEST_TERMS_DIR + "actus-tests-" + contract + ".json");
   const testCaseNames = Object.keys(testCases);
 
   const parsedCases = {};
@@ -25,8 +25,4 @@ async function getTestCases () {
   return parsedCases;
 }
 
-async function getDefaultTerms () {
-  return ((await getTestCases())['10001']).terms;
-}
-
-module.exports = { getTestCases, getDefaultTerms }
+module.exports = { getTestCases }
