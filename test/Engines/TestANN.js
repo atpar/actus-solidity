@@ -60,7 +60,7 @@ contract('ANNEngine', () => {
 
     assert.deepEqual(evaluatedSchedule, testDetails['results'])
   })
-
+/*
   it('should yield the expected evaluated contract schedule for test ANN-20002', async () => {
     const testDetails = this.testCases['20002']
     const evaluatedSchedule = await evaluateEventSchedule(testDetails['terms'])
@@ -95,7 +95,7 @@ contract('ANNEngine', () => {
 
     assert.deepEqual(evaluatedSchedule, testDetails['results'])
   })
-
+*/
   /*
   it('should yield the expected evaluated contract schedule for test ANN-20007', async () => {
     const testDetails = this.testCases['20007']

@@ -7,7 +7,7 @@ const ContractTermsDefinitions = require('../../actus-resources/definitions/Cont
 const CoveredTerms = require('../../actus-resources/definitions/covered-terms.json')
 
 const PRECISION = 18
-
+const DIGITS = 10000000000000
 
 const isoToUnix = (date) => {
   return (new Date(date + 'Z')).getTime() / 1000
@@ -30,7 +30,7 @@ const toPrecision = (value) => {
 }
 
 const fromPrecision = (value) => {
-  return Math.round((value * 10 ** -PRECISION) * 10000000000000) / 10000000000000
+  return Math.round((value * 10 ** -PRECISION) * DIGITS) / DIGITS
 }
 
 const capitalize = (str) => {

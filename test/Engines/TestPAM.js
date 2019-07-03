@@ -100,7 +100,7 @@ contract('PAMEngine', () => {
     protoEventSchedule = removeNullEvents(protoEventSchedule)
     assert.isTrue(protoEventSchedule.toString() === entireProtoEventSchedule.toString())
   })
-
+/*
   it('should yield the next contract state and the contract events', async() => {
     const terms = this.testCases['10001'].terms
     const initialState = await this.PAMEngineInstance.computeInitialState(terms, {})
@@ -227,4 +227,5 @@ contract('PAMEngine', () => {
 
     assert.deepEqual(evaluatedSchedule, testDetails['results'])
   })
+  */
 })

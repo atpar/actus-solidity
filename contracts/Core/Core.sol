@@ -62,11 +62,12 @@ contract Core is Definitions, DayCountConventions, EndOfMonthConventions {
 		returns (uint256)
 	{
 		if (eventType == EventType.IED) { return 20; }
+		if (eventType == EventType.PR) { return 25; }
 		if (eventType == EventType.IP) { return 30; }
 		if (eventType == EventType.IPCI) { return 40; }
 		if (eventType == EventType.FP) { return 50; }
 		if (eventType == EventType.DV) { return 60; }
-		if (eventType == EventType.PR) { return 70; }
+		//if (eventType == EventType.PR) { return 70; }
 		if (eventType == EventType.MR) { return 80; }
 		if (eventType == EventType.RRY) { return 90; }
 		if (eventType == EventType.RR) { return 100; }

@@ -41,24 +41,16 @@
       },
       {
         "eventDate": "2013-02-01T00:00",
-        "eventType": "IP",
-        "eventValue": 33.972602739726,
-        "nominalValue": 5000,
-        "nominalRate": 0.08,
-        "nominalAccrued": 0
-      },
-      {
-        "eventDate": "2013-02-01T00:00",
         "eventType": "PR",
         "eventValue": 400.89399137862,
         "nominalValue": 4599.10600862138,
         "nominalRate": 0.08,
-        "nominalAccrued": 0
+        "nominalAccrued": 33.972602739726
       },
       {
-        "eventDate": "2013-03-01T00:00",
+        "eventDate": "2013-02-01T00:00",
         "eventType": "IP",
-        "eventValue": 28.2246505734572,
+        "eventValue": 33.972602739726,
         "nominalValue": 4599.10600862138,
         "nominalRate": 0.08,
         "nominalAccrued": 0
@@ -69,12 +61,12 @@
         "eventValue": 406.641943544889,
         "nominalValue": 4192.46406507649,
         "nominalRate": 0.08,
-        "nominalAccrued": 0
+        "nominalAccrued": 28.2246505734572
       },
       {
-        "eventDate": "2013-04-01T00:00",
+        "eventDate": "2013-03-01T00:00",
         "eventType": "IP",
-        "eventValue": 28.4857832366841,
+        "eventValue": 28.2246505734572,
         "nominalValue": 4192.46406507649,
         "nominalRate": 0.08,
         "nominalAccrued": 0
@@ -85,12 +77,12 @@
         "eventValue": 406.380810881662,
         "nominalValue": 3786.08325419483,
         "nominalRate": 0.08,
-        "nominalAccrued": 0
+        "nominalAccrued": 28.4857832366841
       },
       {
-        "eventDate": "2013-05-01T00:00",
+        "eventDate": "2013-04-01T00:00",
         "eventType": "IP",
-        "eventValue": 24.8947940001852,
+        "eventValue": 28.4857832366841,
         "nominalValue": 3786.08325419483,
         "nominalRate": 0.08,
         "nominalAccrued": 0
@@ -101,12 +93,12 @@
         "eventValue": 409.971800118161,
         "nominalValue": 3376.11145407667,
         "nominalRate": 0.08,
-        "nominalAccrued": 0
+        "nominalAccrued": 24.8947940001852
       },
       {
-        "eventDate": "2013-06-01T00:00",
+        "eventDate": "2013-05-01T00:00",
         "eventType": "IP",
-        "eventValue": 22.9390586468771,
+        "eventValue": 24.8947940001852,
         "nominalValue": 3376.11145407667,
         "nominalRate": 0.08,
         "nominalAccrued": 0
@@ -117,12 +109,12 @@
         "eventValue": 411.927535471469,
         "nominalValue": 2964.1839186052,
         "nominalRate": 0.08,
-        "nominalAccrued": 0
+        "nominalAccrued": 22.9390586468771
       },
       {
-        "eventDate": "2013-07-01T00:00",
+        "eventDate": "2013-06-01T00:00",
         "eventType": "IP",
-        "eventValue": 19.4905243963082,
+        "eventValue": 22.9390586468771,
         "nominalValue": 2964.1839186052,
         "nominalRate": 0.08,
         "nominalAccrued": 0
@@ -133,12 +125,12 @@
         "eventValue": 415.376069722038,
         "nominalValue": 2548.80784888316,
         "nominalRate": 0.08,
-        "nominalAccrued": 0
+        "nominalAccrued": 19.4905243963082
       },
       {
-        "eventDate": "2013-08-01T00:00",
+        "eventDate": "2013-07-01T00:00",
         "eventType": "IP",
-        "eventValue": 17.3179273020007,
+        "eventValue": 19.4905243963082,
         "nominalValue": 2548.80784888316,
         "nominalRate": 0.08,
         "nominalAccrued": 0
@@ -149,12 +141,12 @@
         "eventValue": 417.548666816345,
         "nominalValue": 2131.25918206682,
         "nominalRate": 0.08,
-        "nominalAccrued": 0
+        "nominalAccrued": 17.3179273020007
       },
       {
-        "eventDate": "2013-09-01T00:00",
+        "eventDate": "2013-08-01T00:00",
         "eventType": "IP",
-        "eventValue": 14.4808843055499,
+        "eventValue": 17.3179273020007,
         "nominalValue": 2131.25918206682,
         "nominalRate": 0.08,
         "nominalAccrued": 0
@@ -165,12 +157,12 @@
         "eventValue": 420.385709812796,
         "nominalValue": 1710.87347225402,
         "nominalRate": 0.08,
-        "nominalAccrued": 0
+        "nominalAccrued": 14.4808843055499
       },
       {
-        "eventDate": "2013-10-01T00:00",
+        "eventDate": "2013-09-01T00:00",
         "eventType": "IP",
-        "eventValue": 11.2495789956429,
+        "eventValue": 14.4808843055499,
         "nominalValue": 1710.87347225402,
         "nominalRate": 0.08,
         "nominalAccrued": 0
@@ -181,12 +173,12 @@
         "eventValue": 423.617015122703,
         "nominalValue": 1287.25645713132,
         "nominalRate": 0.08,
-        "nominalAccrued": 0
+        "nominalAccrued": 11.2495789956429
       },
       {
-        "eventDate": "2013-11-01T00:00",
+        "eventDate": "2013-10-01T00:00",
         "eventType": "IP",
-        "eventValue": 8.74629044845388,
+        "eventValue": 11.2495789956429,
         "nominalValue": 1287.25645713132,
         "nominalRate": 0.08,
         "nominalAccrued": 0
@@ -197,12 +189,12 @@
         "eventValue": 426.120303669892,
         "nominalValue": 861.136153461425,
         "nominalRate": 0.08,
-        "nominalAccrued": 0
+        "nominalAccrued": 8.74629044845388
       },
       {
-        "eventDate": "2013-12-01T00:00",
+        "eventDate": "2013-11-01T00:00",
         "eventType": "IP",
-        "eventValue": 5.66226511865046,
+        "eventValue": 8.74629044845388,
         "nominalValue": 861.136153461425,
         "nominalRate": 0.08,
         "nominalAccrued": 0
@@ -213,12 +205,12 @@
         "eventValue": 429.204328999696,
         "nominalValue": 431.931824461729,
         "nominalRate": 0.08,
-        "nominalAccrued": 0
+        "nominalAccrued": 5.66226511865046
       },
       {
-        "eventDate": "2014-01-01T00:00",
+        "eventDate": "2013-12-01T00:00",
         "eventType": "IP",
-        "eventValue": 2.93476965661668,
+        "eventValue": 5.66226511865046,
         "nominalValue": 431.931824461729,
         "nominalRate": 0.08,
         "nominalAccrued": 0
@@ -227,6 +219,14 @@
         "eventDate": "2014-01-01T00:00",
         "eventType": "PR",
         "eventValue": 431.931824461729,
+        "nominalValue": 0,
+        "nominalRate": 0.08,
+        "nominalAccrued": 2.93476965661668
+      },
+      {
+        "eventDate": "2014-01-01T00:00",
+        "eventType": "IP",
+        "eventValue": 2.93476965661668,
         "nominalValue": 0,
         "nominalRate": 0.08,
         "nominalAccrued": 0

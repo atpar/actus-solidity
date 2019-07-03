@@ -439,9 +439,9 @@ contract ANNEngine is Core, IEngine {
 		}
 		if (eventType == EventType.PR) {
 			contractState.timeFromLastEvent = yearFraction(contractState.lastEventTime, timestamp, contractTerms.dayCountConvention);
-			contractState.nominalValue = contractState.nominalValue - (contractState.nextPrincipalRedemptionPayment - contractState.nominalAccrued);
 			contractState.nominalAccrued = contractState.nominalAccrued.add(contractState.nominalRate.floatMult(contractState.nominalValue).floatMult(contractState.timeFromLastEvent));
 			contractState.feeAccrued = contractState.feeAccrued.add(contractTerms.feeRate.floatMult(contractState.nominalValue).floatMult(contractState.timeFromLastEvent));
+			contractState.nominalValue = contractState.nominalValue - (contractState.nextPrincipalRedemptionPayment - contractState.nominalAccrued);
 			contractState.lastEventTime = timestamp;
 			return contractState;
 		}
