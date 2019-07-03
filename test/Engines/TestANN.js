@@ -58,13 +58,9 @@ contract('ANNEngine', () => {
     const testDetails = this.testCases['20001']
     const evaluatedSchedule = await evaluateEventSchedule(testDetails['terms'])
 
-    console.log(evaluatedSchedule)
-    console.log(testDetails.results)
-
     assert.deepEqual(evaluatedSchedule, testDetails['results'])
   })
 
-/*
   it('should yield the expected evaluated contract schedule for test ANN-20002', async () => {
     const testDetails = this.testCases['20002']
     const evaluatedSchedule = await evaluateEventSchedule(testDetails['terms'])
@@ -100,6 +96,7 @@ contract('ANNEngine', () => {
     assert.deepEqual(evaluatedSchedule, testDetails['results'])
   })
 
+  /*
   it('should yield the expected evaluated contract schedule for test ANN-20007', async () => {
     const testDetails = this.testCases['20007']
     const evaluatedSchedule = await evaluateEventSchedule(testDetails['terms'])
@@ -212,6 +209,13 @@ contract('ANNEngine', () => {
     assert.deepEqual(evaluatedSchedule, testDetails['results'])
   })
 
+  it('should yield the expected evaluated contract schedule for test ANN-20023', async () => {
+    const testDetails = this.testCases['20023']
+    const evaluatedSchedule = await evaluateEventSchedule(testDetails['terms'])
+
+    assert.deepEqual(evaluatedSchedule, testDetails['results'])
+  })
+
   it('should yield the expected evaluated contract schedule for test ANN-20024', async () => {
     const testDetails = this.testCases['20024']
     const evaluatedSchedule = await evaluateEventSchedule(testDetails['terms'])
@@ -225,5 +229,34 @@ contract('ANNEngine', () => {
 
     assert.deepEqual(evaluatedSchedule, testDetails['results'])
   })
-*/
+
+  it('should yield the expected evaluated contract schedule for test ANN-20026', async () => {
+    const testDetails = this.testCases['20026']
+    const evaluatedSchedule = await evaluateEventSchedule(testDetails['terms'])
+
+    assert.deepEqual(evaluatedSchedule, testDetails['results'])
+  })
+
+  it('should yield the expected evaluated contract schedule for test ANN-20027', async () => {
+    const testDetails = this.testCases['20028']
+    const evaluatedSchedule = await evaluateEventSchedule(testDetails['terms'])
+
+    assert.deepEqual(evaluatedSchedule, testDetails['results'])
+  })
+
+  it('should yield the expected evaluated contract schedule for test ANN-20029', async () => {
+    const testDetails = this.testCases['20029']
+    const evaluatedSchedule = await evaluateEventSchedule(testDetails['terms'])
+
+    assert.deepEqual(evaluatedSchedule, testDetails['results'])
+  })
+
+  it('should yield the expected evaluated contract schedule for test ANN-20030', async () => {
+    const testDetails = this.testCases['20030']
+    const evaluatedSchedule = await evaluateEventSchedule(testDetails['terms'])
+
+    assert.deepEqual(evaluatedSchedule, testDetails['results'])
+  })
+
+  */
 })

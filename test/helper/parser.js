@@ -74,7 +74,7 @@ const parseTermsFromObject = (terms) => {
   return parsedTerms;
 }
 
-const parseResultsFromObject = async (schedule) => {  
+const parseResultsFromObject = (schedule) => {  
   const parsedResults = []
 
   for (const event of schedule) {
