@@ -8,7 +8,7 @@ contract('PAMEngine', () => {
 
   before(async () => {        
     this.PAMEngineInstance = await PAMEngine.new()
-    this.terms = (await getTestCases( "PAM" ))[ '10001' ]
+    this.terms = ((await getTestCases( "PAM" ))[ '10001' ]).terms
   })
 
   it('should yield the initial contract state', async () => {
