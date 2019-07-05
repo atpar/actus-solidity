@@ -137,18 +137,18 @@
       },
       {
         "eventDate": "2014-01-01T00:00",
-        "eventType": "IP",
-        "eventValue": 25.4794520547945,
-        "nominalValue": 3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
-      },
-      {
-        "eventDate": "2014-01-01T00:00",
         "eventType": "PR",
         "eventValue": 3000,
         "nominalValue": 0,
-        "nominalRate": 0,
+        "nominalRate": 0.1,
+        "nominalAccrued": 25.4794520547945
+      },
+      {
+        "eventDate": "2014-01-01T00:00",
+        "eventType": "IP",
+        "eventValue": 25.4794520547945,
+        "nominalValue": 0,
+        "nominalRate": 0.1,
         "nominalAccrued": 0
       }
     ]
@@ -243,18 +243,18 @@
       },
       {
         "eventDate": "2014-01-01T00:00",
-        "eventType": "IP",
-        "eventValue": 50.8333333333333,
-        "nominalValue": 3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
-      },
-      {
-        "eventDate": "2014-01-01T00:00",
         "eventType": "PR",
         "eventValue": 3000,
         "nominalValue": 0,
-        "nominalRate": 0,
+        "nominalRate": 0.1,
+        "nominalAccrued": 50.8333333333333
+      },
+      {
+        "eventDate": "2014-01-01T00:00",
+        "eventType": "IP",
+        "eventValue": 50.8333333333333,
+        "nominalValue": 0,
+        "nominalRate": 0.1,
         "nominalAccrued": 0
       }
     ]
@@ -389,18 +389,18 @@
       },
       {
         "eventDate": "2014-01-01T00:00",
-        "eventType": "IP",
-        "eventValue": -25.4794520547945,
-        "nominalValue": -3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
-      },
-      {
-        "eventDate": "2014-01-01T00:00",
         "eventType": "PR",
         "eventValue": -3000,
         "nominalValue": 0,
-        "nominalRate": 0,
+        "nominalRate": 0.1,
+        "nominalAccrued": -25.4794520547945
+      },
+      {
+        "eventDate": "2014-01-01T00:00",
+        "eventType": "IP",
+        "eventValue": -25.4794520547945,
+        "nominalValue": 0,
+        "nominalRate": 0.1,
         "nominalAccrued": 0
       }
     ]
@@ -543,27 +543,27 @@
       },
       {
         "eventDate": "2014-01-01T00:00",
-        "eventType": "IP",
-        "eventValue": 25,
-        "nominalValue": 3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
-      },
-      {
-        "eventDate": "2014-01-01T00:00",
         "eventType": "PR",
         "eventValue": 3000,
         "nominalValue": 0,
-        "nominalRate": 0,
+        "nominalRate": 0.1,
+        "nominalAccrued": 25
+      },
+      {
+        "eventDate": "2014-01-01T00:00",
+        "eventType": "IP",
+        "eventValue": 25,
+        "nominalValue": 0,
+        "nominalRate": 0.1,
         "nominalAccrued": 0
       }
     ]
   },
-  "10006": {
-    "identifier": "10006",
+  "10005": {
+    "identifier": "10005",
     "terms": {
         "contractType": "PAM",
-        "contractID": "10006",
+        "contractID": "10005",
         "statusDate": "2012-12-30T00:00:00",
         "contractDealDate": "2012-12-28T00:00:00",
         "currency": "USD",
@@ -682,27 +682,27 @@
       },
       {
         "eventDate": "2014-01-01T00:00",
-        "eventType": "IP",
-        "eventValue": 25.8333333333333,
-        "nominalValue": 3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
-      },
-      {
-        "eventDate": "2014-01-01T00:00",
         "eventType": "PR",
         "eventValue": 3000,
         "nominalValue": 0,
-        "nominalRate": 0,
+        "nominalRate": 0.1,
+        "nominalAccrued": 25.8333333333333
+      },
+      {
+        "eventDate": "2014-01-01T00:00",
+        "eventType": "IP",
+        "eventValue": 25.8333333333333,
+        "nominalValue": 0,
+        "nominalRate": 0.1,
         "nominalAccrued": 0
       }
     ]
   },
-  "10007": {
-    "identifier": "10007",
+  "10006": {
+    "identifier": "10006",
     "terms": {
         "contractType": "PAM",
-        "contractID": "10007",
+        "contractID": "10006",
         "statusDate": "2012-12-30T00:00:00",
         "contractDealDate": "2012-12-28T00:00:00",
         "currency": "USD",
@@ -822,27 +822,27 @@
       },
       {
         "eventDate": "2014-01-01T00:00",
-        "eventType": "IP",
-        "eventValue": 25.8333333333333,
-        "nominalValue": 3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
-      },
-      {
-        "eventDate": "2014-01-01T00:00",
         "eventType": "PR",
         "eventValue": 3000,
         "nominalValue": 0,
-        "nominalRate": 0,
+        "nominalRate": 0.1,
+        "nominalAccrued": 25.8333333333333
+      },
+      {
+        "eventDate": "2014-01-01T00:00",
+        "eventType": "IP",
+        "eventValue": 25.8333333333333,
+        "nominalValue": 0,
+        "nominalRate": 0.1,
         "nominalAccrued": 0
       }
     ]
   },
-  "10008": {
-    "identifier": "10008",
+  "10007": {
+    "identifier": "10007",
     "terms": {
         "contractType": "PAM",
-        "contractID": "10008",
+        "contractID": "10007",
         "statusDate": "2012-12-30T00:00:00",
         "contractDealDate": "2012-12-28T00:00:00",
         "currency": "USD",
@@ -962,27 +962,27 @@
       },
       {
         "eventDate": "2014-01-01T00:00",
-        "eventType": "IP",
-        "eventValue": 26.6666666666667,
-        "nominalValue": 3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
-      },
-      {
-        "eventDate": "2014-01-01T00:00",
         "eventType": "PR",
         "eventValue": 3000,
         "nominalValue": 0,
-        "nominalRate": 0,
+        "nominalRate": 0.1,
+        "nominalAccrued": 26.6666666666667
+      },
+      {
+        "eventDate": "2014-01-01T00:00",
+        "eventType": "IP",
+        "eventValue": 26.6666666666667,
+        "nominalValue": 0,
+        "nominalRate": 0.1,
         "nominalAccrued": 0
       }
     ]
   },
-  "10009": {
-    "identifier": "10009",
+  "10008": {
+    "identifier": "10008",
     "terms": {
         "contractType": "PAM",
-        "contractID": "10009",
+        "contractID": "10008",
         "statusDate": "2012-12-30T00:00:00",
         "contractDealDate": "2012-12-28T00:00:00",
         "currency": "USD",
@@ -1102,27 +1102,27 @@
       },
       {
         "eventDate": "2014-01-01T00:00",
-        "eventType": "IP",
-        "eventValue": 25.8333333333333,
-        "nominalValue": 3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
-      },
-      {
-        "eventDate": "2014-01-01T00:00",
         "eventType": "PR",
         "eventValue": 3000,
         "nominalValue": 0,
-        "nominalRate": 0,
+        "nominalRate": 0.1,
+        "nominalAccrued": 25.8333333333333
+      },
+      {
+        "eventDate": "2014-01-01T00:00",
+        "eventType": "IP",
+        "eventValue": 25.8333333333333,
+        "nominalValue": 0,
+        "nominalRate": 0.1,
         "nominalAccrued": 0
       }
     ]
   },
-  "10010": {
-    "identifier": "10010",
+  "10009": {
+    "identifier": "10009",
     "terms": {
         "contractType": "PAM",
-        "contractID": "10010",
+        "contractID": "10009",
         "statusDate": "2012-12-30T00:00:00",
         "contractDealDate": "2012-12-28T00:00:00",
         "currency": "USD",
@@ -1242,27 +1242,27 @@
       },
       {
         "eventDate": "2014-01-01T00:00",
-        "eventType": "IP",
-        "eventValue": 24.1666666666667,
-        "nominalValue": 3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
-      },
-      {
-        "eventDate": "2014-01-01T00:00",
         "eventType": "PR",
         "eventValue": 3000,
         "nominalValue": 0,
-        "nominalRate": 0,
+        "nominalRate": 0.1,
+        "nominalAccrued": 24.1666666666667
+      },
+      {
+        "eventDate": "2014-01-01T00:00",
+        "eventType": "IP",
+        "eventValue": 24.1666666666667,
+        "nominalValue": 0,
+        "nominalRate": 0.1,
         "nominalAccrued": 0
       }
     ]
   },
-  "10011": {
-    "identifier": "10011",
+  "10010": {
+    "identifier": "10010",
     "terms": {
         "contractType": "PAM",
-        "contractID": "10011",
+        "contractID": "10010",
         "statusDate": "2012-12-30T00:00:00",
         "contractDealDate": "2012-12-28T00:00:00",
         "currency": "USD",
@@ -1382,27 +1382,27 @@
       },
       {
         "eventDate": "2014-01-01T00:00",
-        "eventType": "IP",
-        "eventValue": 26.6666666666667,
-        "nominalValue": 3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
-      },
-      {
-        "eventDate": "2014-01-01T00:00",
         "eventType": "PR",
         "eventValue": 3000,
         "nominalValue": 0,
-        "nominalRate": 0,
+        "nominalRate": 0.1,
+        "nominalAccrued": 26.6666666666667
+      },
+      {
+        "eventDate": "2014-01-01T00:00",
+        "eventType": "IP",
+        "eventValue": 26.6666666666667,
+        "nominalValue": 0,
+        "nominalRate": 0.1,
         "nominalAccrued": 0
       }
     ]
   },
-  "10012": {
-    "identifier": "10012",
+  "10011": {
+    "identifier": "10011",
     "terms": {
         "contractType": "PAM",
-        "contractID": "10012",
+        "contractID": "10011",
         "statusDate": "2012-12-30T00:00:00",
         "contractDealDate": "2012-12-28T00:00:00",
         "currency": "USD",
@@ -1522,27 +1522,27 @@
       },
       {
         "eventDate": "2014-01-01T00:00",
-        "eventType": "IP",
-        "eventValue": 26.6666666666667,
-        "nominalValue": 3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
-      },
-      {
-        "eventDate": "2014-01-01T00:00",
         "eventType": "PR",
         "eventValue": 3000,
         "nominalValue": 0,
-        "nominalRate": 0,
+        "nominalRate": 0.1,
+        "nominalAccrued": 26.6666666666667
+      },
+      {
+        "eventDate": "2014-01-01T00:00",
+        "eventType": "IP",
+        "eventValue": 26.6666666666667,
+        "nominalValue": 0,
+        "nominalRate": 0.1,
         "nominalAccrued": 0
       }
     ]
   },
-  "10013": {
-    "identifier": "10013",
+  "10012": {
+    "identifier": "10012",
     "terms": {
         "contractType": "PAM",
-        "contractID": "10013",
+        "contractID": "10012",
         "statusDate": "2012-12-30T00:00:00",
         "contractDealDate": "2012-01-30T00:00:00",
         "currency": "USD",
@@ -1659,16 +1659,16 @@
         "eventType": "TD",
         "eventValue": 2913.97260273973,
         "nominalValue": 0,
-        "nominalRate": 0,
+        "nominalRate": 0.1,
         "nominalAccrued": 0
       }
     ]
   },
-  "10014": {
-    "identifier": "10014",
+  "10013": {
+    "identifier": "10013",
     "terms": {
         "contractType": "PAM",
-        "contractID": "10014",
+        "contractID": "10013",
         "statusDate": "2012-12-30T00:00:00",
         "contractDealDate": "2012-10-08T00:00:00",
         "currency": "USD",
@@ -1723,27 +1723,27 @@
       },
       {
         "eventDate": "2014-01-01T00:00",
-        "eventType": "IP",
-        "eventValue": 144.657534246575,
-        "nominalValue": 3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
-      },
-      {
-        "eventDate": "2014-01-01T00:00",
         "eventType": "PR",
         "eventValue": 3000,
         "nominalValue": 0,
-        "nominalRate": 0,
+        "nominalRate": 0.1,
+        "nominalAccrued": 144.657534246575
+      },
+      {
+        "eventDate": "2014-01-01T00:00",
+        "eventType": "IP",
+        "eventValue": 144.657534246575,
+        "nominalValue": 0,
+        "nominalRate": 0.1,
         "nominalAccrued": 0
       }
     ]
   },
-  "10016": {
-    "identifier": "10016",
+  "10014": {
+    "identifier": "10014",
     "terms": {
         "contractType": "PAM",
-        "contractID": "10016",
+        "contractID": "10014",
         "statusDate": "2012-12-30T00:00:00",
         "contractDealDate": "2012-12-28T00:00:00",
         "currency": "USD",
@@ -1878,27 +1878,27 @@
       },
       {
         "eventDate": "2014-01-01T00:00",
-        "eventType": "IP",
-        "eventValue": 25.4794520547945,
-        "nominalValue": 3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
-      },
-      {
-        "eventDate": "2014-01-01T00:00",
         "eventType": "PR",
         "eventValue": 3000,
         "nominalValue": 0,
-        "nominalRate": 0,
+        "nominalRate": 0.1,
+        "nominalAccrued": 25.4794520547945
+      },
+      {
+        "eventDate": "2014-01-01T00:00",
+        "eventType": "IP",
+        "eventValue": 25.4794520547945,
+        "nominalValue": 0,
+        "nominalRate": 0.1,
         "nominalAccrued": 0
       }
     ]
   },
-  "10017": {
-    "identifier": "10017",
+  "10015": {
+    "identifier": "10015",
     "terms": {
         "contractType": "PAM",
-        "contractID": "10017",
+        "contractID": "10015",
         "statusDate": "2012-12-30T00:00:00",
         "contractDealDate": "2012-12-28T00:00:00",
         "currency": "USD",
@@ -2024,27 +2024,27 @@
       },
       {
         "eventDate": "2013-12-31T00:00",
-        "eventType": "IP",
-        "eventValue": 49.3150684931507,
-        "nominalValue": 3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
-      },
-      {
-        "eventDate": "2013-12-31T00:00",
         "eventType": "PR",
         "eventValue": 3000,
         "nominalValue": 0,
-        "nominalRate": 0,
+        "nominalRate": 0.1,
+        "nominalAccrued": 49.3150684931507
+      },
+      {
+        "eventDate": "2013-12-31T00:00",
+        "eventType": "IP",
+        "eventValue": 49.3150684931507,
+        "nominalValue": 0,
+        "nominalRate": 0.1,
         "nominalAccrued": 0
       }
     ]
   },
-  "10018": {
-    "identifier": "10018",
+  "10016": {
+    "identifier": "10016",
     "terms": {
         "contractType": "PAM",
-        "contractID": "10018",
+        "contractID": "10016",
         "statusDate": "2012-12-30T00:00:00",
         "contractDealDate": "2012-12-28T00:00:00",
         "currency": "USD",
@@ -2106,27 +2106,27 @@
       },
       {
         "eventDate": "2016-01-01T00:00",
-        "eventType": "IP",
-        "eventValue": 300,
-        "nominalValue": 3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
-      },
-      {
-        "eventDate": "2016-01-01T00:00",
         "eventType": "PR",
         "eventValue": 3000,
         "nominalValue": 0,
-        "nominalRate": 0,
+        "nominalRate": 0.1,
+        "nominalAccrued": 300
+      },
+      {
+        "eventDate": "2016-01-01T00:00",
+        "eventType": "IP",
+        "eventValue": 300,
+        "nominalValue": 0,
+        "nominalRate": 0.1,
         "nominalAccrued": 0
       }
     ]
   },
-  "10019": {
-    "identifier": "10019",
+  "10017": {
+    "identifier": "10017",
     "terms": {
         "contractType": "PAM",
-        "contractID": "10019",
+        "contractID": "10017",
         "statusDate": "2012-12-30T00:00:00",
         "contractDealDate": "2012-12-28T00:00:00",
         "currency": "USD",
@@ -2276,27 +2276,27 @@
       },
       {
         "eventDate": "2014-01-01T00:00",
-        "eventType": "IP",
-        "eventValue": 11.5068493150685,
-        "nominalValue": 3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
-      },
-      {
-        "eventDate": "2014-01-01T00:00",
         "eventType": "PR",
         "eventValue": 3000,
         "nominalValue": 0,
-        "nominalRate": 0,
+        "nominalRate": 0.1,
+        "nominalAccrued": 11.5068493150685
+      },
+      {
+        "eventDate": "2014-01-01T00:00",
+        "eventType": "IP",
+        "eventValue": 11.5068493150685,
+        "nominalValue": 0,
+        "nominalRate": 0.1,
         "nominalAccrued": 0
       }
     ]
   },
-  "10021": {
-    "identifier": "10021",
+  "10018": {
+    "identifier": "10018",
     "terms": {
         "contractType": "PAM",
-        "contractID": "10021",
+        "contractID": "10018",
         "statusDate": "2012-12-30T00:00:00",
         "contractDealDate": "2012-12-28T00:00:00",
         "currency": "USD",
@@ -2361,7 +2361,7 @@
         "eventDate": "2013-05-01T00:00",
         "eventType": "IPCI",
         "eventValue": 0,
-        "nominalValue": 3099.85211479159,
+        "nominalValue": 3099.85211479158,
         "nominalRate": 0.1,
         "nominalAccrued": 0
       },
@@ -2431,27 +2431,27 @@
       },
       {
         "eventDate": "2014-01-01T00:00",
-        "eventType": "IP",
-        "eventValue": 26.4645584300454,
-        "nominalValue": 3115.98833127954,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
-      },
-      {
-        "eventDate": "2014-01-01T00:00",
         "eventType": "PR",
         "eventValue": 3115.98833127954,
         "nominalValue": 0,
-        "nominalRate": 0,
+        "nominalRate": 0.1,
+        "nominalAccrued": 26.4645584300454
+      },
+      {
+        "eventDate": "2014-01-01T00:00",
+        "eventType": "IP",
+        "eventValue": 26.4645584300454,
+        "nominalValue": 0,
+        "nominalRate": 0.1,
         "nominalAccrued": 0
       }
     ]
   },
-  "10022": {
-    "identifier": "10022",
+  "10019": {
+    "identifier": "10019",
     "terms": {
         "contractType": "PAM",
-        "contractID": "10022",
+        "contractID": "10019",
         "statusDate": "2012-12-30T00:00:00",
         "contractDealDate": "2012-01-30T00:00:00",
         "currency": "USD",
@@ -2568,16 +2568,16 @@
         "eventType": "TD",
         "eventValue": 2913.15068493151,
         "nominalValue": 0,
-        "nominalRate": 0,
+        "nominalRate": 0.1,
         "nominalAccrued": 0
       }
     ]
   },
-  "10023": {
-    "identifier": "10023",
+  "10020": {
+    "identifier": "10020",
     "terms": {
         "contractType": "PAM",
-        "contractID": "10023",
+        "contractID": "10020",
         "statusDate": "2012-12-30T00:00:00",
         "contractDealDate": "2012-12-28T00:00:00",
         "currency": "USD",
@@ -2749,27 +2749,27 @@
       },
       {
         "eventDate": "2014-01-01T00:00",
-        "eventType": "IP",
-        "eventValue": 8.29012345679013,
-        "nominalValue": 3000,
-        "nominalRate": 0.0331604938271605,
-        "nominalAccrued": 0
-      },
-      {
-        "eventDate": "2014-01-01T00:00",
         "eventType": "PR",
         "eventValue": 3000,
         "nominalValue": 0,
-        "nominalRate": 0,
+        "nominalRate": 0.0331604938271605,
+        "nominalAccrued": 8.29012345679013
+      },
+      {
+        "eventDate": "2014-01-01T00:00",
+        "eventType": "IP",
+        "eventValue": 8.29012345679013,
+        "nominalValue": 0,
+        "nominalRate": 0.0331604938271605,
         "nominalAccrued": 0
       }
     ]
   },
-  "10025": {
-    "identifier": "10025",
+  "10021": {
+    "identifier": "10021",
     "terms": {
         "contractType": "PAM",
-        "contractID": "10025",
+        "contractID": "10021",
         "statusDate": "2012-12-30T00:00:00",
         "contractDealDate": "2012-12-28T00:00:00",
         "currency": "USD",
@@ -2941,27 +2941,27 @@
       },
       {
         "eventDate": "2014-01-01T00:00",
-        "eventType": "IP",
-        "eventValue": 13.2253086419753,
-        "nominalValue": 3000,
-        "nominalRate": 0.0529012345679012,
-        "nominalAccrued": 0
-      },
-      {
-        "eventDate": "2014-01-01T00:00",
         "eventType": "PR",
         "eventValue": 3000,
         "nominalValue": 0,
-        "nominalRate": 0,
+        "nominalRate": 0.0529012345679012,
+        "nominalAccrued": 13.2253086419753
+      },
+      {
+        "eventDate": "2014-01-01T00:00",
+        "eventType": "IP",
+        "eventValue": 13.2253086419753,
+        "nominalValue": 0,
+        "nominalRate": 0.0529012345679012,
         "nominalAccrued": 0
       }
     ]
   },
-  "10026": {
-    "identifier": "10026",
+  "10022": {
+    "identifier": "10022",
     "terms": {
         "contractType": "PAM",
-        "contractID": "10026",
+        "contractID": "10022",
         "statusDate": "2012-12-30T00:00:00",
         "contractDealDate": "2012-12-28T00:00:00",
         "currency": "USD",
@@ -3133,27 +3133,27 @@
       },
       {
         "eventDate": "2014-01-01T00:00",
-        "eventType": "IP",
-        "eventValue": 9.8179012345679,
-        "nominalValue": 3000,
-        "nominalRate": 0.0392716049382716,
-        "nominalAccrued": 0
-      },
-      {
-        "eventDate": "2014-01-01T00:00",
         "eventType": "PR",
         "eventValue": 3000,
         "nominalValue": 0,
-        "nominalRate": 0,
+        "nominalRate": 0.0392716049382716,
+        "nominalAccrued": 9.8179012345679
+      },
+      {
+        "eventDate": "2014-01-01T00:00",
+        "eventType": "IP",
+        "eventValue": 9.8179012345679,
+        "nominalValue": 0,
+        "nominalRate": 0.0392716049382716,
         "nominalAccrued": 0
       }
     ]
   },
-  "10029": {
-    "identifier": "10029",
+  "10023": {
+    "identifier": "10023",
     "terms": {
         "contractType": "PAM",
-        "contractID": "10029",
+        "contractID": "10023",
         "statusDate": "2012-12-30T00:00:00",
         "contractDealDate": "2012-12-28T00:00:00",
         "currency": "USD",
@@ -3349,27 +3349,27 @@
       },
       {
         "eventDate": "2014-01-01T00:00",
-        "eventType": "IP",
-        "eventValue": 8.22376543209876,
-        "nominalValue": 3000,
-        "nominalRate": 0.0328950617283951,
-        "nominalAccrued": 0
-      },
-      {
-        "eventDate": "2014-01-01T00:00",
         "eventType": "PR",
         "eventValue": 3000,
         "nominalValue": 0,
-        "nominalRate": 0,
+        "nominalRate": 0.0328950617283951,
+        "nominalAccrued": 8.22376543209876
+      },
+      {
+        "eventDate": "2014-01-01T00:00",
+        "eventType": "IP",
+        "eventValue": 8.22376543209876,
+        "nominalValue": 0,
+        "nominalRate": 0.0328950617283951,
         "nominalAccrued": 0
       }
     ]
   },
-  "10030": {
-    "identifier": "10030",
+  "10024": {
+    "identifier": "10024",
     "terms": {
         "contractType": "PAM",
-        "contractID": "10030",
+        "contractID": "10024",
         "statusDate": "2012-12-30T00:00:00",
         "contractDealDate": "2012-12-28T00:00:00",
         "currency": "USD",
@@ -3495,18 +3495,18 @@
       },
       {
         "eventDate": "2013-12-31T23:59:59",
-        "eventType": "IP",
-        "eventValue": 50.1369863013699,
-        "nominalValue": 3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
-      },
-      {
-        "eventDate": "2013-12-31T23:59:59",
         "eventType": "PR",
         "eventValue": 3000,
         "nominalValue": 0,
-        "nominalRate": 0,
+        "nominalRate": 0.1,
+        "nominalAccrued": 50.1369863013699
+      },
+      {
+        "eventDate": "2013-12-31T23:59:59",
+        "eventType": "IP",
+        "eventValue": 50.1369863013699,
+        "nominalValue": 0,
+        "nominalRate": 0.1,
         "nominalAccrued": 0
       }
     ]

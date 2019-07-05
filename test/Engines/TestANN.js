@@ -23,7 +23,7 @@ contract('ANNEngine', () => {
     const evaluatedSchedule = []
     let contractState = initialContractState
 
-    for (let i = 0; i < 20; i++) {
+    for (let i = 0; i < protoEventSchedule.length; i++) {
       if (protoEventSchedule[i].scheduledTime == 0) { break; }
       const { 0: nextContractState, 1: contractEvent } = await this.ANNEngineInstance.computeNextStateForProtoEvent(
         contractTerms, 
@@ -60,7 +60,7 @@ contract('ANNEngine', () => {
 
     assert.deepEqual(evaluatedSchedule, testDetails['results'])
   })
-/*
+
   it('should yield the expected evaluated contract schedule for test ANN-20002', async () => {
     const testDetails = this.testCases['20002']
     const evaluatedSchedule = await evaluateEventSchedule(testDetails['terms'])
@@ -95,7 +95,7 @@ contract('ANNEngine', () => {
 
     assert.deepEqual(evaluatedSchedule, testDetails['results'])
   })
-*/
+  
   /*
   it('should yield the expected evaluated contract schedule for test ANN-20007', async () => {
     const testDetails = this.testCases['20007']

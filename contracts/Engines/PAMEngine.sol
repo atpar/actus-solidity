@@ -473,10 +473,9 @@ contract PAMEngine is Core, IEngine {
 		}
 		if (eventType == EventType.PR) {
 			contractState.timeFromLastEvent = yearFraction(contractState.lastEventTime, timestamp, contractTerms.dayCountConvention);
+			contractState.nominalAccrued = contractState.nominalAccrued.add(contractState.nominalRate.floatMult(contractState.nominalValue).floatMult(contractState.timeFromLastEvent));
+			contractState.feeAccrued = contractState.feeAccrued.add(contractTerms.feeRate.floatMult(contractState.nominalValue).floatMult(contractState.timeFromLastEvent));
 			contractState.nominalValue = 0;
-			contractState.nominalRate = 0;
-			contractState.nominalAccrued = 0;
-			contractState.feeAccrued = 0;
 			contractState.lastEventTime = timestamp;
 			return contractState;
 		}
@@ -548,7 +547,6 @@ contract PAMEngine is Core, IEngine {
 		if (eventType == EventType.TD) {
 			contractState.timeFromLastEvent = yearFraction(contractState.lastEventTime, timestamp, contractTerms.dayCountConvention);
 			contractState.nominalValue = 0;
-			contractState.nominalRate = 0;
 			contractState.nominalAccrued = 0;
 			contractState.feeAccrued = 0;
 			contractState.lastEventTime = timestamp;

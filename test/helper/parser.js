@@ -7,7 +7,7 @@ const ContractTermsDefinitions = require('../../actus-resources/definitions/Cont
 const CoveredTerms = require('../../actus-resources/definitions/covered-terms.json')
 
 const PRECISION = 18
-const DIGITS = 10000000000000
+const DIGITS = 10
 
 const isoToUnix = (date) => {
   return (new Date(date + 'Z')).getTime() / 1000
@@ -30,7 +30,11 @@ const toPrecision = (value) => {
 }
 
 const fromPrecision = (value) => {
-  return Math.round((value * 10 ** -PRECISION) * DIGITS) / DIGITS
+  return Math.round((value * 10 ** -PRECISION) * 10000000000000) / 10000000000000
+}
+
+const roundToDigits = (value, digits) => {
+  return Math.round(value * 10 ** digits) / 10 ** digits
 }
 
 const capitalize = (str) => {
@@ -83,10 +87,10 @@ const parseResultsFromObject = (schedule) => {
     parsedResults.push({
       'eventDate': new Date(event['eventDate'] + 'Z').toISOString(),
       'eventType': eventTypeIndex.toString(),
-      'eventValue': Number(event['eventValue']),
-      'nominalValue': Number(event['nominalValue']),
+      'eventValue': roundToDigits(Number(event['eventValue']), DIGITS),
+      'nominalValue': roundToDigits(Number(event['nominalValue']),DIGITS),
       'nominalRate': Number(event['nominalRate']),
-      'nominalAccrued': Number(event['nominalAccrued'])
+      'nominalAccrued': roundToDigits(Number(event['nominalAccrued']),DIGITS)
     })
   }
 
@@ -97,10 +101,10 @@ function parseEventFromEth (contractEvent, contractState) {
   return {
     'eventDate': unixToISO(contractEvent['actualEventTime']),
     'eventType': contractEvent['eventType'],
-    'eventValue': fromPrecision(contractEvent['payoff']),
-    'nominalValue': fromPrecision(contractState['nominalValue']),
+    'eventValue': roundToDigits(fromPrecision(contractEvent['payoff']),DIGITS),
+    'nominalValue': roundToDigits(fromPrecision(contractState['nominalValue']),DIGITS),
     'nominalRate': fromPrecision(contractState['nominalRate']),
-    'nominalAccrued': fromPrecision(contractState['nominalAccrued'])
+    'nominalAccrued': roundToDigits(fromPrecision(contractState['nominalAccrued']),DIGITS)
   };
 }
 

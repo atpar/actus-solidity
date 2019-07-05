@@ -514,7 +514,6 @@ contract ANNEngine is Core, IEngine {
 		if (eventType == EventType.TD) {
 			contractState.timeFromLastEvent = yearFraction(contractState.lastEventTime, timestamp, contractTerms.dayCountConvention);
 			contractState.nominalValue = 0;
-			contractState.nominalRate = 0;
 			contractState.nominalAccrued = 0;
 			contractState.feeAccrued = 0;
 			contractState.lastEventTime = timestamp;

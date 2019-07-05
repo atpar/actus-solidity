@@ -23,7 +23,7 @@ contract('PAMEngine', () => {
     const evaluatedSchedule = []
     let contractState = initialContractState
 
-    for (let i = 0; i < 20; i++) {
+    for (let i = 0; i < protoEventSchedule.length; i++) {
       if (protoEventSchedule[i].scheduledTime == 0) { break; }
       const { 0: nextContractState, 1: contractEvent } = await this.PAMEngineInstance.computeNextStateForProtoEvent(
         contractTerms, 
@@ -100,7 +100,7 @@ contract('PAMEngine', () => {
     protoEventSchedule = removeNullEvents(protoEventSchedule)
     assert.isTrue(protoEventSchedule.toString() === entireProtoEventSchedule.toString())
   })
-/*
+
   it('should yield the next contract state and the contract events', async() => {
     const terms = this.testCases['10001'].terms
     const initialState = await this.PAMEngineInstance.computeInitialState(terms, {})
@@ -121,13 +121,15 @@ contract('PAMEngine', () => {
     assert.deepEqual(evaluatedSchedule, testDetails['results'])
   })
 
-  // requires AISDA
-  // it('should yield the expected evaluated contract schedule for test PAM10003', async () => {
-  //  const testDetails = this.testCases['10003']
-  //  const evaluatedSchedule = await evaluateEventSchedule(testDetails['terms'])
-  //
-  //  assert.deepEqual(evaluatedSchedule, testDetails['results'])
-  // })
+  /*
+  // TODO: implement AISDA
+  it('should yield the expected evaluated contract schedule for test PAM10003', async () => {
+    const testDetails = this.testCases['10003']
+    const evaluatedSchedule = await evaluateEventSchedule(testDetails['terms'])
+  
+    assert.deepEqual(evaluatedSchedule, testDetails['results'])
+  })
+  */
 
   it('should yield the expected evaluated contract schedule for test PAM10004', async () => {
     const testDetails = this.testCases['10004']
@@ -136,7 +138,15 @@ contract('PAMEngine', () => {
     assert.deepEqual(evaluatedSchedule, testDetails['results'])
   })
 
-  // EOM convetion (same day) 
+  it('should yield the expected evaluated contract schedule for test PAM10005', async () => {
+    const testDetails = this.testCases['10005']
+    const evaluatedSchedule = await evaluateEventSchedule(testDetails['terms'])
+
+    assert.deepEqual(evaluatedSchedule, testDetails['results'])
+  })
+
+  /*
+    // TODO: implement BDC
   it('should yield the expected evaluated contract schedule for test PAM10006', async () => {
     const testDetails = this.testCases['10006']
     const evaluatedSchedule = await evaluateEventSchedule(testDetails['terms'])
@@ -144,55 +154,80 @@ contract('PAMEngine', () => {
     assert.deepEqual(evaluatedSchedule, testDetails['results'])
   })
 
-  // EOM convention (EOM), Business Day Count conventions
-  // it('should yield the expected evaluated contract schedule for test PAM10007', async () => {
-  //   const contractTerms = this.testTerms['10007']
-  //   const evaluatedSchedule = await evaluateEventSchedule(contractTerms)
+    // TODO: implement BDC
+  it('should yield the expected evaluated contract schedule for test PAM10007', async () => {
+    const testDetails = this.testCases['10007']
+    const evaluatedSchedule = await evaluateEventSchedule(testDetails['terms'])
 
-  //   assert.deepEqual(evaluatedSchedule, this.refTestResults['10007'])
-  // })
+    assert.deepEqual(evaluatedSchedule, testDetails['results'])
+  })
 
-  // EOM conventions, Business Day Count conventions
-  // it('should yield the expected evaluated contract schedule for test PAM10008', async () => {
-  //   const contractTerms = this.testTerms['10008']
-  //   const evaluatedSchedule = await evaluateEventSchedule(contractTerms)
+    // TODO: implement BDC
+  it('should yield the expected evaluated contract schedule for test PAM10008', async () => {
+    const testDetails = this.testCases['10008']
+    const evaluatedSchedule = await evaluateEventSchedule(testDetails['terms'])
 
-  //   assert.deepEqual(evaluatedSchedule, this.refTestResults['10008'])
-  // })
+    assert.deepEqual(evaluatedSchedule, testDetails['results'])
+  })
 
-  // EOM conventions, Business Day Count conventions
-  // it('should yield the expected evaluated contract schedule for test PAM10009', async () => {
-  //   const contractTerms = this.testTerms['10009']
-  //   const evaluatedSchedule = await evaluateEventSchedule(contractTerms)
+    // TODO: implement BDC
+  it('should yield the expected evaluated contract schedule for test PAM10009', async () => {
+    const testDetails = this.testCases['10009']
+    const evaluatedSchedule = await evaluateEventSchedule(testDetails['terms'])
 
-  //   assert.deepEqual(evaluatedSchedule, this.refTestResults['10009'])
-  // })
+    assert.deepEqual(evaluatedSchedule, testDetails['results'])
+  })
 
-// EOM conventions, Business Day Count conventions
-  // it('should yield the expected evaluated contract schedule for test PAM10010', async () => {
-  //   const contractTerms = this.testTerms['10010']
-  //   const evaluatedSchedule = await evaluateEventSchedule(contractTerms)
+    // TODO: implement BDC
+  it('should yield the expected evaluated contract schedule for test PAM10010', async () => {
+    const testDetails = this.testCases['10010']
+    const evaluatedSchedule = await evaluateEventSchedule(testDetails['terms'])
 
-  //   assert.deepEqual(evaluatedSchedule, this.refTestResults['10010'])
-  // })
+    assert.deepEqual(evaluatedSchedule, testDetails['results'])
+  })
 
-  // EOM conventions, Business Day Count conventions
-  // it('should yield the expected evaluated contract schedule for test PAM10011', async () => {
-  //   const contractTerms = this.testTerms['10011']
-  //   const evaluatedSchedule = await evaluateEventSchedule(contractTerms)
+  // TODO: implement BDC
+  it('should yield the expected evaluated contract schedule for test PAM10011', async () => {
+    const testDetails = this.testCases['10011']
+    const evaluatedSchedule = await evaluateEventSchedule(testDetails['terms'])
 
-  //   assert.deepEqual(evaluatedSchedule, this.refTestResults['10011'])
-  // })
+    assert.deepEqual(evaluatedSchedule, testDetails['results'])
+  })
+  */
 
-  // EOM conventions, Business Day Count conventions
-  // it('should yield the expected evaluated contract schedule for test PAM10012', async () => {
-  //   const contractTerms = this.testTerms['10012']
-  //   const evaluatedSchedule = await evaluateEventSchedule(contractTerms)
+  /*
+  // TODO: Purchase/Termination
+  it('should yield the expected evaluated contract schedule for test PAM10012', async () => {
+    const testDetails = this.testCases['10012']
+    const evaluatedSchedule = await evaluateEventSchedule(testDetails['terms'])
 
-  //   assert.deepEqual(evaluatedSchedule, this.refTestResults['10012'])
-  // })
+    assert.deepEqual(evaluatedSchedule, testDetails['results'])
+  })
+  */
 
-  // accrued interest for first IP?
+  /*
+  it('should yield the expected evaluated contract schedule for test PAM10013', async () => {
+    const testDetails = this.testCases['10013']
+    const evaluatedSchedule = await evaluateEventSchedule(testDetails['terms'])
+
+    assert.deepEqual(evaluatedSchedule, testDetails['results'])
+  })
+  */
+
+  it('should yield the expected evaluated contract schedule for test PAM10014', async () => {
+    const testDetails = this.testCases['10014']
+    const evaluatedSchedule = await evaluateEventSchedule(testDetails['terms'])
+
+    assert.deepEqual(evaluatedSchedule, testDetails['results'])
+  })
+
+  it('should yield the expected evaluated contract schedule for test PAM10015', async () => {
+    const testDetails = this.testCases['10015']
+    const evaluatedSchedule = await evaluateEventSchedule(testDetails['terms'])
+
+    assert.deepEqual(evaluatedSchedule, testDetails['results'])
+  })
+
   it('should yield the expected evaluated contract schedule for test PAM10016', async () => {
     const testDetails = this.testCases['10016']
     const evaluatedSchedule = await evaluateEventSchedule(testDetails['terms'])
@@ -206,7 +241,7 @@ contract('PAMEngine', () => {
 
     assert.deepEqual(evaluatedSchedule, testDetails['results'])
   })
-
+ 
   it('should yield the expected evaluated contract schedule for test PAM10018', async () => {
     const testDetails = this.testCases['10018']
     const evaluatedSchedule = await evaluateEventSchedule(testDetails['terms'])
@@ -214,8 +249,20 @@ contract('PAMEngine', () => {
     assert.deepEqual(evaluatedSchedule, testDetails['results'])
   })
 
+  /*
+  // TODO: Purchase/Termination
   it('should yield the expected evaluated contract schedule for test PAM10019', async () => {
     const testDetails = this.testCases['10019']
+    const evaluatedSchedule = await evaluateEventSchedule(testDetails['terms'])
+
+    assert.deepEqual(evaluatedSchedule, testDetails['results'])
+  })
+  */
+
+  /*
+  // TODO: Rate Reset
+  it('should yield the expected evaluated contract schedule for test PAM10020', async () => {
+    const testDetails = this.testCases['10020']
     const evaluatedSchedule = await evaluateEventSchedule(testDetails['terms'])
 
     assert.deepEqual(evaluatedSchedule, testDetails['results'])
@@ -227,5 +274,30 @@ contract('PAMEngine', () => {
 
     assert.deepEqual(evaluatedSchedule, testDetails['results'])
   })
+
+  it('should yield the expected evaluated contract schedule for test PAM10022', async () => {
+    const testDetails = this.testCases['10022']
+    const evaluatedSchedule = await evaluateEventSchedule(testDetails['terms'])
+
+    assert.deepEqual(evaluatedSchedule, testDetails['results'])
+  })
+ 
+  it('should yield the expected evaluated contract schedule for test PAM10023', async () => {
+    const testDetails = this.testCases['10023']
+    const evaluatedSchedule = await evaluateEventSchedule(testDetails['terms'])
+
+    assert.deepEqual(evaluatedSchedule, testDetails['results'])
+  }) 
   */
+
+  /*
+  // TODO: A365 issue
+  it('should yield the expected evaluated contract schedule for test PAM10024', async () => {
+    const testDetails = this.testCases['10024']
+    const evaluatedSchedule = await evaluateEventSchedule(testDetails['terms'])
+
+    assert.deepEqual(evaluatedSchedule, testDetails['results'])
+  })
+  */
+
 })
