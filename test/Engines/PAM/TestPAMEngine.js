@@ -1,7 +1,7 @@
 const PAMEngine = artifacts.require('PAMEngine.sol');
 
-const { getDefaultTerms } = require('../helper/tests');
-const { removeNullEvents } = require('../helper/schedule');
+const { getDefaultTerms } = require('../../helper/tests');
+const { removeNullEvents } = require('../../helper/schedule');
 
 
 contract('PAMEngine', () => {

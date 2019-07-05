@@ -1,6 +1,6 @@
 const PAMEngine = artifacts.require('PAMEngine.sol');
 
-const { getTestCases, getTestResults, toTestEvent } = require('../helper/tests');
+const { getTestCases, getTestResults, toTestEvent } = require('../../helper/tests');
 
 
 contract('PAMEngine', () => {

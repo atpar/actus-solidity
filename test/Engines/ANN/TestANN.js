@@ -1,8 +1,8 @@
 const ANNEngine = artifacts.require('ANNEngine.sol')
 
-const { getTestCases } = require('../helper/tests')
-const { parseEventFromEth } = require('../helper/parser')
-const { removeNullEvents } = require('../helper/schedule')
+const { getTestCases } = require('../../helper/tests')
+const { parseEventFromEth } = require('../../helper/parser')
+const { removeNullEvents } = require('../../helper/schedule')
 
 
 contract('ANNEngine', () => {
