@@ -2,7 +2,6 @@ const ANNEngine = artifacts.require('ANNEngine.sol')
 
 const { getTestCases } = require('../../helper/tests')
 const { parseEventFromEth } = require('../../helper/parser')
-const { removeNullEvents } = require('../../helper/schedule')
 
 
 contract('ANNEngine', () => {
@@ -25,13 +24,16 @@ contract('ANNEngine', () => {
 
     for (let i = 0; i < protoEventSchedule.length; i++) {
       if (protoEventSchedule[i].scheduledTime == 0) { break; }
+
+      console.log(protoEventSchedule[i])
+
       const { 0: nextContractState, 1: contractEvent } = await this.ANNEngineInstance.computeNextStateForProtoEvent(
         contractTerms, 
         contractState, 
         protoEventSchedule[i], 
         protoEventSchedule[i].scheduledTime
       )
-
+        console.log("exit computeNextState method")
       contractState = nextContractState
 
       evaluatedSchedule.push(parseEventFromEth(contractEvent, contractState))
@@ -40,27 +42,13 @@ contract('ANNEngine', () => {
     return evaluatedSchedule
   }
 
-  it('should yield the initial contract state', async () => {
-    const initialState = await this.ANNEngineInstance.computeInitialState(this.testCases['20001'].terms, {})
-    assert.isTrue(Number(initialState['lastEventTime']) === Number(this.testCases['20001'].terms['statusDate']))
-  })
-
-  it('should yield all events', async () => {
-    let protoEventSchedule = await this.ANNEngineInstance.computeProtoEventScheduleSegment(
-      this.testCases['20001'].terms, 
-      this.testCases['20001'].terms['statusDate'],
-      this.testCases['20001'].terms['maturityDate'],
-    )
-    assert.isTrue(removeNullEvents(protoEventSchedule).length > 0)
-  })
-
   it('should yield the expected evaluated contract schedule for test ANN-20001', async () => {
     const testDetails = this.testCases['20001']
     const evaluatedSchedule = await evaluateEventSchedule(testDetails['terms'])
 
     assert.deepEqual(evaluatedSchedule, testDetails['results'])
   })
-
+/*
   it('should yield the expected evaluated contract schedule for test ANN-20002', async () => {
     const testDetails = this.testCases['20002']
     const evaluatedSchedule = await evaluateEventSchedule(testDetails['terms'])
@@ -95,7 +83,7 @@ contract('ANNEngine', () => {
 
     assert.deepEqual(evaluatedSchedule, testDetails['results'])
   })
-  
+  */
   /*
   it('should yield the expected evaluated contract schedule for test ANN-20007', async () => {
     const testDetails = this.testCases['20007']

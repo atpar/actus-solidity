@@ -549,6 +549,8 @@ contract PAMEngine is Core, IEngine {
 				shiftCalcTime(timestamp, contractTerms.businessDayConvention, contractTerms.calendar),
 				contractTerms.dayCountConvention
 			);
+			contractState.nominalAccrued = contractState.nominalAccrued.add(contractState.nominalRate.floatMult(contractState.nominalValue).floatMult(contractState.timeFromLastEvent));
+			contractState.feeAccrued = contractState.feeAccrued.add(contractTerms.feeRate.floatMult(contractState.nominalValue).floatMult(contractState.timeFromLastEvent));
 			contractState.nominalValue = 0;
 			contractState.lastEventTime = timestamp;
 			return contractState;
