@@ -70,31 +70,6 @@
     "name": "solc",
     "version": "0.5.2+commit.1df8f40c.Emscripten.clang"
   },
-  "networks": {
-    "3": {
-      "events": {},
-      "links": {},
-      "address": "0xCB6171DdCdcD0A79930b486a40BBf81804ecb3e9",
-      "transactionHash": "0xfff326a2d122359ca981c15570ec893a1ca4985ed852fe052587f731972f4f46"
-    },
-    "4": {
-      "events": {},
-      "links": {},
-      "address": "0xCB6171DdCdcD0A79930b486a40BBf81804ecb3e9",
-      "transactionHash": "0xfff326a2d122359ca981c15570ec893a1ca4985ed852fe052587f731972f4f46"
-    },
-    "5": {
-      "events": {},
-      "links": {},
-      "address": "0xCB6171DdCdcD0A79930b486a40BBf81804ecb3e9",
-      "transactionHash": "0xfff326a2d122359ca981c15570ec893a1ca4985ed852fe052587f731972f4f46"
-    },
-    "42": {
-      "events": {},
-      "links": {},
-      "address": "0xCB6171DdCdcD0A79930b486a40BBf81804ecb3e9",
-      "transactionHash": "0xfff326a2d122359ca981c15570ec893a1ca4985ed852fe052587f731972f4f46"
-    }
-  },
-  "updatedAt": "2019-05-24T17:48:28.202Z"
+  "networks": {},
+  "updatedAt": "2019-06-15T15:23:56.832Z"
 }

@@ -16,7 +16,7 @@ function removeNullEvents (schedule) {
   const compactSchedule = [];
 
   for (event of schedule) {
-    if (event['scheduledTime'] === '0') { continue }
+    if (event['eventTime'] === '0') { continue }
     compactSchedule.push(event);
   }
 

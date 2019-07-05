@@ -1,12 +1,12 @@
 pragma solidity ^0.5.2;
 pragma experimental ABIEncoderV2;
 
-import "../external/BokkyPooBah/BokkyPooBahsDateTimeLibrary.sol";
+import "../../external/BokkyPooBah/BokkyPooBahsDateTimeLibrary.sol";
 
-import "./Definitions.sol";
+import "../Definitions.sol";
 
 
-contract EndOfMonthConventions is Definitions {
+contract EndOfMonthConvention is Definitions {
 
 	function getEndOfMonthConvention(
 		EndOfMonthConvention eomc,

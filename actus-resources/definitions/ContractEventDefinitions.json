@@ -1,7 +1,7 @@
 {
-  "scheduledTime": {
-    "id": "scheduledTime",
-    "name": "Scheduled Time",
+  "eventTime": {
+    "id": "eventTime",
+    "name": "Event Time",
     "type": "date"
   },
   "eventType": {

@@ -1,0 +1,27 @@
+{
+  "contractName": "ContractRoleConvention",
+  "abi": [
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "PRECISION",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    }
+  ],
+  "metadata": "{\"compiler\":{\"version\":\"0.5.2+commit.1df8f40c\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"constant\":true,\"inputs\":[],\"name\":\"PRECISION\",\"outputs\":[{\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"}],\"devdoc\":{\"methods\":{}},\"userdoc\":{\"methods\":{}}},\"settings\":{\"compilationTarget\":{\"/Users/johannes/Documents/dev/actus-protocol/actus-solidity/contracts/Core/Conventions/ContractRoleConvention.sol\":\"ContractRoleConvention\"},\"evmVersion\":\"byzantium\",\"libraries\":{},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[]},\"sources\":{\"/Users/johannes/Documents/dev/actus-protocol/actus-solidity/contracts/Core/Conventions/ContractRoleConvention.sol\":{\"keccak256\":\"0xbbebeca945da80a5051c20fd36662cc70f5f55d8dd1b6ff01a92633d52c0ffaa\",\"urls\":[\"bzzr://c6201e9a541cc47220d615a33d1c5ecfd6b44ab75d91a8ef87f74c9ac3adc405\"]},\"/Users/johannes/Documents/dev/actus-protocol/actus-solidity/contracts/Core/Definitions.sol\":{\"keccak256\":\"0xe73122fa67be7cf80cae79d572b2f1c10215a882e512d6b6ef6aef40b2458ca4\",\"urls\":[\"bzzr://2d8155349a3eb89a5e10290ebc053dd9e72104b96acb2fddc199742da47ee538\"]}},\"version\":1}",
+  "bytecode": "0x6080604052348015600f57600080fd5b5060928061001e6000396000f3fe6080604052348015600f57600080fd5b50600436106044577c01000000000000000000000000000000000000000000000000000000006000350463aaf5eb6881146049575b600080fd5b604f6061565b60408051918252519081900360200190f35b60128156fea165627a7a7230582019a0f923acdc5c63cc7ce45fc1ec0482f1d99dd0234115495101d733f9371b860029",
+  "compiler": {
+    "name": "solc",
+    "version": "0.5.2+commit.1df8f40c.Emscripten.clang"
+  },
+  "networks": {},
+  "updatedAt": "2019-06-15T15:23:56.787Z"
+}

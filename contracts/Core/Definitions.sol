@@ -26,7 +26,7 @@ contract Definitions {
 
 	enum EventType {SD, MD, AD, IED, IP, PR, PP, PY, FP, PRD, TD, IPCI, RR, RRY, SC, CD, DV, MR, IPCB, STD, Child}
 	enum Calendar {NoCalendar, MondayToFriday} // Custom: custom implementation of calendar
-	enum BusinessDayConvention {SCF, SCMF, CSF, CSMF, SCP, SCMP, CSP, CSMP}
+	enum BusinessDayConvention {NULL, SCF, SCMF, CSF, CSMF, SCP, SCMP, CSP, CSMP}
 	enum ClearingHouse {YES, NO} // required ?
 	enum ContractRole {RPA, RPL, LG, ST, RFL, PFL, BUY, SEL, GUA, OBL} // required ?
 	enum ContractStatus {PF, DL, DQ, DF} // Default: PF
@@ -73,7 +73,7 @@ contract Definitions {
 	}
 
 	struct ContractEvent {
-		uint256 scheduledTime;
+		uint256 eventTime;
 		EventType eventType;
 		address currency;
 		int256 payoff;
@@ -81,8 +81,9 @@ contract Definitions {
 	}
 
 	struct ProtoEvent {
-		uint256 scheduledTime;
-		uint256 scheduledTimeWithEpochOffset;
+		uint256 eventTime; // adjusted for business-day-convention
+		uint256 eventTimeWithEpochOffset; // adjusted for business-day-convention and epoch offset (used exclusively for sorting)
+		uint256 scheduleTime; // primarily used for CalcShift convention
 		EventType eventType;
 		address currency;
 		EventType pofType;
