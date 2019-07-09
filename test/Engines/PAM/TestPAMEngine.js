@@ -8,63 +8,60 @@ contract('PAMEngine', () => {
 
   before(async () => {        
     this.PAMEngineInstance = await PAMEngine.new();
-    this.testCases = await getTestCases( "PAM" )
+    this.terms = (await getTestCases( "PAM" ))['10001'].terms
   });
 
   it('should yield the initial contract state', async () => {
-    const terms = this.testCases['10001'].terms
-    const initialState = await this.PAMEngineInstance.computeInitialState(terms, {});
-    assert.isTrue(Number(initialState['lastEventTime']) === Number(terms['statusDate']));
+    const initialState = await this.PAMEngineInstance.computeInitialState(this.terms, {});
+    assert.isTrue(Number(initialState['lastEventTime']) === Number(this.terms['statusDate']));
   });
 
   it('should yield all events', async () => {
-    const terms = this.testCases['10001'].terms
     let protoEventSchedule = await this.PAMEngineInstance.computeProtoEventScheduleSegment(
-      terms, 
-      terms['statusDate'],
-      terms['maturityDate'],
+      this.terms, 
+      this.terms['statusDate'],
+      this.terms['maturityDate'],
     );
 
     assert.isTrue(removeNullEvents(protoEventSchedule).length > 0);
   });
 
   it('should yield correct segment of events', async () => {
-    const terms = this.testCases['10001'].terms
     const entireProtoEventSchedule = removeNullEvents(
       await this.PAMEngineInstance.computeProtoEventScheduleSegment(
-        terms, 
-        terms['statusDate'],
-        terms['maturityDate'],
+        this.terms, 
+        this.terms['statusDate'],
+        this.terms['maturityDate'],
       )
     );
 
 
     let protoEventSchedule = [];
-    let lastEventTime = terms['statusDate'];
-    let timestamp = terms['statusDate'] + (terms['maturityDate'] - terms['statusDate']) / 4;
+    let lastEventTime = this.terms['statusDate'];
+    let timestamp = this.terms['statusDate'] + (this.terms['maturityDate'] - this.terms['statusDate']) / 4;
 
     response = await this.PAMEngineInstance.computeProtoEventScheduleSegment(
-      terms, 
+      this.terms, 
       lastEventTime,
       timestamp
     );
     protoEventSchedule = [...response];
 
     lastEventTime = timestamp;
-    timestamp = terms['statusDate'] + (terms['maturityDate'] - terms['statusDate']) / 2;
+    timestamp = this.terms['statusDate'] + (this.terms['maturityDate'] - this.terms['statusDate']) / 2;
 
     response = await this.PAMEngineInstance.computeProtoEventScheduleSegment(
-      terms, 
+      this.terms, 
       lastEventTime,
       timestamp
     );
     protoEventSchedule = [...protoEventSchedule, ...response];
     
     lastEventTime = timestamp;
-    timestamp = terms['maturityDate'];
+    timestamp = this.terms['maturityDate'];
 
     response = await this.PAMEngineInstance.computeProtoEventScheduleSegment(
-      terms, 
+      this.terms, 
       lastEventTime,
       timestamp
     );
@@ -76,8 +73,7 @@ contract('PAMEngine', () => {
   });
 
   it('should yield the next next contract state and the contract events', async() => {
-    const terms = this.testCases['10001'].terms
-    const initialState = await this.PAMEngineInstance.computeInitialState(terms, {});
-    await this.PAMEngineInstance.computeNextState(terms, initialState, terms['maturityDate']);
+    const initialState = await this.PAMEngineInstance.computeInitialState(this.terms, {});
+    await this.PAMEngineInstance.computeNextState(this.terms, initialState, this.terms['maturityDate']);
   });
 });

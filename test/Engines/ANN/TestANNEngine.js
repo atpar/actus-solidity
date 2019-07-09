@@ -8,63 +8,60 @@ contract('ANNEngine', () => {
 
   before(async () => {        
     this.ANNEngineInstance = await ANNEngine.new();
-    this.testCases = await getTestCases( "ANN" )
+    this.terms = (await getTestCases( "ANN" ))['20001'].terms;
   });
 
   it('should yield the initial contract state', async () => {
-    const terms = this.testCases['20001'].terms
-    const initialState = await this.ANNEngineInstance.computeInitialState(terms, {});
-    assert.isTrue(Number(initialState['lastEventTime']) === Number(terms['statusDate']));
+    const initialState = await this.ANNEngineInstance.computeInitialState(this.terms, {});
+    assert.isTrue(Number(initialState['lastEventTime']) === Number(this.terms['statusDate']));
   });
 
   it('should yield all events', async () => {
-    const terms = this.testCases['20001'].terms
     let protoEventSchedule = await this.ANNEngineInstance.computeProtoEventScheduleSegment(
-      terms, 
-      terms['statusDate'],
-      terms['maturityDate'],
+      this.terms, 
+      this.terms['statusDate'],
+      this.terms['maturityDate'],
     );
 
     assert.isTrue(removeNullEvents(protoEventSchedule).length > 0);
   });
 
   it('should yield correct segment of events', async () => {
-    const terms = this.testCases['20001'].terms
     const entireProtoEventSchedule = removeNullEvents(
       await this.ANNEngineInstance.computeProtoEventScheduleSegment(
-        terms, 
-        terms['statusDate'],
-        terms['maturityDate'],
+        this.terms, 
+        this.terms['statusDate'],
+        this.terms['maturityDate'],
       )
     );
 
 
     let protoEventSchedule = [];
-    let lastEventTime = terms['statusDate'];
-    let timestamp = terms['statusDate'] + (terms['maturityDate'] - terms['statusDate']) / 4;
+    let lastEventTime = this.terms['statusDate'];
+    let timestamp = this.terms['statusDate'] + (this.terms['maturityDate'] - this.terms['statusDate']) / 4;
 
     response = await this.ANNEngineInstance.computeProtoEventScheduleSegment(
-      terms, 
+      this.terms, 
       lastEventTime,
       timestamp
     );
     protoEventSchedule = [...response];
 
     lastEventTime = timestamp;
-    timestamp = terms['statusDate'] + (terms['maturityDate'] - terms['statusDate']) / 2;
+    timestamp = this.terms['statusDate'] + (this.terms['maturityDate'] - this.terms['statusDate']) / 2;
 
     response = await this.ANNEngineInstance.computeProtoEventScheduleSegment(
-      terms, 
+      this.terms, 
       lastEventTime,
       timestamp
     );
     protoEventSchedule = [...protoEventSchedule, ...response];
     
     lastEventTime = timestamp;
-    timestamp = terms['maturityDate'];
+    timestamp = this.terms['maturityDate'];
 
     response = await this.ANNEngineInstance.computeProtoEventScheduleSegment(
-      terms, 
+      this.terms, 
       lastEventTime,
       timestamp
     );
@@ -76,8 +73,7 @@ contract('ANNEngine', () => {
   });
 
   it('should yield the next next contract state and the contract events', async() => {
-    const terms = this.testCases['20001'].terms
-    const initialState = await this.ANNEngineInstance.computeInitialState(terms, {});
-    await this.ANNEngineInstance.computeNextState(terms, initialState, terms['maturityDate']);
+    const initialState = await this.ANNEngineInstance.computeInitialState(this.terms, {});
+    await this.ANNEngineInstance.computeNextState(this.terms, initialState, this.terms['maturityDate']);
   });
 });
