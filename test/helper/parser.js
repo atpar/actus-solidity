@@ -6,7 +6,7 @@ const ContractTermsDefinitions = require('../../actus-resources/definitions/Cont
 const CoveredTerms = require('../../actus-resources/definitions/covered-terms.json')
 
 const PRECISION = 18;
-const DIGITS = 10;
+const DIGITS = 13;
 
 
 const isoToUnix = (date) => {
@@ -30,11 +30,11 @@ const toPrecision = (value) => {
 }
 
 const fromPrecision = (value) => {
-  return Math.round((value * 10 ** -PRECISION) * 10000000000000) / 10000000000000;
+  return Math.round((value * 10 ** -PRECISION) * 10 ** DIGITS) / 10 ** DIGITS;
 }
 
-const roundToDigits = (value, digits) => {
-  return Math.round(value * 10 ** digits) / 10 ** digits;
+const roundToDigits = (value) => {
+  return Math.round(value * 10 ** DIGITS) / 10 ** DIGITS;
 }
 
 // const capitalize = (str) => {
@@ -87,10 +87,10 @@ const parseResultsFromObject = (schedule) => {
     parsedResults.push({
       'eventDate': new Date(event['eventDate'] + 'Z').toISOString(),
       'eventType': eventTypeIndex.toString(),
-      'eventValue': roundToDigits(Number(event['eventValue']), DIGITS),
-      'nominalValue': roundToDigits(Number(event['nominalValue']), DIGITS),
+      'eventValue': roundToDigits(Number(event['eventValue'])),
+      'nominalValue': roundToDigits(Number(event['nominalValue'])),
       'nominalRate': Number(event['nominalRate']),
-      'nominalAccrued': roundToDigits(Number(event['nominalAccrued']), DIGITS)
+      'nominalAccrued': roundToDigits(Number(event['nominalAccrued']))
     });
   }
 
@@ -101,10 +101,10 @@ function parseToTestEvent (event, state) {
   return {
     'eventDate': unixToISO(event['eventTime']),
     'eventType': event['eventType'],
-    'eventValue': roundToDigits(fromPrecision(event['payoff']), DIGITS),
-    'nominalValue': roundToDigits(fromPrecision(state['nominalValue']), DIGITS),
+    'eventValue': roundToDigits(fromPrecision(event['payoff'])),
+    'nominalValue': roundToDigits(fromPrecision(state['nominalValue'])),
     'nominalRate': fromPrecision(state['nominalRate']),
-    'nominalAccrued': roundToDigits(fromPrecision(state['nominalAccrued']), DIGITS)
+    'nominalAccrued': roundToDigits(fromPrecision(state['nominalAccrued']))
   };
 }
 
