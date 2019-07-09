@@ -8,7 +8,7 @@ contract('ANNEngine', () => {
 
   before(async () => {        
     this.ANNEngineInstance = await ANNEngine.new();
-    this.terms = (await getTestCases( "ANN" ))['20001'].terms;
+    this.terms = (await getTestCases('ANN'))['20001'].terms;
   });
 
   it('should yield the initial contract state', async () => {

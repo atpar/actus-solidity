@@ -1,9 +1,9 @@
 const web3Utils = require('web3-utils');
 const BigNumber = require('bignumber.js');
 
-const ContractEventDefinitions = require('../../actus-resources/definitions/ContractEventDefinitions.json')
-const ContractTermsDefinitions = require('../../actus-resources/definitions/ContractTermsDefinitions.json')
-const CoveredTerms = require('../../actus-resources/definitions/covered-terms.json')
+const ContractEventDefinitions = require('../../actus-resources/definitions/ContractEventDefinitions.json');
+const ContractTermsDefinitions = require('../../actus-resources/definitions/ContractTermsDefinitions.json');
+const CoveredTerms = require('../../actus-resources/definitions/covered-terms.json');
 
 const PRECISION = 18;
 const DIGITS = 13;
