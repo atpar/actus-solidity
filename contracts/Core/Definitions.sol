@@ -115,6 +115,7 @@ contract Definitions {
 		uint256 cycleAnchorDateOfRateReset;
 		uint256 cycleAnchorDateOfScalingIndex;
 		uint256 cycleAnchorDateOfFee;
+		uint256 cycleAnchorDateOfPrincipalRedemption;
 
 		int256 notionalPrincipal;
 		int256 nominalInterestRate;
@@ -127,19 +128,18 @@ contract Definitions {
 		int256 penaltyRate;
 		int256 premiumDiscountAtIED;
 		int256 priceAtPurchaseDate;
+		int256 nextPrincipalRedemptionPayment;
 
 		IPS cycleOfInterestPayment;
 		IPS cycleOfRateReset;
 		IPS cycleOfScalingIndex;
 		IPS cycleOfFee;
+		IPS cycleOfPrincipalRedemption;
 
 		int256 lifeCap;
 		int256 lifeFloor;
 		int256 periodCap;
 		int256 periodFloor;
 
-		uint256 cycleAnchorDateOfPrincipalRedemption;
-		IPS cycleOfPrincipalRedemption;
-		int256 nextPrincipalRedemptionPayment;
 	}
 }

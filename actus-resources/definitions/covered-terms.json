@@ -22,6 +22,7 @@
   "cycleAnchorDateOfRateReset",
   "cycleAnchorDateOfScalingIndex",
   "cycleAnchorDateOfFee",
+  "cycleAnchorDateOfPrincipalRedemption",
   "notionalPrincipal",
   "nominalInterestRate",
   "feeAccrued",
@@ -33,15 +34,14 @@
   "penaltyRate",
   "premiumDiscountAtIED",
   "priceAtPurchaseDate",
+  "nextPrincipalRedemptionPayment",
   "cycleOfInterestPayment",
   "cycleOfRateReset",
   "cycleOfScalingIndex",
   "cycleOfFee",
+  "cycleOfPrincipalRedemption",
   "lifeCap",
   "lifeFloor",
   "periodCap",
-  "periodFloor",
-  "cycleAnchorDateOfPrincipalRedemption",
-  "cycleOfPrincipalRedemption",
-  "nextPrincipalRedemptionPayment"
+  "periodFloor"
 ]
