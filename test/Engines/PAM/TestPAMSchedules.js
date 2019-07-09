@@ -177,7 +177,7 @@ contract('PAMEngine', () => {
     assert.deepEqual(evaluatedSchedule, testDetails['results'])
   })
 
-  /*
+  /**
   // TODO: Purchase/Termination
   it('should yield the expected evaluated contract schedule for test PAM10019', async () => {
     const testDetails = this.testCases['10019']

@@ -12,35 +12,32 @@ contract('ANNEngine', () => {
   })
 
   const evaluateEventSchedule = async (contractTerms) => {
-    const initialContractState = await this.ANNEngineInstance.computeInitialState(contractTerms, {})
+    const initialContractState = await this.ANNEngineInstance.computeInitialState(contractTerms, {});
     const protoEventSchedule = await this.ANNEngineInstance.computeProtoEventScheduleSegment(
       contractTerms,
       contractTerms.statusDate,
       contractTerms.maturityDate
-    )
+    );
 
-    const evaluatedSchedule = []
-    let contractState = initialContractState
+    const evaluatedSchedule = [];
+    let contractState = initialContractState;
 
-    for (let i = 0; i < protoEventSchedule.length; i++) {
-      if (protoEventSchedule[i].scheduledTime == 0) { break; }
-
-      console.log(protoEventSchedule[i])
-
+    for (let i = 0; i < 20; i++) {
+      if (protoEventSchedule[i].scheduleTime == 0) { break; }
       const { 0: nextContractState, 1: contractEvent } = await this.ANNEngineInstance.computeNextStateForProtoEvent(
         contractTerms, 
         contractState, 
         protoEventSchedule[i], 
-        protoEventSchedule[i].scheduledTime
-      )
-        console.log("exit computeNextState method")
-      contractState = nextContractState
+        protoEventSchedule[i].scheduleTime
+      );
 
-      evaluatedSchedule.push(parseEventFromEth(contractEvent, contractState))
+      contractState = nextContractState;
+
+      evaluatedSchedule.push(parseEventFromEth(contractEvent, contractState));
     }
 
-    return evaluatedSchedule
-  }
+    return evaluatedSchedule;
+  };
 
   it('should yield the expected evaluated contract schedule for test ANN-20001', async () => {
     const testDetails = this.testCases['20001']
