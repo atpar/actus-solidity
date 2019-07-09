@@ -1,10 +1,6 @@
-const fs = require('fs')
-
 const { 
   parseTermsFromObject, 
-  parseResultsFromObject, 
-  fromPrecision, 
-  unixToISO 
+  parseResultsFromObject
 } = require('./parser');
 
 const TEST_TERMS_DIR = './actus-resources/tests/';

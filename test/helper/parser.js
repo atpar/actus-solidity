@@ -5,8 +5,9 @@ const ContractEventDefinitions = require('../../actus-resources/definitions/Cont
 const ContractTermsDefinitions = require('../../actus-resources/definitions/ContractTermsDefinitions.json')
 const CoveredTerms = require('../../actus-resources/definitions/covered-terms.json')
 
-const PRECISION = 18
-const DIGITS = 10
+const PRECISION = 18;
+const DIGITS = 10;
+
 
 const isoToUnix = (date) => {
   return (new Date(date + 'Z')).getTime() / 1000;
@@ -33,7 +34,7 @@ const fromPrecision = (value) => {
 }
 
 const roundToDigits = (value, digits) => {
-  return Math.round(value * 10 ** digits) / 10 ** digits
+  return Math.round(value * 10 ** digits) / 10 ** digits;
 }
 
 // const capitalize = (str) => {
@@ -54,10 +55,10 @@ const parseCycleToIPS = (cycle) => {
 
 
 const parseTermsFromObject = (terms) => {
-  const parsedTerms = {}
+  const parsedTerms = {};
 
   for (const attribute of CoveredTerms) {
-    const value = terms[attribute]
+    const value = terms[attribute];
 
     if (ContractTermsDefinitions[attribute].type === 'enum') {
       parsedTerms[attribute] = (value) ? getIndexOfAttribute(attribute, value) : 0;
@@ -78,11 +79,11 @@ const parseTermsFromObject = (terms) => {
 }
 
 const parseResultsFromObject = (schedule) => {  
-  const parsedResults = []
+  const parsedResults = [];
 
   for (const event of schedule) {
-    const eventTypeIndex = ContractEventDefinitions.eventType.options.indexOf(event['eventType'])
-    if (eventTypeIndex === 2) { continue } // filter out AD events
+    const eventTypeIndex = ContractEventDefinitions.eventType.options.indexOf(event['eventType']);
+    if (eventTypeIndex === 2) { continue; } // filter out AD events
     parsedResults.push({
       'eventDate': new Date(event['eventDate'] + 'Z').toISOString(),
       'eventType': eventTypeIndex.toString(),
@@ -90,10 +91,10 @@ const parseResultsFromObject = (schedule) => {
       'nominalValue': roundToDigits(Number(event['nominalValue']), DIGITS),
       'nominalRate': Number(event['nominalRate']),
       'nominalAccrued': roundToDigits(Number(event['nominalAccrued']), DIGITS)
-    })
+    });
   }
 
-  return parsedResults
+  return parsedResults;
 }
 
 function parseToTestEvent (event, state) {

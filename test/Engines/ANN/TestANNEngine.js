@@ -35,7 +35,6 @@ contract('ANNEngine', () => {
       )
     );
 
-
     let protoEventSchedule = [];
     let lastEventTime = this.terms['statusDate'];
     let timestamp = this.terms['statusDate'] + (this.terms['maturityDate'] - this.terms['statusDate']) / 4;
