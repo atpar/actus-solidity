@@ -1,6 +1,5 @@
 const web3Utils = require('web3-utils');
 const BigNumber = require('bignumber.js');
-const csv = require('csvtojson');
 
 const ContractEventDefinitions = require('../../actus-resources/definitions/ContractEventDefinitions.json')
 const ContractTermsDefinitions = require('../../actus-resources/definitions/ContractTermsDefinitions.json')
@@ -37,9 +36,9 @@ const roundToDigits = (value, digits) => {
   return Math.round(value * 10 ** digits) / 10 ** digits
 }
 
-const capitalize = (str) => {
-  return String(str).charAt(0).toUpperCase() + String(str).slice(1);
-}
+// const capitalize = (str) => {
+//   return String(str).charAt(0).toUpperCase() + String(str).slice(1);
+// }
 
 const parseCycleToIPS = (cycle) => {
   if (cycle === '' || !cycle) { return { i: 0, p: 0, s: 0, isSet: false }; }
@@ -88,24 +87,24 @@ const parseResultsFromObject = (schedule) => {
       'eventDate': new Date(event['eventDate'] + 'Z').toISOString(),
       'eventType': eventTypeIndex.toString(),
       'eventValue': roundToDigits(Number(event['eventValue']), DIGITS),
-      'nominalValue': roundToDigits(Number(event['nominalValue']),DIGITS),
+      'nominalValue': roundToDigits(Number(event['nominalValue']), DIGITS),
       'nominalRate': Number(event['nominalRate']),
-      'nominalAccrued': roundToDigits(Number(event['nominalAccrued']),DIGITS)
+      'nominalAccrued': roundToDigits(Number(event['nominalAccrued']), DIGITS)
     })
   }
 
   return parsedResults
 }
 
-function parseEventFromEth (contractEvent, contractState) {
+function parseToTestEvent (event, state) {
   return {
-    'eventDate': unixToISO(contractEvent['actualEventTime']),
-    'eventType': contractEvent['eventType'],
-    'eventValue': roundToDigits(fromPrecision(contractEvent['payoff']),DIGITS),
-    'nominalValue': roundToDigits(fromPrecision(contractState['nominalValue']),DIGITS),
-    'nominalRate': fromPrecision(contractState['nominalRate']),
-    'nominalAccrued': roundToDigits(fromPrecision(contractState['nominalAccrued']),DIGITS)
+    'eventDate': unixToISO(event['eventTime']),
+    'eventType': event['eventType'],
+    'eventValue': roundToDigits(fromPrecision(event['payoff']), DIGITS),
+    'nominalValue': roundToDigits(fromPrecision(state['nominalValue']), DIGITS),
+    'nominalRate': fromPrecision(state['nominalRate']),
+    'nominalAccrued': roundToDigits(fromPrecision(state['nominalAccrued']), DIGITS)
   };
 }
 
-module.exports = { parseTermsFromObject, parseResultsFromObject, parseEventFromEth, fromPrecision, unixToISO }
+module.exports = { parseTermsFromObject, parseResultsFromObject, parseToTestEvent, fromPrecision, unixToISO }

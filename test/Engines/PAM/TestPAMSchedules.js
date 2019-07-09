@@ -1,7 +1,7 @@
 const PAMEngine = artifacts.require('PAMEngine.sol');
 
 const { getTestCases } = require('../../helper/tests')
-const { parseEventFromEth } = require('../../helper/parser')
+const { parseToTestEvent } = require('../../helper/parser')
 
 contract('PAMEngine', () => {
 
@@ -32,7 +32,7 @@ contract('PAMEngine', () => {
 
       contractState = nextContractState;
 
-      evaluatedSchedule.push(parseEventFromEth(contractEvent, contractState));
+      evaluatedSchedule.push(parseToTestEvent(contractEvent, contractState));
     }
 
     return evaluatedSchedule;
@@ -73,7 +73,6 @@ contract('PAMEngine', () => {
     assert.deepEqual(evaluatedSchedule, testDetails['results'])
   })
 
-  /*
     // TODO: implement BDC
   it('should yield the expected evaluated contract schedule for test PAM10006', async () => {
     const testDetails = this.testCases['10006']
@@ -121,7 +120,6 @@ contract('PAMEngine', () => {
 
     assert.deepEqual(evaluatedSchedule, testDetails['results'])
   })
-  */
 
   /*
   // TODO: Purchase/Termination

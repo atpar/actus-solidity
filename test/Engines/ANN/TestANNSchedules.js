@@ -1,7 +1,7 @@
 const ANNEngine = artifacts.require('ANNEngine.sol')
 
 const { getTestCases } = require('../../helper/tests')
-const { parseEventFromEth } = require('../../helper/parser')
+const { parseToTestEvent } = require('../../helper/parser')
 
 
 contract('ANNEngine', () => {
@@ -33,7 +33,7 @@ contract('ANNEngine', () => {
 
       contractState = nextContractState;
 
-      evaluatedSchedule.push(parseEventFromEth(contractEvent, contractState));
+      evaluatedSchedule.push(parseToTestEvent(contractEvent, contractState));
     }
 
     return evaluatedSchedule;
