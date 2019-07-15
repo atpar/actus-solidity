@@ -6,6 +6,7 @@ import "openzeppelin-solidity/contracts/drafts/SignedSafeMath.sol";
 
 import "../Core/Core.sol";
 import "../Core/FloatMath.sol";
+import "../Core/Math.sol";
 import "./IEngine.sol";
 
 
@@ -20,6 +21,7 @@ contract ANNEngine is Core, IEngine {
 	using SafeMath for uint;
 	using SignedSafeMath for int;
 	using FloatMath for int;
+	using Math for int;
 
 
 	/**
@@ -514,7 +516,7 @@ contract ANNEngine is Core, IEngine {
 			);
 			contractState.nominalAccrued = contractState.nominalAccrued.add(contractState.nominalRate.floatMult(contractState.nominalValue).floatMult(contractState.timeFromLastEvent));
 			contractState.feeAccrued = contractState.feeAccrued.add(contractTerms.feeRate.floatMult(contractState.nominalValue).floatMult(contractState.timeFromLastEvent));
-			contractState.nominalValue = contractState.nominalValue - (contractState.nextPrincipalRedemptionPayment - contractState.nominalAccrued);
+			contractState.nominalValue = contractState.nominalValue - contractState.nominalValue.min(contractState.nextPrincipalRedemptionPayment - contractState.nominalAccrued);
 			contractState.lastEventTime = timestamp;
 			return contractState;
 		}
@@ -722,7 +724,9 @@ contract ANNEngine is Core, IEngine {
 			return (
 				performanceIndicator(contractState.contractStatus)
 				* contractState.nominalScalingMultiplier
-					.floatMult(contractState.nextPrincipalRedemptionPayment
+					.floatMult(
+						contractState.nominalValue.min(
+						contractState.nextPrincipalRedemptionPayment
 						- contractState.nominalAccrued
 						- yearFraction(
 								shiftCalcTime(contractState.lastEventTime, contractTerms.businessDayConvention, contractTerms.calendar),
@@ -731,6 +735,7 @@ contract ANNEngine is Core, IEngine {
 							)
 							.floatMult(contractState.nominalRate)
 							.floatMult(contractState.nominalValue)
+						)
 					)
 			);
 		}
