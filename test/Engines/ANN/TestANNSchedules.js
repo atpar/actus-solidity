@@ -22,7 +22,7 @@ contract('ANNEngine', () => {
     const evaluatedSchedule = [];
     let state = initialState;
 
-    for (let i = 0; i < 20; i++) {
+    for (let i = 0; i < protoEventSchedule.length; i++) {
       if (protoEventSchedule[i].scheduleTime == 0) { break; }
       const { 0: nextContractState, 1: contractEvent } = await this.ANNEngineInstance.computeNextStateForProtoEvent(
         terms, 
@@ -39,7 +39,6 @@ contract('ANNEngine', () => {
     return evaluatedSchedule;
   };
 
-  /*
   it('should yield the expected evaluated contract schedule for test ANN-20001', async () => {
     const testDetails = this.testCases['20001'];
     const evaluatedSchedule = await evaluateEventSchedule(testDetails['terms']);
@@ -47,12 +46,15 @@ contract('ANNEngine', () => {
     assert.deepEqual(evaluatedSchedule, testDetails['results']);
   });
 
+  /*
+  // exceeds max schedule size!
   it('should yield the expected evaluated contract schedule for test ANN-20002', async () => {
     const testDetails = this.testCases['20002'];
     const evaluatedSchedule = await evaluateEventSchedule(testDetails['terms']);
 
     assert.deepEqual(evaluatedSchedule, testDetails['results']);
   });
+  */
 
   it('should yield the expected evaluated contract schedule for test ANN-20003', async () => {
     const testDetails = this.testCases['20003'];
@@ -81,7 +83,9 @@ contract('ANNEngine', () => {
 
     assert.deepEqual(evaluatedSchedule, testDetails['results']);
   });
-  */
+
+  // for the remaining cases: annuity amount calculator needs to be implemented
+  // and state space initialization updated
   /*
   it('should yield the expected evaluated contract schedule for test ANN-20007', async () => {
     const testDetails = this.testCases['20007'];
