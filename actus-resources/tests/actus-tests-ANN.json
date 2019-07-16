@@ -2431,7 +2431,7 @@
         "eventDate": "2014-01-01T00:00",
         "eventType": "PR",
         "eventValue": 397.371137802324,
-        "nominalValue": -6.25277607468888e-13,
+        "nominalValue": 0,
         "nominalRate": 0.08,
         "nominalAccrued": 2.69994636095825
       },
@@ -2439,7 +2439,7 @@
         "eventDate": "2014-01-01T00:00",
         "eventType": "IP",
         "eventValue": 2.69994636095825,
-        "nominalValue": -6.25277607468888e-13,
+        "nominalValue": 0,
         "nominalRate": 0.08,
         "nominalAccrued": 0
       }
@@ -2849,7 +2849,7 @@
         "nominalInterestRate": 0.08,
         "currency": "USD",
         "cycleOfPrincipalRedemption": "1M-",
-        "maturityDate": "2013-11-15T00:00:00",
+        "maturityDate": "2014-01-01T00:00:00",
         "rateMultiplier": 1,
         "rateSpread": 0,
         "fixingDays": "0D",
@@ -3034,17 +3034,33 @@
         "nominalAccrued": 0
       },
       {
-        "eventDate": "2013-11-15T00:00",
+        "eventDate": "2013-12-01T00:00",
         "eventType": "PR",
-        "eventValue": 861.136153461425,
-        "nominalValue": 0,
-        "nominalRate": 0,
-        "nominalAccrued": 2.64239038870357
+        "eventValue": 429.204328999695,
+        "nominalValue": 431.931824461729,
+        "nominalRate": 0.08,
+        "nominalAccrued": 5.66226511865046
       },
       {
-        "eventDate": "2013-11-15T00:00",
+        "eventDate": "2013-12-01T00:00",
         "eventType": "IP",
-        "eventValue": 2.64239038870357,
+        "eventValue": 5.66226511865046,
+        "nominalValue": 431.931824461729,
+        "nominalRate": 0.08,
+        "nominalAccrued": 0
+      },
+      {
+        "eventDate": "2014-01-01T00:00",
+        "eventType": "PR",
+        "eventValue": 431.931824461729,
+        "nominalValue": 0,
+        "nominalRate": 0.08,
+        "nominalAccrued": 2.93476965661668
+      },
+      {
+        "eventDate": "2014-01-01T00:00",
+        "eventType": "IP",
+        "eventValue": 2.93476965661668,
         "nominalValue": 0,
         "nominalRate": 0.08,
         "nominalAccrued": 0
