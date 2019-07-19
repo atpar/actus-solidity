@@ -30,7 +30,7 @@ contract('ANNEngine', () => {
         protoEventSchedule[i], 
         protoEventSchedule[i].scheduleTime
       );
-
+      
       state = nextContractState;
 
       evaluatedSchedule.push(parseToTestEvent(contractEvent, state));

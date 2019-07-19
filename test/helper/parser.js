@@ -6,7 +6,7 @@ const ContractTermsDefinitions = require('../../actus-resources/definitions/Cont
 const CoveredTerms = require('../../actus-resources/definitions/covered-terms.json');
 
 const PRECISION = 18;
-const DIGITS = 10;
+const DIGITS = 9;
 
 
 const isoToUnix = (date) => {
