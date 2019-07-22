@@ -3,7 +3,7 @@ pragma solidity ^0.5.2;
 import "truffle/Assert.sol";
 import "truffle/DeployedAddresses.sol";
 
-import "../../contracts/Core/FloatMath.sol";
+import "../../contracts/Core/Math/FloatMath.sol";
 
 
 contract TestFloatMath {

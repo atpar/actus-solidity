@@ -5,7 +5,7 @@ import "openzeppelin-solidity/contracts/math/SafeMath.sol";
 import "openzeppelin-solidity/contracts/drafts/SignedSafeMath.sol";
 
 import "../Core/Core.sol";
-import "../Core/FloatMath.sol";
+import "../Core/Math/FloatMath.sol";
 import "./IEngine.sol";
 
 

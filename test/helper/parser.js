@@ -5,8 +5,7 @@ const ContractEventDefinitions = require('../../actus-resources/definitions/Cont
 const ContractTermsDefinitions = require('../../actus-resources/definitions/ContractTermsDefinitions.json');
 const CoveredTerms = require('../../actus-resources/definitions/covered-terms.json');
 
-const PRECISION = 18;
-const DIGITS = 9;
+const PRECISION = 18; // solidity precision
 
 
 const isoToUnix = (date) => {
@@ -30,16 +29,27 @@ const toPrecision = (value) => {
 }
 
 const fromPrecision = (value) => {
-  return Math.round((value * 10 ** -PRECISION) * 10 ** DIGITS) / 10 ** DIGITS;
+  return (new BigNumber(value).shiftedBy(-PRECISION).toNumber());
 }
 
-const roundToDigits = (value) => {
-  return Math.round(value * 10 ** DIGITS) / 10 ** DIGITS;
+const roundToDecimals = (value, decimals) => {
+  decimals = (decimals > 2) ? (decimals - 2) : decimals;
+  // console.log(value, decimals, numberOfDecimals(value));
+ 
+  const roundedValue = Number(BigNumber(value).decimalPlaces(decimals));
+  const decimalDiff = decimals - numberOfDecimals(roundedValue);
+
+  if (decimalDiff > 0) {
+    // return Number(String(value).substring(0, String(value).length - (numberOfDecimals(value) - decimals)));  
+    return Number(value.toFixed(decimals));
+  }
+
+  return roundedValue; 
 }
 
-// const capitalize = (str) => {
-//   return String(str).charAt(0).toUpperCase() + String(str).slice(1);
-// }
+const numberOfDecimals = (number) => {
+  return (String(number).split('.')[1] || []).length;
+}
 
 const parseCycleToIPS = (cycle) => {
   if (cycle === '' || !cycle) { return { i: 0, p: 0, s: 0, isSet: false }; }
@@ -85,12 +95,12 @@ const parseResultsFromObject = (schedule) => {
     const eventTypeIndex = ContractEventDefinitions.eventType.options.indexOf(event['eventType']);
     if (eventTypeIndex === 2) { continue; } // filter out AD events
     parsedResults.push({
-      'eventDate': new Date(event['eventDate'] + 'Z').toISOString(),
-      'eventType': eventTypeIndex.toString(),
-      'eventValue': roundToDigits(Number(event['eventValue'])),
-      'nominalValue': roundToDigits(Number(event['nominalValue'])),
-      'nominalRate': Number(event['nominalRate']),
-      'nominalAccrued': roundToDigits(Number(event['nominalAccrued']))
+      eventDate: new Date(event['eventDate'] + 'Z').toISOString(),
+      eventType: eventTypeIndex.toString(),
+      eventValue: Number(event['eventValue']),
+      nominalValue: Number(event['nominalValue']),
+      nominalRate: Number(event['nominalRate']),
+      nominalAccrued: Number(event['nominalAccrued']),
     });
   }
 
@@ -99,13 +109,21 @@ const parseResultsFromObject = (schedule) => {
 
 function parseToTestEvent (event, state) {
   return {
-    'eventDate': unixToISO(event['eventTime']),
-    'eventType': event['eventType'],
-    'eventValue': roundToDigits(fromPrecision(event['payoff'])),
-    'nominalValue': roundToDigits(fromPrecision(state['nominalValue'])),
-    'nominalRate': fromPrecision(state['nominalRate']),
-    'nominalAccrued': roundToDigits(fromPrecision(state['nominalAccrued']))
+    eventDate: unixToISO(event['eventTime']),
+    eventType: event['eventType'],
+    eventValue: fromPrecision(event['payoff']),
+    nominalValue: fromPrecision(state['nominalValue']),
+    nominalRate: fromPrecision(state['nominalRate']),
+    nominalAccrued: fromPrecision(state['nominalAccrued']),
   };
 }
 
-module.exports = { parseTermsFromObject, parseResultsFromObject, parseToTestEvent, fromPrecision, unixToISO }
+module.exports = { 
+  parseTermsFromObject, 
+  parseResultsFromObject, 
+  parseToTestEvent, 
+  fromPrecision, 
+  unixToISO, 
+  roundToDecimals, 
+  numberOfDecimals
+}

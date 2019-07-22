@@ -3,17 +3,17 @@ pragma solidity ^0.5.2;
 import "truffle/Assert.sol";
 import "truffle/DeployedAddresses.sol";
 
-import "../../contracts/Core/Math.sol";
+import "../../contracts/Core/Math/SignedMath.sol";
 
 
-contract TestMath {
+contract TestSignedMath {
 
-  using Math for int256;
+  using SignedMath for int256;
 
-  Math instance;
+  SignedMath instance;
 
   constructor() public {
-    instance = Math(DeployedAddresses.Math());
+    instance = SignedMath(DeployedAddresses.SignedMath());
   }
 
   function testSignedMin() public {

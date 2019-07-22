@@ -5,8 +5,8 @@ import "openzeppelin-solidity/contracts/math/SafeMath.sol";
 import "openzeppelin-solidity/contracts/drafts/SignedSafeMath.sol";
 
 import "../Core/Core.sol";
-import "../Core/FloatMath.sol";
-import "../Core/Math.sol";
+import "../Core/Math/FloatMath.sol";
+import "../Core/Math/SignedMath.sol";
 import "./IEngine.sol";
 
 
@@ -21,7 +21,7 @@ contract ANNEngine is Core, IEngine {
 	using SafeMath for uint;
 	using SignedSafeMath for int;
 	using FloatMath for int;
-	using Math for int;
+	using SignedMath for int;
 
 
 	/**

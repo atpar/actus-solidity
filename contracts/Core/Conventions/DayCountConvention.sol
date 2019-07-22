@@ -5,7 +5,7 @@ import "openzeppelin-solidity/contracts/drafts/SignedSafeMath.sol";
 import "../../external/BokkyPooBah/BokkyPooBahsDateTimeLibrary.sol";
 
 import "../Definitions.sol";
-import "../FloatMath.sol";
+import "../Math/FloatMath.sol";
 
 
 contract DayCountConvention is Definitions {
