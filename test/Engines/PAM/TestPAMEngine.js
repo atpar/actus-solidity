@@ -16,8 +16,54 @@ contract('PAMEngine', () => {
     assert.isTrue(Number(initialState['lastEventTime']) === Number(this.terms['statusDate']));
   });
 
+  it('should yield the next next contract state and the contract events', async() => {
+    const initialState = await this.PAMEngineInstance.computeInitialState(this.terms, {});
+    await this.PAMEngineInstance.computeNextState(this.terms, initialState, this.terms['maturityDate']);
+  });
+
+  it('should yield the same evaluated events for computeNextState and computeNextStateForProtoEvent', async () => {
+    const initialState = await this.PAMEngineInstance.computeInitialState(this.terms, {});
+
+    const protoEventSchedule = removeNullEvents(await this.PAMEngineInstance.computeProtoEventScheduleSegment(
+      this.terms, 
+      this.terms['statusDate'],
+      this.terms['maturityDate'],
+    ));
+
+    const endTimestamp = protoEventSchedule[Math.floor(protoEventSchedule.length / 2)].scheduleTime;
+
+    const { 0: state_computeNextState, 1: events_computeNextState } = await this.PAMEngineInstance.computeNextState(
+      this.terms, 
+      initialState, 
+      endTimestamp
+    );
+
+    let state_computeNextStateForProtoEvent = initialState;
+    let events_computeNextStateForProtoEvent = [];
+
+    for (let i = 0; i < 20; i ++) {
+      if (protoEventSchedule[i].scheduleTime > endTimestamp) { break; }
+
+      const { 0: nextState_computeNextStateForProtoEvent, 1: contractEvent } = await this.PAMEngineInstance.computeNextStateForProtoEvent(
+        this.terms, 
+        state_computeNextStateForProtoEvent, 
+        protoEventSchedule[i], 
+        protoEventSchedule[i].scheduleTime
+      );
+
+      contractEvent[4] = endTimestamp;
+      contractEvent.actualEventTime = endTimestamp;
+
+      state_computeNextStateForProtoEvent = nextState_computeNextStateForProtoEvent;
+      events_computeNextStateForProtoEvent.push(contractEvent);
+    }
+
+    assert.deepEqual(state_computeNextState, state_computeNextStateForProtoEvent);
+    assert.deepEqual(removeNullEvents(events_computeNextState), removeNullEvents(events_computeNextStateForProtoEvent));
+  });
+
   it('should yield all events', async () => {
-    let protoEventSchedule = await this.PAMEngineInstance.computeProtoEventScheduleSegment(
+    const protoEventSchedule = await this.PAMEngineInstance.computeProtoEventScheduleSegment(
       this.terms, 
       this.terms['statusDate'],
       this.terms['maturityDate'],
@@ -69,10 +115,5 @@ contract('PAMEngine', () => {
     protoEventSchedule = removeNullEvents(protoEventSchedule);
     
     assert.isTrue(protoEventSchedule.toString() === entireProtoEventSchedule.toString());
-  });
-
-  it('should yield the next next contract state and the contract events', async() => {
-    const initialState = await this.PAMEngineInstance.computeInitialState(this.terms, {});
-    await this.PAMEngineInstance.computeNextState(this.terms, initialState, this.terms['maturityDate']);
   });
 });
