@@ -59,7 +59,7 @@ contract ANNEngine is Core, IEngine {
 
 		ProtoEvent[MAX_EVENT_SCHEDULE_SIZE] memory pendingProtoEventSchedule = computeProtoEventScheduleSegment(
 			contractTerms,
-			contractState.lastEventTime,
+			shiftEventTime(contractState.lastEventTime, contractTerms.businessDayConvention, contractTerms.calendar),
 			timestamp
 		);
 
