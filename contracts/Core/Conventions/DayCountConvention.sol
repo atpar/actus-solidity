@@ -5,14 +5,14 @@ import "openzeppelin-solidity/contracts/drafts/SignedSafeMath.sol";
 import "../../external/BokkyPooBah/BokkyPooBahsDateTimeLibrary.sol";
 
 import "../Definitions.sol";
-import "../Math/FloatMath.sol";
+import "../SignedMath.sol";
 
 
 contract DayCountConvention is Definitions {
 
 	using SafeMath for uint;
 	using SignedSafeMath for int;
-	using FloatMath for int;
+	using SignedMath for int;
 
 	function yearFraction(uint256 startTimestamp, uint256 endTimestamp, DayCountConvention ipdc)
 		internal

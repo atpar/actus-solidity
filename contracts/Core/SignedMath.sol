@@ -1,12 +1,17 @@
 pragma solidity ^0.5.2;
 
 
-library FloatMath {
+/**
+ * Advanced math library for signed integers
+ * (including floats which are represented as multiples of 10 ** 18)
+ */
+library SignedMath {
 
-	int256 constant private INT256_MIN = -2 ** 255;
+    int256 constant private INT256_MIN = -2 ** 255;
 
 	uint256 constant public PRECISION = 18;
 	uint256 constant public MULTIPLICATOR = 10 ** PRECISION;
+
 
 	/**
 	 * @dev The product of a and b has to be less than INT256_MAX (~10 ** 76),
@@ -49,4 +54,18 @@ library FloatMath {
 
 		return d;
 	}
+
+    /**
+     * @dev Returns the smallest of two signed numbers.
+     */
+    function min(int256 a, int256 b) internal pure returns (int256) {
+        return a <= b ? a : b;
+    }
+
+    /**
+     * @dev Returns the largest of two signed numbers.
+     */
+    function max(int256 a, int256 b) internal pure returns (int256) {
+        return a >= b ? a : b;
+    }
 }
