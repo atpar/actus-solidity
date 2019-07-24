@@ -1,75 +1,63 @@
-const fs = require('fs')
-
 const { 
-  parseTermsFromPath, 
-  parseResultsFromPath, 
-  fromPrecision, 
-  unixToISO 
-} = require('../../actus-resources/parser');
+  parseTermsFromObject, 
+  parseResultsFromObject,
+  roundToDecimals,
+  numberOfDecimals
+} = require('./parser');
 
-const TEST_TERMS_FILE_CSV = './actus-resources/ref-test-terms/pam-test-terms.csv';
-const TEST_RESULTS_DIR_CSV = './actus-resources/ref-test-results/';
-const TEST_TERMS_DIR = './actus-resources/test-terms/';
-const TEST_RESULTS_DIR = './actus-resources/test-results/';
+const TEST_TERMS_DIR = './actus-resources/tests/';
  
 
-async function getTestCases () {
-  if (fs.existsSync(TEST_TERMS_FILE_CSV)) {
-    return parseTermsFromPath(TEST_TERMS_FILE_CSV);
-  }
+async function getTestCases (contract) {
+  const testCases = require('../.' + TEST_TERMS_DIR + "actus-tests-" + contract + ".json");
+  const testCaseNames = Object.keys(testCases);
 
-  const testCases = {};
-  fs.readdirSync(TEST_TERMS_DIR).forEach((fileName) => {
-    if (fileName.split('.')[1] !== 'json') { return; }
-    const testCaseName = Number(fileName.split('.')[0].split('-')[2]);
-    testCases[testCaseName] = require('../.' + TEST_TERMS_DIR + fileName);
+  const parsedCases = {};
+  testCaseNames.forEach( (name) => {
+    const caseDetails = {};
+    caseDetails['terms'] = parseTermsFromObject(testCases[name].terms);
+    caseDetails['results'] = parseResultsFromObject(testCases[name].results);
+    parsedCases[name] = caseDetails;
   });
 
-  return testCases;
+  return parsedCases;
 }
 
-async function getDefaultTerms () {
-  return (await getTestCases())['10001'];
-}
+function compareTestResults (actualResults, expectedResults) {
+  const numberOfEvents = (actualResults.length > expectedResults.length) ? actualResults.length : expectedResults.length;
 
-async function getTestResults () {
-  const testResults = {};
-  
-  if (fs.existsSync(TEST_RESULTS_DIR_CSV)) {
-    const files = [];
+  for (let i = 0; i < numberOfEvents; i++) {
+    const actualEvent = actualResults[i];
+    const expectedEvent = expectedResults[i];
 
-    fs.readdirSync(TEST_RESULTS_DIR_CSV).forEach((fileName) => {
-      if (fileName.split('.')[1] !== 'csv') { return; }
-      files.push(fileName);
-    });
+    const decimalsEventValue = (numberOfDecimals(actualEvent.eventValue) < numberOfDecimals(expectedEvent.eventValue)) 
+      ? numberOfDecimals(actualEvent.eventValue)
+      : numberOfDecimals(expectedEvent.eventValue);
 
-    let promises = files.map(async (fileName) => {
-      const result = await parseResultsFromPath(TEST_RESULTS_DIR_CSV + fileName);
-      let testName = fileName.split('.')[0].slice(9, 14);
-      testResults[testName] = result;
-    });
+    const decimalsNominalValue = (numberOfDecimals(actualEvent.nominalValue) < numberOfDecimals(expectedEvent.nominalValue)) 
+      ? numberOfDecimals(actualEvent.nominalValue)
+      : numberOfDecimals(expectedEvent.nominalValue);
 
-    await Promise.all(promises);
-  } else {
-    fs.readdirSync(TEST_RESULTS_DIR).forEach((fileName) => {
-      if (fileName.split('.')[1] !== 'json') { return; }
-      const testResultName = Number(fileName.split('.')[0].split('-')[2]);
-      testResults[testResultName] = require('../.' + TEST_RESULTS_DIR + fileName);
+    const decimalsNominalAccrued = (numberOfDecimals(actualEvent.nominalAccrued) < numberOfDecimals(expectedEvent.nominalAccrued)) 
+      ? numberOfDecimals(actualEvent.nominalAccrued)
+      : numberOfDecimals(expectedEvent.nominalAccrued);
+
+    assert.deepEqual({
+      eventDate: actualEvent.eventDate,
+      eventType: actualEvent.eventType,
+      eventValue: roundToDecimals(actualEvent.eventValue, decimalsEventValue),
+      nominalValue: roundToDecimals(actualEvent.nominalValue, decimalsNominalValue),
+      nominalRate: actualEvent.nominalRate,
+      nominalAccrued: roundToDecimals(actualEvent.nominalAccrued, decimalsNominalAccrued)
+    }, {  
+      eventDate: expectedEvent.eventDate,
+      eventType: expectedEvent.eventType,
+      eventValue: roundToDecimals(expectedEvent.eventValue, decimalsEventValue),
+      nominalValue: roundToDecimals(expectedEvent.nominalValue, decimalsNominalValue),
+      nominalRate: expectedEvent.nominalRate,
+      nominalAccrued: roundToDecimals(expectedEvent.nominalAccrued, decimalsNominalAccrued)
     });
   }
-
-  return testResults;
 }
 
-function toTestEvent (contractEvent, contractState) {
-  return {
-    'eventDate': unixToISO(contractEvent['eventTime']),
-    'eventType': contractEvent['eventType'],
-    'eventValue': fromPrecision(contractEvent['payoff']),
-    'nominalValue': fromPrecision(contractState['nominalValue']),
-    'nominalRate': fromPrecision(contractState['nominalRate']),
-    'nominalAccrued': fromPrecision(contractState['nominalAccrued'])
-  };
-}
-
-module.exports = { getTestCases, getDefaultTerms, getTestResults, toTestEvent }
+module.exports = { getTestCases, compareTestResults }
