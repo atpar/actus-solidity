@@ -23,6 +23,12 @@ async function getTestCases (contract) {
   return parsedCases;
 }
 
+async function getDefaultTestTerms (contract) {
+  const testCases = await getTestCases(contract);
+
+  return testCases[Object.keys(testCases)[0]].terms;
+}
+
 function compareTestResults (actualResults, expectedResults) {
   const numberOfEvents = (actualResults.length > expectedResults.length) ? actualResults.length : expectedResults.length;
 
@@ -60,4 +66,4 @@ function compareTestResults (actualResults, expectedResults) {
   }
 }
 
-module.exports = { getTestCases, compareTestResults }
+module.exports = { getTestCases, getDefaultTestTerms, compareTestResults }

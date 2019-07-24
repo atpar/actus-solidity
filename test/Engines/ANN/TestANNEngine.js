@@ -1,6 +1,6 @@
 const ANNEngine = artifacts.require('ANNEngine.sol');
 
-const { getTestCases } = require('../../helper/tests');
+const { getDefaultTestTerms } = require('../../helper/tests');
 const { removeNullEvents } = require('../../helper/schedule');
 
 
@@ -8,7 +8,7 @@ contract('ANNEngine', () => {
 
   before(async () => {        
     this.ANNEngineInstance = await ANNEngine.new();
-    this.terms = (await getTestCases('ANN'))['20001'].terms;
+    this.terms = await getDefaultTestTerms('ANN');
   });
 
   it('should yield the initial contract state', async () => {
