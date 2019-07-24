@@ -33,48 +33,30 @@ contract Core is
 		}
 	}
 
-	function yearFraction(uint256 startTimestamp, uint256 endTimestamp, DayCountConvention ipdc)
-		internal
-		pure
-		returns (int256)
-	{
-		require(endTimestamp >= startTimestamp, "Core.yearFraction: UNMET_CONDITION");
-		if (ipdc == DayCountConvention.A_AISDA) {
-			return actualActualISDA(startTimestamp, endTimestamp);
-		} else if (ipdc == DayCountConvention.A_360) {
-			return actualThreeSixty(startTimestamp, endTimestamp);
-		} else if (ipdc == DayCountConvention.A_365) {
-			return actualThreeSixtyFive(startTimestamp, endTimestamp);
-		} else if (ipdc == DayCountConvention._30E_360) {
-			return thirtyEThreeSixty(startTimestamp, endTimestamp);
-		} else {
-			return 1000000000000000000;
-		}
-	}
-
 	function getEpochOffset(EventType eventType)
 		internal
 		pure
 		returns (uint256)
 	{
-		if (eventType == EventType.IED) return 20;
-		if (eventType == EventType.IP) return 30;
-		if (eventType == EventType.IPCI) return 40;
-		if (eventType == EventType.FP) return 50;
-		if (eventType == EventType.DV) return 60;
-		if (eventType == EventType.PR) return 70;
-		if (eventType == EventType.MR) return 80;
-		if (eventType == EventType.RRY) return 90;
-		if (eventType == EventType.RR) return 100;
-		if (eventType == EventType.SC) return 110;
-		if (eventType == EventType.IPCB) return 120;
-		if (eventType == EventType.PRD) return 130;
-		if (eventType == EventType.TD) return 140;
-		if (eventType == EventType.STD) return 150;
-		if (eventType == EventType.MD) return 160;
-		if (eventType == EventType.SD) return 900;
-		if (eventType == EventType.AD) return 950;
-		if (eventType == EventType.Child) return 10;
+		if (eventType == EventType.IED) { return 20; }
+		if (eventType == EventType.PR) { return 25; }
+		if (eventType == EventType.IP) { return 30; }
+		if (eventType == EventType.IPCI) { return 40; }
+		if (eventType == EventType.FP) { return 50; }
+		if (eventType == EventType.DV) { return 60; }
+		//if (eventType == EventType.PR) { return 70; }
+		if (eventType == EventType.MR) { return 80; }
+		if (eventType == EventType.RRY) { return 90; }
+		if (eventType == EventType.RR) { return 100; }
+		if (eventType == EventType.SC) { return 110; }
+		if (eventType == EventType.IPCB) { return 120; }
+		if (eventType == EventType.PRD) { return 130; }
+		if (eventType == EventType.TD) { return 140; }
+		if (eventType == EventType.STD) { return 150; }
+		if (eventType == EventType.MD) { return 160; }
+		if (eventType == EventType.SD) { return 900; }
+		if (eventType == EventType.AD) { return 950; }
+		if (eventType == EventType.Child) { return 10; }
 		return 0;
 	}
 }
