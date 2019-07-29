@@ -29,7 +29,7 @@ contract DayCountConvention is Definitions {
 		} else if (ipdc == DayCountConvention._30E_360) {
 			return thirtyEThreeSixty(startTimestamp, endTimestamp);
 		} else {
-			return 1000000000000000000;
+			return int256(1 ** PRECISION);
 		}
 	}
 
