@@ -39,6 +39,7 @@
     "test": "./scripts/test.sh"
   },
   "devDependencies": {
+    "actus-dictionary": "https://github.com/actusfrf/actus-dictionary.git",
     "bignumber.js": "^7.2.1",
     "csvtojson": "^2.0.8",
     "eth-sig-util": "2.1.1",
