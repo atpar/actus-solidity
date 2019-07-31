@@ -21,9 +21,6 @@ const toHex = (value) => {
 }
 
 const getIndexOfAttribute = (attribute, value) => {
-  if (attribute === 'businessDayConvention') { // workaround for actus-dictionary (missing option 'NULL')
-    return (ContractTermsDefinitions[attribute].allowedValues.indexOf(value) + 1);  
-  }
   return ContractTermsDefinitions[attribute].allowedValues.indexOf(value);
 }
 
