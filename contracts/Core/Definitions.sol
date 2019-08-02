@@ -24,7 +24,7 @@ contract Definitions {
 		bool isSet;
 	}
 
-	enum EventType {SD, MD, AD, IED, IP, PR, PP, PY, FP, PRD, TD, IPCI, RR, RRY, SC, CD, DV, MR, IPCB, STD, Child}
+	enum EventType {AD, CD, DV, XD, FP, IED, IPCB, IPCI, IP, MR, MD, PY, PD, PRF, PP, PR, PRD, RRF, RR, SC, STD, TD}
 	enum Calendar {NoCalendar, MondayToFriday} // Custom: custom implementation of calendar
 	enum BusinessDayConvention {NULL, SCF, SCMF, CSF, CSMF, SCP, SCMP, CSP, CSMP}
 	enum ClearingHouse {YES, NO} // required ?

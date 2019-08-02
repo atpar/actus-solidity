@@ -45,7 +45,7 @@ contract Core is
 		if (eventType == EventType.FP) return 50;
 		if (eventType == EventType.DV) return 60;
 		if (eventType == EventType.MR) return 80;
-		if (eventType == EventType.RRY) return 90;
+		if (eventType == EventType.RRF) return 90;
 		if (eventType == EventType.RR) return 100;
 		if (eventType == EventType.SC) return 110;
 		if (eventType == EventType.IPCB) return 120;
@@ -53,9 +53,7 @@ contract Core is
 		if (eventType == EventType.TD) return 140;
 		if (eventType == EventType.STD) return 150;
 		if (eventType == EventType.MD) return 160;
-		if (eventType == EventType.SD) return 900;
 		if (eventType == EventType.AD) return 950;
-		if (eventType == EventType.Child) return 10;
 		return 0;
 	}
 }

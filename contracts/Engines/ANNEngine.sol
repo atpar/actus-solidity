@@ -529,7 +529,7 @@ contract ANNEngine is Core, IEngine {
 			contractState.lastEventTime = timestamp;
 			return contractState;
 		}
-		if (eventType == EventType.RRY) {
+		if (eventType == EventType.RRF) {
 			contractState.timeFromLastEvent = yearFraction(
 				shiftCalcTime(contractState.lastEventTime, contractTerms.businessDayConvention, contractTerms.calendar),
 				shiftCalcTime(timestamp, contractTerms.businessDayConvention, contractTerms.calendar),
@@ -639,7 +639,7 @@ contract ANNEngine is Core, IEngine {
 		if (eventType == EventType.AD) return 0;
 		if (eventType == EventType.CD) return 0;
 		if (eventType == EventType.IPCI) return 0;
-		if (eventType == EventType.RRY) return 0;
+		if (eventType == EventType.RRF) return 0;
 		if (eventType == EventType.RR) return 0;
 		if (eventType == EventType.SC) return 0;
 		if (eventType == EventType.FP) {

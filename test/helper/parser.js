@@ -1,7 +1,8 @@
 const web3Utils = require('web3-utils');
 const BigNumber = require('bignumber.js');
 
-const ContractEventDefinitions = require('../../actus-resources/definitions/ContractEventDefinitions.json');
+// const ContractEventDefinitions = require('../../actus-resources/definitions/ContractEventDefinitions.json');
+const ContractEventDefinitions = require('actus-dictionary/actus-dictionary-event.json');
 const ContractTermsDefinitions = require('actus-dictionary/actus-dictionary-terms.json');
 const CoveredTerms = require('../../actus-resources/definitions/covered-terms.json');
 
@@ -92,8 +93,9 @@ const parseResultsFromObject = (schedule) => {
   const parsedResults = [];
 
   for (const event of schedule) {
-    const eventTypeIndex = ContractEventDefinitions.eventType.options.indexOf(event['eventType']);
-    if (eventTypeIndex === 2) { continue; } // filter out AD events
+    const eventTypeIndex = ContractEventDefinitions.eventType.allowedValues.indexOf(event['eventType']);
+
+    if (eventTypeIndex === 0) { continue; } // filter out AD events
     parsedResults.push({
       eventDate: new Date(event['eventDate'] + 'Z').toISOString(),
       eventType: eventTypeIndex.toString(),
