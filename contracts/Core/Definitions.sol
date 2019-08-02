@@ -94,8 +94,8 @@ contract Definitions {
 		ContractType contractType;
 		Calendar calendar;
 		ContractRole contractRole;
-		bytes32 legalEntityIdRecordCreator;
-		bytes32 legalEntityIdCounterparty;
+		bytes32 creatorID;
+		bytes32 counterpartyID;
 		DayCountConvention dayCountConvention;
 		BusinessDayConvention businessDayConvention;
 		EndOfMonthConvention endOfMonthConvention;
