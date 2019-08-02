@@ -2,7 +2,7 @@ const web3Utils = require('web3-utils');
 const BigNumber = require('bignumber.js');
 
 const ContractEventDefinitions = require('../../actus-resources/definitions/ContractEventDefinitions.json');
-const ContractTermsDefinitions = require('../../actus-resources/definitions/ContractTermsDefinitions.json');
+const ContractTermsDefinitions = require('actus-dictionary/actus-dictionary-terms.json');
 const CoveredTerms = require('../../actus-resources/definitions/covered-terms.json');
 
 const PRECISION = 18; // solidity precision
@@ -21,7 +21,7 @@ const toHex = (value) => {
 }
 
 const getIndexOfAttribute = (attribute, value) => {
-  return ContractTermsDefinitions[attribute].options.indexOf(value);
+  return ContractTermsDefinitions[attribute].allowedValues.indexOf(value);
 }
 
 const toPrecision = (value) => {
@@ -70,15 +70,15 @@ const parseTermsFromObject = (terms) => {
   for (const attribute of CoveredTerms) {
     const value = terms[attribute];
 
-    if (ContractTermsDefinitions[attribute].type === 'enum') {
+    if (ContractTermsDefinitions[attribute].type === 'Enum') {
       parsedTerms[attribute] = (value) ? getIndexOfAttribute(attribute, value) : 0;
-    } else if (ContractTermsDefinitions[attribute].type === 'text') {
+    } else if (ContractTermsDefinitions[attribute].type === 'Varchar') {
       parsedTerms[attribute] = toHex((value) ? value : '');
-    } else if (ContractTermsDefinitions[attribute].type === 'number') {
+    } else if (ContractTermsDefinitions[attribute].type === 'Real') {
       parsedTerms[attribute] = (value) ? toPrecision(value) : 0;
-    } else if (ContractTermsDefinitions[attribute].type === 'date') {
+    } else if (ContractTermsDefinitions[attribute].type === 'Timestamp') {
       parsedTerms[attribute] = (value) ? isoToUnix(value) : 0;
-    } else if (ContractTermsDefinitions[attribute].type === 'cycle') {
+    } else if (ContractTermsDefinitions[attribute].type === 'Cycle') {
       parsedTerms[attribute] = parseCycleToIPS(value);
     }
   }
