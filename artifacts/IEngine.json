@@ -1557,9 +1557,5 @@
     "version": "0.5.2+commit.1df8f40c.Emscripten.clang"
   },
   "networks": {},
-<<<<<<< HEAD
-  "updatedAt": "2019-08-02T11:50:57.917Z"
-=======
-  "updatedAt": "2019-08-02T11:18:52.593Z"
->>>>>>> 242b9a1fe6803aa11d122e18b860529d34bdca82
+  "updatedAt": "2019-08-02T11:56:06.807Z"
 }

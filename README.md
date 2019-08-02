@@ -43,12 +43,12 @@ yarn test
 ```
 
 ### Deployments
-| Network  | FloatMath                                  | PAMEngine                                  |
-|----------|--------------------------------------------|--------------------------------------------|
-| Görli    | 0x43A0949A2ddC4C79c76fFb52c43e6727385055ef | 0x8071beF6f7Ce023816Eba322428E46F22A41A5D5 |
-| Kovan    | 0x28BdF7Aa723eAd1DeDd7788EF8E460ce33190E27 | 0x14Fa37eb13c8Bc8C1Ee9DF965857eC879A095D73 |
-| Rinkeby  | 0x28BdF7Aa723eAd1DeDd7788EF8E460ce33190E27 | 0x14Fa37eb13c8Bc8C1Ee9DF965857eC879A095D73 | 
-| Ropsten  | 0x28BdF7Aa723eAd1DeDd7788EF8E460ce33190E27 | 0x14Fa37eb13c8Bc8C1Ee9DF965857eC879A095D73 |
+| Network  | ANNEngine                                  | PAMEngine                                  | SignedMath                                 |
+|----------|--------------------------------------------|--------------------------------------------|--------------------------------------------|
+| Görli    | 0x28dD300d7518F630fF7724e6292AC3f5F317Bb84 | 0x8aA89C3D119f2f3BE4709cDEE50c0acaab6F5ffB | 0x8E533B1af22E29B0FeF5D2Fd6DcC2dfD1be2269E |
+| Kovan    | 0x8E533B1af22E29B0FeF5D2Fd6DcC2dfD1be2269E | 0x8Cc6f30555ed640252c7aDf214d061C9441EF445 | 0x6F71E63A636C8C2C592EF47EBfe023CAd725e923 |
+| Rinkeby  | 0x53E3f61b38A9Ec180BdA2D969b70ec9925827f2F | 0x24e382D58f5dbdB02B7e5bd652CeD52309dB075d | 0x5cA2E34C49930f0C6E663672F38Dfc21C9a95382 |
+| Ropsten  | 0x53E3f61b38A9Ec180BdA2D969b70ec9925827f2F | 0x24e382D58f5dbdB02B7e5bd652CeD52309dB075d | 0x5cA2E34C49930f0C6E663672F38Dfc21C9a95382 |
 
 ## Implemented Conventions
 - [x] Contract-Role-Sign-Convention (for PAM)
