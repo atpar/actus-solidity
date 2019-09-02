@@ -93,7 +93,7 @@ contract Schedule is Definitions, Utils, EndOfMonthConvention {
 		}
 
 		if (index > 0 && isInPeriod(dates[index - 1], segmentStart, segmentEnd)) {
-			if (cycle.s == S.LONG && index > 1 && cycleEnd != date) {
+			if (cycle.s == S.LONG && index > 1 && cycleEnd != date) { // dates[index]) {
 				dates[index - 1] = dates[index];
 				delete dates[index];
 			}
