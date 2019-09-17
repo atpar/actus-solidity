@@ -135,7 +135,7 @@ contract DayCountConvention is Definitions {
 			d1Day = 30;
 		}
 
-		if (!(endTime == maturityDate || d2Month == 2) && d2Day == BokkyPooBahsDateTimeLibrary.getDaysInMonth(startTime)) {
+		if (!(endTime == maturityDate && d2Month == 2) && d2Day == BokkyPooBahsDateTimeLibrary.getDaysInMonth(endTime)) {
 			d2Day = 30;
 		}
 

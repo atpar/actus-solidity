@@ -29,17 +29,94 @@ contract TestCore is Core {
     Assert.equal(
       yearFraction(1506816000, 1538352000, DayCountConvention.A_360, 0),
       1013888888888888888,
-      "YearFraction should be 1.013888888888888888"
+      "A_360-YearFraction should be 1.013888888888888888"
     );
     Assert.equal(
       yearFraction(1506816000, 1538352000, DayCountConvention.A_365, 0),
       1000000000000000000,
-      "YearFraction should be 1.0"
+      "A_365-YearFraction should be 1.0"
     );
     Assert.equal(
       yearFraction(1506816000, 1538352000, DayCountConvention._30E_360, 0),
       1000000000000000000,
-      "YearFraction should be 1.0"
+      "_30E_360-YearFraction should be 1.0"
+    );
+
+    // 30E/360 ISDA convention
+    Assert.equal(
+      yearFraction(1138665600, 1141084800, DayCountConvention._30E_360ISDA, 1204243200),
+      0.083333333333333333*1000000000000000000,
+      "_30E_360ISDA-1 YearFraction should be 0.083333333333333333"
+    );
+    Assert.equal(
+      yearFraction(1138579200, 1141084800, DayCountConvention._30E_360ISDA, 1204243200),
+      0.083333333333333333*1000000000000000000,
+      "_30E_360ISDA-2 YearFraction should be 0.083333333333333333"
+    );
+    Assert.equal(
+      yearFraction(1141084800, 1141344000, DayCountConvention._30E_360ISDA, 1204243200),
+      0.008333333333333333*1000000000000000000,
+      "_30E_360ISDA-3 YearFraction should be 0.008333333333333333"
+    );
+    Assert.equal(
+      yearFraction(1139875200, 1141084800, DayCountConvention._30E_360ISDA, 1204243200),
+      0.044444444444444444*1000000000000000000,
+      "_30E_360ISDA-4 YearFraction should be 0.044444444444444444"
+    );
+    Assert.equal(
+      yearFraction(1159574400, 1162252800, DayCountConvention._30E_360ISDA, 1204243200),
+      0.083333333333333333*1000000000000000000,
+      "_30E_360ISDA-5 YearFraction should be 0.083333333333333333"
+    );
+    Assert.equal(
+      yearFraction(1162252800, 1164672000, DayCountConvention._30E_360ISDA, 1204243200),
+      0.077777777777777777*1000000000000000000,
+      "_30E_360ISDA-6 YearFraction should be 0.077777777777777777"
+    );
+    Assert.equal(
+      yearFraction(1188518400, 1204156800, DayCountConvention._30E_360ISDA, 1204243200),
+      0.494444444444444444*1000000000000000000,
+      "_30E_360ISDA-7 YearFraction should be 0.494444444444444444"
+    );
+    Assert.equal(
+      yearFraction(1204156800, 1219881600, DayCountConvention._30E_360ISDA, 1204243200),
+      0.5*1000000000000000000,
+      "_30E_360ISDA-8 YearFraction should be 0.5"
+    );
+    Assert.equal(
+      yearFraction(1204156800, 1220054400, DayCountConvention._30E_360ISDA, 1204243200),
+      0.505555555555555555*1000000000000000000,
+      "_30E_360ISDA-9 YearFraction should be 0.505555555555555555"
+    );
+    Assert.equal(
+      yearFraction(1204156800, 1220140800, DayCountConvention._30E_360ISDA, 1204243200),
+      0.505555555555555555*1000000000000000000,
+      "_30E_360ISDA-10 YearFraction should be 0.505555555555555555"
+    );
+    Assert.equal(
+      yearFraction(1172620800, 1204156800, DayCountConvention._30E_360ISDA, 1204243200),
+      0.994444444444444444*1000000000000000000,
+      "_30E_360ISDA-11 YearFraction should be 0.994444444444444444"
+    );
+    Assert.equal(
+      yearFraction(1172620800, 1204243200, DayCountConvention._30E_360ISDA, 1204243200),
+      0.997222222222222222*1000000000000000000,
+      "_30E_360ISDA-12 YearFraction should be 0.997222222222222222"
+    );
+    Assert.equal(
+      yearFraction(1204243200, 1235779200, DayCountConvention._30E_360ISDA, 1204243200),
+      1.0*1000000000000000000,
+      "_30E_360ISDA-13 YearFraction should be 1.0"
+    );
+    Assert.equal(
+      yearFraction(1204243200, 1206835200, DayCountConvention._30E_360ISDA, 1204243200),
+      0.083333333333333333*1000000000000000000,
+      "_30E_360ISDA-14 YearFraction should be 0.083333333333333333"
+    );
+    Assert.equal(
+      yearFraction(1204243200, 1206921600, DayCountConvention._30E_360ISDA, 1204243200),
+      0.083333333333333333*1000000000000000000,
+      "_30E_360ISDA-15 YearFraction should be 0.083333333333333333"
     );
   }
 
