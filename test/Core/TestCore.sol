@@ -26,11 +26,84 @@ contract TestCore is Core {
   }
 
   function testYearFraction() public {
+    // A/360 convention
     Assert.equal(
-      yearFraction(1506816000, 1538352000, DayCountConvention.A_360, 0),
-      1013888888888888888,
-      "A_360-YearFraction should be 1.013888888888888888"
+      yearFraction(1138665600, 1141084800, DayCountConvention.A_360, 0),
+      0.077777777777777777*1000000000000000000,
+      "_A_360-1 YearFraction should be 0.077777777777777777"
     );
+    Assert.equal(
+      yearFraction(1138579200, 1141084800, DayCountConvention.A_360, 0),
+      0.080555555555555555*1000000000000000000,
+      "_A_360-2 YearFraction should be 0.080555555555555555"
+    );
+    Assert.equal(
+      yearFraction(1141084800, 1141344000, DayCountConvention.A_360, 0),
+      0.008333333333333333*1000000000000000000,
+      "_A_360-3 YearFraction should be 0.008333333333333333"
+    );
+    Assert.equal(
+      yearFraction(1139875200, 1141084800, DayCountConvention.A_360, 0),
+      0.038888888888888888*1000000000000000000,
+      "_A_360-4 YearFraction should be 0.038888888888888888"
+    );
+    Assert.equal(
+      yearFraction(1159574400, 1162252800, DayCountConvention.A_360, 0),
+      0.086111111111111111*1000000000000000000,
+      "_A_360-5 YearFraction should be 0.086111111111111111"
+    );
+    Assert.equal(
+      yearFraction(1162252800, 1164672000, DayCountConvention.A_360, 0),
+      0.077777777777777777*1000000000000000000,
+      "_A_360-6 YearFraction should be 0.077777777777777777"
+    );
+    Assert.equal(
+      yearFraction(1188518400, 1204156800, DayCountConvention.A_360, 0),
+      0.502777777777777777*1000000000000000000,
+      "_A_360-7 YearFraction should be 0.502777777777777777"
+    );
+    Assert.equal(
+      yearFraction(1204156800, 1219881600, DayCountConvention.A_360, 0),
+      0.505555555555555555*1000000000000000000,
+      "_A_360-8 YearFraction should be 0.505555555555555555"
+    );
+    Assert.equal(
+      yearFraction(1204156800, 1220054400, DayCountConvention.A_360, 0),
+      0.511111111111111111*1000000000000000000,
+      "_A_360-9 YearFraction should be 0.511111111111111111"
+    );
+    Assert.equal(
+      yearFraction(1204156800, 1220140800, DayCountConvention.A_360, 0),
+      0.513888888888888888*1000000000000000000,
+      "_A_360-10 YearFraction should be 0.513888888888888888"
+    );
+    Assert.equal(
+      yearFraction(1172448000, 1204156800, DayCountConvention.A_360, 0),
+      1.019444444444444444*1000000000000000000,
+      "_A_360-11 YearFraction should be 1.019444444444444444"
+    );
+    Assert.equal(
+      yearFraction(1172448000, 1204243200, DayCountConvention.A_360, 0),
+      1.022222222222222222*1000000000000000000,
+      "_A_360-12 YearFraction should be 1.022222222222222222"
+    );
+    Assert.equal(
+      yearFraction(1204243200, 1235779200, DayCountConvention.A_360, 0),
+      1.013888888888888888*1000000000000000000,
+      "_A_360-13 YearFraction should be 1.013888888888888888"
+    );
+    Assert.equal(
+      yearFraction(1204156800, 1206835200, DayCountConvention.A_360, 0),
+      0.086111111111111111*1000000000000000000,
+      "_A_360-14 YearFraction should be 0.086111111111111111"
+    );
+    Assert.equal(
+      yearFraction(1204156800, 1206921600, DayCountConvention.A_360, 0),
+      0.088888888888888888*1000000000000000000,
+      "_A_360-15 YearFraction should be 0.088888888888888888"
+    );
+
+    // A/365 convention
     Assert.equal(
       yearFraction(1506816000, 1538352000, DayCountConvention.A_365, 0),
       1000000000000000000,
