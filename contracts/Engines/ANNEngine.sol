@@ -10,12 +10,12 @@ import "./IEngine.sol";
 
 
 /**
- * @title the stateless component for a PAM contract
- * implements the STF and POF of the Actus standard for a PAM contract
+ * @title the stateless component for a ANN contract
+ * implements the STF and POF of the Actus standard for a ANN contract
  * @dev all numbers except unix timestamp are represented as multiple of 10 ** 18
  * inputs have to be multiplied by 10 ** 18, outputs have to divided by 10 ** 18
  */
-contract PAMEngine is Core, IEngine {
+contract ANNEngine is Core, IEngine {
 
 	using SafeMath for uint;
 	using SignedSafeMath for int;
@@ -129,6 +129,10 @@ contract PAMEngine is Core, IEngine {
 
 	/**
 	 * computes a schedule segment of contract events based on the contract terms and the specified period
+	 * TODO: add missing contract features:
+	 * - rate reset
+	 * - scaling
+	 * - interest calculation base
 	 * @param contractTerms terms of the contract
 	 * @param segmentStart start timestamp of the segment
 	 * @param segmentEnd end timestamp of the segement
@@ -176,38 +180,21 @@ contract PAMEngine is Core, IEngine {
 			}
 		}
 
-		// interest payment related (e.g. for reoccurring interest payments)
-		if (contractTerms.nominalInterestRate != 0 && (
-			contractTerms.cycleOfInterestPayment.isSet == true && contractTerms.cycleAnchorDateOfInterestPayment != 0)
-		) {
+		// interest payment related (covers pre-repayment period only,
+		//    starting with PRANX interest is paid following the PR schedule)
+		if (contractTerms.cycleOfInterestPayment.isSet == true &&
+			contractTerms.cycleAnchorDateOfInterestPayment != 0 &&
+			contractTerms.cycleAnchorDateOfInterestPayment < contractTerms.cycleAnchorDateOfPrincipalRedemption)
+			{
 			uint256[MAX_CYCLE_SIZE] memory interestPaymentSchedule = computeDatesFromCycleSegment(
 				contractTerms.cycleAnchorDateOfInterestPayment,
-				contractTerms.maturityDate,
+				contractTerms.cycleAnchorDateOfPrincipalRedemption, // pure IP schedule ends at beginning of combined IP/PR schedule
 				contractTerms.cycleOfInterestPayment,
 				contractTerms.endOfMonthConvention,
-				true,
+				false, // do not create an event for cycleAnchorDateOfPrincipalRedemption as covered with the PR schedule
 				segmentStart,
 				segmentEnd
 			);
-			if (contractTerms.capitalizationEndDate != 0) {
-				uint256 shiftedIPCITime = shiftEventTime(
-					contractTerms.capitalizationEndDate,
-					contractTerms.businessDayConvention,
-					contractTerms.calendar
-				);
-				if (isInPeriod(shiftedIPCITime, segmentStart, segmentEnd)) {
-					protoEventSchedule[index] = ProtoEvent(
-						shiftedIPCITime,
-						shiftedIPCITime.add(getEpochOffset(EventType.IPCI)),
-						contractTerms.capitalizationEndDate,
-						EventType.IPCI,
-						contractTerms.currency,
-						EventType.IPCI,
-						EventType.IPCI
-					);
-					index++;
-				}
-			}
 			for (uint8 i = 0; i < MAX_CYCLE_SIZE; i++) {
 				if (interestPaymentSchedule[i] == 0) break;
 				uint256 shiftedIPDate = shiftEventTime(
@@ -246,7 +233,10 @@ contract PAMEngine is Core, IEngine {
 			}
 		}
 		// capitalization end date
-		else if (contractTerms.capitalizationEndDate != 0) {
+		else if (
+			contractTerms.capitalizationEndDate != 0 &&
+			contractTerms.capitalizationEndDate < contractTerms.cycleAnchorDateOfPrincipalRedemption
+		) {
 			uint256 shiftedIPCIDate = shiftEventTime(
 				contractTerms.capitalizationEndDate,
 				contractTerms.businessDayConvention,
@@ -264,39 +254,6 @@ contract PAMEngine is Core, IEngine {
 				);
 				index++;
 			}
-		}
-
-		// rate reset
-		if (contractTerms.cycleOfRateReset.isSet == true && contractTerms.cycleAnchorDateOfRateReset != 0) {
-			uint256[MAX_CYCLE_SIZE] memory rateResetSchedule = computeDatesFromCycleSegment(
-				contractTerms.cycleAnchorDateOfRateReset,
-				contractTerms.maturityDate,
-				contractTerms.cycleOfRateReset,
-				contractTerms.endOfMonthConvention,
-				false,
-				segmentStart,
-				segmentEnd
-			);
-			for (uint8 i = 0; i < MAX_CYCLE_SIZE; i++) {
-				if (rateResetSchedule[i] == 0) break;
-				uint256 shiftedRRDate = shiftEventTime(
-					rateResetSchedule[i],
-					contractTerms.businessDayConvention,
-					contractTerms.calendar
-				);
-				if (isInPeriod(shiftedRRDate, segmentStart, segmentEnd) == false) continue;
-				protoEventSchedule[index] = ProtoEvent(
-					shiftedRRDate,
-					shiftedRRDate.add(getEpochOffset(EventType.RR)),
-					rateResetSchedule[i],
-					EventType.RR,
-					contractTerms.currency,
-					EventType.RR,
-					EventType.RR
-				);
-				index++;
-			}
-			// ... nextRateReset
 		}
 
 		// fees
@@ -331,40 +288,6 @@ contract PAMEngine is Core, IEngine {
 			}
 		}
 
-		// scaling
-		if ((contractTerms.scalingEffect != ScalingEffect._000 || contractTerms.scalingEffect != ScalingEffect._00M)
-			&& contractTerms.cycleAnchorDateOfScalingIndex != 0
-		) {
-			uint256[MAX_CYCLE_SIZE] memory scalingSchedule = computeDatesFromCycleSegment(
-				contractTerms.cycleAnchorDateOfScalingIndex,
-				contractTerms.maturityDate,
-				contractTerms.cycleOfScalingIndex,
-				contractTerms.endOfMonthConvention,
-				true,
-				segmentStart,
-				segmentEnd
-			);
-			for (uint8 i = 0; i < MAX_CYCLE_SIZE; i++) {
-				if (scalingSchedule[i] == 0) break;
-				uint256 shiftedSCDate = shiftEventTime(
-					scalingSchedule[i],
-					contractTerms.businessDayConvention,
-					contractTerms.calendar
-				);
-				if (isInPeriod(shiftedSCDate, segmentStart, segmentEnd) == false) continue;
-				protoEventSchedule[index] = ProtoEvent(
-					shiftedSCDate,
-					shiftedSCDate.add(getEpochOffset(EventType.SC)),
-					scalingSchedule[i],
-					EventType.SC,
-					contractTerms.currency,
-					EventType.SC,
-					EventType.SC
-				);
-				index++;
-			}
-		}
-
 		// termination
 		if (contractTerms.terminationDate != 0) {
 			if (isInPeriod(contractTerms.terminationDate, segmentStart, segmentEnd)) {
@@ -381,16 +304,42 @@ contract PAMEngine is Core, IEngine {
 			}
 		}
 
-		// principal redemption
-		if (isInPeriod(contractTerms.maturityDate, segmentStart, segmentEnd)) {
+		// principal redemption related (covers also interest events post PRANX)
+		uint256[MAX_CYCLE_SIZE] memory principalRedemptionSchedule = computeDatesFromCycleSegment(
+			contractTerms.cycleAnchorDateOfPrincipalRedemption,
+			contractTerms.maturityDate,
+			contractTerms.cycleOfPrincipalRedemption,
+			contractTerms.endOfMonthConvention,
+			true,
+			segmentStart,
+			segmentEnd
+		);
+		for (uint8 i = 0; i < MAX_CYCLE_SIZE; i++) {
+			if (principalRedemptionSchedule[i] == 0) break;
+			uint256 shiftedPRDate = shiftEventTime(
+				principalRedemptionSchedule[i],
+				contractTerms.businessDayConvention,
+				contractTerms.calendar
+			);
+			if (isInPeriod(shiftedPRDate, segmentStart, segmentEnd) == false) continue;
 			protoEventSchedule[index] = ProtoEvent(
-				contractTerms.maturityDate,
-				contractTerms.maturityDate.add(getEpochOffset(EventType.PR)),
-				contractTerms.maturityDate,
+				shiftedPRDate,
+				shiftedPRDate.add(getEpochOffset(EventType.PR)),
+				principalRedemptionSchedule[i],
 				EventType.PR,
 				contractTerms.currency,
 				EventType.PR,
 				EventType.PR
+			);
+			index++;
+			protoEventSchedule[index] = ProtoEvent(
+				shiftedPRDate,
+				shiftedPRDate.add(getEpochOffset(EventType.IP)),
+				principalRedemptionSchedule[i],
+				EventType.IP,
+				contractTerms.currency,
+				EventType.IP,
+				EventType.IP
 			);
 			index++;
 		}
@@ -402,6 +351,8 @@ contract PAMEngine is Core, IEngine {
 
 	/**
 	 * initialize contract state space based on the contract terms
+	 * TODO:
+	 * - implement annuity calculator
 	 * @dev see initStateSpace()
 	 * @param contractTerms terms of the contract
 	 * @return initial contract state
@@ -422,12 +373,18 @@ contract PAMEngine is Core, IEngine {
 		contractState.nominalRate = contractTerms.nominalInterestRate;
 		contractState.nominalAccrued = contractTerms.accruedInterest;
 		contractState.feeAccrued = contractTerms.feeAccrued;
+		// annuity calculator to be implemented
+		contractState.nextPrincipalRedemptionPayment = roleSign(contractTerms.contractRole) * contractTerms.nextPrincipalRedemptionPayment;
 
 		return contractState;
 	}
 
 	/**
 	 * computes the next contract state based on the contract terms, state and the event type
+	 * TODO:
+	 * - annuity calculator for RR/RRF events
+	 * - IPCB events and Icb state variable
+	 * - Icb state variable updates in Nac-updating events
 	 * @param timestamp current timestamp
 	 * @param contractTerms terms of the contract
 	 * @param contractState current state of the contract
@@ -448,8 +405,7 @@ contract PAMEngine is Core, IEngine {
 			contractState.timeFromLastEvent = yearFraction(
 				shiftCalcTime(contractState.lastEventTime, contractTerms.businessDayConvention, contractTerms.calendar),
 				shiftCalcTime(timestamp, contractTerms.businessDayConvention, contractTerms.calendar),
-				contractTerms.dayCountConvention,
-				contractTerms.maturityDate
+				contractTerms.dayCountConvention
 			);
 			contractState.nominalAccrued = contractState.nominalAccrued.add(contractState.nominalRate.floatMult(contractState.nominalValue).floatMult(contractState.timeFromLastEvent));
 			contractState.feeAccrued = contractState.feeAccrued.add(contractTerms.feeRate.floatMult(contractState.nominalValue).floatMult(contractState.timeFromLastEvent));
@@ -460,8 +416,7 @@ contract PAMEngine is Core, IEngine {
 			contractState.timeFromLastEvent = yearFraction(
 				shiftCalcTime(contractState.lastEventTime, contractTerms.businessDayConvention, contractTerms.calendar),
 				shiftCalcTime(timestamp, contractTerms.businessDayConvention, contractTerms.calendar),
-				contractTerms.dayCountConvention,
-				contractTerms.maturityDate
+				contractTerms.dayCountConvention
 			);
 			contractState.nominalAccrued = contractState.nominalAccrued.add(contractState.nominalRate.floatMult(contractState.nominalValue).floatMult(contractState.timeFromLastEvent));
 			contractState.feeAccrued = contractState.feeAccrued.add(contractTerms.feeRate.floatMult(contractState.nominalValue).floatMult(contractState.timeFromLastEvent));
@@ -473,8 +428,7 @@ contract PAMEngine is Core, IEngine {
 			contractState.timeFromLastEvent = yearFraction(
 				shiftCalcTime(contractState.lastEventTime, contractTerms.businessDayConvention, contractTerms.calendar),
 				shiftCalcTime(timestamp, contractTerms.businessDayConvention, contractTerms.calendar),
-				contractTerms.dayCountConvention,
-				contractTerms.maturityDate
+				contractTerms.dayCountConvention
 			);
 			contractState.nominalAccrued = contractState.nominalAccrued.add(contractState.nominalRate.floatMult(contractState.nominalValue).floatMult(contractState.timeFromLastEvent));
 			contractState.feeAccrued = 0;
@@ -485,8 +439,7 @@ contract PAMEngine is Core, IEngine {
 			contractState.timeFromLastEvent = yearFraction(
 				shiftCalcTime(contractState.lastEventTime, contractTerms.businessDayConvention, contractTerms.calendar),
 				shiftCalcTime(timestamp, contractTerms.businessDayConvention, contractTerms.calendar),
-				contractTerms.dayCountConvention,
-				contractTerms.maturityDate
+				contractTerms.dayCountConvention
 			);
 			contractState.nominalValue = roleSign(contractTerms.contractRole) * contractTerms.notionalPrincipal;
 			contractState.nominalRate = contractTerms.nominalInterestRate;
@@ -499,10 +452,9 @@ contract PAMEngine is Core, IEngine {
 				.floatMult(contractState.nominalValue)
 				.floatMult(
 					yearFraction(
-						contractTerms.cycleAnchorDateOfInterestPayment,
-						timestamp,
-						contractTerms.dayCountConvention,
-						contractTerms.maturityDate
+						shiftCalcTime(contractTerms.cycleAnchorDateOfInterestPayment, contractTerms.businessDayConvention, contractTerms.calendar),
+						shiftCalcTime(timestamp, contractTerms.businessDayConvention, contractTerms.calendar),
+						contractTerms.dayCountConvention
 					)
 				);
 			}
@@ -512,10 +464,9 @@ contract PAMEngine is Core, IEngine {
 			contractState.timeFromLastEvent = yearFraction(
 				shiftCalcTime(contractState.lastEventTime, contractTerms.businessDayConvention, contractTerms.calendar),
 				shiftCalcTime(timestamp, contractTerms.businessDayConvention, contractTerms.calendar),
-				contractTerms.dayCountConvention,
-				contractTerms.maturityDate
+				contractTerms.dayCountConvention
 			);
-			contractState.nominalValue = contractState.nominalValue.add(contractState.nominalAccrued.add(contractState.nominalRate.floatMult(contractState.nominalValue).floatMult(contractState.timeFromLastEvent)));
+			contractState.nominalAccrued = contractState.nominalAccrued.add(contractState.nominalAccrued.add(contractState.nominalRate.floatMult(contractState.nominalValue).floatMult(contractState.timeFromLastEvent)));
 			contractState.nominalAccrued = 0;
 			contractState.feeAccrued = contractState.feeAccrued.add(contractTerms.feeRate.floatMult(contractState.nominalValue).floatMult(contractState.timeFromLastEvent));
 			contractState.lastEventTime = timestamp;
@@ -525,8 +476,7 @@ contract PAMEngine is Core, IEngine {
 			contractState.timeFromLastEvent = yearFraction(
 				shiftCalcTime(contractState.lastEventTime, contractTerms.businessDayConvention, contractTerms.calendar),
 				shiftCalcTime(timestamp, contractTerms.businessDayConvention, contractTerms.calendar),
-				contractTerms.dayCountConvention,
-				contractTerms.maturityDate
+				contractTerms.dayCountConvention
 			);
 			contractState.nominalAccrued = 0;
 			contractState.feeAccrued = contractState.feeAccrued.add(contractTerms.feeRate.floatMult(contractState.nominalValue).floatMult(contractState.timeFromLastEvent));
@@ -537,8 +487,7 @@ contract PAMEngine is Core, IEngine {
 			contractState.timeFromLastEvent = yearFraction(
 				shiftCalcTime(contractState.lastEventTime, contractTerms.businessDayConvention, contractTerms.calendar),
 				shiftCalcTime(timestamp, contractTerms.businessDayConvention, contractTerms.calendar),
-				contractTerms.dayCountConvention,
-				contractTerms.maturityDate
+				contractTerms.dayCountConvention
 			);
 			contractState.nominalAccrued = contractState.nominalAccrued.add(contractState.nominalRate.floatMult(contractState.nominalValue).floatMult(contractState.timeFromLastEvent));
 			contractState.feeAccrued = contractState.feeAccrued.add(contractTerms.feeRate.floatMult(contractState.nominalValue).floatMult(contractState.timeFromLastEvent));
@@ -550,8 +499,7 @@ contract PAMEngine is Core, IEngine {
 			contractState.timeFromLastEvent = yearFraction(
 				shiftCalcTime(contractState.lastEventTime, contractTerms.businessDayConvention, contractTerms.calendar),
 				shiftCalcTime(timestamp, contractTerms.businessDayConvention, contractTerms.calendar),
-				contractTerms.dayCountConvention,
-				contractTerms.maturityDate
+				contractTerms.dayCountConvention
 			);
 			contractState.nominalAccrued = contractState.nominalAccrued.add(contractState.nominalRate.floatMult(contractState.nominalValue).floatMult(contractState.timeFromLastEvent));
 			contractState.feeAccrued = contractState.feeAccrued.add(contractTerms.feeRate.floatMult(contractState.nominalValue).floatMult(contractState.timeFromLastEvent));
@@ -562,12 +510,11 @@ contract PAMEngine is Core, IEngine {
 			contractState.timeFromLastEvent = yearFraction(
 				shiftCalcTime(contractState.lastEventTime, contractTerms.businessDayConvention, contractTerms.calendar),
 				shiftCalcTime(timestamp, contractTerms.businessDayConvention, contractTerms.calendar),
-				contractTerms.dayCountConvention,
-				contractTerms.maturityDate
+				contractTerms.dayCountConvention
 			);
 			contractState.nominalAccrued = contractState.nominalAccrued.add(contractState.nominalRate.floatMult(contractState.nominalValue).floatMult(contractState.timeFromLastEvent));
 			contractState.feeAccrued = contractState.feeAccrued.add(contractTerms.feeRate.floatMult(contractState.nominalValue).floatMult(contractState.timeFromLastEvent));
-			contractState.nominalValue = 0;
+			contractState.nominalValue = contractState.nominalValue - contractState.nominalValue.min(contractState.nextPrincipalRedemptionPayment - contractState.nominalAccrued);
 			contractState.lastEventTime = timestamp;
 			return contractState;
 		}
@@ -575,8 +522,7 @@ contract PAMEngine is Core, IEngine {
 			contractState.timeFromLastEvent = yearFraction(
 				shiftCalcTime(contractState.lastEventTime, contractTerms.businessDayConvention, contractTerms.calendar),
 				shiftCalcTime(timestamp, contractTerms.businessDayConvention, contractTerms.calendar),
-				contractTerms.dayCountConvention,
-				contractTerms.maturityDate
+				contractTerms.dayCountConvention
 			);
 			contractState.nominalAccrued = contractState.nominalAccrued.add(contractState.nominalRate.floatMult(contractState.nominalValue).floatMult(contractState.timeFromLastEvent));
 			contractState.feeAccrued = contractState.feeAccrued.add(contractTerms.feeRate.floatMult(contractState.nominalValue).floatMult(contractState.timeFromLastEvent));
@@ -587,8 +533,7 @@ contract PAMEngine is Core, IEngine {
 			contractState.timeFromLastEvent = yearFraction(
 				shiftCalcTime(contractState.lastEventTime, contractTerms.businessDayConvention, contractTerms.calendar),
 				shiftCalcTime(timestamp, contractTerms.businessDayConvention, contractTerms.calendar),
-				contractTerms.dayCountConvention,
-				contractTerms.maturityDate
+				contractTerms.dayCountConvention
 			);
 			contractState.nominalAccrued = contractState.nominalAccrued.add(contractState.nominalRate.floatMult(contractState.nominalValue).floatMult(contractState.timeFromLastEvent));
 			contractState.feeAccrued = contractState.feeAccrued.add(contractTerms.feeRate.floatMult(contractState.nominalValue).floatMult(contractState.timeFromLastEvent));
@@ -620,11 +565,11 @@ contract PAMEngine is Core, IEngine {
 			contractState.timeFromLastEvent = yearFraction(
 				shiftCalcTime(contractState.lastEventTime, contractTerms.businessDayConvention, contractTerms.calendar),
 				shiftCalcTime(timestamp, contractTerms.businessDayConvention, contractTerms.calendar),
-				contractTerms.dayCountConvention,
-				contractTerms.maturityDate
+				contractTerms.dayCountConvention
 			);
 			contractState.nominalAccrued = contractState.nominalAccrued.add(contractState.nominalRate.floatMult(contractState.nominalValue).floatMult(contractState.timeFromLastEvent));
 			contractState.nominalRate = rate;
+			contractState.nextPrincipalRedemptionPayment = 0; // TODO: implement annuity calculator
 			contractState.lastEventTime = timestamp;
 			return contractState;
 		}
@@ -632,8 +577,7 @@ contract PAMEngine is Core, IEngine {
 			contractState.timeFromLastEvent = yearFraction(
 				shiftCalcTime(contractState.lastEventTime, contractTerms.businessDayConvention, contractTerms.calendar),
 				shiftCalcTime(timestamp, contractTerms.businessDayConvention, contractTerms.calendar),
-				contractTerms.dayCountConvention,
-				contractTerms.maturityDate
+				contractTerms.dayCountConvention
 			);
 			contractState.nominalAccrued = contractState.nominalAccrued.add(contractState.nominalRate.floatMult(contractState.nominalValue).floatMult(contractState.timeFromLastEvent));
 			contractState.feeAccrued = contractState.feeAccrued.add(contractTerms.feeRate.floatMult(contractState.nominalValue).floatMult(contractState.timeFromLastEvent));
@@ -660,8 +604,7 @@ contract PAMEngine is Core, IEngine {
 			contractState.timeFromLastEvent = yearFraction(
 				shiftCalcTime(contractState.lastEventTime, contractTerms.businessDayConvention, contractTerms.calendar),
 				shiftCalcTime(timestamp, contractTerms.businessDayConvention, contractTerms.calendar),
-				contractTerms.dayCountConvention,
-				contractTerms.maturityDate
+				contractTerms.dayCountConvention
 			);
 			contractState.nominalValue = 0;
 			contractState.nominalAccrued = 0;
@@ -669,12 +612,14 @@ contract PAMEngine is Core, IEngine {
 			contractState.lastEventTime = timestamp;
 			return contractState;
 		}
-		revert("PAMEngine.stateTransitionFunction: ATTRIBUTE_NOT_FOUND");
+		revert("ANNEngine.stateTransitionFunction: ATTRIBUTE_NOT_FOUND");
 	}
 
 	/**
 	 * calculates the payoff for the current time based on the contract terms,
 	 * state and the event type
+	 * - IPCB events and Icb state variable
+	 * - Icb state variable updates in IP-paying events
 	 * @param timestamp current timestamp
 	 * @param contractTerms terms of the contract
 	 * @param contractState current state of the contract
@@ -712,8 +657,7 @@ contract PAMEngine is Core, IEngine {
 							yearFraction(
 								shiftCalcTime(contractState.lastEventTime, contractTerms.businessDayConvention, contractTerms.calendar),
 								shiftCalcTime(timestamp, contractTerms.businessDayConvention, contractTerms.calendar),
-								contractTerms.dayCountConvention,
-								contractTerms.maturityDate
+								contractTerms.dayCountConvention
 							)
 							.floatMult(contractTerms.feeRate)
 							.floatMult(contractState.nominalValue)
@@ -740,8 +684,7 @@ contract PAMEngine is Core, IEngine {
 							yearFraction(
 								shiftCalcTime(contractState.lastEventTime, contractTerms.businessDayConvention, contractTerms.calendar),
 								shiftCalcTime(timestamp, contractTerms.businessDayConvention, contractTerms.calendar),
-								contractTerms.dayCountConvention,
-								contractTerms.maturityDate
+								contractTerms.dayCountConvention
 							)
 							.floatMult(contractState.nominalRate)
 							.floatMult(contractState.nominalValue)
@@ -768,8 +711,7 @@ contract PAMEngine is Core, IEngine {
 						yearFraction(
 							shiftCalcTime(contractState.lastEventTime, contractTerms.businessDayConvention, contractTerms.calendar),
 							shiftCalcTime(timestamp, contractTerms.businessDayConvention, contractTerms.calendar),
-							contractTerms.dayCountConvention,
-							contractTerms.maturityDate
+							contractTerms.dayCountConvention
 						)
 						.floatMult(contractState.nominalRate)
 						.floatMult(contractState.nominalValue)
@@ -780,7 +722,19 @@ contract PAMEngine is Core, IEngine {
 			return (
 				performanceIndicator(contractState.contractStatus)
 				* contractState.nominalScalingMultiplier
-					.floatMult(contractState.nominalValue)
+					.floatMult(
+						contractState.nominalValue.min(
+						contractState.nextPrincipalRedemptionPayment
+						- contractState.nominalAccrued
+						- yearFraction(
+								shiftCalcTime(contractState.lastEventTime, contractTerms.businessDayConvention, contractTerms.calendar),
+								shiftCalcTime(timestamp, contractTerms.businessDayConvention, contractTerms.calendar),
+								contractTerms.dayCountConvention
+							)
+							.floatMult(contractState.nominalRate)
+							.floatMult(contractState.nominalValue)
+						)
+					)
 			);
 		}
 		if (eventType == EventType.PY) {
@@ -797,8 +751,7 @@ contract PAMEngine is Core, IEngine {
 					* yearFraction(
 							shiftCalcTime(contractState.lastEventTime, contractTerms.businessDayConvention, contractTerms.calendar),
 							shiftCalcTime(timestamp, contractTerms.businessDayConvention, contractTerms.calendar),
-							contractTerms.dayCountConvention,
-							contractTerms.maturityDate
+							contractTerms.dayCountConvention
 						)
 						.floatMult(contractTerms.penaltyRate)
 						.floatMult(contractState.nominalValue)
@@ -814,8 +767,7 @@ contract PAMEngine is Core, IEngine {
 					* yearFraction(
 							shiftCalcTime(contractState.lastEventTime, contractTerms.businessDayConvention, contractTerms.calendar),
 							shiftCalcTime(timestamp, contractTerms.businessDayConvention, contractTerms.calendar),
-							contractTerms.dayCountConvention,
-							contractTerms.maturityDate
+							contractTerms.dayCountConvention
 						)
 						.floatMult(contractState.nominalValue)
 						.floatMult(param)
@@ -832,14 +784,13 @@ contract PAMEngine is Core, IEngine {
 						yearFraction(
 							shiftCalcTime(contractState.lastEventTime, contractTerms.businessDayConvention, contractTerms.calendar),
 							shiftCalcTime(timestamp, contractTerms.businessDayConvention, contractTerms.calendar),
-							contractTerms.dayCountConvention,
-							contractTerms.maturityDate
+							contractTerms.dayCountConvention
 						)
 						.floatMult(contractState.nominalRate)
 						.floatMult(contractState.nominalValue)
 					)
 			);
 		}
-		revert("PAMEngine.payoffFunction: ATTRIBUTE_NOT_FOUND");
+		revert("ANNEngine.payoffFunction: ATTRIBUTE_NOT_FOUND");
 	}
 }

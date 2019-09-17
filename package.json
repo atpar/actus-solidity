@@ -1,6 +1,6 @@
 {
   "name": "actus-solidity",
-  "version": "0.2.0-beta.1",
+  "version": "0.2.0",
   "description": "ACTUS smart contracts",
   "author": "atpar AG",
   "authors": [
@@ -39,6 +39,7 @@
     "test": "./scripts/test.sh"
   },
   "devDependencies": {
+    "actus-dictionary": "https://github.com/actusfrf/actus-dictionary.git",
     "bignumber.js": "^7.2.1",
     "csvtojson": "^2.0.8",
     "eth-sig-util": "2.1.1",
@@ -46,7 +47,7 @@
     "ganache-cli": "^6.4.3",
     "openzeppelin-solidity": "^2.1.2",
     "openzeppelin-test-helpers": "^0.1.2",
-    "truffle": "^5.0.2",
+    "truffle": "5.0.28",
     "truffle-hdwallet-provider": "^1.0.9",
     "truffle-security": "^1.4.4",
     "web3-utils": "1.0.0-beta.46"

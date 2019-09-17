@@ -5,14 +5,14 @@ import "openzeppelin-solidity/contracts/drafts/SignedSafeMath.sol";
 import "../../external/BokkyPooBah/BokkyPooBahsDateTimeLibrary.sol";
 
 import "../Definitions.sol";
-import "../FloatMath.sol";
+import "../SignedMath.sol";
 
 
 contract DayCountConvention is Definitions {
 
 	using SafeMath for uint;
 	using SignedSafeMath for int;
-	using FloatMath for int;
+	using SignedMath for int;
 
 	function yearFraction(
 		uint256 startTimestamp,
@@ -36,7 +36,7 @@ contract DayCountConvention is Definitions {
 		} else if (ipdc == DayCountConvention._30E_360ISDA) {
 			return thirtyEThreeSixtyISDA(startTimestamp, endTimestamp, maturityDate);
 		} else {
-			return 1000000000000000000;
+			return int256(1 ** PRECISION);
 		}
 	}
 

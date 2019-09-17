@@ -24,7 +24,7 @@ contract Definitions {
 		bool isSet;
 	}
 
-	enum EventType {SD, MD, AD, IED, IP, PR, PP, PY, FP, PRD, TD, IPCI, RR, RRY, SC, CD, DV, MR, IPCB, STD, Child}
+	enum EventType {AD, CD, DV, XD, FP, IED, IPCB, IPCI, IP, MR, MD, PY, PD, PRF, PP, PR, PRD, RRF, RR, SC, STD, TD}
 	enum Calendar {NoCalendar, MondayToFriday} // Custom: custom implementation of calendar
 	enum BusinessDayConvention {NULL, SCF, SCMF, CSF, CSMF, SCP, SCMP, CSP, CSMP}
 	enum ClearingHouse {YES, NO} // required ?
@@ -61,7 +61,7 @@ contract Definitions {
 		// int256 interestCalculationBase;
 		int256 interestScalingMultiplier;
 		int256 nominalScalingMultiplier;
-		// int256 nextPrincipalRedemptionPayment;
+		int256 nextPrincipalRedemptionPayment;
 		// int256 secondaryNominalValue; // analytical result
 		// int256 lastInterestPayment;
 		// int256 payoffAtSettlement;
@@ -94,8 +94,8 @@ contract Definitions {
 		ContractType contractType;
 		Calendar calendar;
 		ContractRole contractRole;
-		bytes32 legalEntityIdRecordCreator;
-		bytes32 legalEntityIdCounterparty;
+		bytes32 creatorID;
+		bytes32 counterpartyID;
 		DayCountConvention dayCountConvention;
 		BusinessDayConvention businessDayConvention;
 		EndOfMonthConvention endOfMonthConvention;
@@ -115,6 +115,7 @@ contract Definitions {
 		uint256 cycleAnchorDateOfRateReset;
 		uint256 cycleAnchorDateOfScalingIndex;
 		uint256 cycleAnchorDateOfFee;
+		uint256 cycleAnchorDateOfPrincipalRedemption;
 
 		int256 notionalPrincipal;
 		int256 nominalInterestRate;
@@ -127,15 +128,18 @@ contract Definitions {
 		int256 penaltyRate;
 		int256 premiumDiscountAtIED;
 		int256 priceAtPurchaseDate;
+		int256 nextPrincipalRedemptionPayment;
 
 		IPS cycleOfInterestPayment;
 		IPS cycleOfRateReset;
 		IPS cycleOfScalingIndex;
 		IPS cycleOfFee;
+		IPS cycleOfPrincipalRedemption;
 
 		int256 lifeCap;
 		int256 lifeFloor;
 		int256 periodCap;
 		int256 periodFloor;
+
 	}
 }

@@ -3,14 +3,14 @@ pragma solidity ^0.5.2;
 import "truffle/Assert.sol";
 import "truffle/DeployedAddresses.sol";
 
-import "../../contracts/Core/FloatMath.sol";
+import "../../contracts/Core/SignedMath.sol";
 
 
-contract TestFloatMath {
+contract TestSignedMath {
 
-  using FloatMath for int;
+  using SignedMath for int256;
 
-  FloatMath instance;
+  SignedMath instance;
 
   int256 constant INT256_MIN = int256((uint256(1) << 255));
 	int256 constant INT256_MAX = int256(~((uint256(1) << 255)));
@@ -18,8 +18,9 @@ contract TestFloatMath {
   uint256 constant PRECISION = 18;
   uint256 constant MULTIPLICATOR = 10 ** PRECISION;
 
+
   constructor() public {
-    instance = FloatMath(DeployedAddresses.FloatMath());
+    instance = SignedMath(DeployedAddresses.SignedMath());
   }
 
   function testFloatMult_NO_OVERFLOW() public {
@@ -85,7 +86,7 @@ contract TestFloatMath {
     Assert.isFalse(result, "FloatMult (Identity - 10) times 1 should fail");
   }
 
-  function testFloatDIV_NO_OVERFLOW() public {
+  function testFloatDiv_NO_OVERFLOW() public {
     Assert.equal(
       int256(5 * int256(MULTIPLICATOR)).floatDiv(1 * int256(MULTIPLICATOR)), 
       5 * int256(MULTIPLICATOR), 
@@ -134,5 +135,45 @@ contract TestFloatMath {
 
     (bool result, ) = address(instance).call(abi.encodeWithSelector(bytes4(keccak256("floatDiv(int256,int256)")), 1, 1 * int256(MULTIPLICATOR + 10))); // ~ 0.0...01
     Assert.isFalse(result, "FloatDiv 1 by (Identity - 10) should fail");
+  }
+
+  function testSignedMin() public {
+    Assert.equal(
+      int256(1).min(int256(2)),
+      1,
+      "min of 1 and 2 should be 1"
+    );
+
+    Assert.equal(
+      int256(1).min(int256(0)),
+      0,
+      "min of 1 and 0 should be 0"
+    );
+
+    Assert.equal(
+      int256(1).min(int256(-1)),
+      -1,
+      "min of 1 and -1 should be -1"
+    );
+  }
+
+  function testSignedMax() public {
+    Assert.equal(
+      int256(1).max(int256(2)),
+      2,
+      "max of 1 and 2 should be 2"
+    );
+
+    Assert.equal(
+      int256(1).max(int256(0)),
+      1,
+      "max of 1 and 0 should be 1"
+    );
+
+    Assert.equal(
+      int256(1).max(int256(-1)),
+      1,
+      "max of 1 and -1 should be 1"
+    );
   }
 }
