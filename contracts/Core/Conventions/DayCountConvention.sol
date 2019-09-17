@@ -14,7 +14,12 @@ contract DayCountConvention is Definitions {
 	using SignedSafeMath for int;
 	using SignedMath for int;
 
-	function yearFraction(uint256 startTimestamp, uint256 endTimestamp, DayCountConvention ipdc)
+	function yearFraction(
+		uint256 startTimestamp,
+		uint256 endTimestamp,
+		DayCountConvention ipdc,
+		uint256 maturityDate
+	)
 		internal
 		pure
 		returns (int256)
@@ -28,6 +33,8 @@ contract DayCountConvention is Definitions {
 			return actualThreeSixtyFive(startTimestamp, endTimestamp);
 		} else if (ipdc == DayCountConvention._30E_360) {
 			return thirtyEThreeSixty(startTimestamp, endTimestamp);
+		} else if (ipdc == DayCountConvention._30E_360ISDA) {
+			return thirtyEThreeSixtyISDA(startTimestamp, endTimestamp, maturityDate);
 		} else {
 			return int256(1 ** PRECISION);
 		}
@@ -98,6 +105,37 @@ contract DayCountConvention is Definitions {
 		}
 
 		if (d2Day == 31) {
+			d2Day = 30;
+		}
+
+		int256 delD = int256(d2Day).sub(int256(d1Day));
+		int256 delM = int256(d2Month).sub(int256(d1Month));
+		int256 delY = int256(d2Year).sub(int256(d1Year));
+
+		return ((delY.mul(360).add(delM.mul(30)).add(delD)).floatDiv(360));
+	}
+
+	function thirtyEThreeSixtyISDA(uint256 startTime, uint256 endTime, uint256 maturityDate)
+		internal
+		pure
+		returns (int256)
+	{
+		uint256 d1Day;
+		uint256 d1Month;
+		uint256 d1Year;
+
+		uint256 d2Day;
+		uint256 d2Month;
+		uint256 d2Year;
+
+		(d1Year, d1Month, d1Day) = BokkyPooBahsDateTimeLibrary.timestampToDate(startTime);
+		(d2Year, d2Month, d2Day) = BokkyPooBahsDateTimeLibrary.timestampToDate(endTime);
+
+		if (d1Day == BokkyPooBahsDateTimeLibrary.getDaysInMonth(startTime)) {
+			d1Day = 30;
+		}
+
+		if (!(endTime == maturityDate && d2Month == 2) && d2Day == BokkyPooBahsDateTimeLibrary.getDaysInMonth(endTime)) {
 			d2Day = 30;
 		}
 
