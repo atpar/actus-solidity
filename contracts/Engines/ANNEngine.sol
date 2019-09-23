@@ -369,9 +369,9 @@ contract ANNEngine is Core, IEngine {
 		contractState.interestScalingMultiplier = int256(1 * 10 ** PRECISION);
 		contractState.contractRoleSign = contractTerms.contractRole;
 		contractState.lastEventTime = contractTerms.statusDate;
-		contractState.nominalValue = contractTerms.notionalPrincipal;
+		contractState.nominalValue = roleSign(contractTerms.contractRole) * contractTerms.notionalPrincipal;
 		contractState.nominalRate = contractTerms.nominalInterestRate;
-		contractState.nominalAccrued = contractTerms.accruedInterest;
+		contractState.nominalAccrued = roleSign(contractTerms.contractRole) * contractTerms.accruedInterest;
 		contractState.feeAccrued = contractTerms.feeAccrued;
 		// annuity calculator to be implemented
 		contractState.nextPrincipalRedemptionPayment = roleSign(contractTerms.contractRole) * contractTerms.nextPrincipalRedemptionPayment;
@@ -524,7 +524,10 @@ contract ANNEngine is Core, IEngine {
 			);
 			contractState.nominalAccrued = contractState.nominalAccrued.add(contractState.nominalRate.floatMult(contractState.nominalValue).floatMult(contractState.timeFromLastEvent));
 			contractState.feeAccrued = contractState.feeAccrued.add(contractTerms.feeRate.floatMult(contractState.nominalValue).floatMult(contractState.timeFromLastEvent));
-			contractState.nominalValue = contractState.nominalValue - contractState.nominalValue.min(contractState.nextPrincipalRedemptionPayment - contractState.nominalAccrued);
+			contractState.nominalValue = contractState.nominalValue -
+						roleSign(contractTerms.contractRole) * (
+							roleSign(contractTerms.contractRole) * contractState.nominalValue).min(
+								roleSign(contractTerms.contractRole) * (contractState.nextPrincipalRedemptionPayment - contractState.nominalAccrued));
 			contractState.lastEventTime = timestamp;
 			return contractState;
 		}
@@ -739,21 +742,25 @@ contract ANNEngine is Core, IEngine {
 		if (eventType == EventType.PR) {
 			return (
 				performanceIndicator(contractState.contractStatus)
-				* contractState.nominalScalingMultiplier
+				* (contractState.nominalScalingMultiplier * roleSign(contractTerms.contractRole))
 					.floatMult(
-						contractState.nominalValue.min(
-						contractState.nextPrincipalRedemptionPayment
-						- contractState.nominalAccrued
-						- yearFraction(
-								shiftCalcTime(contractState.lastEventTime, contractTerms.businessDayConvention, contractTerms.calendar),
-								shiftCalcTime(timestamp, contractTerms.businessDayConvention, contractTerms.calendar),
-								contractTerms.dayCountConvention,
-								contractTerms.maturityDate
+						(
+							roleSign(contractTerms.contractRole) * contractState.nominalValue
+							).min(
+								roleSign(contractTerms.contractRole) * (
+									contractState.nextPrincipalRedemptionPayment
+									- contractState.nominalAccrued
+									- yearFraction(
+											shiftCalcTime(contractState.lastEventTime, contractTerms.businessDayConvention, contractTerms.calendar),
+											shiftCalcTime(timestamp, contractTerms.businessDayConvention, contractTerms.calendar),
+											contractTerms.dayCountConvention,
+											contractTerms.maturityDate
+										)
+										.floatMult(contractState.nominalRate)
+										.floatMult(contractState.nominalValue)
+									)
 							)
-							.floatMult(contractState.nominalRate)
-							.floatMult(contractState.nominalValue)
 						)
-					)
 			);
 		}
 		if (eventType == EventType.PY) {
