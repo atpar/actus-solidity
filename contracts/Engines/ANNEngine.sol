@@ -744,23 +744,23 @@ contract ANNEngine is Core, IEngine {
 				performanceIndicator(contractState.contractStatus)
 				* (contractState.nominalScalingMultiplier * roleSign(contractTerms.contractRole))
 					.floatMult(
-						(
-							roleSign(contractTerms.contractRole) * contractState.nominalValue
-							).min(
-								roleSign(contractTerms.contractRole) * (
+						(roleSign(contractTerms.contractRole) * contractState.nominalValue)
+						.min(
+								roleSign(contractTerms.contractRole)
+								* (
 									contractState.nextPrincipalRedemptionPayment
 									- contractState.nominalAccrued
 									- yearFraction(
-											shiftCalcTime(contractState.lastEventTime, contractTerms.businessDayConvention, contractTerms.calendar),
-											shiftCalcTime(timestamp, contractTerms.businessDayConvention, contractTerms.calendar),
-											contractTerms.dayCountConvention,
-											contractTerms.maturityDate
-										)
-										.floatMult(contractState.nominalRate)
-										.floatMult(contractState.nominalValue)
+										shiftCalcTime(contractState.lastEventTime, contractTerms.businessDayConvention, contractTerms.calendar),
+										shiftCalcTime(timestamp, contractTerms.businessDayConvention, contractTerms.calendar),
+										contractTerms.dayCountConvention,
+										contractTerms.maturityDate
 									)
+									.floatMult(contractState.nominalRate)
+									.floatMult(contractState.nominalValue)
+								)
 							)
-						)
+					)
 			);
 		}
 		if (eventType == EventType.PY) {
