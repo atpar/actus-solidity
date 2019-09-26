@@ -1,6 +1,6 @@
 {
   "name": "actus-solidity",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "ACTUS smart contracts",
   "author": "atpar AG",
   "authors": [
@@ -29,7 +29,7 @@
   "scripts": {
     "build": "npm run compile && npm run generate-artifacts",
     "compile": "truffle compile",
-    "generate-artifacts": "./scripts/truffle-minimize.sh ./build/contracts ./artifacts",
+    "generate-artifacts": "rm -rf ./artifacts && ./scripts/truffle-minimize.sh ./build/contracts ./artifacts",
     "migrate:goerli": "truffle migrate --network goerli",
     "migrate:kovan": "truffle migrate --network kovan",
     "migrate:rinkeby": "truffle migrate --network rinkeby",
