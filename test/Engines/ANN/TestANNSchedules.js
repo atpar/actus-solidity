@@ -248,4 +248,11 @@ contract('ANNEngine', () => {
     compareTestResults(evaluatedSchedule, testDetails['results']);
   });
   */
+
+ it('should yield the expected evaluated contract schedule for test ANN20031', async () => {
+  const testDetails = this.testCases['20031'];
+  const evaluatedSchedule = await evaluateEventSchedule(testDetails['terms']);
+
+  compareTestResults(evaluatedSchedule, testDetails['results']);
+  });
 });
