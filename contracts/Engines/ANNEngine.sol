@@ -310,7 +310,7 @@ contract ANNEngine is Core, IEngine {
 			contractTerms.maturityDate,
 			contractTerms.cycleOfPrincipalRedemption,
 			contractTerms.endOfMonthConvention,
-			true,
+			false,
 			segmentStart,
 			segmentEnd
 		);
@@ -336,6 +336,30 @@ contract ANNEngine is Core, IEngine {
 				shiftedPRDate,
 				shiftedPRDate.add(getEpochOffset(EventType.IP)),
 				principalRedemptionSchedule[i],
+				EventType.IP,
+				contractTerms.currency,
+				EventType.IP,
+				EventType.IP
+			);
+			index++;
+		}
+
+		// principal redemption at maturity
+		if (isInPeriod(contractTerms.maturityDate, segmentStart, segmentEnd) == true) {
+			protoEventSchedule[index] = ProtoEvent(
+				contractTerms.maturityDate,
+				contractTerms.maturityDate.add(getEpochOffset(EventType.PR)),
+				contractTerms.maturityDate,
+				EventType.MD,
+				contractTerms.currency,
+				EventType.MD,
+				EventType.MD
+			);
+			index++;
+			protoEventSchedule[index] = ProtoEvent(
+				contractTerms.maturityDate,
+				contractTerms.maturityDate.add(getEpochOffset(EventType.IP)),
+				contractTerms.maturityDate,
 				EventType.IP,
 				contractTerms.currency,
 				EventType.IP,
@@ -528,6 +552,19 @@ contract ANNEngine is Core, IEngine {
 						roleSign(contractTerms.contractRole) * (
 							roleSign(contractTerms.contractRole) * contractState.nominalValue).min(
 								roleSign(contractTerms.contractRole) * (contractState.nextPrincipalRedemptionPayment - contractState.nominalAccrued));
+			contractState.lastEventTime = timestamp;
+			return contractState;
+		}
+		if (eventType == EventType.MD) {
+			contractState.timeFromLastEvent = yearFraction(
+				shiftCalcTime(contractState.lastEventTime, contractTerms.businessDayConvention, contractTerms.calendar),
+				shiftCalcTime(timestamp, contractTerms.businessDayConvention, contractTerms.calendar),
+				contractTerms.dayCountConvention,
+				contractTerms.maturityDate
+			);
+			contractState.nominalAccrued = contractState.nominalAccrued.add(contractState.nominalRate.floatMult(contractState.nominalValue).floatMult(contractState.timeFromLastEvent));
+			contractState.feeAccrued = contractState.feeAccrued.add(contractTerms.feeRate.floatMult(contractState.nominalValue).floatMult(contractState.timeFromLastEvent));
+			contractState.nominalValue = 0.0;
 			contractState.lastEventTime = timestamp;
 			return contractState;
 		}
@@ -761,6 +798,13 @@ contract ANNEngine is Core, IEngine {
 								)
 							)
 					)
+			);
+		}
+		if (eventType == EventType.MD) {
+			return (
+				performanceIndicator(contractState.contractStatus)
+				* contractState.nominalScalingMultiplier
+					.floatMult(contractState.nominalValue)
 			);
 		}
 		if (eventType == EventType.PY) {
