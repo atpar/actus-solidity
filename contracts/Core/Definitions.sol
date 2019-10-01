@@ -27,45 +27,47 @@ contract Definitions {
 	enum EventType {AD, CD, DV, XD, FP, IED, IPCB, IPCI, IP, MR, MD, PY, PD, PRF, PP, PR, PRD, RRF, RR, SC, STD, TD, DEL}
 	enum Calendar {NoCalendar, MondayToFriday} // Custom: custom implementation of calendar
 	enum BusinessDayConvention {NULL, SCF, SCMF, CSF, CSMF, SCP, SCMP, CSP, CSMP}
-	enum ClearingHouse {YES, NO} // required ?
-	enum ContractRole {RPA, RPL, LG, ST, RFL, PFL, BUY, SEL, GUA, OBL} // required ?
+	enum ClearingHouse {YES, NO}
+	enum ContractRole {RPA, RPL, LG, ST, RFL, PFL, BUY, SEL, GUA, OBL}
 	enum ContractStatus {PF, DL, DQ, DF} // Default: PF
-	enum ContractType {PAM, ANN, NAM, LAM, LAX, CLM, UMP, CSH, STK, COM, SWAPS, SWPPV, FXOUT, CAPFL, FUTUR, OPTNS, CEG, CEC} // required ?
+	enum ContractType {PAM, ANN, NAM, LAM, LAX, CLM, UMP, CSH, STK, COM, SWAPS, SWPPV, FXOUT, CAPFL, FUTUR, OPTNS, CEG, CEC}
 	enum CyclePointOfInterestPayment {EndOf, BeginningOf} // Default: EndOf
 	enum CyclePointOfRateReset {BeginningOf, EndOf} // Default: BeginningOf
 	enum CycleTriggerOfOptionality {IP, PR, RR}
-	enum DayCountConvention {A_AISDA, A_360, A_365, _30E_360ISDA, _30E_360, _30_360, BUS_252} // required ?
+	enum DayCountConvention {A_AISDA, A_360, A_365, _30E_360ISDA, _30E_360, _30_360, BUS_252}
 	enum EndOfMonthConvention {EOM, SD} // Default: SD
-	enum EventLevel {P} // ?
+	enum EventLevel {P}
 	enum FeeBasis {A, N} // Default: Null
 	enum InterestCalculationBase {NT, NTIED, NTL} // Default: NT
 	enum MarketObjectCodeOfRateReset {USD_SWP, USD_GOV, CHF_SWP} // Must correspond to defined set of market objects // Default: CUR ?
-	enum ObjectCodeOfPrepaymentModel {IDXY} // ?
-	enum OptionExecutionType {E, B, A} // required ?
-	enum OptionStrikeDriver {FX, IR, PR} // ?
-	enum OptionType {C, P, CP} // required ?
+	enum ObjectCodeOfPrepaymentModel {IDXY}
+	enum OptionExecutionType {E, B, A}
+	enum OptionStrikeDriver {FX, IR, PR}
+	enum OptionType {C, P, CP}
 	enum PenaltyType {O, A, N, I} // Default: 0
 	enum PrepaymentEffect {N, A, M} // Default: N
 	enum ScalingEffect {_000, _0N0, _00M, _0NM, I00, IN0, I0M, INM} // Default: _000
-	enum Seniority {S, J} // required ?
-	enum Unit {BRL, BSH, GLN, CUU, MWH, PND, STN, TON, TRO} // required ?
+	enum Seniority {S, J}
+	enum Unit {BRL, BSH, GLN, CUU, MWH, PND, STN, TON, TRO}
 
 	struct ContractState {
 		uint256 lastEventTime;
-		ContractStatus contractStatus;
-		int256 timeFromLastEvent; // analytical result
-		int256 nominalValue; // analytical result
-		int256 nominalAccrued; // analytical result
-		int256 feeAccrued; // analytical result
-		int256 nominalRate; // analytical result
+		uint256 nonPerformingDate;
+
+		int256 timeFromLastEvent;
+		int256 nominalValue;
+		int256 nominalAccrued;
+		int256 feeAccrued;
+		int256 nominalRate;
 		// int256 interestCalculationBase;
 		int256 interestScalingMultiplier;
 		int256 nominalScalingMultiplier;
 		int256 nextPrincipalRedemptionPayment;
-		// int256 secondaryNominalValue; // analytical result
+		// int256 secondaryNominalValue;
 		// int256 lastInterestPayment;
 		// int256 payoffAtSettlement;
-		// int256 variationMargin; // analytical result
+		// int256 variationMargin;
+		ContractStatus contractStatus;
 		ContractRole contractRoleSign;
 		// int256 nominalAccruedFix;
 		// int256 nominalAccruedFloat;
@@ -116,6 +118,8 @@ contract Definitions {
 		uint256 cycleAnchorDateOfScalingIndex;
 		uint256 cycleAnchorDateOfFee;
 		uint256 cycleAnchorDateOfPrincipalRedemption;
+		uint256 gracePeriod;
+		uint256 delinquencyPeriod;
 
 		int256 notionalPrincipal;
 		int256 nominalInterestRate;
@@ -140,6 +144,5 @@ contract Definitions {
 		int256 lifeFloor;
 		int256 periodCap;
 		int256 periodFloor;
-
 	}
 }

@@ -668,13 +668,13 @@ contract ANNEngine is Core, IEngine {
 			return contractState;
 		}
 		if (protoEvent.stfType == EventType.DEL) {
-			uint256 delay = (contractState.nonPerformingDate == 0) 
+			uint256 delay = (contractState.nonPerformingDate == 0)
 				? timestamp - protoEvent.eventTime
 				: timestamp - contractState.nonPerformingDate;
 
-			if (delay <= terms.gracePeriod) {
+			if (delay <= contractTerms.gracePeriod) {
 				contractState.contractStatus = ContractStatus.DL;
-			} else if (delay <= terms.delinquencyPeriod) {
+			} else if (delay <= contractTerms.delinquencyPeriod) {
 				contractState.contractStatus = ContractStatus.DQ;
 			} else {
 				contractState.contractStatus = ContractStatus.DF;
@@ -714,6 +714,7 @@ contract ANNEngine is Core, IEngine {
 		if (protoEvent.pofType == EventType.RRF) return 0;
 		if (protoEvent.pofType == EventType.RR) return 0;
 		if (protoEvent.pofType == EventType.SC) return 0;
+		if (protoEvent.pofType == EventType.DEL) return 0;
 		if (protoEvent.pofType == EventType.FP) {
 			if (contractTerms.feeBasis == FeeBasis.A) {
 				return (
