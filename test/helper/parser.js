@@ -53,7 +53,7 @@ const numberOfDecimals = (number) => {
 }
 
 const parseCycleToIPS = (cycle) => {
-  if (cycle === '' || !cycle) { return { i: 0, p: 0, s: 0, isSet: false }; }
+  if (!cycle || cycle === '') { return { i: 0, p: 0, s: 0, isSet: false }; }
 
   const pOptions = ['D', 'W', 'M', 'Q', 'H', 'Y'];
 
@@ -64,6 +64,16 @@ const parseCycleToIPS = (cycle) => {
   return { i: i, p: p, s: s, isSet: true };
 }
 
+const parsePeriodToIP = (period) => {
+  if (!period  || period === '') { return { i: 0, p: 0, isSet: false }; }
+
+  const pOptions = ['D', 'W', 'M', 'Q', 'H', 'Y'];
+
+  let i = String(cycle).slice(0, -2);
+  let p = pOptions.indexOf(String(cycle).slice(-2, -1));
+
+  return { i: i, p: p, isSet: true };
+}
 
 const parseTermsFromObject = (terms) => {
   const parsedTerms = {};
@@ -82,7 +92,7 @@ const parseTermsFromObject = (terms) => {
     } else if (ContractTermsDefinitions[attribute].type === 'Cycle') {
       parsedTerms[attribute] = parseCycleToIPS(value);
     } else if (ContractTermsDefinitions[attribute].type === 'Period') {
-      parsedTerms[attribute] = 0;
+      parsedTerms[attribute] = parsePeriodToIP(value);
     }
   }
 

@@ -24,6 +24,12 @@ contract Definitions {
 		bool isSet;
 	}
 
+	struct IP {
+		uint256 i;
+		P p;
+		bool isSet;
+	}
+
 	enum EventType {AD, CD, DV, XD, FP, IED, IPCB, IPCI, IP, MR, MD, PY, PD, PRF, PP, PR, PRD, RRF, RR, SC, STD, TD, DEL}
 	enum Calendar {NoCalendar, MondayToFriday} // Custom: custom implementation of calendar
 	enum BusinessDayConvention {NULL, SCF, SCMF, CSF, CSMF, SCP, SCMP, CSP, CSMP}
@@ -118,8 +124,6 @@ contract Definitions {
 		uint256 cycleAnchorDateOfScalingIndex;
 		uint256 cycleAnchorDateOfFee;
 		uint256 cycleAnchorDateOfPrincipalRedemption;
-		uint256 gracePeriod;
-		uint256 delinquencyPeriod;
 
 		int256 notionalPrincipal;
 		int256 nominalInterestRate;
@@ -139,6 +143,9 @@ contract Definitions {
 		IPS cycleOfScalingIndex;
 		IPS cycleOfFee;
 		IPS cycleOfPrincipalRedemption;
+
+		IP gracePeriod;
+		IP delinquencyPeriod;
 
 		int256 lifeCap;
 		int256 lifeFloor;

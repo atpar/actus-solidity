@@ -668,20 +668,23 @@ contract ANNEngine is Core, IEngine {
 			return contractState;
 		}
 		if (protoEvent.stfType == EventType.DEL) {
-			uint256 delay = (contractState.nonPerformingDate == 0)
-				? timestamp - protoEvent.eventTime
-				: timestamp - contractState.nonPerformingDate;
+			uint256 nonPerformingDate = (contractState.nonPerformingDate == 0)
+				? protoEvent.eventTime
+				: contractState.nonPerformingDate;
 
-			if (delay <= contractTerms.gracePeriod) {
+			uint256 graceDate = getTimestampPlusPeriod(contractTerms.gracePeriod, nonPerformingDate);
+			uint256 delinquencyDate = getTimestampPlusPeriod(contractTerms.delinquencyPeriod, nonPerformingDate);
+
+			if (timestamp <= graceDate) {
 				contractState.contractStatus = ContractStatus.DL;
-			} else if (delay <= contractTerms.delinquencyPeriod) {
+			} else if (timestamp <= delinquencyDate) {
 				contractState.contractStatus = ContractStatus.DQ;
 			} else {
 				contractState.contractStatus = ContractStatus.DF;
 			}
 
 			if (contractState.nonPerformingDate == 0) {
-				contractState.nonPerformingDate = protoEvent.scheduleTime;
+				contractState.nonPerformingDate = protoEvent.eventTime;
 			}
     }
 		revert("ANNEngine.stateTransitionFunction: ATTRIBUTE_NOT_FOUND");
