@@ -686,6 +686,8 @@ contract ANNEngine is Core, IEngine {
 			if (contractState.nonPerformingDate == 0) {
 				contractState.nonPerformingDate = protoEvent.eventTime;
 			}
+
+			return contractState;
     }
 		revert("ANNEngine.stateTransitionFunction: ATTRIBUTE_NOT_FOUND");
 	}

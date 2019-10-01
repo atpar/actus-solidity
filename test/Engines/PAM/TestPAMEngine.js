@@ -116,4 +116,42 @@ contract('PAMEngine', () => {
     
     assert.isTrue(protoEventSchedule.toString() === entireProtoEventSchedule.toString());
   });
+
+  // Payment Delay
+  it('should', async () => {
+    let protoEventSchedule = await this.PAMEngineInstance.computeProtoEventScheduleSegment(
+      this.terms,
+      this.terms['statusDate'],
+      this.terms['maturityDate']
+    );
+
+    // insert Payment Delay Event
+    protoEventSchedule.splice(6, 0, [ ...protoEventSchedule[5] ]);
+    protoEventSchedule[6].scheduleTime = protoEventSchedule[5].scheduleTime;
+    protoEventSchedule[6].eventType = '22';
+    protoEventSchedule[6].pofType = '22';
+    protoEventSchedule[6].stfType = '22';
+    protoEventSchedule[6][3]= '22';
+    protoEventSchedule[6][5] = '22';
+    protoEventSchedule[6][6] = '22';
+
+    protoEventSchedule = removeNullEvents(protoEventSchedule);
+
+    let state = await this.PAMEngineInstance.computeInitialState(this.terms, {});
+    const evaluatedEventSchedule = [];
+
+    for (let i = 0; i < protoEventSchedule.length; i ++) {
+      const { 0: nextState, 1: contractEvent } = await this.PAMEngineInstance.computeNextStateForProtoEvent(
+        this.terms, 
+        state, 
+        protoEventSchedule[i], 
+        protoEventSchedule[i].scheduleTime
+      );
+
+      state = nextState;
+      evaluatedEventSchedule.push({ state, event: contractEvent });
+    }
+
+    console.log(evaluatedEventSchedule);
+  });
 });

@@ -688,6 +688,8 @@ contract PAMEngine is Core, IEngine {
 			if (contractState.nonPerformingDate == 0) {
 				contractState.nonPerformingDate = protoEvent.eventTime;
 			}
+
+			return contractState;
     }
 		revert("PAMEngine.stateTransitionFunction: ATTRIBUTE_NOT_FOUND");
 	}
