@@ -4,6 +4,11 @@
     "name": "Last Event Time",
     "type": "date"
   },
+  "nonPerformingDate": {
+    "id": "nonPerformingDate",
+    "name": "Non Performing Date",
+    "type": "date"
+  },
   "contractStatus": {
     "id": "contractStatus",
     "name": "Contract Status",

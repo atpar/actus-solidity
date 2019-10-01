@@ -81,6 +81,8 @@ const parseTermsFromObject = (terms) => {
       parsedTerms[attribute] = (value) ? isoToUnix(value) : 0;
     } else if (ContractTermsDefinitions[attribute].type === 'Cycle') {
       parsedTerms[attribute] = parseCycleToIPS(value);
+    } else if (ContractTermsDefinitions[attribute].type === 'Period') {
+      parsedTerms[attribute] = 0;
     }
   }
 

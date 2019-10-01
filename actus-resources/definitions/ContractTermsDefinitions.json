@@ -179,6 +179,16 @@
     "name": "Cycle Anchor Date Of Fee",
     "type": "date"
   },
+  "gracePeriod": {
+    "id": "gracePeriod",
+    "name": "Grace Period",
+    "type": "number"
+  },
+  "delinquencyPeriod": {
+    "id": "delinquencyPeriod",
+    "name": "Delinquency Period",
+    "type": "number"
+  },
   "notionalPrincipal": {
     "id": "notionalPrincipal",
     "name": "Notional Principal",

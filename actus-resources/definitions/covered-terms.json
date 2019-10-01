@@ -23,6 +23,8 @@
   "cycleAnchorDateOfScalingIndex",
   "cycleAnchorDateOfFee",
   "cycleAnchorDateOfPrincipalRedemption",
+  "gracePeriod",
+  "delinquencyPeriod",
   "notionalPrincipal",
   "nominalInterestRate",
   "feeAccrued",
