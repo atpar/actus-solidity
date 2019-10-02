@@ -42,13 +42,13 @@ contract PAMEngine is Core, IEngine {
 	 * (such that Led < Tev && now >= Tev)
 	 * @param contractTerms terms of the contract
 	 * @param contractState current state of the contract
-	 * @param timestamp current timestamp
+	 * @param currentTimestamp current timestamp
 	 * @return the new contract state and the evaluated events
 	 */
 	function computeNextState(
 		ContractTerms memory contractTerms,
 		ContractState memory contractState,
-		uint256 timestamp
+		uint256 currentTimestamp
 	)
 		public
 		pure
@@ -60,7 +60,7 @@ contract PAMEngine is Core, IEngine {
 		ProtoEvent[MAX_EVENT_SCHEDULE_SIZE] memory pendingProtoEventSchedule = computeProtoEventScheduleSegment(
 			contractTerms,
 			shiftEventTime(contractState.lastEventTime, contractTerms.businessDayConvention, contractTerms.calendar),
-			timestamp
+			currentTimestamp
 		);
 
 		for (uint8 index = 0; index < MAX_EVENT_SCHEDULE_SIZE; index++) {
@@ -71,19 +71,19 @@ contract PAMEngine is Core, IEngine {
 				pendingProtoEventSchedule[index].eventType,
 				pendingProtoEventSchedule[index].currency,
 				payoffFunction(
-					pendingProtoEventSchedule[index].scheduleTime,
-					contractTerms,
+					pendingProtoEventSchedule[index],
 					contractState,
-					pendingProtoEventSchedule[index]
+					contractTerms,
+					currentTimestamp
 				),
-				timestamp
+				currentTimestamp
 			);
 
 			nextContractState = stateTransitionFunction(
-				pendingProtoEventSchedule[index].scheduleTime,
-				contractTerms,
+				pendingProtoEventSchedule[index],
 				contractState,
-				pendingProtoEventSchedule[index]
+				contractTerms,
+				currentTimestamp
 			);
 		}
 
@@ -96,14 +96,14 @@ contract PAMEngine is Core, IEngine {
 	 * @param contractTerms terms of the contract
 	 * @param contractState current state of the contract
 	 * @param protoEvent prototype event to be evaluated and applied to the contract state
-	 * @param timestamp current timestamp
+	 * @param currentTimestamp current timestamp
 	 * @return the new contract state and the evaluated event
 	 */
 	function computeNextStateForProtoEvent(
 		ContractTerms memory contractTerms,
 		ContractState memory contractState,
 		ProtoEvent memory protoEvent,
-		uint256 timestamp
+		uint256 currentTimestamp
 	)
 		public
 		pure
@@ -113,15 +113,15 @@ contract PAMEngine is Core, IEngine {
 			protoEvent.eventTime,
 			protoEvent.eventType,
 			protoEvent.currency,
-			payoffFunction(timestamp, contractTerms, contractState, protoEvent), // solium-disable-line
-			timestamp
+			payoffFunction( protoEvent, contractState, contractTerms, currentTimestamp), // solium-disable-line
+			currentTimestamp
 		);
 
 		ContractState memory nextContractState = stateTransitionFunction(
-			timestamp,
-			contractTerms,
+			protoEvent,
 			contractState,
-			protoEvent
+			contractTerms,
+			currentTimestamp
 		);
 
 		return (nextContractState, contractEvent);
@@ -428,17 +428,17 @@ contract PAMEngine is Core, IEngine {
 
 	/**
 	 * computes the next contract state based on the contract terms, state and the event type
-	 * @param timestamp current timestamp
-	 * @param contractTerms terms of the contract
-	 * @param contractState current state of the contract
 	 * @param protoEvent proto event for which to evaluate the next state for
+	 * @param contractState current state of the contract
+	 * @param contractTerms terms of the contract
+	 * @param currentTimestamp current timestamp
 	 * @return next contract state
 	 */
 	function stateTransitionFunction(
-		uint256 timestamp,
-		ContractTerms memory contractTerms,
+		ProtoEvent memory protoEvent,
 		ContractState memory contractState,
-		ProtoEvent memory protoEvent
+		ContractTerms memory contractTerms,
+		uint256 currentTimestamp
 	)
 		private
 		pure
@@ -677,9 +677,9 @@ contract PAMEngine is Core, IEngine {
 			uint256 graceDate = getTimestampPlusPeriod(contractTerms.gracePeriod, nonPerformingDate);
 			uint256 delinquencyDate = getTimestampPlusPeriod(contractTerms.delinquencyPeriod, nonPerformingDate);
 
-			if (timestamp <= graceDate) {
+			if (currentTimestamp <= graceDate) {
 				contractState.contractStatus = ContractStatus.DL;
-			} else if (timestamp <= delinquencyDate) {
+			} else if (currentTimestamp <= delinquencyDate) {
 				contractState.contractStatus = ContractStatus.DQ;
 			} else {
 				contractState.contractStatus = ContractStatus.DF;
@@ -697,17 +697,17 @@ contract PAMEngine is Core, IEngine {
 	/**
 	 * calculates the payoff for the current time based on the contract terms,
 	 * state and the event type
-	 * @param timestamp current timestamp
-	 * @param contractTerms terms of the contract
-	 * @param contractState current state of the contract
 	 * @param protoEvent proto event for which to evaluate the payoff for
+	 * @param contractState current state of the contract
+	 * @param contractTerms terms of the contract
+	 * @param currentTimestamp current timestamp
 	 * @return payoff
 	 */
 	function payoffFunction(
-		uint256 timestamp,
-		ContractTerms memory contractTerms,
+		ProtoEvent memory protoEvent,
 		ContractState memory contractState,
-		ProtoEvent memory protoEvent
+		ContractTerms memory contractTerms,
+		uint256 currentTimestamp
 	)
 		private
 		pure

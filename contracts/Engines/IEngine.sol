@@ -29,13 +29,13 @@ contract IEngine is Definitions {
 	 * (such that Led < Tev && now >= Tev)
 	 * @param contractTerms terms of the contract
 	 * @param contractState current state of the contract
-	 * @param timestamp current timestamp
+	 * @param currentTimestamp current timestamp
 	 * @return the new contract state and the evaluated events
 	 */
 	function computeNextState(
 		ContractTerms memory contractTerms,
 		ContractState memory contractState,
-		uint256 timestamp
+		uint256 currentTimestamp
 	)
 		public
 		pure
@@ -47,14 +47,14 @@ contract IEngine is Definitions {
 	 * @param contractTerms terms of the contract
 	 * @param contractState current state of the contract
 	 * @param protoEvent prototype event to be evaluated and applied to the contract state
-	 * @param timestamp current timestamp
+	 * @param currentTimestamp current timestamp
 	 * @return the new contract state and the evaluated event
 	 */
 	function computeNextStateForProtoEvent(
 		ContractTerms memory contractTerms,
 		ContractState memory contractState,
 		ProtoEvent memory protoEvent,
-		uint256 timestamp
+		uint256 currentTimestamp
 	)
 		public
 		pure
