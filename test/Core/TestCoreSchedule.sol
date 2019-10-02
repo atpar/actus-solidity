@@ -6,35 +6,31 @@ import "truffle/Assert.sol";
 import "../../contracts/Core/Core.sol";
 
 
+/** Covered test cases:
+  - cycle not set, different overlaps, with or without endtime
+  - Different overlaps of segment and cycle with or without addEndtime
+    - start before, end before
+    - start before, end within
+    - start before, end after
+    - start within, end within
+    - start within, end after
+    - start after, end after
+
+    The tests are divided into multiple parts to avoid a stack which is too deep
+*/
 contract TestCoreSchedule is Core {
 
-  /** Covered test cases:
-    - cycle not set, different overlaps, with or without endtime
-    - Different overlaps of segment and cycle with or without addEndtime
-      - start before, end before
-      - start before, end within
-      - start before, end after
-      - start within, end within
-      - start within, end after
-      - start after, end after
-
-      The tests are divided into multiple parts to avoid a stack which is too deep
-  */
+  /*
+   * test cases where cycle.isSet == false
+   */
   function testComputeDatesFromCycleSegment_1() public {
-
-    // Initialize variables
-    IPS memory c = IPS(1, P.M, S.LONG, false); // Every 1 month
+    IPS memory c = IPS(1, P.M, S.LONG, false); // Every 1 month, isSet = false
     EndOfMonthConvention eomc = EndOfMonthConvention.EOM;
     bool addEndTime = false;
     uint256 cStart = 1514764800; // Monday, 2018-01-01 00:00:00 UTC
     uint256 cEnd = 1538352000; // Monday, 2018-10-01 00:00:00 UTC
     uint256 sStart = 1525132800; // Tuesday, 2018-05-01 00:00:00 UTC
     uint256 sEnd = 1535760000; // Saturday, 2018-09-01 00:00:00 UTC
-
-    /*
-    * test cases where cycle.isSet == false
-    */
-    c = IPS(1, P.M, S.LONG, false); // isSet = false
 
     // Segment lies before cycle
     uint256[MAX_CYCLE_SIZE] memory result_t1; // empty array
@@ -72,9 +68,10 @@ contract TestCoreSchedule is Core {
       "Array should contain only the cycle start date");
   }
 
+  /*
+   * test cases where cycle.isSet == false (continued)
+   */
   function testComputeDatesFromCycleSegment_2() public {
-
-    // Initialize variables
     IPS memory c = IPS(1, P.M, S.LONG, false); // Every 1 month
     EndOfMonthConvention eomc = EndOfMonthConvention.EOM;
     bool addEndTime = false;
@@ -83,9 +80,6 @@ contract TestCoreSchedule is Core {
     uint256 sStart = 1525132800; // Tuesday, 2018-05-01 00:00:00 UTC
     uint256 sEnd = 1535760000; // Saturday, 2018-09-01 00:00:00 UTC
 
-    /*
-    * test cases where cycle.isSet == false (continued)
-    */
     // Cycle lies within Segment, addEndTime == true
     uint256[MAX_CYCLE_SIZE] memory result_t5;
     addEndTime = true;
@@ -117,8 +111,10 @@ contract TestCoreSchedule is Core {
     );
   }
 
+  /*
+   * test cases where cycle.isSet == true
+   */
   function testComputeDatesFromCycleSegment_3() public {
-
     // Initialize variables
     IPS memory c = IPS(1, P.M, S.LONG, true); // Every 1 month
     EndOfMonthConvention eomc = EndOfMonthConvention.EOM;
@@ -127,10 +123,6 @@ contract TestCoreSchedule is Core {
     uint256 cEnd = 1538352000; // Monday, 2018-10-01 00:00:00 UTC
     uint256 sStart = 1525132800; // Tuesday, 2018-05-01 00:00:00 UTC
     uint256 sEnd = 1535760000; // Saturday, 2018-09-01 00:00:00 UTC
-
-    /*
-    * test cases where cycle.isSet == true
-    */
 
     // Segment lies in cycle
     uint256[MAX_CYCLE_SIZE] memory result_t7; // empty array
@@ -195,11 +187,11 @@ contract TestCoreSchedule is Core {
   }
 
   /*
-  * The two following test ar for the case when the SD end of month convention
-  * is selected but the start date is on the 30th of a month. For all months with
-  * >= 30 days the date will be on the 30th. For Febuary it will be on
-  * the 28th except for leap years, where it will be on the 29th
-  */
+   * The two following test ar for the case when the SD end of month convention
+   * is selected but the start date is on the 30th of a month. For all months with
+   * >= 30 days the date will be on the 30th. For Febuary it will be on
+   * the 28th except for leap years, where it will be on the 29th
+   */
   function test_Schedule_Monthly_SD_shortstub_startEndMonthApr() public {
     uint256[MAX_CYCLE_SIZE] memory expectedDates;
     uint256[MAX_CYCLE_SIZE] memory generatedDates;

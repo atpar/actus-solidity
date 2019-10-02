@@ -6,12 +6,12 @@ import "truffle/Assert.sol";
 import "../../contracts/Core/Core.sol";
 
 
+/*
+ * Test modelled after the official ACTUS tests
+ */
 contract TestCoreScheduleACTUS is Core {
 
-  /*
-  * Test modelled after the official ACTUS tests
-  */
-function test_Schedule_Daily_SD_shortstub() public {
+  function test_Schedule_Daily_SD_shortstub() public {
     uint256[MAX_CYCLE_SIZE] memory expectedDates;
     uint256[MAX_CYCLE_SIZE] memory generatedDates;
 
@@ -31,9 +31,9 @@ function test_Schedule_Daily_SD_shortstub() public {
       keccak256(abi.encode(generatedDates)),
       "Generated schedules should be equal."
     );
-}
+  }
 
-function test_Schedule_Daily_EOM_shortstub() public {
+  function test_Schedule_Daily_EOM_shortstub() public {
     uint256[MAX_CYCLE_SIZE] memory expectedDates;
     uint256[MAX_CYCLE_SIZE] memory generatedDates;
 
@@ -53,9 +53,9 @@ function test_Schedule_Daily_EOM_shortstub() public {
       keccak256(abi.encode(generatedDates)),
       "Generated schedules should be equal."
     );
-}
+  }
 
-function test_Schedule_Daily_SD_longstub() public {
+  function test_Schedule_Daily_SD_longstub() public {
     uint256[MAX_CYCLE_SIZE] memory expectedDates;
     uint256[MAX_CYCLE_SIZE] memory generatedDates;
 
@@ -75,9 +75,9 @@ function test_Schedule_Daily_SD_longstub() public {
       keccak256(abi.encode(generatedDates)),
       "Generated schedules should be equal."
     );
-}
+  }
 
-function test_Schedule_Daily_SD_shortstub_endT24() public {
+  function test_Schedule_Daily_SD_shortstub_endT24() public {
     uint256[MAX_CYCLE_SIZE] memory expectedDates;
     uint256[MAX_CYCLE_SIZE] memory generatedDates;
 
@@ -100,7 +100,7 @@ function test_Schedule_Daily_SD_shortstub_endT24() public {
     );
   }
 
-function test_Schedule_Daily_SD_longstub_endT24() public {
+  function test_Schedule_Daily_SD_longstub_endT24() public {
     uint256[MAX_CYCLE_SIZE] memory expectedDates;
     uint256[MAX_CYCLE_SIZE] memory generatedDates;
 
@@ -123,7 +123,7 @@ function test_Schedule_Daily_SD_longstub_endT24() public {
     );
   }
 
-function test_Schedule_BiDaily_SD_shortstub() public {
+  function test_Schedule_BiDaily_SD_shortstub() public {
     uint256[MAX_CYCLE_SIZE] memory expectedDates;
     uint256[MAX_CYCLE_SIZE] memory generatedDates;
 
@@ -147,7 +147,7 @@ function test_Schedule_BiDaily_SD_shortstub() public {
     );
 }
 
-function test_Schedule_31Daily_EOM_shortstub_startEndMonth() public {
+  function test_Schedule_31Daily_EOM_shortstub_startEndMonth() public {
     uint256[MAX_CYCLE_SIZE] memory expectedDates;
     uint256[MAX_CYCLE_SIZE] memory generatedDates;
 
@@ -166,9 +166,9 @@ function test_Schedule_31Daily_EOM_shortstub_startEndMonth() public {
       keccak256(abi.encode(generatedDates)),
       "Generated schedules should be equal."
     );
-}
+  }
 
-function test_Schedule_Weekly_SD_shortstub() public {
+  function test_Schedule_Weekly_SD_shortstub() public {
     uint256[MAX_CYCLE_SIZE] memory expectedDates;
     uint256[MAX_CYCLE_SIZE] memory generatedDates;
 
@@ -188,9 +188,9 @@ function test_Schedule_Weekly_SD_shortstub() public {
       keccak256(abi.encode(generatedDates)),
       "Generated schedules should be equal."
     );
-}
+  }
 
-function test_Schedule_Weekly_SD_longstub() public {
+  function test_Schedule_Weekly_SD_longstub() public {
     uint256[MAX_CYCLE_SIZE] memory expectedDates;
     uint256[MAX_CYCLE_SIZE] memory generatedDates;
 
@@ -210,9 +210,9 @@ function test_Schedule_Weekly_SD_longstub() public {
       keccak256(abi.encode(generatedDates)),
       "Generated schedules should be equal."
     );
-}
+  }
 
-function test_Schedule_Weekly_EOM_shortstub_startMidMonth() public {
+  function test_Schedule_Weekly_EOM_shortstub_startMidMonth() public {
     uint256[MAX_CYCLE_SIZE] memory expectedDates;
     uint256[MAX_CYCLE_SIZE] memory generatedDates;
 
@@ -232,9 +232,9 @@ function test_Schedule_Weekly_EOM_shortstub_startMidMonth() public {
       keccak256(abi.encode(generatedDates)),
       "Generated schedules should be equal."
     );
-}
+  }
 
-function test_Schedule_Weekly_EOM_shortstub_startEndMonth() public {
+  function test_Schedule_Weekly_EOM_shortstub_startEndMonth() public {
     uint256[MAX_CYCLE_SIZE] memory expectedDates;
     uint256[MAX_CYCLE_SIZE] memory generatedDates;
 
@@ -254,9 +254,9 @@ function test_Schedule_Weekly_EOM_shortstub_startEndMonth() public {
       keccak256(abi.encode(generatedDates)),
       "Generated schedules should be equal."
     );
-}
+  }
 
-function test_Schedule_4Weekly_SD_longstub_startEndMonth() public {
+  function test_Schedule_4Weekly_SD_longstub_startEndMonth() public {
     uint256[MAX_CYCLE_SIZE] memory expectedDates;
     uint256[MAX_CYCLE_SIZE] memory generatedDates;
 
@@ -276,9 +276,9 @@ function test_Schedule_4Weekly_SD_longstub_startEndMonth() public {
       keccak256(abi.encode(generatedDates)),
       "Generated schedules should be equal."
     );
-}
+  }
 
-function test_Schedule_4Weekly_EOM_longstub_startEndMonth() public {
+  function test_Schedule_4Weekly_EOM_longstub_startEndMonth() public {
     uint256[MAX_CYCLE_SIZE] memory expectedDates;
     uint256[MAX_CYCLE_SIZE] memory generatedDates;
 
@@ -298,9 +298,9 @@ function test_Schedule_4Weekly_EOM_longstub_startEndMonth() public {
       keccak256(abi.encode(generatedDates)),
       "Generated schedules should be equal."
     );
-}
+  }
 
-function test_Schedule_4Weekly_EOM_shortstub_startEndMonth() public {
+  function test_Schedule_4Weekly_EOM_shortstub_startEndMonth() public {
     uint256[MAX_CYCLE_SIZE] memory expectedDates;
     uint256[MAX_CYCLE_SIZE] memory generatedDates;
 
@@ -320,9 +320,9 @@ function test_Schedule_4Weekly_EOM_shortstub_startEndMonth() public {
       keccak256(abi.encode(generatedDates)),
       "Generated schedules should be equal."
     );
-}
+  }
 
-function test_Schedule_Monthly_SD_shortstub() public {
+  function test_Schedule_Monthly_SD_shortstub() public {
     uint256[MAX_CYCLE_SIZE] memory expectedDates;
     uint256[MAX_CYCLE_SIZE] memory generatedDates;
 
@@ -354,7 +354,7 @@ function test_Schedule_Monthly_SD_shortstub() public {
     );
   }
 
-function test_Schedule_Monthly_SD_longstub_startBeginningMonth() public {
+  function test_Schedule_Monthly_SD_longstub_startBeginningMonth() public {
     uint256[MAX_CYCLE_SIZE] memory expectedDates;
     uint256[MAX_CYCLE_SIZE] memory generatedDates;
 
@@ -386,7 +386,7 @@ function test_Schedule_Monthly_SD_longstub_startBeginningMonth() public {
     );
   }
 
-function test_Schedule_Monthly_SD_shortstub_startMidMonth() public {
+  function test_Schedule_Monthly_SD_shortstub_startMidMonth() public {
     uint256[MAX_CYCLE_SIZE] memory expectedDates;
     uint256[MAX_CYCLE_SIZE] memory generatedDates;
 
@@ -428,7 +428,7 @@ function test_Schedule_Monthly_SD_shortstub_startMidMonth() public {
     uint256 end = 1483228800; // 2017-01-01T00:00:00
 
     generatedDates = computeDatesFromCycleSegment(start, end, c, eomc, true, 0, 9999999999);
-    
+
     expectedDates[0] = 1452816000; // 2016-01-15T00:00:00
     expectedDates[1] = 1455494400; // 2016-02-15T00:00:00
     expectedDates[2] = 1458000000; // 2016-03-15T00:00:00
