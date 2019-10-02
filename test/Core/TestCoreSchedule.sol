@@ -193,4 +193,71 @@ contract TestCoreSchedule is Core {
       "Should return 1514764800, 1517443200, 1519862400, 1522540800, 1525132800, 1527811200, 1530403200, 1533081600, 1535760000, 1538352000"
     );
   }
+
+  /*
+  * The two following test ar for the case when the SD end of month convention
+  * is selected but the start date is on the 30th of a month. For all months with
+  * >= 30 days the date will be on the 30th. For Febuary it will be on
+  * the 28th except for leap years, where it will be on the 29th
+  */
+  function test_Schedule_Monthly_SD_shortstub_startEndMonthApr() public {
+    uint256[MAX_CYCLE_SIZE] memory expectedDates;
+    uint256[MAX_CYCLE_SIZE] memory generatedDates;
+
+    EndOfMonthConvention eomc = EndOfMonthConvention.SD;
+    IPS memory c = IPS(1, P.M, S.SHORT, true);
+    uint256 start = 1461974400; // 2016-04-30T00:00:00
+    uint256 end = 1488326400; // 2017-03-01T00:00:00
+
+    generatedDates = computeDatesFromCycleSegment(start, end, c, eomc, true, 0, 9999999999);
+
+    expectedDates[0] = 1461974400; // 2016-04-30T00:00:00
+    expectedDates[1] = 1464566400; // 2016-05-30T00:00:00
+    expectedDates[2] = 1467244800; // 2016-06-30T00:00:00
+    expectedDates[3] = 1469836800; // 2016-07-30T00:00:00
+    expectedDates[4] = 1472515200; // 2016-08-30T00:00:00
+    expectedDates[5] = 1475193600; // 2016-09-30T00:00:00
+    expectedDates[6] = 1477785600; // 2016-10-30T00:00:00
+    expectedDates[7] = 1480464000; // 2016-11-30T00:00:00
+    expectedDates[8] = 1483056000; // 2016-12-30T00:00:00
+    expectedDates[9] = 1485734400; // 2017-01-30T00:00:00
+    expectedDates[10] = 1488240000; // 2017-02-28T00:00:00
+    expectedDates[11] = 1488326400; // 2017-03-01T00:00:00
+
+    Assert.equal(
+      keccak256(abi.encode(expectedDates)),
+      keccak256(abi.encode(generatedDates)),
+      "Generated schedules should be equal."
+    );
+  }
+  function test_Schedule_Monthly_SD_shortstub_startEndMonthApr_leapyear() public {
+    uint256[MAX_CYCLE_SIZE] memory expectedDates;
+    uint256[MAX_CYCLE_SIZE] memory generatedDates;
+
+    EndOfMonthConvention eomc = EndOfMonthConvention.SD;
+    IPS memory c = IPS(1, P.M, S.SHORT, true);
+    uint256 start = 1430352000; // 2015-04-30T00:00:00
+    uint256 end = 1456790400; // 2016-03-01T00:00:00 - 2016 is a leap year
+
+    generatedDates = computeDatesFromCycleSegment(start, end, c, eomc, true, 0, 9999999999);
+
+    expectedDates[0] = 1430352000; // 2015-04-30T00:00:00
+    expectedDates[1] = 1432944000; // 2015-05-30T00:00:00
+    expectedDates[2] = 1435622400; // 2015-06-30T00:00:00
+    expectedDates[3] = 1438214400; // 2015-07-30T00:00:00
+    expectedDates[4] = 1440892800; // 2015-08-30T00:00:00
+    expectedDates[5] = 1443571200; // 2015-09-30T00:00:00
+    expectedDates[6] = 1446163200; // 2015-10-30T00:00:00
+    expectedDates[7] = 1448841600; // 2015-11-30T00:00:00
+    expectedDates[8] = 1451433600; // 2015-12-30T00:00:00
+    expectedDates[9] = 1454112000; // 2016-01-30T00:00:00
+    expectedDates[10] = 1456704000; // 2016-02-29T00:00:00
+    expectedDates[11] = 1456790400; // 2016-03-01T00:00:00
+
+    Assert.equal(
+      keccak256(abi.encode(expectedDates)),
+      keccak256(abi.encode(generatedDates)),
+      "Generated schedules should be equal."
+    );
+  }
 }
