@@ -33,7 +33,7 @@ contract EndOfMonthConvention is Definitions {
 			// otherwise switch to SD convention
 			if (
 				BokkyPooBahsDateTimeLibrary.getDay(startTime) == BokkyPooBahsDateTimeLibrary.getDaysInMonth(startTime) &&
-				(cycle.p == P.M || cycle.p == P.Q)
+				(cycle.p == P.M || cycle.p == P.Q || cycle.p == P.H)
 			) {
 				return EndOfMonthConvention.EOM;
 			}
