@@ -37,6 +37,20 @@ contract Schedule is Definitions, Utils, EndOfMonthConvention {
 		return newTimestamp;
 	}
 
+	/**
+	 * This function computes an array of UNIX timestamps that
+	 * represent dates in a cycle falling within a given segment.
+	 * @dev There are some notable edge cases: If the cycle is "not set" we return the start end end dates
+	 * of the cycle if they lie within the segment. Otherwise and empty array is returned.
+	 * @param cycleStart the start time of the cycle
+	 * @param cycleEnd the end time of the cycle
+	 * @param cycle struct that describe sthe cycle
+	 * @param eomc the end of month convention to be used
+	 * @param addEndTime specifies if the timestamp of the end of the cycle should be added to the result if it falls in the segment
+	 * @param segmentStart start time of the segment
+	 * @param segmentEnd end time of the segment
+	 * @return an array of timestamps from the given cycle that fall within the specified segement
+	 */
   function computeDatesFromCycleSegment(
 		uint256 cycleStart,
 		uint256 cycleEnd,
@@ -53,6 +67,9 @@ contract Schedule is Definitions, Utils, EndOfMonthConvention {
 		uint256[MAX_CYCLE_SIZE] memory dates;
 		uint256 index = 0;
 
+		// if the cycle is not set we return only the cycle start end end dates under these conditions:
+		// we return the cycle start, if it's in the segment
+		// in case of addEntTime = true, the cycle end is also returned if in the segment
 		if (cycle.isSet == false) {
 			if (isInPeriod(cycleStart, segmentStart, segmentEnd)) {
 				dates[index] = cycleStart;
@@ -64,13 +81,14 @@ contract Schedule is Definitions, Utils, EndOfMonthConvention {
 			return dates;
 		}
 
-		// simplified
-
-		EndOfMonthConvention actualEOMC = getEndOfMonthConvention(eomc, cycleStart, cycle);
+		// adjust EOMC if necessary
+		EndOfMonthConvention adjustedEOMC = adjustEndOfMonthConvention(eomc, cycleStart, cycle);
 		uint256 date = cycleStart;
 		uint256 cycleIndex = 0;
 
+		// walk through the cycle and create the cycle dates to be returned
 		while (date < cycleEnd) {
+			// if date is in segment and MAX_CYCLE_SIZE is not reached add it to the output array
 			if (isInPeriod(date, segmentStart, segmentEnd)) {
 				require(index < (MAX_CYCLE_SIZE - 2), "Schedule.computeDatesFromCycle: MAX_CYCLE_SIZE");
 				dates[index] = date;
@@ -79,19 +97,22 @@ contract Schedule is Definitions, Utils, EndOfMonthConvention {
 
 			cycleIndex++;
 
-			if (actualEOMC == EndOfMonthConvention.EOM) {
+			// Get next cycle date based on the adjusted EOM convention. For SD no shifting is necessary
+			if (adjustedEOMC == EndOfMonthConvention.EOM) {
 				date = shiftEndOfMonth(getNextCycleDate(cycle, cycleStart, cycleIndex));
 			} else {
-				date = shiftSameDay(getNextCycleDate(cycle, cycleStart, cycleIndex));
+				date = getNextCycleDate(cycle, cycleStart, cycleIndex);
 			}
 		}
 
+		// add additional time at the end if addEndTime
 		if (addEndTime == true) {
 			if (isInPeriod(cycleEnd, segmentStart, segmentEnd)) {
 				dates[index] = cycleEnd;
 			}
 		}
 
+		// handle a special case where S is set to LONG (e.g. for trimming a cycle to the maturity date)
 		if (index > 0 && isInPeriod(dates[index - 1], segmentStart, segmentEnd)) {
 			if (cycle.s == S.LONG && index > 1 && cycleEnd != date) {
 				dates[index - 1] = dates[index];

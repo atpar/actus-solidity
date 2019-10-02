@@ -430,8 +430,4 @@ contract TestCore is Core {
     Assert.equal(getNextCycleDate(IPS(1, P.Y, S.LONG, true), 1514764800, 3), 1609459200, "Timestamp + 1Y+ with CycleIndex 3 should be 1609459200");
     Assert.equal(getNextCycleDate(IPS(5, P.Y, S.LONG, true), 1514764800, 3), 1988150400, "Timestamp + 5Y+ with CycleIndex 3 should be 1988150400");
   }
-
-  // function computeDatesFromCycleSegment() public {
-
-  // }
 }
