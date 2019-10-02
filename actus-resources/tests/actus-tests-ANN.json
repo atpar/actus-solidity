@@ -217,7 +217,7 @@
       },
       {
         "eventDate": "2014-01-01T00:00",
-        "eventType": "PR",
+        "eventType": "MD",
         "eventValue": 431.931824461729,
         "nominalValue": 0,
         "nominalRate": 0.08,
@@ -2179,7 +2179,7 @@
       },
       {
         "eventDate": "2023-01-01T00:00",
-        "eventType": "PR",
+        "eventType": "MD",
         "eventValue": 1154.35107756699,
         "nominalValue": 0,
         "nominalRate": 0.07,
@@ -2429,7 +2429,7 @@
       },
       {
         "eventDate": "2014-01-01T00:00",
-        "eventType": "PR",
+        "eventType": "MD",
         "eventValue": 397.371137802324,
         "nominalValue": 0,
         "nominalRate": 0.08,
@@ -2647,7 +2647,7 @@
       },
       {
         "eventDate": "2013-12-15T00:00",
-        "eventType": "PR",
+        "eventType": "MD",
         "eventValue": 562.137628823171,
         "nominalValue": 0,
         "nominalRate": 0.08,
@@ -2817,7 +2817,7 @@
       },
       {
         "eventDate": "2013-09-01T00:00",
-        "eventType": "PR",
+        "eventType": "MD",
         "eventValue": 237.719353407862,
         "nominalValue": 0,
         "nominalRate": 0.08,
@@ -3051,7 +3051,7 @@
       },
       {
         "eventDate": "2014-01-01T00:00",
-        "eventType": "PR",
+        "eventType": "MD",
         "eventValue": 431.931824461729,
         "nominalValue": 0,
         "nominalRate": 0.08,
@@ -9994,6 +9994,330 @@
         "eventDate": "2014-01-01T00:00",
         "eventType": "PR",
         "eventValue": 515.128833255542,
+        "nominalValue": 0,
+        "nominalRate": 0.08,
+        "nominalAccrued": 0
+      }
+    ]
+  },
+  "20031": {
+    "identifier": "20031",
+    "terms": {
+        "contractType": "ANN",
+        "contractID": "20031",
+        "contractRole": "RPL",
+        "contractDealDate": "2012-12-28T00:00:00",
+        "initialExchangeDate": "2013-01-01T00:00:00",
+        "statusDate": "2012-12-30T00:00:00",
+        "notionalPrincipal": 5000,
+        "cycleAnchorDateOfPrincipalRedemption": "2013-02-01T00:00:00",
+        "nextPrincipalRedemptionPayment": 700,
+        "dayCountConvention": "A/365",
+        "nominalInterestRate": 0.08,
+        "currency": "USD",
+        "cycleOfPrincipalRedemption": "1M+",
+        "maturityDate": "2013-09-01T00:00:00",
+        "rateMultiplier": 1,
+        "rateSpread": 0,
+        "fixingDays": "0D",
+        "premiumDiscountAtIED": 0,
+        "interestCalculationBase": "NT"
+      },
+    "results": [
+      {
+        "eventDate": "2012-12-31T00:00",
+        "eventType": "AD",
+        "eventValue": 0,
+        "nominalValue": 0,
+        "nominalRate": 0,
+        "nominalAccrued": 0
+      },
+      {
+        "eventDate": "2013-01-01T00:00",
+        "eventType": "IED",
+        "eventValue": 5000,
+        "nominalValue": -5000,
+        "nominalRate": 0.08,
+        "nominalAccrued": 0
+      },
+      {
+        "eventDate": "2013-02-01T00:00",
+        "eventType": "PR",
+        "eventValue": -666.027397260274,
+        "nominalValue": -4333.97260273973,
+        "nominalRate": 0.08,
+        "nominalAccrued": -33.972602739726
+      },
+      {
+        "eventDate": "2013-02-01T00:00",
+        "eventType": "IP",
+        "eventValue": -33.972602739726,
+        "nominalValue": -4333.97260273973,
+        "nominalRate": 0.08,
+        "nominalAccrued": 0
+      },
+      {
+        "eventDate": "2013-03-01T00:00",
+        "eventType": "PR",
+        "eventValue": -673.402469506474,
+        "nominalValue": -3660.57013323325,
+        "nominalRate": 0.08,
+        "nominalAccrued": -26.597530493526
+      },
+      {
+        "eventDate": "2013-03-01T00:00",
+        "eventType": "IP",
+        "eventValue": -26.597530493526,
+        "nominalValue": -3660.57013323325,
+        "nominalRate": 0.08,
+        "nominalAccrued": 0
+      },
+      {
+        "eventDate": "2013-04-01T00:00",
+        "eventType": "PR",
+        "eventValue": -675.128181012552,
+        "nominalValue": -2985.4419522207,
+        "nominalRate": 0.08,
+        "nominalAccrued": -24.8718189874479
+      },
+      {
+        "eventDate": "2013-04-01T00:00",
+        "eventType": "IP",
+        "eventValue": -24.8718189874479,
+        "nominalValue": -2985.4419522207,
+        "nominalRate": 0.08,
+        "nominalAccrued": 0
+      },
+      {
+        "eventDate": "2013-05-01T00:00",
+        "eventType": "PR",
+        "eventValue": -680.369696752522,
+        "nominalValue": -2305.07225546818,
+        "nominalRate": 0.08,
+        "nominalAccrued": -19.6303032474786
+      },
+      {
+        "eventDate": "2013-05-01T00:00",
+        "eventType": "IP",
+        "eventValue": -19.6303032474786,
+        "nominalValue": -2305.07225546818,
+        "nominalRate": 0.08,
+        "nominalAccrued": 0
+      },
+      {
+        "eventDate": "2013-06-01T00:00",
+        "eventType": "PR",
+        "eventValue": -684.338139195723,
+        "nominalValue": -1620.73411627246,
+        "nominalRate": 0.08,
+        "nominalAccrued": -15.6618608042769
+      },
+      {
+        "eventDate": "2013-06-01T00:00",
+        "eventType": "IP",
+        "eventValue": -15.6618608042769,
+        "nominalValue": -1620.73411627246,
+        "nominalRate": 0.08,
+        "nominalAccrued": 0
+      },
+      {
+        "eventDate": "2013-07-01T00:00",
+        "eventType": "PR",
+        "eventValue": -689.343118139578,
+        "nominalValue": -931.390998132877,
+        "nominalRate": 0.08,
+        "nominalAccrued": -10.6568818604216
+      },
+      {
+        "eventDate": "2013-07-01T00:00",
+        "eventType": "IP",
+        "eventValue": -10.6568818604216,
+        "nominalValue": -931.390998132877,
+        "nominalRate": 0.08,
+        "nominalAccrued": 0
+      },
+      {
+        "eventDate": "2013-08-01T00:00",
+        "eventType": "PR",
+        "eventValue": -693.671644725015,
+        "nominalValue": -237.719353407862,
+        "nominalRate": 0.08,
+        "nominalAccrued": -6.32835527498503
+      },
+      {
+        "eventDate": "2013-08-01T00:00",
+        "eventType": "IP",
+        "eventValue": -6.32835527498503,
+        "nominalValue": -237.719353407862,
+        "nominalRate": 0.08,
+        "nominalAccrued": 0
+      },
+      {
+        "eventDate": "2013-09-01T00:00",
+        "eventType": "MD",
+        "eventValue": -237.719353407862,
+        "nominalValue": 0,
+        "nominalRate": 0.08,
+        "nominalAccrued": -1.61518903137397
+      },
+      {
+        "eventDate": "2013-09-01T00:00",
+        "eventType": "IP",
+        "eventValue": -1.61518903137397,
+        "nominalValue": 0,
+        "nominalRate": 0.08,
+        "nominalAccrued": 0
+      }
+    ]
+  },
+  "20032": {
+    "identifier": "20032",
+    "terms": {
+        "contractType": "ANN",
+        "contractID": "20032",
+        "contractRole": "RPL",
+        "contractDealDate": "2012-12-28T00:00:00",
+        "initialExchangeDate": "2013-01-01T00:00:00",
+        "statusDate": "2012-12-30T00:00:00",
+        "notionalPrincipal": 5000,
+        "cycleAnchorDateOfPrincipalRedemption": "2013-02-01T00:00:00",
+        "nextPrincipalRedemptionPayment": 700,
+        "dayCountConvention": "A/365",
+        "nominalInterestRate": 0.08,
+        "currency": "USD",
+        "cycleOfPrincipalRedemption": "1M+",
+        "maturityDate": "2013-08-01T00:00",
+        "rateMultiplier": 1,
+        "rateSpread": 0,
+        "fixingDays": "0D",
+        "premiumDiscountAtIED": 0,
+        "interestCalculationBase": "NT"
+      },
+    "results": [
+      {
+        "eventDate": "2012-12-31T00:00",
+        "eventType": "AD",
+        "eventValue": 0,
+        "nominalValue": 0,
+        "nominalRate": 0,
+        "nominalAccrued": 0
+      },
+      {
+        "eventDate": "2013-01-01T00:00",
+        "eventType": "IED",
+        "eventValue": 5000,
+        "nominalValue": -5000,
+        "nominalRate": 0.08,
+        "nominalAccrued": 0
+      },
+      {
+        "eventDate": "2013-02-01T00:00",
+        "eventType": "PR",
+        "eventValue": -666.027397260274,
+        "nominalValue": -4333.97260273973,
+        "nominalRate": 0.08,
+        "nominalAccrued": -33.972602739726
+      },
+      {
+        "eventDate": "2013-02-01T00:00",
+        "eventType": "IP",
+        "eventValue": -33.972602739726,
+        "nominalValue": -4333.97260273973,
+        "nominalRate": 0.08,
+        "nominalAccrued": 0
+      },
+      {
+        "eventDate": "2013-03-01T00:00",
+        "eventType": "PR",
+        "eventValue": -673.402469506474,
+        "nominalValue": -3660.57013323325,
+        "nominalRate": 0.08,
+        "nominalAccrued": -26.597530493526
+      },
+      {
+        "eventDate": "2013-03-01T00:00",
+        "eventType": "IP",
+        "eventValue": -26.597530493526,
+        "nominalValue": -3660.57013323325,
+        "nominalRate": 0.08,
+        "nominalAccrued": 0
+      },
+      {
+        "eventDate": "2013-04-01T00:00",
+        "eventType": "PR",
+        "eventValue": -675.128181012552,
+        "nominalValue": -2985.4419522207,
+        "nominalRate": 0.08,
+        "nominalAccrued": -24.8718189874479
+      },
+      {
+        "eventDate": "2013-04-01T00:00",
+        "eventType": "IP",
+        "eventValue": -24.8718189874479,
+        "nominalValue": -2985.4419522207,
+        "nominalRate": 0.08,
+        "nominalAccrued": 0
+      },
+      {
+        "eventDate": "2013-05-01T00:00",
+        "eventType": "PR",
+        "eventValue": -680.369696752522,
+        "nominalValue": -2305.07225546818,
+        "nominalRate": 0.08,
+        "nominalAccrued": -19.6303032474786
+      },
+      {
+        "eventDate": "2013-05-01T00:00",
+        "eventType": "IP",
+        "eventValue": -19.6303032474786,
+        "nominalValue": -2305.07225546818,
+        "nominalRate": 0.08,
+        "nominalAccrued": 0
+      },
+      {
+        "eventDate": "2013-06-01T00:00",
+        "eventType": "PR",
+        "eventValue": -684.338139195723,
+        "nominalValue": -1620.73411627246,
+        "nominalRate": 0.08,
+        "nominalAccrued": -15.6618608042769
+      },
+      {
+        "eventDate": "2013-06-01T00:00",
+        "eventType": "IP",
+        "eventValue": -15.6618608042769,
+        "nominalValue": -1620.73411627246,
+        "nominalRate": 0.08,
+        "nominalAccrued": 0
+      },
+      {
+        "eventDate": "2013-07-01T00:00",
+        "eventType": "PR",
+        "eventValue": -689.343118139578,
+        "nominalValue": -931.390998132877,
+        "nominalRate": 0.08,
+        "nominalAccrued": -10.6568818604216
+      },
+      {
+        "eventDate": "2013-07-01T00:00",
+        "eventType": "IP",
+        "eventValue": -10.6568818604216,
+        "nominalValue": -931.390998132877,
+        "nominalRate": 0.08,
+        "nominalAccrued": 0
+      },
+      {
+        "eventDate": "2013-08-01T00:00",
+        "eventType": "MD",
+        "eventValue": -931.390998132877,
+        "nominalValue": 0,
+        "nominalRate": 0.08,
+        "nominalAccrued": -6.32835527498503
+      },
+      {
+        "eventDate": "2013-08-01T00:00",
+        "eventType": "IP",
+        "eventValue": -6.32835527498503,
         "nominalValue": 0,
         "nominalRate": 0.08,
         "nominalAccrued": 0

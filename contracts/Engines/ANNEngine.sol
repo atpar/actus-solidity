@@ -310,7 +310,7 @@ contract ANNEngine is Core, IEngine {
 			contractTerms.maturityDate,
 			contractTerms.cycleOfPrincipalRedemption,
 			contractTerms.endOfMonthConvention,
-			true,
+			false,
 			segmentStart,
 			segmentEnd
 		);
@@ -344,6 +344,30 @@ contract ANNEngine is Core, IEngine {
 			index++;
 		}
 
+		// principal redemption at maturity
+		if (isInPeriod(contractTerms.maturityDate, segmentStart, segmentEnd) == true) {
+			protoEventSchedule[index] = ProtoEvent(
+				contractTerms.maturityDate,
+				contractTerms.maturityDate.add(getEpochOffset(EventType.PR)),
+				contractTerms.maturityDate,
+				EventType.MD,
+				contractTerms.currency,
+				EventType.MD,
+				EventType.MD
+			);
+			index++;
+			protoEventSchedule[index] = ProtoEvent(
+				contractTerms.maturityDate,
+				contractTerms.maturityDate.add(getEpochOffset(EventType.IP)),
+				contractTerms.maturityDate,
+				EventType.IP,
+				contractTerms.currency,
+				EventType.IP,
+				EventType.IP
+			);
+			index++;
+		}
+
 		sortProtoEventSchedule(protoEventSchedule, index);
 
 		return protoEventSchedule;
@@ -369,9 +393,9 @@ contract ANNEngine is Core, IEngine {
 		contractState.interestScalingMultiplier = int256(1 * 10 ** PRECISION);
 		contractState.contractRoleSign = contractTerms.contractRole;
 		contractState.lastEventTime = contractTerms.statusDate;
-		contractState.nominalValue = contractTerms.notionalPrincipal;
+		contractState.nominalValue = roleSign(contractTerms.contractRole) * contractTerms.notionalPrincipal;
 		contractState.nominalRate = contractTerms.nominalInterestRate;
-		contractState.nominalAccrued = contractTerms.accruedInterest;
+		contractState.nominalAccrued = roleSign(contractTerms.contractRole) * contractTerms.accruedInterest;
 		contractState.feeAccrued = contractTerms.feeAccrued;
 		// annuity calculator to be implemented
 		contractState.nextPrincipalRedemptionPayment = roleSign(contractTerms.contractRole) * contractTerms.nextPrincipalRedemptionPayment;
@@ -405,7 +429,8 @@ contract ANNEngine is Core, IEngine {
 			contractState.timeFromLastEvent = yearFraction(
 				shiftCalcTime(contractState.lastEventTime, contractTerms.businessDayConvention, contractTerms.calendar),
 				shiftCalcTime(timestamp, contractTerms.businessDayConvention, contractTerms.calendar),
-				contractTerms.dayCountConvention
+				contractTerms.dayCountConvention,
+				contractTerms.maturityDate
 			);
 			contractState.nominalAccrued = contractState.nominalAccrued.add(contractState.nominalRate.floatMult(contractState.nominalValue).floatMult(contractState.timeFromLastEvent));
 			contractState.feeAccrued = contractState.feeAccrued.add(contractTerms.feeRate.floatMult(contractState.nominalValue).floatMult(contractState.timeFromLastEvent));
@@ -416,7 +441,8 @@ contract ANNEngine is Core, IEngine {
 			contractState.timeFromLastEvent = yearFraction(
 				shiftCalcTime(contractState.lastEventTime, contractTerms.businessDayConvention, contractTerms.calendar),
 				shiftCalcTime(timestamp, contractTerms.businessDayConvention, contractTerms.calendar),
-				contractTerms.dayCountConvention
+				contractTerms.dayCountConvention,
+				contractTerms.maturityDate
 			);
 			contractState.nominalAccrued = contractState.nominalAccrued.add(contractState.nominalRate.floatMult(contractState.nominalValue).floatMult(contractState.timeFromLastEvent));
 			contractState.feeAccrued = contractState.feeAccrued.add(contractTerms.feeRate.floatMult(contractState.nominalValue).floatMult(contractState.timeFromLastEvent));
@@ -428,7 +454,8 @@ contract ANNEngine is Core, IEngine {
 			contractState.timeFromLastEvent = yearFraction(
 				shiftCalcTime(contractState.lastEventTime, contractTerms.businessDayConvention, contractTerms.calendar),
 				shiftCalcTime(timestamp, contractTerms.businessDayConvention, contractTerms.calendar),
-				contractTerms.dayCountConvention
+				contractTerms.dayCountConvention,
+				contractTerms.maturityDate
 			);
 			contractState.nominalAccrued = contractState.nominalAccrued.add(contractState.nominalRate.floatMult(contractState.nominalValue).floatMult(contractState.timeFromLastEvent));
 			contractState.feeAccrued = 0;
@@ -439,7 +466,8 @@ contract ANNEngine is Core, IEngine {
 			contractState.timeFromLastEvent = yearFraction(
 				shiftCalcTime(contractState.lastEventTime, contractTerms.businessDayConvention, contractTerms.calendar),
 				shiftCalcTime(timestamp, contractTerms.businessDayConvention, contractTerms.calendar),
-				contractTerms.dayCountConvention
+				contractTerms.dayCountConvention,
+				contractTerms.maturityDate
 			);
 			contractState.nominalValue = roleSign(contractTerms.contractRole) * contractTerms.notionalPrincipal;
 			contractState.nominalRate = contractTerms.nominalInterestRate;
@@ -454,7 +482,8 @@ contract ANNEngine is Core, IEngine {
 					yearFraction(
 						shiftCalcTime(contractTerms.cycleAnchorDateOfInterestPayment, contractTerms.businessDayConvention, contractTerms.calendar),
 						shiftCalcTime(timestamp, contractTerms.businessDayConvention, contractTerms.calendar),
-						contractTerms.dayCountConvention
+						contractTerms.dayCountConvention,
+						contractTerms.maturityDate
 					)
 				);
 			}
@@ -464,7 +493,8 @@ contract ANNEngine is Core, IEngine {
 			contractState.timeFromLastEvent = yearFraction(
 				shiftCalcTime(contractState.lastEventTime, contractTerms.businessDayConvention, contractTerms.calendar),
 				shiftCalcTime(timestamp, contractTerms.businessDayConvention, contractTerms.calendar),
-				contractTerms.dayCountConvention
+				contractTerms.dayCountConvention,
+				contractTerms.maturityDate
 			);
 			contractState.nominalAccrued = contractState.nominalAccrued.add(contractState.nominalAccrued.add(contractState.nominalRate.floatMult(contractState.nominalValue).floatMult(contractState.timeFromLastEvent)));
 			contractState.nominalAccrued = 0;
@@ -476,7 +506,8 @@ contract ANNEngine is Core, IEngine {
 			contractState.timeFromLastEvent = yearFraction(
 				shiftCalcTime(contractState.lastEventTime, contractTerms.businessDayConvention, contractTerms.calendar),
 				shiftCalcTime(timestamp, contractTerms.businessDayConvention, contractTerms.calendar),
-				contractTerms.dayCountConvention
+				contractTerms.dayCountConvention,
+				contractTerms.maturityDate
 			);
 			contractState.nominalAccrued = 0;
 			contractState.feeAccrued = contractState.feeAccrued.add(contractTerms.feeRate.floatMult(contractState.nominalValue).floatMult(contractState.timeFromLastEvent));
@@ -487,7 +518,8 @@ contract ANNEngine is Core, IEngine {
 			contractState.timeFromLastEvent = yearFraction(
 				shiftCalcTime(contractState.lastEventTime, contractTerms.businessDayConvention, contractTerms.calendar),
 				shiftCalcTime(timestamp, contractTerms.businessDayConvention, contractTerms.calendar),
-				contractTerms.dayCountConvention
+				contractTerms.dayCountConvention,
+				contractTerms.maturityDate
 			);
 			contractState.nominalAccrued = contractState.nominalAccrued.add(contractState.nominalRate.floatMult(contractState.nominalValue).floatMult(contractState.timeFromLastEvent));
 			contractState.feeAccrued = contractState.feeAccrued.add(contractTerms.feeRate.floatMult(contractState.nominalValue).floatMult(contractState.timeFromLastEvent));
@@ -499,7 +531,8 @@ contract ANNEngine is Core, IEngine {
 			contractState.timeFromLastEvent = yearFraction(
 				shiftCalcTime(contractState.lastEventTime, contractTerms.businessDayConvention, contractTerms.calendar),
 				shiftCalcTime(timestamp, contractTerms.businessDayConvention, contractTerms.calendar),
-				contractTerms.dayCountConvention
+				contractTerms.dayCountConvention,
+				contractTerms.maturityDate
 			);
 			contractState.nominalAccrued = contractState.nominalAccrued.add(contractState.nominalRate.floatMult(contractState.nominalValue).floatMult(contractState.timeFromLastEvent));
 			contractState.feeAccrued = contractState.feeAccrued.add(contractTerms.feeRate.floatMult(contractState.nominalValue).floatMult(contractState.timeFromLastEvent));
@@ -510,11 +543,28 @@ contract ANNEngine is Core, IEngine {
 			contractState.timeFromLastEvent = yearFraction(
 				shiftCalcTime(contractState.lastEventTime, contractTerms.businessDayConvention, contractTerms.calendar),
 				shiftCalcTime(timestamp, contractTerms.businessDayConvention, contractTerms.calendar),
-				contractTerms.dayCountConvention
+				contractTerms.dayCountConvention,
+				contractTerms.maturityDate
 			);
 			contractState.nominalAccrued = contractState.nominalAccrued.add(contractState.nominalRate.floatMult(contractState.nominalValue).floatMult(contractState.timeFromLastEvent));
 			contractState.feeAccrued = contractState.feeAccrued.add(contractTerms.feeRate.floatMult(contractState.nominalValue).floatMult(contractState.timeFromLastEvent));
-			contractState.nominalValue = contractState.nominalValue - contractState.nominalValue.min(contractState.nextPrincipalRedemptionPayment - contractState.nominalAccrued);
+			contractState.nominalValue = contractState.nominalValue -
+						roleSign(contractTerms.contractRole) * (
+							roleSign(contractTerms.contractRole) * contractState.nominalValue).min(
+								roleSign(contractTerms.contractRole) * (contractState.nextPrincipalRedemptionPayment - contractState.nominalAccrued));
+			contractState.lastEventTime = timestamp;
+			return contractState;
+		}
+		if (eventType == EventType.MD) {
+			contractState.timeFromLastEvent = yearFraction(
+				shiftCalcTime(contractState.lastEventTime, contractTerms.businessDayConvention, contractTerms.calendar),
+				shiftCalcTime(timestamp, contractTerms.businessDayConvention, contractTerms.calendar),
+				contractTerms.dayCountConvention,
+				contractTerms.maturityDate
+			);
+			contractState.nominalAccrued = contractState.nominalAccrued.add(contractState.nominalRate.floatMult(contractState.nominalValue).floatMult(contractState.timeFromLastEvent));
+			contractState.feeAccrued = contractState.feeAccrued.add(contractTerms.feeRate.floatMult(contractState.nominalValue).floatMult(contractState.timeFromLastEvent));
+			contractState.nominalValue = 0.0;
 			contractState.lastEventTime = timestamp;
 			return contractState;
 		}
@@ -522,7 +572,8 @@ contract ANNEngine is Core, IEngine {
 			contractState.timeFromLastEvent = yearFraction(
 				shiftCalcTime(contractState.lastEventTime, contractTerms.businessDayConvention, contractTerms.calendar),
 				shiftCalcTime(timestamp, contractTerms.businessDayConvention, contractTerms.calendar),
-				contractTerms.dayCountConvention
+				contractTerms.dayCountConvention,
+				contractTerms.maturityDate
 			);
 			contractState.nominalAccrued = contractState.nominalAccrued.add(contractState.nominalRate.floatMult(contractState.nominalValue).floatMult(contractState.timeFromLastEvent));
 			contractState.feeAccrued = contractState.feeAccrued.add(contractTerms.feeRate.floatMult(contractState.nominalValue).floatMult(contractState.timeFromLastEvent));
@@ -533,7 +584,8 @@ contract ANNEngine is Core, IEngine {
 			contractState.timeFromLastEvent = yearFraction(
 				shiftCalcTime(contractState.lastEventTime, contractTerms.businessDayConvention, contractTerms.calendar),
 				shiftCalcTime(timestamp, contractTerms.businessDayConvention, contractTerms.calendar),
-				contractTerms.dayCountConvention
+				contractTerms.dayCountConvention,
+				contractTerms.maturityDate
 			);
 			contractState.nominalAccrued = contractState.nominalAccrued.add(contractState.nominalRate.floatMult(contractState.nominalValue).floatMult(contractState.timeFromLastEvent));
 			contractState.feeAccrued = contractState.feeAccrued.add(contractTerms.feeRate.floatMult(contractState.nominalValue).floatMult(contractState.timeFromLastEvent));
@@ -565,7 +617,8 @@ contract ANNEngine is Core, IEngine {
 			contractState.timeFromLastEvent = yearFraction(
 				shiftCalcTime(contractState.lastEventTime, contractTerms.businessDayConvention, contractTerms.calendar),
 				shiftCalcTime(timestamp, contractTerms.businessDayConvention, contractTerms.calendar),
-				contractTerms.dayCountConvention
+				contractTerms.dayCountConvention,
+				contractTerms.maturityDate
 			);
 			contractState.nominalAccrued = contractState.nominalAccrued.add(contractState.nominalRate.floatMult(contractState.nominalValue).floatMult(contractState.timeFromLastEvent));
 			contractState.nominalRate = rate;
@@ -577,7 +630,8 @@ contract ANNEngine is Core, IEngine {
 			contractState.timeFromLastEvent = yearFraction(
 				shiftCalcTime(contractState.lastEventTime, contractTerms.businessDayConvention, contractTerms.calendar),
 				shiftCalcTime(timestamp, contractTerms.businessDayConvention, contractTerms.calendar),
-				contractTerms.dayCountConvention
+				contractTerms.dayCountConvention,
+				contractTerms.maturityDate
 			);
 			contractState.nominalAccrued = contractState.nominalAccrued.add(contractState.nominalRate.floatMult(contractState.nominalValue).floatMult(contractState.timeFromLastEvent));
 			contractState.feeAccrued = contractState.feeAccrued.add(contractTerms.feeRate.floatMult(contractState.nominalValue).floatMult(contractState.timeFromLastEvent));
@@ -604,7 +658,8 @@ contract ANNEngine is Core, IEngine {
 			contractState.timeFromLastEvent = yearFraction(
 				shiftCalcTime(contractState.lastEventTime, contractTerms.businessDayConvention, contractTerms.calendar),
 				shiftCalcTime(timestamp, contractTerms.businessDayConvention, contractTerms.calendar),
-				contractTerms.dayCountConvention
+				contractTerms.dayCountConvention,
+				contractTerms.maturityDate
 			);
 			contractState.nominalValue = 0;
 			contractState.nominalAccrued = 0;
@@ -657,7 +712,8 @@ contract ANNEngine is Core, IEngine {
 							yearFraction(
 								shiftCalcTime(contractState.lastEventTime, contractTerms.businessDayConvention, contractTerms.calendar),
 								shiftCalcTime(timestamp, contractTerms.businessDayConvention, contractTerms.calendar),
-								contractTerms.dayCountConvention
+								contractTerms.dayCountConvention,
+								contractTerms.maturityDate
 							)
 							.floatMult(contractTerms.feeRate)
 							.floatMult(contractState.nominalValue)
@@ -684,7 +740,8 @@ contract ANNEngine is Core, IEngine {
 							yearFraction(
 								shiftCalcTime(contractState.lastEventTime, contractTerms.businessDayConvention, contractTerms.calendar),
 								shiftCalcTime(timestamp, contractTerms.businessDayConvention, contractTerms.calendar),
-								contractTerms.dayCountConvention
+								contractTerms.dayCountConvention,
+								contractTerms.maturityDate
 							)
 							.floatMult(contractState.nominalRate)
 							.floatMult(contractState.nominalValue)
@@ -711,7 +768,8 @@ contract ANNEngine is Core, IEngine {
 						yearFraction(
 							shiftCalcTime(contractState.lastEventTime, contractTerms.businessDayConvention, contractTerms.calendar),
 							shiftCalcTime(timestamp, contractTerms.businessDayConvention, contractTerms.calendar),
-							contractTerms.dayCountConvention
+							contractTerms.dayCountConvention,
+							contractTerms.maturityDate
 						)
 						.floatMult(contractState.nominalRate)
 						.floatMult(contractState.nominalValue)
@@ -721,20 +779,32 @@ contract ANNEngine is Core, IEngine {
 		if (eventType == EventType.PR) {
 			return (
 				performanceIndicator(contractState.contractStatus)
-				* contractState.nominalScalingMultiplier
+				* (contractState.nominalScalingMultiplier * roleSign(contractTerms.contractRole))
 					.floatMult(
-						contractState.nominalValue.min(
-						contractState.nextPrincipalRedemptionPayment
-						- contractState.nominalAccrued
-						- yearFraction(
-								shiftCalcTime(contractState.lastEventTime, contractTerms.businessDayConvention, contractTerms.calendar),
-								shiftCalcTime(timestamp, contractTerms.businessDayConvention, contractTerms.calendar),
-								contractTerms.dayCountConvention
+						(roleSign(contractTerms.contractRole) * contractState.nominalValue)
+						.min(
+								roleSign(contractTerms.contractRole)
+								* (
+									contractState.nextPrincipalRedemptionPayment
+									- contractState.nominalAccrued
+									- yearFraction(
+										shiftCalcTime(contractState.lastEventTime, contractTerms.businessDayConvention, contractTerms.calendar),
+										shiftCalcTime(timestamp, contractTerms.businessDayConvention, contractTerms.calendar),
+										contractTerms.dayCountConvention,
+										contractTerms.maturityDate
+									)
+									.floatMult(contractState.nominalRate)
+									.floatMult(contractState.nominalValue)
+								)
 							)
-							.floatMult(contractState.nominalRate)
-							.floatMult(contractState.nominalValue)
-						)
 					)
+			);
+		}
+		if (eventType == EventType.MD) {
+			return (
+				performanceIndicator(contractState.contractStatus)
+				* contractState.nominalScalingMultiplier
+					.floatMult(contractState.nominalValue)
 			);
 		}
 		if (eventType == EventType.PY) {
@@ -751,7 +821,8 @@ contract ANNEngine is Core, IEngine {
 					* yearFraction(
 							shiftCalcTime(contractState.lastEventTime, contractTerms.businessDayConvention, contractTerms.calendar),
 							shiftCalcTime(timestamp, contractTerms.businessDayConvention, contractTerms.calendar),
-							contractTerms.dayCountConvention
+							contractTerms.dayCountConvention,
+							contractTerms.maturityDate
 						)
 						.floatMult(contractTerms.penaltyRate)
 						.floatMult(contractState.nominalValue)
@@ -767,7 +838,8 @@ contract ANNEngine is Core, IEngine {
 					* yearFraction(
 							shiftCalcTime(contractState.lastEventTime, contractTerms.businessDayConvention, contractTerms.calendar),
 							shiftCalcTime(timestamp, contractTerms.businessDayConvention, contractTerms.calendar),
-							contractTerms.dayCountConvention
+							contractTerms.dayCountConvention,
+							contractTerms.maturityDate
 						)
 						.floatMult(contractState.nominalValue)
 						.floatMult(param)
@@ -784,7 +856,8 @@ contract ANNEngine is Core, IEngine {
 						yearFraction(
 							shiftCalcTime(contractState.lastEventTime, contractTerms.businessDayConvention, contractTerms.calendar),
 							shiftCalcTime(timestamp, contractTerms.businessDayConvention, contractTerms.calendar),
-							contractTerms.dayCountConvention
+							contractTerms.dayCountConvention,
+							contractTerms.maturityDate
 						)
 						.floatMult(contractState.nominalRate)
 						.floatMult(contractState.nominalValue)
