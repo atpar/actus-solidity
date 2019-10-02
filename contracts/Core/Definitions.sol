@@ -15,7 +15,7 @@ contract Definitions {
 	uint256 constant MAX_EVENT_SCHEDULE_SIZE = 64; // 4x MAX_CYCLE_SIZE for IP, RR, FP and SC
 
 	// IPS
-	enum P {D, W, M, Q, H, Y} // P=[D=Days, W=Weeks, M=Months, Q=Quarters, H=Halfyear, Y=Year]
+	enum P {D, W, M, Q, H, Y}// P=[D=Days, W=Weeks, M=Months, Q=Quarters, H=Halfyear, Y=Year]
 	enum S {LONG, SHORT} // S=[+=long stub,- short stub, {} if S empty then - for short stub]
 	struct IPS {
 		uint256 i; // I=Integer

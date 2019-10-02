@@ -10,7 +10,7 @@ contract EndOfMonthConvention is Definitions {
 
 	/**
 	 * This function makes an adjustment on the end of month convention.
-	 * @dev The following is conderted to dertermine if schedule dates are shifted to the end of month:
+	 * @dev The following is considered to dertermine if schedule dates are shifted to the end of month:
      * - The convention SD (same day) means not adjusting, EM (end of month) means adjusting
      * - Dates are only shifted if the schedule start date is an end-of-month date
      * - Dates are only shifted if the schedule cycle is based on an "M" period unit or multiple thereof
@@ -33,7 +33,7 @@ contract EndOfMonthConvention is Definitions {
 			// otherwise switch to SD convention
 			if (
 				BokkyPooBahsDateTimeLibrary.getDay(startTime) == BokkyPooBahsDateTimeLibrary.getDaysInMonth(startTime) &&
-				cycle.p == P.M
+				(cycle.p == P.M || cycle.p == P.Q)
 			) {
 				return EndOfMonthConvention.EOM;
 			}
