@@ -7,6 +7,7 @@ import "openzeppelin-solidity/contracts/drafts/SignedSafeMath.sol";
 import "../Core/Core.sol";
 import "../Core/SignedMath.sol";
 import "./IEngine.sol";
+import "./STF.sol";
 
 
 /**
@@ -15,7 +16,7 @@ import "./IEngine.sol";
  * @dev all numbers except unix timestamp are represented as multiple of 10 ** 18
  * inputs have to be multiplied by 10 ** 18, outputs have to divided by 10 ** 18
  */
-contract ANNEngine is Core, IEngine {
+contract ANNEngine is Core, IEngine, STF {
 
 	using SafeMath for uint;
 	using SignedSafeMath for int;
@@ -425,248 +426,22 @@ contract ANNEngine is Core, IEngine {
 		pure
 		returns (ContractState memory)
 	{
-		if (eventType == EventType.AD) {
-			contractState.timeFromLastEvent = yearFraction(
-				shiftCalcTime(contractState.lastEventTime, contractTerms.businessDayConvention, contractTerms.calendar),
-				shiftCalcTime(timestamp, contractTerms.businessDayConvention, contractTerms.calendar),
-				contractTerms.dayCountConvention,
-				contractTerms.maturityDate
-			);
-			contractState.nominalAccrued = contractState.nominalAccrued.add(contractState.nominalRate.floatMult(contractState.nominalValue).floatMult(contractState.timeFromLastEvent));
-			contractState.feeAccrued = contractState.feeAccrued.add(contractTerms.feeRate.floatMult(contractState.nominalValue).floatMult(contractState.timeFromLastEvent));
-			contractState.lastEventTime = timestamp;
-			return contractState;
-		}
-		if (eventType == EventType.CD) {
-			contractState.timeFromLastEvent = yearFraction(
-				shiftCalcTime(contractState.lastEventTime, contractTerms.businessDayConvention, contractTerms.calendar),
-				shiftCalcTime(timestamp, contractTerms.businessDayConvention, contractTerms.calendar),
-				contractTerms.dayCountConvention,
-				contractTerms.maturityDate
-			);
-			contractState.nominalAccrued = contractState.nominalAccrued.add(contractState.nominalRate.floatMult(contractState.nominalValue).floatMult(contractState.timeFromLastEvent));
-			contractState.feeAccrued = contractState.feeAccrued.add(contractTerms.feeRate.floatMult(contractState.nominalValue).floatMult(contractState.timeFromLastEvent));
-			contractState.contractStatus = ContractStatus.DF;
-			contractState.lastEventTime = timestamp;
-			return contractState;
-		}
-		if (eventType == EventType.FP) {
-			contractState.timeFromLastEvent = yearFraction(
-				shiftCalcTime(contractState.lastEventTime, contractTerms.businessDayConvention, contractTerms.calendar),
-				shiftCalcTime(timestamp, contractTerms.businessDayConvention, contractTerms.calendar),
-				contractTerms.dayCountConvention,
-				contractTerms.maturityDate
-			);
-			contractState.nominalAccrued = contractState.nominalAccrued.add(contractState.nominalRate.floatMult(contractState.nominalValue).floatMult(contractState.timeFromLastEvent));
-			contractState.feeAccrued = 0;
-			contractState.lastEventTime = timestamp;
-			return contractState;
-		}
-		if (eventType == EventType.IED) {
-			contractState.timeFromLastEvent = yearFraction(
-				shiftCalcTime(contractState.lastEventTime, contractTerms.businessDayConvention, contractTerms.calendar),
-				shiftCalcTime(timestamp, contractTerms.businessDayConvention, contractTerms.calendar),
-				contractTerms.dayCountConvention,
-				contractTerms.maturityDate
-			);
-			contractState.nominalValue = roleSign(contractTerms.contractRole) * contractTerms.notionalPrincipal;
-			contractState.nominalRate = contractTerms.nominalInterestRate;
-			contractState.lastEventTime = timestamp;
+		if (eventType == EventType.AD) return ANN_AD(timestamp, contractTerms, contractState);
+		if (eventType == EventType.CD) return ANN_CD(timestamp, contractTerms, contractState);
+		if (eventType == EventType.FP)  return ANN_FP(timestamp, contractTerms, contractState);
+		if (eventType == EventType.IED) return ANN_IED(timestamp, contractTerms, contractState);
+		if (eventType == EventType.IPCI) return ANN_IPCI(timestamp, contractTerms, contractState);
+		if (eventType == EventType.IP) return ANN_IP(timestamp, contractTerms, contractState);
+		if (eventType == EventType.PP) return ANN_PP(timestamp, contractTerms, contractState);
+		if (eventType == EventType.PRD) return ANN_PRD(timestamp, contractTerms, contractState);
+		if (eventType == EventType.PR) return ANN_PR(timestamp, contractTerms, contractState);
+		if (eventType == EventType.MD) return ANN_MD(timestamp, contractTerms, contractState);
+		if (eventType == EventType.PY)  return ANN_PY(timestamp, contractTerms, contractState);
+		if (eventType == EventType.RRF) return ANN_RRF(timestamp, contractTerms, contractState);
+		if (eventType == EventType.RR)  return ANN_RR(timestamp, contractTerms, contractState);
+		if (eventType == EventType.SC) return ANN_SC(timestamp, contractTerms, contractState);
+		if (eventType == EventType.TD)  return ANN_TD(timestamp, contractTerms, contractState);
 
-			if (contractTerms.cycleAnchorDateOfInterestPayment != 0 &&
-				contractTerms.cycleAnchorDateOfInterestPayment < contractTerms.initialExchangeDate
-			) {
-				contractState.nominalAccrued = contractState.nominalRate
-				.floatMult(contractState.nominalValue)
-				.floatMult(
-					yearFraction(
-						shiftCalcTime(contractTerms.cycleAnchorDateOfInterestPayment, contractTerms.businessDayConvention, contractTerms.calendar),
-						shiftCalcTime(timestamp, contractTerms.businessDayConvention, contractTerms.calendar),
-						contractTerms.dayCountConvention,
-						contractTerms.maturityDate
-					)
-				);
-			}
-			return contractState;
-		}
-		if (eventType == EventType.IPCI) {
-			contractState.timeFromLastEvent = yearFraction(
-				shiftCalcTime(contractState.lastEventTime, contractTerms.businessDayConvention, contractTerms.calendar),
-				shiftCalcTime(timestamp, contractTerms.businessDayConvention, contractTerms.calendar),
-				contractTerms.dayCountConvention,
-				contractTerms.maturityDate
-			);
-			contractState.nominalAccrued = contractState.nominalAccrued.add(contractState.nominalAccrued.add(contractState.nominalRate.floatMult(contractState.nominalValue).floatMult(contractState.timeFromLastEvent)));
-			contractState.nominalAccrued = 0;
-			contractState.feeAccrued = contractState.feeAccrued.add(contractTerms.feeRate.floatMult(contractState.nominalValue).floatMult(contractState.timeFromLastEvent));
-			contractState.lastEventTime = timestamp;
-			return contractState;
-		}
-		if (eventType == EventType.IP) {
-			contractState.timeFromLastEvent = yearFraction(
-				shiftCalcTime(contractState.lastEventTime, contractTerms.businessDayConvention, contractTerms.calendar),
-				shiftCalcTime(timestamp, contractTerms.businessDayConvention, contractTerms.calendar),
-				contractTerms.dayCountConvention,
-				contractTerms.maturityDate
-			);
-			contractState.nominalAccrued = 0;
-			contractState.feeAccrued = contractState.feeAccrued.add(contractTerms.feeRate.floatMult(contractState.nominalValue).floatMult(contractState.timeFromLastEvent));
-			contractState.lastEventTime = timestamp;
-			return contractState;
-		}
-		if (eventType == EventType.PP) {
-			contractState.timeFromLastEvent = yearFraction(
-				shiftCalcTime(contractState.lastEventTime, contractTerms.businessDayConvention, contractTerms.calendar),
-				shiftCalcTime(timestamp, contractTerms.businessDayConvention, contractTerms.calendar),
-				contractTerms.dayCountConvention,
-				contractTerms.maturityDate
-			);
-			contractState.nominalAccrued = contractState.nominalAccrued.add(contractState.nominalRate.floatMult(contractState.nominalValue).floatMult(contractState.timeFromLastEvent));
-			contractState.feeAccrued = contractState.feeAccrued.add(contractTerms.feeRate.floatMult(contractState.nominalValue).floatMult(contractState.timeFromLastEvent));
-			contractState.nominalValue -= 0; // riskFactor(contractTerms.objectCodeOfPrepaymentModel, timestamp, contractState, contractTerms) * contractState.nominalValue;
-			contractState.lastEventTime = timestamp;
-			return contractState;
-		}
-		if (eventType == EventType.PRD) {
-			contractState.timeFromLastEvent = yearFraction(
-				shiftCalcTime(contractState.lastEventTime, contractTerms.businessDayConvention, contractTerms.calendar),
-				shiftCalcTime(timestamp, contractTerms.businessDayConvention, contractTerms.calendar),
-				contractTerms.dayCountConvention,
-				contractTerms.maturityDate
-			);
-			contractState.nominalAccrued = contractState.nominalAccrued.add(contractState.nominalRate.floatMult(contractState.nominalValue).floatMult(contractState.timeFromLastEvent));
-			contractState.feeAccrued = contractState.feeAccrued.add(contractTerms.feeRate.floatMult(contractState.nominalValue).floatMult(contractState.timeFromLastEvent));
-			contractState.lastEventTime = timestamp;
-			return contractState;
-		}
-		if (eventType == EventType.PR) {
-			contractState.timeFromLastEvent = yearFraction(
-				shiftCalcTime(contractState.lastEventTime, contractTerms.businessDayConvention, contractTerms.calendar),
-				shiftCalcTime(timestamp, contractTerms.businessDayConvention, contractTerms.calendar),
-				contractTerms.dayCountConvention,
-				contractTerms.maturityDate
-			);
-			contractState.nominalAccrued = contractState.nominalAccrued.add(contractState.nominalRate.floatMult(contractState.nominalValue).floatMult(contractState.timeFromLastEvent));
-			contractState.feeAccrued = contractState.feeAccrued.add(contractTerms.feeRate.floatMult(contractState.nominalValue).floatMult(contractState.timeFromLastEvent));
-			contractState.nominalValue = contractState.nominalValue -
-						roleSign(contractTerms.contractRole) * (
-							roleSign(contractTerms.contractRole) * contractState.nominalValue).min(
-								roleSign(contractTerms.contractRole) * (contractState.nextPrincipalRedemptionPayment - contractState.nominalAccrued));
-			contractState.lastEventTime = timestamp;
-			return contractState;
-		}
-		if (eventType == EventType.MD) {
-			contractState.timeFromLastEvent = yearFraction(
-				shiftCalcTime(contractState.lastEventTime, contractTerms.businessDayConvention, contractTerms.calendar),
-				shiftCalcTime(timestamp, contractTerms.businessDayConvention, contractTerms.calendar),
-				contractTerms.dayCountConvention,
-				contractTerms.maturityDate
-			);
-			contractState.nominalAccrued = contractState.nominalAccrued.add(contractState.nominalRate.floatMult(contractState.nominalValue).floatMult(contractState.timeFromLastEvent));
-			contractState.feeAccrued = contractState.feeAccrued.add(contractTerms.feeRate.floatMult(contractState.nominalValue).floatMult(contractState.timeFromLastEvent));
-			contractState.nominalValue = 0.0;
-			contractState.lastEventTime = timestamp;
-			return contractState;
-		}
-		if (eventType == EventType.PY) {
-			contractState.timeFromLastEvent = yearFraction(
-				shiftCalcTime(contractState.lastEventTime, contractTerms.businessDayConvention, contractTerms.calendar),
-				shiftCalcTime(timestamp, contractTerms.businessDayConvention, contractTerms.calendar),
-				contractTerms.dayCountConvention,
-				contractTerms.maturityDate
-			);
-			contractState.nominalAccrued = contractState.nominalAccrued.add(contractState.nominalRate.floatMult(contractState.nominalValue).floatMult(contractState.timeFromLastEvent));
-			contractState.feeAccrued = contractState.feeAccrued.add(contractTerms.feeRate.floatMult(contractState.nominalValue).floatMult(contractState.timeFromLastEvent));
-			contractState.lastEventTime = timestamp;
-			return contractState;
-		}
-		if (eventType == EventType.RRF) {
-			contractState.timeFromLastEvent = yearFraction(
-				shiftCalcTime(contractState.lastEventTime, contractTerms.businessDayConvention, contractTerms.calendar),
-				shiftCalcTime(timestamp, contractTerms.businessDayConvention, contractTerms.calendar),
-				contractTerms.dayCountConvention,
-				contractTerms.maturityDate
-			);
-			contractState.nominalAccrued = contractState.nominalAccrued.add(contractState.nominalRate.floatMult(contractState.nominalValue).floatMult(contractState.timeFromLastEvent));
-			contractState.feeAccrued = contractState.feeAccrued.add(contractTerms.feeRate.floatMult(contractState.nominalValue).floatMult(contractState.timeFromLastEvent));
-			contractState.nominalRate = contractTerms.nextResetRate;
-			contractState.lastEventTime = timestamp;
-			return contractState;
-		}
-		if (eventType == EventType.RR) {
-			// int256 rate = //riskFactor(contractTerms.marketObjectCodeOfRateReset, timestamp, contractState, contractTerms)
-			// 	* contractTerms.rateMultiplier + contractTerms.rateSpread;
-			int256 rate = contractTerms.rateSpread;
-			int256 deltaRate = rate.sub(contractState.nominalRate);
-
-			 // apply period cap/floor
-			if ((contractTerms.lifeCap < deltaRate) && (contractTerms.lifeCap < ((-1) * contractTerms.periodFloor))) {
-				deltaRate = contractTerms.lifeCap;
-			} else if (deltaRate < ((-1) * contractTerms.periodFloor)) {
-				deltaRate = ((-1) * contractTerms.periodFloor);
-			}
-			rate = contractState.nominalRate.add(deltaRate);
-
-			// apply life cap/floor
-			if (contractTerms.lifeCap < rate && contractTerms.lifeCap < contractTerms.lifeFloor) {
-				rate = contractTerms.lifeCap;
-			} else if (rate < contractTerms.lifeFloor) {
-				rate = contractTerms.lifeFloor;
-			}
-
-			contractState.timeFromLastEvent = yearFraction(
-				shiftCalcTime(contractState.lastEventTime, contractTerms.businessDayConvention, contractTerms.calendar),
-				shiftCalcTime(timestamp, contractTerms.businessDayConvention, contractTerms.calendar),
-				contractTerms.dayCountConvention,
-				contractTerms.maturityDate
-			);
-			contractState.nominalAccrued = contractState.nominalAccrued.add(contractState.nominalRate.floatMult(contractState.nominalValue).floatMult(contractState.timeFromLastEvent));
-			contractState.nominalRate = rate;
-			contractState.nextPrincipalRedemptionPayment = 0; // TODO: implement annuity calculator
-			contractState.lastEventTime = timestamp;
-			return contractState;
-		}
-		if (eventType == EventType.SC) {
-			contractState.timeFromLastEvent = yearFraction(
-				shiftCalcTime(contractState.lastEventTime, contractTerms.businessDayConvention, contractTerms.calendar),
-				shiftCalcTime(timestamp, contractTerms.businessDayConvention, contractTerms.calendar),
-				contractTerms.dayCountConvention,
-				contractTerms.maturityDate
-			);
-			contractState.nominalAccrued = contractState.nominalAccrued.add(contractState.nominalRate.floatMult(contractState.nominalValue).floatMult(contractState.timeFromLastEvent));
-			contractState.feeAccrued = contractState.feeAccrued.add(contractTerms.feeRate.floatMult(contractState.nominalValue).floatMult(contractState.timeFromLastEvent));
-
-			if ((contractTerms.scalingEffect == ScalingEffect.I00)
-				|| (contractTerms.scalingEffect == ScalingEffect.IN0)
-				|| (contractTerms.scalingEffect == ScalingEffect.I0M)
-				|| (contractTerms.scalingEffect == ScalingEffect.INM)
-			) {
-				contractState.interestScalingMultiplier = 0; // riskFactor(contractTerms.marketObjectCodeOfScalingIndex, timestamp, contractState, contractTerms)
-			}
-			if ((contractTerms.scalingEffect == ScalingEffect._0N0)
-				|| (contractTerms.scalingEffect == ScalingEffect._0NM)
-				|| (contractTerms.scalingEffect == ScalingEffect.IN0)
-				|| (contractTerms.scalingEffect == ScalingEffect.INM)
-			) {
-				contractState.nominalScalingMultiplier = 0; // riskFactor(contractTerms.marketObjectCodeOfScalingIndex, timestamp, contractState, contractTerms)
-			}
-
-			contractState.lastEventTime = timestamp;
-			return contractState;
-		}
-		if (eventType == EventType.TD) {
-			contractState.timeFromLastEvent = yearFraction(
-				shiftCalcTime(contractState.lastEventTime, contractTerms.businessDayConvention, contractTerms.calendar),
-				shiftCalcTime(timestamp, contractTerms.businessDayConvention, contractTerms.calendar),
-				contractTerms.dayCountConvention,
-				contractTerms.maturityDate
-			);
-			contractState.nominalValue = 0;
-			contractState.nominalAccrued = 0;
-			contractState.feeAccrued = 0;
-			contractState.lastEventTime = timestamp;
-			return contractState;
-		}
 		revert("ANNEngine.stateTransitionFunction: ATTRIBUTE_NOT_FOUND");
 	}
 
