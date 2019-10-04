@@ -467,12 +467,12 @@ contract ANNEngine is Core, IEngine, STF, POF {
 		pure
 		returns (int256)
 	{
-		if (eventType == EventType.AD) return 0;
-		if (eventType == EventType.CD) return 0;
-		if (eventType == EventType.IPCI) return 0;
-		if (eventType == EventType.RRF) return 0;
-		if (eventType == EventType.RR) return 0;
-		if (eventType == EventType.SC) return 0;
+		if (eventType == EventType.AD) return POF_ANN_AD(timestamp, contractTerms, contractState);
+		if (eventType == EventType.CD) return POF_ANN_CD(timestamp, contractTerms, contractState);
+		if (eventType == EventType.IPCI) return POF_ANN_IPCI(timestamp, contractTerms, contractState);
+		if (eventType == EventType.RRF) return POF_ANN_RRF(timestamp, contractTerms, contractState);
+		if (eventType == EventType.RR) return POF_ANN_RR(timestamp, contractTerms, contractState);
+		if (eventType == EventType.SC) return POF_ANN_SC(timestamp, contractTerms, contractState);
 		if (eventType == EventType.FP) return POF_ANN_FP(timestamp, contractTerms, contractState);
 		if (eventType == EventType.IED) return POF_ANN_IED(timestamp, contractTerms, contractState);
 		if (eventType == EventType.IP) return POF_ANN_IP(timestamp, contractTerms, contractState);

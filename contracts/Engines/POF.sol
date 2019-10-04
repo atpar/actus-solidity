@@ -30,7 +30,7 @@ contract POF is Core {
     return 0;
   }
 
-  function POF_PAM_ICPI (
+  function POF_PAM_IPCI (
     uint256 timestamp,
     ContractTerms memory contractTerms,
     ContractState memory contractState

@@ -483,12 +483,12 @@ contract PAMEngine is Core, IEngine, STF, POF {
 		pure
 		returns (int256)
 	{
-		if (eventType == EventType.AD) return 0;
-		if (eventType == EventType.CD) return 0;
-		if (eventType == EventType.IPCI) return 0;
-		if (eventType == EventType.RRF) return 0;
-		if (eventType == EventType.RR) return 0;
-		if (eventType == EventType.SC) return 0;
+		if (eventType == EventType.AD) return POF_PAM_AD(timestamp, contractTerms, contractState);
+		if (eventType == EventType.CD) return POF_PAM_CD(timestamp, contractTerms, contractState);
+		if (eventType == EventType.IPCI) return POF_PAM_IPCI(timestamp, contractTerms, contractState);
+		if (eventType == EventType.RRF) return POF_PAM_RRF(timestamp, contractTerms, contractState);
+		if (eventType == EventType.RR) return POF_PAM_RR(timestamp, contractTerms, contractState);
+		if (eventType == EventType.SC) return POF_PAM_SC(timestamp, contractTerms, contractState);
 		if (eventType == EventType.FP) return POF_PAM_FP(timestamp, contractTerms, contractState);
 		if (eventType == EventType.IED) return POF_PAM_IED(timestamp, contractTerms, contractState);
 		if (eventType == EventType.IP) return POF_PAM_IP(timestamp, contractTerms, contractState);
