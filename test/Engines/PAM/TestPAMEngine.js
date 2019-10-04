@@ -8,7 +8,11 @@ contract('PAMEngine', () => {
 
   before(async () => {        
     this.PAMEngineInstance = await PAMEngine.new();
-    this.terms = await getDefaultTestTerms('PAM');
+    this.terms = {
+      ...(await getDefaultTestTerms('PAM')),
+      gracePeriod: { i: 1, p: 2 },
+      delinquencyPeriod: { i: 1, p: 3 },
+    };
   });
 
   it('should yield the initial contract state', async () => {
@@ -117,17 +121,18 @@ contract('PAMEngine', () => {
     assert.isTrue(protoEventSchedule.toString() === entireProtoEventSchedule.toString());
   });
 
-  // Payment Delay
-  it('should', async () => {
+  // should be moved to STF test cases
+  it('should transition to DL / DQ / DF for a given Payment Delay event', async () => {
     let protoEventSchedule = await this.PAMEngineInstance.computeProtoEventScheduleSegment(
       this.terms,
       this.terms['statusDate'],
       this.terms['maturityDate']
     );
 
-    // insert Payment Delay Event
+    // insert Payment Delay Event for the previous IP event
     protoEventSchedule.splice(6, 0, [ ...protoEventSchedule[5] ]);
-    protoEventSchedule[6].scheduleTime = protoEventSchedule[5].scheduleTime;
+    protoEventSchedule[6].eventTime = protoEventSchedule[6][0];
+    protoEventSchedule[6].scheduleTime = protoEventSchedule[5].scheduleTime; // equal to schedule time of IP event
     protoEventSchedule[6].eventType = '22';
     protoEventSchedule[6].pofType = '22';
     protoEventSchedule[6].stfType = '22';
@@ -137,21 +142,38 @@ contract('PAMEngine', () => {
 
     protoEventSchedule = removeNullEvents(protoEventSchedule);
 
-    let state = await this.PAMEngineInstance.computeInitialState(this.terms, {});
-    const evaluatedEventSchedule = [];
+    // initial state
+    const state = await this.PAMEngineInstance.computeInitialState(this.terms, {});
 
-    for (let i = 0; i < protoEventSchedule.length; i ++) {
-      const { 0: nextState, 1: contractEvent } = await this.PAMEngineInstance.computeNextStateForProtoEvent(
-        this.terms, 
-        state, 
-        protoEventSchedule[i], 
-        protoEventSchedule[i].scheduleTime
-      );
+    // Payment Delay event with 1 seconds beyond eventTime
+    const timestampAfterEventTime = Number(protoEventSchedule[6].eventTime) + 1;
+    const { 0: delayedState } = await this.PAMEngineInstance.computeNextStateForProtoEvent(
+      this.terms, 
+      state, 
+      protoEventSchedule[6], 
+      timestampAfterEventTime
+    );
 
-      state = nextState;
-      evaluatedEventSchedule.push({ state, event: contractEvent });
-    }
+    // Payment Delay event with 1 seconds beyond grace period
+    const timestampAfterGracePeriod = Number(protoEventSchedule[6].eventTime) + (31 * 86400) + 1;
+    const { 0: delinquentState } = await this.PAMEngineInstance.computeNextStateForProtoEvent(
+      this.terms, 
+      state, 
+      protoEventSchedule[6], 
+      timestampAfterGracePeriod
+    );
 
-    console.log(evaluatedEventSchedule);
+    // Payment Delay event with 1 seconds beyond delinquency period
+    const timestampAfterDelinquencyPeriod = Number(protoEventSchedule[6].eventTime) + (3 * 31 * 86400) + 1;
+    const { 0: defaultedState } = await this.PAMEngineInstance.computeNextStateForProtoEvent(
+      this.terms, 
+      state, 
+      protoEventSchedule[6], 
+      timestampAfterDelinquencyPeriod
+    );
+
+    assert.equal(delayedState.contractStatus, '1');
+    assert.equal(delinquentState.contractStatus, '2');
+    assert.equal(defaultedState.contractStatus, '3');
   });
 });

@@ -8,7 +8,11 @@ contract('ANNEngine', () => {
 
   before(async () => {        
     this.ANNEngineInstance = await ANNEngine.new();
-    this.terms = await getDefaultTestTerms('ANN');
+    this.terms = {
+      ...(await getDefaultTestTerms('ANN')),
+      gracePeriod: { i: 1, p: 2 },
+      delinquencyPeriod: { i: 1, p: 3 },
+    };
   });
 
   it('should yield the initial contract state', async () => {
@@ -115,5 +119,61 @@ contract('ANNEngine', () => {
     protoEventSchedule = removeNullEvents(protoEventSchedule);
     
     assert.isTrue(protoEventSchedule.toString() === entireProtoEventSchedule.toString());
+  });
+
+  // should be moved to STF test cases
+  it('should transition to DL / DQ / DF for a given Payment Delay event', async () => {
+    let protoEventSchedule = await this.ANNEngineInstance.computeProtoEventScheduleSegment(
+      this.terms,
+      this.terms['statusDate'],
+      this.terms['maturityDate']
+    );
+
+    // insert Payment Delay Event for the previous IP event
+    protoEventSchedule.splice(6, 0, [ ...protoEventSchedule[5] ]);
+    protoEventSchedule[6].eventTime = protoEventSchedule[6][0];
+    protoEventSchedule[6].scheduleTime = protoEventSchedule[5].scheduleTime; // equal to schedule time of IP event
+    protoEventSchedule[6].eventType = '22';
+    protoEventSchedule[6].pofType = '22';
+    protoEventSchedule[6].stfType = '22';
+    protoEventSchedule[6][3]= '22';
+    protoEventSchedule[6][5] = '22';
+    protoEventSchedule[6][6] = '22';
+
+    protoEventSchedule = removeNullEvents(protoEventSchedule);
+
+    // initial state
+    const state = await this.ANNEngineInstance.computeInitialState(this.terms, {});
+
+    // Payment Delay event with 1 seconds beyond eventTime
+    const timestampAfterEventTime = Number(protoEventSchedule[6].eventTime) + 1;
+    const { 0: delayedState } = await this.ANNEngineInstance.computeNextStateForProtoEvent(
+      this.terms, 
+      state, 
+      protoEventSchedule[6], 
+      timestampAfterEventTime
+    );
+
+    // Payment Delay event with 1 seconds beyond grace period
+    const timestampAfterGracePeriod = Number(protoEventSchedule[6].eventTime) + (31 * 86400) + 1;
+    const { 0: delinquentState } = await this.ANNEngineInstance.computeNextStateForProtoEvent(
+      this.terms, 
+      state, 
+      protoEventSchedule[6], 
+      timestampAfterGracePeriod
+    );
+
+    // Payment Delay event with 1 seconds beyond delinquency period
+    const timestampAfterDelinquencyPeriod = Number(protoEventSchedule[6].eventTime) + (3 * 31 * 86400) + 1;
+    const { 0: defaultedState } = await this.ANNEngineInstance.computeNextStateForProtoEvent(
+      this.terms, 
+      state, 
+      protoEventSchedule[6], 
+      timestampAfterDelinquencyPeriod
+    );
+
+    assert.equal(delayedState.contractStatus, '1');
+    assert.equal(delinquentState.contractStatus, '2');
+    assert.equal(defaultedState.contractStatus, '3');
   });
 });
