@@ -10,8 +10,8 @@ contract('ANNEngine', () => {
     this.ANNEngineInstance = await ANNEngine.new();
     this.terms = {
       ...(await getDefaultTestTerms('ANN')),
-      gracePeriod: { i: 1, p: 2 },
-      delinquencyPeriod: { i: 1, p: 3 },
+      gracePeriod: { i: 1, p: 2, isSet: true },
+      delinquencyPeriod: { i: 1, p: 3, isSet: true },
     };
   });
 

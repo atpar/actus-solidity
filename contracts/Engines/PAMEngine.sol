@@ -674,15 +674,22 @@ contract PAMEngine is Core, IEngine {
 				? protoEvent.eventTime
 				: contractState.nonPerformingDate;
 
-			uint256 graceDate = getTimestampPlusPeriod(contractTerms.gracePeriod, nonPerformingDate);
-			uint256 delinquencyDate = getTimestampPlusPeriod(contractTerms.delinquencyPeriod, nonPerformingDate);
+			bool isInGracePeriod = false;
+			if (contractTerms.gracePeriod.isSet) {
+				uint256 graceDate = getTimestampPlusPeriod(contractTerms.gracePeriod, nonPerformingDate);
+				if (currentTimestamp <= graceDate) {
+					contractState.contractStatus = ContractStatus.DL;
+					isInGracePeriod = true;
+				}
+			}
 
-			if (currentTimestamp <= graceDate) {
-				contractState.contractStatus = ContractStatus.DL;
-			} else if (currentTimestamp <= delinquencyDate) {
-				contractState.contractStatus = ContractStatus.DQ;
-			} else {
-				contractState.contractStatus = ContractStatus.DF;
+			if (contractTerms.delinquencyPeriod.isSet && !isInGracePeriod) {
+				uint256 delinquencyDate = getTimestampPlusPeriod(contractTerms.delinquencyPeriod, nonPerformingDate);
+				if (currentTimestamp <= delinquencyDate) {
+					contractState.contractStatus = ContractStatus.DQ;
+				} else {
+					contractState.contractStatus = ContractStatus.DF;
+				}
 			}
 
 			if (contractState.nonPerformingDate == 0) {
