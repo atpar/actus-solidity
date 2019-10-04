@@ -446,21 +446,21 @@ contract PAMEngine is Core, IEngine, STF, POF {
 		pure
 		returns (ContractState memory)
 	{
-		if (eventType == EventType.AD) return STF.STF_PAM_AD(timestamp, contractTerms, contractState);
-		if (eventType == EventType.CD) return STF.STF_PAM_CD(timestamp, contractTerms, contractState);
-		if (eventType == EventType.FP) return STF.STF_PAM_FP(timestamp, contractTerms, contractState);
-		if (eventType == EventType.IED) return STF.STF_PAM_IED(timestamp, contractTerms, contractState);
-		if (eventType == EventType.IPCI) return STF.STF_PAM_IPCI(timestamp, contractTerms, contractState);
-		if (eventType == EventType.IP) return STF.STF_PAM_IP(timestamp, contractTerms, contractState);
-		if (eventType == EventType.PP) return STF.STF_PAM_PP(timestamp, contractTerms, contractState);
-		if (eventType == EventType.PRD) return STF.STF_PAM_PRD(timestamp, contractTerms, contractState);
-		if (eventType == EventType.PR) return STF.STF_PAM_PR(timestamp, contractTerms, contractState);
-		if (eventType == EventType.PY) return STF.STF_PAM_PY(timestamp, contractTerms, contractState);
-		if (eventType == EventType.RRF) return STF.STF_PAM_RRF(timestamp, contractTerms, contractState);
-		if (eventType == EventType.RR) return STF.STF_PAM_RR(timestamp, contractTerms, contractState);
-		if (eventType == EventType.SC) return STF.STF_PAM_SC(timestamp, contractTerms, contractState);
-		if (eventType == EventType.TD) return STF.STF_PAM_TD(timestamp, contractTerms, contractState);
-		if (eventType == EventType.DEL) return STF.STF_PAM_DEL(timestamp, contractTerms, contractState);
+		if (protoEvent.eventType == EventType.AD) return STF.STF_PAM_AD(protoEvent, contractTerms, contractState, currentTimestamp);
+		if (protoEvent.eventType == EventType.CD) return STF.STF_PAM_CD(protoEvent, contractTerms, contractState, currentTimestamp);
+		if (protoEvent.eventType == EventType.FP) return STF.STF_PAM_FP(protoEvent, contractTerms, contractState, currentTimestamp);
+		if (protoEvent.eventType == EventType.IED) return STF.STF_PAM_IED(protoEvent, contractTerms, contractState, currentTimestamp);
+		if (protoEvent.eventType == EventType.IPCI) return STF.STF_PAM_IPCI(protoEvent, contractTerms, contractState, currentTimestamp);
+		if (protoEvent.eventType == EventType.IP) return STF.STF_PAM_IP(protoEvent, contractTerms, contractState, currentTimestamp);
+		if (protoEvent.eventType == EventType.PP) return STF.STF_PAM_PP(protoEvent, contractTerms, contractState, currentTimestamp);
+		if (protoEvent.eventType == EventType.PRD) return STF.STF_PAM_PRD(protoEvent, contractTerms, contractState, currentTimestamp);
+		if (protoEvent.eventType == EventType.PR) return STF.STF_PAM_PR(protoEvent, contractTerms, contractState, currentTimestamp);
+		if (protoEvent.eventType == EventType.PY) return STF.STF_PAM_PY(protoEvent, contractTerms, contractState, currentTimestamp);
+		if (protoEvent.eventType == EventType.RRF) return STF.STF_PAM_RRF(protoEvent, contractTerms, contractState, currentTimestamp);
+		if (protoEvent.eventType == EventType.RR) return STF.STF_PAM_RR(protoEvent, contractTerms, contractState, currentTimestamp);
+		if (protoEvent.eventType == EventType.SC) return STF.STF_PAM_SC(protoEvent, contractTerms, contractState, currentTimestamp);
+		if (protoEvent.eventType == EventType.TD) return STF.STF_PAM_TD(protoEvent, contractTerms, contractState, currentTimestamp);
+		if (protoEvent.eventType == EventType.DEL) return STF.STF_PAM_DEL(protoEvent, contractTerms, contractState, currentTimestamp);
 
 		revert("PAMEngine.stateTransitionFunction: ATTRIBUTE_NOT_FOUND");
 	}
@@ -484,20 +484,21 @@ contract PAMEngine is Core, IEngine, STF, POF {
 		pure
 		returns (int256)
 	{
-		if (eventType == EventType.AD) return POF_PAM_AD(timestamp, contractTerms, contractState);
-		if (eventType == EventType.CD) return POF_PAM_CD(timestamp, contractTerms, contractState);
-		if (eventType == EventType.IPCI) return POF_PAM_IPCI(timestamp, contractTerms, contractState);
-		if (eventType == EventType.RRF) return POF_PAM_RRF(timestamp, contractTerms, contractState);
-		if (eventType == EventType.RR) return POF_PAM_RR(timestamp, contractTerms, contractState);
-		if (eventType == EventType.SC) return POF_PAM_SC(timestamp, contractTerms, contractState);
-		if (eventType == EventType.FP) return POF_PAM_FP(timestamp, contractTerms, contractState);
-		if (eventType == EventType.IED) return POF_PAM_IED(timestamp, contractTerms, contractState);
-		if (eventType == EventType.IP) return POF_PAM_IP(timestamp, contractTerms, contractState);
-		if (eventType == EventType.PP) return POF_PAM_PP(timestamp, contractTerms, contractState);
-		if (eventType == EventType.PRD) return POF_PAM_PRD(timestamp, contractTerms, contractState);
-		if (eventType == EventType.PR) return POF_PAM_PR(timestamp, contractTerms, contractState);
-		if (eventType == EventType.PY) return POF_PAM_PY(timestamp, contractTerms, contractState);
-		if (eventType == EventType.TD) return POF_PAM_TD(timestamp, contractTerms, contractState);
+		if (protoEvent.eventType == EventType.AD) return POF_PAM_AD(protoEvent, contractTerms, contractState, currentTimestamp);
+		if (protoEvent.eventType == EventType.CD) return POF_PAM_CD(protoEvent, contractTerms, contractState, currentTimestamp);
+		if (protoEvent.eventType == EventType.IPCI) return POF_PAM_IPCI(protoEvent, contractTerms, contractState, currentTimestamp);
+		if (protoEvent.eventType == EventType.RRF) return POF_PAM_RRF(protoEvent, contractTerms, contractState, currentTimestamp);
+		if (protoEvent.eventType == EventType.RR) return POF_PAM_RR(protoEvent, contractTerms, contractState, currentTimestamp);
+		if (protoEvent.eventType == EventType.SC) return POF_PAM_SC(protoEvent, contractTerms, contractState, currentTimestamp);
+		if (protoEvent.eventType == EventType.FP) return POF_PAM_FP(protoEvent, contractTerms, contractState, currentTimestamp);
+		if (protoEvent.eventType == EventType.IED) return POF_PAM_IED(protoEvent, contractTerms, contractState, currentTimestamp);
+		if (protoEvent.eventType == EventType.IP) return POF_PAM_IP(protoEvent, contractTerms, contractState, currentTimestamp);
+		if (protoEvent.eventType == EventType.PP) return POF_PAM_PP(protoEvent, contractTerms, contractState, currentTimestamp);
+		if (protoEvent.eventType == EventType.PRD) return POF_PAM_PRD(protoEvent, contractTerms, contractState, currentTimestamp);
+		if (protoEvent.eventType == EventType.PR) return POF_PAM_PR(protoEvent, contractTerms, contractState, currentTimestamp);
+		if (protoEvent.eventType == EventType.PY) return POF_PAM_PY(protoEvent, contractTerms, contractState, currentTimestamp);
+		if (protoEvent.eventType == EventType.TD) return POF_PAM_TD(protoEvent, contractTerms, contractState, currentTimestamp);
+		if (protoEvent.eventType == EventType.DEL) return POF_PAM_DEL(protoEvent, contractTerms, contractState, currentTimestamp);
 
 		revert("PAMEngine.payoffFunction: ATTRIBUTE_NOT_FOUND");
 	}
