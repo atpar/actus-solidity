@@ -8,6 +8,7 @@ import "../Core/Core.sol";
 import "../Core/SignedMath.sol";
 import "./IEngine.sol";
 import "./STF.sol";
+import "./POF.sol";
 
 
 /**
@@ -16,7 +17,7 @@ import "./STF.sol";
  * @dev all numbers except unix timestamp are represented as multiple of 10 ** 18
  * inputs have to be multiplied by 10 ** 18, outputs have to divided by 10 ** 18
  */
-contract ANNEngine is Core, IEngine, STF {
+contract ANNEngine is Core, IEngine, STF, POF {
 
 	using SafeMath for uint;
 	using SignedSafeMath for int;
@@ -426,21 +427,21 @@ contract ANNEngine is Core, IEngine, STF {
 		pure
 		returns (ContractState memory)
 	{
-		if (eventType == EventType.AD) return ANN_AD(timestamp, contractTerms, contractState);
-		if (eventType == EventType.CD) return ANN_CD(timestamp, contractTerms, contractState);
-		if (eventType == EventType.FP)  return ANN_FP(timestamp, contractTerms, contractState);
-		if (eventType == EventType.IED) return ANN_IED(timestamp, contractTerms, contractState);
-		if (eventType == EventType.IPCI) return ANN_IPCI(timestamp, contractTerms, contractState);
-		if (eventType == EventType.IP) return ANN_IP(timestamp, contractTerms, contractState);
-		if (eventType == EventType.PP) return ANN_PP(timestamp, contractTerms, contractState);
-		if (eventType == EventType.PRD) return ANN_PRD(timestamp, contractTerms, contractState);
-		if (eventType == EventType.PR) return ANN_PR(timestamp, contractTerms, contractState);
-		if (eventType == EventType.MD) return ANN_MD(timestamp, contractTerms, contractState);
-		if (eventType == EventType.PY)  return ANN_PY(timestamp, contractTerms, contractState);
-		if (eventType == EventType.RRF) return ANN_RRF(timestamp, contractTerms, contractState);
-		if (eventType == EventType.RR)  return ANN_RR(timestamp, contractTerms, contractState);
-		if (eventType == EventType.SC) return ANN_SC(timestamp, contractTerms, contractState);
-		if (eventType == EventType.TD)  return ANN_TD(timestamp, contractTerms, contractState);
+		if (eventType == EventType.AD) return STF_ANN_AD(timestamp, contractTerms, contractState);
+		if (eventType == EventType.CD) return STF_ANN_CD(timestamp, contractTerms, contractState);
+		if (eventType == EventType.FP)  return STF_ANN_FP(timestamp, contractTerms, contractState);
+		if (eventType == EventType.IED) return STF_ANN_IED(timestamp, contractTerms, contractState);
+		if (eventType == EventType.IPCI) return STF_ANN_IPCI(timestamp, contractTerms, contractState);
+		if (eventType == EventType.IP) return STF_ANN_IP(timestamp, contractTerms, contractState);
+		if (eventType == EventType.PP) return STF_ANN_PP(timestamp, contractTerms, contractState);
+		if (eventType == EventType.PRD) return STF_ANN_PRD(timestamp, contractTerms, contractState);
+		if (eventType == EventType.PR) return STF_ANN_PR(timestamp, contractTerms, contractState);
+		if (eventType == EventType.MD) return STF_ANN_MD(timestamp, contractTerms, contractState);
+		if (eventType == EventType.PY)  return STF_ANN_PY(timestamp, contractTerms, contractState);
+		if (eventType == EventType.RRF) return STF_ANN_RRF(timestamp, contractTerms, contractState);
+		if (eventType == EventType.RR)  return STF_ANN_RR(timestamp, contractTerms, contractState);
+		if (eventType == EventType.SC) return STF_ANN_SC(timestamp, contractTerms, contractState);
+		if (eventType == EventType.TD)  return STF_ANN_TD(timestamp, contractTerms, contractState);
 
 		revert("ANNEngine.stateTransitionFunction: ATTRIBUTE_NOT_FOUND");
 	}
@@ -464,7 +465,7 @@ contract ANNEngine is Core, IEngine, STF {
 	)
 		private
 		pure
-		returns (int256 payoff)
+		returns (int256)
 	{
 		if (eventType == EventType.AD) return 0;
 		if (eventType == EventType.CD) return 0;
@@ -472,173 +473,16 @@ contract ANNEngine is Core, IEngine, STF {
 		if (eventType == EventType.RRF) return 0;
 		if (eventType == EventType.RR) return 0;
 		if (eventType == EventType.SC) return 0;
-		if (eventType == EventType.FP) {
-			if (contractTerms.feeBasis == FeeBasis.A) {
-				return (
-					performanceIndicator(contractState.contractStatus)
-					* roleSign(contractTerms.contractRole)
-					* contractTerms.feeRate
-				);
-			} else {
-				return (
-					performanceIndicator(contractState.contractStatus)
-					* contractState.feeAccrued
-						.add(
-							yearFraction(
-								shiftCalcTime(contractState.lastEventTime, contractTerms.businessDayConvention, contractTerms.calendar),
-								shiftCalcTime(timestamp, contractTerms.businessDayConvention, contractTerms.calendar),
-								contractTerms.dayCountConvention,
-								contractTerms.maturityDate
-							)
-							.floatMult(contractTerms.feeRate)
-							.floatMult(contractState.nominalValue)
-						)
-				);
-			}
-		}
-		if (eventType == EventType.IED) {
-			return (
-				performanceIndicator(contractState.contractStatus)
-				* roleSign(contractTerms.contractRole)
-				* (-1)
-				* contractTerms.notionalPrincipal
-					.add(contractTerms.premiumDiscountAtIED)
-			);
-		}
-		if (eventType == EventType.IP) {
-			return (
-				performanceIndicator(contractState.contractStatus)
-				* contractState.interestScalingMultiplier
-					.floatMult(
-						contractState.nominalAccrued
-						.add(
-							yearFraction(
-								shiftCalcTime(contractState.lastEventTime, contractTerms.businessDayConvention, contractTerms.calendar),
-								shiftCalcTime(timestamp, contractTerms.businessDayConvention, contractTerms.calendar),
-								contractTerms.dayCountConvention,
-								contractTerms.maturityDate
-							)
-							.floatMult(contractState.nominalRate)
-							.floatMult(contractState.nominalValue)
-						)
-					)
-			);
-		}
-		if (eventType == EventType.PP) {
-			return (
-				performanceIndicator(contractState.contractStatus)
-				* roleSign(contractTerms.contractRole)
-				* 0 // riskFactor(timestamp, contractState, contractTerms, contractTerms.objectCodeOfPrepaymentModel)
-				* contractState.nominalValue
-			);
-		}
-		if (eventType == EventType.PRD) {
-			return (
-				performanceIndicator(contractState.contractStatus)
-				* roleSign(contractTerms.contractRole)
-				* (-1)
-				* contractTerms.priceAtPurchaseDate
-					.add(contractState.nominalAccrued)
-					.add(
-						yearFraction(
-							shiftCalcTime(contractState.lastEventTime, contractTerms.businessDayConvention, contractTerms.calendar),
-							shiftCalcTime(timestamp, contractTerms.businessDayConvention, contractTerms.calendar),
-							contractTerms.dayCountConvention,
-							contractTerms.maturityDate
-						)
-						.floatMult(contractState.nominalRate)
-						.floatMult(contractState.nominalValue)
-					)
-			);
-		}
-		if (eventType == EventType.PR) {
-			return (
-				performanceIndicator(contractState.contractStatus)
-				* (contractState.nominalScalingMultiplier * roleSign(contractTerms.contractRole))
-					.floatMult(
-						(roleSign(contractTerms.contractRole) * contractState.nominalValue)
-						.min(
-								roleSign(contractTerms.contractRole)
-								* (
-									contractState.nextPrincipalRedemptionPayment
-									- contractState.nominalAccrued
-									- yearFraction(
-										shiftCalcTime(contractState.lastEventTime, contractTerms.businessDayConvention, contractTerms.calendar),
-										shiftCalcTime(timestamp, contractTerms.businessDayConvention, contractTerms.calendar),
-										contractTerms.dayCountConvention,
-										contractTerms.maturityDate
-									)
-									.floatMult(contractState.nominalRate)
-									.floatMult(contractState.nominalValue)
-								)
-							)
-					)
-			);
-		}
-		if (eventType == EventType.MD) {
-			return (
-				performanceIndicator(contractState.contractStatus)
-				* contractState.nominalScalingMultiplier
-					.floatMult(contractState.nominalValue)
-			);
-		}
-		if (eventType == EventType.PY) {
-			if (contractTerms.penaltyType == PenaltyType.A) {
-				return (
-					performanceIndicator(contractState.contractStatus)
-					* roleSign(contractTerms.contractRole)
-					* contractTerms.penaltyRate
-				);
-			} else if (contractTerms.penaltyType == PenaltyType.N) {
-				return (
-					performanceIndicator(contractState.contractStatus)
-					* roleSign(contractTerms.contractRole)
-					* yearFraction(
-							shiftCalcTime(contractState.lastEventTime, contractTerms.businessDayConvention, contractTerms.calendar),
-							shiftCalcTime(timestamp, contractTerms.businessDayConvention, contractTerms.calendar),
-							contractTerms.dayCountConvention,
-							contractTerms.maturityDate
-						)
-						.floatMult(contractTerms.penaltyRate)
-						.floatMult(contractState.nominalValue)
-				);
-			} else {
-				// riskFactor(timestamp, contractState, contractTerms, contractTerms.marketObjectCodeOfRateReset);
-				int256 risk = 0;
-				int256 param = 0;
-				if (contractState.nominalRate - risk > 0) param = contractState.nominalRate - risk;
-				return (
-					performanceIndicator(contractState.contractStatus)
-					* roleSign(contractTerms.contractRole)
-					* yearFraction(
-							shiftCalcTime(contractState.lastEventTime, contractTerms.businessDayConvention, contractTerms.calendar),
-							shiftCalcTime(timestamp, contractTerms.businessDayConvention, contractTerms.calendar),
-							contractTerms.dayCountConvention,
-							contractTerms.maturityDate
-						)
-						.floatMult(contractState.nominalValue)
-						.floatMult(param)
-				);
-			}
-		}
-		if (eventType == EventType.TD) {
-			return (
-				performanceIndicator(contractState.contractStatus)
-				* roleSign(contractTerms.contractRole)
-				* contractTerms.priceAtPurchaseDate
-					.add(contractState.nominalAccrued)
-					.add(
-						yearFraction(
-							shiftCalcTime(contractState.lastEventTime, contractTerms.businessDayConvention, contractTerms.calendar),
-							shiftCalcTime(timestamp, contractTerms.businessDayConvention, contractTerms.calendar),
-							contractTerms.dayCountConvention,
-							contractTerms.maturityDate
-						)
-						.floatMult(contractState.nominalRate)
-						.floatMult(contractState.nominalValue)
-					)
-			);
-		}
+		if (eventType == EventType.FP) return POF_ANN_FP(timestamp, contractTerms, contractState);
+		if (eventType == EventType.IED) return POF_ANN_IED(timestamp, contractTerms, contractState);
+		if (eventType == EventType.IP) return POF_ANN_IP(timestamp, contractTerms, contractState);
+		if (eventType == EventType.PP) return POF_ANN_PP(timestamp, contractTerms, contractState);
+		if (eventType == EventType.PRD) return POF_ANN_PRD(timestamp, contractTerms, contractState);
+		if (eventType == EventType.PR) return POF_ANN_PR(timestamp, contractTerms, contractState);
+		if (eventType == EventType.MD) return POF_ANN_MD(timestamp, contractTerms, contractState);
+		if (eventType == EventType.PY) return POF_ANN_PY(timestamp, contractTerms, contractState);
+		if (eventType == EventType.TD) return POF_ANN_TD(timestamp, contractTerms, contractState);
+
 		revert("ANNEngine.payoffFunction: ATTRIBUTE_NOT_FOUND");
 	}
 }

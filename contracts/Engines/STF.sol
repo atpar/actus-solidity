@@ -6,7 +6,7 @@ import "../Core/Core.sol";
 
 contract STF is Core {
 
-  function PAM_AD (
+  function STF_PAM_AD (
     uint256 timestamp,
     ContractTerms memory contractTerms,
     ContractState memory contractState
@@ -38,7 +38,7 @@ contract STF is Core {
     return contractState;
   }
 
-  function PAM_CD (
+  function STF_PAM_CD (
     uint256 timestamp,
     ContractTerms memory contractTerms,
     ContractState memory contractState
@@ -71,7 +71,7 @@ contract STF is Core {
     return contractState;
   }
 
-  function PAM_FP (
+  function STF_PAM_FP (
     uint256 timestamp,
     ContractTerms memory contractTerms,
     ContractState memory contractState
@@ -98,7 +98,7 @@ contract STF is Core {
     return contractState;
   }
 
-  function PAM_IED (
+  function STF_PAM_IED (
     uint256 timestamp,
     ContractTerms memory contractTerms,
     ContractState memory contractState
@@ -135,7 +135,7 @@ contract STF is Core {
     return contractState;
   }
 
-  function PAM_IPCI (
+  function STF_PAM_IPCI (
     uint256 timestamp,
     ContractTerms memory contractTerms,
     ContractState memory contractState
@@ -171,7 +171,7 @@ contract STF is Core {
     return contractState;
   }
 
-  function PAM_IP (
+  function STF_PAM_IP (
     uint256 timestamp,
     ContractTerms memory contractTerms,
     ContractState memory contractState
@@ -198,7 +198,7 @@ contract STF is Core {
     return contractState;
   }
 
-  function PAM_PP (
+  function STF_PAM_PP (
     uint256 timestamp,
     ContractTerms memory contractTerms,
     ContractState memory contractState
@@ -231,7 +231,7 @@ contract STF is Core {
     return contractState;
   }
 
-  function PAM_PRD (
+  function STF_PAM_PRD (
     uint256 timestamp,
     ContractTerms memory contractTerms,
     ContractState memory contractState
@@ -263,7 +263,7 @@ contract STF is Core {
     return contractState;
   }
 
-  function PAM_PR (
+  function STF_PAM_PR (
     uint256 timestamp,
     ContractTerms memory contractTerms,
     ContractState memory contractState
@@ -296,7 +296,7 @@ contract STF is Core {
     return contractState;
   }
 
-  function PAM_PY (
+  function STF_PAM_PY (
     uint256 timestamp,
     ContractTerms memory contractTerms,
     ContractState memory contractState
@@ -328,7 +328,7 @@ contract STF is Core {
     return contractState;
   }
 
-  function PAM_RRF (
+  function STF_PAM_RRF (
     uint256 timestamp,
     ContractTerms memory contractTerms,
     ContractState memory contractState
@@ -361,7 +361,7 @@ contract STF is Core {
     return contractState;
   }
 
-  function PAM_RR (
+  function STF_PAM_RR (
     uint256 timestamp,
     ContractTerms memory contractTerms,
     ContractState memory contractState
@@ -408,7 +408,7 @@ contract STF is Core {
     return contractState;
   }
 
-  function PAM_SC (
+  function STF_PAM_SC (
     uint256 timestamp,
     ContractTerms memory contractTerms,
     ContractState memory contractState
@@ -456,7 +456,7 @@ contract STF is Core {
     return contractState;
   }
 
-  function PAM_TD (
+  function STF_PAM_TD (
     uint256 timestamp,
     ContractTerms memory contractTerms,
     ContractState memory contractState
@@ -479,7 +479,7 @@ contract STF is Core {
     return contractState;
   }
 
-  function ANN_AD (
+  function STF_ANN_AD (
     uint256 timestamp,
     ContractTerms memory contractTerms,
     ContractState memory contractState
@@ -511,7 +511,7 @@ contract STF is Core {
     return contractState;
   }
 
-  function ANN_CD (
+  function STF_ANN_CD (
     uint256 timestamp,
     ContractTerms memory contractTerms,
     ContractState memory contractState
@@ -544,7 +544,7 @@ contract STF is Core {
     return contractState;
   }
 
-  function ANN_FP (
+  function STF_ANN_FP (
     uint256 timestamp,
     ContractTerms memory contractTerms,
     ContractState memory contractState
@@ -571,7 +571,7 @@ contract STF is Core {
     return contractState;
   }
 
-  function ANN_IED (
+  function STF_ANN_IED (
     uint256 timestamp,
     ContractTerms memory contractTerms,
     ContractState memory contractState
@@ -608,7 +608,7 @@ contract STF is Core {
     return contractState;
   }
 
-  function ANN_IPCI (
+  function STF_ANN_IPCI (
     uint256 timestamp,
     ContractTerms memory contractTerms,
     ContractState memory contractState
@@ -644,7 +644,7 @@ contract STF is Core {
     return contractState;
   }
 
-  function ANN_IP (
+  function STF_ANN_IP (
     uint256 timestamp,
     ContractTerms memory contractTerms,
     ContractState memory contractState
@@ -671,7 +671,7 @@ contract STF is Core {
     return contractState;
   }
 
-  function ANN_PP (
+  function STF_ANN_PP (
     uint256 timestamp,
     ContractTerms memory contractTerms,
     ContractState memory contractState
@@ -704,7 +704,7 @@ contract STF is Core {
     return contractState;
   }
 
-  function ANN_PRD (
+  function STF_ANN_PRD (
     uint256 timestamp,
     ContractTerms memory contractTerms,
     ContractState memory contractState
@@ -736,7 +736,7 @@ contract STF is Core {
     return contractState;
   }
 
-  function ANN_PR (
+  function STF_ANN_PR (
     uint256 timestamp,
     ContractTerms memory contractTerms,
     ContractState memory contractState
@@ -784,7 +784,7 @@ contract STF is Core {
     return contractState;
   }
 
-  function ANN_MD (
+  function STF_ANN_MD (
     uint256 timestamp,
     ContractTerms memory contractTerms,
     ContractState memory contractState
@@ -817,7 +817,7 @@ contract STF is Core {
     return contractState;
   }
 
-  function ANN_PY (
+  function STF_ANN_PY (
     uint256 timestamp,
     ContractTerms memory contractTerms,
     ContractState memory contractState
@@ -849,7 +849,7 @@ contract STF is Core {
     return contractState;
   }
 
-  function ANN_RRF (
+  function STF_ANN_RRF (
     uint256 timestamp,
     ContractTerms memory contractTerms,
     ContractState memory contractState
@@ -882,7 +882,7 @@ contract STF is Core {
     return contractState;
   }
 
-  function ANN_RR (
+  function STF_ANN_RR (
     uint256 timestamp,
     ContractTerms memory contractTerms,
     ContractState memory contractState
@@ -930,7 +930,7 @@ contract STF is Core {
     return contractState;
   }
 
-  function ANN_SC (
+  function STF_ANN_SC (
     uint256 timestamp,
     ContractTerms memory contractTerms,
     ContractState memory contractState
@@ -977,7 +977,7 @@ contract STF is Core {
     return contractState;
   }
 
-  function ANN_TD (
+  function STF_ANN_TD (
     uint256 timestamp,
     ContractTerms memory contractTerms,
     ContractState memory contractState
