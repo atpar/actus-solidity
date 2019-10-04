@@ -275,6 +275,42 @@
               "type": "tuple"
             },
             {
+              "components": [
+                {
+                  "name": "i",
+                  "type": "uint256"
+                },
+                {
+                  "name": "p",
+                  "type": "uint8"
+                },
+                {
+                  "name": "isSet",
+                  "type": "bool"
+                }
+              ],
+              "name": "gracePeriod",
+              "type": "tuple"
+            },
+            {
+              "components": [
+                {
+                  "name": "i",
+                  "type": "uint256"
+                },
+                {
+                  "name": "p",
+                  "type": "uint8"
+                },
+                {
+                  "name": "isSet",
+                  "type": "bool"
+                }
+              ],
+              "name": "delinquencyPeriod",
+              "type": "tuple"
+            },
+            {
               "name": "lifeCap",
               "type": "int256"
             },
@@ -304,8 +340,8 @@
               "type": "uint256"
             },
             {
-              "name": "contractStatus",
-              "type": "uint8"
+              "name": "nonPerformingDate",
+              "type": "uint256"
             },
             {
               "name": "timeFromLastEvent",
@@ -338,6 +374,10 @@
             {
               "name": "nextPrincipalRedemptionPayment",
               "type": "int256"
+            },
+            {
+              "name": "contractStatus",
+              "type": "uint8"
             },
             {
               "name": "contractRoleSign",
@@ -612,6 +652,42 @@
               "type": "tuple"
             },
             {
+              "components": [
+                {
+                  "name": "i",
+                  "type": "uint256"
+                },
+                {
+                  "name": "p",
+                  "type": "uint8"
+                },
+                {
+                  "name": "isSet",
+                  "type": "bool"
+                }
+              ],
+              "name": "gracePeriod",
+              "type": "tuple"
+            },
+            {
+              "components": [
+                {
+                  "name": "i",
+                  "type": "uint256"
+                },
+                {
+                  "name": "p",
+                  "type": "uint8"
+                },
+                {
+                  "name": "isSet",
+                  "type": "bool"
+                }
+              ],
+              "name": "delinquencyPeriod",
+              "type": "tuple"
+            },
+            {
               "name": "lifeCap",
               "type": "int256"
             },
@@ -638,8 +714,8 @@
               "type": "uint256"
             },
             {
-              "name": "contractStatus",
-              "type": "uint8"
+              "name": "nonPerformingDate",
+              "type": "uint256"
             },
             {
               "name": "timeFromLastEvent",
@@ -674,6 +750,10 @@
               "type": "int256"
             },
             {
+              "name": "contractStatus",
+              "type": "uint8"
+            },
+            {
               "name": "contractRoleSign",
               "type": "uint8"
             }
@@ -682,7 +762,7 @@
           "type": "tuple"
         },
         {
-          "name": "timestamp",
+          "name": "currentTimestamp",
           "type": "uint256"
         }
       ],
@@ -695,8 +775,8 @@
               "type": "uint256"
             },
             {
-              "name": "contractStatus",
-              "type": "uint8"
+              "name": "nonPerformingDate",
+              "type": "uint256"
             },
             {
               "name": "timeFromLastEvent",
@@ -729,6 +809,10 @@
             {
               "name": "nextPrincipalRedemptionPayment",
               "type": "int256"
+            },
+            {
+              "name": "contractStatus",
+              "type": "uint8"
             },
             {
               "name": "contractRoleSign",
@@ -1029,6 +1113,42 @@
               "type": "tuple"
             },
             {
+              "components": [
+                {
+                  "name": "i",
+                  "type": "uint256"
+                },
+                {
+                  "name": "p",
+                  "type": "uint8"
+                },
+                {
+                  "name": "isSet",
+                  "type": "bool"
+                }
+              ],
+              "name": "gracePeriod",
+              "type": "tuple"
+            },
+            {
+              "components": [
+                {
+                  "name": "i",
+                  "type": "uint256"
+                },
+                {
+                  "name": "p",
+                  "type": "uint8"
+                },
+                {
+                  "name": "isSet",
+                  "type": "bool"
+                }
+              ],
+              "name": "delinquencyPeriod",
+              "type": "tuple"
+            },
+            {
               "name": "lifeCap",
               "type": "int256"
             },
@@ -1055,8 +1175,8 @@
               "type": "uint256"
             },
             {
-              "name": "contractStatus",
-              "type": "uint8"
+              "name": "nonPerformingDate",
+              "type": "uint256"
             },
             {
               "name": "timeFromLastEvent",
@@ -1089,6 +1209,10 @@
             {
               "name": "nextPrincipalRedemptionPayment",
               "type": "int256"
+            },
+            {
+              "name": "contractStatus",
+              "type": "uint8"
             },
             {
               "name": "contractRoleSign",
@@ -1133,7 +1257,7 @@
           "type": "tuple"
         },
         {
-          "name": "timestamp",
+          "name": "currentTimestamp",
           "type": "uint256"
         }
       ],
@@ -1146,8 +1270,8 @@
               "type": "uint256"
             },
             {
-              "name": "contractStatus",
-              "type": "uint8"
+              "name": "nonPerformingDate",
+              "type": "uint256"
             },
             {
               "name": "timeFromLastEvent",
@@ -1180,6 +1304,10 @@
             {
               "name": "nextPrincipalRedemptionPayment",
               "type": "int256"
+            },
+            {
+              "name": "contractStatus",
+              "type": "uint8"
             },
             {
               "name": "contractRoleSign",
@@ -1477,6 +1605,42 @@
                 }
               ],
               "name": "cycleOfPrincipalRedemption",
+              "type": "tuple"
+            },
+            {
+              "components": [
+                {
+                  "name": "i",
+                  "type": "uint256"
+                },
+                {
+                  "name": "p",
+                  "type": "uint8"
+                },
+                {
+                  "name": "isSet",
+                  "type": "bool"
+                }
+              ],
+              "name": "gracePeriod",
+              "type": "tuple"
+            },
+            {
+              "components": [
+                {
+                  "name": "i",
+                  "type": "uint256"
+                },
+                {
+                  "name": "p",
+                  "type": "uint8"
+                },
+                {
+                  "name": "isSet",
+                  "type": "bool"
+                }
+              ],
+              "name": "delinquencyPeriod",
               "type": "tuple"
             },
             {
@@ -1557,5 +1721,5 @@
     "version": "0.5.2+commit.1df8f40c.Emscripten.clang"
   },
   "networks": {},
-  "updatedAt": "2019-10-04T14:32:19.380Z"
+  "updatedAt": "2019-10-04T17:32:18.414Z"
 }
