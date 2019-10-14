@@ -40,28 +40,28 @@ function compareTestResults (actualResults, expectedResults) {
       ? numberOfDecimals(actualEvent.eventValue)
       : numberOfDecimals(expectedEvent.eventValue);
 
-    const decimalsNominalValue = (numberOfDecimals(actualEvent.nominalValue) < numberOfDecimals(expectedEvent.nominalValue)) 
-      ? numberOfDecimals(actualEvent.nominalValue)
-      : numberOfDecimals(expectedEvent.nominalValue);
+    const decimalsNominalValue = (numberOfDecimals(actualEvent.notionalPrincipal) < numberOfDecimals(expectedEvent.notionalPrincipal)) 
+      ? numberOfDecimals(actualEvent.notionalPrincipal)
+      : numberOfDecimals(expectedEvent.notionalPrincipal);
 
-    const decimalsNominalAccrued = (numberOfDecimals(actualEvent.nominalAccrued) < numberOfDecimals(expectedEvent.nominalAccrued)) 
-      ? numberOfDecimals(actualEvent.nominalAccrued)
-      : numberOfDecimals(expectedEvent.nominalAccrued);
+    const decimalsNominalAccrued = (numberOfDecimals(actualEvent.accruedInterest) < numberOfDecimals(expectedEvent.accruedInterest)) 
+      ? numberOfDecimals(actualEvent.accruedInterest)
+      : numberOfDecimals(expectedEvent.accruedInterest);
 
     assert.deepEqual({
       eventDate: actualEvent.eventDate,
       eventType: actualEvent.eventType,
       eventValue: roundToDecimals(actualEvent.eventValue, decimalsEventValue),
-      nominalValue: roundToDecimals(actualEvent.nominalValue, decimalsNominalValue),
-      nominalRate: actualEvent.nominalRate,
-      nominalAccrued: roundToDecimals(actualEvent.nominalAccrued, decimalsNominalAccrued)
+      notionalPrincipal: roundToDecimals(actualEvent.notionalPrincipal, decimalsNominalValue),
+      nominalInterestRate: actualEvent.nominalInterestRate,
+      accruedInterest: roundToDecimals(actualEvent.accruedInterest, decimalsNominalAccrued)
     }, {  
       eventDate: expectedEvent.eventDate,
       eventType: expectedEvent.eventType,
       eventValue: roundToDecimals(expectedEvent.eventValue, decimalsEventValue),
-      nominalValue: roundToDecimals(expectedEvent.nominalValue, decimalsNominalValue),
-      nominalRate: expectedEvent.nominalRate,
-      nominalAccrued: roundToDecimals(expectedEvent.nominalAccrued, decimalsNominalAccrued)
+      notionalPrincipal: roundToDecimals(expectedEvent.notionalPrincipal, decimalsNominalValue),
+      nominalInterestRate: expectedEvent.nominalInterestRate,
+      accruedInterest: roundToDecimals(expectedEvent.accruedInterest, decimalsNominalAccrued)
     });
   }
 }

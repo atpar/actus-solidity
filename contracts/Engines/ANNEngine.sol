@@ -390,14 +390,13 @@ contract ANNEngine is Core, IEngine, STF, POF {
 	{
 		ContractState memory contractState;
 
-		contractState.contractStatus = ContractStatus.PF;
-		contractState.nominalScalingMultiplier = int256(1 * 10 ** PRECISION);
+		contractState.contractPerformance = ContractPerformance.PF;
+		contractState.notionalScalingMultiplier = int256(1 * 10 ** PRECISION);
 		contractState.interestScalingMultiplier = int256(1 * 10 ** PRECISION);
-		contractState.contractRoleSign = contractTerms.contractRole;
 		contractState.lastEventTime = contractTerms.statusDate;
-		contractState.nominalValue = roleSign(contractTerms.contractRole) * contractTerms.notionalPrincipal;
-		contractState.nominalRate = contractTerms.nominalInterestRate;
-		contractState.nominalAccrued = roleSign(contractTerms.contractRole) * contractTerms.accruedInterest;
+		contractState.notionalPrincipal = roleSign(contractTerms.contractRole) * contractTerms.notionalPrincipal;
+		contractState.nominalInterestRate = contractTerms.nominalInterestRate;
+		contractState.accruedInterest = roleSign(contractTerms.contractRole) * contractTerms.accruedInterest;
 		contractState.feeAccrued = contractTerms.feeAccrued;
 		// annuity calculator to be implemented
 		contractState.nextPrincipalRedemptionPayment = roleSign(contractTerms.contractRole) * contractTerms.nextPrincipalRedemptionPayment;

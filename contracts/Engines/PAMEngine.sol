@@ -415,14 +415,13 @@ contract PAMEngine is Core, IEngine, STF, POF {
 	{
 		ContractState memory contractState;
 
-		contractState.contractStatus = ContractStatus.PF;
-		contractState.nominalScalingMultiplier = int256(1 * 10 ** PRECISION);
+		contractState.contractPerformance = ContractPerformance.PF;
+		contractState.notionalScalingMultiplier = int256(1 * 10 ** PRECISION);
 		contractState.interestScalingMultiplier = int256(1 * 10 ** PRECISION);
-		contractState.contractRoleSign = contractTerms.contractRole;
 		contractState.lastEventTime = contractTerms.statusDate;
-		contractState.nominalValue = contractTerms.notionalPrincipal;
-		contractState.nominalRate = contractTerms.nominalInterestRate;
-		contractState.nominalAccrued = contractTerms.accruedInterest;
+		contractState.notionalPrincipal = contractTerms.notionalPrincipal;
+		contractState.nominalInterestRate = contractTerms.nominalInterestRate;
+		contractState.accruedInterest = contractTerms.accruedInterest;
 		contractState.feeAccrued = contractTerms.feeAccrued;
 
 		return contractState;

@@ -5,12 +5,12 @@ import "../Definitions.sol";
 
 contract ContractDefaultConvention is Definitions {
 
-  function performanceIndicator(ContractStatus contractStatus)
+  function performanceIndicator(ContractPerformance contractPerformance)
 		internal
 		pure
 		returns (int8)
 	{
-		if (contractStatus == ContractStatus.DF) return 0;
+		if (contractPerformance == ContractPerformance.DF) return 0;
 		return 1;
 	}
 }

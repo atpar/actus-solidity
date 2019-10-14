@@ -9,10 +9,10 @@ import "../../contracts/Core/Core.sol";
 contract TestCore is Core {
 
   function testPerformanceIndicator() public {
-    Assert.equal(performanceIndicator(ContractStatus.PF), 1, "Performance should be 1");
-    Assert.equal(performanceIndicator(ContractStatus.DL), 1, "Performance should be 1");
-    Assert.equal(performanceIndicator(ContractStatus.DQ), 1, "Performance should be 1");
-    Assert.equal(performanceIndicator(ContractStatus.DF), 0, "Performance should be 0");
+    Assert.equal(performanceIndicator(ContractPerformance.PF), 1, "Performance should be 1");
+    Assert.equal(performanceIndicator(ContractPerformance.DL), 1, "Performance should be 1");
+    Assert.equal(performanceIndicator(ContractPerformance.DQ), 1, "Performance should be 1");
+    Assert.equal(performanceIndicator(ContractPerformance.DF), 0, "Performance should be 0");
   }
 
   function testRoleSign() public {

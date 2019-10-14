@@ -89,14 +89,14 @@ contract POF is Core {
   {
     if (contractTerms.feeBasis == FeeBasis.A) {
       return (
-        performanceIndicator(contractState.contractStatus)
+        performanceIndicator(contractState.contractPerformance)
         * roleSign(contractTerms.contractRole)
         * contractTerms.feeRate
       );
     }
 
     return (
-      performanceIndicator(contractState.contractStatus)
+      performanceIndicator(contractState.contractPerformance)
       * contractState.feeAccrued
         .add(
           yearFraction(
@@ -106,7 +106,7 @@ contract POF is Core {
             contractTerms.maturityDate
           )
           .floatMult(contractTerms.feeRate)
-          .floatMult(contractState.nominalValue)
+          .floatMult(contractState.notionalPrincipal)
         )
     );
   }
@@ -121,7 +121,7 @@ contract POF is Core {
     returns(int256)
   {
     return (
-      performanceIndicator(contractState.contractStatus)
+      performanceIndicator(contractState.contractPerformance)
       * roleSign(contractTerms.contractRole)
       * (-1)
       * contractTerms.notionalPrincipal
@@ -139,10 +139,10 @@ contract POF is Core {
     returns(int256)
   {
     return (
-      performanceIndicator(contractState.contractStatus)
+      performanceIndicator(contractState.contractPerformance)
       * contractState.interestScalingMultiplier
         .floatMult(
-          contractState.nominalAccrued
+          contractState.accruedInterest
           .add(
             yearFraction(
               shiftCalcTime(contractState.lastEventTime, contractTerms.businessDayConvention, contractTerms.calendar),
@@ -150,8 +150,8 @@ contract POF is Core {
               contractTerms.dayCountConvention,
               contractTerms.maturityDate
             )
-            .floatMult(contractState.nominalRate)
-            .floatMult(contractState.nominalValue)
+            .floatMult(contractState.nominalInterestRate)
+            .floatMult(contractState.notionalPrincipal)
           )
         )
     );
@@ -167,10 +167,10 @@ contract POF is Core {
     returns(int256)
   {
     return (
-      performanceIndicator(contractState.contractStatus)
+      performanceIndicator(contractState.contractPerformance)
       * roleSign(contractTerms.contractRole)
       * 0 // riskFactor(timestamp, contractState, contractTerms, contractTerms.objectCodeOfPrepaymentModel)
-      * contractState.nominalValue
+      * contractState.notionalPrincipal
     );
   }
 
@@ -184,11 +184,11 @@ contract POF is Core {
     returns(int256)
   {
     return (
-      performanceIndicator(contractState.contractStatus)
+      performanceIndicator(contractState.contractPerformance)
       * roleSign(contractTerms.contractRole)
       * (-1)
       * contractTerms.priceAtPurchaseDate
-        .add(contractState.nominalAccrued)
+        .add(contractState.accruedInterest)
         .add(
           yearFraction(
             shiftCalcTime(contractState.lastEventTime, contractTerms.businessDayConvention, contractTerms.calendar),
@@ -196,8 +196,8 @@ contract POF is Core {
             contractTerms.dayCountConvention,
             contractTerms.maturityDate
           )
-          .floatMult(contractState.nominalRate)
-          .floatMult(contractState.nominalValue)
+          .floatMult(contractState.nominalInterestRate)
+          .floatMult(contractState.notionalPrincipal)
         )
     );
   }
@@ -212,9 +212,9 @@ contract POF is Core {
     returns(int256)
   {
     return (
-      performanceIndicator(contractState.contractStatus)
-      * contractState.nominalScalingMultiplier
-        .floatMult(contractState.nominalValue)
+      performanceIndicator(contractState.contractPerformance)
+      * contractState.notionalScalingMultiplier
+        .floatMult(contractState.notionalPrincipal)
     );
   }
 
@@ -229,13 +229,13 @@ contract POF is Core {
   {
     if (contractTerms.penaltyType == PenaltyType.A) {
       return (
-        performanceIndicator(contractState.contractStatus)
+        performanceIndicator(contractState.contractPerformance)
         * roleSign(contractTerms.contractRole)
         * contractTerms.penaltyRate
       );
     } else if (contractTerms.penaltyType == PenaltyType.N) {
       return (
-        performanceIndicator(contractState.contractStatus)
+        performanceIndicator(contractState.contractPerformance)
         * roleSign(contractTerms.contractRole)
         * yearFraction(
             shiftCalcTime(contractState.lastEventTime, contractTerms.businessDayConvention, contractTerms.calendar),
@@ -244,15 +244,15 @@ contract POF is Core {
             contractTerms.maturityDate
           )
           .floatMult(contractTerms.penaltyRate)
-          .floatMult(contractState.nominalValue)
+          .floatMult(contractState.notionalPrincipal)
       );
     } else {
       // riskFactor(timestamp, contractState, contractTerms, contractTerms.marketObjectCodeOfRateReset);
       int256 risk = 0;
       int256 param = 0;
-      if (contractState.nominalRate - risk > 0) param = contractState.nominalRate - risk;
+      if (contractState.nominalInterestRate - risk > 0) param = contractState.nominalInterestRate - risk;
       return (
-        performanceIndicator(contractState.contractStatus)
+        performanceIndicator(contractState.contractPerformance)
         * roleSign(contractTerms.contractRole)
         * yearFraction(
             shiftCalcTime(contractState.lastEventTime, contractTerms.businessDayConvention, contractTerms.calendar),
@@ -260,7 +260,7 @@ contract POF is Core {
             contractTerms.dayCountConvention,
             contractTerms.maturityDate
           )
-          .floatMult(contractState.nominalValue)
+          .floatMult(contractState.notionalPrincipal)
           .floatMult(param)
       );
     }
@@ -276,10 +276,10 @@ contract POF is Core {
     returns(int256)
   {
     return (
-      performanceIndicator(contractState.contractStatus)
+      performanceIndicator(contractState.contractPerformance)
       * roleSign(contractTerms.contractRole)
       * contractTerms.priceAtPurchaseDate
-        .add(contractState.nominalAccrued)
+        .add(contractState.accruedInterest)
         .add(
           yearFraction(
             shiftCalcTime(contractState.lastEventTime, contractTerms.businessDayConvention, contractTerms.calendar),
@@ -287,8 +287,8 @@ contract POF is Core {
             contractTerms.dayCountConvention,
             contractTerms.maturityDate
           )
-          .floatMult(contractState.nominalRate)
-          .floatMult(contractState.nominalValue)
+          .floatMult(contractState.nominalInterestRate)
+          .floatMult(contractState.notionalPrincipal)
         )
     );
   }
@@ -376,13 +376,13 @@ contract POF is Core {
   {
     if (contractTerms.feeBasis == FeeBasis.A) {
       return (
-        performanceIndicator(contractState.contractStatus)
+        performanceIndicator(contractState.contractPerformance)
         * roleSign(contractTerms.contractRole)
         * contractTerms.feeRate
       );
     } else {
       return (
-        performanceIndicator(contractState.contractStatus)
+        performanceIndicator(contractState.contractPerformance)
         * contractState.feeAccrued
           .add(
             yearFraction(
@@ -392,7 +392,7 @@ contract POF is Core {
               contractTerms.maturityDate
             )
             .floatMult(contractTerms.feeRate)
-            .floatMult(contractState.nominalValue)
+            .floatMult(contractState.notionalPrincipal)
           )
       );
     }
@@ -408,7 +408,7 @@ contract POF is Core {
     returns(int256)
   {
     return (
-      performanceIndicator(contractState.contractStatus)
+      performanceIndicator(contractState.contractPerformance)
       * roleSign(contractTerms.contractRole)
       * (-1)
       * contractTerms.notionalPrincipal
@@ -426,10 +426,10 @@ contract POF is Core {
     returns(int256)
   {
     return (
-      performanceIndicator(contractState.contractStatus)
+      performanceIndicator(contractState.contractPerformance)
       * contractState.interestScalingMultiplier
         .floatMult(
-          contractState.nominalAccrued
+          contractState.accruedInterest
           .add(
             yearFraction(
               shiftCalcTime(contractState.lastEventTime, contractTerms.businessDayConvention, contractTerms.calendar),
@@ -437,8 +437,8 @@ contract POF is Core {
               contractTerms.dayCountConvention,
               contractTerms.maturityDate
             )
-            .floatMult(contractState.nominalRate)
-            .floatMult(contractState.nominalValue)
+            .floatMult(contractState.nominalInterestRate)
+            .floatMult(contractState.notionalPrincipal)
           )
         )
     );
@@ -454,10 +454,10 @@ contract POF is Core {
     returns(int256)
   {
     return (
-      performanceIndicator(contractState.contractStatus)
+      performanceIndicator(contractState.contractPerformance)
       * roleSign(contractTerms.contractRole)
       * 0 // riskFactor(timestamp, contractState, contractTerms, contractTerms.objectCodeOfPrepaymentModel)
-      * contractState.nominalValue
+      * contractState.notionalPrincipal
     );
   }
 
@@ -471,11 +471,11 @@ contract POF is Core {
     returns(int256)
   {
     return (
-      performanceIndicator(contractState.contractStatus)
+      performanceIndicator(contractState.contractPerformance)
       * roleSign(contractTerms.contractRole)
       * (-1)
       * contractTerms.priceAtPurchaseDate
-        .add(contractState.nominalAccrued)
+        .add(contractState.accruedInterest)
         .add(
           yearFraction(
             shiftCalcTime(contractState.lastEventTime, contractTerms.businessDayConvention, contractTerms.calendar),
@@ -483,8 +483,8 @@ contract POF is Core {
             contractTerms.dayCountConvention,
             contractTerms.maturityDate
           )
-          .floatMult(contractState.nominalRate)
-          .floatMult(contractState.nominalValue)
+          .floatMult(contractState.nominalInterestRate)
+          .floatMult(contractState.notionalPrincipal)
         )
     );
   }
@@ -499,23 +499,23 @@ contract POF is Core {
     returns(int256)
   {
     return (
-      performanceIndicator(contractState.contractStatus)
-      * (contractState.nominalScalingMultiplier * roleSign(contractTerms.contractRole))
+      performanceIndicator(contractState.contractPerformance)
+      * (contractState.notionalScalingMultiplier * roleSign(contractTerms.contractRole))
         .floatMult(
-          (roleSign(contractTerms.contractRole) * contractState.nominalValue)
+          (roleSign(contractTerms.contractRole) * contractState.notionalPrincipal)
           .min(
               roleSign(contractTerms.contractRole)
               * (
                 contractState.nextPrincipalRedemptionPayment
-                - contractState.nominalAccrued
+                - contractState.accruedInterest
                 - yearFraction(
                   shiftCalcTime(contractState.lastEventTime, contractTerms.businessDayConvention, contractTerms.calendar),
                   shiftCalcTime(timestamp, contractTerms.businessDayConvention, contractTerms.calendar),
                   contractTerms.dayCountConvention,
                   contractTerms.maturityDate
                 )
-                .floatMult(contractState.nominalRate)
-                .floatMult(contractState.nominalValue)
+                .floatMult(contractState.nominalInterestRate)
+                .floatMult(contractState.notionalPrincipal)
               )
             )
         )
@@ -532,9 +532,9 @@ contract POF is Core {
     returns(int256)
   {
     return (
-      performanceIndicator(contractState.contractStatus)
-      * contractState.nominalScalingMultiplier
-        .floatMult(contractState.nominalValue)
+      performanceIndicator(contractState.contractPerformance)
+      * contractState.notionalScalingMultiplier
+        .floatMult(contractState.notionalPrincipal)
     );
   }
 
@@ -549,13 +549,13 @@ contract POF is Core {
   {
     if (contractTerms.penaltyType == PenaltyType.A) {
       return (
-        performanceIndicator(contractState.contractStatus)
+        performanceIndicator(contractState.contractPerformance)
         * roleSign(contractTerms.contractRole)
         * contractTerms.penaltyRate
       );
     } else if (contractTerms.penaltyType == PenaltyType.N) {
       return (
-        performanceIndicator(contractState.contractStatus)
+        performanceIndicator(contractState.contractPerformance)
         * roleSign(contractTerms.contractRole)
         * yearFraction(
             shiftCalcTime(contractState.lastEventTime, contractTerms.businessDayConvention, contractTerms.calendar),
@@ -564,15 +564,15 @@ contract POF is Core {
             contractTerms.maturityDate
           )
           .floatMult(contractTerms.penaltyRate)
-          .floatMult(contractState.nominalValue)
+          .floatMult(contractState.notionalPrincipal)
       );
     } else {
       // riskFactor(timestamp, contractState, contractTerms, contractTerms.marketObjectCodeOfRateReset);
       int256 risk = 0;
       int256 param = 0;
-      if (contractState.nominalRate - risk > 0) param = contractState.nominalRate - risk;
+      if (contractState.nominalInterestRate - risk > 0) param = contractState.nominalInterestRate - risk;
       return (
-        performanceIndicator(contractState.contractStatus)
+        performanceIndicator(contractState.contractPerformance)
         * roleSign(contractTerms.contractRole)
         * yearFraction(
             shiftCalcTime(contractState.lastEventTime, contractTerms.businessDayConvention, contractTerms.calendar),
@@ -580,7 +580,7 @@ contract POF is Core {
             contractTerms.dayCountConvention,
             contractTerms.maturityDate
           )
-          .floatMult(contractState.nominalValue)
+          .floatMult(contractState.notionalPrincipal)
           .floatMult(param)
       );
     }
@@ -596,10 +596,10 @@ contract POF is Core {
     returns(int256)
   {
     return (
-      performanceIndicator(contractState.contractStatus)
+      performanceIndicator(contractState.contractPerformance)
       * roleSign(contractTerms.contractRole)
       * contractTerms.priceAtPurchaseDate
-        .add(contractState.nominalAccrued)
+        .add(contractState.accruedInterest)
         .add(
           yearFraction(
             shiftCalcTime(contractState.lastEventTime, contractTerms.businessDayConvention, contractTerms.calendar),
@@ -607,8 +607,8 @@ contract POF is Core {
             contractTerms.dayCountConvention,
             contractTerms.maturityDate
           )
-          .floatMult(contractState.nominalRate)
-          .floatMult(contractState.nominalValue)
+          .floatMult(contractState.nominalInterestRate)
+          .floatMult(contractState.notionalPrincipal)
         )
     );
   }

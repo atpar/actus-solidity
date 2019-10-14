@@ -4,8 +4,8 @@
     "name": "Last Event Time",
     "type": "date"
   },
-  "contractStatus": {
-    "id": "contractStatus",
+  "contractPerformance": {
+    "id": "contractPerformance",
     "name": "Contract Status",
     "type": "enum",
     "options": [
@@ -20,8 +20,8 @@
     "name": "Time From Last Event",
     "type": "date"
   },
-  "nominalAccrued": {
-    "id": "nominalAccrued",
+  "accruedInterest": {
+    "id": "accruedInterest",
     "name": "Nominal Accrued",
     "type": "number"
   },
@@ -30,8 +30,8 @@
     "name": "Fee Accrued",
     "type": "number"
   },
-  "nominalRate": {
-    "id": "nominalRate",
+  "nominalInterestRate": {
+    "id": "nominalInterestRate",
     "name": "Nominal Rate",
     "type": "number"
   },
@@ -40,8 +40,8 @@
     "name": "Interest Scaling Multiplier",
     "type": "number"
   },
-  "nominalScalingMultiplier": {
-    "id": "nominalScalingMultiplier",
+  "notionalScalingMultiplier": {
+    "id": "notionalScalingMultiplier",
     "name": "Nominal Scaling Multiplier",
     "type": "number"
   },

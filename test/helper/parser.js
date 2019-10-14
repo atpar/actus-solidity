@@ -100,9 +100,9 @@ const parseResultsFromObject = (schedule) => {
       eventDate: new Date(event['eventDate'] + 'Z').toISOString(),
       eventType: eventTypeIndex.toString(),
       eventValue: Number(event['eventValue']),
-      nominalValue: Number(event['nominalValue']),
-      nominalRate: Number(event['nominalRate']),
-      nominalAccrued: Number(event['nominalAccrued']),
+      notionalPrincipal: Number(event['notionalPrincipal']),
+      nominalInterestRate: Number(event['nominalInterestRate']),
+      accruedInterest: Number(event['accruedInterest']),
     });
   }
 
@@ -114,9 +114,9 @@ function parseToTestEvent (event, state) {
     eventDate: unixToISO(event['eventTime']),
     eventType: event['eventType'],
     eventValue: fromPrecision(event['payoff']),
-    nominalValue: fromPrecision(state['nominalValue']),
-    nominalRate: fromPrecision(state['nominalRate']),
-    nominalAccrued: fromPrecision(state['nominalAccrued']),
+    notionalPrincipal: fromPrecision(state['notionalPrincipal']),
+    nominalInterestRate: fromPrecision(state['nominalInterestRate']),
+    accruedInterest: fromPrecision(state['accruedInterest']),
   };
 }
 
