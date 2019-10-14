@@ -427,21 +427,21 @@ contract ANNEngine is Core, IEngine, STF, POF {
 		pure
 		returns (ContractState memory)
 	{
-		if (eventType == EventType.AD) return STF_ANN_AD(timestamp, contractTerms, contractState);
-		if (eventType == EventType.CD) return STF_ANN_CD(timestamp, contractTerms, contractState);
-		if (eventType == EventType.FP)  return STF_ANN_FP(timestamp, contractTerms, contractState);
+		if (eventType == EventType.AD) return STF_PAM_AD(timestamp, contractTerms, contractState);
+		if (eventType == EventType.CD) return STF_PAM_CD(timestamp, contractTerms, contractState);
+		if (eventType == EventType.FP)  return STF_PAM_FP(timestamp, contractTerms, contractState);
 		if (eventType == EventType.IED) return STF_ANN_IED(timestamp, contractTerms, contractState);
 		if (eventType == EventType.IPCI) return STF_ANN_IPCI(timestamp, contractTerms, contractState);
 		if (eventType == EventType.IP) return STF_ANN_IP(timestamp, contractTerms, contractState);
-		if (eventType == EventType.PP) return STF_ANN_PP(timestamp, contractTerms, contractState);
-		if (eventType == EventType.PRD) return STF_ANN_PRD(timestamp, contractTerms, contractState);
+		if (eventType == EventType.PP) return STF_PAM_PP(timestamp, contractTerms, contractState);
+		if (eventType == EventType.PRD) return STF_PAM_PRD(timestamp, contractTerms, contractState);
 		if (eventType == EventType.PR) return STF_ANN_PR(timestamp, contractTerms, contractState);
 		if (eventType == EventType.MD) return STF_ANN_MD(timestamp, contractTerms, contractState);
-		if (eventType == EventType.PY)  return STF_ANN_PY(timestamp, contractTerms, contractState);
-		if (eventType == EventType.RRF) return STF_ANN_RRF(timestamp, contractTerms, contractState);
+		if (eventType == EventType.PY)  return STF_PAM_PY(timestamp, contractTerms, contractState);
+		if (eventType == EventType.RRF) return STF_PAM_RRF(timestamp, contractTerms, contractState);
 		if (eventType == EventType.RR)  return STF_ANN_RR(timestamp, contractTerms, contractState);
 		if (eventType == EventType.SC) return STF_ANN_SC(timestamp, contractTerms, contractState);
-		if (eventType == EventType.TD)  return STF_ANN_TD(timestamp, contractTerms, contractState);
+		if (eventType == EventType.TD)  return STF_PAM_TD(timestamp, contractTerms, contractState);
 
 		revert("ANNEngine.stateTransitionFunction: ATTRIBUTE_NOT_FOUND");
 	}
@@ -474,14 +474,14 @@ contract ANNEngine is Core, IEngine, STF, POF {
 		if (eventType == EventType.RR) return POF_ANN_RR(timestamp, contractTerms, contractState);
 		if (eventType == EventType.SC) return POF_ANN_SC(timestamp, contractTerms, contractState);
 		if (eventType == EventType.FP) return POF_ANN_FP(timestamp, contractTerms, contractState);
-		if (eventType == EventType.IED) return POF_ANN_IED(timestamp, contractTerms, contractState);
-		if (eventType == EventType.IP) return POF_ANN_IP(timestamp, contractTerms, contractState);
-		if (eventType == EventType.PP) return POF_ANN_PP(timestamp, contractTerms, contractState);
-		if (eventType == EventType.PRD) return POF_ANN_PRD(timestamp, contractTerms, contractState);
+		if (eventType == EventType.IED) return POF_PAM_IED(timestamp, contractTerms, contractState);
+		if (eventType == EventType.IP) return POF_PAM_IP(timestamp, contractTerms, contractState);
+		if (eventType == EventType.PP) return POF_PAM_PP(timestamp, contractTerms, contractState);
+		if (eventType == EventType.PRD) return POF_PAM_PRD(timestamp, contractTerms, contractState);
 		if (eventType == EventType.PR) return POF_ANN_PR(timestamp, contractTerms, contractState);
 		if (eventType == EventType.MD) return POF_ANN_MD(timestamp, contractTerms, contractState);
-		if (eventType == EventType.PY) return POF_ANN_PY(timestamp, contractTerms, contractState);
-		if (eventType == EventType.TD) return POF_ANN_TD(timestamp, contractTerms, contractState);
+		if (eventType == EventType.PY) return POF_PAM_PY(timestamp, contractTerms, contractState);
+		if (eventType == EventType.TD) return POF_PAM_TD(timestamp, contractTerms, contractState);
 
 		revert("ANNEngine.payoffFunction: ATTRIBUTE_NOT_FOUND");
 	}
