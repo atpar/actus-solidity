@@ -479,97 +479,97 @@ contract STF is Core {
     return contractState;
   }
 
-  function STF_ANN_AD (
-    uint256 timestamp,
-    ContractTerms memory contractTerms,
-    ContractState memory contractState
-  )
-    internal
-    pure
-    returns (ContractState memory)
-  {
-    contractState.timeFromLastEvent = yearFraction(
-      shiftCalcTime(contractState.lastEventTime, contractTerms.businessDayConvention, contractTerms.calendar),
-      shiftCalcTime(timestamp, contractTerms.businessDayConvention, contractTerms.calendar),
-      contractTerms.dayCountConvention,
-      contractTerms.maturityDate
-    );
-    contractState.nominalAccrued = contractState.nominalAccrued
-    .add(
-      contractState.nominalRate
-      .floatMult(contractState.nominalValue)
-      .floatMult(contractState.timeFromLastEvent)
-    );
-    contractState.feeAccrued = contractState.feeAccrued
-    .add(
-      contractTerms.feeRate
-      .floatMult(contractState.nominalValue)
-      .floatMult(contractState.timeFromLastEvent)
-    );
-    contractState.lastEventTime = timestamp;
+  // function STF_ANN_AD (
+  //   uint256 timestamp,
+  //   ContractTerms memory contractTerms,
+  //   ContractState memory contractState
+  // )
+  //   internal
+  //   pure
+  //   returns (ContractState memory)
+  // {
+  //   contractState.timeFromLastEvent = yearFraction(
+  //     shiftCalcTime(contractState.lastEventTime, contractTerms.businessDayConvention, contractTerms.calendar),
+  //     shiftCalcTime(timestamp, contractTerms.businessDayConvention, contractTerms.calendar),
+  //     contractTerms.dayCountConvention,
+  //     contractTerms.maturityDate
+  //   );
+  //   contractState.nominalAccrued = contractState.nominalAccrued
+  //   .add(
+  //     contractState.nominalRate
+  //     .floatMult(contractState.nominalValue)
+  //     .floatMult(contractState.timeFromLastEvent)
+  //   );
+  //   contractState.feeAccrued = contractState.feeAccrued
+  //   .add(
+  //     contractTerms.feeRate
+  //     .floatMult(contractState.nominalValue)
+  //     .floatMult(contractState.timeFromLastEvent)
+  //   );
+  //   contractState.lastEventTime = timestamp;
 
-    return contractState;
-  }
+  //   return contractState;
+  // }
 
-  function STF_ANN_CD (
-    uint256 timestamp,
-    ContractTerms memory contractTerms,
-    ContractState memory contractState
-  )
-    internal
-    pure
-    returns (ContractState memory)
-  {
-    contractState.timeFromLastEvent = yearFraction(
-      shiftCalcTime(contractState.lastEventTime, contractTerms.businessDayConvention, contractTerms.calendar),
-      shiftCalcTime(timestamp, contractTerms.businessDayConvention, contractTerms.calendar),
-      contractTerms.dayCountConvention,
-      contractTerms.maturityDate
-    );
-    contractState.nominalAccrued = contractState.nominalAccrued
-    .add(
-      contractState.nominalRate
-      .floatMult(contractState.nominalValue)
-      .floatMult(contractState.timeFromLastEvent)
-    );
-    contractState.feeAccrued = contractState.feeAccrued
-    .add(
-      contractTerms.feeRate
-      .floatMult(contractState.nominalValue)
-      .floatMult(contractState.timeFromLastEvent)
-    );
-    contractState.contractStatus = ContractStatus.DF;
-    contractState.lastEventTime = timestamp;
+  // function STF_ANN_CD (
+  //   uint256 timestamp,
+  //   ContractTerms memory contractTerms,
+  //   ContractState memory contractState
+  // )
+  //   internal
+  //   pure
+  //   returns (ContractState memory)
+  // {
+  //   contractState.timeFromLastEvent = yearFraction(
+  //     shiftCalcTime(contractState.lastEventTime, contractTerms.businessDayConvention, contractTerms.calendar),
+  //     shiftCalcTime(timestamp, contractTerms.businessDayConvention, contractTerms.calendar),
+  //     contractTerms.dayCountConvention,
+  //     contractTerms.maturityDate
+  //   );
+  //   contractState.nominalAccrued = contractState.nominalAccrued
+  //   .add(
+  //     contractState.nominalRate
+  //     .floatMult(contractState.nominalValue)
+  //     .floatMult(contractState.timeFromLastEvent)
+  //   );
+  //   contractState.feeAccrued = contractState.feeAccrued
+  //   .add(
+  //     contractTerms.feeRate
+  //     .floatMult(contractState.nominalValue)
+  //     .floatMult(contractState.timeFromLastEvent)
+  //   );
+  //   contractState.contractStatus = ContractStatus.DF;
+  //   contractState.lastEventTime = timestamp;
 
-    return contractState;
-  }
+  //   return contractState;
+  // }
 
-  function STF_ANN_FP (
-    uint256 timestamp,
-    ContractTerms memory contractTerms,
-    ContractState memory contractState
-  )
-    internal
-    pure
-    returns (ContractState memory)
-  {
-    contractState.timeFromLastEvent = yearFraction(
-      shiftCalcTime(contractState.lastEventTime, contractTerms.businessDayConvention, contractTerms.calendar),
-      shiftCalcTime(timestamp, contractTerms.businessDayConvention, contractTerms.calendar),
-      contractTerms.dayCountConvention,
-      contractTerms.maturityDate
-    );
-    contractState.nominalAccrued = contractState.nominalAccrued
-    .add(
-      contractState.nominalRate
-      .floatMult(contractState.nominalValue)
-      .floatMult(contractState.timeFromLastEvent)
-    );
-    contractState.feeAccrued = 0;
-    contractState.lastEventTime = timestamp;
+  // function STF_ANN_FP (
+  //   uint256 timestamp,
+  //   ContractTerms memory contractTerms,
+  //   ContractState memory contractState
+  // )
+  //   internal
+  //   pure
+  //   returns (ContractState memory)
+  // {
+  //   contractState.timeFromLastEvent = yearFraction(
+  //     shiftCalcTime(contractState.lastEventTime, contractTerms.businessDayConvention, contractTerms.calendar),
+  //     shiftCalcTime(timestamp, contractTerms.businessDayConvention, contractTerms.calendar),
+  //     contractTerms.dayCountConvention,
+  //     contractTerms.maturityDate
+  //   );
+  //   contractState.nominalAccrued = contractState.nominalAccrued
+  //   .add(
+  //     contractState.nominalRate
+  //     .floatMult(contractState.nominalValue)
+  //     .floatMult(contractState.timeFromLastEvent)
+  //   );
+  //   contractState.feeAccrued = 0;
+  //   contractState.lastEventTime = timestamp;
 
-    return contractState;
-  }
+  //   return contractState;
+  // }
 
   function STF_ANN_IED (
     uint256 timestamp,
@@ -671,70 +671,71 @@ contract STF is Core {
     return contractState;
   }
 
-  function STF_ANN_PP (
-    uint256 timestamp,
-    ContractTerms memory contractTerms,
-    ContractState memory contractState
-  )
-    internal
-    pure
-    returns (ContractState memory)
-  {
-    contractState.timeFromLastEvent = yearFraction(
-      shiftCalcTime(contractState.lastEventTime, contractTerms.businessDayConvention, contractTerms.calendar),
-      shiftCalcTime(timestamp, contractTerms.businessDayConvention, contractTerms.calendar),
-      contractTerms.dayCountConvention,
-      contractTerms.maturityDate
-    );
-    contractState.nominalAccrued = contractState.nominalAccrued
-    .add(
-      contractState.nominalRate
-      .floatMult(contractState.nominalValue)
-      .floatMult(contractState.timeFromLastEvent)
-    );
-    contractState.feeAccrued = contractState.feeAccrued
-    .add(
-      contractTerms.feeRate
-      .floatMult(contractState.nominalValue)
-      .floatMult(contractState.timeFromLastEvent)
-    );
-    contractState.nominalValue -= 0; // riskFactor(contractTerms.objectCodeOfPrepaymentModel, timestamp, contractState, contractTerms) * contractState.nominalValue;
-    contractState.lastEventTime = timestamp;
+  // function STF_ANN_PP (
+  //   uint256 timestamp,
+  //   ContractTerms memory contractTerms,
+  //   ContractState memory contractState
+  // )
+  //   internal
+  //   pure
+  //   returns (ContractState memory)
+  // {
+  //   contractState.timeFromLastEvent = yearFraction(
+  //     shiftCalcTime(contractState.lastEventTime, contractTerms.businessDayConvention, contractTerms.calendar),
+  //     shiftCalcTime(timestamp, contractTerms.businessDayConvention, contractTerms.calendar),
+  //     contractTerms.dayCountConvention,
+  //     contractTerms.maturityDate
+  //   );
+  //   contractState.nominalAccrued = contractState.nominalAccrued
+  //   .add(
+  //     contractState.nominalRate
+  //     .floatMult(contractState.nominalValue)
+  //     .floatMult(contractState.timeFromLastEvent)
+  //   );
+  //   contractState.feeAccrued = contractState.feeAccrued
+  //   .add(
+  //     contractTerms.feeRate
+  //     .floatMult(contractState.nominalValue)
+  //     .floatMult(contractState.timeFromLastEvent)
+  //   );
+  //   contractState.nominalValue -= 0; // riskFactor(contractTerms.objectCodeOfPrepaymentModel, timestamp, contractState, contractTerms) * contractState.nominalValue;
+  //   contractState.lastEventTime = timestamp;
 
-    return contractState;
-  }
+  //   return contractState;
+  // }
 
-  function STF_ANN_PRD (
-    uint256 timestamp,
-    ContractTerms memory contractTerms,
-    ContractState memory contractState
-  )
-    internal
-    pure
-    returns (ContractState memory)
-  {
-    contractState.timeFromLastEvent = yearFraction(
-      shiftCalcTime(contractState.lastEventTime, contractTerms.businessDayConvention, contractTerms.calendar),
-      shiftCalcTime(timestamp, contractTerms.businessDayConvention, contractTerms.calendar),
-      contractTerms.dayCountConvention,
-      contractTerms.maturityDate
-    );
-    contractState.nominalAccrued = contractState.nominalAccrued
-    .add(
-      contractState.nominalRate
-      .floatMult(contractState.nominalValue)
-      .floatMult(contractState.timeFromLastEvent)
-    );
-    contractState.feeAccrued = contractState.feeAccrued
-    .add(
-      contractTerms.feeRate
-      .floatMult(contractState.nominalValue)
-      .floatMult(contractState.timeFromLastEvent)
-    );
-    contractState.lastEventTime = timestamp;
+  // STF_PAM_PRD
+  // function STF_ANN_PRD (
+  //   uint256 timestamp,
+  //   ContractTerms memory contractTerms,
+  //   ContractState memory contractState
+  // )
+  //   internal
+  //   pure
+  //   returns (ContractState memory)
+  // {
+  //   contractState.timeFromLastEvent = yearFraction(
+  //     shiftCalcTime(contractState.lastEventTime, contractTerms.businessDayConvention, contractTerms.calendar),
+  //     shiftCalcTime(timestamp, contractTerms.businessDayConvention, contractTerms.calendar),
+  //     contractTerms.dayCountConvention,
+  //     contractTerms.maturityDate
+  //   );
+  //   contractState.nominalAccrued = contractState.nominalAccrued
+  //   .add(
+  //     contractState.nominalRate
+  //     .floatMult(contractState.nominalValue)
+  //     .floatMult(contractState.timeFromLastEvent)
+  //   );
+  //   contractState.feeAccrued = contractState.feeAccrued
+  //   .add(
+  //     contractTerms.feeRate
+  //     .floatMult(contractState.nominalValue)
+  //     .floatMult(contractState.timeFromLastEvent)
+  //   );
+  //   contractState.lastEventTime = timestamp;
 
-    return contractState;
-  }
+  //   return contractState;
+  // }
 
   function STF_ANN_PR (
     uint256 timestamp,
@@ -817,70 +818,71 @@ contract STF is Core {
     return contractState;
   }
 
-  function STF_ANN_PY (
-    uint256 timestamp,
-    ContractTerms memory contractTerms,
-    ContractState memory contractState
-  )
-    internal
-    pure
-    returns (ContractState memory)
-  {
-    contractState.timeFromLastEvent = yearFraction(
-      shiftCalcTime(contractState.lastEventTime, contractTerms.businessDayConvention, contractTerms.calendar),
-      shiftCalcTime(timestamp, contractTerms.businessDayConvention, contractTerms.calendar),
-      contractTerms.dayCountConvention,
-      contractTerms.maturityDate
-    );
-    contractState.nominalAccrued = contractState.nominalAccrued
-    .add(
-      contractState.nominalRate
-      .floatMult(contractState.nominalValue)
-      .floatMult(contractState.timeFromLastEvent)
-    );
-    contractState.feeAccrued = contractState.feeAccrued
-    .add(
-      contractTerms.feeRate
-      .floatMult(contractState.nominalValue)
-      .floatMult(contractState.timeFromLastEvent)
-    );
-    contractState.lastEventTime = timestamp;
+  // STF_PAM_PY
+  // function STF_ANN_PY (
+  //   uint256 timestamp,
+  //   ContractTerms memory contractTerms,
+  //   ContractState memory contractState
+  // )
+  //   internal
+  //   pure
+  //   returns (ContractState memory)
+  // {
+  //   contractState.timeFromLastEvent = yearFraction(
+  //     shiftCalcTime(contractState.lastEventTime, contractTerms.businessDayConvention, contractTerms.calendar),
+  //     shiftCalcTime(timestamp, contractTerms.businessDayConvention, contractTerms.calendar),
+  //     contractTerms.dayCountConvention,
+  //     contractTerms.maturityDate
+  //   );
+  //   contractState.nominalAccrued = contractState.nominalAccrued
+  //   .add(
+  //     contractState.nominalRate
+  //     .floatMult(contractState.nominalValue)
+  //     .floatMult(contractState.timeFromLastEvent)
+  //   );
+  //   contractState.feeAccrued = contractState.feeAccrued
+  //   .add(
+  //     contractTerms.feeRate
+  //     .floatMult(contractState.nominalValue)
+  //     .floatMult(contractState.timeFromLastEvent)
+  //   );
+  //   contractState.lastEventTime = timestamp;
 
-    return contractState;
-  }
+  //   return contractState;
+  // }
 
-  function STF_ANN_RRF (
-    uint256 timestamp,
-    ContractTerms memory contractTerms,
-    ContractState memory contractState
-  )
-    internal
-    pure
-    returns (ContractState memory)
-  {
-    contractState.timeFromLastEvent = yearFraction(
-      shiftCalcTime(contractState.lastEventTime, contractTerms.businessDayConvention, contractTerms.calendar),
-      shiftCalcTime(timestamp, contractTerms.businessDayConvention, contractTerms.calendar),
-      contractTerms.dayCountConvention,
-      contractTerms.maturityDate
-    );
-    contractState.nominalAccrued = contractState.nominalAccrued
-    .add(
-      contractState.nominalRate
-      .floatMult(contractState.nominalValue)
-      .floatMult(contractState.timeFromLastEvent)
-    );
-    contractState.feeAccrued = contractState.feeAccrued
-    .add(
-      contractTerms.feeRate
-      .floatMult(contractState.nominalValue)
-      .floatMult(contractState.timeFromLastEvent)
-    );
-    contractState.nominalRate = contractTerms.nextResetRate;
-    contractState.lastEventTime = timestamp;
+  // function STF_ANN_RRF (
+  //   uint256 timestamp,
+  //   ContractTerms memory contractTerms,
+  //   ContractState memory contractState
+  // )
+  //   internal
+  //   pure
+  //   returns (ContractState memory)
+  // {
+  //   contractState.timeFromLastEvent = yearFraction(
+  //     shiftCalcTime(contractState.lastEventTime, contractTerms.businessDayConvention, contractTerms.calendar),
+  //     shiftCalcTime(timestamp, contractTerms.businessDayConvention, contractTerms.calendar),
+  //     contractTerms.dayCountConvention,
+  //     contractTerms.maturityDate
+  //   );
+  //   contractState.nominalAccrued = contractState.nominalAccrued
+  //   .add(
+  //     contractState.nominalRate
+  //     .floatMult(contractState.nominalValue)
+  //     .floatMult(contractState.timeFromLastEvent)
+  //   );
+  //   contractState.feeAccrued = contractState.feeAccrued
+  //   .add(
+  //     contractTerms.feeRate
+  //     .floatMult(contractState.nominalValue)
+  //     .floatMult(contractState.timeFromLastEvent)
+  //   );
+  //   contractState.nominalRate = contractTerms.nextResetRate;
+  //   contractState.lastEventTime = timestamp;
 
-    return contractState;
-  }
+  //   return contractState;
+  // }
 
   function STF_ANN_RR (
     uint256 timestamp,
@@ -977,26 +979,26 @@ contract STF is Core {
     return contractState;
   }
 
-  function STF_ANN_TD (
-    uint256 timestamp,
-    ContractTerms memory contractTerms,
-    ContractState memory contractState
-  )
-    internal
-    pure
-    returns (ContractState memory)
-  {
-    contractState.timeFromLastEvent = yearFraction(
-      shiftCalcTime(contractState.lastEventTime, contractTerms.businessDayConvention, contractTerms.calendar),
-      shiftCalcTime(timestamp, contractTerms.businessDayConvention, contractTerms.calendar),
-      contractTerms.dayCountConvention,
-      contractTerms.maturityDate
-    );
-    contractState.nominalValue = 0;
-    contractState.nominalAccrued = 0;
-    contractState.feeAccrued = 0;
-    contractState.lastEventTime = timestamp;
+  // function STF_ANN_TD (
+  //   uint256 timestamp,
+  //   ContractTerms memory contractTerms,
+  //   ContractState memory contractState
+  // )
+  //   internal
+  //   pure
+  //   returns (ContractState memory)
+  // {
+  //   contractState.timeFromLastEvent = yearFraction(
+  //     shiftCalcTime(contractState.lastEventTime, contractTerms.businessDayConvention, contractTerms.calendar),
+  //     shiftCalcTime(timestamp, contractTerms.businessDayConvention, contractTerms.calendar),
+  //     contractTerms.dayCountConvention,
+  //     contractTerms.maturityDate
+  //   );
+  //   contractState.nominalValue = 0;
+  //   contractState.nominalAccrued = 0;
+  //   contractState.feeAccrued = 0;
+  //   contractState.lastEventTime = timestamp;
 
-    return contractState;
-  }
+  //   return contractState;
+  // }
 }
