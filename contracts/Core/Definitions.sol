@@ -53,7 +53,6 @@ contract Definitions {
 	struct ContractState {
 		uint256 lastEventTime;
 		ContractPerformance contractPerformance;
-		int256 timeFromLastEvent;
 		int256 notionalPrincipal;
 		// int256 notionalPrincipal2;
 		int256 accruedInterest;

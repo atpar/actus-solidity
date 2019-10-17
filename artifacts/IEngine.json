@@ -304,19 +304,15 @@
               "type": "uint256"
             },
             {
-              "name": "contractStatus",
+              "name": "contractPerformance",
               "type": "uint8"
             },
             {
-              "name": "timeFromLastEvent",
+              "name": "notionalPrincipal",
               "type": "int256"
             },
             {
-              "name": "nominalValue",
-              "type": "int256"
-            },
-            {
-              "name": "nominalAccrued",
+              "name": "accruedInterest",
               "type": "int256"
             },
             {
@@ -324,7 +320,7 @@
               "type": "int256"
             },
             {
-              "name": "nominalRate",
+              "name": "nominalInterestRate",
               "type": "int256"
             },
             {
@@ -332,16 +328,12 @@
               "type": "int256"
             },
             {
-              "name": "nominalScalingMultiplier",
+              "name": "notionalScalingMultiplier",
               "type": "int256"
             },
             {
               "name": "nextPrincipalRedemptionPayment",
               "type": "int256"
-            },
-            {
-              "name": "contractRoleSign",
-              "type": "uint8"
             }
           ],
           "name": "",
@@ -638,19 +630,15 @@
               "type": "uint256"
             },
             {
-              "name": "contractStatus",
+              "name": "contractPerformance",
               "type": "uint8"
             },
             {
-              "name": "timeFromLastEvent",
+              "name": "notionalPrincipal",
               "type": "int256"
             },
             {
-              "name": "nominalValue",
-              "type": "int256"
-            },
-            {
-              "name": "nominalAccrued",
+              "name": "accruedInterest",
               "type": "int256"
             },
             {
@@ -658,7 +646,7 @@
               "type": "int256"
             },
             {
-              "name": "nominalRate",
+              "name": "nominalInterestRate",
               "type": "int256"
             },
             {
@@ -666,16 +654,12 @@
               "type": "int256"
             },
             {
-              "name": "nominalScalingMultiplier",
+              "name": "notionalScalingMultiplier",
               "type": "int256"
             },
             {
               "name": "nextPrincipalRedemptionPayment",
               "type": "int256"
-            },
-            {
-              "name": "contractRoleSign",
-              "type": "uint8"
             }
           ],
           "name": "contractState",
@@ -695,19 +679,15 @@
               "type": "uint256"
             },
             {
-              "name": "contractStatus",
+              "name": "contractPerformance",
               "type": "uint8"
             },
             {
-              "name": "timeFromLastEvent",
+              "name": "notionalPrincipal",
               "type": "int256"
             },
             {
-              "name": "nominalValue",
-              "type": "int256"
-            },
-            {
-              "name": "nominalAccrued",
+              "name": "accruedInterest",
               "type": "int256"
             },
             {
@@ -715,7 +695,7 @@
               "type": "int256"
             },
             {
-              "name": "nominalRate",
+              "name": "nominalInterestRate",
               "type": "int256"
             },
             {
@@ -723,16 +703,12 @@
               "type": "int256"
             },
             {
-              "name": "nominalScalingMultiplier",
+              "name": "notionalScalingMultiplier",
               "type": "int256"
             },
             {
               "name": "nextPrincipalRedemptionPayment",
               "type": "int256"
-            },
-            {
-              "name": "contractRoleSign",
-              "type": "uint8"
             }
           ],
           "name": "",
@@ -1055,19 +1031,15 @@
               "type": "uint256"
             },
             {
-              "name": "contractStatus",
+              "name": "contractPerformance",
               "type": "uint8"
             },
             {
-              "name": "timeFromLastEvent",
+              "name": "notionalPrincipal",
               "type": "int256"
             },
             {
-              "name": "nominalValue",
-              "type": "int256"
-            },
-            {
-              "name": "nominalAccrued",
+              "name": "accruedInterest",
               "type": "int256"
             },
             {
@@ -1075,7 +1047,7 @@
               "type": "int256"
             },
             {
-              "name": "nominalRate",
+              "name": "nominalInterestRate",
               "type": "int256"
             },
             {
@@ -1083,16 +1055,12 @@
               "type": "int256"
             },
             {
-              "name": "nominalScalingMultiplier",
+              "name": "notionalScalingMultiplier",
               "type": "int256"
             },
             {
               "name": "nextPrincipalRedemptionPayment",
               "type": "int256"
-            },
-            {
-              "name": "contractRoleSign",
-              "type": "uint8"
             }
           ],
           "name": "contractState",
@@ -1146,19 +1114,15 @@
               "type": "uint256"
             },
             {
-              "name": "contractStatus",
+              "name": "contractPerformance",
               "type": "uint8"
             },
             {
-              "name": "timeFromLastEvent",
+              "name": "notionalPrincipal",
               "type": "int256"
             },
             {
-              "name": "nominalValue",
-              "type": "int256"
-            },
-            {
-              "name": "nominalAccrued",
+              "name": "accruedInterest",
               "type": "int256"
             },
             {
@@ -1166,7 +1130,7 @@
               "type": "int256"
             },
             {
-              "name": "nominalRate",
+              "name": "nominalInterestRate",
               "type": "int256"
             },
             {
@@ -1174,16 +1138,12 @@
               "type": "int256"
             },
             {
-              "name": "nominalScalingMultiplier",
+              "name": "notionalScalingMultiplier",
               "type": "int256"
             },
             {
               "name": "nextPrincipalRedemptionPayment",
               "type": "int256"
-            },
-            {
-              "name": "contractRoleSign",
-              "type": "uint8"
             }
           ],
           "name": "",
@@ -1557,5 +1517,5 @@
     "version": "0.5.2+commit.1df8f40c.Emscripten.clang"
   },
   "networks": {},
-  "updatedAt": "2019-10-17T09:48:57.925Z"
+  "updatedAt": "2019-10-17T10:15:13.174Z"
 }
