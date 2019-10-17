@@ -23,12 +23,12 @@ Contains ACTUS state machine engines for each ACTUS Contract Type. An Engine imp
 ### Requirements
 - `node`: >=10.0.0 <11.0.0
 - `npm`: >=6.8.0
-- `yarn`: v1.16.0 (temporary fix uses yarn resolutions)
+- `yarn`: 1.16.0
 - `truffle`
 - `ganache-cli`
 - `jq` (only for generating artifacts)
 
-install truffle and ganache-cli
+Note, install truffle and ganache-cli using npm as follows:
 ```sh
 npm install -g truffle
 npm install -g ganache-cli
