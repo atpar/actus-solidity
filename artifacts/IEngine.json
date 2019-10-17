@@ -1119,14 +1119,6 @@
             {
               "name": "currency",
               "type": "address"
-            },
-            {
-              "name": "pofType",
-              "type": "uint8"
-            },
-            {
-              "name": "stfType",
-              "type": "uint8"
             }
           ],
           "name": "protoEvent",
@@ -1531,14 +1523,6 @@
             {
               "name": "currency",
               "type": "address"
-            },
-            {
-              "name": "pofType",
-              "type": "uint8"
-            },
-            {
-              "name": "stfType",
-              "type": "uint8"
             }
           ],
           "name": "",
@@ -1557,5 +1541,5 @@
     "version": "0.5.2+commit.1df8f40c.Emscripten.clang"
   },
   "networks": {},
-  "updatedAt": "2019-10-04T14:32:19.380Z"
+  "updatedAt": "2019-10-17T10:33:07.654Z"
 }

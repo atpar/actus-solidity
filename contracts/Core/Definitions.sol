@@ -86,8 +86,6 @@ contract Definitions {
 		uint256 scheduleTime; // primarily used for CalcShift convention
 		EventType eventType;
 		address currency;
-		EventType pofType;
-		EventType stfType;
 	}
 
 	struct ContractTerms {
