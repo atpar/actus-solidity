@@ -90,6 +90,38 @@ contract Definitions {
 		EventType stfType;
 	}
 
+	struct LifecycleTerms {
+		Calendar calendar;
+		ContractRole contractRole;
+		DayCountConvention dayCountConvention;
+		BusinessDayConvention businessDayConvention;
+		EndOfMonthConvention endOfMonthConvention;
+		address currency;
+		ScalingEffect scalingEffect;
+		PenaltyType penaltyType;
+		FeeBasis feeBasis;
+
+		uint256 initialExchangeDate;
+		uint256 maturityDate;
+		uint256 terminationDate;
+		uint256 purchaseDate;
+
+		int256 notionalPrincipal;
+		int256 nominalInterestRate;
+		int256 rateSpread;
+		int256 feeRate;
+		int256 nextResetRate;
+		int256 penaltyRate;
+		int256 premiumDiscountAtIED;
+		int256 priceAtPurchaseDate;
+		int256 nextPrincipalRedemptionPayment;
+
+		int256 lifeCap;
+		int256 lifeFloor;
+		int256 periodCap;
+		int256 periodFloor;
+	}
+
 	struct ContractTerms {
 		ContractType contractType;
 		Calendar calendar;
