@@ -29,7 +29,7 @@ contract Definitions {
 	enum BusinessDayConvention {NULL, SCF, SCMF, CSF, CSMF, SCP, SCMP, CSP, CSMP}
 	enum ClearingHouse {YES, NO} // required ?
 	enum ContractRole {RPA, RPL, LG, ST, RFL, PFL, BUY, SEL, GUA, OBL} // required ?
-	enum ContractStatus {PF, DL, DQ, DF} // Default: PF
+	enum ContractPerformance {PF, DL, DQ, DF} // Default: PF
 	enum ContractType {PAM, ANN, NAM, LAM, LAX, CLM, UMP, CSH, STK, COM, SWAPS, SWPPV, FXOUT, CAPFL, FUTUR, OPTNS, CEG, CEC} // required ?
 	enum CyclePointOfInterestPayment {EndOf, BeginningOf} // Default: EndOf
 	enum CyclePointOfRateReset {BeginningOf, EndOf} // Default: BeginningOf
@@ -52,24 +52,17 @@ contract Definitions {
 
 	struct ContractState {
 		uint256 lastEventTime;
-		ContractStatus contractStatus;
-		int256 timeFromLastEvent; // analytical result
-		int256 nominalValue; // analytical result
-		int256 nominalAccrued; // analytical result
-		int256 feeAccrued; // analytical result
-		int256 nominalRate; // analytical result
+		ContractPerformance contractPerformance;
+		int256 notionalPrincipal;
+		// int256 notionalPrincipal2;
+		int256 accruedInterest;
+		int256 feeAccrued;
+		int256 nominalInterestRate;
 		// int256 interestCalculationBase;
 		int256 interestScalingMultiplier;
-		int256 nominalScalingMultiplier;
+		int256 notionalScalingMultiplier;
 		int256 nextPrincipalRedemptionPayment;
-		// int256 secondaryNominalValue; // analytical result
-		// int256 lastInterestPayment;
 		// int256 payoffAtSettlement;
-		// int256 variationMargin; // analytical result
-		ContractRole contractRoleSign;
-		// int256 nominalAccruedFix;
-		// int256 nominalAccruedFloat;
-		// uint8 probabilityOfDefault;
 	}
 
 	struct ContractEvent {
