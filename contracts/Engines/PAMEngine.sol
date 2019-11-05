@@ -44,13 +44,13 @@ contract PAMEngine is Core, IEngine, STF, POF {
 	 * (such that Led < Tev && now >= Tev)
 	 * @param contractTerms terms of the contract
 	 * @param contractState current state of the contract
-	 * @param timestamp current timestamp
+	 * @param currentTimestamp current timestamp
 	 * @return the new contract state and the evaluated events
 	 */
 	function computeNextState(
 		ContractTerms memory contractTerms,
 		ContractState memory contractState,
-		uint256 timestamp
+		uint256 currentTimestamp
 	)
 		public
 		pure
@@ -62,7 +62,7 @@ contract PAMEngine is Core, IEngine, STF, POF {
 		ProtoEvent[MAX_EVENT_SCHEDULE_SIZE] memory pendingProtoEventSchedule = computeProtoEventScheduleSegment(
 			contractTerms,
 			shiftEventTime(contractState.lastEventTime, contractTerms.businessDayConvention, contractTerms.calendar),
-			timestamp
+			currentTimestamp
 		);
 
 		for (uint8 index = 0; index < MAX_EVENT_SCHEDULE_SIZE; index++) {
@@ -73,19 +73,19 @@ contract PAMEngine is Core, IEngine, STF, POF {
 				pendingProtoEventSchedule[index].eventType,
 				pendingProtoEventSchedule[index].currency,
 				payoffFunction(
-					pendingProtoEventSchedule[index].scheduleTime,
-					contractTerms,
+					pendingProtoEventSchedule[index],
 					contractState,
-					pendingProtoEventSchedule[index].eventType
+					contractTerms,
+					currentTimestamp
 				),
-				timestamp
+				currentTimestamp
 			);
 
 			nextContractState = stateTransitionFunction(
-				pendingProtoEventSchedule[index].scheduleTime,
-				contractTerms,
+				pendingProtoEventSchedule[index],
 				contractState,
-				pendingProtoEventSchedule[index].eventType
+				contractTerms,
+				currentTimestamp
 			);
 		}
 
@@ -98,14 +98,14 @@ contract PAMEngine is Core, IEngine, STF, POF {
 	 * @param contractTerms terms of the contract
 	 * @param contractState current state of the contract
 	 * @param protoEvent prototype event to be evaluated and applied to the contract state
-	 * @param timestamp current timestamp
+	 * @param currentTimestamp current timestamp
 	 * @return the new contract state and the evaluated event
 	 */
 	function computeNextStateForProtoEvent(
 		ContractTerms memory contractTerms,
 		ContractState memory contractState,
 		ProtoEvent memory protoEvent,
-		uint256 timestamp
+		uint256 currentTimestamp
 	)
 		public
 		pure
@@ -115,15 +115,15 @@ contract PAMEngine is Core, IEngine, STF, POF {
 			protoEvent.eventTime,
 			protoEvent.eventType,
 			protoEvent.currency,
-			payoffFunction(timestamp, contractTerms, contractState, protoEvent.eventType), // solium-disable-line
-			timestamp
+			payoffFunction(protoEvent, contractState, contractTerms, currentTimestamp), // solium-disable-line
+			currentTimestamp
 		);
 
 		ContractState memory nextContractState = stateTransitionFunction(
-			timestamp,
-			contractTerms,
+			protoEvent,
 			contractState,
-			protoEvent.eventType
+			contractTerms,
+			currentTimestamp
 		);
 
 		return (nextContractState, contractEvent);
@@ -407,36 +407,37 @@ contract PAMEngine is Core, IEngine, STF, POF {
 
 	/**
 	 * computes the next contract state based on the contract terms, state and the event type
-	 * @param timestamp current timestamp
-	 * @param contractTerms terms of the contract
+	 * @param protoEvent proto event for which to evaluate the next state for
 	 * @param contractState current state of the contract
-	 * @param eventType event type
+	 * @param contractTerms terms of the contract
+	 * @param currentTimestamp current timestamp
 	 * @return next contract state
 	 */
 	function stateTransitionFunction(
-		uint256 timestamp,
-		ContractTerms memory contractTerms,
+		ProtoEvent memory protoEvent,
 		ContractState memory contractState,
-		EventType eventType
+		ContractTerms memory contractTerms,
+		uint256 currentTimestamp
 	)
 		private
 		pure
 		returns (ContractState memory)
 	{
-		if (eventType == EventType.AD) return STF.STF_PAM_AD(timestamp, contractTerms, contractState);
-		if (eventType == EventType.CD) return STF.STF_PAM_CD(timestamp, contractTerms, contractState);
-		if (eventType == EventType.FP) return STF.STF_PAM_FP(timestamp, contractTerms, contractState);
-		if (eventType == EventType.IED) return STF.STF_PAM_IED(timestamp, contractTerms, contractState);
-		if (eventType == EventType.IPCI) return STF.STF_PAM_IPCI(timestamp, contractTerms, contractState);
-		if (eventType == EventType.IP) return STF.STF_PAM_IP(timestamp, contractTerms, contractState);
-		if (eventType == EventType.PP) return STF.STF_PAM_PP(timestamp, contractTerms, contractState);
-		if (eventType == EventType.PRD) return STF.STF_PAM_PRD(timestamp, contractTerms, contractState);
-		if (eventType == EventType.PR) return STF.STF_PAM_PR(timestamp, contractTerms, contractState);
-		if (eventType == EventType.PY) return STF.STF_PAM_PY(timestamp, contractTerms, contractState);
-		if (eventType == EventType.RRF) return STF.STF_PAM_RRF(timestamp, contractTerms, contractState);
-		if (eventType == EventType.RR) return STF.STF_PAM_RR(timestamp, contractTerms, contractState);
-		if (eventType == EventType.SC) return STF.STF_PAM_SC(timestamp, contractTerms, contractState);
-		if (eventType == EventType.TD) return STF.STF_PAM_TD(timestamp, contractTerms, contractState);
+		if (protoEvent.eventType == EventType.AD) return STF_PAM_AD(protoEvent, contractTerms, contractState, currentTimestamp);
+		if (protoEvent.eventType == EventType.CD) return STF_PAM_CD(protoEvent, contractTerms, contractState, currentTimestamp);
+		if (protoEvent.eventType == EventType.FP) return STF_PAM_FP(protoEvent, contractTerms, contractState, currentTimestamp);
+		if (protoEvent.eventType == EventType.IED) return STF_PAM_IED(protoEvent, contractTerms, contractState, currentTimestamp);
+		if (protoEvent.eventType == EventType.IPCI) return STF_PAM_IPCI(protoEvent, contractTerms, contractState, currentTimestamp);
+		if (protoEvent.eventType == EventType.IP) return STF_PAM_IP(protoEvent, contractTerms, contractState, currentTimestamp);
+		if (protoEvent.eventType == EventType.PP) return STF_PAM_PP(protoEvent, contractTerms, contractState, currentTimestamp);
+		if (protoEvent.eventType == EventType.PRD) return STF_PAM_PRD(protoEvent, contractTerms, contractState, currentTimestamp);
+		if (protoEvent.eventType == EventType.PR) return STF_PAM_PR(protoEvent, contractTerms, contractState, currentTimestamp);
+		if (protoEvent.eventType == EventType.PY) return STF_PAM_PY(protoEvent, contractTerms, contractState, currentTimestamp);
+		if (protoEvent.eventType == EventType.RRF) return STF_PAM_RRF(protoEvent, contractTerms, contractState, currentTimestamp);
+		if (protoEvent.eventType == EventType.RR) return STF_PAM_RR(protoEvent, contractTerms, contractState, currentTimestamp);
+		if (protoEvent.eventType == EventType.SC) return STF_PAM_SC(protoEvent, contractTerms, contractState, currentTimestamp);
+		if (protoEvent.eventType == EventType.TD) return STF_PAM_TD(protoEvent, contractTerms, contractState, currentTimestamp);
+		if (protoEvent.eventType == EventType.DEL)  return STF_PAM_DEL(protoEvent, contractTerms, contractState, currentTimestamp);
 
 		revert("PAMEngine.stateTransitionFunction: ATTRIBUTE_NOT_FOUND");
 	}
@@ -444,36 +445,37 @@ contract PAMEngine is Core, IEngine, STF, POF {
 	/**
 	 * calculates the payoff for the current time based on the contract terms,
 	 * state and the event type
-	 * @param timestamp current timestamp
-	 * @param contractTerms terms of the contract
+	 * @param protoEvent proto event for which to evaluate the payoff for
 	 * @param contractState current state of the contract
-	 * @param eventType event type
+	 * @param contractTerms terms of the contract
+	 * @param currentTimestamp current timestamp
 	 * @return payoff
 	 */
 	function payoffFunction(
-		uint256 timestamp,
-		ContractTerms memory contractTerms,
+		ProtoEvent memory protoEvent,
 		ContractState memory contractState,
-		EventType eventType
+		ContractTerms memory contractTerms,
+		uint256 currentTimestamp
 	)
 		private
 		pure
 		returns (int256)
 	{
-		if (eventType == EventType.AD) return 0;
-		if (eventType == EventType.CD) return 0;
-		if (eventType == EventType.IPCI) return 0;
-		if (eventType == EventType.RRF) return 0;
-		if (eventType == EventType.RR) return 0;
-		if (eventType == EventType.SC) return 0;
-		if (eventType == EventType.FP) return POF_PAM_FP(timestamp, contractTerms, contractState);
-		if (eventType == EventType.IED) return POF_PAM_IED(timestamp, contractTerms, contractState);
-		if (eventType == EventType.IP) return POF_PAM_IP(timestamp, contractTerms, contractState);
-		if (eventType == EventType.PP) return POF_PAM_PP(timestamp, contractTerms, contractState);
-		if (eventType == EventType.PRD) return POF_PAM_PRD(timestamp, contractTerms, contractState);
-		if (eventType == EventType.PR) return POF_PAM_PR(timestamp, contractTerms, contractState);
-		if (eventType == EventType.PY) return POF_PAM_PY(timestamp, contractTerms, contractState);
-		if (eventType == EventType.TD) return POF_PAM_TD(timestamp, contractTerms, contractState);
+		if (protoEvent.eventType == EventType.AD) return 0;
+		if (protoEvent.eventType == EventType.CD) return 0;
+		if (protoEvent.eventType == EventType.IPCI) return 0;
+		if (protoEvent.eventType == EventType.RRF) return 0;
+		if (protoEvent.eventType == EventType.RR) return 0;
+		if (protoEvent.eventType == EventType.SC) return 0;
+		if (protoEvent.eventType == EventType.DEL) return 0;
+		if (protoEvent.eventType == EventType.FP) return POF_PAM_FP(protoEvent, contractTerms, contractState, currentTimestamp);
+		if (protoEvent.eventType == EventType.IED) return POF_PAM_IED(protoEvent, contractTerms, contractState, currentTimestamp);
+		if (protoEvent.eventType == EventType.IP) return POF_PAM_IP(protoEvent, contractTerms, contractState, currentTimestamp);
+		if (protoEvent.eventType == EventType.PP) return POF_PAM_PP(protoEvent, contractTerms, contractState, currentTimestamp);
+		if (protoEvent.eventType == EventType.PRD) return POF_PAM_PRD(protoEvent, contractTerms, contractState, currentTimestamp);
+		if (protoEvent.eventType == EventType.PR) return POF_PAM_PR(protoEvent, contractTerms, contractState, currentTimestamp);
+		if (protoEvent.eventType == EventType.PY) return POF_PAM_PY(protoEvent, contractTerms, contractState, currentTimestamp);
+		if (protoEvent.eventType == EventType.TD) return POF_PAM_TD(protoEvent, contractTerms, contractState, currentTimestamp);
 
 		revert("PAMEngine.payoffFunction: ATTRIBUTE_NOT_FOUND");
 	}

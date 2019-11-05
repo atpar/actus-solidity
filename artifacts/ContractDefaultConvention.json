@@ -1,0 +1,27 @@
+{
+  "contractName": "ContractDefaultConvention",
+  "abi": [
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "PRECISION",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    }
+  ],
+  "metadata": "{\"compiler\":{\"version\":\"0.5.2+commit.1df8f40c\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"constant\":true,\"inputs\":[],\"name\":\"PRECISION\",\"outputs\":[{\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"}],\"devdoc\":{\"methods\":{}},\"userdoc\":{\"methods\":{}}},\"settings\":{\"compilationTarget\":{\"/Users/johannes/Documents/dev/actus-protocol/actus-solidity/contracts/Core/Conventions/ContractDefaultConvention.sol\":\"ContractDefaultConvention\"},\"evmVersion\":\"byzantium\",\"libraries\":{},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[]},\"sources\":{\"/Users/johannes/Documents/dev/actus-protocol/actus-solidity/contracts/Core/Conventions/ContractDefaultConvention.sol\":{\"keccak256\":\"0x109f3129b4af2d1402a5b2cc7290c9b1979cfc8250576c63411fe5637eba7b40\",\"urls\":[\"bzzr://a7947efa1f0d497e83294b5ecedf32508b7c6893d498223ce447e31cbc265b15\"]},\"/Users/johannes/Documents/dev/actus-protocol/actus-solidity/contracts/Core/Definitions.sol\":{\"keccak256\":\"0x958180e3c6e84a9a5db0c99b5bd12e565e18444b43bca8fc85268b1de90c3e98\",\"urls\":[\"bzzr://597ccdcc849723598da8d34e6d427a09883aa4afbb0288bc42334587b8d3cda6\"]}},\"version\":1}",
+  "bytecode": "0x6080604052348015600f57600080fd5b5060928061001e6000396000f3fe6080604052348015600f57600080fd5b50600436106044577c01000000000000000000000000000000000000000000000000000000006000350463aaf5eb6881146049575b600080fd5b604f6061565b60408051918252519081900360200190f35b60128156fea165627a7a7230582052690a96ddf99fd69a69d599936c65be27e007ae43c112ab74683d4b4f1492890029",
+  "compiler": {
+    "name": "solc",
+    "version": "0.5.2+commit.1df8f40c.Emscripten.clang"
+  },
+  "networks": {},
+  "updatedAt": "2019-11-05T14:07:23.339Z"
+}

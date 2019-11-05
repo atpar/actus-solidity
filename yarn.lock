@@ -120,7 +120,7 @@ acorn@^6.0.7:
 
 "actus-dictionary@https://github.com/actusfrf/actus-dictionary.git":
   version "0.0.0"
-  resolved "https://github.com/actusfrf/actus-dictionary.git#8753f7ac69147e8f89020eaf7e965396242a585a"
+  resolved "https://github.com/actusfrf/actus-dictionary.git#d42fda056355b3350701de93bf13161c4ce37bde"
 
 aes-js@3.0.0:
   version "3.0.0"

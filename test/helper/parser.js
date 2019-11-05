@@ -2,8 +2,8 @@ const web3Utils = require('web3-utils');
 const BigNumber = require('bignumber.js');
 
 // const ContractEventDefinitions = require('../../actus-resources/definitions/ContractEventDefinitions.json');
-const ContractEventDefinitions = require('actus-dictionary/actus-dictionary-event.json');
-const ContractTermsDefinitions = require('actus-dictionary/actus-dictionary-terms.json');
+const ContractEventDefinitions = require('actus-dictionary/actus-dictionary-event.json').event;
+const ContractTermsDefinitions = require('actus-dictionary/actus-dictionary-terms.json').terms;
 const CoveredTerms = require('../../actus-resources/definitions/covered-terms.json');
 
 const PRECISION = 18; // solidity precision
@@ -53,7 +53,7 @@ const numberOfDecimals = (number) => {
 }
 
 const parseCycleToIPS = (cycle) => {
-  if (cycle === '' || !cycle) { return { i: 0, p: 0, s: 0, isSet: false }; }
+  if (!cycle || cycle === '') { return { i: 0, p: 0, s: 0, isSet: false }; }
 
   const pOptions = ['D', 'W', 'M', 'Q', 'H', 'Y'];
 
@@ -64,6 +64,16 @@ const parseCycleToIPS = (cycle) => {
   return { i: i, p: p, s: s, isSet: true };
 }
 
+const parsePeriodToIP = (period) => {
+  if (!period  || period === '') { return { i: 0, p: 0, isSet: false }; }
+
+  const pOptions = ['D', 'W', 'M', 'Q', 'H', 'Y'];
+
+  let i = String(cycle).slice(0, -2);
+  let p = pOptions.indexOf(String(cycle).slice(-2, -1));
+
+  return { i: i, p: p, isSet: true };
+}
 
 const parseTermsFromObject = (terms) => {
   const parsedTerms = {};
@@ -71,7 +81,9 @@ const parseTermsFromObject = (terms) => {
   for (const attribute of CoveredTerms) {
     const value = terms[attribute];
 
-    if (ContractTermsDefinitions[attribute].type === 'Enum') {
+    // console.log(attribute); 
+
+    if (ContractTermsDefinitions[attribute].type === 'Enum' || ContractTermsDefinitions[attribute].type === 'Enum[]') {
       parsedTerms[attribute] = (value) ? getIndexOfAttribute(attribute, value) : 0;
     } else if (ContractTermsDefinitions[attribute].type === 'Varchar') {
       parsedTerms[attribute] = toHex((value) ? value : '');
@@ -81,6 +93,10 @@ const parseTermsFromObject = (terms) => {
       parsedTerms[attribute] = (value) ? isoToUnix(value) : 0;
     } else if (ContractTermsDefinitions[attribute].type === 'Cycle') {
       parsedTerms[attribute] = parseCycleToIPS(value);
+    } else if (ContractTermsDefinitions[attribute].type === 'Period') {
+      parsedTerms[attribute] = parsePeriodToIP(value);
+    } else if (ContractTermsDefinitions[attribute].type === 'ContractStructure') {
+      parsedTerms[attribute] = { object: toHex(''), contractReferenceType: 0, contractReferenceRole: 0 };
     }
   }
 

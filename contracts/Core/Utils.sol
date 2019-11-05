@@ -7,25 +7,25 @@ import "./Definitions.sol";
 
 contract Utils is Definitions {
 
-  function getTimestampPlusPeriod(IPS memory cycle, uint256 timestamp)
+	function getTimestampPlusPeriod(IP memory period, uint256 timestamp)
 		internal
 		pure
 		returns (uint256)
 	{
 		uint256 newTimestamp;
 
-		if (cycle.p == P.D) {
-			newTimestamp = BokkyPooBahsDateTimeLibrary.addDays(timestamp, cycle.i);
-		} else if (cycle.p == P.W) {
-			newTimestamp = BokkyPooBahsDateTimeLibrary.addDays(timestamp, cycle.i * 7);
-		} else if (cycle.p == P.M) {
-			newTimestamp = BokkyPooBahsDateTimeLibrary.addMonths(timestamp, cycle.i);
-		} else if (cycle.p == P.Q) {
-			newTimestamp = BokkyPooBahsDateTimeLibrary.addMonths(timestamp, cycle.i * 3);
-		} else if (cycle.p == P.H) {
-			newTimestamp = BokkyPooBahsDateTimeLibrary.addMonths(timestamp, cycle.i * 6);
-		} else if (cycle.p == P.Y) {
-			newTimestamp = BokkyPooBahsDateTimeLibrary.addYears(timestamp, cycle.i);
+		if (period.p == P.D) {
+			newTimestamp = BokkyPooBahsDateTimeLibrary.addDays(timestamp, period.i);
+		} else if (period.p == P.W) {
+			newTimestamp = BokkyPooBahsDateTimeLibrary.addDays(timestamp, period.i * 7);
+		} else if (period.p == P.M) {
+			newTimestamp = BokkyPooBahsDateTimeLibrary.addMonths(timestamp, period.i);
+		} else if (period.p == P.Q) {
+			newTimestamp = BokkyPooBahsDateTimeLibrary.addMonths(timestamp, period.i * 3);
+		} else if (period.p == P.H) {
+			newTimestamp = BokkyPooBahsDateTimeLibrary.addMonths(timestamp, period.i * 6);
+		} else if (period.p == P.Y) {
+			newTimestamp = BokkyPooBahsDateTimeLibrary.addYears(timestamp, period.i);
 		} else {
 			revert("Core.getTimestampPlusPeriod: ATTRIBUTE_NOT_FOUND");
 		}

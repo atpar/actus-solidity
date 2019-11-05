@@ -12,12 +12,12 @@ import "./POF.sol";
 
 
 /**
- * @title the stateless component for a ANN contract
- * implements the STF and POF of the Actus standard for a ANN contract
+ * @title the stateless component for a CEG contract
+ * implements the STF and POF of the Actus standard for a CEG contract
  * @dev all numbers except unix timestamp are represented as multiple of 10 ** 18
  * inputs have to be multiplied by 10 ** 18, outputs have to divided by 10 ** 18
  */
-contract ANNEngine is Core, IEngine, STF, POF {
+contract CEGEngine is Core, IEngine, STF, POF {
 
 	using SafeMath for uint;
 	using SignedSafeMath for int;
@@ -129,7 +129,7 @@ contract ANNEngine is Core, IEngine, STF, POF {
 		return (nextContractState, contractEvent);
 	}
 
-		/**
+	/**
 	 * computes a schedule segment of contract events based on the contract terms and the specified period
 	 * TODO: add missing contract features:
 	 * - rate reset
@@ -152,18 +152,6 @@ contract ANNEngine is Core, IEngine, STF, POF {
 		ProtoEvent[MAX_EVENT_SCHEDULE_SIZE] memory protoEventSchedule;
 		uint16 index = 0;
 
-		// initial exchange
-		if (isInPeriod(contractTerms.initialExchangeDate, segmentStart, segmentEnd)) {
-			protoEventSchedule[index] = ProtoEvent(
-				contractTerms.initialExchangeDate,
-				contractTerms.initialExchangeDate.add(getEpochOffset(EventType.IED)),
-				contractTerms.initialExchangeDate,
-				EventType.IED,
-				contractTerms.currency
-			);
-			index++;
-		}
-
 		// purchase
 		if (contractTerms.purchaseDate != 0) {
 			if (isInPeriod(contractTerms.purchaseDate, segmentStart, segmentEnd)) {
@@ -172,76 +160,6 @@ contract ANNEngine is Core, IEngine, STF, POF {
 					contractTerms.purchaseDate.add(getEpochOffset(EventType.PRD)),
 					contractTerms.purchaseDate,
 					EventType.PRD,
-					contractTerms.currency
-				);
-				index++;
-			}
-		}
-
-		// interest payment related (covers pre-repayment period only,
-		//    starting with PRANX interest is paid following the PR schedule)
-		if (contractTerms.cycleOfInterestPayment.isSet == true &&
-			contractTerms.cycleAnchorDateOfInterestPayment != 0 &&
-			contractTerms.cycleAnchorDateOfInterestPayment < contractTerms.cycleAnchorDateOfPrincipalRedemption)
-			{
-			uint256[MAX_CYCLE_SIZE] memory interestPaymentSchedule = computeDatesFromCycleSegment(
-				contractTerms.cycleAnchorDateOfInterestPayment,
-				contractTerms.cycleAnchorDateOfPrincipalRedemption, // pure IP schedule ends at beginning of combined IP/PR schedule
-				contractTerms.cycleOfInterestPayment,
-				contractTerms.endOfMonthConvention,
-				false, // do not create an event for cycleAnchorDateOfPrincipalRedemption as covered with the PR schedule
-				segmentStart,
-				segmentEnd
-			);
-			for (uint8 i = 0; i < MAX_CYCLE_SIZE; i++) {
-				if (interestPaymentSchedule[i] == 0) break;
-				uint256 shiftedIPDate = shiftEventTime(
-					interestPaymentSchedule[i],
-					contractTerms.businessDayConvention,
-					contractTerms.calendar
-				);
-				if (isInPeriod(shiftedIPDate, segmentStart, segmentEnd) == false) continue;
-				if (
-					contractTerms.capitalizationEndDate != 0 &&
-					interestPaymentSchedule[i] <= contractTerms.capitalizationEndDate
-				) {
-					if (interestPaymentSchedule[i] == contractTerms.capitalizationEndDate) continue;
-					protoEventSchedule[index] = ProtoEvent(
-						shiftedIPDate,
-						shiftedIPDate.add(getEpochOffset(EventType.IPCI)),
-						interestPaymentSchedule[i],
-						EventType.IPCI,
-						contractTerms.currency
-					);
-					index++;
-				} else {
-					protoEventSchedule[index] = ProtoEvent(
-						shiftedIPDate,
-						shiftedIPDate.add(getEpochOffset(EventType.IP)),
-						interestPaymentSchedule[i],
-						EventType.IP,
-						contractTerms.currency
-					);
-					index++;
-				}
-			}
-		}
-		// capitalization end date
-		else if (
-			contractTerms.capitalizationEndDate != 0 &&
-			contractTerms.capitalizationEndDate < contractTerms.cycleAnchorDateOfPrincipalRedemption
-		) {
-			uint256 shiftedIPCIDate = shiftEventTime(
-				contractTerms.capitalizationEndDate,
-				contractTerms.businessDayConvention,
-				contractTerms.calendar
-			);
-			if (isInPeriod(shiftedIPCIDate, segmentStart, segmentEnd)) {
-				protoEventSchedule[index] = ProtoEvent(
-					shiftedIPCIDate,
-					shiftedIPCIDate.add(getEpochOffset(EventType.IPCI)),
-					contractTerms.capitalizationEndDate,
-					EventType.IPCI,
 					contractTerms.currency
 				);
 				index++;
@@ -276,59 +194,8 @@ contract ANNEngine is Core, IEngine, STF, POF {
 				);
 				index++;
 			}
-		}
 
-		// termination
-		if (contractTerms.terminationDate != 0) {
-			if (isInPeriod(contractTerms.terminationDate, segmentStart, segmentEnd)) {
-				protoEventSchedule[index] = ProtoEvent(
-					contractTerms.terminationDate,
-					contractTerms.terminationDate.add(getEpochOffset(EventType.TD)),
-					contractTerms.terminationDate,
-					EventType.TD,
-					contractTerms.currency
-				);
-				index++;
-			}
-		}
-
-		// principal redemption related (covers also interest events post PRANX)
-		uint256[MAX_CYCLE_SIZE] memory principalRedemptionSchedule = computeDatesFromCycleSegment(
-			contractTerms.cycleAnchorDateOfPrincipalRedemption,
-			contractTerms.maturityDate,
-			contractTerms.cycleOfPrincipalRedemption,
-			contractTerms.endOfMonthConvention,
-			false,
-			segmentStart,
-			segmentEnd
-		);
-		for (uint8 i = 0; i < MAX_CYCLE_SIZE; i++) {
-			if (principalRedemptionSchedule[i] == 0) break;
-			uint256 shiftedPRDate = shiftEventTime(
-				principalRedemptionSchedule[i],
-				contractTerms.businessDayConvention,
-				contractTerms.calendar
-			);
-			if (isInPeriod(shiftedPRDate, segmentStart, segmentEnd) == false) continue;
-			protoEventSchedule[index] = ProtoEvent(
-				shiftedPRDate,
-				shiftedPRDate.add(getEpochOffset(EventType.PR)),
-				principalRedemptionSchedule[i],
-				EventType.PR,
-				contractTerms.currency
-			);
-			index++;
-			protoEventSchedule[index] = ProtoEvent(
-				shiftedPRDate,
-				shiftedPRDate.add(getEpochOffset(EventType.IP)),
-				principalRedemptionSchedule[i],
-				EventType.IP,
-				contractTerms.currency
-			);
-			index++;
-		}
-
-		// principal redemption at maturity
+		// maturity event
 		if (isInPeriod(contractTerms.maturityDate, segmentStart, segmentEnd) == true) {
 			protoEventSchedule[index] = ProtoEvent(
 				contractTerms.maturityDate,
@@ -338,14 +205,7 @@ contract ANNEngine is Core, IEngine, STF, POF {
 				contractTerms.currency
 			);
 			index++;
-			protoEventSchedule[index] = ProtoEvent(
-				contractTerms.maturityDate,
-				contractTerms.maturityDate.add(getEpochOffset(EventType.IP)),
-				contractTerms.maturityDate,
-				EventType.IP,
-				contractTerms.currency
-			);
-			index++;
+		}
 		}
 
 		sortProtoEventSchedule(protoEventSchedule, index);
@@ -418,15 +278,9 @@ contract ANNEngine is Core, IEngine, STF, POF {
 		ContractState memory contractState;
 
 		contractState.contractPerformance = ContractPerformance.PF;
-		contractState.notionalScalingMultiplier = int256(1 * 10 ** PRECISION);
-		contractState.interestScalingMultiplier = int256(1 * 10 ** PRECISION);
 		contractState.lastEventTime = contractTerms.statusDate;
 		contractState.notionalPrincipal = roleSign(contractTerms.contractRole) * contractTerms.notionalPrincipal;
-		contractState.nominalInterestRate = contractTerms.nominalInterestRate;
-		contractState.accruedInterest = roleSign(contractTerms.contractRole) * contractTerms.accruedInterest;
 		contractState.feeAccrued = contractTerms.feeAccrued;
-		// annuity calculator to be implemented
-		contractState.nextPrincipalRedemptionPayment = roleSign(contractTerms.contractRole) * contractTerms.nextPrincipalRedemptionPayment;
 
 		return contractState;
 	}
@@ -453,24 +307,13 @@ contract ANNEngine is Core, IEngine, STF, POF {
 		pure
 		returns (ContractState memory)
 	{
-		if (protoEvent.eventType == EventType.AD) return STF_PAM_AD(protoEvent, contractTerms, contractState, currentTimestamp);
-		if (protoEvent.eventType == EventType.CD) return STF_PAM_CD(protoEvent, contractTerms, contractState, currentTimestamp);
-		if (protoEvent.eventType == EventType.FP) return STF_PAM_FP(protoEvent, contractTerms, contractState, currentTimestamp);
-		if (protoEvent.eventType == EventType.IED) return STF_ANN_IED(protoEvent, contractTerms, contractState, currentTimestamp);
-		if (protoEvent.eventType == EventType.IPCI) return STF_ANN_IPCI(protoEvent, contractTerms, contractState, currentTimestamp);
-		if (protoEvent.eventType == EventType.IP) return STF_ANN_IP(protoEvent, contractTerms, contractState, currentTimestamp);
-		if (protoEvent.eventType == EventType.PP) return STF_PAM_PP(protoEvent, contractTerms, contractState, currentTimestamp);
-		if (protoEvent.eventType == EventType.PRD) return STF_PAM_PRD(protoEvent, contractTerms, contractState, currentTimestamp);
-		if (protoEvent.eventType == EventType.PR) return STF_ANN_PR(protoEvent, contractTerms, contractState, currentTimestamp);
-		if (protoEvent.eventType == EventType.MD) return STF_ANN_MD(protoEvent, contractTerms, contractState, currentTimestamp);
-		if (protoEvent.eventType == EventType.PY) return STF_PAM_PY(protoEvent, contractTerms, contractState, currentTimestamp);
-		if (protoEvent.eventType == EventType.RRF) return STF_PAM_RRF(protoEvent, contractTerms, contractState, currentTimestamp);
-		if (protoEvent.eventType == EventType.RR) return STF_ANN_RR(protoEvent, contractTerms, contractState, currentTimestamp);
-		if (protoEvent.eventType == EventType.SC) return STF_ANN_SC(protoEvent, contractTerms, contractState, currentTimestamp);
-		if (protoEvent.eventType == EventType.TD) return STF_PAM_TD(protoEvent, contractTerms, contractState, currentTimestamp);
+		if (protoEvent.eventType == EventType.PRD) return STF_CEG_PRD(protoEvent, contractTerms, contractState, currentTimestamp);
+		if (protoEvent.eventType == EventType.FP) return STF_CEG_FP(protoEvent, contractTerms, contractState, currentTimestamp);
+		if (protoEvent.eventType == EventType.XD) return STF_CEG_XD(protoEvent, contractTerms, contractState, currentTimestamp);
+		if (protoEvent.eventType == EventType.MD) return STF_CEG_MD(protoEvent, contractTerms, contractState, currentTimestamp);
 		if (protoEvent.eventType == EventType.DEL) return STF_PAM_DEL(protoEvent, contractTerms, contractState, currentTimestamp);
 
-		revert("ANNEngine.stateTransitionFunction: ATTRIBUTE_NOT_FOUND");
+		revert("CEGEngine.stateTransitionFunction: ATTRIBUTE_NOT_FOUND");
 	}
 
 	/**
@@ -494,23 +337,12 @@ contract ANNEngine is Core, IEngine, STF, POF {
 		pure
 		returns (int256)
 	{
-		if (protoEvent.eventType == EventType.AD) return 0;
-		if (protoEvent.eventType == EventType.CD) return 0;
-		if (protoEvent.eventType == EventType.IPCI) return 0;
-		if (protoEvent.eventType == EventType.RRF) return 0;
-		if (protoEvent.eventType == EventType.RR) return 0;
-		if (protoEvent.eventType == EventType.SC) return 0;
 		if (protoEvent.eventType == EventType.DEL) return 0;
-		if (protoEvent.eventType == EventType.FP) return POF_ANN_FP(protoEvent, contractTerms, contractState, currentTimestamp);
-		if (protoEvent.eventType == EventType.IED) return POF_PAM_IED(protoEvent, contractTerms, contractState, currentTimestamp);
-		if (protoEvent.eventType == EventType.IP) return POF_PAM_IP(protoEvent, contractTerms, contractState, currentTimestamp);
-		if (protoEvent.eventType == EventType.PP) return POF_PAM_PP(protoEvent, contractTerms, contractState, currentTimestamp);
-		if (protoEvent.eventType == EventType.PRD) return POF_PAM_PRD(protoEvent, contractTerms, contractState, currentTimestamp);
-		if (protoEvent.eventType == EventType.PR) return POF_ANN_PR(protoEvent, contractTerms, contractState, currentTimestamp);
-		if (protoEvent.eventType == EventType.MD) return POF_ANN_MD(protoEvent, contractTerms, contractState, currentTimestamp);
-		if (protoEvent.eventType == EventType.PY) return POF_PAM_PY(protoEvent, contractTerms, contractState, currentTimestamp);
-		if (protoEvent.eventType == EventType.TD) return POF_PAM_TD(protoEvent, contractTerms, contractState, currentTimestamp);
+		if (protoEvent.eventType == EventType.PRD) return POF_CEG_PRD(protoEvent, contractTerms, contractState, currentTimestamp);
+		if (protoEvent.eventType == EventType.FP) return POF_CEG_FP(protoEvent, contractTerms, contractState, currentTimestamp);
+		if (protoEvent.eventType == EventType.XD) return POF_CEG_XD(protoEvent, contractTerms, contractState, currentTimestamp);
+		if (protoEvent.eventType == EventType.MD) return POF_CEG_MD(protoEvent, contractTerms, contractState, currentTimestamp);
 
-		revert("ANNEngine.payoffFunction: ATTRIBUTE_NOT_FOUND");
+		revert("CEGEngine.payoffFunction: ATTRIBUTE_NOT_FOUND");
 	}
 }

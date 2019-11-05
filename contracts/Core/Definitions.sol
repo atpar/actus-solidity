@@ -24,7 +24,13 @@ contract Definitions {
 		bool isSet;
 	}
 
-	enum EventType {AD, CD, DV, XD, FP, IED, IPCB, IPCI, IP, MR, MD, PY, PD, PRF, PP, PR, PRD, RRF, RR, SC, STD, TD}
+	struct IP {
+		uint256 i;
+		P p;
+		bool isSet;
+	}
+
+	enum EventType {AD, CD, DV, XD, FP, IED, IPCB, IPCI, IP, MR, MD, PY, PD, PRF, PP, PR, PRD, RRF, RR, SC, STD, TD, DEL}
 	enum Calendar {NoCalendar, MondayToFriday} // Custom: custom implementation of calendar
 	enum BusinessDayConvention {NULL, SCF, SCMF, CSF, CSMF, SCP, SCMP, CSP, CSMP}
 	enum ClearingHouse {YES, NO} // required ?
@@ -49,9 +55,18 @@ contract Definitions {
 	enum ScalingEffect {_000, _0N0, _00M, _0NM, I00, IN0, I0M, INM} // Default: _000
 	enum Seniority {S, J} // required ?
 	enum Unit {BRL, BSH, GLN, CUU, MWH, PND, STN, TON, TRO} // required ?
+	enum ContractReferenceType {CT, CID, MOC, LEI, CS}
+	enum ContractReferenceRole {UDY, FL, SL, CVE, CVI}
+
+	struct ContractStructure {
+		bytes32 object;
+		ContractReferenceType contractReferenceType;
+		ContractReferenceRole contractReferenceRole;
+	}
 
 	struct ContractState {
 		uint256 lastEventTime;
+		uint256 nonPerformingDate;
 		ContractPerformance contractPerformance;
 		int256 notionalPrincipal;
 		// int256 notionalPrincipal2;
@@ -91,6 +106,8 @@ contract Definitions {
 		ScalingEffect scalingEffect;
 		PenaltyType penaltyType;
 		FeeBasis feeBasis;
+		ContractPerformance creditEventTypeCovered;
+		ContractStructure contractStructure;
 
 		uint256 initialExchangeDate;
 		uint256 maturityDate;
@@ -106,6 +123,10 @@ contract Definitions {
 		int256 premiumDiscountAtIED;
 		int256 priceAtPurchaseDate;
 		int256 nextPrincipalRedemptionPayment;
+		int256 coverageOfCreditEnhancement;
+
+		IP gracePeriod;
+		IP delinquencyPeriod;
 
 		int256 lifeCap;
 		int256 lifeFloor;
@@ -126,6 +147,8 @@ contract Definitions {
 		ScalingEffect scalingEffect;
 		PenaltyType penaltyType;
 		FeeBasis feeBasis;
+		ContractPerformance creditEventTypeCovered;
+		ContractStructure contractStructure;
 
 		uint256 contractDealDate;
 		uint256 statusDate;
@@ -152,12 +175,16 @@ contract Definitions {
 		int256 premiumDiscountAtIED;
 		int256 priceAtPurchaseDate;
 		int256 nextPrincipalRedemptionPayment;
+		int256 coverageOfCreditEnhancement;
 
 		IPS cycleOfInterestPayment;
 		IPS cycleOfRateReset;
 		IPS cycleOfScalingIndex;
 		IPS cycleOfFee;
 		IPS cycleOfPrincipalRedemption;
+
+		IP gracePeriod;
+		IP delinquencyPeriod;
 
 		int256 lifeCap;
 		int256 lifeFloor;

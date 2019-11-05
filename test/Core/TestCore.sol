@@ -383,17 +383,18 @@ contract TestCore is Core {
   }
 
   function testGetTimestampPlusPeriod() public {
-    Assert.equal(getTimestampPlusPeriod(IPS(1, P.D, S.LONG, true), 1514764800), 1514851200, "Timestamp + 1D+ should be 1514851200");
-    Assert.equal(getTimestampPlusPeriod(IPS(5, P.D, S.LONG, true), 1514764800), 1515196800, "Timestamp + 5D+ should be 1515196800");
-    Assert.equal(getTimestampPlusPeriod(IPS(1, P.W, S.LONG, true), 1514764800), 1515369600, "Timestamp + 1W+ should be 1515369600");
-    Assert.equal(getTimestampPlusPeriod(IPS(5, P.W, S.LONG, true), 1514764800), 1517788800, "Timestamp + 5W+ should be 1517788800");
-    Assert.equal(getTimestampPlusPeriod(IPS(1, P.Q, S.LONG, true), 1514764800), 1522540800, "Timestamp + 1Q+ should be 1522540800");
-    Assert.equal(getTimestampPlusPeriod(IPS(3, P.Q, S.LONG, true), 1514764800), 1538352000, "Timestamp + 3Q+ should be 1538352000");
-    Assert.equal(getTimestampPlusPeriod(IPS(1, P.H, S.LONG, true), 1514764800), 1530403200, "Timestamp + 1H+ should be 1530403200");
-    Assert.equal(getTimestampPlusPeriod(IPS(5, P.H, S.LONG, true), 1514764800), 1593561600, "Timestamp + 5H+ should be 1593561600");
-    Assert.equal(getTimestampPlusPeriod(IPS(1, P.Y, S.LONG, true), 1514764800), 1546300800, "Timestamp + 1Y+ should be 1546300800");
-    Assert.equal(getTimestampPlusPeriod(IPS(5, P.Y, S.LONG, true), 1514764800), 1672531200, "Timestamp + 5Y+ should be 1672531200");
+    Assert.equal(getTimestampPlusPeriod(IP(1, P.D, true), 1514764800), 1514851200, "Timestamp + 1D+ should be 1514851200");
+    Assert.equal(getTimestampPlusPeriod(IP(5, P.D, true), 1514764800), 1515196800, "Timestamp + 5D+ should be 1515196800");
+    Assert.equal(getTimestampPlusPeriod(IP(1, P.W, true), 1514764800), 1515369600, "Timestamp + 1W+ should be 1515369600");
+    Assert.equal(getTimestampPlusPeriod(IP(5, P.W, true), 1514764800), 1517788800, "Timestamp + 5W+ should be 1517788800");
+    Assert.equal(getTimestampPlusPeriod(IP(1, P.Q, true), 1514764800), 1522540800, "Timestamp + 1Q+ should be 1522540800");
+    Assert.equal(getTimestampPlusPeriod(IP(3, P.Q, true), 1514764800), 1538352000, "Timestamp + 3Q+ should be 1538352000");
+    Assert.equal(getTimestampPlusPeriod(IP(1, P.H, true), 1514764800), 1530403200, "Timestamp + 1H+ should be 1530403200");
+    Assert.equal(getTimestampPlusPeriod(IP(5, P.H, true), 1514764800), 1593561600, "Timestamp + 5H+ should be 1593561600");
+    Assert.equal(getTimestampPlusPeriod(IP(1, P.Y, true), 1514764800), 1546300800, "Timestamp + 1Y+ should be 1546300800");
+    Assert.equal(getTimestampPlusPeriod(IP(5, P.Y, true), 1514764800), 1672531200, "Timestamp + 5Y+ should be 1672531200");
   }
+
 
   function testGetNextCycleDate() public {
     Assert.equal(getNextCycleDate(IPS(1, P.D, S.LONG, true), 1514764800, 0), 1514764800, "Timestamp + 1D+ with CycleIndex 0 should be 1514764800");
