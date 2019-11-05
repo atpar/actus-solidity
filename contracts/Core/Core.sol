@@ -22,6 +22,33 @@ contract Core is
 	EndOfMonthConvention,
 	Schedule
 {
+	function createProtoEvent(
+		EventType eventType,
+		uint256 scheduleTime,
+		ContractTerms memory contractTerms,
+		EventType stfType,
+		EventType pofType
+	)
+		public
+		pure
+		returns (ProtoEvent memory)
+	{
+		uint256 eventTime = shiftEventTime(
+			scheduleTime,
+			contractTerms.businessDayConvention,
+			contractTerms.calendar
+		);
+
+		return ProtoEvent(
+			eventTime,
+			eventTime.add(getEpochOffset(eventType)),
+			scheduleTime,
+			eventType,
+			contractTerms.currency,
+			stfType,
+			pofType
+		);
+	}
 
 	function signum(int value) internal pure returns (int256) {
 		if (value > 0) {
