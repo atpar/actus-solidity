@@ -44,9 +44,7 @@ contract Core is
 			eventTime.add(getEpochOffset(eventType)),
 			scheduleTime,
 			eventType,
-			contractTerms.currency,
-			stfType,
-			pofType
+			contractTerms.currency
 		);
 	}
 
