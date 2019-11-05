@@ -344,9 +344,7 @@ contract TestCore is Core {
       uint256(4).add(getEpochOffset(EventType.TD)),
       uint256(4),
       EventType.TD,
-      address(0),
-      EventType.TD,
-      EventType.TD
+      address(0)
     );
     index++;
 
@@ -355,9 +353,7 @@ contract TestCore is Core {
       uint256(4).add(getEpochOffset(EventType.MD)),
       uint256(4),
       EventType.MD,
-      address(0),
-      EventType.MD,
-      EventType.MD
+      address(0)
     );
     index++;
 
@@ -366,9 +362,7 @@ contract TestCore is Core {
       uint256(1).add(getEpochOffset(EventType.IED)),
       uint256(1),
       EventType.IED,
-      address(0),
-      EventType.IED,
-      EventType.IED
+      address(0)
     );
     index++;
 

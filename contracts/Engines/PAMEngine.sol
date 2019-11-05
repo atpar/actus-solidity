@@ -115,7 +115,7 @@ contract PAMEngine is Core, IEngine, STF, POF {
 			protoEvent.eventTime,
 			protoEvent.eventType,
 			protoEvent.currency,
-			payoffFunction(timestamp, contractTerms, contractState, protoEvent.pofType), // solium-disable-line
+			payoffFunction(timestamp, contractTerms, contractState, protoEvent.eventType), // solium-disable-line
 			timestamp
 		);
 
@@ -123,7 +123,7 @@ contract PAMEngine is Core, IEngine, STF, POF {
 			timestamp,
 			contractTerms,
 			contractState,
-			protoEvent.stfType
+			protoEvent.eventType
 		);
 
 		return (nextContractState, contractEvent);
@@ -155,9 +155,7 @@ contract PAMEngine is Core, IEngine, STF, POF {
 				contractTerms.initialExchangeDate.add(getEpochOffset(EventType.IED)),
 				contractTerms.initialExchangeDate,
 				EventType.IED,
-				contractTerms.currency,
-				EventType.IED,
-				EventType.IED
+				contractTerms.currency
 			);
 			index++;
 		}
@@ -170,9 +168,7 @@ contract PAMEngine is Core, IEngine, STF, POF {
 					contractTerms.purchaseDate.add(getEpochOffset(EventType.PRD)),
 					contractTerms.purchaseDate,
 					EventType.PRD,
-					contractTerms.currency,
-					EventType.PRD,
-					EventType.PRD
+					contractTerms.currency
 				);
 				index++;
 			}
@@ -203,9 +199,7 @@ contract PAMEngine is Core, IEngine, STF, POF {
 						shiftedIPCITime.add(getEpochOffset(EventType.IPCI)),
 						contractTerms.capitalizationEndDate,
 						EventType.IPCI,
-						contractTerms.currency,
-						EventType.IPCI,
-						EventType.IPCI
+						contractTerms.currency
 					);
 					index++;
 				}
@@ -228,9 +222,7 @@ contract PAMEngine is Core, IEngine, STF, POF {
 						shiftedIPDate.add(getEpochOffset(EventType.IPCI)),
 						interestPaymentSchedule[i],
 						EventType.IPCI,
-						contractTerms.currency,
-						EventType.IPCI,
-						EventType.IPCI
+						contractTerms.currency
 					);
 					index++;
 				} else {
@@ -239,9 +231,7 @@ contract PAMEngine is Core, IEngine, STF, POF {
 						shiftedIPDate.add(getEpochOffset(EventType.IP)),
 						interestPaymentSchedule[i],
 						EventType.IP,
-						contractTerms.currency,
-						EventType.IP,
-						EventType.IP
+						contractTerms.currency
 					);
 					index++;
 				}
@@ -260,9 +250,7 @@ contract PAMEngine is Core, IEngine, STF, POF {
 					shiftedIPCIDate.add(getEpochOffset(EventType.IPCI)),
 					contractTerms.capitalizationEndDate,
 					EventType.IPCI,
-					contractTerms.currency,
-					EventType.IPCI,
-					EventType.IPCI
+					contractTerms.currency
 				);
 				index++;
 			}
@@ -292,9 +280,7 @@ contract PAMEngine is Core, IEngine, STF, POF {
 					shiftedRRDate.add(getEpochOffset(EventType.RR)),
 					rateResetSchedule[i],
 					EventType.RR,
-					contractTerms.currency,
-					EventType.RR,
-					EventType.RR
+					contractTerms.currency
 				);
 				index++;
 			}
@@ -325,9 +311,7 @@ contract PAMEngine is Core, IEngine, STF, POF {
 					shiftedFPDate.add(getEpochOffset(EventType.FP)),
 					feeSchedule[i],
 					EventType.FP,
-					contractTerms.currency,
-					EventType.FP,
-					EventType.FP
+					contractTerms.currency
 				);
 				index++;
 			}
@@ -359,9 +343,7 @@ contract PAMEngine is Core, IEngine, STF, POF {
 					shiftedSCDate.add(getEpochOffset(EventType.SC)),
 					scalingSchedule[i],
 					EventType.SC,
-					contractTerms.currency,
-					EventType.SC,
-					EventType.SC
+					contractTerms.currency
 				);
 				index++;
 			}
@@ -375,9 +357,7 @@ contract PAMEngine is Core, IEngine, STF, POF {
 					contractTerms.terminationDate.add(getEpochOffset(EventType.TD)),
 					contractTerms.terminationDate,
 					EventType.TD,
-					contractTerms.currency,
-					EventType.TD,
-					EventType.TD
+					contractTerms.currency
 				);
 				index++;
 			}
@@ -390,9 +370,7 @@ contract PAMEngine is Core, IEngine, STF, POF {
 				contractTerms.maturityDate.add(getEpochOffset(EventType.PR)),
 				contractTerms.maturityDate,
 				EventType.PR,
-				contractTerms.currency,
-				EventType.PR,
-				EventType.PR
+				contractTerms.currency
 			);
 			index++;
 		}
