@@ -507,15 +507,22 @@ contract STF is Core {
       ? protoEvent.eventTime
       : contractState.nonPerformingDate;
 
-    uint256 graceDate = getTimestampPlusPeriod(contractTerms.gracePeriod, nonPerformingDate);
-    uint256 delinquencyDate = getTimestampPlusPeriod(contractTerms.delinquencyPeriod, nonPerformingDate);
+    bool isInGracePeriod = false;
+    if (contractTerms.gracePeriod.isSet) {
+      uint256 graceDate = getTimestampPlusPeriod(contractTerms.gracePeriod, nonPerformingDate);
+      if (currentTimestamp <= graceDate) {
+        contractState.contractPerformance = ContractPerformance.DL;
+        isInGracePeriod = true;
+      }
+    }
 
-    if (protoEvent.scheduleTime <= graceDate) {
-      contractState.contractPerformance = ContractPerformance.DL;
-    } else if (protoEvent.scheduleTime <= delinquencyDate) {
-      contractState.contractPerformance = ContractPerformance.DQ;
-    } else {
-      contractState.contractPerformance = ContractPerformance.DF;
+    if (contractTerms.delinquencyPeriod.isSet && !isInGracePeriod) {
+      uint256 delinquencyDate = getTimestampPlusPeriod(contractTerms.delinquencyPeriod, nonPerformingDate);
+      if (currentTimestamp <= delinquencyDate) {
+        contractState.contractPerformance = ContractPerformance.DQ;
+      } else {
+        contractState.contractPerformance = ContractPerformance.DF;
+      }
     }
 
     if (contractState.nonPerformingDate == 0) {
