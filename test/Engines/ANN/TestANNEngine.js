@@ -11,7 +11,7 @@ const {
 
 contract('ANNEngine', () => {
 
-  computeProtoEventScheduleSegment = async (terms, segmentStart, segmentEnd) => {
+  const computeProtoEventScheduleSegment = async (terms, segmentStart, segmentEnd) => {
     const protoEventSchedule = [];
       
     protoEventSchedule.push(... await this.ANNEngineInstance.computeNonCyclicProtoEventScheduleSegment(
