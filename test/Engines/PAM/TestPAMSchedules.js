@@ -10,7 +10,7 @@ const {
 
 contract('PAMEngine', () => {
 
-  computeProtoEventScheduleSegment = async (terms, segmentStart, segmentEnd) => {
+  const computeProtoEventScheduleSegment = async (terms, segmentStart, segmentEnd) => {
     const protoEventSchedule = [];
       
     protoEventSchedule.push(... await this.PAMEngineInstance.computeNonCyclicProtoEventScheduleSegment(

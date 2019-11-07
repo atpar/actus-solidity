@@ -16,7 +16,7 @@ function getEpochOffsetForEventType (eventType) {
   if (eventType === 16) { return 130; } // PRD
   if (eventType === 21) { return 140; } // TD
   if (eventType === 20) { return 150; } // STD
-  if (eventType === 10) { return 160; } // MD
+  if (eventType === 10) { return 10; } // MD
   if (eventType === 0) { return 950; } // AD
   return 0;
 }
