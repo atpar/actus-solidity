@@ -6,7 +6,7 @@ import "../Core/Core.sol";
 
 contract POF is Core {
   function POF_PAM_FP (
-    ProtoEvent memory protoEvent,
+    uint256 scheduleTime,
     ContractTerms memory contractTerms,
     ContractState memory contractState,
     uint256 currentTimestamp
@@ -29,7 +29,7 @@ contract POF is Core {
         .add(
           yearFraction(
             shiftCalcTime(contractState.lastEventTime, contractTerms.businessDayConvention, contractTerms.calendar),
-            shiftCalcTime(protoEvent.scheduleTime, contractTerms.businessDayConvention, contractTerms.calendar),
+            shiftCalcTime(scheduleTime, contractTerms.businessDayConvention, contractTerms.calendar),
             contractTerms.dayCountConvention,
             contractTerms.maturityDate
           )
@@ -40,7 +40,7 @@ contract POF is Core {
   }
 
   function POF_PAM_IED (
-    ProtoEvent memory protoEvent,
+    uint256 scheduleTime,
     ContractTerms memory contractTerms,
     ContractState memory contractState,
     uint256 currentTimestamp
@@ -59,7 +59,7 @@ contract POF is Core {
   }
 
   function POF_PAM_IP (
-    ProtoEvent memory protoEvent,
+    uint256 scheduleTime,
     ContractTerms memory contractTerms,
     ContractState memory contractState,
     uint256 currentTimestamp
@@ -76,7 +76,7 @@ contract POF is Core {
           .add(
             yearFraction(
               shiftCalcTime(contractState.lastEventTime, contractTerms.businessDayConvention, contractTerms.calendar),
-              shiftCalcTime(protoEvent.scheduleTime, contractTerms.businessDayConvention, contractTerms.calendar),
+              shiftCalcTime(scheduleTime, contractTerms.businessDayConvention, contractTerms.calendar),
               contractTerms.dayCountConvention,
               contractTerms.maturityDate
             )
@@ -88,7 +88,7 @@ contract POF is Core {
   }
 
   function POF_PAM_PP (
-    ProtoEvent memory protoEvent,
+    uint256 scheduleTime,
     ContractTerms memory contractTerms,
     ContractState memory contractState,
     uint256 currentTimestamp
@@ -100,13 +100,13 @@ contract POF is Core {
     return (
       performanceIndicator(contractState.contractPerformance)
       * roleSign(contractTerms.contractRole)
-      * 0 // riskFactor(protoEvent.scheduleTime, contractState, contractTerms, contractTerms.objectCodeOfPrepaymentModel)
+      * 0 // riskFactor(scheduleTime, contractState, contractTerms, contractTerms.objectCodeOfPrepaymentModel)
       * contractState.notionalPrincipal
     );
   }
 
   function POF_PAM_PRD (
-    ProtoEvent memory protoEvent,
+    uint256 scheduleTime,
     ContractTerms memory contractTerms,
     ContractState memory contractState,
     uint256 currentTimestamp
@@ -124,7 +124,7 @@ contract POF is Core {
         .add(
           yearFraction(
             shiftCalcTime(contractState.lastEventTime, contractTerms.businessDayConvention, contractTerms.calendar),
-            shiftCalcTime(protoEvent.scheduleTime, contractTerms.businessDayConvention, contractTerms.calendar),
+            shiftCalcTime(scheduleTime, contractTerms.businessDayConvention, contractTerms.calendar),
             contractTerms.dayCountConvention,
             contractTerms.maturityDate
           )
@@ -135,7 +135,7 @@ contract POF is Core {
   }
 
   function POF_PAM_PR (
-    ProtoEvent memory protoEvent,
+    uint256 scheduleTime,
     ContractTerms memory contractTerms,
     ContractState memory contractState,
     uint256 currentTimestamp
@@ -152,7 +152,7 @@ contract POF is Core {
   }
 
   function POF_PAM_PY (
-    ProtoEvent memory protoEvent,
+    uint256 scheduleTime,
     ContractTerms memory contractTerms,
     ContractState memory contractState,
     uint256 currentTimestamp
@@ -173,7 +173,7 @@ contract POF is Core {
         * roleSign(contractTerms.contractRole)
         * yearFraction(
             shiftCalcTime(contractState.lastEventTime, contractTerms.businessDayConvention, contractTerms.calendar),
-            shiftCalcTime(protoEvent.scheduleTime, contractTerms.businessDayConvention, contractTerms.calendar),
+            shiftCalcTime(scheduleTime, contractTerms.businessDayConvention, contractTerms.calendar),
             contractTerms.dayCountConvention,
             contractTerms.maturityDate
           )
@@ -181,7 +181,7 @@ contract POF is Core {
           .floatMult(contractState.notionalPrincipal)
       );
     } else {
-      // riskFactor(protoEvent.scheduleTime, contractState, contractTerms, contractTerms.marketObjectCodeOfRateReset);
+      // riskFactor(scheduleTime, contractState, contractTerms, contractTerms.marketObjectCodeOfRateReset);
       int256 risk = 0;
       int256 param = 0;
       if (contractState.nominalInterestRate - risk > 0) param = contractState.nominalInterestRate - risk;
@@ -190,7 +190,7 @@ contract POF is Core {
         * roleSign(contractTerms.contractRole)
         * yearFraction(
             shiftCalcTime(contractState.lastEventTime, contractTerms.businessDayConvention, contractTerms.calendar),
-            shiftCalcTime(protoEvent.scheduleTime, contractTerms.businessDayConvention, contractTerms.calendar),
+            shiftCalcTime(scheduleTime, contractTerms.businessDayConvention, contractTerms.calendar),
             contractTerms.dayCountConvention,
             contractTerms.maturityDate
           )
@@ -201,7 +201,7 @@ contract POF is Core {
   }
 
   function POF_PAM_TD (
-    ProtoEvent memory protoEvent,
+    uint256 scheduleTime,
     ContractTerms memory contractTerms,
     ContractState memory contractState,
     uint256 currentTimestamp
@@ -218,7 +218,7 @@ contract POF is Core {
         .add(
           yearFraction(
             shiftCalcTime(contractState.lastEventTime, contractTerms.businessDayConvention, contractTerms.calendar),
-            shiftCalcTime(protoEvent.scheduleTime, contractTerms.businessDayConvention, contractTerms.calendar),
+            shiftCalcTime(scheduleTime, contractTerms.businessDayConvention, contractTerms.calendar),
             contractTerms.dayCountConvention,
             contractTerms.maturityDate
           )
@@ -229,7 +229,7 @@ contract POF is Core {
   }
 
   function POF_ANN_FP (
-    ProtoEvent memory protoEvent,
+    uint256 scheduleTime,
     ContractTerms memory contractTerms,
     ContractState memory contractState,
     uint256 currentTimestamp
@@ -251,7 +251,7 @@ contract POF is Core {
           .add(
             yearFraction(
               shiftCalcTime(contractState.lastEventTime, contractTerms.businessDayConvention, contractTerms.calendar),
-              shiftCalcTime(protoEvent.scheduleTime, contractTerms.businessDayConvention, contractTerms.calendar),
+              shiftCalcTime(scheduleTime, contractTerms.businessDayConvention, contractTerms.calendar),
               contractTerms.dayCountConvention,
               contractTerms.maturityDate
             )
@@ -263,7 +263,7 @@ contract POF is Core {
   }
 
   function POF_ANN_PR (
-    ProtoEvent memory protoEvent,
+    uint256 scheduleTime,
     ContractTerms memory contractTerms,
     ContractState memory contractState,
     uint256 currentTimestamp
@@ -284,7 +284,7 @@ contract POF is Core {
                 - contractState.accruedInterest
                 - yearFraction(
                   shiftCalcTime(contractState.lastEventTime, contractTerms.businessDayConvention, contractTerms.calendar),
-                  shiftCalcTime(protoEvent.scheduleTime, contractTerms.businessDayConvention, contractTerms.calendar),
+                  shiftCalcTime(scheduleTime, contractTerms.businessDayConvention, contractTerms.calendar),
                   contractTerms.dayCountConvention,
                   contractTerms.maturityDate
                 )
@@ -297,7 +297,7 @@ contract POF is Core {
   }
 
   function POF_ANN_MD (
-    ProtoEvent memory protoEvent,
+    uint256 scheduleTime,
     ContractTerms memory contractTerms,
     ContractState memory contractState,
     uint256 currentTimestamp
@@ -314,7 +314,7 @@ contract POF is Core {
   }
 
   function POF_CEG_MD (
-    ProtoEvent memory protoEvent,
+    uint256 scheduleTime,
     ContractTerms memory contractTerms,
     ContractState memory contractState,
     uint256 currentTimestamp
@@ -327,7 +327,7 @@ contract POF is Core {
   }
 
   function POF_CEG_XD (
-    ProtoEvent memory protoEvent,
+    uint256 scheduleTime,
     ContractTerms memory contractTerms,
     ContractState memory contractState,
     uint256 currentTimestamp
@@ -345,7 +345,7 @@ contract POF is Core {
   }
 
   function POF_CEG_PRD (
-    ProtoEvent memory protoEvent,
+    uint256 scheduleTime,
     ContractTerms memory contractTerms,
     ContractState memory contractState,
     uint256 currentTimestamp
@@ -363,7 +363,7 @@ contract POF is Core {
   }
 
   function POF_CEG_FP (
-    ProtoEvent memory protoEvent,
+    uint256 scheduleTime,
     ContractTerms memory contractTerms,
     ContractState memory contractState,
     uint256 currentTimestamp
@@ -386,7 +386,7 @@ contract POF is Core {
         .add(
           yearFraction(
             shiftCalcTime(contractState.lastEventTime, contractTerms.businessDayConvention, contractTerms.calendar),
-            shiftCalcTime(protoEvent.scheduleTime, contractTerms.businessDayConvention, contractTerms.calendar),
+            shiftCalcTime(scheduleTime, contractTerms.businessDayConvention, contractTerms.calendar),
             contractTerms.dayCountConvention,
             contractTerms.maturityDate
           )

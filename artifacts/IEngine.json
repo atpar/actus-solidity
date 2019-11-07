@@ -798,11 +798,15 @@
           "type": "tuple"
         },
         {
-          "name": "timestamp",
+          "name": "protoEvent",
+          "type": "bytes32"
+        },
+        {
+          "name": "currentTimestamp",
           "type": "uint256"
         }
       ],
-      "name": "computeNextState",
+      "name": "computeStateForProtoEvent",
       "outputs": [
         {
           "components": [
@@ -849,32 +853,6 @@
           ],
           "name": "",
           "type": "tuple"
-        },
-        {
-          "components": [
-            {
-              "name": "eventTime",
-              "type": "uint256"
-            },
-            {
-              "name": "eventType",
-              "type": "uint8"
-            },
-            {
-              "name": "currency",
-              "type": "address"
-            },
-            {
-              "name": "payoff",
-              "type": "int256"
-            },
-            {
-              "name": "actualEventTime",
-              "type": "uint256"
-            }
-          ],
-          "name": "",
-          "type": "tuple[64]"
         }
       ],
       "payable": false,
@@ -1269,109 +1247,19 @@
           "type": "tuple"
         },
         {
-          "components": [
-            {
-              "name": "eventTime",
-              "type": "uint256"
-            },
-            {
-              "name": "eventTimeWithEpochOffset",
-              "type": "uint256"
-            },
-            {
-              "name": "scheduleTime",
-              "type": "uint256"
-            },
-            {
-              "name": "eventType",
-              "type": "uint8"
-            },
-            {
-              "name": "currency",
-              "type": "address"
-            }
-          ],
           "name": "protoEvent",
-          "type": "tuple"
+          "type": "bytes32"
         },
         {
-          "name": "timestamp",
+          "name": "currentTimestamp",
           "type": "uint256"
         }
       ],
-      "name": "computeNextStateForProtoEvent",
+      "name": "computePayoffForProtoEvent",
       "outputs": [
         {
-          "components": [
-            {
-              "name": "lastEventTime",
-              "type": "uint256"
-            },
-            {
-              "name": "nonPerformingDate",
-              "type": "uint256"
-            },
-            {
-              "name": "contractPerformance",
-              "type": "uint8"
-            },
-            {
-              "name": "notionalPrincipal",
-              "type": "int256"
-            },
-            {
-              "name": "accruedInterest",
-              "type": "int256"
-            },
-            {
-              "name": "feeAccrued",
-              "type": "int256"
-            },
-            {
-              "name": "nominalInterestRate",
-              "type": "int256"
-            },
-            {
-              "name": "interestScalingMultiplier",
-              "type": "int256"
-            },
-            {
-              "name": "notionalScalingMultiplier",
-              "type": "int256"
-            },
-            {
-              "name": "nextPrincipalRedemptionPayment",
-              "type": "int256"
-            }
-          ],
           "name": "",
-          "type": "tuple"
-        },
-        {
-          "components": [
-            {
-              "name": "eventTime",
-              "type": "uint256"
-            },
-            {
-              "name": "eventType",
-              "type": "uint8"
-            },
-            {
-              "name": "currency",
-              "type": "address"
-            },
-            {
-              "name": "payoff",
-              "type": "int256"
-            },
-            {
-              "name": "actualEventTime",
-              "type": "uint256"
-            }
-          ],
-          "name": "",
-          "type": "tuple"
+          "type": "int256"
         }
       ],
       "payable": false,
@@ -1728,33 +1616,376 @@
           "type": "uint256"
         }
       ],
-      "name": "computeProtoEventScheduleSegment",
+      "name": "computeNonCyclicProtoEventScheduleSegment",
       "outputs": [
+        {
+          "name": "",
+          "type": "bytes32[64]"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "pure",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [
         {
           "components": [
             {
-              "name": "eventTime",
-              "type": "uint256"
+              "name": "contractType",
+              "type": "uint8"
             },
             {
-              "name": "eventTimeWithEpochOffset",
-              "type": "uint256"
+              "name": "calendar",
+              "type": "uint8"
             },
             {
-              "name": "scheduleTime",
-              "type": "uint256"
+              "name": "contractRole",
+              "type": "uint8"
             },
             {
-              "name": "eventType",
+              "name": "creatorID",
+              "type": "bytes32"
+            },
+            {
+              "name": "counterpartyID",
+              "type": "bytes32"
+            },
+            {
+              "name": "dayCountConvention",
+              "type": "uint8"
+            },
+            {
+              "name": "businessDayConvention",
+              "type": "uint8"
+            },
+            {
+              "name": "endOfMonthConvention",
               "type": "uint8"
             },
             {
               "name": "currency",
               "type": "address"
+            },
+            {
+              "name": "scalingEffect",
+              "type": "uint8"
+            },
+            {
+              "name": "penaltyType",
+              "type": "uint8"
+            },
+            {
+              "name": "feeBasis",
+              "type": "uint8"
+            },
+            {
+              "name": "creditEventTypeCovered",
+              "type": "uint8"
+            },
+            {
+              "components": [
+                {
+                  "name": "object",
+                  "type": "bytes32"
+                },
+                {
+                  "name": "contractReferenceType",
+                  "type": "uint8"
+                },
+                {
+                  "name": "contractReferenceRole",
+                  "type": "uint8"
+                }
+              ],
+              "name": "contractStructure",
+              "type": "tuple"
+            },
+            {
+              "name": "contractDealDate",
+              "type": "uint256"
+            },
+            {
+              "name": "statusDate",
+              "type": "uint256"
+            },
+            {
+              "name": "initialExchangeDate",
+              "type": "uint256"
+            },
+            {
+              "name": "maturityDate",
+              "type": "uint256"
+            },
+            {
+              "name": "terminationDate",
+              "type": "uint256"
+            },
+            {
+              "name": "purchaseDate",
+              "type": "uint256"
+            },
+            {
+              "name": "capitalizationEndDate",
+              "type": "uint256"
+            },
+            {
+              "name": "cycleAnchorDateOfInterestPayment",
+              "type": "uint256"
+            },
+            {
+              "name": "cycleAnchorDateOfRateReset",
+              "type": "uint256"
+            },
+            {
+              "name": "cycleAnchorDateOfScalingIndex",
+              "type": "uint256"
+            },
+            {
+              "name": "cycleAnchorDateOfFee",
+              "type": "uint256"
+            },
+            {
+              "name": "cycleAnchorDateOfPrincipalRedemption",
+              "type": "uint256"
+            },
+            {
+              "name": "notionalPrincipal",
+              "type": "int256"
+            },
+            {
+              "name": "nominalInterestRate",
+              "type": "int256"
+            },
+            {
+              "name": "feeAccrued",
+              "type": "int256"
+            },
+            {
+              "name": "accruedInterest",
+              "type": "int256"
+            },
+            {
+              "name": "rateMultiplier",
+              "type": "int256"
+            },
+            {
+              "name": "rateSpread",
+              "type": "int256"
+            },
+            {
+              "name": "feeRate",
+              "type": "int256"
+            },
+            {
+              "name": "nextResetRate",
+              "type": "int256"
+            },
+            {
+              "name": "penaltyRate",
+              "type": "int256"
+            },
+            {
+              "name": "premiumDiscountAtIED",
+              "type": "int256"
+            },
+            {
+              "name": "priceAtPurchaseDate",
+              "type": "int256"
+            },
+            {
+              "name": "nextPrincipalRedemptionPayment",
+              "type": "int256"
+            },
+            {
+              "name": "coverageOfCreditEnhancement",
+              "type": "int256"
+            },
+            {
+              "components": [
+                {
+                  "name": "i",
+                  "type": "uint256"
+                },
+                {
+                  "name": "p",
+                  "type": "uint8"
+                },
+                {
+                  "name": "s",
+                  "type": "uint8"
+                },
+                {
+                  "name": "isSet",
+                  "type": "bool"
+                }
+              ],
+              "name": "cycleOfInterestPayment",
+              "type": "tuple"
+            },
+            {
+              "components": [
+                {
+                  "name": "i",
+                  "type": "uint256"
+                },
+                {
+                  "name": "p",
+                  "type": "uint8"
+                },
+                {
+                  "name": "s",
+                  "type": "uint8"
+                },
+                {
+                  "name": "isSet",
+                  "type": "bool"
+                }
+              ],
+              "name": "cycleOfRateReset",
+              "type": "tuple"
+            },
+            {
+              "components": [
+                {
+                  "name": "i",
+                  "type": "uint256"
+                },
+                {
+                  "name": "p",
+                  "type": "uint8"
+                },
+                {
+                  "name": "s",
+                  "type": "uint8"
+                },
+                {
+                  "name": "isSet",
+                  "type": "bool"
+                }
+              ],
+              "name": "cycleOfScalingIndex",
+              "type": "tuple"
+            },
+            {
+              "components": [
+                {
+                  "name": "i",
+                  "type": "uint256"
+                },
+                {
+                  "name": "p",
+                  "type": "uint8"
+                },
+                {
+                  "name": "s",
+                  "type": "uint8"
+                },
+                {
+                  "name": "isSet",
+                  "type": "bool"
+                }
+              ],
+              "name": "cycleOfFee",
+              "type": "tuple"
+            },
+            {
+              "components": [
+                {
+                  "name": "i",
+                  "type": "uint256"
+                },
+                {
+                  "name": "p",
+                  "type": "uint8"
+                },
+                {
+                  "name": "s",
+                  "type": "uint8"
+                },
+                {
+                  "name": "isSet",
+                  "type": "bool"
+                }
+              ],
+              "name": "cycleOfPrincipalRedemption",
+              "type": "tuple"
+            },
+            {
+              "components": [
+                {
+                  "name": "i",
+                  "type": "uint256"
+                },
+                {
+                  "name": "p",
+                  "type": "uint8"
+                },
+                {
+                  "name": "isSet",
+                  "type": "bool"
+                }
+              ],
+              "name": "gracePeriod",
+              "type": "tuple"
+            },
+            {
+              "components": [
+                {
+                  "name": "i",
+                  "type": "uint256"
+                },
+                {
+                  "name": "p",
+                  "type": "uint8"
+                },
+                {
+                  "name": "isSet",
+                  "type": "bool"
+                }
+              ],
+              "name": "delinquencyPeriod",
+              "type": "tuple"
+            },
+            {
+              "name": "lifeCap",
+              "type": "int256"
+            },
+            {
+              "name": "lifeFloor",
+              "type": "int256"
+            },
+            {
+              "name": "periodCap",
+              "type": "int256"
+            },
+            {
+              "name": "periodFloor",
+              "type": "int256"
             }
           ],
+          "name": "contractTerms",
+          "type": "tuple"
+        },
+        {
+          "name": "segmentStart",
+          "type": "uint256"
+        },
+        {
+          "name": "segmentEnd",
+          "type": "uint256"
+        },
+        {
+          "name": "eventType",
+          "type": "uint8"
+        }
+      ],
+      "name": "computeCyclicProtoEventScheduleSegment",
+      "outputs": [
+        {
           "name": "",
-          "type": "tuple[64]"
+          "type": "bytes32[64]"
         }
       ],
       "payable": false,
@@ -1769,5 +2000,5 @@
     "version": "0.5.2+commit.1df8f40c.Emscripten.clang"
   },
   "networks": {},
-  "updatedAt": "2019-11-05T14:07:23.400Z"
+  "updatedAt": "2019-11-07T11:21:09.685Z"
 }

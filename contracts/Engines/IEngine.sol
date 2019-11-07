@@ -23,56 +23,88 @@ contract IEngine is Definitions {
 		returns (ContractState memory);
 
 	/**
-	 * computes pending events based on the contract state and
-	 * applys them to the contract state and returns the evaluated events and the new contract state
-	 * @dev evaluates all events between the scheduled time of the last executed event and now
-	 * (such that Led < Tev && now >= Tev)
+	 * compute next state for a given ProtoEvent
 	 * @param contractTerms terms of the contract
 	 * @param contractState current state of the contract
+	 * @param protoEvent ProtoEvent to apply to the current state of the contract
 	 * @param currentTimestamp current timestamp
-	 * @return the new contract state and the evaluated events
+	 * @return next state of the contract
 	 */
-	function computeNextState(
+	function computeStateForProtoEvent(
 		ContractTerms memory contractTerms,
 		ContractState memory contractState,
+		bytes32 protoEvent,
 		uint256 currentTimestamp
 	)
 		public
 		pure
-		returns (ContractState memory, ContractEvent[MAX_EVENT_SCHEDULE_SIZE] memory);
+		returns (ContractState memory);
 
 	/**
-	 * applys a prototype event to the current state of a contract and
-	 * returns the contrat event and the new contract state
+	 * compute the payoff for a given ProtoEvent
 	 * @param contractTerms terms of the contract
 	 * @param contractState current state of the contract
-	 * @param protoEvent prototype event to be evaluated and applied to the contract state
+	 * @param protoEvent ProtoEvent to compute the payoff for
 	 * @param currentTimestamp current timestamp
-	 * @return the new contract state and the evaluated event
+	 * @return payoff of the given ProtoEvent
 	 */
-	function computeNextStateForProtoEvent(
+	function computePayoffForProtoEvent(
 		ContractTerms memory contractTerms,
 		ContractState memory contractState,
-		ProtoEvent memory protoEvent,
+		bytes32 protoEvent,
 		uint256 currentTimestamp
 	)
 		public
 		pure
-		returns (ContractState memory, ContractEvent memory);
+		returns (int256);
 
 	/**
-	 * computes a schedule segment of contract events based on the contract terms and the specified period
+	 * computes a schedule segment of non-cyclic contract events based on the contract terms and the specified period
 	 * @param contractTerms terms of the contract
 	 * @param segmentStart start timestamp of the segment
 	 * @param segmentEnd end timestamp of the segement
 	 * @return event schedule segment
 	 */
-	function computeProtoEventScheduleSegment(
+	function computeNonCyclicProtoEventScheduleSegment(
 		ContractTerms memory contractTerms,
 		uint256 segmentStart,
 		uint256 segmentEnd
 	)
 		public
 		pure
-		returns (ProtoEvent[MAX_EVENT_SCHEDULE_SIZE] memory);
+		returns (bytes32[MAX_EVENT_SCHEDULE_SIZE] memory);
+
+	/**
+	 * computes a schedule segment of cyclic contract events based on the contract terms and the specified period
+	 * @param contractTerms terms of the contract
+	 * @param segmentStart start timestamp of the segment
+	 * @param segmentEnd end timestamp of the segement
+	 * @param eventType eventType of the cyclic schedule
+	 * @return event schedule segment
+	 */
+	function computeCyclicProtoEventScheduleSegment(
+		ContractTerms memory contractTerms,
+		uint256 segmentStart,
+		uint256 segmentEnd,
+		EventType eventType
+	)
+		public
+		pure
+		returns (bytes32[MAX_EVENT_SCHEDULE_SIZE] memory);
+
+	// /**
+	//  * verifies that a given ProtoEvent is (still) scheduled under the current state of the contract
+	//  * @param protoEvent ProtoEvent to verify
+	//  * @param contractTerms terms of the contract
+	//  * @param contractState current state of the contract
+	//  * @return boolean if the the ProtoEvent is still scheduled
+	//  */
+	// function isProtoEventScheduled(
+	// 	ProtoEvent memory protoEvent,
+	// 	ContractTerms memory contractTerms,
+	// 	ContractState memory contractState
+	// )
+	// 	public
+	// 	pure
+	// 	returns (bool);
 }

@@ -88,13 +88,13 @@ contract Definitions {
 		uint256 actualEventTime;
 	}
 
-	struct ProtoEvent {
-		uint256 eventTime; // adjusted for business-day-convention
-		uint256 eventTimeWithEpochOffset; // adjusted for business-day-convention and epoch offset (used exclusively for sorting)
-		uint256 scheduleTime; // primarily used for CalcShift convention
-		EventType eventType;
-		address currency;
-	}
+	// struct ProtoEvent {
+	// 	uint256 eventTime; // adjusted for business-day-convention
+	// 	uint256 eventTimeWithEpochOffset; // adjusted for business-day-convention and epoch offset (used exclusively for sorting)
+	// 	uint256 scheduleTime; // primarily used for CalcShift convention
+	// 	EventType eventType;
+	// 	address currency;
+	// }
 
 	struct LifecycleTerms {
 		Calendar calendar;

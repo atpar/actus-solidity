@@ -335,45 +335,45 @@ contract TestCore is Core {
     );
   }
 
-  function testSortProtoEventSchedule() public {
-    ProtoEvent[MAX_EVENT_SCHEDULE_SIZE] memory protoEventSchedule;
-    uint16 index = 0;
+  // function testSortProtoEventSchedule() public {
+  //   ProtoEvent[MAX_EVENT_SCHEDULE_SIZE] memory protoEventSchedule;
+  //   uint16 index = 0;
 
-    protoEventSchedule[index] = ProtoEvent(
-      uint256(4),
-      uint256(4).add(getEpochOffset(EventType.TD)),
-      uint256(4),
-      EventType.TD,
-      address(0)
-    );
-    index++;
+  //   protoEventSchedule[index] = ProtoEvent(
+  //     uint256(4),
+  //     uint256(4).add(getEpochOffset(EventType.TD)),
+  //     uint256(4),
+  //     EventType.TD,
+  //     address(0)
+  //   );
+  //   index++;
 
-    protoEventSchedule[index] = ProtoEvent(
-      uint256(4),
-      uint256(4).add(getEpochOffset(EventType.MD)),
-      uint256(4),
-      EventType.MD,
-      address(0)
-    );
-    index++;
+  //   protoEventSchedule[index] = ProtoEvent(
+  //     uint256(4),
+  //     uint256(4).add(getEpochOffset(EventType.MD)),
+  //     uint256(4),
+  //     EventType.MD,
+  //     address(0)
+  //   );
+  //   index++;
 
-    protoEventSchedule[index] = ProtoEvent(
-      uint256(1),
-      uint256(1).add(getEpochOffset(EventType.IED)),
-      uint256(1),
-      EventType.IED,
-      address(0)
-    );
-    index++;
+  //   protoEventSchedule[index] = ProtoEvent(
+  //     uint256(1),
+  //     uint256(1).add(getEpochOffset(EventType.IED)),
+  //     uint256(1),
+  //     EventType.IED,
+  //     address(0)
+  //   );
+  //   index++;
 
-    sortProtoEventSchedule(protoEventSchedule, index);
+  //   sortProtoEventSchedule(protoEventSchedule, index);
 
-    Assert.equal(uint256(protoEventSchedule[0].eventType), uint256(EventType.IED), "First ProtoEvent in schedule should be IED");
-    Assert.equal(uint256(protoEventSchedule[1].eventType), uint256(EventType.TD), "Second ProtoEvent in schedule should be TD");
-    Assert.equal(uint256(protoEventSchedule[2].eventType), uint256(EventType.MD), "Second ProtoEvent in schedule should be MD");
-    Assert.equal(uint256(protoEventSchedule[3].eventTime), uint256(0), "Following ProtoEvents should be 0");
-    Assert.equal(uint256(protoEventSchedule[4].eventTime), uint256(0), "Following ProtoEvents should be 0");
-  }
+  //   Assert.equal(uint256(protoEventSchedule[0].eventType), uint256(EventType.IED), "First ProtoEvent in schedule should be IED");
+  //   Assert.equal(uint256(protoEventSchedule[1].eventType), uint256(EventType.TD), "Second ProtoEvent in schedule should be TD");
+  //   Assert.equal(uint256(protoEventSchedule[2].eventType), uint256(EventType.MD), "Second ProtoEvent in schedule should be MD");
+  //   Assert.equal(uint256(protoEventSchedule[3].eventTime), uint256(0), "Following ProtoEvents should be 0");
+  //   Assert.equal(uint256(protoEventSchedule[4].eventTime), uint256(0), "Following ProtoEvents should be 0");
+  // }
 
   function testIsInPeriod() public {
     Assert.equal(isInPeriod(uint256(100), uint256(99), uint256(101)), true, "Timestamp should be contained in the period");

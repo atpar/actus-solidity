@@ -125,11 +125,11 @@ const parseResultsFromObject = (schedule) => {
   return parsedResults;
 }
 
-function parseToTestEvent (event, state) {
+function parseToTestEvent (eventType, eventTime, payoff, state) {
   return {
-    eventDate: unixToISO(event['eventTime']),
-    eventType: event['eventType'],
-    eventValue: fromPrecision(event['payoff']),
+    eventDate: unixToISO(eventTime),
+    eventType: String(eventType),
+    eventValue: fromPrecision(payoff),
     notionalPrincipal: fromPrecision(state['notionalPrincipal']),
     nominalInterestRate: fromPrecision(state['nominalInterestRate']),
     accruedInterest: fromPrecision(state['accruedInterest']),
