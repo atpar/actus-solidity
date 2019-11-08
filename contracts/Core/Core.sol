@@ -25,7 +25,7 @@ contract Core is
 	// function createProtoEvent(
 	// 	EventType eventType,
 	// 	uint256 scheduleTime,
-	// 	ContractTerms memory contractTerms
+	// 	Terms memory terms
 	// )
 	// 	public
 	// 	pure
@@ -33,8 +33,8 @@ contract Core is
 	// {
 	// 	uint256 eventTime = shiftEventTime(
 	// 		scheduleTime,
-	// 		contractTerms.businessDayConvention,
-	// 		contractTerms.calendar
+	// 		terms.businessDayConvention,
+	// 		terms.calendar
 	// 	);
 
 	// 	return ProtoEvent(
@@ -42,7 +42,7 @@ contract Core is
 	// 		eventTime.add(getEpochOffset(eventType)),
 	// 		scheduleTime,
 	// 		eventType,
-	// 		contractTerms.currency
+	// 		terms.currency
 	// 	);
 	// }
 

@@ -29,47 +29,47 @@ contract CEGEngine is Core, IEngine, STF, POF {
 	 * TODO:
 	 * - implement annuity calculator
 	 * @dev see initStateSpace()
-	 * @param contractTerms terms of the contract
+	 * @param terms terms of the contract
 	 * @return initial contract state
 	 */
-	function computeInitialState(ContractTerms memory contractTerms)
+	function computeInitialState(Terms memory terms)
 		public
 		pure
-		returns (ContractState memory)
+		returns (State memory)
 	{
-		ContractState memory contractState;
+		State memory state;
 
-		contractState.contractPerformance = ContractPerformance.PF;
-		contractState.lastEventTime = contractTerms.statusDate;
-		contractState.notionalPrincipal = roleSign(contractTerms.contractRole) * contractTerms.notionalPrincipal;
-		contractState.feeAccrued = contractTerms.feeAccrued;
+		state.contractPerformance = ContractPerformance.PF;
+		state.lastEventTime = terms.statusDate;
+		state.notionalPrincipal = roleSign(terms.contractRole) * terms.notionalPrincipal;
+		state.feeAccrued = terms.feeAccrued;
 
-		return contractState;
+		return state;
 	}
 
 	/**
 	 * applys a prototype event to the current state of a contract and
 	 * returns the contrat event and the new contract state
-	 * @param contractTerms terms of the contract
-	 * @param contractState current state of the contract
+	 * @param terms terms of the contract
+	 * @param state current state of the contract
 	 * @param protoEvent prototype event to be evaluated and applied to the contract state
 	 * @param currentTimestamp current timestamp
 	 * @return the new contract state and the evaluated event
 	 */
 	function computeStateForProtoEvent(
-		ContractTerms memory contractTerms,
-		ContractState memory contractState,
+		Terms memory terms,
+		State memory state,
 		bytes32 protoEvent,
 		uint256 currentTimestamp
 	)
 		public
 		pure
-		returns (ContractState memory)
+		returns (State memory)
 	{
 		return stateTransitionFunction(
 			protoEvent,
-			contractState,
-			contractTerms,
+			state,
+			terms,
 			currentTimestamp
 		);
 	}
@@ -77,15 +77,15 @@ contract CEGEngine is Core, IEngine, STF, POF {
 	/**
 	 * applys a prototype event to the current state of a contract and
 	 * returns the contrat event and the new contract state
-	 * @param contractTerms terms of the contract
-	 * @param contractState current state of the contract
+	 * @param terms terms of the contract
+	 * @param state current state of the contract
 	 * @param protoEvent prototype event to be evaluated and applied to the contract state
 	 * @param currentTimestamp current timestamp
 	 * @return the new contract state and the evaluated event
 	 */
 	function computePayoffForProtoEvent(
-		ContractTerms memory contractTerms,
-		ContractState memory contractState,
+		Terms memory terms,
+		State memory state,
 		bytes32 protoEvent,
 		uint256 currentTimestamp
 	)
@@ -95,21 +95,21 @@ contract CEGEngine is Core, IEngine, STF, POF {
 	{
 		return payoffFunction(
 			protoEvent,
-			contractState,
-			contractTerms,
+			state,
+			terms,
 			currentTimestamp
 		);
 	}
 
 	/**
 	 * computes a schedule segment of non-cyclic contract events based on the contract terms and the specified period
-	 * @param contractTerms terms of the contract
+	 * @param terms terms of the contract
 	 * @param segmentStart start timestamp of the segment
 	 * @param segmentEnd end timestamp of the segement
 	 * @return event schedule segment
 	 */
 	function computeNonCylicProtoEventScheduleSegment(
-		ContractTerms memory contractTerms,
+		Terms memory terms,
 		uint256 segmentStart,
 		uint256 segmentEnd
 	)
@@ -121,16 +121,16 @@ contract CEGEngine is Core, IEngine, STF, POF {
 		uint16 index = 0;
 
 		// purchase
-		if (contractTerms.purchaseDate != 0) {
-			if (isInPeriod(contractTerms.purchaseDate, segmentStart, segmentEnd)) {
-				protoEventSchedule[index] = encodeProtoEvent(EventType.PRD, contractTerms.purchaseDate);
+		if (terms.purchaseDate != 0) {
+			if (isInPeriod(terms.purchaseDate, segmentStart, segmentEnd)) {
+				protoEventSchedule[index] = encodeProtoEvent(EventType.PRD, terms.purchaseDate);
 				index++;
 			}
 		}
 
 		// maturity event
-		if (isInPeriod(contractTerms.maturityDate, segmentStart, segmentEnd) == true) {
-			protoEventSchedule[index] = encodeProtoEvent(EventType.MD, contractTerms.maturityDate);
+		if (isInPeriod(terms.maturityDate, segmentStart, segmentEnd) == true) {
+			protoEventSchedule[index] = encodeProtoEvent(EventType.MD, terms.maturityDate);
 			index++;
 		}
 
@@ -139,14 +139,14 @@ contract CEGEngine is Core, IEngine, STF, POF {
 
 	/**
 	 * computes a schedule segment of cyclic contract events based on the contract terms and the specified period
-	 * @param contractTerms terms of the contract
+	 * @param terms terms of the contract
 	 * @param segmentStart start timestamp of the segment
 	 * @param segmentEnd end timestamp of the segement
 	 * @param eventType eventType of the cyclic schedule
 	 * @return event schedule segment
 	 */
 	function computeCyclicProtoEventScheduleSegment(
-		ContractTerms memory contractTerms,
+		Terms memory terms,
 		uint256 segmentStart,
 		uint256 segmentEnd,
 		EventType eventType
@@ -160,12 +160,12 @@ contract CEGEngine is Core, IEngine, STF, POF {
 			uint256 index = 0;
 
 			// fees
-			if (contractTerms.cycleOfFee.isSet == true && contractTerms.cycleAnchorDateOfFee != 0) {
+			if (terms.cycleOfFee.isSet == true && terms.cycleAnchorDateOfFee != 0) {
 				uint256[MAX_CYCLE_SIZE] memory feeSchedule = computeDatesFromCycleSegment(
-					contractTerms.cycleAnchorDateOfFee,
-					contractTerms.maturityDate,
-					contractTerms.cycleOfFee,
-					contractTerms.endOfMonthConvention,
+					terms.cycleAnchorDateOfFee,
+					terms.maturityDate,
+					terms.cycleOfFee,
+					terms.endOfMonthConvention,
 					true,
 					segmentStart,
 					segmentEnd
@@ -174,8 +174,8 @@ contract CEGEngine is Core, IEngine, STF, POF {
 					if (feeSchedule[i] == 0) break;
 					uint256 shiftedFPDate = shiftEventTime(
 						feeSchedule[i],
-						contractTerms.businessDayConvention,
-						contractTerms.calendar
+						terms.businessDayConvention,
+						terms.calendar
 					);
 					if (isInPeriod(shiftedFPDate, segmentStart, segmentEnd) == false) continue;
 					protoEventSchedule[index] = encodeProtoEvent(EventType.FP, feeSchedule[i]);
@@ -245,28 +245,28 @@ contract CEGEngine is Core, IEngine, STF, POF {
 	 * - IPCB events and Icb state variable
 	 * - Icb state variable updates in Nac-updating events
 	 * @param protoEvent proto event for which to evaluate the next state for
-	 * @param contractState current state of the contract
-	 * @param contractTerms terms of the contract
+	 * @param state current state of the contract
+	 * @param terms terms of the contract
 	 * @param currentTimestamp current timestamp
 	 * @return next contract state
 	 */
 	function stateTransitionFunction(
 		bytes32 protoEvent,
-		ContractState memory contractState,
-		ContractTerms memory contractTerms,
+		State memory state,
+		Terms memory terms,
 		uint256 currentTimestamp
 	)
 		private
 		pure
-		returns (ContractState memory)
+		returns (State memory)
 	{
 		(EventType eventType, uint256 scheduleTime) = decodeProtoEvent(protoEvent);
 
-		if (eventType == EventType.PRD) return STF_CEG_PRD(scheduleTime, contractTerms, contractState, currentTimestamp);
-		if (eventType == EventType.FP) return STF_CEG_FP(scheduleTime, contractTerms, contractState, currentTimestamp);
-		if (eventType == EventType.XD) return STF_CEG_XD(scheduleTime, contractTerms, contractState, currentTimestamp);
-		if (eventType == EventType.MD) return STF_CEG_MD(scheduleTime, contractTerms, contractState, currentTimestamp);
-		if (eventType == EventType.DEL) return STF_PAM_DEL(scheduleTime, contractTerms, contractState, currentTimestamp);
+		if (eventType == EventType.PRD) return STF_CEG_PRD(scheduleTime, terms, state, currentTimestamp);
+		if (eventType == EventType.FP) return STF_CEG_FP(scheduleTime, terms, state, currentTimestamp);
+		if (eventType == EventType.XD) return STF_CEG_XD(scheduleTime, terms, state, currentTimestamp);
+		if (eventType == EventType.MD) return STF_CEG_MD(scheduleTime, terms, state, currentTimestamp);
+		if (eventType == EventType.DEL) return STF_PAM_DEL(scheduleTime, terms, state, currentTimestamp);
 
 		revert("CEGEngine.stateTransitionFunction: ATTRIBUTE_NOT_FOUND");
 	}
@@ -277,15 +277,15 @@ contract CEGEngine is Core, IEngine, STF, POF {
 	 * - IPCB events and Icb state variable
 	 * - Icb state variable updates in IP-paying events
 	 * @param protoEvent proto event for which to evaluate the payoff for
-	 * @param contractState current state of the contract
-	 * @param contractTerms terms of the contract
+	 * @param state current state of the contract
+	 * @param terms terms of the contract
 	 * @param currentTimestamp current timestamp
 	 * @return payoff
 	 */
 	function payoffFunction(
 		bytes32 protoEvent,
-		ContractState memory contractState,
-		ContractTerms memory contractTerms,
+		State memory state,
+		Terms memory terms,
 		uint256 currentTimestamp
 	)
 		private
@@ -295,10 +295,10 @@ contract CEGEngine is Core, IEngine, STF, POF {
 		(EventType eventType, uint256 scheduleTime) = decodeProtoEvent(protoEvent);
 
 		if (eventType == EventType.DEL) return 0;
-		if (eventType == EventType.PRD) return POF_CEG_PRD(scheduleTime, contractTerms, contractState, currentTimestamp);
-		if (eventType == EventType.FP) return POF_CEG_FP(scheduleTime, contractTerms, contractState, currentTimestamp);
-		if (eventType == EventType.XD) return POF_CEG_XD(scheduleTime, contractTerms, contractState, currentTimestamp);
-		if (eventType == EventType.MD) return POF_CEG_MD(scheduleTime, contractTerms, contractState, currentTimestamp);
+		if (eventType == EventType.PRD) return POF_CEG_PRD(scheduleTime, terms, state, currentTimestamp);
+		if (eventType == EventType.FP) return POF_CEG_FP(scheduleTime, terms, state, currentTimestamp);
+		if (eventType == EventType.XD) return POF_CEG_XD(scheduleTime, terms, state, currentTimestamp);
+		if (eventType == EventType.MD) return POF_CEG_MD(scheduleTime, terms, state, currentTimestamp);
 
 		revert("CEGEngine.payoffFunction: ATTRIBUTE_NOT_FOUND");
 	}

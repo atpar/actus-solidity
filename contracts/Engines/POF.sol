@@ -7,42 +7,42 @@ import "../Core/Core.sol";
 contract POF is Core {
   function POF_PAM_FP (
     uint256 scheduleTime,
-    ContractTerms memory contractTerms,
-    ContractState memory contractState,
+    Terms memory terms,
+    State memory state,
     uint256 currentTimestamp
   )
     internal
     pure
     returns(int256)
   {
-    if (contractTerms.feeBasis == FeeBasis.A) {
+    if (terms.feeBasis == FeeBasis.A) {
       return (
-        performanceIndicator(contractState.contractPerformance)
-        * roleSign(contractTerms.contractRole)
-        * contractTerms.feeRate
+        performanceIndicator(state.contractPerformance)
+        * roleSign(terms.contractRole)
+        * terms.feeRate
       );
     }
 
     return (
-      performanceIndicator(contractState.contractPerformance)
-      * contractState.feeAccrued
+      performanceIndicator(state.contractPerformance)
+      * state.feeAccrued
         .add(
           yearFraction(
-            shiftCalcTime(contractState.lastEventTime, contractTerms.businessDayConvention, contractTerms.calendar),
-            shiftCalcTime(scheduleTime, contractTerms.businessDayConvention, contractTerms.calendar),
-            contractTerms.dayCountConvention,
-            contractTerms.maturityDate
+            shiftCalcTime(state.lastEventTime, terms.businessDayConvention, terms.calendar),
+            shiftCalcTime(scheduleTime, terms.businessDayConvention, terms.calendar),
+            terms.dayCountConvention,
+            terms.maturityDate
           )
-          .floatMult(contractTerms.feeRate)
-          .floatMult(contractState.notionalPrincipal)
+          .floatMult(terms.feeRate)
+          .floatMult(state.notionalPrincipal)
         )
     );
   }
 
   function POF_PAM_IED (
     uint256 scheduleTime,
-    ContractTerms memory contractTerms,
-    ContractState memory contractState,
+    Terms memory terms,
+    State memory state,
     uint256 currentTimestamp
   )
     internal
@@ -50,18 +50,18 @@ contract POF is Core {
     returns(int256)
   {
     return (
-      performanceIndicator(contractState.contractPerformance)
-      * roleSign(contractTerms.contractRole)
+      performanceIndicator(state.contractPerformance)
+      * roleSign(terms.contractRole)
       * (-1)
-      * contractTerms.notionalPrincipal
-        .add(contractTerms.premiumDiscountAtIED)
+      * terms.notionalPrincipal
+        .add(terms.premiumDiscountAtIED)
     );
   }
 
   function POF_PAM_IP (
     uint256 scheduleTime,
-    ContractTerms memory contractTerms,
-    ContractState memory contractState,
+    Terms memory terms,
+    State memory state,
     uint256 currentTimestamp
   )
     internal
@@ -69,19 +69,19 @@ contract POF is Core {
     returns(int256)
   {
     return (
-      performanceIndicator(contractState.contractPerformance)
-      * contractState.interestScalingMultiplier
+      performanceIndicator(state.contractPerformance)
+      * state.interestScalingMultiplier
         .floatMult(
-          contractState.accruedInterest
+          state.accruedInterest
           .add(
             yearFraction(
-              shiftCalcTime(contractState.lastEventTime, contractTerms.businessDayConvention, contractTerms.calendar),
-              shiftCalcTime(scheduleTime, contractTerms.businessDayConvention, contractTerms.calendar),
-              contractTerms.dayCountConvention,
-              contractTerms.maturityDate
+              shiftCalcTime(state.lastEventTime, terms.businessDayConvention, terms.calendar),
+              shiftCalcTime(scheduleTime, terms.businessDayConvention, terms.calendar),
+              terms.dayCountConvention,
+              terms.maturityDate
             )
-            .floatMult(contractState.nominalInterestRate)
-            .floatMult(contractState.notionalPrincipal)
+            .floatMult(state.nominalInterestRate)
+            .floatMult(state.notionalPrincipal)
           )
         )
     );
@@ -89,8 +89,8 @@ contract POF is Core {
 
   function POF_PAM_PP (
     uint256 scheduleTime,
-    ContractTerms memory contractTerms,
-    ContractState memory contractState,
+    Terms memory terms,
+    State memory state,
     uint256 currentTimestamp
   )
     internal
@@ -98,17 +98,17 @@ contract POF is Core {
     returns(int256)
   {
     return (
-      performanceIndicator(contractState.contractPerformance)
-      * roleSign(contractTerms.contractRole)
-      * 0 // riskFactor(scheduleTime, contractState, contractTerms, contractTerms.objectCodeOfPrepaymentModel)
-      * contractState.notionalPrincipal
+      performanceIndicator(state.contractPerformance)
+      * roleSign(terms.contractRole)
+      * 0 // riskFactor(scheduleTime, state, terms, terms.objectCodeOfPrepaymentModel)
+      * state.notionalPrincipal
     );
   }
 
   function POF_PAM_PRD (
     uint256 scheduleTime,
-    ContractTerms memory contractTerms,
-    ContractState memory contractState,
+    Terms memory terms,
+    State memory state,
     uint256 currentTimestamp
   )
     internal
@@ -116,28 +116,28 @@ contract POF is Core {
     returns(int256)
   {
     return (
-      performanceIndicator(contractState.contractPerformance)
-      * roleSign(contractTerms.contractRole)
+      performanceIndicator(state.contractPerformance)
+      * roleSign(terms.contractRole)
       * (-1)
-      * contractTerms.priceAtPurchaseDate
-        .add(contractState.accruedInterest)
+      * terms.priceAtPurchaseDate
+        .add(state.accruedInterest)
         .add(
           yearFraction(
-            shiftCalcTime(contractState.lastEventTime, contractTerms.businessDayConvention, contractTerms.calendar),
-            shiftCalcTime(scheduleTime, contractTerms.businessDayConvention, contractTerms.calendar),
-            contractTerms.dayCountConvention,
-            contractTerms.maturityDate
+            shiftCalcTime(state.lastEventTime, terms.businessDayConvention, terms.calendar),
+            shiftCalcTime(scheduleTime, terms.businessDayConvention, terms.calendar),
+            terms.dayCountConvention,
+            terms.maturityDate
           )
-          .floatMult(contractState.nominalInterestRate)
-          .floatMult(contractState.notionalPrincipal)
+          .floatMult(state.nominalInterestRate)
+          .floatMult(state.notionalPrincipal)
         )
     );
   }
 
   function POF_PAM_PR (
     uint256 scheduleTime,
-    ContractTerms memory contractTerms,
-    ContractState memory contractState,
+    Terms memory terms,
+    State memory state,
     uint256 currentTimestamp
   )
     internal
@@ -145,56 +145,56 @@ contract POF is Core {
     returns(int256)
   {
     return (
-      performanceIndicator(contractState.contractPerformance)
-      * contractState.notionalScalingMultiplier
-        .floatMult(contractState.notionalPrincipal)
+      performanceIndicator(state.contractPerformance)
+      * state.notionalScalingMultiplier
+        .floatMult(state.notionalPrincipal)
     );
   }
 
   function POF_PAM_PY (
     uint256 scheduleTime,
-    ContractTerms memory contractTerms,
-    ContractState memory contractState,
+    Terms memory terms,
+    State memory state,
     uint256 currentTimestamp
   )
     internal
     pure
     returns(int256)
   {
-    if (contractTerms.penaltyType == PenaltyType.A) {
+    if (terms.penaltyType == PenaltyType.A) {
       return (
-        performanceIndicator(contractState.contractPerformance)
-        * roleSign(contractTerms.contractRole)
-        * contractTerms.penaltyRate
+        performanceIndicator(state.contractPerformance)
+        * roleSign(terms.contractRole)
+        * terms.penaltyRate
       );
-    } else if (contractTerms.penaltyType == PenaltyType.N) {
+    } else if (terms.penaltyType == PenaltyType.N) {
       return (
-        performanceIndicator(contractState.contractPerformance)
-        * roleSign(contractTerms.contractRole)
+        performanceIndicator(state.contractPerformance)
+        * roleSign(terms.contractRole)
         * yearFraction(
-            shiftCalcTime(contractState.lastEventTime, contractTerms.businessDayConvention, contractTerms.calendar),
-            shiftCalcTime(scheduleTime, contractTerms.businessDayConvention, contractTerms.calendar),
-            contractTerms.dayCountConvention,
-            contractTerms.maturityDate
+            shiftCalcTime(state.lastEventTime, terms.businessDayConvention, terms.calendar),
+            shiftCalcTime(scheduleTime, terms.businessDayConvention, terms.calendar),
+            terms.dayCountConvention,
+            terms.maturityDate
           )
-          .floatMult(contractTerms.penaltyRate)
-          .floatMult(contractState.notionalPrincipal)
+          .floatMult(terms.penaltyRate)
+          .floatMult(state.notionalPrincipal)
       );
     } else {
-      // riskFactor(scheduleTime, contractState, contractTerms, contractTerms.marketObjectCodeOfRateReset);
+      // riskFactor(scheduleTime, state, terms, terms.marketObjectCodeOfRateReset);
       int256 risk = 0;
       int256 param = 0;
-      if (contractState.nominalInterestRate - risk > 0) param = contractState.nominalInterestRate - risk;
+      if (state.nominalInterestRate - risk > 0) param = state.nominalInterestRate - risk;
       return (
-        performanceIndicator(contractState.contractPerformance)
-        * roleSign(contractTerms.contractRole)
+        performanceIndicator(state.contractPerformance)
+        * roleSign(terms.contractRole)
         * yearFraction(
-            shiftCalcTime(contractState.lastEventTime, contractTerms.businessDayConvention, contractTerms.calendar),
-            shiftCalcTime(scheduleTime, contractTerms.businessDayConvention, contractTerms.calendar),
-            contractTerms.dayCountConvention,
-            contractTerms.maturityDate
+            shiftCalcTime(state.lastEventTime, terms.businessDayConvention, terms.calendar),
+            shiftCalcTime(scheduleTime, terms.businessDayConvention, terms.calendar),
+            terms.dayCountConvention,
+            terms.maturityDate
           )
-          .floatMult(contractState.notionalPrincipal)
+          .floatMult(state.notionalPrincipal)
           .floatMult(param)
       );
     }
@@ -202,8 +202,8 @@ contract POF is Core {
 
   function POF_PAM_TD (
     uint256 scheduleTime,
-    ContractTerms memory contractTerms,
-    ContractState memory contractState,
+    Terms memory terms,
+    State memory state,
     uint256 currentTimestamp
   )
     internal
@@ -211,52 +211,52 @@ contract POF is Core {
     returns(int256)
   {
     return (
-      performanceIndicator(contractState.contractPerformance)
-      * roleSign(contractTerms.contractRole)
-      * contractTerms.priceAtPurchaseDate
-        .add(contractState.accruedInterest)
+      performanceIndicator(state.contractPerformance)
+      * roleSign(terms.contractRole)
+      * terms.priceAtPurchaseDate
+        .add(state.accruedInterest)
         .add(
           yearFraction(
-            shiftCalcTime(contractState.lastEventTime, contractTerms.businessDayConvention, contractTerms.calendar),
-            shiftCalcTime(scheduleTime, contractTerms.businessDayConvention, contractTerms.calendar),
-            contractTerms.dayCountConvention,
-            contractTerms.maturityDate
+            shiftCalcTime(state.lastEventTime, terms.businessDayConvention, terms.calendar),
+            shiftCalcTime(scheduleTime, terms.businessDayConvention, terms.calendar),
+            terms.dayCountConvention,
+            terms.maturityDate
           )
-          .floatMult(contractState.nominalInterestRate)
-          .floatMult(contractState.notionalPrincipal)
+          .floatMult(state.nominalInterestRate)
+          .floatMult(state.notionalPrincipal)
         )
     );
   }
 
   function POF_ANN_FP (
     uint256 scheduleTime,
-    ContractTerms memory contractTerms,
-    ContractState memory contractState,
+    Terms memory terms,
+    State memory state,
     uint256 currentTimestamp
   )
     internal
     pure
     returns(int256)
   {
-    if (contractTerms.feeBasis == FeeBasis.A) {
+    if (terms.feeBasis == FeeBasis.A) {
       return (
-        performanceIndicator(contractState.contractPerformance)
-        * roleSign(contractTerms.contractRole)
-        * contractTerms.feeRate
+        performanceIndicator(state.contractPerformance)
+        * roleSign(terms.contractRole)
+        * terms.feeRate
       );
     } else {
       return (
-        performanceIndicator(contractState.contractPerformance)
-        * contractState.feeAccrued
+        performanceIndicator(state.contractPerformance)
+        * state.feeAccrued
           .add(
             yearFraction(
-              shiftCalcTime(contractState.lastEventTime, contractTerms.businessDayConvention, contractTerms.calendar),
-              shiftCalcTime(scheduleTime, contractTerms.businessDayConvention, contractTerms.calendar),
-              contractTerms.dayCountConvention,
-              contractTerms.maturityDate
+              shiftCalcTime(state.lastEventTime, terms.businessDayConvention, terms.calendar),
+              shiftCalcTime(scheduleTime, terms.businessDayConvention, terms.calendar),
+              terms.dayCountConvention,
+              terms.maturityDate
             )
-            .floatMult(contractTerms.feeRate)
-            .floatMult(contractState.notionalPrincipal)
+            .floatMult(terms.feeRate)
+            .floatMult(state.notionalPrincipal)
           )
       );
     }
@@ -264,8 +264,8 @@ contract POF is Core {
 
   function POF_ANN_PR (
     uint256 scheduleTime,
-    ContractTerms memory contractTerms,
-    ContractState memory contractState,
+    Terms memory terms,
+    State memory state,
     uint256 currentTimestamp
   )
     internal
@@ -273,23 +273,23 @@ contract POF is Core {
     returns(int256)
   {
     return (
-      performanceIndicator(contractState.contractPerformance)
-      * (contractState.notionalScalingMultiplier * roleSign(contractTerms.contractRole))
+      performanceIndicator(state.contractPerformance)
+      * (state.notionalScalingMultiplier * roleSign(terms.contractRole))
         .floatMult(
-          (roleSign(contractTerms.contractRole) * contractState.notionalPrincipal)
+          (roleSign(terms.contractRole) * state.notionalPrincipal)
           .min(
-              roleSign(contractTerms.contractRole)
+              roleSign(terms.contractRole)
               * (
-                contractState.nextPrincipalRedemptionPayment
-                - contractState.accruedInterest
+                state.nextPrincipalRedemptionPayment
+                - state.accruedInterest
                 - yearFraction(
-                  shiftCalcTime(contractState.lastEventTime, contractTerms.businessDayConvention, contractTerms.calendar),
-                  shiftCalcTime(scheduleTime, contractTerms.businessDayConvention, contractTerms.calendar),
-                  contractTerms.dayCountConvention,
-                  contractTerms.maturityDate
+                  shiftCalcTime(state.lastEventTime, terms.businessDayConvention, terms.calendar),
+                  shiftCalcTime(scheduleTime, terms.businessDayConvention, terms.calendar),
+                  terms.dayCountConvention,
+                  terms.maturityDate
                 )
-                .floatMult(contractState.nominalInterestRate)
-                .floatMult(contractState.notionalPrincipal)
+                .floatMult(state.nominalInterestRate)
+                .floatMult(state.notionalPrincipal)
               )
             )
         )
@@ -298,8 +298,8 @@ contract POF is Core {
 
   function POF_ANN_MD (
     uint256 scheduleTime,
-    ContractTerms memory contractTerms,
-    ContractState memory contractState,
+    Terms memory terms,
+    State memory state,
     uint256 currentTimestamp
   )
     internal
@@ -307,16 +307,16 @@ contract POF is Core {
     returns(int256)
   {
     return (
-      performanceIndicator(contractState.contractPerformance)
-      * contractState.notionalScalingMultiplier
-        .floatMult(contractState.notionalPrincipal)
+      performanceIndicator(state.contractPerformance)
+      * state.notionalScalingMultiplier
+        .floatMult(state.notionalPrincipal)
     );
   }
 
   function POF_CEG_MD (
     uint256 scheduleTime,
-    ContractTerms memory contractTerms,
-    ContractState memory contractState,
+    Terms memory terms,
+    State memory state,
     uint256 currentTimestamp
   )
     internal
@@ -328,8 +328,8 @@ contract POF is Core {
 
   function POF_CEG_XD (
     uint256 scheduleTime,
-    ContractTerms memory contractTerms,
-    ContractState memory contractState,
+    Terms memory terms,
+    State memory state,
     uint256 currentTimestamp
   )
     internal
@@ -337,17 +337,17 @@ contract POF is Core {
     returns(int256)
   {
     return (
-      performanceIndicator(contractState.contractPerformance)
-      * roleSign(contractTerms.contractRole)
-      * contractTerms.coverageOfCreditEnhancement
-        .floatMult(contractState.notionalPrincipal)
+      performanceIndicator(state.contractPerformance)
+      * roleSign(terms.contractRole)
+      * terms.coverageOfCreditEnhancement
+        .floatMult(state.notionalPrincipal)
     );
   }
 
   function POF_CEG_PRD (
     uint256 scheduleTime,
-    ContractTerms memory contractTerms,
-    ContractState memory contractState,
+    Terms memory terms,
+    State memory state,
     uint256 currentTimestamp
   )
     internal
@@ -355,43 +355,43 @@ contract POF is Core {
     returns(int256)
   {
     return (
-      performanceIndicator(contractState.contractPerformance)
-      * roleSign(contractTerms.contractRole)
+      performanceIndicator(state.contractPerformance)
+      * roleSign(terms.contractRole)
       * (-1)
-      * contractTerms.priceAtPurchaseDate
+      * terms.priceAtPurchaseDate
     );
   }
 
   function POF_CEG_FP (
     uint256 scheduleTime,
-    ContractTerms memory contractTerms,
-    ContractState memory contractState,
+    Terms memory terms,
+    State memory state,
     uint256 currentTimestamp
   )
     internal
     pure
     returns(int256)
   {
-    if (contractTerms.feeBasis == FeeBasis.A) {
+    if (terms.feeBasis == FeeBasis.A) {
       return (
-        performanceIndicator(contractState.contractPerformance)
-        * roleSign(contractTerms.contractRole)
-        * contractTerms.feeRate
+        performanceIndicator(state.contractPerformance)
+        * roleSign(terms.contractRole)
+        * terms.feeRate
       );
     }
 
     return (
-      performanceIndicator(contractState.contractPerformance)
-      * contractState.feeAccrued
+      performanceIndicator(state.contractPerformance)
+      * state.feeAccrued
         .add(
           yearFraction(
-            shiftCalcTime(contractState.lastEventTime, contractTerms.businessDayConvention, contractTerms.calendar),
-            shiftCalcTime(scheduleTime, contractTerms.businessDayConvention, contractTerms.calendar),
-            contractTerms.dayCountConvention,
-            contractTerms.maturityDate
+            shiftCalcTime(state.lastEventTime, terms.businessDayConvention, terms.calendar),
+            shiftCalcTime(scheduleTime, terms.businessDayConvention, terms.calendar),
+            terms.dayCountConvention,
+            terms.maturityDate
           )
-          .floatMult(contractTerms.feeRate)
-          .floatMult(contractState.notionalPrincipal)
+          .floatMult(terms.feeRate)
+          .floatMult(state.notionalPrincipal)
         )
     );
   }

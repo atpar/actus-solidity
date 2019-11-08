@@ -353,7 +353,7 @@
               "type": "int256"
             }
           ],
-          "name": "contractTerms",
+          "name": "terms",
           "type": "tuple"
         }
       ],
@@ -748,7 +748,7 @@
               "type": "int256"
             }
           ],
-          "name": "contractTerms",
+          "name": "terms",
           "type": "tuple"
         },
         {
@@ -794,7 +794,7 @@
               "type": "int256"
             }
           ],
-          "name": "contractState",
+          "name": "state",
           "type": "tuple"
         },
         {
@@ -1197,7 +1197,7 @@
               "type": "int256"
             }
           ],
-          "name": "contractTerms",
+          "name": "terms",
           "type": "tuple"
         },
         {
@@ -1243,7 +1243,7 @@
               "type": "int256"
             }
           ],
-          "name": "contractState",
+          "name": "state",
           "type": "tuple"
         },
         {
@@ -1604,7 +1604,7 @@
               "type": "int256"
             }
           ],
-          "name": "contractTerms",
+          "name": "terms",
           "type": "tuple"
         },
         {
@@ -1965,7 +1965,7 @@
               "type": "int256"
             }
           ],
-          "name": "contractTerms",
+          "name": "terms",
           "type": "tuple"
         },
         {
@@ -2000,5 +2000,5 @@
     "version": "0.5.2+commit.1df8f40c.Emscripten.clang"
   },
   "networks": {},
-  "updatedAt": "2019-11-07T16:21:54.696Z"
+  "updatedAt": "2019-11-08T14:49:57.419Z"
 }

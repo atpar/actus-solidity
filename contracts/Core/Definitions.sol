@@ -64,7 +64,7 @@ contract Definitions {
 		ContractReferenceRole contractReferenceRole;
 	}
 
-	struct ContractState {
+	struct State {
 		uint256 lastEventTime;
 		uint256 nonPerformingDate;
 		ContractPerformance contractPerformance;
@@ -79,22 +79,6 @@ contract Definitions {
 		int256 nextPrincipalRedemptionPayment;
 		// int256 payoffAtSettlement;
 	}
-
-	struct ContractEvent {
-		uint256 eventTime;
-		EventType eventType;
-		address currency;
-		int256 payoff;
-		uint256 actualEventTime;
-	}
-
-	// struct ProtoEvent {
-	// 	uint256 eventTime; // adjusted for business-day-convention
-	// 	uint256 eventTimeWithEpochOffset; // adjusted for business-day-convention and epoch offset (used exclusively for sorting)
-	// 	uint256 scheduleTime; // primarily used for CalcShift convention
-	// 	EventType eventType;
-	// 	address currency;
-	// }
 
 	struct LifecycleTerms {
 		Calendar calendar;
@@ -134,7 +118,7 @@ contract Definitions {
 		int256 periodFloor;
 	}
 
-	struct ContractTerms {
+	struct Terms {
 		ContractType contractType;
 		Calendar calendar;
 		ContractRole contractRole;
@@ -190,6 +174,5 @@ contract Definitions {
 		int256 lifeFloor;
 		int256 periodCap;
 		int256 periodFloor;
-
 	}
 }

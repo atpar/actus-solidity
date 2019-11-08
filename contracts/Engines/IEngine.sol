@@ -14,43 +14,43 @@ contract IEngine is Definitions {
 
 	/**
 	 * get the initial contract state
-	 * @param contractTerms terms of the contract
+	 * @param terms terms of the contract
 	 * @return initial contract state
 	 */
-	function computeInitialState(ContractTerms memory contractTerms)
+	function computeInitialState(Terms memory terms)
 		public
 		pure
-		returns (ContractState memory);
+		returns (State memory);
 
 	/**
 	 * compute next state for a given ProtoEvent
-	 * @param contractTerms terms of the contract
-	 * @param contractState current state of the contract
+	 * @param terms terms of the contract
+	 * @param state current state of the contract
 	 * @param protoEvent ProtoEvent to apply to the current state of the contract
 	 * @param currentTimestamp current timestamp
 	 * @return next state of the contract
 	 */
 	function computeStateForProtoEvent(
-		ContractTerms memory contractTerms,
-		ContractState memory contractState,
+		Terms memory terms,
+		State memory state,
 		bytes32 protoEvent,
 		uint256 currentTimestamp
 	)
 		public
 		pure
-		returns (ContractState memory);
+		returns (State memory);
 
 	/**
 	 * compute the payoff for a given ProtoEvent
-	 * @param contractTerms terms of the contract
-	 * @param contractState current state of the contract
+	 * @param terms terms of the contract
+	 * @param state current state of the contract
 	 * @param protoEvent ProtoEvent to compute the payoff for
 	 * @param currentTimestamp current timestamp
 	 * @return payoff of the given ProtoEvent
 	 */
 	function computePayoffForProtoEvent(
-		ContractTerms memory contractTerms,
-		ContractState memory contractState,
+		Terms memory terms,
+		State memory state,
 		bytes32 protoEvent,
 		uint256 currentTimestamp
 	)
@@ -60,13 +60,13 @@ contract IEngine is Definitions {
 
 	/**
 	 * computes a schedule segment of non-cyclic contract events based on the contract terms and the specified period
-	 * @param contractTerms terms of the contract
+	 * @param terms terms of the contract
 	 * @param segmentStart start timestamp of the segment
 	 * @param segmentEnd end timestamp of the segement
 	 * @return event schedule segment
 	 */
 	function computeNonCyclicProtoEventScheduleSegment(
-		ContractTerms memory contractTerms,
+		Terms memory terms,
 		uint256 segmentStart,
 		uint256 segmentEnd
 	)
@@ -76,14 +76,14 @@ contract IEngine is Definitions {
 
 	/**
 	 * computes a schedule segment of cyclic contract events based on the contract terms and the specified period
-	 * @param contractTerms terms of the contract
+	 * @param terms terms of the contract
 	 * @param segmentStart start timestamp of the segment
 	 * @param segmentEnd end timestamp of the segement
 	 * @param eventType eventType of the cyclic schedule
 	 * @return event schedule segment
 	 */
 	function computeCyclicProtoEventScheduleSegment(
-		ContractTerms memory contractTerms,
+		Terms memory terms,
 		uint256 segmentStart,
 		uint256 segmentEnd,
 		EventType eventType
@@ -95,14 +95,14 @@ contract IEngine is Definitions {
 	// /**
 	//  * verifies that a given ProtoEvent is (still) scheduled under the current state of the contract
 	//  * @param protoEvent ProtoEvent to verify
-	//  * @param contractTerms terms of the contract
-	//  * @param contractState current state of the contract
+	//  * @param terms terms of the contract
+	//  * @param state current state of the contract
 	//  * @return boolean if the the ProtoEvent is still scheduled
 	//  */
 	// function isProtoEventScheduled(
 	// 	ProtoEvent memory protoEvent,
-	// 	ContractTerms memory contractTerms,
-	// 	ContractState memory contractState
+	// 	Terms memory terms,
+	// 	State memory state
 	// )
 	// 	public
 	// 	pure

@@ -8,1156 +8,1156 @@ contract STF is Core {
 
   function STF_PAM_AD (
     uint256 scheduleTime,
-    ContractTerms memory contractTerms,
-    ContractState memory contractState,
+    Terms memory terms,
+    State memory state,
     uint256 currentTimestamp
   )
     internal
     pure
-    returns (ContractState memory)
+    returns (State memory)
   {
     int256 timeFromLastEvent = yearFraction(
-      shiftCalcTime(contractState.lastEventTime, contractTerms.businessDayConvention, contractTerms.calendar),
-      shiftCalcTime(scheduleTime, contractTerms.businessDayConvention, contractTerms.calendar),
-      contractTerms.dayCountConvention,
-      contractTerms.maturityDate
+      shiftCalcTime(state.lastEventTime, terms.businessDayConvention, terms.calendar),
+      shiftCalcTime(scheduleTime, terms.businessDayConvention, terms.calendar),
+      terms.dayCountConvention,
+      terms.maturityDate
     );
-    contractState.accruedInterest = contractState.accruedInterest
+    state.accruedInterest = state.accruedInterest
     .add(
-      contractState.nominalInterestRate
-      .floatMult(contractState.notionalPrincipal)
+      state.nominalInterestRate
+      .floatMult(state.notionalPrincipal)
       .floatMult(timeFromLastEvent)
     );
-    contractState.feeAccrued = contractState.feeAccrued
+    state.feeAccrued = state.feeAccrued
     .add(
-      contractTerms.feeRate
-      .floatMult(contractState.notionalPrincipal)
+      terms.feeRate
+      .floatMult(state.notionalPrincipal)
       .floatMult(timeFromLastEvent)
     );
-    contractState.lastEventTime = scheduleTime;
+    state.lastEventTime = scheduleTime;
 
-    return contractState;
+    return state;
   }
 
   function STF_PAM_CD (
     uint256 scheduleTime,
-    ContractTerms memory contractTerms,
-    ContractState memory contractState,
+    Terms memory terms,
+    State memory state,
     uint256 currentTimestamp
   )
     internal
     pure
-    returns (ContractState memory)
+    returns (State memory)
   {
     int256 timeFromLastEvent = yearFraction(
-      shiftCalcTime(contractState.lastEventTime, contractTerms.businessDayConvention, contractTerms.calendar),
-      shiftCalcTime(scheduleTime, contractTerms.businessDayConvention, contractTerms.calendar),
-      contractTerms.dayCountConvention,
-      contractTerms.maturityDate
+      shiftCalcTime(state.lastEventTime, terms.businessDayConvention, terms.calendar),
+      shiftCalcTime(scheduleTime, terms.businessDayConvention, terms.calendar),
+      terms.dayCountConvention,
+      terms.maturityDate
     );
-    contractState.accruedInterest = contractState.accruedInterest
+    state.accruedInterest = state.accruedInterest
     .add(
-      contractState.nominalInterestRate
-      .floatMult(contractState.notionalPrincipal)
+      state.nominalInterestRate
+      .floatMult(state.notionalPrincipal)
       .floatMult(timeFromLastEvent)
     );
-    contractState.feeAccrued = contractState.feeAccrued
+    state.feeAccrued = state.feeAccrued
     .add(
-      contractTerms.feeRate
-      .floatMult(contractState.notionalPrincipal)
+      terms.feeRate
+      .floatMult(state.notionalPrincipal)
       .floatMult(timeFromLastEvent)
     );
-    contractState.contractPerformance = ContractPerformance.DF;
-    contractState.lastEventTime = scheduleTime;
+    state.contractPerformance = ContractPerformance.DF;
+    state.lastEventTime = scheduleTime;
 
-    return contractState;
+    return state;
   }
 
   function STF_PAM_FP (
     uint256 scheduleTime,
-    ContractTerms memory contractTerms,
-    ContractState memory contractState,
+    Terms memory terms,
+    State memory state,
     uint256 currentTimestamp
   )
     internal
     pure
-    returns (ContractState memory)
+    returns (State memory)
   {
     int256 timeFromLastEvent = yearFraction(
-      shiftCalcTime(contractState.lastEventTime, contractTerms.businessDayConvention, contractTerms.calendar),
-      shiftCalcTime(scheduleTime, contractTerms.businessDayConvention, contractTerms.calendar),
-      contractTerms.dayCountConvention,
-      contractTerms.maturityDate
+      shiftCalcTime(state.lastEventTime, terms.businessDayConvention, terms.calendar),
+      shiftCalcTime(scheduleTime, terms.businessDayConvention, terms.calendar),
+      terms.dayCountConvention,
+      terms.maturityDate
     );
-    contractState.accruedInterest = contractState.accruedInterest
+    state.accruedInterest = state.accruedInterest
     .add(
-      contractState.nominalInterestRate
-      .floatMult(contractState.notionalPrincipal)
+      state.nominalInterestRate
+      .floatMult(state.notionalPrincipal)
       .floatMult(timeFromLastEvent)
     );
-    contractState.feeAccrued = 0;
-    contractState.lastEventTime = scheduleTime;
+    state.feeAccrued = 0;
+    state.lastEventTime = scheduleTime;
 
-    return contractState;
+    return state;
   }
 
   function STF_PAM_IED (
     uint256 scheduleTime,
-    ContractTerms memory contractTerms,
-    ContractState memory contractState,
+    Terms memory terms,
+    State memory state,
     uint256 currentTimestamp
   )
     internal
     pure
-    returns (ContractState memory)
+    returns (State memory)
   {
     int256 timeFromLastEvent = yearFraction(
-      shiftCalcTime(contractState.lastEventTime, contractTerms.businessDayConvention, contractTerms.calendar),
-      shiftCalcTime(scheduleTime, contractTerms.businessDayConvention, contractTerms.calendar),
-      contractTerms.dayCountConvention,
-      contractTerms.maturityDate
+      shiftCalcTime(state.lastEventTime, terms.businessDayConvention, terms.calendar),
+      shiftCalcTime(scheduleTime, terms.businessDayConvention, terms.calendar),
+      terms.dayCountConvention,
+      terms.maturityDate
     );
-    contractState.notionalPrincipal = roleSign(contractTerms.contractRole) * contractTerms.notionalPrincipal;
-    contractState.nominalInterestRate = contractTerms.nominalInterestRate;
-    contractState.lastEventTime = scheduleTime;
+    state.notionalPrincipal = roleSign(terms.contractRole) * terms.notionalPrincipal;
+    state.nominalInterestRate = terms.nominalInterestRate;
+    state.lastEventTime = scheduleTime;
 
-    if (contractTerms.cycleAnchorDateOfInterestPayment != 0 &&
-      contractTerms.cycleAnchorDateOfInterestPayment < contractTerms.initialExchangeDate
+    if (terms.cycleAnchorDateOfInterestPayment != 0 &&
+      terms.cycleAnchorDateOfInterestPayment < terms.initialExchangeDate
     ) {
-      contractState.accruedInterest = contractState.nominalInterestRate
-      .floatMult(contractState.notionalPrincipal)
+      state.accruedInterest = state.nominalInterestRate
+      .floatMult(state.notionalPrincipal)
       .floatMult(
         yearFraction(
-          contractTerms.cycleAnchorDateOfInterestPayment,
+          terms.cycleAnchorDateOfInterestPayment,
           scheduleTime,
-          contractTerms.dayCountConvention,
-          contractTerms.maturityDate
+          terms.dayCountConvention,
+          terms.maturityDate
         )
       );
     }
 
-    return contractState;
+    return state;
   }
 
   function STF_PAM_IPCI (
     uint256 scheduleTime,
-    ContractTerms memory contractTerms,
-    ContractState memory contractState,
+    Terms memory terms,
+    State memory state,
     uint256 currentTimestamp
   )
     internal
     pure
-    returns (ContractState memory)
+    returns (State memory)
   {
     int256 timeFromLastEvent = yearFraction(
-      shiftCalcTime(contractState.lastEventTime, contractTerms.businessDayConvention, contractTerms.calendar),
-      shiftCalcTime(scheduleTime, contractTerms.businessDayConvention, contractTerms.calendar),
-      contractTerms.dayCountConvention,
-      contractTerms.maturityDate
+      shiftCalcTime(state.lastEventTime, terms.businessDayConvention, terms.calendar),
+      shiftCalcTime(scheduleTime, terms.businessDayConvention, terms.calendar),
+      terms.dayCountConvention,
+      terms.maturityDate
     );
-    contractState.notionalPrincipal = contractState.notionalPrincipal
+    state.notionalPrincipal = state.notionalPrincipal
     .add(
-      contractState.accruedInterest
+      state.accruedInterest
       .add(
-        contractState.nominalInterestRate
-        .floatMult(contractState.notionalPrincipal)
+        state.nominalInterestRate
+        .floatMult(state.notionalPrincipal)
         .floatMult(timeFromLastEvent)
       )
     );
-    contractState.accruedInterest = 0;
-    contractState.feeAccrued = contractState.feeAccrued
+    state.accruedInterest = 0;
+    state.feeAccrued = state.feeAccrued
     .add(
-      contractTerms.feeRate
-      .floatMult(contractState.notionalPrincipal)
+      terms.feeRate
+      .floatMult(state.notionalPrincipal)
       .floatMult(timeFromLastEvent)
     );
-    contractState.lastEventTime = scheduleTime;
+    state.lastEventTime = scheduleTime;
 
-    return contractState;
+    return state;
   }
 
   function STF_PAM_IP (
     uint256 scheduleTime,
-    ContractTerms memory contractTerms,
-    ContractState memory contractState,
+    Terms memory terms,
+    State memory state,
     uint256 currentTimestamp
   )
     internal
     pure
-    returns (ContractState memory)
+    returns (State memory)
   {
     int256 timeFromLastEvent = yearFraction(
-      shiftCalcTime(contractState.lastEventTime, contractTerms.businessDayConvention, contractTerms.calendar),
-      shiftCalcTime(scheduleTime, contractTerms.businessDayConvention, contractTerms.calendar),
-      contractTerms.dayCountConvention,
-      contractTerms.maturityDate
+      shiftCalcTime(state.lastEventTime, terms.businessDayConvention, terms.calendar),
+      shiftCalcTime(scheduleTime, terms.businessDayConvention, terms.calendar),
+      terms.dayCountConvention,
+      terms.maturityDate
     );
-    contractState.accruedInterest = 0;
-    contractState.feeAccrued = contractState.feeAccrued
+    state.accruedInterest = 0;
+    state.feeAccrued = state.feeAccrued
     .add(
-      contractTerms.feeRate
-      .floatMult(contractState.notionalPrincipal)
+      terms.feeRate
+      .floatMult(state.notionalPrincipal)
       .floatMult(timeFromLastEvent)
     );
-    contractState.lastEventTime = scheduleTime;
+    state.lastEventTime = scheduleTime;
     
-    return contractState;
+    return state;
   }
 
   function STF_PAM_PP (
     uint256 scheduleTime,
-    ContractTerms memory contractTerms,
-    ContractState memory contractState,
+    Terms memory terms,
+    State memory state,
     uint256 currentTimestamp
   )
     internal
     pure
-    returns (ContractState memory)
+    returns (State memory)
   {
     int256 timeFromLastEvent = yearFraction(
-      shiftCalcTime(contractState.lastEventTime, contractTerms.businessDayConvention, contractTerms.calendar),
-      shiftCalcTime(scheduleTime, contractTerms.businessDayConvention, contractTerms.calendar),
-      contractTerms.dayCountConvention,
-      contractTerms.maturityDate
+      shiftCalcTime(state.lastEventTime, terms.businessDayConvention, terms.calendar),
+      shiftCalcTime(scheduleTime, terms.businessDayConvention, terms.calendar),
+      terms.dayCountConvention,
+      terms.maturityDate
     );
-    contractState.accruedInterest = contractState.accruedInterest
+    state.accruedInterest = state.accruedInterest
     .add(
-      contractState.nominalInterestRate
-      .floatMult(contractState.notionalPrincipal)
+      state.nominalInterestRate
+      .floatMult(state.notionalPrincipal)
       .floatMult(timeFromLastEvent)
     );
-    contractState.feeAccrued = contractState.feeAccrued
+    state.feeAccrued = state.feeAccrued
     .add(
-      contractTerms.feeRate
-      .floatMult(contractState.notionalPrincipal)
+      terms.feeRate
+      .floatMult(state.notionalPrincipal)
       .floatMult(timeFromLastEvent)
     );
-    contractState.notionalPrincipal -= 0; // riskFactor(contractTerms.objectCodeOfPrepaymentModel, scheduleTime, contractState, contractTerms) * contractState.notionalPrincipal;
-    contractState.lastEventTime = scheduleTime;
+    state.notionalPrincipal -= 0; // riskFactor(terms.objectCodeOfPrepaymentModel, scheduleTime, state, terms) * state.notionalPrincipal;
+    state.lastEventTime = scheduleTime;
 
-    return contractState;
+    return state;
   }
 
   function STF_PAM_PRD (
     uint256 scheduleTime,
-    ContractTerms memory contractTerms,
-    ContractState memory contractState,
+    Terms memory terms,
+    State memory state,
     uint256 currentTimestamp
   )
     internal
     pure
-    returns (ContractState memory)
+    returns (State memory)
   {
     int256 timeFromLastEvent = yearFraction(
-      shiftCalcTime(contractState.lastEventTime, contractTerms.businessDayConvention, contractTerms.calendar),
-      shiftCalcTime(scheduleTime, contractTerms.businessDayConvention, contractTerms.calendar),
-      contractTerms.dayCountConvention,
-      contractTerms.maturityDate
+      shiftCalcTime(state.lastEventTime, terms.businessDayConvention, terms.calendar),
+      shiftCalcTime(scheduleTime, terms.businessDayConvention, terms.calendar),
+      terms.dayCountConvention,
+      terms.maturityDate
     );
-    contractState.accruedInterest = contractState.accruedInterest
+    state.accruedInterest = state.accruedInterest
     .add(
-      contractState.nominalInterestRate
-      .floatMult(contractState.notionalPrincipal)
+      state.nominalInterestRate
+      .floatMult(state.notionalPrincipal)
       .floatMult(timeFromLastEvent)
     );
-    contractState.feeAccrued = contractState.feeAccrued
+    state.feeAccrued = state.feeAccrued
     .add(
-      contractTerms.feeRate
-      .floatMult(contractState.notionalPrincipal)
+      terms.feeRate
+      .floatMult(state.notionalPrincipal)
       .floatMult(timeFromLastEvent)
     );
-    contractState.lastEventTime = scheduleTime;
+    state.lastEventTime = scheduleTime;
 
-    return contractState;
+    return state;
   }
 
   function STF_PAM_PR (
     uint256 scheduleTime,
-    ContractTerms memory contractTerms,
-    ContractState memory contractState,
+    Terms memory terms,
+    State memory state,
     uint256 currentTimestamp
   )
     internal
     pure
-    returns (ContractState memory)
+    returns (State memory)
   {
     int256 timeFromLastEvent = yearFraction(
-      shiftCalcTime(contractState.lastEventTime, contractTerms.businessDayConvention, contractTerms.calendar),
-      shiftCalcTime(scheduleTime, contractTerms.businessDayConvention, contractTerms.calendar),
-      contractTerms.dayCountConvention,
-      contractTerms.maturityDate
+      shiftCalcTime(state.lastEventTime, terms.businessDayConvention, terms.calendar),
+      shiftCalcTime(scheduleTime, terms.businessDayConvention, terms.calendar),
+      terms.dayCountConvention,
+      terms.maturityDate
     );
-    contractState.accruedInterest = contractState.accruedInterest
+    state.accruedInterest = state.accruedInterest
     .add(
-      contractState.nominalInterestRate
-      .floatMult(contractState.notionalPrincipal)
+      state.nominalInterestRate
+      .floatMult(state.notionalPrincipal)
       .floatMult(timeFromLastEvent)
     );
-    contractState.feeAccrued = contractState.feeAccrued
+    state.feeAccrued = state.feeAccrued
     .add(
-      contractTerms.feeRate
-      .floatMult(contractState.notionalPrincipal)
+      terms.feeRate
+      .floatMult(state.notionalPrincipal)
       .floatMult(timeFromLastEvent)
     );
-    contractState.notionalPrincipal = 0;
-    contractState.lastEventTime = scheduleTime;
+    state.notionalPrincipal = 0;
+    state.lastEventTime = scheduleTime;
 
-    return contractState;
+    return state;
   }
 
   function STF_PAM_PY (
     uint256 scheduleTime,
-    ContractTerms memory contractTerms,
-    ContractState memory contractState,
+    Terms memory terms,
+    State memory state,
     uint256 currentTimestamp
   )
     internal
     pure
-    returns (ContractState memory)
+    returns (State memory)
   {
     int256 timeFromLastEvent = yearFraction(
-      shiftCalcTime(contractState.lastEventTime, contractTerms.businessDayConvention, contractTerms.calendar),
-      shiftCalcTime(scheduleTime, contractTerms.businessDayConvention, contractTerms.calendar),
-      contractTerms.dayCountConvention,
-      contractTerms.maturityDate
+      shiftCalcTime(state.lastEventTime, terms.businessDayConvention, terms.calendar),
+      shiftCalcTime(scheduleTime, terms.businessDayConvention, terms.calendar),
+      terms.dayCountConvention,
+      terms.maturityDate
     );
-    contractState.accruedInterest = contractState.accruedInterest
+    state.accruedInterest = state.accruedInterest
     .add(
-      contractState.nominalInterestRate
-      .floatMult(contractState.notionalPrincipal)
+      state.nominalInterestRate
+      .floatMult(state.notionalPrincipal)
       .floatMult(timeFromLastEvent)
     );
-    contractState.feeAccrued = contractState.feeAccrued
+    state.feeAccrued = state.feeAccrued
     .add(
-      contractTerms.feeRate
-      .floatMult(contractState.notionalPrincipal)
+      terms.feeRate
+      .floatMult(state.notionalPrincipal)
       .floatMult(timeFromLastEvent)
     );
-    contractState.lastEventTime = scheduleTime;
+    state.lastEventTime = scheduleTime;
 
-    return contractState;
+    return state;
   }
 
   function STF_PAM_RRF (
     uint256 scheduleTime,
-    ContractTerms memory contractTerms,
-    ContractState memory contractState,
+    Terms memory terms,
+    State memory state,
     uint256 currentTimestamp
   )
     internal
     pure
-    returns (ContractState memory)
+    returns (State memory)
   {
     int256 timeFromLastEvent = yearFraction(
-      shiftCalcTime(contractState.lastEventTime, contractTerms.businessDayConvention, contractTerms.calendar),
-      shiftCalcTime(scheduleTime, contractTerms.businessDayConvention, contractTerms.calendar),
-      contractTerms.dayCountConvention,
-      contractTerms.maturityDate
+      shiftCalcTime(state.lastEventTime, terms.businessDayConvention, terms.calendar),
+      shiftCalcTime(scheduleTime, terms.businessDayConvention, terms.calendar),
+      terms.dayCountConvention,
+      terms.maturityDate
     );
-    contractState.accruedInterest = contractState.accruedInterest
+    state.accruedInterest = state.accruedInterest
     .add(
-      contractState.nominalInterestRate
-      .floatMult(contractState.notionalPrincipal)
+      state.nominalInterestRate
+      .floatMult(state.notionalPrincipal)
       .floatMult(timeFromLastEvent)
     );
-    contractState.feeAccrued = contractState.feeAccrued
+    state.feeAccrued = state.feeAccrued
     .add(
-      contractTerms.feeRate
-      .floatMult(contractState.notionalPrincipal)
+      terms.feeRate
+      .floatMult(state.notionalPrincipal)
       .floatMult(timeFromLastEvent)
     );
-    contractState.nominalInterestRate = contractTerms.nextResetRate;
-    contractState.lastEventTime = scheduleTime;
+    state.nominalInterestRate = terms.nextResetRate;
+    state.lastEventTime = scheduleTime;
 
-    return contractState;
+    return state;
   }
 
   function STF_PAM_RR (
     uint256 scheduleTime,
-    ContractTerms memory contractTerms,
-    ContractState memory contractState,
+    Terms memory terms,
+    State memory state,
     uint256 currentTimestamp
   )
     internal
     pure
-    returns (ContractState memory)
+    returns (State memory)
   {
-    // int256 rate = //riskFactor(contractTerms.marketObjectCodeOfRateReset, scheduleTime, contractState, contractTerms)
-    // 	* contractTerms.rateMultiplier + contractTerms.rateSpread;
-    int256 rate = contractTerms.rateSpread;
-    int256 deltaRate = rate.sub(contractState.nominalInterestRate);
+    // int256 rate = //riskFactor(terms.marketObjectCodeOfRateReset, scheduleTime, state, terms)
+    // 	* terms.rateMultiplier + terms.rateSpread;
+    int256 rate = terms.rateSpread;
+    int256 deltaRate = rate.sub(state.nominalInterestRate);
 
       // apply period cap/floor
-    if ((contractTerms.lifeCap < deltaRate) && (contractTerms.lifeCap < ((-1) * contractTerms.periodFloor))) {
-      deltaRate = contractTerms.lifeCap;
-    } else if (deltaRate < ((-1) * contractTerms.periodFloor)) {
-      deltaRate = ((-1) * contractTerms.periodFloor);
+    if ((terms.lifeCap < deltaRate) && (terms.lifeCap < ((-1) * terms.periodFloor))) {
+      deltaRate = terms.lifeCap;
+    } else if (deltaRate < ((-1) * terms.periodFloor)) {
+      deltaRate = ((-1) * terms.periodFloor);
     }
-    rate = contractState.nominalInterestRate.add(deltaRate);
+    rate = state.nominalInterestRate.add(deltaRate);
 
     // apply life cap/floor
-    if (contractTerms.lifeCap < rate && contractTerms.lifeCap < contractTerms.lifeFloor) {
-      rate = contractTerms.lifeCap;
-    } else if (rate < contractTerms.lifeFloor) {
-      rate = contractTerms.lifeFloor;
+    if (terms.lifeCap < rate && terms.lifeCap < terms.lifeFloor) {
+      rate = terms.lifeCap;
+    } else if (rate < terms.lifeFloor) {
+      rate = terms.lifeFloor;
     }
 
     int256 timeFromLastEvent = yearFraction(
-      shiftCalcTime(contractState.lastEventTime, contractTerms.businessDayConvention, contractTerms.calendar),
-      shiftCalcTime(scheduleTime, contractTerms.businessDayConvention, contractTerms.calendar),
-      contractTerms.dayCountConvention,
-      contractTerms.maturityDate
+      shiftCalcTime(state.lastEventTime, terms.businessDayConvention, terms.calendar),
+      shiftCalcTime(scheduleTime, terms.businessDayConvention, terms.calendar),
+      terms.dayCountConvention,
+      terms.maturityDate
     );
-    contractState.accruedInterest = contractState.accruedInterest
+    state.accruedInterest = state.accruedInterest
     .add(
-      contractState.nominalInterestRate
-      .floatMult(contractState.notionalPrincipal)
+      state.nominalInterestRate
+      .floatMult(state.notionalPrincipal)
       .floatMult(timeFromLastEvent)
     );
-    contractState.nominalInterestRate = rate;
-    contractState.lastEventTime = scheduleTime;
+    state.nominalInterestRate = rate;
+    state.lastEventTime = scheduleTime;
 
-    return contractState;
+    return state;
   }
 
   function STF_PAM_SC (
     uint256 scheduleTime,
-    ContractTerms memory contractTerms,
-    ContractState memory contractState,
+    Terms memory terms,
+    State memory state,
     uint256 currentTimestamp
   )
     internal
     pure
-    returns (ContractState memory)
+    returns (State memory)
   {
     int256 timeFromLastEvent = yearFraction(
-      shiftCalcTime(contractState.lastEventTime, contractTerms.businessDayConvention, contractTerms.calendar),
-      shiftCalcTime(scheduleTime, contractTerms.businessDayConvention, contractTerms.calendar),
-      contractTerms.dayCountConvention,
-      contractTerms.maturityDate
+      shiftCalcTime(state.lastEventTime, terms.businessDayConvention, terms.calendar),
+      shiftCalcTime(scheduleTime, terms.businessDayConvention, terms.calendar),
+      terms.dayCountConvention,
+      terms.maturityDate
     );
-    contractState.accruedInterest = contractState.accruedInterest
+    state.accruedInterest = state.accruedInterest
     .add(
-      contractState.nominalInterestRate
-      .floatMult(contractState.notionalPrincipal)
+      state.nominalInterestRate
+      .floatMult(state.notionalPrincipal)
       .floatMult(timeFromLastEvent)
     );
-    contractState.feeAccrued = contractState.feeAccrued
+    state.feeAccrued = state.feeAccrued
     .add(
-      contractTerms.feeRate
-      .floatMult(contractState.notionalPrincipal)
+      terms.feeRate
+      .floatMult(state.notionalPrincipal)
       .floatMult(timeFromLastEvent)
     );
 
-    if ((contractTerms.scalingEffect == ScalingEffect.I00)
-      || (contractTerms.scalingEffect == ScalingEffect.IN0)
-      || (contractTerms.scalingEffect == ScalingEffect.I0M)
-      || (contractTerms.scalingEffect == ScalingEffect.INM)
+    if ((terms.scalingEffect == ScalingEffect.I00)
+      || (terms.scalingEffect == ScalingEffect.IN0)
+      || (terms.scalingEffect == ScalingEffect.I0M)
+      || (terms.scalingEffect == ScalingEffect.INM)
     ) {
-      contractState.interestScalingMultiplier = 0; // riskFactor(contractTerms.marketObjectCodeOfScalingIndex, scheduleTime, contractState, contractTerms)
+      state.interestScalingMultiplier = 0; // riskFactor(terms.marketObjectCodeOfScalingIndex, scheduleTime, state, terms)
     }
-    if ((contractTerms.scalingEffect == ScalingEffect._0N0)
-      || (contractTerms.scalingEffect == ScalingEffect._0NM)
-      || (contractTerms.scalingEffect == ScalingEffect.IN0)
-      || (contractTerms.scalingEffect == ScalingEffect.INM)
+    if ((terms.scalingEffect == ScalingEffect._0N0)
+      || (terms.scalingEffect == ScalingEffect._0NM)
+      || (terms.scalingEffect == ScalingEffect.IN0)
+      || (terms.scalingEffect == ScalingEffect.INM)
     ) {
-      contractState.notionalScalingMultiplier = 0; // riskFactor(contractTerms.marketObjectCodeOfScalingIndex, scheduleTime, contractState, contractTerms)
+      state.notionalScalingMultiplier = 0; // riskFactor(terms.marketObjectCodeOfScalingIndex, scheduleTime, state, terms)
     }
 
-    contractState.lastEventTime = scheduleTime;
+    state.lastEventTime = scheduleTime;
 
-    return contractState;
+    return state;
   }
 
   function STF_PAM_TD (
     uint256 scheduleTime,
-    ContractTerms memory contractTerms,
-    ContractState memory contractState,
+    Terms memory terms,
+    State memory state,
     uint256 currentTimestamp
   )
     internal
     pure
-    returns (ContractState memory)
+    returns (State memory)
   {
     int256 timeFromLastEvent = yearFraction(
-      shiftCalcTime(contractState.lastEventTime, contractTerms.businessDayConvention, contractTerms.calendar),
-      shiftCalcTime(scheduleTime, contractTerms.businessDayConvention, contractTerms.calendar),
-      contractTerms.dayCountConvention,
-      contractTerms.maturityDate
+      shiftCalcTime(state.lastEventTime, terms.businessDayConvention, terms.calendar),
+      shiftCalcTime(scheduleTime, terms.businessDayConvention, terms.calendar),
+      terms.dayCountConvention,
+      terms.maturityDate
     );
-    contractState.notionalPrincipal = 0;
-    contractState.accruedInterest = 0;
-    contractState.feeAccrued = 0;
-    contractState.lastEventTime = scheduleTime;
+    state.notionalPrincipal = 0;
+    state.accruedInterest = 0;
+    state.feeAccrued = 0;
+    state.lastEventTime = scheduleTime;
 
-    return contractState;
+    return state;
   }
 
   function STF_PAM_DEL (
     uint256 scheduleTime,
-    ContractTerms memory contractTerms,
-    ContractState memory contractState,
+    Terms memory terms,
+    State memory state,
     uint256 currentTimestamp
   )
     internal
     pure
-    returns(ContractState memory)
+    returns(State memory)
   {
-    uint256 nonPerformingDate = (contractState.nonPerformingDate == 0)
-      ? shiftEventTime(scheduleTime, contractTerms.businessDayConvention, contractTerms.calendar)
-      : contractState.nonPerformingDate;
+    uint256 nonPerformingDate = (state.nonPerformingDate == 0)
+      ? shiftEventTime(scheduleTime, terms.businessDayConvention, terms.calendar)
+      : state.nonPerformingDate;
 
     bool isInGracePeriod = false;
-    if (contractTerms.gracePeriod.isSet) {
-      uint256 graceDate = getTimestampPlusPeriod(contractTerms.gracePeriod, nonPerformingDate);
+    if (terms.gracePeriod.isSet) {
+      uint256 graceDate = getTimestampPlusPeriod(terms.gracePeriod, nonPerformingDate);
       if (currentTimestamp <= graceDate) {
-        contractState.contractPerformance = ContractPerformance.DL;
+        state.contractPerformance = ContractPerformance.DL;
         isInGracePeriod = true;
       }
     }
 
-    if (contractTerms.delinquencyPeriod.isSet && !isInGracePeriod) {
-      uint256 delinquencyDate = getTimestampPlusPeriod(contractTerms.delinquencyPeriod, nonPerformingDate);
+    if (terms.delinquencyPeriod.isSet && !isInGracePeriod) {
+      uint256 delinquencyDate = getTimestampPlusPeriod(terms.delinquencyPeriod, nonPerformingDate);
       if (currentTimestamp <= delinquencyDate) {
-        contractState.contractPerformance = ContractPerformance.DQ;
+        state.contractPerformance = ContractPerformance.DQ;
       } else {
-        contractState.contractPerformance = ContractPerformance.DF;
+        state.contractPerformance = ContractPerformance.DF;
       }
     }
 
-    if (contractState.nonPerformingDate == 0) {
-      contractState.nonPerformingDate = shiftEventTime(
+    if (state.nonPerformingDate == 0) {
+      state.nonPerformingDate = shiftEventTime(
         scheduleTime,
-        contractTerms.businessDayConvention,
-        contractTerms.calendar
+        terms.businessDayConvention,
+        terms.calendar
       );
     }
 
-    return contractState;
+    return state;
   }
 
   // function STF_ANN_AD (
   //   uint256 scheduleTime,
-  //   ContractTerms memory contractTerms,
-  //   ContractState memory contractState
+  //   Terms memory terms,
+  //   State memory state
   // )
   //   internal
   //   pure
-  //   returns (ContractState memory)
+  //   returns (State memory)
   // {
   //   int256 timeFromLastEvent = yearFraction(
-  //     shiftCalcTime(contractState.lastEventTime, contractTerms.businessDayConvention, contractTerms.calendar),
-  //     shiftCalcTime(scheduleTime, contractTerms.businessDayConvention, contractTerms.calendar),
-  //     contractTerms.dayCountConvention,
-  //     contractTerms.maturityDate
+  //     shiftCalcTime(state.lastEventTime, terms.businessDayConvention, terms.calendar),
+  //     shiftCalcTime(scheduleTime, terms.businessDayConvention, terms.calendar),
+  //     terms.dayCountConvention,
+  //     terms.maturityDate
   //   );
-  //   contractState.nominalAccrued = contractState.nominalAccrued
+  //   state.nominalAccrued = state.nominalAccrued
   //   .add(
-  //     contractState.nominalInterestRate
-  //     .floatMult(contractState.notionalPrincipal)
+  //     state.nominalInterestRate
+  //     .floatMult(state.notionalPrincipal)
   //     .floatMult(timeFromLastEvent)
   //   );
-  //   contractState.feeAccrued = contractState.feeAccrued
+  //   state.feeAccrued = state.feeAccrued
   //   .add(
-  //     contractTerms.feeRate
-  //     .floatMult(contractState.notionalPrincipal)
+  //     terms.feeRate
+  //     .floatMult(state.notionalPrincipal)
   //     .floatMult(timeFromLastEvent)
   //   );
-  //   contractState.lastEventTime = scheduleTime;
+  //   state.lastEventTime = scheduleTime;
 
-  //   return contractState;
+  //   return state;
   // }
 
   // function STF_ANN_CD (
   //   uint256 scheduleTime,
-  //   ContractTerms memory contractTerms,
-  //   ContractState memory contractState
+  //   Terms memory terms,
+  //   State memory state
   // )
   //   internal
   //   pure
-  //   returns (ContractState memory)
+  //   returns (State memory)
   // {
   //   int256 timeFromLastEvent = yearFraction(
-  //     shiftCalcTime(contractState.lastEventTime, contractTerms.businessDayConvention, contractTerms.calendar),
-  //     shiftCalcTime(scheduleTime, contractTerms.businessDayConvention, contractTerms.calendar),
-  //     contractTerms.dayCountConvention,
-  //     contractTerms.maturityDate
+  //     shiftCalcTime(state.lastEventTime, terms.businessDayConvention, terms.calendar),
+  //     shiftCalcTime(scheduleTime, terms.businessDayConvention, terms.calendar),
+  //     terms.dayCountConvention,
+  //     terms.maturityDate
   //   );
-  //   contractState.nominalAccrued = contractState.nominalAccrued
+  //   state.nominalAccrued = state.nominalAccrued
   //   .add(
-  //     contractState.nominalInterestRate
-  //     .floatMult(contractState.notionalPrincipal)
+  //     state.nominalInterestRate
+  //     .floatMult(state.notionalPrincipal)
   //     .floatMult(timeFromLastEvent)
   //   );
-  //   contractState.feeAccrued = contractState.feeAccrued
+  //   state.feeAccrued = state.feeAccrued
   //   .add(
-  //     contractTerms.feeRate
-  //     .floatMult(contractState.notionalPrincipal)
+  //     terms.feeRate
+  //     .floatMult(state.notionalPrincipal)
   //     .floatMult(timeFromLastEvent)
   //   );
-  //   contractState.ContractPerformance = ContractPerformance.DF;
-  //   contractState.lastEventTime = scheduleTime;
+  //   state.ContractPerformance = ContractPerformance.DF;
+  //   state.lastEventTime = scheduleTime;
 
-  //   return contractState;
+  //   return state;
   // }
 
   // function STF_ANN_FP (
   //   uint256 scheduleTime,
-  //   ContractTerms memory contractTerms,
-  //   ContractState memory contractState
+  //   Terms memory terms,
+  //   State memory state
   // )
   //   internal
   //   pure
-  //   returns (ContractState memory)
+  //   returns (State memory)
   // {
   //   int256 timeFromLastEvent = yearFraction(
-  //     shiftCalcTime(contractState.lastEventTime, contractTerms.businessDayConvention, contractTerms.calendar),
-  //     shiftCalcTime(scheduleTime, contractTerms.businessDayConvention, contractTerms.calendar),
-  //     contractTerms.dayCountConvention,
-  //     contractTerms.maturityDate
+  //     shiftCalcTime(state.lastEventTime, terms.businessDayConvention, terms.calendar),
+  //     shiftCalcTime(scheduleTime, terms.businessDayConvention, terms.calendar),
+  //     terms.dayCountConvention,
+  //     terms.maturityDate
   //   );
-  //   contractState.nominalAccrued = contractState.nominalAccrued
+  //   state.nominalAccrued = state.nominalAccrued
   //   .add(
-  //     contractState.nominalInterestRate
-  //     .floatMult(contractState.notionalPrincipal)
+  //     state.nominalInterestRate
+  //     .floatMult(state.notionalPrincipal)
   //     .floatMult(timeFromLastEvent)
   //   );
-  //   contractState.feeAccrued = 0;
-  //   contractState.lastEventTime = scheduleTime;
+  //   state.feeAccrued = 0;
+  //   state.lastEventTime = scheduleTime;
 
-  //   return contractState;
+  //   return state;
   // }
 
   function STF_ANN_IED (
     uint256 scheduleTime,
-    ContractTerms memory contractTerms,
-    ContractState memory contractState,
+    Terms memory terms,
+    State memory state,
     uint256 currentTimestamp
   )
     internal
     pure
-    returns (ContractState memory)
+    returns (State memory)
   {
     int256 timeFromLastEvent = yearFraction(
-      shiftCalcTime(contractState.lastEventTime, contractTerms.businessDayConvention, contractTerms.calendar),
-      shiftCalcTime(scheduleTime, contractTerms.businessDayConvention, contractTerms.calendar),
-      contractTerms.dayCountConvention,
-      contractTerms.maturityDate
+      shiftCalcTime(state.lastEventTime, terms.businessDayConvention, terms.calendar),
+      shiftCalcTime(scheduleTime, terms.businessDayConvention, terms.calendar),
+      terms.dayCountConvention,
+      terms.maturityDate
     );
-    contractState.notionalPrincipal = roleSign(contractTerms.contractRole) * contractTerms.notionalPrincipal;
-    contractState.nominalInterestRate = contractTerms.nominalInterestRate;
-    contractState.lastEventTime = scheduleTime;
+    state.notionalPrincipal = roleSign(terms.contractRole) * terms.notionalPrincipal;
+    state.nominalInterestRate = terms.nominalInterestRate;
+    state.lastEventTime = scheduleTime;
 
-    if (contractTerms.cycleAnchorDateOfInterestPayment != 0 &&
-      contractTerms.cycleAnchorDateOfInterestPayment < contractTerms.initialExchangeDate
+    if (terms.cycleAnchorDateOfInterestPayment != 0 &&
+      terms.cycleAnchorDateOfInterestPayment < terms.initialExchangeDate
     ) {
-      contractState.accruedInterest = contractState.nominalInterestRate
-      .floatMult(contractState.notionalPrincipal)
+      state.accruedInterest = state.nominalInterestRate
+      .floatMult(state.notionalPrincipal)
       .floatMult(
         yearFraction(
-          shiftCalcTime(contractTerms.cycleAnchorDateOfInterestPayment, contractTerms.businessDayConvention, contractTerms.calendar),
-          shiftCalcTime(scheduleTime, contractTerms.businessDayConvention, contractTerms.calendar),
-          contractTerms.dayCountConvention,
-          contractTerms.maturityDate
+          shiftCalcTime(terms.cycleAnchorDateOfInterestPayment, terms.businessDayConvention, terms.calendar),
+          shiftCalcTime(scheduleTime, terms.businessDayConvention, terms.calendar),
+          terms.dayCountConvention,
+          terms.maturityDate
         )
       );
     }
 
-    return contractState;
+    return state;
   }
 
   function STF_ANN_IPCI (
     uint256 scheduleTime,
-    ContractTerms memory contractTerms,
-    ContractState memory contractState,
+    Terms memory terms,
+    State memory state,
     uint256 currentTimestamp
   )
     internal
     pure
-    returns (ContractState memory)
+    returns (State memory)
   {
     int256 timeFromLastEvent = yearFraction(
-      shiftCalcTime(contractState.lastEventTime, contractTerms.businessDayConvention, contractTerms.calendar),
-      shiftCalcTime(scheduleTime, contractTerms.businessDayConvention, contractTerms.calendar),
-      contractTerms.dayCountConvention,
-      contractTerms.maturityDate
+      shiftCalcTime(state.lastEventTime, terms.businessDayConvention, terms.calendar),
+      shiftCalcTime(scheduleTime, terms.businessDayConvention, terms.calendar),
+      terms.dayCountConvention,
+      terms.maturityDate
     );
-    contractState.accruedInterest = contractState.accruedInterest
+    state.accruedInterest = state.accruedInterest
     .add(
-      contractState.accruedInterest
+      state.accruedInterest
       .add(
-        contractState.nominalInterestRate
-        .floatMult(contractState.notionalPrincipal)
+        state.nominalInterestRate
+        .floatMult(state.notionalPrincipal)
         .floatMult(timeFromLastEvent)
       )
     );
-    contractState.accruedInterest = 0;
-    contractState.feeAccrued = contractState.feeAccrued
+    state.accruedInterest = 0;
+    state.feeAccrued = state.feeAccrued
     .add(
-      contractTerms.feeRate
-      .floatMult(contractState.notionalPrincipal)
+      terms.feeRate
+      .floatMult(state.notionalPrincipal)
       .floatMult(timeFromLastEvent)
     );
-    contractState.lastEventTime = scheduleTime;
+    state.lastEventTime = scheduleTime;
 
-    return contractState;
+    return state;
   }
 
   function STF_ANN_IP (
     uint256 scheduleTime,
-    ContractTerms memory contractTerms,
-    ContractState memory contractState,
+    Terms memory terms,
+    State memory state,
     uint256 currentTimestamp
   )
     internal
     pure
-    returns (ContractState memory)
+    returns (State memory)
   {
     int256 timeFromLastEvent = yearFraction(
-      shiftCalcTime(contractState.lastEventTime, contractTerms.businessDayConvention, contractTerms.calendar),
-      shiftCalcTime(scheduleTime, contractTerms.businessDayConvention, contractTerms.calendar),
-      contractTerms.dayCountConvention,
-      contractTerms.maturityDate
+      shiftCalcTime(state.lastEventTime, terms.businessDayConvention, terms.calendar),
+      shiftCalcTime(scheduleTime, terms.businessDayConvention, terms.calendar),
+      terms.dayCountConvention,
+      terms.maturityDate
     );
-    contractState.accruedInterest = 0;
-    contractState.feeAccrued = contractState.feeAccrued
+    state.accruedInterest = 0;
+    state.feeAccrued = state.feeAccrued
     .add(
-      contractTerms.feeRate
-      .floatMult(contractState.notionalPrincipal)
+      terms.feeRate
+      .floatMult(state.notionalPrincipal)
       .floatMult(timeFromLastEvent)
     );
-    contractState.lastEventTime = scheduleTime;
+    state.lastEventTime = scheduleTime;
 
-    return contractState;
+    return state;
   }
 
   // function STF_ANN_PP (
   //   uint256 scheduleTime,
-  //   ContractTerms memory contractTerms,
-  //   ContractState memory contractState
+  //   Terms memory terms,
+  //   State memory state
   // )
   //   internal
   //   pure
-  //   returns (ContractState memory)
+  //   returns (State memory)
   // {
   //   int256 timeFromLastEvent = yearFraction(
-  //     shiftCalcTime(contractState.lastEventTime, contractTerms.businessDayConvention, contractTerms.calendar),
-  //     shiftCalcTime(scheduleTime, contractTerms.businessDayConvention, contractTerms.calendar),
-  //     contractTerms.dayCountConvention,
-  //     contractTerms.maturityDate
+  //     shiftCalcTime(state.lastEventTime, terms.businessDayConvention, terms.calendar),
+  //     shiftCalcTime(scheduleTime, terms.businessDayConvention, terms.calendar),
+  //     terms.dayCountConvention,
+  //     terms.maturityDate
   //   );
-  //   contractState.nominalAccrued = contractState.nominalAccrued
+  //   state.nominalAccrued = state.nominalAccrued
   //   .add(
-  //     contractState.nominalInterestRate
-  //     .floatMult(contractState.notionalPrincipal)
+  //     state.nominalInterestRate
+  //     .floatMult(state.notionalPrincipal)
   //     .floatMult(timeFromLastEvent)
   //   );
-  //   contractState.feeAccrued = contractState.feeAccrued
+  //   state.feeAccrued = state.feeAccrued
   //   .add(
-  //     contractTerms.feeRate
-  //     .floatMult(contractState.notionalPrincipal)
+  //     terms.feeRate
+  //     .floatMult(state.notionalPrincipal)
   //     .floatMult(timeFromLastEvent)
   //   );
-  //   contractState.notionalPrincipal -= 0; // riskFactor(contractTerms.objectCodeOfPrepaymentModel, scheduleTime, contractState, contractTerms) * contractState.notionalPrincipal;
-  //   contractState.lastEventTime = scheduleTime;
+  //   state.notionalPrincipal -= 0; // riskFactor(terms.objectCodeOfPrepaymentModel, scheduleTime, state, terms) * state.notionalPrincipal;
+  //   state.lastEventTime = scheduleTime;
 
-  //   return contractState;
+  //   return state;
   // }
 
   // STF_PAM_PRD
   // function STF_ANN_PRD (
   //   uint256 scheduleTime,
-  //   ContractTerms memory contractTerms,
-  //   ContractState memory contractState
+  //   Terms memory terms,
+  //   State memory state
   // )
   //   internal
   //   pure
-  //   returns (ContractState memory)
+  //   returns (State memory)
   // {
   //   int256 timeFromLastEvent = yearFraction(
-  //     shiftCalcTime(contractState.lastEventTime, contractTerms.businessDayConvention, contractTerms.calendar),
-  //     shiftCalcTime(scheduleTime, contractTerms.businessDayConvention, contractTerms.calendar),
-  //     contractTerms.dayCountConvention,
-  //     contractTerms.maturityDate
+  //     shiftCalcTime(state.lastEventTime, terms.businessDayConvention, terms.calendar),
+  //     shiftCalcTime(scheduleTime, terms.businessDayConvention, terms.calendar),
+  //     terms.dayCountConvention,
+  //     terms.maturityDate
   //   );
-  //   contractState.nominalAccrued = contractState.nominalAccrued
+  //   state.nominalAccrued = state.nominalAccrued
   //   .add(
-  //     contractState.nominalInterestRate
-  //     .floatMult(contractState.notionalPrincipal)
+  //     state.nominalInterestRate
+  //     .floatMult(state.notionalPrincipal)
   //     .floatMult(timeFromLastEvent)
   //   );
-  //   contractState.feeAccrued = contractState.feeAccrued
+  //   state.feeAccrued = state.feeAccrued
   //   .add(
-  //     contractTerms.feeRate
-  //     .floatMult(contractState.notionalPrincipal)
+  //     terms.feeRate
+  //     .floatMult(state.notionalPrincipal)
   //     .floatMult(timeFromLastEvent)
   //   );
-  //   contractState.lastEventTime = scheduleTime;
+  //   state.lastEventTime = scheduleTime;
 
-  //   return contractState;
+  //   return state;
   // }
 
   function STF_ANN_PR (
     uint256 scheduleTime,
-    ContractTerms memory contractTerms,
-    ContractState memory contractState,
+    Terms memory terms,
+    State memory state,
     uint256 currentTimestamp
   )
     internal
     pure
-    returns (ContractState memory)
+    returns (State memory)
   {
     int256 timeFromLastEvent = yearFraction(
-      shiftCalcTime(contractState.lastEventTime, contractTerms.businessDayConvention, contractTerms.calendar),
-      shiftCalcTime(scheduleTime, contractTerms.businessDayConvention, contractTerms.calendar),
-      contractTerms.dayCountConvention,
-      contractTerms.maturityDate
+      shiftCalcTime(state.lastEventTime, terms.businessDayConvention, terms.calendar),
+      shiftCalcTime(scheduleTime, terms.businessDayConvention, terms.calendar),
+      terms.dayCountConvention,
+      terms.maturityDate
     );
-    contractState.accruedInterest = contractState.accruedInterest
+    state.accruedInterest = state.accruedInterest
     .add(
-      contractState.nominalInterestRate
-      .floatMult(contractState.notionalPrincipal)
+      state.nominalInterestRate
+      .floatMult(state.notionalPrincipal)
       .floatMult(timeFromLastEvent)
     );
-    contractState.feeAccrued = contractState.feeAccrued
+    state.feeAccrued = state.feeAccrued
     .add(
-      contractTerms.feeRate
-      .floatMult(contractState.notionalPrincipal)
+      terms.feeRate
+      .floatMult(state.notionalPrincipal)
       .floatMult(timeFromLastEvent)
     );
-    contractState.notionalPrincipal = contractState.notionalPrincipal
+    state.notionalPrincipal = state.notionalPrincipal
     .sub(
-      roleSign(contractTerms.contractRole)
+      roleSign(terms.contractRole)
       * (
-        roleSign(contractTerms.contractRole)
-        * contractState.notionalPrincipal
+        roleSign(terms.contractRole)
+        * state.notionalPrincipal
       )
       .min(
-        roleSign(contractTerms.contractRole)
+        roleSign(terms.contractRole)
         * (
-          contractState.nextPrincipalRedemptionPayment
-          .sub(contractState.accruedInterest)
+          state.nextPrincipalRedemptionPayment
+          .sub(state.accruedInterest)
         )
       )
     );
 
-    contractState.lastEventTime = scheduleTime;
+    state.lastEventTime = scheduleTime;
 
-    return contractState;
+    return state;
   }
 
   function STF_ANN_MD (
     uint256 scheduleTime,
-    ContractTerms memory contractTerms,
-    ContractState memory contractState,
+    Terms memory terms,
+    State memory state,
     uint256 currentTimestamp
   )
     internal
     pure
-    returns (ContractState memory)
+    returns (State memory)
   {
     int256 timeFromLastEvent = yearFraction(
-      shiftCalcTime(contractState.lastEventTime, contractTerms.businessDayConvention, contractTerms.calendar),
-      shiftCalcTime(scheduleTime, contractTerms.businessDayConvention, contractTerms.calendar),
-      contractTerms.dayCountConvention,
-      contractTerms.maturityDate
+      shiftCalcTime(state.lastEventTime, terms.businessDayConvention, terms.calendar),
+      shiftCalcTime(scheduleTime, terms.businessDayConvention, terms.calendar),
+      terms.dayCountConvention,
+      terms.maturityDate
     );
-    contractState.accruedInterest = contractState.accruedInterest
+    state.accruedInterest = state.accruedInterest
     .add(
-      contractState.nominalInterestRate
-      .floatMult(contractState.notionalPrincipal)
+      state.nominalInterestRate
+      .floatMult(state.notionalPrincipal)
       .floatMult(timeFromLastEvent)
     );
-    contractState.feeAccrued = contractState.feeAccrued
+    state.feeAccrued = state.feeAccrued
     .add(
-      contractTerms.feeRate
-      .floatMult(contractState.notionalPrincipal)
+      terms.feeRate
+      .floatMult(state.notionalPrincipal)
       .floatMult(timeFromLastEvent)
     );
-    contractState.notionalPrincipal = 0.0;
-    contractState.lastEventTime = scheduleTime;
+    state.notionalPrincipal = 0.0;
+    state.lastEventTime = scheduleTime;
 
-    return contractState;
+    return state;
   }
 
   // STF_PAM_PY
   // function STF_ANN_PY (
   //   uint256 scheduleTime,
-  //   ContractTerms memory contractTerms,
-  //   ContractState memory contractState
+  //   Terms memory terms,
+  //   State memory state
   // )
   //   internal
   //   pure
-  //   returns (ContractState memory)
+  //   returns (State memory)
   // {
   //   int256 timeFromLastEvent = yearFraction(
-  //     shiftCalcTime(contractState.lastEventTime, contractTerms.businessDayConvention, contractTerms.calendar),
-  //     shiftCalcTime(scheduleTime, contractTerms.businessDayConvention, contractTerms.calendar),
-  //     contractTerms.dayCountConvention,
-  //     contractTerms.maturityDate
+  //     shiftCalcTime(state.lastEventTime, terms.businessDayConvention, terms.calendar),
+  //     shiftCalcTime(scheduleTime, terms.businessDayConvention, terms.calendar),
+  //     terms.dayCountConvention,
+  //     terms.maturityDate
   //   );
-  //   contractState.nominalAccrued = contractState.nominalAccrued
+  //   state.nominalAccrued = state.nominalAccrued
   //   .add(
-  //     contractState.nominalInterestRate
-  //     .floatMult(contractState.notionalPrincipal)
+  //     state.nominalInterestRate
+  //     .floatMult(state.notionalPrincipal)
   //     .floatMult(timeFromLastEvent)
   //   );
-  //   contractState.feeAccrued = contractState.feeAccrued
+  //   state.feeAccrued = state.feeAccrued
   //   .add(
-  //     contractTerms.feeRate
-  //     .floatMult(contractState.notionalPrincipal)
+  //     terms.feeRate
+  //     .floatMult(state.notionalPrincipal)
   //     .floatMult(timeFromLastEvent)
   //   );
-  //   contractState.lastEventTime = scheduleTime;
+  //   state.lastEventTime = scheduleTime;
 
-  //   return contractState;
+  //   return state;
   // }
 
   // function STF_ANN_RRF (
   //   uint256 scheduleTime,
-  //   ContractTerms memory contractTerms,
-  //   ContractState memory contractState
+  //   Terms memory terms,
+  //   State memory state
   // )
   //   internal
   //   pure
-  //   returns (ContractState memory)
+  //   returns (State memory)
   // {
   //   int256 timeFromLastEvent = yearFraction(
-  //     shiftCalcTime(contractState.lastEventTime, contractTerms.businessDayConvention, contractTerms.calendar),
-  //     shiftCalcTime(scheduleTime, contractTerms.businessDayConvention, contractTerms.calendar),
-  //     contractTerms.dayCountConvention,
-  //     contractTerms.maturityDate
+  //     shiftCalcTime(state.lastEventTime, terms.businessDayConvention, terms.calendar),
+  //     shiftCalcTime(scheduleTime, terms.businessDayConvention, terms.calendar),
+  //     terms.dayCountConvention,
+  //     terms.maturityDate
   //   );
-  //   contractState.nominalAccrued = contractState.nominalAccrued
+  //   state.nominalAccrued = state.nominalAccrued
   //   .add(
-  //     contractState.nominalInterestRate
-  //     .floatMult(contractState.notionalPrincipal)
+  //     state.nominalInterestRate
+  //     .floatMult(state.notionalPrincipal)
   //     .floatMult(timeFromLastEvent)
   //   );
-  //   contractState.feeAccrued = contractState.feeAccrued
+  //   state.feeAccrued = state.feeAccrued
   //   .add(
-  //     contractTerms.feeRate
-  //     .floatMult(contractState.notionalPrincipal)
+  //     terms.feeRate
+  //     .floatMult(state.notionalPrincipal)
   //     .floatMult(timeFromLastEvent)
   //   );
-  //   contractState.nominalInterestRate = contractTerms.nextResetRate;
-  //   contractState.lastEventTime = scheduleTime;
+  //   state.nominalInterestRate = terms.nextResetRate;
+  //   state.lastEventTime = scheduleTime;
 
-  //   return contractState;
+  //   return state;
   // }
 
   function STF_ANN_RR (
     uint256 scheduleTime,
-    ContractTerms memory contractTerms,
-    ContractState memory contractState,
+    Terms memory terms,
+    State memory state,
     uint256 currentTimestamp
   )
     internal
     pure
-    returns (ContractState memory)
+    returns (State memory)
   {
-    // int256 rate = //riskFactor(contractTerms.marketObjectCodeOfRateReset, scheduleTime, contractState, contractTerms)
-    // 	* contractTerms.rateMultiplier + contractTerms.rateSpread;
-    int256 rate = contractTerms.rateSpread;
-    int256 deltaRate = rate.sub(contractState.nominalInterestRate);
+    // int256 rate = //riskFactor(terms.marketObjectCodeOfRateReset, scheduleTime, state, terms)
+    // 	* terms.rateMultiplier + terms.rateSpread;
+    int256 rate = terms.rateSpread;
+    int256 deltaRate = rate.sub(state.nominalInterestRate);
 
       // apply period cap/floor
-    if ((contractTerms.lifeCap < deltaRate) && (contractTerms.lifeCap < ((-1) * contractTerms.periodFloor))) {
-      deltaRate = contractTerms.lifeCap;
-    } else if (deltaRate < ((-1) * contractTerms.periodFloor)) {
-      deltaRate = ((-1) * contractTerms.periodFloor);
+    if ((terms.lifeCap < deltaRate) && (terms.lifeCap < ((-1) * terms.periodFloor))) {
+      deltaRate = terms.lifeCap;
+    } else if (deltaRate < ((-1) * terms.periodFloor)) {
+      deltaRate = ((-1) * terms.periodFloor);
     }
-    rate = contractState.nominalInterestRate.add(deltaRate);
+    rate = state.nominalInterestRate.add(deltaRate);
 
     // apply life cap/floor
-    if (contractTerms.lifeCap < rate && contractTerms.lifeCap < contractTerms.lifeFloor) {
-      rate = contractTerms.lifeCap;
-    } else if (rate < contractTerms.lifeFloor) {
-      rate = contractTerms.lifeFloor;
+    if (terms.lifeCap < rate && terms.lifeCap < terms.lifeFloor) {
+      rate = terms.lifeCap;
+    } else if (rate < terms.lifeFloor) {
+      rate = terms.lifeFloor;
     }
 
     int256 timeFromLastEvent = yearFraction(
-      shiftCalcTime(contractState.lastEventTime, contractTerms.businessDayConvention, contractTerms.calendar),
-      shiftCalcTime(scheduleTime, contractTerms.businessDayConvention, contractTerms.calendar),
-      contractTerms.dayCountConvention,
-      contractTerms.maturityDate
+      shiftCalcTime(state.lastEventTime, terms.businessDayConvention, terms.calendar),
+      shiftCalcTime(scheduleTime, terms.businessDayConvention, terms.calendar),
+      terms.dayCountConvention,
+      terms.maturityDate
     );
-    contractState.accruedInterest = contractState.accruedInterest
+    state.accruedInterest = state.accruedInterest
     .add(
-      contractState.nominalInterestRate
-      .floatMult(contractState.notionalPrincipal)
+      state.nominalInterestRate
+      .floatMult(state.notionalPrincipal)
       .floatMult(timeFromLastEvent)
     );
-    contractState.nominalInterestRate = rate;
-    contractState.nextPrincipalRedemptionPayment = 0; // TODO: implement annuity calculator
-    contractState.lastEventTime = scheduleTime;
+    state.nominalInterestRate = rate;
+    state.nextPrincipalRedemptionPayment = 0; // TODO: implement annuity calculator
+    state.lastEventTime = scheduleTime;
 
-    return contractState;
+    return state;
   }
 
   function STF_ANN_SC (
     uint256 scheduleTime,
-    ContractTerms memory contractTerms,
-    ContractState memory contractState,
+    Terms memory terms,
+    State memory state,
     uint256 currentTimestamp
   )
     internal
     pure
-    returns (ContractState memory)
+    returns (State memory)
   {
     int256 timeFromLastEvent = yearFraction(
-      shiftCalcTime(contractState.lastEventTime, contractTerms.businessDayConvention, contractTerms.calendar),
-      shiftCalcTime(scheduleTime, contractTerms.businessDayConvention, contractTerms.calendar),
-      contractTerms.dayCountConvention,
-      contractTerms.maturityDate
+      shiftCalcTime(state.lastEventTime, terms.businessDayConvention, terms.calendar),
+      shiftCalcTime(scheduleTime, terms.businessDayConvention, terms.calendar),
+      terms.dayCountConvention,
+      terms.maturityDate
     );
-    contractState.accruedInterest = contractState.accruedInterest
+    state.accruedInterest = state.accruedInterest
     .add(
-      contractState.nominalInterestRate
-      .floatMult(contractState.notionalPrincipal)
+      state.nominalInterestRate
+      .floatMult(state.notionalPrincipal)
       .floatMult(timeFromLastEvent)
     );
-    contractState.feeAccrued = contractState.feeAccrued
+    state.feeAccrued = state.feeAccrued
     .add(
-      contractTerms.feeRate
-      .floatMult(contractState.notionalPrincipal)
+      terms.feeRate
+      .floatMult(state.notionalPrincipal)
       .floatMult(timeFromLastEvent)
     );
 
-    if ((contractTerms.scalingEffect == ScalingEffect.I00)
-      || (contractTerms.scalingEffect == ScalingEffect.IN0)
-      || (contractTerms.scalingEffect == ScalingEffect.I0M)
-      || (contractTerms.scalingEffect == ScalingEffect.INM)
+    if ((terms.scalingEffect == ScalingEffect.I00)
+      || (terms.scalingEffect == ScalingEffect.IN0)
+      || (terms.scalingEffect == ScalingEffect.I0M)
+      || (terms.scalingEffect == ScalingEffect.INM)
     ) {
-      contractState.interestScalingMultiplier = 0; // riskFactor(contractTerms.marketObjectCodeOfScalingIndex, scheduleTime, contractState, contractTerms)
+      state.interestScalingMultiplier = 0; // riskFactor(terms.marketObjectCodeOfScalingIndex, scheduleTime, state, terms)
     }
-    if ((contractTerms.scalingEffect == ScalingEffect._0N0)
-      || (contractTerms.scalingEffect == ScalingEffect._0NM)
-      || (contractTerms.scalingEffect == ScalingEffect.IN0)
-      || (contractTerms.scalingEffect == ScalingEffect.INM)
+    if ((terms.scalingEffect == ScalingEffect._0N0)
+      || (terms.scalingEffect == ScalingEffect._0NM)
+      || (terms.scalingEffect == ScalingEffect.IN0)
+      || (terms.scalingEffect == ScalingEffect.INM)
     ) {
-      contractState.notionalScalingMultiplier = 0; // riskFactor(contractTerms.marketObjectCodeOfScalingIndex, scheduleTime, contractState, contractTerms)
+      state.notionalScalingMultiplier = 0; // riskFactor(terms.marketObjectCodeOfScalingIndex, scheduleTime, state, terms)
     }
 
-    contractState.lastEventTime = scheduleTime;
-    return contractState;
+    state.lastEventTime = scheduleTime;
+    return state;
   }
 
   // function STF_ANN_TD (
   //   uint256 scheduleTime,
-  //   ContractTerms memory contractTerms,
-  //   ContractState memory contractState
+  //   Terms memory terms,
+  //   State memory state
   // )
   //   internal
   //   pure
-  //   returns (ContractState memory)
+  //   returns (State memory)
   // {
   //   int256 timeFromLastEvent = yearFraction(
-  //     shiftCalcTime(contractState.lastEventTime, contractTerms.businessDayConvention, contractTerms.calendar),
-  //     shiftCalcTime(scheduleTime, contractTerms.businessDayConvention, contractTerms.calendar),
-  //     contractTerms.dayCountConvention,
-  //     contractTerms.maturityDate
+  //     shiftCalcTime(state.lastEventTime, terms.businessDayConvention, terms.calendar),
+  //     shiftCalcTime(scheduleTime, terms.businessDayConvention, terms.calendar),
+  //     terms.dayCountConvention,
+  //     terms.maturityDate
   //   );
-  //   contractState.notionalPrincipal = 0;
-  //   contractState.nominalAccrued = 0;
-  //   contractState.feeAccrued = 0;
-  //   contractState.lastEventTime = scheduleTime;
+  //   state.notionalPrincipal = 0;
+  //   state.nominalAccrued = 0;
+  //   state.feeAccrued = 0;
+  //   state.lastEventTime = scheduleTime;
 
-  //   return contractState;
+  //   return state;
   // }
 
   function STF_CEG_MD (
     uint256 scheduleTime,
-    ContractTerms memory contractTerms,
-    ContractState memory contractState,
+    Terms memory terms,
+    State memory state,
     uint256 currentTimestamp
   )
     internal
     pure
-    returns (ContractState memory)
+    returns (State memory)
   {
-    contractState.notionalPrincipal = 0;
-    contractState.lastEventTime = scheduleTime;
+    state.notionalPrincipal = 0;
+    state.lastEventTime = scheduleTime;
 
-    return contractState;
+    return state;
   }
 
   function STF_CEG_XD (
     uint256 scheduleTime,
-    ContractTerms memory contractTerms,
-    ContractState memory contractState,
+    Terms memory terms,
+    State memory state,
     uint256 currentTimestamp
   )
     internal
     pure
-    returns (ContractState memory)
+    returns (State memory)
   {
-    contractState.notionalPrincipal = 0;
-    contractState.lastEventTime = scheduleTime;
+    state.notionalPrincipal = 0;
+    state.lastEventTime = scheduleTime;
 
-    return contractState;
+    return state;
   }
 
   function STF_CEG_PRD (
     uint256 scheduleTime,
-    ContractTerms memory contractTerms,
-    ContractState memory contractState,
+    Terms memory terms,
+    State memory state,
     uint256 currentTimestamp
   )
     internal
     pure
-    returns (ContractState memory)
+    returns (State memory)
   {
-    contractState.notionalPrincipal = roleSign(contractTerms.contractRole) * contractTerms.notionalPrincipal;
-    contractState.nominalInterestRate = contractTerms.feeRate;
-    contractState.lastEventTime = scheduleTime;
+    state.notionalPrincipal = roleSign(terms.contractRole) * terms.notionalPrincipal;
+    state.nominalInterestRate = terms.feeRate;
+    state.lastEventTime = scheduleTime;
 
-    return contractState;
+    return state;
   }
 
   function STF_CEG_FP (
     uint256 scheduleTime,
-    ContractTerms memory contractTerms,
-    ContractState memory contractState,
+    Terms memory terms,
+    State memory state,
     uint256 currentTimestamp
   )
     internal
     pure
-    returns (ContractState memory)
+    returns (State memory)
   {
     // uint256 timeFromLastEvent = yearFraction(
-    //   shiftCalcTime(contractState.lastEventTime, contractTerms.businessDayConvention, contractTerms.calendar),
-    //   shiftCalcTime(scheduleTime, contractTerms.businessDayConvention, contractTerms.calendar),
-    //   contractTerms.dayCountConvention,
-    //   contractTerms.maturityDate
+    //   shiftCalcTime(state.lastEventTime, terms.businessDayConvention, terms.calendar),
+    //   shiftCalcTime(scheduleTime, terms.businessDayConvention, terms.calendar),
+    //   terms.dayCountConvention,
+    //   terms.maturityDate
     // );
-    contractState.feeAccrued = 0;
-    contractState.lastEventTime = scheduleTime;
+    state.feeAccrued = 0;
+    state.lastEventTime = scheduleTime;
 
-    return contractState;
+    return state;
   }
 
     function STF_CEG_TD (
     uint256 scheduleTime,
-    ContractTerms memory contractTerms,
-    ContractState memory contractState,
+    Terms memory terms,
+    State memory state,
     uint256 currentTimestamp
   )
     internal
     pure
-    returns (ContractState memory)
+    returns (State memory)
   {
     // uint256 timeFromLastEvent = yearFraction(
-    //   shiftCalcTime(contractState.lastEventTime, contractTerms.businessDayConvention, contractTerms.calendar),
-    //   shiftCalcTime(scheduleTime, contractTerms.businessDayConvention, contractTerms.calendar),
-    //   contractTerms.dayCountConvention,
-    //   contractTerms.maturityDate
+    //   shiftCalcTime(state.lastEventTime, terms.businessDayConvention, terms.calendar),
+    //   shiftCalcTime(scheduleTime, terms.businessDayConvention, terms.calendar),
+    //   terms.dayCountConvention,
+    //   terms.maturityDate
     // );
-    contractState.notionalPrincipal = 0;
-    contractState.accruedInterest = 0;
-    contractState.feeAccrued = 0;
-    contractState.lastEventTime = scheduleTime;
+    state.notionalPrincipal = 0;
+    state.accruedInterest = 0;
+    state.feeAccrued = 0;
+    state.lastEventTime = scheduleTime;
 
-    return contractState;
+    return state;
   }
 }

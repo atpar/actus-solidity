@@ -12,7 +12,7 @@ import "./Conventions/EndOfMonthConvention.sol";
 
 contract Schedule is Definitions, Utils, BusinessDayConvention, EndOfMonthConvention {
 
-	function computeEventTimeForProtoEvent(bytes32 protoEvent, ContractTerms memory terms)
+	function computeEventTimeForProtoEvent(bytes32 protoEvent, Terms memory terms)
 		public
 		pure
 		returns (uint256)
