@@ -166,8 +166,9 @@ contract PAMEngine is Core, IEngine, STF, POF {
 		pure
 		returns(bytes32[MAX_EVENT_SCHEDULE_SIZE] memory)
 	{
+		bytes32[MAX_EVENT_SCHEDULE_SIZE] memory protoEventSchedule;
+
 		if (eventType == EventType.IP || eventType == EventType.IPCI) {
-			bytes32[MAX_EVENT_SCHEDULE_SIZE] memory protoEventSchedule;
 			uint256 index = 0;
 
 			// interest payment related (e.g. for reoccurring interest payments)
@@ -228,10 +229,9 @@ contract PAMEngine is Core, IEngine, STF, POF {
 					index++;
 				}
 			}
+		}
 
-			return protoEventSchedule;
-		} else if (eventType == EventType.RR) {
-			bytes32[MAX_EVENT_SCHEDULE_SIZE] memory protoEventSchedule;
+		if (eventType == EventType.RR) {
 			uint256 index = 0;
 
 			// rate reset
@@ -258,10 +258,9 @@ contract PAMEngine is Core, IEngine, STF, POF {
 				}
 			}
 			// ... nextRateReset
+		}
 
-			return protoEventSchedule;
-		} else if (eventType == EventType.FP) {
-			bytes32[MAX_EVENT_SCHEDULE_SIZE] memory protoEventSchedule;
+		if (eventType == EventType.FP) {
 			uint256 index = 0;
 
 			// fees
@@ -287,10 +286,9 @@ contract PAMEngine is Core, IEngine, STF, POF {
 					index++;
 				}
 			}
+		}
 
-			return protoEventSchedule;
-		} else if (eventType == EventType.SC) {
-			bytes32[MAX_EVENT_SCHEDULE_SIZE] memory protoEventSchedule;
+		if (eventType == EventType.SC) {
 			uint256 index;
 
 			// scaling
@@ -318,11 +316,10 @@ contract PAMEngine is Core, IEngine, STF, POF {
 					index++;
 				}
 			}
-
-			return protoEventSchedule;
 		}
 
-		revert("PAMEngine.computeCyclicProtoEventScheduleSegment: UNKNOWN_CYCLIC_EVENT_TYPE");
+		// revert("PAMEngine.computeCyclicProtoEventScheduleSegment: UNKNOWN_CYCLIC_EVENT_TYPE");
+		return protoEventSchedule;
 	}
 
 	/**

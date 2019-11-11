@@ -176,8 +176,9 @@ contract ANNEngine is Core, IEngine, STF, POF {
 		pure
 		returns (bytes32[MAX_EVENT_SCHEDULE_SIZE] memory)
 	{
+		bytes32[MAX_EVENT_SCHEDULE_SIZE] memory protoEventSchedule;
+
 		if (eventType == EventType.IP || eventType == EventType.IPCI) {
-			bytes32[MAX_EVENT_SCHEDULE_SIZE] memory protoEventSchedule;
 			uint256 index = 0;
 
 			// interest payment related (covers pre-repayment period only,
@@ -231,12 +232,9 @@ contract ANNEngine is Core, IEngine, STF, POF {
 					index++;
 				}
 			}
-
-			return protoEventSchedule;
 		}
 
 		if (eventType == EventType.FP) {
-			bytes32[MAX_EVENT_SCHEDULE_SIZE] memory protoEventSchedule;
 			uint256 index = 0;
 
 			// fees
@@ -262,12 +260,9 @@ contract ANNEngine is Core, IEngine, STF, POF {
 					index++;
 				}
 			}
-
-			return protoEventSchedule;
 		}
 
 		if (eventType == EventType.PR) {
-			bytes32[MAX_EVENT_SCHEDULE_SIZE] memory protoEventSchedule;
 			uint256 index = 0;
 
 			// principal redemption related (covers also interest events post PRANX)
@@ -293,11 +288,10 @@ contract ANNEngine is Core, IEngine, STF, POF {
 				protoEventSchedule[index] = encodeProtoEvent(EventType.IP, principalRedemptionSchedule[i]);
 				index++;
 			}
-
-			return protoEventSchedule;
 		}
 
-		revert("ANNEngine.computeCyclicProtoEventScheduleSegment: UNKNOWN_CYCLIC_EVENT_TYPE");
+		// revert("ANNEngine.computeCyclicProtoEventScheduleSegment: UNKNOWN_CYCLIC_EVENT_TYPE");
+		return protoEventSchedule;
 	}
 
 	// function applyProtoEventsToProtoEventSchedule(

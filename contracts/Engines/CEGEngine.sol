@@ -155,8 +155,9 @@ contract CEGEngine is Core, IEngine, STF, POF {
 		pure
 		returns (bytes32[MAX_EVENT_SCHEDULE_SIZE] memory)
 	{
+		bytes32[MAX_EVENT_SCHEDULE_SIZE] memory protoEventSchedule;
+
 		if (eventType == EventType.FP) {
-			bytes32[MAX_EVENT_SCHEDULE_SIZE] memory protoEventSchedule;
 			uint256 index = 0;
 
 			// fees
@@ -182,11 +183,10 @@ contract CEGEngine is Core, IEngine, STF, POF {
 					index++;
 				}
 			}
-
-			return protoEventSchedule;
 		}
 
-		revert("CEGEngine.computeCyclicProtoEventScheduleSegment: UNKNOWN_CYCLIC_EVENT_TYPE");
+		// revert("CEGEngine.computeCyclicProtoEventScheduleSegment: UNKNOWN_CYCLIC_EVENT_TYPE");
+		return protoEventSchedule;
 	}
 
 	// function applyProtoEventsToProtoEventSchedule(
