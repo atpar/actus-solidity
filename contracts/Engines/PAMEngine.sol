@@ -141,7 +141,7 @@ contract PAMEngine is Core, IEngine, STF, POF {
 
 		// principal redemption
 		if (isInPeriod(terms.maturityDate, segmentStart, segmentEnd)) {
-			protoEventSchedule[index] = encodeProtoEvent(EventType.PR, terms.maturityDate);
+			protoEventSchedule[index] = encodeProtoEvent(EventType.MD, terms.maturityDate);
 			index++;
 		}
 
@@ -353,7 +353,7 @@ contract PAMEngine is Core, IEngine, STF, POF {
 		if (eventType == EventType.IP) return STF_PAM_IP(scheduleTime, terms, state, currentTimestamp);
 		if (eventType == EventType.PP) return STF_PAM_PP(scheduleTime, terms, state, currentTimestamp);
 		if (eventType == EventType.PRD) return STF_PAM_PRD(scheduleTime, terms, state, currentTimestamp);
-		if (eventType == EventType.PR) return STF_PAM_PR(scheduleTime, terms, state, currentTimestamp);
+		if (eventType == EventType.MD) return STF_PAM_PR(scheduleTime, terms, state, currentTimestamp);
 		if (eventType == EventType.PY) return STF_PAM_PY(scheduleTime, terms, state, currentTimestamp);
 		if (eventType == EventType.RRF) return STF_PAM_RRF(scheduleTime, terms, state, currentTimestamp);
 		if (eventType == EventType.RR) return STF_PAM_RR(scheduleTime, terms, state, currentTimestamp);
@@ -397,7 +397,7 @@ contract PAMEngine is Core, IEngine, STF, POF {
 		if (eventType == EventType.IP) return POF_PAM_IP(scheduleTime, terms, state, currentTimestamp);
 		if (eventType == EventType.PP) return POF_PAM_PP(scheduleTime, terms, state, currentTimestamp);
 		if (eventType == EventType.PRD) return POF_PAM_PRD(scheduleTime, terms, state, currentTimestamp);
-		if (eventType == EventType.PR) return POF_PAM_PR(scheduleTime, terms, state, currentTimestamp);
+		if (eventType == EventType.MD) return POF_PAM_PR(scheduleTime, terms, state, currentTimestamp);
 		if (eventType == EventType.PY) return POF_PAM_PY(scheduleTime, terms, state, currentTimestamp);
 		if (eventType == EventType.TD) return POF_PAM_TD(scheduleTime, terms, state, currentTimestamp);
 
