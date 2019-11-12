@@ -1,9 +1,9 @@
 const web3Utils = require('web3-utils');
 const BigNumber = require('bignumber.js');
 
-// const ContractEventDefinitions = require('../../actus-resources/definitions/ContractEventDefinitions.json');
-const ContractEventDefinitions = require('actus-dictionary/actus-dictionary-event.json').event;
-const ContractTermsDefinitions = require('actus-dictionary/actus-dictionary-terms.json').terms;
+// const EventDefinitions = require('../../actus-resources/definitions/EventDefinitions.json');
+const EventDefinitions = require('actus-dictionary/actus-dictionary-event.json').event;
+const TermsDefinitions = require('actus-dictionary/actus-dictionary-terms.json').terms;
 const CoveredTerms = require('../../actus-resources/definitions/covered-terms.json');
 
 const PRECISION = 18; // solidity precision
@@ -22,7 +22,7 @@ const toHex = (value) => {
 }
 
 const getIndexOfAttribute = (attribute, value) => {
-  return ContractTermsDefinitions[attribute].allowedValues.indexOf(value);
+  return TermsDefinitions[attribute].allowedValues.indexOf(value);
 }
 
 const toPrecision = (value) => {
@@ -83,19 +83,19 @@ const parseTermsFromObject = (terms) => {
 
     // console.log(attribute); 
 
-    if (ContractTermsDefinitions[attribute].type === 'Enum' || ContractTermsDefinitions[attribute].type === 'Enum[]') {
+    if (TermsDefinitions[attribute].type === 'Enum' || TermsDefinitions[attribute].type === 'Enum[]') {
       parsedTerms[attribute] = (value) ? getIndexOfAttribute(attribute, value) : 0;
-    } else if (ContractTermsDefinitions[attribute].type === 'Varchar') {
+    } else if (TermsDefinitions[attribute].type === 'Varchar') {
       parsedTerms[attribute] = toHex((value) ? value : '');
-    } else if (ContractTermsDefinitions[attribute].type === 'Real') {
+    } else if (TermsDefinitions[attribute].type === 'Real') {
       parsedTerms[attribute] = (value) ? toPrecision(value) : 0;
-    } else if (ContractTermsDefinitions[attribute].type === 'Timestamp') {
+    } else if (TermsDefinitions[attribute].type === 'Timestamp') {
       parsedTerms[attribute] = (value) ? isoToUnix(value) : 0;
-    } else if (ContractTermsDefinitions[attribute].type === 'Cycle') {
+    } else if (TermsDefinitions[attribute].type === 'Cycle') {
       parsedTerms[attribute] = parseCycleToIPS(value);
-    } else if (ContractTermsDefinitions[attribute].type === 'Period') {
+    } else if (TermsDefinitions[attribute].type === 'Period') {
       parsedTerms[attribute] = parsePeriodToIP(value);
-    } else if (ContractTermsDefinitions[attribute].type === 'ContractStructure') {
+    } else if (TermsDefinitions[attribute].type === 'ContractStructure') {
       parsedTerms[attribute] = { object: toHex(''), contractReferenceType: 0, contractReferenceRole: 0 };
     }
   }
@@ -109,7 +109,7 @@ const parseResultsFromObject = (schedule) => {
   const parsedResults = [];
 
   for (const event of schedule) {
-    const eventTypeIndex = ContractEventDefinitions.eventType.allowedValues.indexOf(event['eventType']);
+    const eventTypeIndex = EventDefinitions.eventType.allowedValues.indexOf(event['eventType']);
 
     if (eventTypeIndex === 0) { continue; } // filter out AD events
     parsedResults.push({
@@ -125,11 +125,11 @@ const parseResultsFromObject = (schedule) => {
   return parsedResults;
 }
 
-function parseToTestEvent (event, state) {
+function parseToTestEvent (eventType, eventTime, payoff, state) {
   return {
-    eventDate: unixToISO(event['eventTime']),
-    eventType: event['eventType'],
-    eventValue: fromPrecision(event['payoff']),
+    eventDate: unixToISO(eventTime),
+    eventType: String(eventType),
+    eventValue: fromPrecision(payoff),
     notionalPrincipal: fromPrecision(state['notionalPrincipal']),
     nominalInterestRate: fromPrecision(state['nominalInterestRate']),
     accruedInterest: fromPrecision(state['accruedInterest']),

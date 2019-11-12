@@ -14,14 +14,60 @@
       "payable": false,
       "stateMutability": "view",
       "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "name": "eventType",
+          "type": "uint8"
+        },
+        {
+          "name": "scheduleTime",
+          "type": "uint256"
+        }
+      ],
+      "name": "encodeProtoEvent",
+      "outputs": [
+        {
+          "name": "",
+          "type": "bytes32"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "pure",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "name": "protoEvent",
+          "type": "bytes32"
+        }
+      ],
+      "name": "decodeProtoEvent",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint8"
+        },
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "pure",
+      "type": "function"
     }
   ],
-  "metadata": "{\"compiler\":{\"version\":\"0.5.2+commit.1df8f40c\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"constant\":true,\"inputs\":[],\"name\":\"PRECISION\",\"outputs\":[{\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"}],\"devdoc\":{\"methods\":{}},\"userdoc\":{\"methods\":{}}},\"settings\":{\"compilationTarget\":{\"/Users/johannes/Documents/dev/actus-protocol/actus-solidity/contracts/Core/Utils.sol\":\"Utils\"},\"evmVersion\":\"byzantium\",\"libraries\":{},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[]},\"sources\":{\"/Users/johannes/Documents/dev/actus-protocol/actus-solidity/contracts/Core/Definitions.sol\":{\"keccak256\":\"0x958180e3c6e84a9a5db0c99b5bd12e565e18444b43bca8fc85268b1de90c3e98\",\"urls\":[\"bzzr://597ccdcc849723598da8d34e6d427a09883aa4afbb0288bc42334587b8d3cda6\"]},\"/Users/johannes/Documents/dev/actus-protocol/actus-solidity/contracts/Core/Utils.sol\":{\"keccak256\":\"0x67570358a0eaae71bdeb24871185e7a1493fe132a09e089368de404fc6bc0e51\",\"urls\":[\"bzzr://9bc404b14bdbd4ac302ae5053751f211b893c1c0a562fa6b00a2bcb5c4d922a7\"]},\"/Users/johannes/Documents/dev/actus-protocol/actus-solidity/contracts/external/BokkyPooBah/BokkyPooBahsDateTimeLibrary.sol\":{\"keccak256\":\"0x55ce115963ca5ee7a98b7b2e644e6decfbfdd70ada0b18e09a60344d9cdfe345\",\"urls\":[\"bzzr://9e24ebbec8dc7775ab45c4e41f9ac1958bb5710daf538df1f5cfd70b27650cb1\"]}},\"version\":1}",
-  "bytecode": "0x6080604052348015600f57600080fd5b5060928061001e6000396000f3fe6080604052348015600f57600080fd5b50600436106044577c01000000000000000000000000000000000000000000000000000000006000350463aaf5eb6881146049575b600080fd5b604f6061565b60408051918252519081900360200190f35b60128156fea165627a7a72305820081d948630cd7bd4f60d37a879de28bd8d735ae04ebecb83494e468cf819b8390029",
+  "metadata": "{\"compiler\":{\"version\":\"0.5.2+commit.1df8f40c\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"constant\":true,\"inputs\":[{\"name\":\"protoEvent\",\"type\":\"bytes32\"}],\"name\":\"decodeProtoEvent\",\"outputs\":[{\"name\":\"\",\"type\":\"uint8\"},{\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"pure\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"PRECISION\",\"outputs\":[{\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"name\":\"eventType\",\"type\":\"uint8\"},{\"name\":\"scheduleTime\",\"type\":\"uint256\"}],\"name\":\"encodeProtoEvent\",\"outputs\":[{\"name\":\"\",\"type\":\"bytes32\"}],\"payable\":false,\"stateMutability\":\"pure\",\"type\":\"function\"}],\"devdoc\":{\"methods\":{}},\"userdoc\":{\"methods\":{}}},\"settings\":{\"compilationTarget\":{\"/Users/johannes/Documents/dev/actus-protocol/actus-solidity/contracts/Core/Utils.sol\":\"Utils\"},\"evmVersion\":\"byzantium\",\"libraries\":{},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[]},\"sources\":{\"/Users/johannes/Documents/dev/actus-protocol/actus-solidity/contracts/Core/Definitions.sol\":{\"keccak256\":\"0x7dd39bfa11975f17676305ef457bfbaefdec59fa563acee2fdb1629ad506319c\",\"urls\":[\"bzzr://f619f18f6c018d7386775e4a18eb541bbb239a6213e95e28b7e35d958beb554b\"]},\"/Users/johannes/Documents/dev/actus-protocol/actus-solidity/contracts/Core/Utils.sol\":{\"keccak256\":\"0x0cec4733c143eee4479f6a3d900ecc0ce00855a79e75743198735a17641ebe91\",\"urls\":[\"bzzr://6a75e6d588e0eb1ce3660ee9030f3233b9e697457d693c6be7b1325c36e738ba\"]},\"/Users/johannes/Documents/dev/actus-protocol/actus-solidity/contracts/external/BokkyPooBah/BokkyPooBahsDateTimeLibrary.sol\":{\"keccak256\":\"0x55ce115963ca5ee7a98b7b2e644e6decfbfdd70ada0b18e09a60344d9cdfe345\",\"urls\":[\"bzzr://9e24ebbec8dc7775ab45c4e41f9ac1958bb5710daf538df1f5cfd70b27650cb1\"]}},\"version\":1}",
+  "bytecode": "0x608060405234801561001057600080fd5b5061018a806100206000396000f3fe608060405234801561001057600080fd5b506004361061005d577c010000000000000000000000000000000000000000000000000000000060003504631e7ba71a8114610062578063aaf5eb68146100aa578063c117d533146100c4575b600080fd5b61007f6004803603602081101561007857600080fd5b50356100ea565b6040518083601681111561008f57fe5b60ff1681526020018281526020019250505060405180910390f35b6100b2610134565b60408051918252519081900360200190f35b6100b2600480360360408110156100da57600080fd5b5060ff8135169060200135610139565b6000808060ff7f0100000000000000000000000000000000000000000000000000000000000000850416601681111561011f57fe5b92505067ffffffffffffffff83169050915091565b601281565b60008160f884601681111561014a57fe5b60ff166001029060020a021790509291505056fea165627a7a7230582064e0c1c1a1dc54a3a091a8f33ddf6d3be0db544a61ef8074a92b5a6a4a49d0360029",
   "compiler": {
     "name": "solc",
     "version": "0.5.2+commit.1df8f40c.Emscripten.clang"
   },
   "networks": {},
-  "updatedAt": "2019-11-05T14:07:23.365Z"
+  "updatedAt": "2019-11-12T11:34:00.360Z"
 }

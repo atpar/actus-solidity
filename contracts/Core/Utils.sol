@@ -7,6 +7,28 @@ import "./Definitions.sol";
 
 contract Utils is Definitions {
 
+	function encodeProtoEvent(EventType eventType, uint256 scheduleTime)
+		public
+		pure
+		returns (bytes32)
+	{
+		return (
+			bytes32(uint256(uint8(eventType))) << 248 |
+			bytes32(scheduleTime)
+		);
+	}
+
+	function decodeProtoEvent(bytes32 protoEvent)
+		public
+		pure
+		returns (EventType, uint256)
+	{
+		EventType eventType = EventType(uint8(uint256(protoEvent >> 248)));
+		uint256 scheduleTime = uint256(uint64(uint256(protoEvent)));
+
+		return (eventType, scheduleTime);
+	}
+
 	function getTimestampPlusPeriod(IP memory period, uint256 timestamp)
 		internal
 		pure
@@ -33,59 +55,59 @@ contract Utils is Definitions {
 		return newTimestamp;
 	}
 
-  function sortProtoEventSchedule(
-		ProtoEvent[MAX_EVENT_SCHEDULE_SIZE] memory protoEventSchedule,
-		uint256 numberOfProtoEvents
-	)
-		internal
-		pure
-	{
-		quickSortProtoEventSchedule(protoEventSchedule, uint(0), uint(protoEventSchedule.length - 1));
+  // function sortProtoEventSchedule(
+	// 	ProtoEvent[MAX_EVENT_SCHEDULE_SIZE] memory protoEventSchedule,
+	// 	uint256 numberOfProtoEvents
+	// )
+	// 	internal
+	// 	pure
+	// {
+	// 	quickSortProtoEventSchedule(protoEventSchedule, uint(0), uint(protoEventSchedule.length - 1));
 
-		for (uint256 i = 0; i < numberOfProtoEvents; i++) {
-			protoEventSchedule[i] = protoEventSchedule[protoEventSchedule.length - numberOfProtoEvents + i];
-			delete protoEventSchedule[protoEventSchedule.length - numberOfProtoEvents + i];
-		}
-	}
+	// 	for (uint256 i = 0; i < numberOfProtoEvents; i++) {
+	// 		protoEventSchedule[i] = protoEventSchedule[protoEventSchedule.length - numberOfProtoEvents + i];
+	// 		delete protoEventSchedule[protoEventSchedule.length - numberOfProtoEvents + i];
+	// 	}
+	// }
 
-	function quickSortProtoEventSchedule(
-		ProtoEvent[MAX_EVENT_SCHEDULE_SIZE] memory protoEventSchedule,
-		uint left,
-		uint right
-	)
-		internal
-		pure
-	{
-		uint i = left;
-		uint j = right;
+	// function quickSortProtoEventSchedule(
+	// 	ProtoEvent[MAX_EVENT_SCHEDULE_SIZE] memory protoEventSchedule,
+	// 	uint left,
+	// 	uint right
+	// )
+	// 	internal
+	// 	pure
+	// {
+	// 	uint i = left;
+	// 	uint j = right;
 
-		if (i == j) return;
+	// 	if (i == j) return;
 
-		// pick event in the middle of the schedule
-		uint pivot = protoEventSchedule[left + (right - left) / 2].eventTimeWithEpochOffset;
+	// 	// pick event in the middle of the schedule
+	// 	uint pivot = protoEventSchedule[left + (right - left) / 2].eventTimeWithEpochOffset;
 
-		// do until pivot event is reached
-		while (i <= j) {
-			// search for event that is scheduled later than the pivot event
-			while (protoEventSchedule[i].eventTimeWithEpochOffset < pivot) i++;
-			// search for event that is scheduled earlier than the pivot event
-			while (pivot < protoEventSchedule[j].eventTimeWithEpochOffset) j--;
-			// if the event that is scheduled later comes before the event that is scheduled earlier, swap events
-			if (i <= j) {
-				(
-					protoEventSchedule[i], protoEventSchedule[j]
-				) = (
-					protoEventSchedule[j],
-					protoEventSchedule[i]
-				);
-				i++;
-				j--;
-			}
-		}
+	// 	// do until pivot event is reached
+	// 	while (i <= j) {
+	// 		// search for event that is scheduled later than the pivot event
+	// 		while (protoEventSchedule[i].eventTimeWithEpochOffset < pivot) i++;
+	// 		// search for event that is scheduled earlier than the pivot event
+	// 		while (pivot < protoEventSchedule[j].eventTimeWithEpochOffset) j--;
+	// 		// if the event that is scheduled later comes before the event that is scheduled earlier, swap events
+	// 		if (i <= j) {
+	// 			(
+	// 				protoEventSchedule[i], protoEventSchedule[j]
+	// 			) = (
+	// 				protoEventSchedule[j],
+	// 				protoEventSchedule[i]
+	// 			);
+	// 			i++;
+	// 			j--;
+	// 		}
+	// 	}
 
-		if (left < j) quickSortProtoEventSchedule(protoEventSchedule, left, j);
-		if (i < right) quickSortProtoEventSchedule(protoEventSchedule, i, right);
-	}
+	// 	if (left < j) quickSortProtoEventSchedule(protoEventSchedule, left, j);
+	// 	if (i < right) quickSortProtoEventSchedule(protoEventSchedule, i, right);
+	// }
 
 	/**
 	 * checks if a timestamp is in a given period
