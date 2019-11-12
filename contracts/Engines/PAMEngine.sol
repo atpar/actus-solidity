@@ -218,7 +218,7 @@ contract PAMEngine is Core, IEngine, STF, POF {
 			}
 
 			// capitalization end date
-			if (terms.capitalizationEndDate != 0) {
+			else if (terms.capitalizationEndDate != 0) {
 				uint256 shiftedIPCIDate = shiftEventTime(
 					terms.capitalizationEndDate,
 					terms.businessDayConvention,

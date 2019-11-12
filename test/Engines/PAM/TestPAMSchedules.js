@@ -209,7 +209,7 @@ contract('PAMEngine', () => {
  
   it('should yield the expected evaluated contract schedule for test PAM10018', async () => {
     const testDetails = this.testCases['10018'];
-    const evaluatedSchedule = await evaluateEventSchedule(testDetails['terms']);
+    const evaluatedSchedule = await evaluateEventSchedule(testDetails['terms']);    
 
     compareTestResults(evaluatedSchedule, testDetails['results']);
   });
