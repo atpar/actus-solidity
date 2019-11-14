@@ -25,7 +25,7 @@ contract PAMEngine is Core, IEngine, STF, POF {
 	 * @param terms terms of the contract
 	 * @return initial contract state
 	 */
-	function computeInitialState(Terms memory terms)
+	function computeInitialState(LifecycleTerms memory terms)
 		public
 		pure
 		returns (State memory)
@@ -54,7 +54,7 @@ contract PAMEngine is Core, IEngine, STF, POF {
 	 * @return the new contract state and the evaluated event
 	 */
 	function computeStateForProtoEvent(
-		Terms memory terms,
+		LifecycleTerms memory terms,
 		State memory state,
 		bytes32 protoEvent,
 		uint256 currentTimestamp
@@ -81,7 +81,7 @@ contract PAMEngine is Core, IEngine, STF, POF {
 	 * @return the new contract state and the evaluated event
 	 */
 	function computePayoffForProtoEvent(
-		Terms memory terms,
+		LifecycleTerms memory terms,
 		State memory state,
 		bytes32 protoEvent,
 		uint256 currentTimestamp
@@ -333,7 +333,7 @@ contract PAMEngine is Core, IEngine, STF, POF {
 	function stateTransitionFunction(
 		bytes32 protoEvent,
 		State memory state,
-		Terms memory terms,
+		LifecycleTerms memory terms,
 		uint256 currentTimestamp
 	)
 		private
@@ -373,7 +373,7 @@ contract PAMEngine is Core, IEngine, STF, POF {
 	function payoffFunction(
 		bytes32 protoEvent,
 		State memory state,
-		Terms memory terms,
+		LifecycleTerms memory terms,
 		uint256 currentTimestamp
 	)
 		private

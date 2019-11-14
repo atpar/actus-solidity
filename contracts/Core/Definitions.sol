@@ -93,13 +93,17 @@ contract Definitions {
 		ContractPerformance creditEventTypeCovered;
 		ContractStructure contractStructure;
 
+		uint256 statusDate;
 		uint256 initialExchangeDate;
 		uint256 maturityDate;
 		uint256 terminationDate;
 		uint256 purchaseDate;
+		uint256 cycleAnchorDateOfInterestPayment;
 
 		int256 notionalPrincipal;
 		int256 nominalInterestRate;
+		int256 feeAccrued;
+		int256 accruedInterest;
 		int256 rateSpread;
 		int256 feeRate;
 		int256 nextResetRate;

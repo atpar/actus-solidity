@@ -1,7 +1,7 @@
 const ANNEngine = artifacts.require('ANNEngine.sol');
 
-const { parseToTestEvent } = require('../../helper/parser');
-const { getTestCases, compareTestResults } = require('../../helper/tests');
+const { getTestCases, compareTestResults  } = require('../../helper/tests');
+const { parseToTestEvent, parseTermsToLifecycleTerms } = require('../../helper/parser');
 const {
   decodeProtoEvent,
   sortProtoEvents,
@@ -47,7 +47,9 @@ contract('ANNEngine', () => {
   })
 
   const evaluateEventSchedule = async (terms) => {
-    const initialState = await this.ANNEngineInstance.computeInitialState(terms, {});
+    const lifecycleTerms = parseTermsToLifecycleTerms(terms);
+
+    const initialState = await this.ANNEngineInstance.computeInitialState(lifecycleTerms, {});
     const protoEventSchedule = removeNullProtoEvents(await computeProtoEventScheduleSegment(
       terms,
       terms.contractDealDate,
@@ -63,13 +65,13 @@ contract('ANNEngine', () => {
       if (scheduleTime == 0) { break; }
 
       const payoff = await this.ANNEngineInstance.computePayoffForProtoEvent(
-        terms,
+        lifecycleTerms,
         state,
         protoEvent,
         scheduleTime
       );
       const nextState = await this.ANNEngineInstance.computeStateForProtoEvent(
-        terms, 
+        lifecycleTerms, 
         state, 
         protoEvent, 
         scheduleTime
@@ -77,7 +79,7 @@ contract('ANNEngine', () => {
       
       state = nextState;
 
-      const eventTime = await this.ANNEngineInstance.computeEventTimeForProtoEvent(protoEvent, terms, {});
+      const eventTime = await this.ANNEngineInstance.computeEventTimeForProtoEvent(protoEvent, lifecycleTerms, {});
 
       evaluatedSchedule.push(parseToTestEvent(eventType, eventTime, payoff, state));
     }

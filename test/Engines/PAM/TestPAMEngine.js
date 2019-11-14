@@ -1,6 +1,7 @@
 const PAMEngine = artifacts.require('PAMEngine.sol');
 
 const { getDefaultTestTerms } = require('../../helper/tests');
+const { parseTermsToLifecycleTerms } = require('../../helper/parser');
 const { 
   parseProtoEventSchedule,
   decodeProtoEvent,
@@ -44,22 +45,23 @@ contract('PAMEngine', () => {
   before(async () => {        
     this.PAMEngineInstance = await PAMEngine.new();
     this.terms = await getDefaultTestTerms('PAM');
+    this.lifecycleTerms = parseTermsToLifecycleTerms(this.terms);
   });
 
   it('should yield the initial contract state', async () => {
-    const initialState = await this.PAMEngineInstance.computeInitialState(this.terms, {});
+    const initialState = await this.PAMEngineInstance.computeInitialState(this.lifecycleTerms, {});
     assert.isTrue(Number(initialState['lastEventTime']) === Number(this.terms['statusDate']));
   });
 
   it('should yield the next next contract state and the contract events', async() => {
-    const initialState = await this.PAMEngineInstance.computeInitialState(this.terms, {});
+    const initialState = await this.PAMEngineInstance.computeInitialState(this.lifecycleTerms, {});
     const protoEventSchedule = await this.PAMEngineInstance.computeNonCyclicProtoEventScheduleSegment(
       this.terms,
       this.terms.contractDealDate,
       this.terms.maturityDate
     )
     const nextState = await this.PAMEngineInstance.computeStateForProtoEvent(
-      this.terms,
+      this.lifecycleTerms,
       initialState,
       protoEventSchedule[0],
       decodeProtoEvent(protoEventSchedule[0]).scheduleTime
@@ -109,7 +111,7 @@ contract('PAMEngine', () => {
   });
 
   it('should yield the state of each ProtoEvent', async () => {
-    const initialState = await this.PAMEngineInstance.computeInitialState(this.terms, {});
+    const initialState = await this.PAMEngineInstance.computeInitialState(this.lifecycleTerms, {});
 
     const protoEventSchedule = removeNullProtoEvents(await computeProtoEventScheduleSegment(
       this.terms,
@@ -121,7 +123,7 @@ contract('PAMEngine', () => {
 
     for (protoEvent of protoEventSchedule) {
       const nextState = await this.PAMEngineInstance.computeStateForProtoEvent(
-        this.terms,
+        this.lifecycleTerms,
         state,
         protoEvent,
         decodeProtoEvent(protoEvent).scheduleTime

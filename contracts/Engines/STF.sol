@@ -8,7 +8,7 @@ contract STF is Core {
 
   function STF_PAM_AD (
     uint256 scheduleTime,
-    Terms memory terms,
+    LifecycleTerms memory terms,
     State memory state,
     uint256 currentTimestamp
   )
@@ -41,7 +41,7 @@ contract STF is Core {
 
   function STF_PAM_CD (
     uint256 scheduleTime,
-    Terms memory terms,
+    LifecycleTerms memory terms,
     State memory state,
     uint256 currentTimestamp
   )
@@ -75,7 +75,7 @@ contract STF is Core {
 
   function STF_PAM_FP (
     uint256 scheduleTime,
-    Terms memory terms,
+    LifecycleTerms memory terms,
     State memory state,
     uint256 currentTimestamp
   )
@@ -103,7 +103,7 @@ contract STF is Core {
 
   function STF_PAM_IED (
     uint256 scheduleTime,
-    Terms memory terms,
+    LifecycleTerms memory terms,
     State memory state,
     uint256 currentTimestamp
   )
@@ -141,7 +141,7 @@ contract STF is Core {
 
   function STF_PAM_IPCI (
     uint256 scheduleTime,
-    Terms memory terms,
+    LifecycleTerms memory terms,
     State memory state,
     uint256 currentTimestamp
   )
@@ -178,7 +178,7 @@ contract STF is Core {
 
   function STF_PAM_IP (
     uint256 scheduleTime,
-    Terms memory terms,
+    LifecycleTerms memory terms,
     State memory state,
     uint256 currentTimestamp
   )
@@ -206,7 +206,7 @@ contract STF is Core {
 
   function STF_PAM_PP (
     uint256 scheduleTime,
-    Terms memory terms,
+    LifecycleTerms memory terms,
     State memory state,
     uint256 currentTimestamp
   )
@@ -240,7 +240,7 @@ contract STF is Core {
 
   function STF_PAM_PRD (
     uint256 scheduleTime,
-    Terms memory terms,
+    LifecycleTerms memory terms,
     State memory state,
     uint256 currentTimestamp
   )
@@ -273,7 +273,7 @@ contract STF is Core {
 
   function STF_PAM_PR (
     uint256 scheduleTime,
-    Terms memory terms,
+    LifecycleTerms memory terms,
     State memory state,
     uint256 currentTimestamp
   )
@@ -307,7 +307,7 @@ contract STF is Core {
 
   function STF_PAM_PY (
     uint256 scheduleTime,
-    Terms memory terms,
+    LifecycleTerms memory terms,
     State memory state,
     uint256 currentTimestamp
   )
@@ -340,7 +340,7 @@ contract STF is Core {
 
   function STF_PAM_RRF (
     uint256 scheduleTime,
-    Terms memory terms,
+    LifecycleTerms memory terms,
     State memory state,
     uint256 currentTimestamp
   )
@@ -374,7 +374,7 @@ contract STF is Core {
 
   function STF_PAM_RR (
     uint256 scheduleTime,
-    Terms memory terms,
+    LifecycleTerms memory terms,
     State memory state,
     uint256 currentTimestamp
   )
@@ -422,7 +422,7 @@ contract STF is Core {
 
   function STF_PAM_SC (
     uint256 scheduleTime,
-    Terms memory terms,
+    LifecycleTerms memory terms,
     State memory state,
     uint256 currentTimestamp
   )
@@ -471,7 +471,7 @@ contract STF is Core {
 
   function STF_PAM_TD (
     uint256 scheduleTime,
-    Terms memory terms,
+    LifecycleTerms memory terms,
     State memory state,
     uint256 currentTimestamp
   )
@@ -495,7 +495,7 @@ contract STF is Core {
 
   function STF_PAM_DEL (
     uint256 scheduleTime,
-    Terms memory terms,
+    LifecycleTerms memory terms,
     State memory state,
     uint256 currentTimestamp
   )
@@ -538,7 +538,7 @@ contract STF is Core {
 
   // function STF_ANN_AD (
   //   uint256 scheduleTime,
-  //   Terms memory terms,
+  //   LifecycleTerms memory terms,
   //   State memory state
   // )
   //   internal
@@ -570,7 +570,7 @@ contract STF is Core {
 
   // function STF_ANN_CD (
   //   uint256 scheduleTime,
-  //   Terms memory terms,
+  //   LifecycleTerms memory terms,
   //   State memory state
   // )
   //   internal
@@ -603,7 +603,7 @@ contract STF is Core {
 
   // function STF_ANN_FP (
   //   uint256 scheduleTime,
-  //   Terms memory terms,
+  //   LifecycleTerms memory terms,
   //   State memory state
   // )
   //   internal
@@ -630,7 +630,7 @@ contract STF is Core {
 
   function STF_ANN_IED (
     uint256 scheduleTime,
-    Terms memory terms,
+    LifecycleTerms memory terms,
     State memory state,
     uint256 currentTimestamp
   )
@@ -668,7 +668,7 @@ contract STF is Core {
 
   function STF_ANN_IPCI (
     uint256 scheduleTime,
-    Terms memory terms,
+    LifecycleTerms memory terms,
     State memory state,
     uint256 currentTimestamp
   )
@@ -705,7 +705,7 @@ contract STF is Core {
 
   function STF_ANN_IP (
     uint256 scheduleTime,
-    Terms memory terms,
+    LifecycleTerms memory terms,
     State memory state,
     uint256 currentTimestamp
   )
@@ -733,7 +733,7 @@ contract STF is Core {
 
   // function STF_ANN_PP (
   //   uint256 scheduleTime,
-  //   Terms memory terms,
+  //   LifecycleTerms memory terms,
   //   State memory state
   // )
   //   internal
@@ -767,7 +767,7 @@ contract STF is Core {
   // STF_PAM_PRD
   // function STF_ANN_PRD (
   //   uint256 scheduleTime,
-  //   Terms memory terms,
+  //   LifecycleTerms memory terms,
   //   State memory state
   // )
   //   internal
@@ -799,7 +799,7 @@ contract STF is Core {
 
   function STF_ANN_PR (
     uint256 scheduleTime,
-    Terms memory terms,
+    LifecycleTerms memory terms,
     State memory state,
     uint256 currentTimestamp
   )
@@ -848,7 +848,7 @@ contract STF is Core {
 
   function STF_ANN_MD (
     uint256 scheduleTime,
-    Terms memory terms,
+    LifecycleTerms memory terms,
     State memory state,
     uint256 currentTimestamp
   )
@@ -883,7 +883,7 @@ contract STF is Core {
   // STF_PAM_PY
   // function STF_ANN_PY (
   //   uint256 scheduleTime,
-  //   Terms memory terms,
+  //   LifecycleTerms memory terms,
   //   State memory state
   // )
   //   internal
@@ -915,7 +915,7 @@ contract STF is Core {
 
   // function STF_ANN_RRF (
   //   uint256 scheduleTime,
-  //   Terms memory terms,
+  //   LifecycleTerms memory terms,
   //   State memory state
   // )
   //   internal
@@ -948,7 +948,7 @@ contract STF is Core {
 
   function STF_ANN_RR (
     uint256 scheduleTime,
-    Terms memory terms,
+    LifecycleTerms memory terms,
     State memory state,
     uint256 currentTimestamp
   )
@@ -997,7 +997,7 @@ contract STF is Core {
 
   function STF_ANN_SC (
     uint256 scheduleTime,
-    Terms memory terms,
+    LifecycleTerms memory terms,
     State memory state,
     uint256 currentTimestamp
   )
@@ -1045,7 +1045,7 @@ contract STF is Core {
 
   // function STF_ANN_TD (
   //   uint256 scheduleTime,
-  //   Terms memory terms,
+  //   LifecycleTerms memory terms,
   //   State memory state
   // )
   //   internal
@@ -1068,7 +1068,7 @@ contract STF is Core {
 
   function STF_CEG_MD (
     uint256 scheduleTime,
-    Terms memory terms,
+    LifecycleTerms memory terms,
     State memory state,
     uint256 currentTimestamp
   )
@@ -1084,7 +1084,7 @@ contract STF is Core {
 
   function STF_CEG_XD (
     uint256 scheduleTime,
-    Terms memory terms,
+    LifecycleTerms memory terms,
     State memory state,
     uint256 currentTimestamp
   )
@@ -1100,7 +1100,7 @@ contract STF is Core {
 
   function STF_CEG_PRD (
     uint256 scheduleTime,
-    Terms memory terms,
+    LifecycleTerms memory terms,
     State memory state,
     uint256 currentTimestamp
   )
@@ -1117,7 +1117,7 @@ contract STF is Core {
 
   function STF_CEG_FP (
     uint256 scheduleTime,
-    Terms memory terms,
+    LifecycleTerms memory terms,
     State memory state,
     uint256 currentTimestamp
   )
@@ -1139,7 +1139,7 @@ contract STF is Core {
 
     function STF_CEG_TD (
     uint256 scheduleTime,
-    Terms memory terms,
+    LifecycleTerms memory terms,
     State memory state,
     uint256 currentTimestamp
   )

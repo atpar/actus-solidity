@@ -1,10 +1,11 @@
 const web3Utils = require('web3-utils');
 const BigNumber = require('bignumber.js');
 
-// const EventDefinitions = require('../../actus-resources/definitions/EventDefinitions.json');
 const EventDefinitions = require('actus-dictionary/actus-dictionary-event.json').event;
 const TermsDefinitions = require('actus-dictionary/actus-dictionary-terms.json').terms;
-const CoveredTerms = require('../../actus-resources/definitions/covered-terms.json');
+
+const Terms = require('../../actus-resources/definitions/terms.json');
+const LifecycleTerms = require('../../actus-resources/definitions/lifecycle-terms.json');
 
 const PRECISION = 18; // solidity precision
 
@@ -78,10 +79,36 @@ const parsePeriodToIP = (period) => {
 const parseTermsFromObject = (terms) => {
   const parsedTerms = {};
 
-  for (const attribute of CoveredTerms) {
+  for (const attribute of Terms) {
     const value = terms[attribute];
 
-    // console.log(attribute); 
+    if (TermsDefinitions[attribute].type === 'Enum' || TermsDefinitions[attribute].type === 'Enum[]') {
+      parsedTerms[attribute] = (value) ? getIndexOfAttribute(attribute, value) : 0;
+    } else if (TermsDefinitions[attribute].type === 'Varchar') {
+      parsedTerms[attribute] = toHex((value) ? value : '');
+    } else if (TermsDefinitions[attribute].type === 'Real') {
+      parsedTerms[attribute] = (value) ? toPrecision(value) : 0;
+    } else if (TermsDefinitions[attribute].type === 'Timestamp') {
+      parsedTerms[attribute] = (value) ? isoToUnix(value) : 0;
+    } else if (TermsDefinitions[attribute].type === 'Cycle') {
+      parsedTerms[attribute] = parseCycleToIPS(value);
+    } else if (TermsDefinitions[attribute].type === 'Period') {
+      parsedTerms[attribute] = parsePeriodToIP(value);
+    } else if (TermsDefinitions[attribute].type === 'ContractStructure') {
+      parsedTerms[attribute] = { object: toHex(''), contractReferenceType: 0, contractReferenceRole: 0 };
+    }
+  }
+
+  parsedTerms['currency'] = '0x0000000000000000000000000000000000000000';
+
+  return parsedTerms;
+}
+
+const parseLifecycleTermsFromObject = (terms) => {
+  const parsedTerms = {};
+
+  for (const attribute of LifecycleTerms) {
+    const value = terms[attribute];
 
     if (TermsDefinitions[attribute].type === 'Enum' || TermsDefinitions[attribute].type === 'Enum[]') {
       parsedTerms[attribute] = (value) ? getIndexOfAttribute(attribute, value) : 0;
@@ -136,10 +163,21 @@ function parseToTestEvent (eventType, eventTime, payoff, state) {
   };
 }
 
+function parseTermsToLifecycleTerms (terms) {
+  const lifecycleTerms = {};
+
+  for (const attribute of LifecycleTerms) {
+    lifecycleTerms[attribute] = terms[attribute];
+  }
+
+  return lifecycleTerms;
+}
+
 module.exports = { 
   parseTermsFromObject, 
   parseResultsFromObject, 
-  parseToTestEvent, 
+  parseToTestEvent,
+  parseTermsToLifecycleTerms,
   fromPrecision, 
   unixToISO, 
   roundToDecimals, 

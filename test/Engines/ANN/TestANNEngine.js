@@ -1,6 +1,7 @@
 const ANNEngine = artifacts.require('ANNEngine.sol');
 
 const { getDefaultTestTerms } = require('../../helper/tests');
+const { parseTermsToLifecycleTerms } = require('../../helper/parser');
 const { 
   parseProtoEventSchedule,
   decodeProtoEvent,
@@ -44,22 +45,23 @@ contract('ANNEngine', () => {
   before(async () => {        
     this.ANNEngineInstance = await ANNEngine.new();
     this.terms = await getDefaultTestTerms('ANN');
+    this.lifecycleTerms = parseTermsToLifecycleTerms(this.terms);
   });
 
   it('should yield the initial contract state', async () => {
-    const initialState = await this.ANNEngineInstance.computeInitialState(this.terms, {});
+    const initialState = await this.ANNEngineInstance.computeInitialState(this.lifecycleTerms, {});
     assert.isTrue(Number(initialState['lastEventTime']) === Number(this.terms['statusDate']));
   });
 
   it('should yield the next next contract state and the contract events', async() => {
-    const initialState = await this.ANNEngineInstance.computeInitialState(this.terms, {});
+    const initialState = await this.ANNEngineInstance.computeInitialState(this.lifecycleTerms, {});
     const protoEventSchedule = await this.ANNEngineInstance.computeNonCyclicProtoEventScheduleSegment(
       this.terms,
       this.terms.contractDealDate,
       this.terms.maturityDate
     )
     const nextState = await this.ANNEngineInstance.computeStateForProtoEvent(
-      this.terms,
+      this.lifecycleTerms,
       initialState,
       protoEventSchedule[0],
       decodeProtoEvent(protoEventSchedule[0]).scheduleTime
@@ -109,7 +111,7 @@ contract('ANNEngine', () => {
   });
 
   it('should yield the state of each ProtoEvent', async () => {
-    const initialState = await this.ANNEngineInstance.computeInitialState(this.terms, {});
+    const initialState = await this.ANNEngineInstance.computeInitialState(this.lifecycleTerms, {});
 
     const protoEventSchedule = removeNullProtoEvents(await computeProtoEventScheduleSegment(
       this.terms,
@@ -121,7 +123,7 @@ contract('ANNEngine', () => {
 
     for (protoEvent of protoEventSchedule) {
       const nextState = await this.ANNEngineInstance.computeStateForProtoEvent(
-        this.terms,
+        this.lifecycleTerms,
         state,
         protoEvent,
         decodeProtoEvent(protoEvent).scheduleTime
