@@ -6,6 +6,7 @@ const TermsDefinitions = require('actus-dictionary/actus-dictionary-terms.json')
 
 const Terms = require('../../actus-resources/definitions/terms.json');
 const LifecycleTerms = require('../../actus-resources/definitions/lifecycle-terms.json');
+const GeneratingTerms = require('../../actus-resources/definitions/generating-terms.json');
 
 const PRECISION = 18; // solidity precision
 
@@ -104,34 +105,6 @@ const parseTermsFromObject = (terms) => {
   return parsedTerms;
 }
 
-const parseLifecycleTermsFromObject = (terms) => {
-  const parsedTerms = {};
-
-  for (const attribute of LifecycleTerms) {
-    const value = terms[attribute];
-
-    if (TermsDefinitions[attribute].type === 'Enum' || TermsDefinitions[attribute].type === 'Enum[]') {
-      parsedTerms[attribute] = (value) ? getIndexOfAttribute(attribute, value) : 0;
-    } else if (TermsDefinitions[attribute].type === 'Varchar') {
-      parsedTerms[attribute] = toHex((value) ? value : '');
-    } else if (TermsDefinitions[attribute].type === 'Real') {
-      parsedTerms[attribute] = (value) ? toPrecision(value) : 0;
-    } else if (TermsDefinitions[attribute].type === 'Timestamp') {
-      parsedTerms[attribute] = (value) ? isoToUnix(value) : 0;
-    } else if (TermsDefinitions[attribute].type === 'Cycle') {
-      parsedTerms[attribute] = parseCycleToIPS(value);
-    } else if (TermsDefinitions[attribute].type === 'Period') {
-      parsedTerms[attribute] = parsePeriodToIP(value);
-    } else if (TermsDefinitions[attribute].type === 'ContractStructure') {
-      parsedTerms[attribute] = { object: toHex(''), contractReferenceType: 0, contractReferenceRole: 0 };
-    }
-  }
-
-  parsedTerms['currency'] = '0x0000000000000000000000000000000000000000';
-
-  return parsedTerms;
-}
-
 const parseResultsFromObject = (schedule) => {  
   const parsedResults = [];
 
@@ -173,11 +146,22 @@ function parseTermsToLifecycleTerms (terms) {
   return lifecycleTerms;
 }
 
+function parseTermsToGeneratingTerms (terms) {
+  const generatingTerms = {};
+
+  for (const attribute of GeneratingTerms) {
+    generatingTerms[attribute] = terms[attribute];
+  }
+
+  return generatingTerms;
+}
+
 module.exports = { 
   parseTermsFromObject, 
   parseResultsFromObject, 
   parseToTestEvent,
   parseTermsToLifecycleTerms,
+  parseTermsToGeneratingTerms,
   fromPrecision, 
   unixToISO, 
   roundToDecimals, 

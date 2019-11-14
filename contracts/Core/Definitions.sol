@@ -122,6 +122,38 @@ contract Definitions {
 		int256 periodFloor;
 	}
 
+	struct GeneratingTerms {
+		Calendar calendar;
+		BusinessDayConvention businessDayConvention;
+		EndOfMonthConvention endOfMonthConvention;
+		ScalingEffect scalingEffect;
+		PenaltyType penaltyType;
+
+		uint256 contractDealDate;
+		uint256 statusDate;
+		uint256 initialExchangeDate;
+		uint256 maturityDate;
+		uint256 terminationDate;
+		uint256 purchaseDate;
+		uint256 capitalizationEndDate;
+		uint256 cycleAnchorDateOfInterestPayment;
+		uint256 cycleAnchorDateOfRateReset;
+		uint256 cycleAnchorDateOfScalingIndex;
+		uint256 cycleAnchorDateOfFee;
+		uint256 cycleAnchorDateOfPrincipalRedemption;
+
+		int256 nominalInterestRate;
+
+		IPS cycleOfInterestPayment;
+		IPS cycleOfRateReset;
+		IPS cycleOfScalingIndex;
+		IPS cycleOfFee;
+		IPS cycleOfPrincipalRedemption;
+
+		IP gracePeriod;
+		IP delinquencyPeriod;
+	}
+
 	struct Terms {
 		ContractType contractType;
 		Calendar calendar;

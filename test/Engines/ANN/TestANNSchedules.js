@@ -1,7 +1,7 @@
 const ANNEngine = artifacts.require('ANNEngine.sol');
 
 const { getTestCases, compareTestResults  } = require('../../helper/tests');
-const { parseToTestEvent, parseTermsToLifecycleTerms } = require('../../helper/parser');
+const { parseToTestEvent, parseTermsToLifecycleTerms, parseTermsToGeneratingTerms } = require('../../helper/parser');
 const {
   decodeProtoEvent,
   sortProtoEvents,
@@ -12,27 +12,28 @@ const {
 contract('ANNEngine', () => {
   
   const computeProtoEventScheduleSegment = async (terms, segmentStart, segmentEnd) => {
+    const generatingTerms = parseTermsToGeneratingTerms(terms);
     const protoEventSchedule = [];
       
     protoEventSchedule.push(... await this.ANNEngineInstance.computeNonCyclicProtoEventScheduleSegment(
-      terms,
+      generatingTerms,
       segmentStart,
       segmentEnd
     ));
     protoEventSchedule.push(... await this.ANNEngineInstance.computeCyclicProtoEventScheduleSegment(
-      terms,
+      generatingTerms,
       segmentStart,
       segmentEnd,
       4 // FP
     ));
     protoEventSchedule.push(... await this.ANNEngineInstance.computeCyclicProtoEventScheduleSegment(
-      terms,
+      generatingTerms,
       segmentStart,
       segmentEnd,
       8 // IP
     ));
     protoEventSchedule.push(... await this.ANNEngineInstance.computeCyclicProtoEventScheduleSegment(
-      terms,
+      generatingTerms,
       segmentStart,
       segmentEnd,
       15 // PR
@@ -48,12 +49,13 @@ contract('ANNEngine', () => {
 
   const evaluateEventSchedule = async (terms) => {
     const lifecycleTerms = parseTermsToLifecycleTerms(terms);
+    const generatingTerms = parseTermsToGeneratingTerms(terms);
 
     const initialState = await this.ANNEngineInstance.computeInitialState(lifecycleTerms, {});
     const protoEventSchedule = removeNullProtoEvents(await computeProtoEventScheduleSegment(
-      terms,
-      terms.contractDealDate,
-      terms.maturityDate
+      generatingTerms,
+      generatingTerms.contractDealDate,
+      generatingTerms.maturityDate
     ));
 
     const evaluatedSchedule = [];

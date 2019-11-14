@@ -114,7 +114,7 @@ contract ANNEngine is Core, IEngine, STF, POF {
 	 * @return event schedule segment
 	 */
 	function computeNonCyclicProtoEventScheduleSegment(
-		Terms memory terms,
+		GeneratingTerms memory terms,
 		uint256 segmentStart,
 		uint256 segmentEnd
 	)
@@ -167,7 +167,7 @@ contract ANNEngine is Core, IEngine, STF, POF {
 	 * @return event schedule segment
 	 */
 	function computeCyclicProtoEventScheduleSegment(
-		Terms memory terms,
+		GeneratingTerms memory terms,
 		uint256 segmentStart,
 		uint256 segmentEnd,
 		EventType eventType
