@@ -17,7 +17,7 @@ contract IEngine is Definitions {
 	 * @param terms terms of the contract
 	 * @return initial contract state
 	 */
-	function computeInitialState(Terms memory terms)
+	function computeInitialState(LifecycleTerms memory terms)
 		public
 		pure
 		returns (State memory);
@@ -31,7 +31,7 @@ contract IEngine is Definitions {
 	 * @return next state of the contract
 	 */
 	function computeStateForProtoEvent(
-		Terms memory terms,
+		LifecycleTerms memory terms,
 		State memory state,
 		bytes32 protoEvent,
 		uint256 currentTimestamp
@@ -49,7 +49,7 @@ contract IEngine is Definitions {
 	 * @return payoff of the given ProtoEvent
 	 */
 	function computePayoffForProtoEvent(
-		Terms memory terms,
+		LifecycleTerms memory terms,
 		State memory state,
 		bytes32 protoEvent,
 		uint256 currentTimestamp
@@ -66,7 +66,7 @@ contract IEngine is Definitions {
 	 * @return event schedule segment
 	 */
 	function computeNonCyclicProtoEventScheduleSegment(
-		Terms memory terms,
+		GeneratingTerms memory terms,
 		uint256 segmentStart,
 		uint256 segmentEnd
 	)
@@ -83,7 +83,7 @@ contract IEngine is Definitions {
 	 * @return event schedule segment
 	 */
 	function computeCyclicProtoEventScheduleSegment(
-		Terms memory terms,
+		GeneratingTerms memory terms,
 		uint256 segmentStart,
 		uint256 segmentEnd,
 		EventType eventType
@@ -101,7 +101,7 @@ contract IEngine is Definitions {
 	//  */
 	// function isProtoEventScheduled(
 	// 	ProtoEvent memory protoEvent,
-	// 	Terms memory terms,
+	// 	LifecycleTerms memory terms,
 	// 	State memory state
 	// )
 	// 	public

@@ -25,7 +25,7 @@ contract Core is
 	// function createProtoEvent(
 	// 	EventType eventType,
 	// 	uint256 scheduleTime,
-	// 	Terms memory terms
+	// 	LifecycleTerms memory terms
 	// )
 	// 	public
 	// 	pure

@@ -1,7 +1,7 @@
 const PAMEngine = artifacts.require('PAMEngine.sol');
 
 const { getTestCases, compareTestResults } = require('../../helper/tests');
-const { parseToTestEvent } = require('../../helper/parser');
+const { parseToTestEvent, parseTermsToLifecycleTerms, parseTermsToGeneratingTerms} = require('../../helper/parser');
 const {
   decodeProtoEvent,
   sortProtoEvents,
@@ -11,27 +11,28 @@ const {
 contract('PAMEngine', () => {
 
   const computeProtoEventScheduleSegment = async (terms, segmentStart, segmentEnd) => {
+    const generatingTerms = parseTermsToGeneratingTerms(terms);
     const protoEventSchedule = [];
       
     protoEventSchedule.push(... await this.PAMEngineInstance.computeNonCyclicProtoEventScheduleSegment(
-      terms,
+      generatingTerms,
       segmentStart,
       segmentEnd
     ));
     protoEventSchedule.push(... await this.PAMEngineInstance.computeCyclicProtoEventScheduleSegment(
-      terms,
+      generatingTerms,
       segmentStart,
       segmentEnd,
       4 // FP
     ));
     protoEventSchedule.push(... await this.PAMEngineInstance.computeCyclicProtoEventScheduleSegment(
-      terms,
+      generatingTerms,
       segmentStart,
       segmentEnd,
       8 // IP
     ));
     protoEventSchedule.push(... await this.PAMEngineInstance.computeCyclicProtoEventScheduleSegment(
-      terms,
+      generatingTerms,
       segmentStart,
       segmentEnd,
       18 // RR
@@ -46,11 +47,14 @@ contract('PAMEngine', () => {
   });
 
   const evaluateEventSchedule = async (terms) => {
-    const initialState = await this.PAMEngineInstance.computeInitialState(terms, {});
+    const lifecycleTerms = parseTermsToLifecycleTerms(terms);
+    const generatingTerms = parseTermsToGeneratingTerms(terms);
+
+    const initialState = await this.PAMEngineInstance.computeInitialState(lifecycleTerms, {});
     const protoEventSchedule = removeNullProtoEvents(await computeProtoEventScheduleSegment(
-      terms,
-      terms.contractDealDate,
-      terms.maturityDate
+      generatingTerms,
+      generatingTerms.contractDealDate,
+      generatingTerms.maturityDate
     ));
 
     const evaluatedSchedule = [];
@@ -62,13 +66,13 @@ contract('PAMEngine', () => {
       if (scheduleTime == 0) { break; }
 
       const payoff = await this.PAMEngineInstance.computePayoffForProtoEvent(
-        terms,
+        lifecycleTerms,
         state,
         protoEvent,
         scheduleTime
       );
       const nextState = await this.PAMEngineInstance.computeStateForProtoEvent(
-        terms, 
+        lifecycleTerms, 
         state, 
         protoEvent, 
         scheduleTime
@@ -76,7 +80,7 @@ contract('PAMEngine', () => {
       
       state = nextState;
 
-      const eventTime = await this.PAMEngineInstance.computeEventTimeForProtoEvent(protoEvent, terms, {});
+      const eventTime = await this.PAMEngineInstance.computeEventTimeForProtoEvent(protoEvent, lifecycleTerms, {});
 
       evaluatedSchedule.push(parseToTestEvent(eventType, eventTime, payoff, state));
     }

@@ -1,6 +1,7 @@
 const ANNEngine = artifacts.require('ANNEngine.sol');
 
 const { getDefaultTestTerms } = require('../../helper/tests');
+const { parseTermsToLifecycleTerms, parseTermsToGeneratingTerms } = require('../../helper/parser');
 const { 
   parseProtoEventSchedule,
   decodeProtoEvent,
@@ -44,22 +45,24 @@ contract('ANNEngine', () => {
   before(async () => {        
     this.ANNEngineInstance = await ANNEngine.new();
     this.terms = await getDefaultTestTerms('ANN');
+    this.generatingTerms = parseTermsToGeneratingTerms(this.terms);
+    this.lifecycleTerms = parseTermsToLifecycleTerms(this.terms);
   });
 
   it('should yield the initial contract state', async () => {
-    const initialState = await this.ANNEngineInstance.computeInitialState(this.terms, {});
-    assert.isTrue(Number(initialState['lastEventTime']) === Number(this.terms['statusDate']));
+    const initialState = await this.ANNEngineInstance.computeInitialState(this.lifecycleTerms, {});
+    assert.isTrue(Number(initialState['lastEventTime']) === Number(this.generatingTerms['statusDate']));
   });
 
   it('should yield the next next contract state and the contract events', async() => {
-    const initialState = await this.ANNEngineInstance.computeInitialState(this.terms, {});
+    const initialState = await this.ANNEngineInstance.computeInitialState(this.lifecycleTerms, {});
     const protoEventSchedule = await this.ANNEngineInstance.computeNonCyclicProtoEventScheduleSegment(
-      this.terms,
-      this.terms.contractDealDate,
-      this.terms.maturityDate
+      this.generatingTerms,
+      this.generatingTerms.contractDealDate,
+      this.generatingTerms.maturityDate
     )
     const nextState = await this.ANNEngineInstance.computeStateForProtoEvent(
-      this.terms,
+      this.lifecycleTerms,
       initialState,
       protoEventSchedule[0],
       decodeProtoEvent(protoEventSchedule[0]).scheduleTime
@@ -70,35 +73,35 @@ contract('ANNEngine', () => {
 
   it('should yield correct segment of events', async () => {
     const completeProtoEventSchedule = parseProtoEventSchedule(await computeProtoEventScheduleSegment(
-      this.terms,
-      this.terms.contractDealDate,
-      this.terms.maturityDate
+      this.generatingTerms,
+      this.generatingTerms.contractDealDate,
+      this.generatingTerms.maturityDate
     ));
 
     let protoEventSchedule = [];
-    let lastEventTime = this.terms['statusDate'];
-    let timestamp = this.terms['statusDate'] + (this.terms['maturityDate'] - this.terms['statusDate']) / 4;
+    let lastEventTime = this.generatingTerms['statusDate'];
+    let timestamp = this.generatingTerms['statusDate'] + (this.generatingTerms['maturityDate'] - this.generatingTerms['statusDate']) / 4;
 
     protoEventSchedule.push(... await computeProtoEventScheduleSegment(
-      this.terms, 
+      this.generatingTerms, 
       lastEventTime,
       timestamp
     ));
 
     lastEventTime = timestamp;
-    timestamp = this.terms['statusDate'] + (this.terms['maturityDate'] - this.terms['statusDate']) / 2;
+    timestamp = this.generatingTerms['statusDate'] + (this.generatingTerms['maturityDate'] - this.generatingTerms['statusDate']) / 2;
 
     protoEventSchedule.push(... await computeProtoEventScheduleSegment(
-    this.terms, 
+    this.generatingTerms, 
     lastEventTime,
       timestamp
     ));
     
     lastEventTime = timestamp;
-    timestamp = this.terms['maturityDate'];
+    timestamp = this.generatingTerms['maturityDate'];
 
     protoEventSchedule.push(... await computeProtoEventScheduleSegment(
-      this.terms, 
+      this.generatingTerms, 
       lastEventTime,
       timestamp
     ));
@@ -109,19 +112,19 @@ contract('ANNEngine', () => {
   });
 
   it('should yield the state of each ProtoEvent', async () => {
-    const initialState = await this.ANNEngineInstance.computeInitialState(this.terms, {});
+    const initialState = await this.ANNEngineInstance.computeInitialState(this.lifecycleTerms, {});
 
     const protoEventSchedule = removeNullProtoEvents(await computeProtoEventScheduleSegment(
-      this.terms,
-      this.terms.contractDealDate,
-      this.terms.maturityDate
+      this.generatingTerms,
+      this.generatingTerms.contractDealDate,
+      this.generatingTerms.maturityDate
     ));
 
     let state = initialState;
 
     for (protoEvent of protoEventSchedule) {
       const nextState = await this.ANNEngineInstance.computeStateForProtoEvent(
-        this.terms,
+        this.lifecycleTerms,
         state,
         protoEvent,
         decodeProtoEvent(protoEvent).scheduleTime
