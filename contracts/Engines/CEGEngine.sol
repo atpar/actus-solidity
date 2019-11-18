@@ -266,7 +266,7 @@ contract CEGEngine is Core, IEngine, STF, POF {
 		if (eventType == EventType.FP) return STF_CEG_FP(scheduleTime, terms, state, currentTimestamp);
 		if (eventType == EventType.XD) return STF_CEG_XD(scheduleTime, terms, state, currentTimestamp);
 		if (eventType == EventType.MD) return STF_CEG_MD(scheduleTime, terms, state, currentTimestamp);
-		if (eventType == EventType.DEL) return STF_PAM_DEL(scheduleTime, terms, state, currentTimestamp);
+		if (eventType == EventType.CE) return STF_PAM_DEL(scheduleTime, terms, state, currentTimestamp);
 
 		revert("CEGEngine.stateTransitionFunction: ATTRIBUTE_NOT_FOUND");
 	}
@@ -294,7 +294,7 @@ contract CEGEngine is Core, IEngine, STF, POF {
 	{
 		(EventType eventType, uint256 scheduleTime) = decodeProtoEvent(protoEvent);
 
-		if (eventType == EventType.DEL) return 0;
+		if (eventType == EventType.CE) return 0;
 		if (eventType == EventType.PRD) return POF_CEG_PRD(scheduleTime, terms, state, currentTimestamp);
 		if (eventType == EventType.FP) return POF_CEG_FP(scheduleTime, terms, state, currentTimestamp);
 		if (eventType == EventType.XD) return POF_CEG_XD(scheduleTime, terms, state, currentTimestamp);
