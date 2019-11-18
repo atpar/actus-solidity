@@ -15,24 +15,24 @@ contract('ANNEngine', () => {
     const generatingTerms = parseTermsToGeneratingTerms(terms);
     const protoEventSchedule = [];
       
-    protoEventSchedule.push(... await this.ANNEngineInstance.computeNonCyclicProtoEventScheduleSegment(
+    protoEventSchedule.push(... await this.ANNEngineInstance.computeNonCyclicScheduleSegment(
       generatingTerms,
       segmentStart,
       segmentEnd
     ));
-    protoEventSchedule.push(... await this.ANNEngineInstance.computeCyclicProtoEventScheduleSegment(
+    protoEventSchedule.push(... await this.ANNEngineInstance.computeCyclicScheduleSegment(
       generatingTerms,
       segmentStart,
       segmentEnd,
       4 // FP
     ));
-    protoEventSchedule.push(... await this.ANNEngineInstance.computeCyclicProtoEventScheduleSegment(
+    protoEventSchedule.push(... await this.ANNEngineInstance.computeCyclicScheduleSegment(
       generatingTerms,
       segmentStart,
       segmentEnd,
       8 // IP
     ));
-    protoEventSchedule.push(... await this.ANNEngineInstance.computeCyclicProtoEventScheduleSegment(
+    protoEventSchedule.push(... await this.ANNEngineInstance.computeCyclicScheduleSegment(
       generatingTerms,
       segmentStart,
       segmentEnd,
@@ -66,13 +66,13 @@ contract('ANNEngine', () => {
 
       if (scheduleTime == 0) { break; }
 
-      const payoff = await this.ANNEngineInstance.computePayoffForProtoEvent(
+      const payoff = await this.ANNEngineInstance.computePayoffForEvent(
         lifecycleTerms,
         state,
         protoEvent,
         scheduleTime
       );
-      const nextState = await this.ANNEngineInstance.computeStateForProtoEvent(
+      const nextState = await this.ANNEngineInstance.computeStateForEvent(
         lifecycleTerms, 
         state, 
         protoEvent, 
