@@ -382,7 +382,7 @@ contract ANNEngine is Core, IEngine, STF, POF {
 		if (eventType == EventType.RR) return STF_ANN_RR(scheduleTime, terms, state, currentTimestamp);
 		if (eventType == EventType.SC) return STF_ANN_SC(scheduleTime, terms, state, currentTimestamp);
 		if (eventType == EventType.TD) return STF_PAM_TD(scheduleTime, terms, state, currentTimestamp);
-		if (eventType == EventType.DEL) return STF_PAM_DEL(scheduleTime, terms, state, currentTimestamp);
+		if (eventType == EventType.CE) return STF_PAM_DEL(scheduleTime, terms, state, currentTimestamp);
 
 		revert("ANNEngine.stateTransitionFunction: ATTRIBUTE_NOT_FOUND");
 	}
@@ -416,7 +416,7 @@ contract ANNEngine is Core, IEngine, STF, POF {
 		if (eventType == EventType.RRF) return 0;
 		if (eventType == EventType.RR) return 0;
 		if (eventType == EventType.SC) return 0;
-		if (eventType == EventType.DEL) return 0;
+		if (eventType == EventType.CE) return 0;
 		if (eventType == EventType.FP) return POF_ANN_FP(scheduleTime, terms, state, currentTimestamp);
 		if (eventType == EventType.IED) return POF_PAM_IED(scheduleTime, terms, state, currentTimestamp);
 		if (eventType == EventType.IP) return POF_PAM_IP(scheduleTime, terms, state, currentTimestamp);
