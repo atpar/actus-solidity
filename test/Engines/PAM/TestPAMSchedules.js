@@ -14,24 +14,24 @@ contract('PAMEngine', () => {
     const generatingTerms = parseTermsToGeneratingTerms(terms);
     const protoEventSchedule = [];
       
-    protoEventSchedule.push(... await this.PAMEngineInstance.computeNonCyclicProtoEventScheduleSegment(
+    protoEventSchedule.push(... await this.PAMEngineInstance.computeNonCyclicScheduleSegment(
       generatingTerms,
       segmentStart,
       segmentEnd
     ));
-    protoEventSchedule.push(... await this.PAMEngineInstance.computeCyclicProtoEventScheduleSegment(
+    protoEventSchedule.push(... await this.PAMEngineInstance.computeCyclicScheduleSegment(
       generatingTerms,
       segmentStart,
       segmentEnd,
       4 // FP
     ));
-    protoEventSchedule.push(... await this.PAMEngineInstance.computeCyclicProtoEventScheduleSegment(
+    protoEventSchedule.push(... await this.PAMEngineInstance.computeCyclicScheduleSegment(
       generatingTerms,
       segmentStart,
       segmentEnd,
       8 // IP
     ));
-    protoEventSchedule.push(... await this.PAMEngineInstance.computeCyclicProtoEventScheduleSegment(
+    protoEventSchedule.push(... await this.PAMEngineInstance.computeCyclicScheduleSegment(
       generatingTerms,
       segmentStart,
       segmentEnd,
@@ -65,13 +65,13 @@ contract('PAMEngine', () => {
 
       if (scheduleTime == 0) { break; }
 
-      const payoff = await this.PAMEngineInstance.computePayoffForProtoEvent(
+      const payoff = await this.PAMEngineInstance.computePayoffForEvent(
         lifecycleTerms,
         state,
         protoEvent,
         scheduleTime
       );
-      const nextState = await this.PAMEngineInstance.computeStateForProtoEvent(
+      const nextState = await this.PAMEngineInstance.computeStateForEvent(
         lifecycleTerms, 
         state, 
         protoEvent, 

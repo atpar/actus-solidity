@@ -53,7 +53,7 @@ contract PAMEngine is Core, IEngine, STF, POF {
 	 * @param currentTimestamp current timestamp
 	 * @return the new contract state and the evaluated event
 	 */
-	function computeStateForProtoEvent(
+	function computeStateForEvent(
 		LifecycleTerms memory terms,
 		State memory state,
 		bytes32 protoEvent,
@@ -80,7 +80,7 @@ contract PAMEngine is Core, IEngine, STF, POF {
 	 * @param currentTimestamp current timestamp
 	 * @return the new contract state and the evaluated event
 	 */
-	function computePayoffForProtoEvent(
+	function computePayoffForEvent(
 		LifecycleTerms memory terms,
 		State memory state,
 		bytes32 protoEvent,
@@ -105,7 +105,7 @@ contract PAMEngine is Core, IEngine, STF, POF {
 	 * @param segmentEnd end timestamp of the segement
 	 * @return event schedule segment
 	 */
-	function computeNonCyclicProtoEventScheduleSegment(
+	function computeNonCyclicScheduleSegment(
 		GeneratingTerms memory terms,
 		uint256 segmentStart,
 		uint256 segmentEnd
@@ -156,7 +156,7 @@ contract PAMEngine is Core, IEngine, STF, POF {
 	 * @param eventType eventType of the cyclic schedule
 	 * @return event schedule segment
 	 */
-	function computeCyclicProtoEventScheduleSegment(
+	function computeCyclicScheduleSegment(
 		GeneratingTerms memory terms,
 		uint256 segmentStart,
 		uint256 segmentEnd,
@@ -318,7 +318,7 @@ contract PAMEngine is Core, IEngine, STF, POF {
 			}
 		}
 
-		// revert("PAMEngine.computeCyclicProtoEventScheduleSegment: UNKNOWN_CYCLIC_EVENT_TYPE");
+		// revert("PAMEngine.computeCyclicScheduleSegment: UNKNOWN_CYCLIC_EVENT_TYPE");
 		return protoEventSchedule;
 	}
 
