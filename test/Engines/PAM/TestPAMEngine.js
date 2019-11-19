@@ -15,24 +15,24 @@ contract('PAMEngine', () => {
   const computeProtoEventScheduleSegment = async (terms, segmentStart, segmentEnd) => {
     const protoEventSchedule = [];
       
-    protoEventSchedule.push(... await this.PAMEngineInstance.computeNonCyclicProtoEventScheduleSegment(
+    protoEventSchedule.push(... await this.PAMEngineInstance.computeNonCyclicScheduleSegment(
       terms,
       segmentStart,
       segmentEnd
     ));
-    protoEventSchedule.push(... await this.PAMEngineInstance.computeCyclicProtoEventScheduleSegment(
+    protoEventSchedule.push(... await this.PAMEngineInstance.computeCyclicScheduleSegment(
       terms,
       segmentStart,
       segmentEnd,
       4 // FP
     ));
-    protoEventSchedule.push(... await this.PAMEngineInstance.computeCyclicProtoEventScheduleSegment(
+    protoEventSchedule.push(... await this.PAMEngineInstance.computeCyclicScheduleSegment(
       terms,
       segmentStart,
       segmentEnd,
       8 // IP
     ));
-    protoEventSchedule.push(... await this.PAMEngineInstance.computeCyclicProtoEventScheduleSegment(
+    protoEventSchedule.push(... await this.PAMEngineInstance.computeCyclicScheduleSegment(
       terms,
       segmentStart,
       segmentEnd,
@@ -56,12 +56,12 @@ contract('PAMEngine', () => {
 
   it('should yield the next next contract state and the contract events', async() => {
     const initialState = await this.PAMEngineInstance.computeInitialState(this.lifecycleTerms, {});
-    const protoEventSchedule = await this.PAMEngineInstance.computeNonCyclicProtoEventScheduleSegment(
+    const protoEventSchedule = await this.PAMEngineInstance.computeNonCyclicScheduleSegment(
       this.generatingTerms,
       this.generatingTerms.contractDealDate,
       this.generatingTerms.maturityDate
     )
-    const nextState = await this.PAMEngineInstance.computeStateForProtoEvent(
+    const nextState = await this.PAMEngineInstance.computeStateForEvent(
       this.lifecycleTerms,
       initialState,
       protoEventSchedule[0],
@@ -111,7 +111,7 @@ contract('PAMEngine', () => {
     assert.isTrue(protoEventSchedule.toString() === completeProtoEventSchedule.toString());
   });
 
-  it('should yield the state of each ProtoEvent', async () => {
+  it('should yield the state of each event', async () => {
     const initialState = await this.PAMEngineInstance.computeInitialState(this.lifecycleTerms, {});
 
     const protoEventSchedule = removeNullProtoEvents(await computeProtoEventScheduleSegment(
@@ -123,7 +123,7 @@ contract('PAMEngine', () => {
     let state = initialState;
 
     for (protoEvent of protoEventSchedule) {
-      const nextState = await this.PAMEngineInstance.computeStateForProtoEvent(
+      const nextState = await this.PAMEngineInstance.computeStateForEvent(
         this.lifecycleTerms,
         state,
         protoEvent,

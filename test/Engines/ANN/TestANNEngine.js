@@ -15,24 +15,24 @@ contract('ANNEngine', () => {
   const computeProtoEventScheduleSegment = async (terms, segmentStart, segmentEnd) => {
     const protoEventSchedule = [];
       
-    protoEventSchedule.push(... await this.ANNEngineInstance.computeNonCyclicProtoEventScheduleSegment(
+    protoEventSchedule.push(... await this.ANNEngineInstance.computeNonCyclicScheduleSegment(
       terms,
       segmentStart,
       segmentEnd
     ));
-    protoEventSchedule.push(... await this.ANNEngineInstance.computeCyclicProtoEventScheduleSegment(
+    protoEventSchedule.push(... await this.ANNEngineInstance.computeCyclicScheduleSegment(
       terms,
       segmentStart,
       segmentEnd,
       4 // FP
     ));
-    protoEventSchedule.push(... await this.ANNEngineInstance.computeCyclicProtoEventScheduleSegment(
+    protoEventSchedule.push(... await this.ANNEngineInstance.computeCyclicScheduleSegment(
       terms,
       segmentStart,
       segmentEnd,
       8 // IP
     ));
-    protoEventSchedule.push(... await this.ANNEngineInstance.computeCyclicProtoEventScheduleSegment(
+    protoEventSchedule.push(... await this.ANNEngineInstance.computeCyclicScheduleSegment(
       terms,
       segmentStart,
       segmentEnd,
@@ -56,12 +56,12 @@ contract('ANNEngine', () => {
 
   it('should yield the next next contract state and the contract events', async() => {
     const initialState = await this.ANNEngineInstance.computeInitialState(this.lifecycleTerms, {});
-    const protoEventSchedule = await this.ANNEngineInstance.computeNonCyclicProtoEventScheduleSegment(
+    const protoEventSchedule = await this.ANNEngineInstance.computeNonCyclicScheduleSegment(
       this.generatingTerms,
       this.generatingTerms.contractDealDate,
       this.generatingTerms.maturityDate
     )
-    const nextState = await this.ANNEngineInstance.computeStateForProtoEvent(
+    const nextState = await this.ANNEngineInstance.computeStateForEvent(
       this.lifecycleTerms,
       initialState,
       protoEventSchedule[0],
@@ -111,7 +111,7 @@ contract('ANNEngine', () => {
     assert.isTrue(protoEventSchedule.toString() === completeProtoEventSchedule.toString());
   });
 
-  it('should yield the state of each ProtoEvent', async () => {
+  it('should yield the state of each event', async () => {
     const initialState = await this.ANNEngineInstance.computeInitialState(this.lifecycleTerms, {});
 
     const protoEventSchedule = removeNullProtoEvents(await computeProtoEventScheduleSegment(
@@ -123,7 +123,7 @@ contract('ANNEngine', () => {
     let state = initialState;
 
     for (protoEvent of protoEventSchedule) {
-      const nextState = await this.ANNEngineInstance.computeStateForProtoEvent(
+      const nextState = await this.ANNEngineInstance.computeStateForEvent(
         this.lifecycleTerms,
         state,
         protoEvent,

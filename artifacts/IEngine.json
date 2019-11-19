@@ -506,7 +506,7 @@
           "type": "uint256"
         }
       ],
-      "name": "computeStateForProtoEvent",
+      "name": "computeStateForEvent",
       "outputs": [
         {
           "components": [
@@ -805,7 +805,7 @@
           "type": "uint256"
         }
       ],
-      "name": "computePayoffForProtoEvent",
+      "name": "computePayoffForEvent",
       "outputs": [
         {
           "name": "",
@@ -1052,7 +1052,7 @@
           "type": "uint256"
         }
       ],
-      "name": "computeNonCyclicProtoEventScheduleSegment",
+      "name": "computeNonCyclicScheduleSegment",
       "outputs": [
         {
           "name": "",
@@ -1303,7 +1303,7 @@
           "type": "uint8"
         }
       ],
-      "name": "computeCyclicProtoEventScheduleSegment",
+      "name": "computeCyclicScheduleSegment",
       "outputs": [
         {
           "name": "",
@@ -1322,5 +1322,5 @@
     "version": "0.5.2+commit.1df8f40c.Emscripten.clang"
   },
   "networks": {},
-  "updatedAt": "2019-11-14T14:13:55.502Z"
+  "updatedAt": "2019-11-18T17:03:57.646Z"
 }
