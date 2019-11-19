@@ -26,14 +26,14 @@ contract IEngine is Definitions {
 	 * compute next state for a given event
 	 * @param terms terms of the contract
 	 * @param state current state of the contract
-	 * @param protoEvent event to apply to the current state of the contract
+	 * @param _event event to apply to the current state of the contract
 	 * @param currentTimestamp current timestamp
 	 * @return next state of the contract
 	 */
 	function computeStateForEvent(
 		LifecycleTerms memory terms,
 		State memory state,
-		bytes32 protoEvent,
+		bytes32 _event,
 		uint256 currentTimestamp
 	)
 		public
@@ -44,14 +44,14 @@ contract IEngine is Definitions {
 	 * compute the payoff for a given event
 	 * @param terms terms of the contract
 	 * @param state current state of the contract
-	 * @param protoEvent event to compute the payoff for
+	 * @param _event event to compute the payoff for
 	 * @param currentTimestamp current timestamp
 	 * @return payoff of the given event
 	 */
 	function computePayoffForEvent(
 		LifecycleTerms memory terms,
 		State memory state,
-		bytes32 protoEvent,
+		bytes32 _event,
 		uint256 currentTimestamp
 	)
 		public
@@ -94,13 +94,13 @@ contract IEngine is Definitions {
 
 	// /**
 	//  * verifies that a given event is (still) scheduled under the current state of the contract
-	//  * @param protoEvent event to verify
+	//  * @param _event event to verify
 	//  * @param terms terms of the contract
 	//  * @param state current state of the contract
 	//  * @return boolean if the the event is still scheduled
 	//  */
 	// function isEventScheduled(
-	// 	event memory protoEvent,
+	// 	event memory _event,
 	// 	LifecycleTerms memory terms,
 	// 	State memory state
 	// )

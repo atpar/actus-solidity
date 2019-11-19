@@ -22,14 +22,14 @@ contract Core is
 	EndOfMonthConvention,
 	Schedule
 {
-	// function createProtoEvent(
+	// function createEvent(
 	// 	EventType eventType,
 	// 	uint256 scheduleTime,
 	// 	LifecycleTerms memory terms
 	// )
 	// 	public
 	// 	pure
-	// 	returns (ProtoEvent memory)
+	// 	returns (Event memory)
 	// {
 	// 	uint256 eventTime = shiftEventTime(
 	// 		scheduleTime,
@@ -37,7 +37,7 @@ contract Core is
 	// 		terms.calendar
 	// 	);
 
-	// 	return ProtoEvent(
+	// 	return Event(
 	// 		eventTime,
 	// 		eventTime.add(getEpochOffset(eventType)),
 	// 		scheduleTime,
