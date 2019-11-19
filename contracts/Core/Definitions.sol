@@ -123,7 +123,6 @@ contract Definitions {
 	}
 
 	struct GeneratingTerms {
-		Calendar calendar;
 		BusinessDayConvention businessDayConvention;
 		EndOfMonthConvention endOfMonthConvention;
 		ScalingEffect scalingEffect;

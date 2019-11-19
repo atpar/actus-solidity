@@ -198,12 +198,7 @@ contract ANNEngine is Core, IEngine, STF, POF {
 				);
 				for (uint8 i = 0; i < MAX_CYCLE_SIZE; i++) {
 					if (interestPaymentSchedule[i] == 0) break;
-					uint256 shiftedIPDate = shiftEventTime(
-						interestPaymentSchedule[i],
-						terms.businessDayConvention,
-						terms.calendar
-					);
-					if (isInPeriod(shiftedIPDate, segmentStart, segmentEnd) == false) continue;
+					if (isInPeriod(interestPaymentSchedule[i], segmentStart, segmentEnd) == false) continue;
 					if (
 						terms.capitalizationEndDate != 0 &&
 						interestPaymentSchedule[i] <= terms.capitalizationEndDate
@@ -222,12 +217,7 @@ contract ANNEngine is Core, IEngine, STF, POF {
 				terms.capitalizationEndDate != 0 &&
 				terms.capitalizationEndDate < terms.cycleAnchorDateOfPrincipalRedemption
 			) {
-				uint256 shiftedIPCIDate = shiftEventTime(
-					terms.capitalizationEndDate,
-					terms.businessDayConvention,
-					terms.calendar
-				);
-				if (isInPeriod(shiftedIPCIDate, segmentStart, segmentEnd)) {
+				if (isInPeriod(terms.capitalizationEndDate, segmentStart, segmentEnd)) {
 					_eventSchedule[index] = encodeEvent(EventType.IPCI, terms.capitalizationEndDate);
 					index++;
 				}
@@ -250,12 +240,7 @@ contract ANNEngine is Core, IEngine, STF, POF {
 				);
 				for (uint8 i = 0; i < MAX_CYCLE_SIZE; i++) {
 					if (feeSchedule[i] == 0) break;
-					uint256 shiftedFPDate = shiftEventTime(
-						feeSchedule[i],
-						terms.businessDayConvention,
-						terms.calendar
-					);
-					if (isInPeriod(shiftedFPDate, segmentStart, segmentEnd) == false) continue;
+					if (isInPeriod(feeSchedule[i], segmentStart, segmentEnd) == false) continue;
 					_eventSchedule[index] = encodeEvent(EventType.FP, feeSchedule[i]);
 					index++;
 				}
@@ -277,12 +262,7 @@ contract ANNEngine is Core, IEngine, STF, POF {
 			);
 			for (uint8 i = 0; i < MAX_CYCLE_SIZE; i++) {
 				if (principalRedemptionSchedule[i] == 0) break;
-				uint256 shiftedPRDate = shiftEventTime(
-					principalRedemptionSchedule[i],
-					terms.businessDayConvention,
-					terms.calendar
-				);
-				if (isInPeriod(shiftedPRDate, segmentStart, segmentEnd) == false) continue;
+				if (isInPeriod(principalRedemptionSchedule[i], segmentStart, segmentEnd) == false) continue;
 				_eventSchedule[index] = encodeEvent(EventType.PR, principalRedemptionSchedule[i]);
 				index++;
 				_eventSchedule[index] = encodeEvent(EventType.IP, principalRedemptionSchedule[i]);

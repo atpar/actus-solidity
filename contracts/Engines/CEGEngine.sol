@@ -173,12 +173,7 @@ contract CEGEngine is Core, IEngine, STF, POF {
 				);
 				for (uint8 i = 0; i < MAX_CYCLE_SIZE; i++) {
 					if (feeSchedule[i] == 0) break;
-					uint256 shiftedFPDate = shiftEventTime(
-						feeSchedule[i],
-						terms.businessDayConvention,
-						terms.calendar
-					);
-					if (isInPeriod(shiftedFPDate, segmentStart, segmentEnd) == false) continue;
+					if (isInPeriod(feeSchedule[i], segmentStart, segmentEnd) == false) continue;
 					_eventSchedule[index] = encodeEvent(EventType.FP, feeSchedule[i]);
 					index++;
 				}
