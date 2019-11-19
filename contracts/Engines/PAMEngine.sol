@@ -25,7 +25,7 @@ contract PAMEngine is Core, IEngine, STF, POF {
 	 * @param terms terms of the contract
 	 * @return initial contract state
 	 */
-	function computeInitialState(Terms memory terms)
+	function computeInitialState(LifecycleTerms memory terms)
 		public
 		pure
 		returns (State memory)
@@ -36,7 +36,6 @@ contract PAMEngine is Core, IEngine, STF, POF {
 		state.notionalScalingMultiplier = int256(1 * 10 ** PRECISION);
 		state.interestScalingMultiplier = int256(1 * 10 ** PRECISION);
 		state.lastEventTime = terms.statusDate;
-		state.maturityDate = terms.maturityDate;
 		state.notionalPrincipal = terms.notionalPrincipal;
 		state.nominalInterestRate = terms.nominalInterestRate;
 		state.accruedInterest = terms.accruedInterest;

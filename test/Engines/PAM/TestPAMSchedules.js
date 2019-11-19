@@ -50,7 +50,7 @@ contract('PAMEngine', () => {
     const lifecycleTerms = parseTermsToLifecycleTerms(terms);
     const generatingTerms = parseTermsToGeneratingTerms(terms);
 
-    const initialState = await this.PAMEngineInstance.computeInitialState(terms, {});
+    const initialState = await this.PAMEngineInstance.computeInitialState(lifecycleTerms, {});
     const protoEventSchedule = removeNullProtoEvents(await computeProtoEventScheduleSegment(
       generatingTerms,
       generatingTerms.contractDealDate,

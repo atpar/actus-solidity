@@ -31,7 +31,7 @@ contract POF is Core {
             shiftCalcTime(state.lastEventTime, terms.businessDayConvention, terms.calendar),
             shiftCalcTime(scheduleTime, terms.businessDayConvention, terms.calendar),
             terms.dayCountConvention,
-            state.maturityDate
+            terms.maturityDate
           )
           .floatMult(terms.feeRate)
           .floatMult(state.notionalPrincipal)
@@ -78,7 +78,7 @@ contract POF is Core {
               shiftCalcTime(state.lastEventTime, terms.businessDayConvention, terms.calendar),
               shiftCalcTime(scheduleTime, terms.businessDayConvention, terms.calendar),
               terms.dayCountConvention,
-              state.maturityDate
+              terms.maturityDate
             )
             .floatMult(state.nominalInterestRate)
             .floatMult(state.notionalPrincipal)
@@ -126,7 +126,7 @@ contract POF is Core {
             shiftCalcTime(state.lastEventTime, terms.businessDayConvention, terms.calendar),
             shiftCalcTime(scheduleTime, terms.businessDayConvention, terms.calendar),
             terms.dayCountConvention,
-            state.maturityDate
+            terms.maturityDate
           )
           .floatMult(state.nominalInterestRate)
           .floatMult(state.notionalPrincipal)
@@ -175,7 +175,7 @@ contract POF is Core {
             shiftCalcTime(state.lastEventTime, terms.businessDayConvention, terms.calendar),
             shiftCalcTime(scheduleTime, terms.businessDayConvention, terms.calendar),
             terms.dayCountConvention,
-            state.maturityDate
+            terms.maturityDate
           )
           .floatMult(terms.penaltyRate)
           .floatMult(state.notionalPrincipal)
@@ -192,7 +192,7 @@ contract POF is Core {
             shiftCalcTime(state.lastEventTime, terms.businessDayConvention, terms.calendar),
             shiftCalcTime(scheduleTime, terms.businessDayConvention, terms.calendar),
             terms.dayCountConvention,
-            state.maturityDate
+            terms.maturityDate
           )
           .floatMult(state.notionalPrincipal)
           .floatMult(param)
@@ -220,7 +220,7 @@ contract POF is Core {
             shiftCalcTime(state.lastEventTime, terms.businessDayConvention, terms.calendar),
             shiftCalcTime(scheduleTime, terms.businessDayConvention, terms.calendar),
             terms.dayCountConvention,
-            state.maturityDate
+            terms.maturityDate
           )
           .floatMult(state.nominalInterestRate)
           .floatMult(state.notionalPrincipal)
@@ -253,7 +253,7 @@ contract POF is Core {
               shiftCalcTime(state.lastEventTime, terms.businessDayConvention, terms.calendar),
               shiftCalcTime(scheduleTime, terms.businessDayConvention, terms.calendar),
               terms.dayCountConvention,
-              state.maturityDate
+              terms.maturityDate
             )
             .floatMult(terms.feeRate)
             .floatMult(state.notionalPrincipal)
@@ -286,7 +286,7 @@ contract POF is Core {
                   shiftCalcTime(state.lastEventTime, terms.businessDayConvention, terms.calendar),
                   shiftCalcTime(scheduleTime, terms.businessDayConvention, terms.calendar),
                   terms.dayCountConvention,
-                  state.maturityDate
+                  terms.maturityDate
                 )
                 .floatMult(state.nominalInterestRate)
                 .floatMult(state.notionalPrincipal)
@@ -388,7 +388,7 @@ contract POF is Core {
             shiftCalcTime(state.lastEventTime, terms.businessDayConvention, terms.calendar),
             shiftCalcTime(scheduleTime, terms.businessDayConvention, terms.calendar),
             terms.dayCountConvention,
-            state.maturityDate
+            terms.maturityDate
           )
           .floatMult(terms.feeRate)
           .floatMult(state.notionalPrincipal)

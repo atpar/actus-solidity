@@ -27,7 +27,7 @@ contract ANNEngine is Core, IEngine, STF, POF {
 	 * @param terms terms of the contract
 	 * @return initial contract state
 	 */
-	function computeInitialState(Terms memory terms)
+	function computeInitialState(LifecycleTerms memory terms)
 		public
 		pure
 		returns (State memory)
@@ -37,7 +37,6 @@ contract ANNEngine is Core, IEngine, STF, POF {
 		state.contractPerformance = ContractPerformance.PF;
 		state.notionalScalingMultiplier = int256(1 * 10 ** PRECISION);
 		state.interestScalingMultiplier = int256(1 * 10 ** PRECISION);
-		state.maturityDate = terms.maturityDate;
 		state.lastEventTime = terms.statusDate;
 		state.notionalPrincipal = roleSign(terms.contractRole) * terms.notionalPrincipal;
 		state.nominalInterestRate = terms.nominalInterestRate;

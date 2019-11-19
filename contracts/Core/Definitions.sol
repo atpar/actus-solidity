@@ -94,6 +94,9 @@ contract Definitions {
 		ContractPerformance creditEventTypeCovered;
 		ContractStructure contractStructure;
 
+		uint256 statusDate;
+		uint256 maturityDate;
+
 		int256 notionalPrincipal;
 		int256 nominalInterestRate;
 		int256 feeAccrued;

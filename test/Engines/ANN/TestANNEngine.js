@@ -50,12 +50,12 @@ contract('ANNEngine', () => {
   });
 
   it('should yield the initial contract state', async () => {
-    const initialState = await this.ANNEngineInstance.computeInitialState(this.terms, {});
+    const initialState = await this.ANNEngineInstance.computeInitialState(this.lifecycleTerms, {});
     assert.isTrue(Number(initialState['lastEventTime']) === Number(this.generatingTerms['statusDate']));
   });
 
   it('should yield the next next contract state and the contract events', async() => {
-    const initialState = await this.ANNEngineInstance.computeInitialState(this.terms, {});
+    const initialState = await this.ANNEngineInstance.computeInitialState(this.lifecycleTerms, {});
     const protoEventSchedule = await this.ANNEngineInstance.computeNonCyclicScheduleSegment(
       this.generatingTerms,
       this.generatingTerms.contractDealDate,
@@ -112,7 +112,7 @@ contract('ANNEngine', () => {
   });
 
   it('should yield the state of each event', async () => {
-    const initialState = await this.ANNEngineInstance.computeInitialState(this.terms, {});
+    const initialState = await this.ANNEngineInstance.computeInitialState(this.lifecycleTerms, {});
 
     const protoEventSchedule = removeNullProtoEvents(await computeProtoEventScheduleSegment(
       this.generatingTerms,

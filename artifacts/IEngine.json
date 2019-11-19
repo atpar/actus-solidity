@@ -21,24 +21,12 @@
         {
           "components": [
             {
-              "name": "contractType",
-              "type": "uint8"
-            },
-            {
               "name": "calendar",
               "type": "uint8"
             },
             {
               "name": "contractRole",
               "type": "uint8"
-            },
-            {
-              "name": "creatorID",
-              "type": "bytes32"
-            },
-            {
-              "name": "counterpartyID",
-              "type": "bytes32"
             },
             {
               "name": "dayCountConvention",
@@ -91,51 +79,11 @@
               "type": "tuple"
             },
             {
-              "name": "contractDealDate",
-              "type": "uint256"
-            },
-            {
               "name": "statusDate",
               "type": "uint256"
             },
             {
-              "name": "initialExchangeDate",
-              "type": "uint256"
-            },
-            {
               "name": "maturityDate",
-              "type": "uint256"
-            },
-            {
-              "name": "terminationDate",
-              "type": "uint256"
-            },
-            {
-              "name": "purchaseDate",
-              "type": "uint256"
-            },
-            {
-              "name": "capitalizationEndDate",
-              "type": "uint256"
-            },
-            {
-              "name": "cycleAnchorDateOfInterestPayment",
-              "type": "uint256"
-            },
-            {
-              "name": "cycleAnchorDateOfRateReset",
-              "type": "uint256"
-            },
-            {
-              "name": "cycleAnchorDateOfScalingIndex",
-              "type": "uint256"
-            },
-            {
-              "name": "cycleAnchorDateOfFee",
-              "type": "uint256"
-            },
-            {
-              "name": "cycleAnchorDateOfPrincipalRedemption",
               "type": "uint256"
             },
             {
@@ -152,10 +100,6 @@
             },
             {
               "name": "accruedInterest",
-              "type": "int256"
-            },
-            {
-              "name": "rateMultiplier",
               "type": "int256"
             },
             {
@@ -189,116 +133,6 @@
             {
               "name": "coverageOfCreditEnhancement",
               "type": "int256"
-            },
-            {
-              "components": [
-                {
-                  "name": "i",
-                  "type": "uint256"
-                },
-                {
-                  "name": "p",
-                  "type": "uint8"
-                },
-                {
-                  "name": "s",
-                  "type": "uint8"
-                },
-                {
-                  "name": "isSet",
-                  "type": "bool"
-                }
-              ],
-              "name": "cycleOfInterestPayment",
-              "type": "tuple"
-            },
-            {
-              "components": [
-                {
-                  "name": "i",
-                  "type": "uint256"
-                },
-                {
-                  "name": "p",
-                  "type": "uint8"
-                },
-                {
-                  "name": "s",
-                  "type": "uint8"
-                },
-                {
-                  "name": "isSet",
-                  "type": "bool"
-                }
-              ],
-              "name": "cycleOfRateReset",
-              "type": "tuple"
-            },
-            {
-              "components": [
-                {
-                  "name": "i",
-                  "type": "uint256"
-                },
-                {
-                  "name": "p",
-                  "type": "uint8"
-                },
-                {
-                  "name": "s",
-                  "type": "uint8"
-                },
-                {
-                  "name": "isSet",
-                  "type": "bool"
-                }
-              ],
-              "name": "cycleOfScalingIndex",
-              "type": "tuple"
-            },
-            {
-              "components": [
-                {
-                  "name": "i",
-                  "type": "uint256"
-                },
-                {
-                  "name": "p",
-                  "type": "uint8"
-                },
-                {
-                  "name": "s",
-                  "type": "uint8"
-                },
-                {
-                  "name": "isSet",
-                  "type": "bool"
-                }
-              ],
-              "name": "cycleOfFee",
-              "type": "tuple"
-            },
-            {
-              "components": [
-                {
-                  "name": "i",
-                  "type": "uint256"
-                },
-                {
-                  "name": "p",
-                  "type": "uint8"
-                },
-                {
-                  "name": "s",
-                  "type": "uint8"
-                },
-                {
-                  "name": "isSet",
-                  "type": "bool"
-                }
-              ],
-              "name": "cycleOfPrincipalRedemption",
-              "type": "tuple"
             },
             {
               "components": [
@@ -476,6 +310,14 @@
               ],
               "name": "contractStructure",
               "type": "tuple"
+            },
+            {
+              "name": "statusDate",
+              "type": "uint256"
+            },
+            {
+              "name": "maturityDate",
+              "type": "uint256"
             },
             {
               "name": "notionalPrincipal",
@@ -759,6 +601,14 @@
               ],
               "name": "contractStructure",
               "type": "tuple"
+            },
+            {
+              "name": "statusDate",
+              "type": "uint256"
+            },
+            {
+              "name": "maturityDate",
+              "type": "uint256"
             },
             {
               "name": "notionalPrincipal",
@@ -1440,5 +1290,5 @@
     "version": "0.5.2+commit.1df8f40c.Emscripten.clang"
   },
   "networks": {},
-  "updatedAt": "2019-11-19T14:48:59.303Z"
+  "updatedAt": "2019-11-19T15:07:13.674Z"
 }

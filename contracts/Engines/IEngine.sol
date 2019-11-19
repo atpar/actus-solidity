@@ -17,7 +17,7 @@ contract IEngine is Definitions {
 	 * @param terms terms of the contract
 	 * @return initial contract state
 	 */
-	function computeInitialState(Terms memory terms)
+	function computeInitialState(LifecycleTerms memory terms)
 		public
 		pure
 		returns (State memory);

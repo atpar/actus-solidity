@@ -10,6 +10,8 @@
   "feeBasis",
   "creditEventTypeCovered",
   "contractStructure",
+  "statusDate",
+  "maturityDate",
   "notionalPrincipal",
   "nominalInterestRate",
   "feeAccrued",
