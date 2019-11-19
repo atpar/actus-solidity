@@ -126,7 +126,6 @@ contract Definitions {
 		BusinessDayConvention businessDayConvention;
 		EndOfMonthConvention endOfMonthConvention;
 		ScalingEffect scalingEffect;
-		PenaltyType penaltyType;
 
 		uint256 contractDealDate;
 		uint256 statusDate;
