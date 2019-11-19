@@ -32,7 +32,7 @@ contract CEGEngine is Core, IEngine, STF, POF {
 	 * @param terms terms of the contract
 	 * @return initial contract state
 	 */
-	function computeInitialState(LifecycleTerms memory terms)
+	function computeInitialState(Terms memory terms)
 		public
 		pure
 		returns (State memory)
@@ -41,6 +41,7 @@ contract CEGEngine is Core, IEngine, STF, POF {
 
 		state.contractPerformance = ContractPerformance.PF;
 		state.lastEventTime = terms.statusDate;
+		state.maturityDate = terms.maturityDate;
 		state.notionalPrincipal = roleSign(terms.contractRole) * terms.notionalPrincipal;
 		state.feeAccrued = terms.feeAccrued;
 

@@ -1,0 +1,27 @@
+{
+  "contractName": "DayCountConvention",
+  "abi": [
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "PRECISION",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    }
+  ],
+  "metadata": "{\"compiler\":{\"version\":\"0.5.2+commit.1df8f40c\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"constant\":true,\"inputs\":[],\"name\":\"PRECISION\",\"outputs\":[{\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"}],\"devdoc\":{\"methods\":{}},\"userdoc\":{\"methods\":{}}},\"settings\":{\"compilationTarget\":{\"/Users/johannes/Documents/dev/actus-protocol/actus-solidity/contracts/Core/Conventions/DayCountConvention.sol\":\"DayCountConvention\"},\"evmVersion\":\"byzantium\",\"libraries\":{},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[]},\"sources\":{\"/Users/johannes/Documents/dev/actus-protocol/actus-solidity/contracts/Core/Conventions/DayCountConvention.sol\":{\"keccak256\":\"0x71532d0a0ddfd273c8e1e5b0476335600e045b0432db88c38ea0dd7aa4e3e5b9\",\"urls\":[\"bzzr://90a7540d010eee4e633e5237f046fd0ee005f4d83619415ca8694578e88e3eb6\"]},\"/Users/johannes/Documents/dev/actus-protocol/actus-solidity/contracts/Core/Definitions.sol\":{\"keccak256\":\"0xd743b8ef9bac781276ae8bf00f64438fd25bacec40e07d0e27752859b591f708\",\"urls\":[\"bzzr://8addd6b73bf3159f20d396a56621d919994f18e6ffe8f605c2179110ce91ebba\"]},\"/Users/johannes/Documents/dev/actus-protocol/actus-solidity/contracts/Core/SignedMath.sol\":{\"keccak256\":\"0x087ce99293084f1440d9005e9888bd12aff770f72ee0ff977adae1255ce899e6\",\"urls\":[\"bzzr://682c9a17df08c3c0e121abaf5b55f15752c0543fcbb45cdcaa7ddf545e688b30\"]},\"/Users/johannes/Documents/dev/actus-protocol/actus-solidity/contracts/external/BokkyPooBah/BokkyPooBahsDateTimeLibrary.sol\":{\"keccak256\":\"0x55ce115963ca5ee7a98b7b2e644e6decfbfdd70ada0b18e09a60344d9cdfe345\",\"urls\":[\"bzzr://9e24ebbec8dc7775ab45c4e41f9ac1958bb5710daf538df1f5cfd70b27650cb1\"]},\"openzeppelin-solidity/contracts/drafts/SignedSafeMath.sol\":{\"keccak256\":\"0xb4b45cd5475c318722ac0f8d7e2b9e77fee6f4f36374c1110fe615d50fbc0650\",\"urls\":[\"bzzr://a90fb457269c8a03ec5b811c71acef08a2751a4d2019b0661328610f9357dae7\"]},\"openzeppelin-solidity/contracts/math/SafeMath.sol\":{\"keccak256\":\"0x4ccf2d7b51873db1ccfd54ca2adae5eac3b184f9699911ed4490438419f1c690\",\"urls\":[\"bzzr://1604f5b6d6e916c154efd8c6720cda069e5ba32dfa0a9dedf2b42e5b02d07f89\"]}},\"version\":1}",
+  "bytecode": "0x6080604052348015600f57600080fd5b5060928061001e6000396000f3fe6080604052348015600f57600080fd5b50600436106044577c01000000000000000000000000000000000000000000000000000000006000350463aaf5eb6881146049575b600080fd5b604f6061565b60408051918252519081900360200190f35b60128156fea165627a7a72305820dd819d41d928f694ff4a53ca6f481145ce8d4a8dbb17d217a088cb4fbd44d1130029",
+  "compiler": {
+    "name": "solc",
+    "version": "0.5.2+commit.1df8f40c.Emscripten.clang"
+  },
+  "networks": {},
+  "updatedAt": "2019-11-19T14:48:59.266Z"
+}

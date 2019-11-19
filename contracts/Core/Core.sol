@@ -22,29 +22,6 @@ contract Core is
 	EndOfMonthConvention,
 	Schedule
 {
-	// function createProtoEvent(
-	// 	EventType eventType,
-	// 	uint256 scheduleTime,
-	// 	LifecycleTerms memory terms
-	// )
-	// 	public
-	// 	pure
-	// 	returns (ProtoEvent memory)
-	// {
-	// 	uint256 eventTime = shiftEventTime(
-	// 		scheduleTime,
-	// 		terms.businessDayConvention,
-	// 		terms.calendar
-	// 	);
-
-	// 	return ProtoEvent(
-	// 		eventTime,
-	// 		eventTime.add(getEpochOffset(eventType)),
-	// 		scheduleTime,
-	// 		eventType,
-	// 		terms.currency
-	// 	);
-	// }
 
 	function signum(int value) internal pure returns (int256) {
 		if (value > 0) {

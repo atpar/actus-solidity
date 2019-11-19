@@ -51,7 +51,7 @@ contract('ANNEngine', () => {
     const lifecycleTerms = parseTermsToLifecycleTerms(terms);
     const generatingTerms = parseTermsToGeneratingTerms(terms);
 
-    const initialState = await this.ANNEngineInstance.computeInitialState(lifecycleTerms, {});
+    const initialState = await this.ANNEngineInstance.computeInitialState(terms, {});
     const protoEventSchedule = removeNullProtoEvents(await computeProtoEventScheduleSegment(
       generatingTerms,
       generatingTerms.contractDealDate,

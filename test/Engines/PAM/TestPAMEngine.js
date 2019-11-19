@@ -50,12 +50,12 @@ contract('PAMEngine', () => {
   });
 
   it('should yield the initial contract state', async () => {
-    const initialState = await this.PAMEngineInstance.computeInitialState(this.lifecycleTerms, {});
+    const initialState = await this.PAMEngineInstance.computeInitialState(this.terms, {});
     assert.isTrue(Number(initialState['lastEventTime']) === Number(this.generatingTerms['statusDate']));
   });
 
   it('should yield the next next contract state and the contract events', async() => {
-    const initialState = await this.PAMEngineInstance.computeInitialState(this.lifecycleTerms, {});
+    const initialState = await this.PAMEngineInstance.computeInitialState(this.terms, {});
     const protoEventSchedule = await this.PAMEngineInstance.computeNonCyclicScheduleSegment(
       this.generatingTerms,
       this.generatingTerms.contractDealDate,
@@ -112,7 +112,7 @@ contract('PAMEngine', () => {
   });
 
   it('should yield the state of each event', async () => {
-    const initialState = await this.PAMEngineInstance.computeInitialState(this.lifecycleTerms, {});
+    const initialState = await this.PAMEngineInstance.computeInitialState(this.terms, {});
 
     const protoEventSchedule = removeNullProtoEvents(await computeProtoEventScheduleSegment(
       this.generatingTerms,

@@ -20,7 +20,7 @@ contract STF is Core {
       shiftCalcTime(state.lastEventTime, terms.businessDayConvention, terms.calendar),
       shiftCalcTime(scheduleTime, terms.businessDayConvention, terms.calendar),
       terms.dayCountConvention,
-      terms.maturityDate
+      state.maturityDate
     );
     state.accruedInterest = state.accruedInterest
     .add(
@@ -53,7 +53,7 @@ contract STF is Core {
       shiftCalcTime(state.lastEventTime, terms.businessDayConvention, terms.calendar),
       shiftCalcTime(scheduleTime, terms.businessDayConvention, terms.calendar),
       terms.dayCountConvention,
-      terms.maturityDate
+      state.maturityDate
     );
     state.accruedInterest = state.accruedInterest
     .add(
@@ -87,7 +87,7 @@ contract STF is Core {
       shiftCalcTime(state.lastEventTime, terms.businessDayConvention, terms.calendar),
       shiftCalcTime(scheduleTime, terms.businessDayConvention, terms.calendar),
       terms.dayCountConvention,
-      terms.maturityDate
+      state.maturityDate
     );
     state.accruedInterest = state.accruedInterest
     .add(
@@ -115,26 +115,28 @@ contract STF is Core {
       shiftCalcTime(state.lastEventTime, terms.businessDayConvention, terms.calendar),
       shiftCalcTime(scheduleTime, terms.businessDayConvention, terms.calendar),
       terms.dayCountConvention,
-      terms.maturityDate
+      state.maturityDate
     );
     state.notionalPrincipal = roleSign(terms.contractRole) * terms.notionalPrincipal;
     state.nominalInterestRate = terms.nominalInterestRate;
     state.lastEventTime = scheduleTime;
 
-    if (terms.cycleAnchorDateOfInterestPayment != 0 &&
-      terms.cycleAnchorDateOfInterestPayment < terms.initialExchangeDate
-    ) {
-      state.accruedInterest = state.nominalInterestRate
-      .floatMult(state.notionalPrincipal)
-      .floatMult(
-        yearFraction(
-          terms.cycleAnchorDateOfInterestPayment,
-          scheduleTime,
-          terms.dayCountConvention,
-          terms.maturityDate
-        )
-      );
-    }
+    state.accruedInterest = terms.accruedInterest;
+
+    // if (terms.cycleAnchorDateOfInterestPayment != 0 &&
+    //   terms.cycleAnchorDateOfInterestPayment < terms.initialExchangeDate
+    // ) {
+    //   state.accruedInterest = state.nominalInterestRate
+    //   .floatMult(state.notionalPrincipal)
+    //   .floatMult(
+    //     yearFraction(
+    //       terms.cycleAnchorDateOfInterestPayment,
+    //       scheduleTime,
+    //       terms.dayCountConvention,
+    //       state.maturityDate
+    //     )
+    //   );
+    // }
 
     return state;
   }
@@ -153,7 +155,7 @@ contract STF is Core {
       shiftCalcTime(state.lastEventTime, terms.businessDayConvention, terms.calendar),
       shiftCalcTime(scheduleTime, terms.businessDayConvention, terms.calendar),
       terms.dayCountConvention,
-      terms.maturityDate
+      state.maturityDate
     );
     state.notionalPrincipal = state.notionalPrincipal
     .add(
@@ -190,7 +192,7 @@ contract STF is Core {
       shiftCalcTime(state.lastEventTime, terms.businessDayConvention, terms.calendar),
       shiftCalcTime(scheduleTime, terms.businessDayConvention, terms.calendar),
       terms.dayCountConvention,
-      terms.maturityDate
+      state.maturityDate
     );
     state.accruedInterest = 0;
     state.feeAccrued = state.feeAccrued
@@ -218,7 +220,7 @@ contract STF is Core {
       shiftCalcTime(state.lastEventTime, terms.businessDayConvention, terms.calendar),
       shiftCalcTime(scheduleTime, terms.businessDayConvention, terms.calendar),
       terms.dayCountConvention,
-      terms.maturityDate
+      state.maturityDate
     );
     state.accruedInterest = state.accruedInterest
     .add(
@@ -252,7 +254,7 @@ contract STF is Core {
       shiftCalcTime(state.lastEventTime, terms.businessDayConvention, terms.calendar),
       shiftCalcTime(scheduleTime, terms.businessDayConvention, terms.calendar),
       terms.dayCountConvention,
-      terms.maturityDate
+      state.maturityDate
     );
     state.accruedInterest = state.accruedInterest
     .add(
@@ -285,7 +287,7 @@ contract STF is Core {
       shiftCalcTime(state.lastEventTime, terms.businessDayConvention, terms.calendar),
       shiftCalcTime(scheduleTime, terms.businessDayConvention, terms.calendar),
       terms.dayCountConvention,
-      terms.maturityDate
+      state.maturityDate
     );
     state.accruedInterest = state.accruedInterest
     .add(
@@ -319,7 +321,7 @@ contract STF is Core {
       shiftCalcTime(state.lastEventTime, terms.businessDayConvention, terms.calendar),
       shiftCalcTime(scheduleTime, terms.businessDayConvention, terms.calendar),
       terms.dayCountConvention,
-      terms.maturityDate
+      state.maturityDate
     );
     state.accruedInterest = state.accruedInterest
     .add(
@@ -352,7 +354,7 @@ contract STF is Core {
       shiftCalcTime(state.lastEventTime, terms.businessDayConvention, terms.calendar),
       shiftCalcTime(scheduleTime, terms.businessDayConvention, terms.calendar),
       terms.dayCountConvention,
-      terms.maturityDate
+      state.maturityDate
     );
     state.accruedInterest = state.accruedInterest
     .add(
@@ -406,7 +408,7 @@ contract STF is Core {
       shiftCalcTime(state.lastEventTime, terms.businessDayConvention, terms.calendar),
       shiftCalcTime(scheduleTime, terms.businessDayConvention, terms.calendar),
       terms.dayCountConvention,
-      terms.maturityDate
+      state.maturityDate
     );
     state.accruedInterest = state.accruedInterest
     .add(
@@ -434,7 +436,7 @@ contract STF is Core {
       shiftCalcTime(state.lastEventTime, terms.businessDayConvention, terms.calendar),
       shiftCalcTime(scheduleTime, terms.businessDayConvention, terms.calendar),
       terms.dayCountConvention,
-      terms.maturityDate
+      state.maturityDate
     );
     state.accruedInterest = state.accruedInterest
     .add(
@@ -483,7 +485,7 @@ contract STF is Core {
       shiftCalcTime(state.lastEventTime, terms.businessDayConvention, terms.calendar),
       shiftCalcTime(scheduleTime, terms.businessDayConvention, terms.calendar),
       terms.dayCountConvention,
-      terms.maturityDate
+      state.maturityDate
     );
     state.notionalPrincipal = 0;
     state.accruedInterest = 0;
@@ -549,7 +551,7 @@ contract STF is Core {
   //     shiftCalcTime(state.lastEventTime, terms.businessDayConvention, terms.calendar),
   //     shiftCalcTime(scheduleTime, terms.businessDayConvention, terms.calendar),
   //     terms.dayCountConvention,
-  //     terms.maturityDate
+  //     state.maturityDate
   //   );
   //   state.nominalAccrued = state.nominalAccrued
   //   .add(
@@ -581,7 +583,7 @@ contract STF is Core {
   //     shiftCalcTime(state.lastEventTime, terms.businessDayConvention, terms.calendar),
   //     shiftCalcTime(scheduleTime, terms.businessDayConvention, terms.calendar),
   //     terms.dayCountConvention,
-  //     terms.maturityDate
+  //     state.maturityDate
   //   );
   //   state.nominalAccrued = state.nominalAccrued
   //   .add(
@@ -614,7 +616,7 @@ contract STF is Core {
   //     shiftCalcTime(state.lastEventTime, terms.businessDayConvention, terms.calendar),
   //     shiftCalcTime(scheduleTime, terms.businessDayConvention, terms.calendar),
   //     terms.dayCountConvention,
-  //     terms.maturityDate
+  //     state.maturityDate
   //   );
   //   state.nominalAccrued = state.nominalAccrued
   //   .add(
@@ -642,26 +644,28 @@ contract STF is Core {
       shiftCalcTime(state.lastEventTime, terms.businessDayConvention, terms.calendar),
       shiftCalcTime(scheduleTime, terms.businessDayConvention, terms.calendar),
       terms.dayCountConvention,
-      terms.maturityDate
+      state.maturityDate
     );
     state.notionalPrincipal = roleSign(terms.contractRole) * terms.notionalPrincipal;
     state.nominalInterestRate = terms.nominalInterestRate;
     state.lastEventTime = scheduleTime;
 
-    if (terms.cycleAnchorDateOfInterestPayment != 0 &&
-      terms.cycleAnchorDateOfInterestPayment < terms.initialExchangeDate
-    ) {
-      state.accruedInterest = state.nominalInterestRate
-      .floatMult(state.notionalPrincipal)
-      .floatMult(
-        yearFraction(
-          shiftCalcTime(terms.cycleAnchorDateOfInterestPayment, terms.businessDayConvention, terms.calendar),
-          shiftCalcTime(scheduleTime, terms.businessDayConvention, terms.calendar),
-          terms.dayCountConvention,
-          terms.maturityDate
-        )
-      );
-    }
+    state.accruedInterest = terms.accruedInterest;
+
+    // if (terms.cycleAnchorDateOfInterestPayment != 0 &&
+    //   terms.cycleAnchorDateOfInterestPayment < terms.initialExchangeDate
+    // ) {
+    //   state.accruedInterest = state.nominalInterestRate
+    //   .floatMult(state.notionalPrincipal)
+    //   .floatMult(
+    //     yearFraction(
+    //       shiftCalcTime(terms.cycleAnchorDateOfInterestPayment, terms.businessDayConvention, terms.calendar),
+    //       shiftCalcTime(scheduleTime, terms.businessDayConvention, terms.calendar),
+    //       terms.dayCountConvention,
+    //       state.maturityDate
+    //     )
+    //   );
+    // }
 
     return state;
   }
@@ -680,7 +684,7 @@ contract STF is Core {
       shiftCalcTime(state.lastEventTime, terms.businessDayConvention, terms.calendar),
       shiftCalcTime(scheduleTime, terms.businessDayConvention, terms.calendar),
       terms.dayCountConvention,
-      terms.maturityDate
+      state.maturityDate
     );
     state.accruedInterest = state.accruedInterest
     .add(
@@ -717,7 +721,7 @@ contract STF is Core {
       shiftCalcTime(state.lastEventTime, terms.businessDayConvention, terms.calendar),
       shiftCalcTime(scheduleTime, terms.businessDayConvention, terms.calendar),
       terms.dayCountConvention,
-      terms.maturityDate
+      state.maturityDate
     );
     state.accruedInterest = 0;
     state.feeAccrued = state.feeAccrued
@@ -744,7 +748,7 @@ contract STF is Core {
   //     shiftCalcTime(state.lastEventTime, terms.businessDayConvention, terms.calendar),
   //     shiftCalcTime(scheduleTime, terms.businessDayConvention, terms.calendar),
   //     terms.dayCountConvention,
-  //     terms.maturityDate
+  //     state.maturityDate
   //   );
   //   state.nominalAccrued = state.nominalAccrued
   //   .add(
@@ -778,7 +782,7 @@ contract STF is Core {
   //     shiftCalcTime(state.lastEventTime, terms.businessDayConvention, terms.calendar),
   //     shiftCalcTime(scheduleTime, terms.businessDayConvention, terms.calendar),
   //     terms.dayCountConvention,
-  //     terms.maturityDate
+  //     state.maturityDate
   //   );
   //   state.nominalAccrued = state.nominalAccrued
   //   .add(
@@ -811,7 +815,7 @@ contract STF is Core {
       shiftCalcTime(state.lastEventTime, terms.businessDayConvention, terms.calendar),
       shiftCalcTime(scheduleTime, terms.businessDayConvention, terms.calendar),
       terms.dayCountConvention,
-      terms.maturityDate
+      state.maturityDate
     );
     state.accruedInterest = state.accruedInterest
     .add(
@@ -860,7 +864,7 @@ contract STF is Core {
       shiftCalcTime(state.lastEventTime, terms.businessDayConvention, terms.calendar),
       shiftCalcTime(scheduleTime, terms.businessDayConvention, terms.calendar),
       terms.dayCountConvention,
-      terms.maturityDate
+      state.maturityDate
     );
     state.accruedInterest = state.accruedInterest
     .add(
@@ -894,7 +898,7 @@ contract STF is Core {
   //     shiftCalcTime(state.lastEventTime, terms.businessDayConvention, terms.calendar),
   //     shiftCalcTime(scheduleTime, terms.businessDayConvention, terms.calendar),
   //     terms.dayCountConvention,
-  //     terms.maturityDate
+  //     state.maturityDate
   //   );
   //   state.nominalAccrued = state.nominalAccrued
   //   .add(
@@ -926,7 +930,7 @@ contract STF is Core {
   //     shiftCalcTime(state.lastEventTime, terms.businessDayConvention, terms.calendar),
   //     shiftCalcTime(scheduleTime, terms.businessDayConvention, terms.calendar),
   //     terms.dayCountConvention,
-  //     terms.maturityDate
+  //     state.maturityDate
   //   );
   //   state.nominalAccrued = state.nominalAccrued
   //   .add(
@@ -980,7 +984,7 @@ contract STF is Core {
       shiftCalcTime(state.lastEventTime, terms.businessDayConvention, terms.calendar),
       shiftCalcTime(scheduleTime, terms.businessDayConvention, terms.calendar),
       terms.dayCountConvention,
-      terms.maturityDate
+      state.maturityDate
     );
     state.accruedInterest = state.accruedInterest
     .add(
@@ -1009,7 +1013,7 @@ contract STF is Core {
       shiftCalcTime(state.lastEventTime, terms.businessDayConvention, terms.calendar),
       shiftCalcTime(scheduleTime, terms.businessDayConvention, terms.calendar),
       terms.dayCountConvention,
-      terms.maturityDate
+      state.maturityDate
     );
     state.accruedInterest = state.accruedInterest
     .add(
@@ -1056,7 +1060,7 @@ contract STF is Core {
   //     shiftCalcTime(state.lastEventTime, terms.businessDayConvention, terms.calendar),
   //     shiftCalcTime(scheduleTime, terms.businessDayConvention, terms.calendar),
   //     terms.dayCountConvention,
-  //     terms.maturityDate
+  //     state.maturityDate
   //   );
   //   state.notionalPrincipal = 0;
   //   state.nominalAccrued = 0;
@@ -1129,7 +1133,7 @@ contract STF is Core {
     //   shiftCalcTime(state.lastEventTime, terms.businessDayConvention, terms.calendar),
     //   shiftCalcTime(scheduleTime, terms.businessDayConvention, terms.calendar),
     //   terms.dayCountConvention,
-    //   terms.maturityDate
+    //   state.maturityDate
     // );
     state.feeAccrued = 0;
     state.lastEventTime = scheduleTime;
@@ -1151,7 +1155,7 @@ contract STF is Core {
     //   shiftCalcTime(state.lastEventTime, terms.businessDayConvention, terms.calendar),
     //   shiftCalcTime(scheduleTime, terms.businessDayConvention, terms.calendar),
     //   terms.dayCountConvention,
-    //   terms.maturityDate
+    //   state.maturityDate
     // );
     state.notionalPrincipal = 0;
     state.accruedInterest = 0;
