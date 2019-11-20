@@ -21,10 +21,10 @@ function getEpochOffsetForEventType (eventType) {
   return 0;
 }
 
-function sortProtoEvents (protoEvents) {
-  protoEvents.sort((protoEventA, protoEventB) => {
-    const { eventType: eventTypeA, scheduleTime: scheduleTimeA } = decodeProtoEvent(protoEventA);
-    const { eventType: eventTypeB, scheduleTime: scheduleTimeB } = decodeProtoEvent(protoEventB)
+function sortEvents (_events) {
+  _events.sort((_eventA, _eventB) => {
+    const { eventType: eventTypeA, scheduleTime: scheduleTimeA } = decodeEvent(_eventA);
+    const { eventType: eventTypeB, scheduleTime: scheduleTimeB } = decodeEvent(_eventB)
 
     if (scheduleTimeA == 0) { return 1 }
     if (scheduleTimeB == 0) { return -1 }
@@ -41,36 +41,36 @@ function sortProtoEvents (protoEvents) {
     return 0
   });
 
-  return protoEvents;
+  return _events;
 }
 
-function removeNullProtoEvents (protoEventSchedule) {
-  const compactProtoEventSchedule = [];
+function removeNullEvents (_eventSchedule) {
+  const compactEventSchedule = [];
 
-  for (protoEvent of protoEventSchedule) {
-    if (decodeProtoEvent(protoEvent).scheduleTime === 0) { continue }
-    compactProtoEventSchedule.push(protoEvent);
+  for (_event of _eventSchedule) {
+    if (decodeEvent(_event).scheduleTime === 0) { continue }
+    compactEventSchedule.push(_event);
   }
 
-  return compactProtoEventSchedule;
+  return compactEventSchedule;
 }
 
-function decodeProtoEvent (encodedProtoEvent) {
+function decodeEvent (encodedEvent) {
   return {
-    eventType: Web3Utils.hexToNumber('0x' + String(encodedProtoEvent).substr(2, 2)),
-    scheduleTime: Web3Utils.hexToNumber('0x' + String(encodedProtoEvent).substr(10, encodedProtoEvent.length))
+    eventType: Web3Utils.hexToNumber('0x' + String(encodedEvent).substr(2, 2)),
+    scheduleTime: Web3Utils.hexToNumber('0x' + String(encodedEvent).substr(10, encodedEvent.length))
   };
 }
 
-function parseProtoEventSchedule (encodedProtoEventSchedule) {
-  return removeNullProtoEvents(
-    encodedProtoEventSchedule
-  ).map((encodedProtoEvent) => decodeProtoEvent(encodedProtoEvent));
+function parseEventSchedule (encodedEventSchedule) {
+  return removeNullEvents(
+    encodedEventSchedule
+  ).map((encodedEvent) => decodeEvent(encodedEvent));
 }
 
 module.exports = { 
-  sortProtoEvents, 
-  removeNullProtoEvents, 
-  decodeProtoEvent,
-  parseProtoEventSchedule
+  sortEvents, 
+  removeNullEvents, 
+  decodeEvent,
+  parseEventSchedule
 }

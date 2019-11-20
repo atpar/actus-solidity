@@ -120,11 +120,8 @@ contract Definitions {
 	}
 
 	struct GeneratingTerms {
-		Calendar calendar;
-		BusinessDayConvention businessDayConvention;
 		EndOfMonthConvention endOfMonthConvention;
 		ScalingEffect scalingEffect;
-		PenaltyType penaltyType;
 
 		uint256 contractDealDate;
 		uint256 statusDate;
