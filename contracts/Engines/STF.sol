@@ -121,20 +121,22 @@ contract STF is Core {
     state.nominalInterestRate = terms.nominalInterestRate;
     state.lastEventTime = scheduleTime;
 
-    if (terms.cycleAnchorDateOfInterestPayment != 0 &&
-      terms.cycleAnchorDateOfInterestPayment < terms.initialExchangeDate
-    ) {
-      state.accruedInterest = state.nominalInterestRate
-      .floatMult(state.notionalPrincipal)
-      .floatMult(
-        yearFraction(
-          terms.cycleAnchorDateOfInterestPayment,
-          scheduleTime,
-          terms.dayCountConvention,
-          terms.maturityDate
-        )
-      );
-    }
+    state.accruedInterest = terms.accruedInterest;
+
+    // if (terms.cycleAnchorDateOfInterestPayment != 0 &&
+    //   terms.cycleAnchorDateOfInterestPayment < terms.initialExchangeDate
+    // ) {
+    //   state.accruedInterest = state.nominalInterestRate
+    //   .floatMult(state.notionalPrincipal)
+    //   .floatMult(
+    //     yearFraction(
+    //       terms.cycleAnchorDateOfInterestPayment,
+    //       scheduleTime,
+    //       terms.dayCountConvention,
+    //       terms.maturityDate
+    //     )
+    //   );
+    // }
 
     return state;
   }
@@ -648,20 +650,22 @@ contract STF is Core {
     state.nominalInterestRate = terms.nominalInterestRate;
     state.lastEventTime = scheduleTime;
 
-    if (terms.cycleAnchorDateOfInterestPayment != 0 &&
-      terms.cycleAnchorDateOfInterestPayment < terms.initialExchangeDate
-    ) {
-      state.accruedInterest = state.nominalInterestRate
-      .floatMult(state.notionalPrincipal)
-      .floatMult(
-        yearFraction(
-          shiftCalcTime(terms.cycleAnchorDateOfInterestPayment, terms.businessDayConvention, terms.calendar),
-          shiftCalcTime(scheduleTime, terms.businessDayConvention, terms.calendar),
-          terms.dayCountConvention,
-          terms.maturityDate
-        )
-      );
-    }
+    state.accruedInterest = terms.accruedInterest;
+
+    // if (terms.cycleAnchorDateOfInterestPayment != 0 &&
+    //   terms.cycleAnchorDateOfInterestPayment < terms.initialExchangeDate
+    // ) {
+    //   state.accruedInterest = state.nominalInterestRate
+    //   .floatMult(state.notionalPrincipal)
+    //   .floatMult(
+    //     yearFraction(
+    //       shiftCalcTime(terms.cycleAnchorDateOfInterestPayment, terms.businessDayConvention, terms.calendar),
+    //       shiftCalcTime(scheduleTime, terms.businessDayConvention, terms.calendar),
+    //       terms.dayCountConvention,
+    //       terms.maturityDate
+    //     )
+    //   );
+    // }
 
     return state;
   }
