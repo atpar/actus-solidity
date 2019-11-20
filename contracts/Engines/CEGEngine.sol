@@ -41,6 +41,7 @@ contract CEGEngine is Core, IEngine, STF, POF {
 
 		state.contractPerformance = ContractPerformance.PF;
 		state.lastEventTime = terms.statusDate;
+		state.maturityDate = terms.maturityDate;
 		state.notionalPrincipal = roleSign(terms.contractRole) * terms.notionalPrincipal;
 		state.feeAccrued = terms.feeAccrued;
 
