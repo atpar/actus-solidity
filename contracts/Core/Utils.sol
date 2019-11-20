@@ -7,7 +7,7 @@ import "./Definitions.sol";
 
 contract Utils is Definitions {
 
-	function encodeProtoEvent(EventType eventType, uint256 scheduleTime)
+	function encodeEvent(EventType eventType, uint256 scheduleTime)
 		public
 		pure
 		returns (bytes32)
@@ -18,13 +18,13 @@ contract Utils is Definitions {
 		);
 	}
 
-	function decodeProtoEvent(bytes32 protoEvent)
+	function decodeEvent(bytes32 _event)
 		public
 		pure
 		returns (EventType, uint256)
 	{
-		EventType eventType = EventType(uint8(uint256(protoEvent >> 248)));
-		uint256 scheduleTime = uint256(uint64(uint256(protoEvent)));
+		EventType eventType = EventType(uint8(uint256(_event >> 248)));
+		uint256 scheduleTime = uint256(uint64(uint256(_event)));
 
 		return (eventType, scheduleTime);
 	}
@@ -55,23 +55,23 @@ contract Utils is Definitions {
 		return newTimestamp;
 	}
 
-  // function sortProtoEventSchedule(
-	// 	ProtoEvent[MAX_EVENT_SCHEDULE_SIZE] memory protoEventSchedule,
-	// 	uint256 numberOfProtoEvents
+  // function sortEventSchedule(
+	// 	Event[MAX_EVENT_SCHEDULE_SIZE] memory _eventSchedule,
+	// 	uint256 numberOfEvents
 	// )
 	// 	internal
 	// 	pure
 	// {
-	// 	quickSortProtoEventSchedule(protoEventSchedule, uint(0), uint(protoEventSchedule.length - 1));
+	// 	quickSortEventSchedule(_eventSchedule, uint(0), uint(_eventSchedule.length - 1));
 
-	// 	for (uint256 i = 0; i < numberOfProtoEvents; i++) {
-	// 		protoEventSchedule[i] = protoEventSchedule[protoEventSchedule.length - numberOfProtoEvents + i];
-	// 		delete protoEventSchedule[protoEventSchedule.length - numberOfProtoEvents + i];
+	// 	for (uint256 i = 0; i < numberOfEvents; i++) {
+	// 		_eventSchedule[i] = _eventSchedule[_eventSchedule.length - numberOfEvents + i];
+	// 		delete _eventSchedule[_eventSchedule.length - numberOfEvents + i];
 	// 	}
 	// }
 
-	// function quickSortProtoEventSchedule(
-	// 	ProtoEvent[MAX_EVENT_SCHEDULE_SIZE] memory protoEventSchedule,
+	// function quickSortEventSchedule(
+	// 	Event[MAX_EVENT_SCHEDULE_SIZE] memory _eventSchedule,
 	// 	uint left,
 	// 	uint right
 	// )
@@ -84,29 +84,29 @@ contract Utils is Definitions {
 	// 	if (i == j) return;
 
 	// 	// pick event in the middle of the schedule
-	// 	uint pivot = protoEventSchedule[left + (right - left) / 2].eventTimeWithEpochOffset;
+	// 	uint pivot = _eventSchedule[left + (right - left) / 2].eventTimeWithEpochOffset;
 
 	// 	// do until pivot event is reached
 	// 	while (i <= j) {
 	// 		// search for event that is scheduled later than the pivot event
-	// 		while (protoEventSchedule[i].eventTimeWithEpochOffset < pivot) i++;
+	// 		while (_eventSchedule[i].eventTimeWithEpochOffset < pivot) i++;
 	// 		// search for event that is scheduled earlier than the pivot event
-	// 		while (pivot < protoEventSchedule[j].eventTimeWithEpochOffset) j--;
+	// 		while (pivot < _eventSchedule[j].eventTimeWithEpochOffset) j--;
 	// 		// if the event that is scheduled later comes before the event that is scheduled earlier, swap events
 	// 		if (i <= j) {
 	// 			(
-	// 				protoEventSchedule[i], protoEventSchedule[j]
+	// 				_eventSchedule[i], _eventSchedule[j]
 	// 			) = (
-	// 				protoEventSchedule[j],
-	// 				protoEventSchedule[i]
+	// 				_eventSchedule[j],
+	// 				_eventSchedule[i]
 	// 			);
 	// 			i++;
 	// 			j--;
 	// 		}
 	// 	}
 
-	// 	if (left < j) quickSortProtoEventSchedule(protoEventSchedule, left, j);
-	// 	if (i < right) quickSortProtoEventSchedule(protoEventSchedule, i, right);
+	// 	if (left < j) quickSortEventSchedule(_eventSchedule, left, j);
+	// 	if (i < right) quickSortEventSchedule(_eventSchedule, i, right);
 	// }
 
 	/**

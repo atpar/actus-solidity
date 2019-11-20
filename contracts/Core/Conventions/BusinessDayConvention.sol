@@ -29,7 +29,7 @@ contract BusinessDayConvention is Definitions {
 		return shiftEventTime(timestamp, convention, calendar);
 	}
 
-	// used in ProtoEvent schedule generation (for single events and event cycles schedules)
+	// used in Event schedule generation (for single events and event cycles schedules)
 	// before event offset is applied
 	function shiftEventTime(
 		uint256 timestamp,

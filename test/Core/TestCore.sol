@@ -335,11 +335,11 @@ contract TestCore is Core {
     );
   }
 
-  // function testSortProtoEventSchedule() public {
-  //   ProtoEvent[MAX_EVENT_SCHEDULE_SIZE] memory protoEventSchedule;
+  // function testSortEventSchedule() public {
+  //   Event[MAX_EVENT_SCHEDULE_SIZE] memory _eventSchedule;
   //   uint16 index = 0;
 
-  //   protoEventSchedule[index] = ProtoEvent(
+  //   _eventSchedule[index] = Event(
   //     uint256(4),
   //     uint256(4).add(getEpochOffset(EventType.TD)),
   //     uint256(4),
@@ -348,7 +348,7 @@ contract TestCore is Core {
   //   );
   //   index++;
 
-  //   protoEventSchedule[index] = ProtoEvent(
+  //   _eventSchedule[index] = Event(
   //     uint256(4),
   //     uint256(4).add(getEpochOffset(EventType.MD)),
   //     uint256(4),
@@ -357,7 +357,7 @@ contract TestCore is Core {
   //   );
   //   index++;
 
-  //   protoEventSchedule[index] = ProtoEvent(
+  //   _eventSchedule[index] = Event(
   //     uint256(1),
   //     uint256(1).add(getEpochOffset(EventType.IED)),
   //     uint256(1),
@@ -366,13 +366,13 @@ contract TestCore is Core {
   //   );
   //   index++;
 
-  //   sortProtoEventSchedule(protoEventSchedule, index);
+  //   sortEventSchedule(_eventSchedule, index);
 
-  //   Assert.equal(uint256(protoEventSchedule[0].eventType), uint256(EventType.IED), "First ProtoEvent in schedule should be IED");
-  //   Assert.equal(uint256(protoEventSchedule[1].eventType), uint256(EventType.TD), "Second ProtoEvent in schedule should be TD");
-  //   Assert.equal(uint256(protoEventSchedule[2].eventType), uint256(EventType.MD), "Second ProtoEvent in schedule should be MD");
-  //   Assert.equal(uint256(protoEventSchedule[3].eventTime), uint256(0), "Following ProtoEvents should be 0");
-  //   Assert.equal(uint256(protoEventSchedule[4].eventTime), uint256(0), "Following ProtoEvents should be 0");
+  //   Assert.equal(uint256(_eventSchedule[0].eventType), uint256(EventType.IED), "First Event in schedule should be IED");
+  //   Assert.equal(uint256(_eventSchedule[1].eventType), uint256(EventType.TD), "Second Event in schedule should be TD");
+  //   Assert.equal(uint256(_eventSchedule[2].eventType), uint256(EventType.MD), "Second Event in schedule should be MD");
+  //   Assert.equal(uint256(_eventSchedule[3].eventTime), uint256(0), "Following Events should be 0");
+  //   Assert.equal(uint256(_eventSchedule[4].eventTime), uint256(0), "Following Events should be 0");
   // }
 
   function testIsInPeriod() public {

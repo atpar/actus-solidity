@@ -50,14 +50,14 @@ contract PAMEngine is Core, IEngine, STF, POF {
 	 * returns the contrat event and the new contract state
 	 * @param terms terms of the contract
 	 * @param state current state of the contract
-	 * @param protoEvent prototype event to be evaluated and applied to the contract state
+	 * @param _event prototype event to be evaluated and applied to the contract state
 	 * @param currentTimestamp current timestamp
 	 * @return the new contract state and the evaluated event
 	 */
 	function computeStateForEvent(
 		LifecycleTerms memory terms,
 		State memory state,
-		bytes32 protoEvent,
+		bytes32 _event,
 		uint256 currentTimestamp
 	)
 		public
@@ -65,7 +65,7 @@ contract PAMEngine is Core, IEngine, STF, POF {
 		returns (State memory)
 	{
 		return stateTransitionFunction(
-			protoEvent,
+			_event,
 			state,
 			terms,
 			currentTimestamp
@@ -77,14 +77,14 @@ contract PAMEngine is Core, IEngine, STF, POF {
 	 * returns the contrat event and the new contract state
 	 * @param terms terms of the contract
 	 * @param state current state of the contract
-	 * @param protoEvent prototype event to be evaluated and applied to the contract state
+	 * @param _event prototype event to be evaluated and applied to the contract state
 	 * @param currentTimestamp current timestamp
 	 * @return the new contract state and the evaluated event
 	 */
 	function computePayoffForEvent(
 		LifecycleTerms memory terms,
 		State memory state,
-		bytes32 protoEvent,
+		bytes32 _event,
 		uint256 currentTimestamp
 	)
 		public
@@ -92,7 +92,7 @@ contract PAMEngine is Core, IEngine, STF, POF {
 		returns (int256)
 	{
 		return payoffFunction(
-			protoEvent,
+			_event,
 			state,
 			terms,
 			currentTimestamp
@@ -115,19 +115,19 @@ contract PAMEngine is Core, IEngine, STF, POF {
 		pure
 		returns (bytes32[MAX_EVENT_SCHEDULE_SIZE] memory)
 	{
-		bytes32[MAX_EVENT_SCHEDULE_SIZE] memory protoEventSchedule;
+		bytes32[MAX_EVENT_SCHEDULE_SIZE] memory _eventSchedule;
 		uint16 index = 0;
 
 		// initial exchange
 		if (isInPeriod(terms.initialExchangeDate, segmentStart, segmentEnd)) {
-			protoEventSchedule[index] = encodeProtoEvent(EventType.IED, terms.initialExchangeDate);
+			_eventSchedule[index] = encodeEvent(EventType.IED, terms.initialExchangeDate);
 			index++;
 		}
 
 		// purchase
 		if (terms.purchaseDate != 0) {
 			if (isInPeriod(terms.purchaseDate, segmentStart, segmentEnd)) {
-				protoEventSchedule[index] = encodeProtoEvent(EventType.PRD, terms.purchaseDate);
+				_eventSchedule[index] = encodeEvent(EventType.PRD, terms.purchaseDate);
 				index++;
 			}
 		}
@@ -135,18 +135,18 @@ contract PAMEngine is Core, IEngine, STF, POF {
 		// termination
 		if (terms.terminationDate != 0) {
 			if (isInPeriod(terms.terminationDate, segmentStart, segmentEnd)) {
-				protoEventSchedule[index] = encodeProtoEvent(EventType.TD, terms.terminationDate);
+				_eventSchedule[index] = encodeEvent(EventType.TD, terms.terminationDate);
 				index++;
 			}
 		}
 
 		// principal redemption
 		if (isInPeriod(terms.maturityDate, segmentStart, segmentEnd)) {
-			protoEventSchedule[index] = encodeProtoEvent(EventType.MD, terms.maturityDate);
+			_eventSchedule[index] = encodeEvent(EventType.MD, terms.maturityDate);
 			index++;
 		}
 
-		return protoEventSchedule;
+		return _eventSchedule;
 	}
 
 	/**
@@ -167,7 +167,7 @@ contract PAMEngine is Core, IEngine, STF, POF {
 		pure
 		returns(bytes32[MAX_EVENT_SCHEDULE_SIZE] memory)
 	{
-		bytes32[MAX_EVENT_SCHEDULE_SIZE] memory protoEventSchedule;
+		bytes32[MAX_EVENT_SCHEDULE_SIZE] memory _eventSchedule;
 
 		if (eventType == EventType.IP || eventType == EventType.IPCI) {
 			uint256 index = 0;
@@ -186,33 +186,23 @@ contract PAMEngine is Core, IEngine, STF, POF {
 					segmentEnd
 				);
 				if (terms.capitalizationEndDate != 0) {
-					uint256 shiftedIPCITime = shiftEventTime(
-						terms.capitalizationEndDate,
-						terms.businessDayConvention,
-						terms.calendar
-					);
-					if (isInPeriod(shiftedIPCITime, segmentStart, segmentEnd)) {
-						protoEventSchedule[index] = encodeProtoEvent(EventType.IPCI, terms.capitalizationEndDate);
+					if (isInPeriod(terms.capitalizationEndDate, segmentStart, segmentEnd)) {
+						_eventSchedule[index] = encodeEvent(EventType.IPCI, terms.capitalizationEndDate);
 						index++;
 					}
 				}
 				for (uint8 i = 0; i < MAX_CYCLE_SIZE; i++) {
 					if (interestPaymentSchedule[i] == 0) break;
-					uint256 shiftedIPDate = shiftEventTime(
-						interestPaymentSchedule[i],
-						terms.businessDayConvention,
-						terms.calendar
-					);
-					if (isInPeriod(shiftedIPDate, segmentStart, segmentEnd) == false) continue;
+					if (isInPeriod(interestPaymentSchedule[i], segmentStart, segmentEnd) == false) continue;
 					if (
 						terms.capitalizationEndDate != 0 &&
 						interestPaymentSchedule[i] <= terms.capitalizationEndDate
 					) {
 						if (interestPaymentSchedule[i] == terms.capitalizationEndDate) continue;
-						protoEventSchedule[index] = encodeProtoEvent(EventType.IPCI, interestPaymentSchedule[i]);
+						_eventSchedule[index] = encodeEvent(EventType.IPCI, interestPaymentSchedule[i]);
 						index++;
 					} else {
-						protoEventSchedule[index] = encodeProtoEvent(EventType.IP, interestPaymentSchedule[i]);
+						_eventSchedule[index] = encodeEvent(EventType.IP, interestPaymentSchedule[i]);
 						index++;
 					}
 				}
@@ -220,13 +210,8 @@ contract PAMEngine is Core, IEngine, STF, POF {
 
 			// capitalization end date
 			else if (terms.capitalizationEndDate != 0) {
-				uint256 shiftedIPCIDate = shiftEventTime(
-					terms.capitalizationEndDate,
-					terms.businessDayConvention,
-					terms.calendar
-				);
-				if (isInPeriod(shiftedIPCIDate, segmentStart, segmentEnd)) {
-					protoEventSchedule[index] = encodeProtoEvent(EventType.IPCI, terms.capitalizationEndDate);
+				if (isInPeriod(terms.capitalizationEndDate, segmentStart, segmentEnd)) {
+					_eventSchedule[index] = encodeEvent(EventType.IPCI, terms.capitalizationEndDate);
 					index++;
 				}
 			}
@@ -248,13 +233,8 @@ contract PAMEngine is Core, IEngine, STF, POF {
 				);
 				for (uint8 i = 0; i < MAX_CYCLE_SIZE; i++) {
 					if (rateResetSchedule[i] == 0) break;
-					uint256 shiftedRRDate = shiftEventTime(
-						rateResetSchedule[i],
-						terms.businessDayConvention,
-						terms.calendar
-					);
-					if (isInPeriod(shiftedRRDate, segmentStart, segmentEnd) == false) continue;
-					protoEventSchedule[index] = encodeProtoEvent(EventType.RR, rateResetSchedule[i]);
+					if (isInPeriod(rateResetSchedule[i], segmentStart, segmentEnd) == false) continue;
+					_eventSchedule[index] = encodeEvent(EventType.RR, rateResetSchedule[i]);
 					index++;
 				}
 			}
@@ -277,13 +257,8 @@ contract PAMEngine is Core, IEngine, STF, POF {
 				);
 				for (uint8 i = 0; i < MAX_CYCLE_SIZE; i++) {
 					if (feeSchedule[i] == 0) break;
-					uint256 shiftedFPDate = shiftEventTime(
-						feeSchedule[i],
-						terms.businessDayConvention,
-						terms.calendar
-					);
-					if (isInPeriod(shiftedFPDate, segmentStart, segmentEnd) == false) continue;
-					protoEventSchedule[index] = encodeProtoEvent(EventType.FP, feeSchedule[i]);
+					if (isInPeriod(feeSchedule[i], segmentStart, segmentEnd) == false) continue;
+					_eventSchedule[index] = encodeEvent(EventType.FP, feeSchedule[i]);
 					index++;
 				}
 			}
@@ -307,32 +282,27 @@ contract PAMEngine is Core, IEngine, STF, POF {
 				);
 				for (uint8 i = 0; i < MAX_CYCLE_SIZE; i++) {
 					if (scalingSchedule[i] == 0) break;
-					uint256 shiftedSCDate = shiftEventTime(
-						scalingSchedule[i],
-						terms.businessDayConvention,
-						terms.calendar
-					);
-					if (isInPeriod(shiftedSCDate, segmentStart, segmentEnd) == false) continue;
-					protoEventSchedule[index] = encodeProtoEvent(EventType.SC, scalingSchedule[i]);
+					if (isInPeriod(scalingSchedule[i], segmentStart, segmentEnd) == false) continue;
+					_eventSchedule[index] = encodeEvent(EventType.SC, scalingSchedule[i]);
 					index++;
 				}
 			}
 		}
 
 		// revert("PAMEngine.computeCyclicScheduleSegment: UNKNOWN_CYCLIC_EVENT_TYPE");
-		return protoEventSchedule;
+		return _eventSchedule;
 	}
 
 	/**
 	 * computes the next contract state based on the contract terms, state and the event type
-	 * @param protoEvent proto event for which to evaluate the next state for
+	 * @param _event proto event for which to evaluate the next state for
 	 * @param state current state of the contract
 	 * @param terms terms of the contract
 	 * @param currentTimestamp current timestamp
 	 * @return next contract state
 	 */
 	function stateTransitionFunction(
-		bytes32 protoEvent,
+		bytes32 _event,
 		State memory state,
 		LifecycleTerms memory terms,
 		uint256 currentTimestamp
@@ -341,7 +311,7 @@ contract PAMEngine is Core, IEngine, STF, POF {
 		pure
 		returns (State memory)
 	{
-		(EventType eventType, uint256 scheduleTime) = decodeProtoEvent(protoEvent);
+		(EventType eventType, uint256 scheduleTime) = decodeEvent(_event);
 
 		if (eventType == EventType.AD) return STF_PAM_AD(scheduleTime, terms, state, currentTimestamp);
 		if (eventType == EventType.CD) return STF_PAM_CD(scheduleTime, terms, state, currentTimestamp);
@@ -365,14 +335,14 @@ contract PAMEngine is Core, IEngine, STF, POF {
 	/**
 	 * calculates the payoff for the current time based on the contract terms,
 	 * state and the event type
-	 * @param protoEvent proto event for which to evaluate the payoff for
+	 * @param _event proto event for which to evaluate the payoff for
 	 * @param state current state of the contract
 	 * @param terms terms of the contract
 	 * @param currentTimestamp current timestamp
 	 * @return payoff
 	 */
 	function payoffFunction(
-		bytes32 protoEvent,
+		bytes32 _event,
 		State memory state,
 		LifecycleTerms memory terms,
 		uint256 currentTimestamp
@@ -381,7 +351,7 @@ contract PAMEngine is Core, IEngine, STF, POF {
 		pure
 		returns (int256)
 	{
-		(EventType eventType, uint256 scheduleTime) = decodeProtoEvent(protoEvent);
+		(EventType eventType, uint256 scheduleTime) = decodeEvent(_event);
 
 		if (eventType == EventType.AD) return 0;
 		if (eventType == EventType.CD) return 0;
