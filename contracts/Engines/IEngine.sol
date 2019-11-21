@@ -92,19 +92,20 @@ contract IEngine is Definitions {
 		pure
 		returns (bytes32[MAX_EVENT_SCHEDULE_SIZE] memory);
 
-	// /**
-	//  * verifies that a given event is (still) scheduled under the current state of the contract
-	//  * @param _event event to verify
-	//  * @param terms terms of the contract
-	//  * @param state current state of the contract
-	//  * @return boolean if the the event is still scheduled
-	//  */
-	// function isEventScheduled(
-	// 	event memory _event,
-	// 	LifecycleTerms memory terms,
-	// 	State memory state
-	// )
-	// 	public
-	// 	pure
-	// 	returns (bool);
+	/**
+	 * verifies that a given event is (still) scheduled under the current state of the contract
+	 * @param _event event to verify
+	 * @param terms terms of the contract
+	 * @param state current state of the contract
+	 * @return boolean if the the event is still scheduled
+	 */
+	function isEventScheduled(
+		bytes32 _event,
+		LifecycleTerms memory terms,
+		State memory state,
+		State memory underlyingState
+	)
+		public
+		pure
+		returns (bool);
 }

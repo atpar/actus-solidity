@@ -289,8 +289,22 @@ contract PAMEngine is Core, IEngine, STF, POF {
 			}
 		}
 
-		// revert("PAMEngine.computeCyclicScheduleSegment: UNKNOWN_CYCLIC_EVENT_TYPE");
 		return _eventSchedule;
+	}
+
+	function isEventScheduled(
+		bytes32 _event,
+		LifecycleTerms memory terms,
+		State memory state,
+		State memory underlyingState
+	)
+		public
+		pure
+		returns (bool)
+	{
+		// ...
+
+		return true;
 	}
 
 	/**
