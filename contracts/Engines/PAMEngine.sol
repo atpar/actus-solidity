@@ -35,7 +35,7 @@ contract PAMEngine is Core, IEngine, STF, POF {
 		state.contractPerformance = ContractPerformance.PF;
 		state.notionalScalingMultiplier = int256(1 * 10 ** PRECISION);
 		state.interestScalingMultiplier = int256(1 * 10 ** PRECISION);
-		state.lastEventTime = terms.statusDate;
+		state.statusDate = terms.statusDate;
 		state.maturityDate = terms.maturityDate;
 		state.notionalPrincipal = terms.notionalPrincipal;
 		state.nominalInterestRate = terms.nominalInterestRate;

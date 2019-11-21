@@ -50,49 +50,7 @@
       "constant": true,
       "inputs": [
         {
-          "name": "protoEvent",
-          "type": "bytes32"
-        }
-      ],
-      "name": "decodeProtoEvent",
-      "outputs": [
-        {
-          "name": "",
-          "type": "uint8"
-        },
-        {
-          "name": "",
-          "type": "uint256"
-        }
-      ],
-      "payable": false,
-      "stateMutability": "pure",
-      "type": "function"
-    },
-    {
-      "constant": true,
-      "inputs": [
-        {
-          "name": "eventType",
-          "type": "uint8"
-        }
-      ],
-      "name": "getEpochOffset",
-      "outputs": [
-        {
-          "name": "",
-          "type": "uint256"
-        }
-      ],
-      "payable": false,
-      "stateMutability": "pure",
-      "type": "function"
-    },
-    {
-      "constant": true,
-      "inputs": [
-        {
-          "name": "protoEvent",
+          "name": "_event",
           "type": "bytes32"
         },
         {
@@ -268,7 +226,49 @@
           "type": "tuple"
         }
       ],
-      "name": "computeEventTimeForProtoEvent",
+      "name": "computeEventTimeForEvent",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "pure",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "name": "_event",
+          "type": "bytes32"
+        }
+      ],
+      "name": "decodeEvent",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint8"
+        },
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "pure",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "name": "eventType",
+          "type": "uint8"
+        }
+      ],
+      "name": "getEpochOffset",
       "outputs": [
         {
           "name": "",
@@ -297,48 +297,13 @@
       "constant": true,
       "inputs": [
         {
-          "name": "eventType",
-          "type": "uint8"
-        },
-        {
-          "name": "scheduleTime",
-          "type": "uint256"
-        }
-      ],
-      "name": "encodeProtoEvent",
-      "outputs": [
-        {
-          "name": "",
-          "type": "bytes32"
-        }
-      ],
-      "payable": false,
-      "stateMutability": "pure",
-      "type": "function"
-    },
-    {
-      "constant": true,
-      "inputs": [
-        {
           "components": [
-            {
-              "name": "calendar",
-              "type": "uint8"
-            },
-            {
-              "name": "businessDayConvention",
-              "type": "uint8"
-            },
             {
               "name": "endOfMonthConvention",
               "type": "uint8"
             },
             {
               "name": "scalingEffect",
-              "type": "uint8"
-            },
-            {
-              "name": "penaltyType",
               "type": "uint8"
             },
             {
@@ -567,6 +532,29 @@
       "constant": true,
       "inputs": [
         {
+          "name": "eventType",
+          "type": "uint8"
+        },
+        {
+          "name": "scheduleTime",
+          "type": "uint256"
+        }
+      ],
+      "name": "encodeEvent",
+      "outputs": [
+        {
+          "name": "",
+          "type": "bytes32"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "pure",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [
+        {
           "components": [
             {
               "name": "calendar",
@@ -744,7 +732,7 @@
         {
           "components": [
             {
-              "name": "lastEventTime",
+              "name": "statusDate",
               "type": "uint256"
             },
             {
@@ -974,7 +962,7 @@
         {
           "components": [
             {
-              "name": "lastEventTime",
+              "name": "statusDate",
               "type": "uint256"
             },
             {
@@ -1022,7 +1010,7 @@
           "type": "tuple"
         },
         {
-          "name": "protoEvent",
+          "name": "_event",
           "type": "bytes32"
         },
         {
@@ -1035,7 +1023,7 @@
         {
           "components": [
             {
-              "name": "lastEventTime",
+              "name": "statusDate",
               "type": "uint256"
             },
             {
@@ -1265,7 +1253,7 @@
         {
           "components": [
             {
-              "name": "lastEventTime",
+              "name": "statusDate",
               "type": "uint256"
             },
             {
@@ -1313,7 +1301,7 @@
           "type": "tuple"
         },
         {
-          "name": "protoEvent",
+          "name": "_event",
           "type": "bytes32"
         },
         {
@@ -1338,23 +1326,11 @@
         {
           "components": [
             {
-              "name": "calendar",
-              "type": "uint8"
-            },
-            {
-              "name": "businessDayConvention",
-              "type": "uint8"
-            },
-            {
               "name": "endOfMonthConvention",
               "type": "uint8"
             },
             {
               "name": "scalingEffect",
-              "type": "uint8"
-            },
-            {
-              "name": "penaltyType",
               "type": "uint8"
             },
             {
@@ -1568,7 +1544,7 @@
           "type": "uint256"
         }
       ],
-      "name": "computeNonCylicProtoEventScheduleSegment",
+      "name": "computeNonCylicEventScheduleSegment",
       "outputs": [
         {
           "name": "",
@@ -1585,23 +1561,11 @@
         {
           "components": [
             {
-              "name": "calendar",
-              "type": "uint8"
-            },
-            {
-              "name": "businessDayConvention",
-              "type": "uint8"
-            },
-            {
               "name": "endOfMonthConvention",
               "type": "uint8"
             },
             {
               "name": "scalingEffect",
-              "type": "uint8"
-            },
-            {
-              "name": "penaltyType",
               "type": "uint8"
             },
             {
@@ -1838,5 +1802,5 @@
     "version": "0.5.2+commit.1df8f40c.Emscripten.clang"
   },
   "networks": {},
-  "updatedAt": "2019-11-20T12:52:45.685Z"
+  "updatedAt": "2019-11-21T12:22:00.423Z"
 }

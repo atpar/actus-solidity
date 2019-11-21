@@ -65,7 +65,7 @@ contract Definitions {
 	}
 
 	struct State {
-		uint256 lastEventTime;
+		uint256 statusDate;
 		uint256 nonPerformingDate;
 		uint256 maturityDate;
 		ContractPerformance contractPerformance;

@@ -51,7 +51,7 @@ contract('ANNEngine', () => {
 
   it('should yield the initial contract state', async () => {
     const initialState = await this.ANNEngineInstance.computeInitialState(this.lifecycleTerms, {});
-    assert.isTrue(Number(initialState['lastEventTime']) === Number(this.generatingTerms['statusDate']));
+    assert.isTrue(Number(initialState['statusDate']) === Number(this.generatingTerms['statusDate']));
   });
 
   it('should yield the next next contract state and the contract events', async() => {
@@ -68,7 +68,7 @@ contract('ANNEngine', () => {
       decodeEvent(_eventSchedule[0]).scheduleTime
     );
 
-    assert.equal(Number(nextState.lastEventTime), decodeEvent(_eventSchedule[0]).scheduleTime);
+    assert.equal(Number(nextState.statusDate), decodeEvent(_eventSchedule[0]).scheduleTime);
   });
 
   it('should yield correct segment of events', async () => {
@@ -79,30 +79,30 @@ contract('ANNEngine', () => {
     ));
 
     let _eventSchedule = [];
-    let lastEventTime = this.generatingTerms['statusDate'];
+    let statusDate = this.generatingTerms['statusDate'];
     let timestamp = this.generatingTerms['statusDate'] + (this.generatingTerms['maturityDate'] - this.generatingTerms['statusDate']) / 4;
 
     _eventSchedule.push(... await computeEventScheduleSegment(
       this.generatingTerms, 
-      lastEventTime,
+      statusDate,
       timestamp
     ));
 
-    lastEventTime = timestamp;
+    statusDate = timestamp;
     timestamp = this.generatingTerms['statusDate'] + (this.generatingTerms['maturityDate'] - this.generatingTerms['statusDate']) / 2;
 
     _eventSchedule.push(... await computeEventScheduleSegment(
     this.generatingTerms, 
-    lastEventTime,
+    statusDate,
       timestamp
     ));
     
-    lastEventTime = timestamp;
+    statusDate = timestamp;
     timestamp = this.generatingTerms['maturityDate'];
 
     _eventSchedule.push(... await computeEventScheduleSegment(
       this.generatingTerms, 
-      lastEventTime,
+      statusDate,
       timestamp
     ));
     
