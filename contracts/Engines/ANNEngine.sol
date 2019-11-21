@@ -191,7 +191,6 @@ contract ANNEngine is Core, IEngine, STF, POF {
 					terms.cycleAnchorDateOfInterestPayment,
 					terms.cycleAnchorDateOfPrincipalRedemption, // pure IP schedule ends at beginning of combined IP/PR schedule
 					terms.cycleOfInterestPayment,
-					terms.endOfMonthConvention,
 					false, // do not create an event for cycleAnchorDateOfPrincipalRedemption as covered with the PR schedule
 					segmentStart,
 					segmentEnd
@@ -233,7 +232,6 @@ contract ANNEngine is Core, IEngine, STF, POF {
 					terms.cycleAnchorDateOfFee,
 					terms.maturityDate,
 					terms.cycleOfFee,
-					terms.endOfMonthConvention,
 					true,
 					segmentStart,
 					segmentEnd
@@ -255,7 +253,6 @@ contract ANNEngine is Core, IEngine, STF, POF {
 				terms.cycleAnchorDateOfPrincipalRedemption,
 				terms.maturityDate,
 				terms.cycleOfPrincipalRedemption,
-				terms.endOfMonthConvention,
 				false,
 				segmentStart,
 				segmentEnd

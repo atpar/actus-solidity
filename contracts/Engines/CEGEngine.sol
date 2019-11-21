@@ -166,7 +166,6 @@ contract CEGEngine is Core, IEngine, STF, POF {
 					terms.cycleAnchorDateOfFee,
 					terms.maturityDate,
 					terms.cycleOfFee,
-					terms.endOfMonthConvention,
 					true,
 					segmentStart,
 					segmentEnd
