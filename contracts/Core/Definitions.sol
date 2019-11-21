@@ -120,7 +120,6 @@ contract Definitions {
 	}
 
 	struct GeneratingTerms {
-		EndOfMonthConvention endOfMonthConvention;
 		ScalingEffect scalingEffect;
 
 		uint256 contractDealDate;
