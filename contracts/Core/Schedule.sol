@@ -7,10 +7,9 @@ import "./Definitions.sol";
 import "./Utils.sol";
 
 import "./Conventions/BusinessDayConvention.sol";
-import "./Conventions/EndOfMonthConvention.sol";
 
 
-contract Schedule is Definitions, Utils, BusinessDayConvention, EndOfMonthConvention {
+contract Schedule is Definitions, Utils, BusinessDayConvention {
 
 	function computeEventTimeForEvent(bytes32 _event, LifecycleTerms memory terms)
 		public
@@ -79,7 +78,6 @@ contract Schedule is Definitions, Utils, BusinessDayConvention, EndOfMonthConven
 	 * @param cycleStart the start time of the cycle
 	 * @param cycleEnd the end time of the cycle
 	 * @param cycle struct that describe sthe cycle
-	 * @param eomc the end of month convention to be used
 	 * @param addEndTime specifies if the timestamp of the end of the cycle should be added to the result if it falls in the segment
 	 * @param segmentStart start time of the segment
 	 * @param segmentEnd end time of the segment
@@ -89,7 +87,6 @@ contract Schedule is Definitions, Utils, BusinessDayConvention, EndOfMonthConven
 		uint256 cycleStart,
 		uint256 cycleEnd,
 		IPS memory cycle,
-		EndOfMonthConvention eomc,
 		bool addEndTime,
 		uint256 segmentStart,
 		uint256 segmentEnd
@@ -115,8 +112,6 @@ contract Schedule is Definitions, Utils, BusinessDayConvention, EndOfMonthConven
 			return dates;
 		}
 
-		// adjust EOMC if necessary
-		EndOfMonthConvention adjustedEOMC = adjustEndOfMonthConvention(eomc, cycleStart, cycle);
 		uint256 date = cycleStart;
 		uint256 cycleIndex = 0;
 
@@ -131,12 +126,9 @@ contract Schedule is Definitions, Utils, BusinessDayConvention, EndOfMonthConven
 
 			cycleIndex++;
 
-			// Get next cycle date based on the adjusted EOM convention. For SD no shifting is necessary
-			if (adjustedEOMC == EndOfMonthConvention.EOM) {
-				date = shiftEndOfMonth(getNextCycleDate(cycle, cycleStart, cycleIndex));
-			} else {
-				date = getNextCycleDate(cycle, cycleStart, cycleIndex);
-			}
+
+			date = getNextCycleDate(cycle, cycleStart, cycleIndex);
+
 		}
 
 		// add additional time at the end if addEndTime
