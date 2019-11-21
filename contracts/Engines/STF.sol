@@ -1096,8 +1096,42 @@ contract STF is Core {
     pure
     returns (State memory)
   {
-    state.notionalPrincipal = 0;
     state.statusDate = scheduleTime;
+    state.executionAmount = terms.coverageOfCreditEnhancement * state.notionalPrincipal;
+    state.executionDate = scheduleTime;
+
+    if (terms.feeBasis == FeeBasis.A) {
+      state.feeAccrued = roleSign(terms.contractRole) * terms.feeRate;
+    } else {
+      state.feeAccrued = state.feeAccrued
+          .add(
+            yearFraction(
+              shiftCalcTime(state.statusDate, terms.businessDayConvention, terms.calendar),
+              shiftCalcTime(scheduleTime, terms.businessDayConvention, terms.calendar),
+              terms.dayCountConvention,
+              terms.maturityDate
+            )
+            .floatMult(terms.feeRate)
+            .floatMult(state.notionalPrincipal)
+          );
+    }
+
+    return state;
+  }
+
+  function STF_CEG_STD (
+    uint256 scheduleTime,
+    LifecycleTerms memory terms,
+    State memory state,
+    uint256 currentTimestamp
+  )
+    internal
+    pure
+    returns (State memory)
+  {
+    state.statusDate = scheduleTime;
+    state.notionalPrincipal = 0;
+    state.feeAccrued = 0;
 
     return state;
   }

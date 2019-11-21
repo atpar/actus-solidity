@@ -194,8 +194,13 @@ contract CEGEngine is Core, IEngine, STF, POF {
 		pure
 		returns (bool)
 	{
-		// ...
+		(EventType eventType, uint256 scheduleTime) = decodeEvent(_event);
 
+		// FP, MD events only scheduled up to execution of the Guarantee
+		if ( (eventType == EventType.FP || eventType == EventType.MD) &&
+				underlyingState.executionAmount > 0.0 ) {
+			return false;
+		}
 		return true;
 	}
 
@@ -226,6 +231,7 @@ contract CEGEngine is Core, IEngine, STF, POF {
 		if (eventType == EventType.PRD) return STF_CEG_PRD(scheduleTime, terms, state, currentTimestamp);
 		if (eventType == EventType.FP) return STF_CEG_FP(scheduleTime, terms, state, currentTimestamp);
 		if (eventType == EventType.XD) return STF_CEG_XD(scheduleTime, terms, state, currentTimestamp);
+		if (eventType == EventType.STD) return STF_CEG_STD(scheduleTime, terms, state, currentTimestamp);
 		if (eventType == EventType.MD) return STF_CEG_MD(scheduleTime, terms, state, currentTimestamp);
 		if (eventType == EventType.CE) return STF_PAM_DEL(scheduleTime, terms, state, currentTimestamp);
 
@@ -259,6 +265,7 @@ contract CEGEngine is Core, IEngine, STF, POF {
 		if (eventType == EventType.PRD) return POF_CEG_PRD(scheduleTime, terms, state, currentTimestamp);
 		if (eventType == EventType.FP) return POF_CEG_FP(scheduleTime, terms, state, currentTimestamp);
 		if (eventType == EventType.XD) return POF_CEG_XD(scheduleTime, terms, state, currentTimestamp);
+		if (eventType == EventType.STD) return POF_CEG_STD(scheduleTime, terms, state, currentTimestamp);
 		if (eventType == EventType.MD) return POF_CEG_MD(scheduleTime, terms, state, currentTimestamp);
 
 		revert("CEGEngine.payoffFunction: ATTRIBUTE_NOT_FOUND");
