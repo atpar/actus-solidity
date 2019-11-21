@@ -28,7 +28,7 @@ contract POF is Core {
       * state.feeAccrued
         .add(
           yearFraction(
-            shiftCalcTime(state.lastEventTime, terms.businessDayConvention, terms.calendar),
+            shiftCalcTime(state.statusDate, terms.businessDayConvention, terms.calendar),
             shiftCalcTime(scheduleTime, terms.businessDayConvention, terms.calendar),
             terms.dayCountConvention,
             terms.maturityDate
@@ -75,7 +75,7 @@ contract POF is Core {
           state.accruedInterest
           .add(
             yearFraction(
-              shiftCalcTime(state.lastEventTime, terms.businessDayConvention, terms.calendar),
+              shiftCalcTime(state.statusDate, terms.businessDayConvention, terms.calendar),
               shiftCalcTime(scheduleTime, terms.businessDayConvention, terms.calendar),
               terms.dayCountConvention,
               terms.maturityDate
@@ -123,7 +123,7 @@ contract POF is Core {
         .add(state.accruedInterest)
         .add(
           yearFraction(
-            shiftCalcTime(state.lastEventTime, terms.businessDayConvention, terms.calendar),
+            shiftCalcTime(state.statusDate, terms.businessDayConvention, terms.calendar),
             shiftCalcTime(scheduleTime, terms.businessDayConvention, terms.calendar),
             terms.dayCountConvention,
             terms.maturityDate
@@ -172,7 +172,7 @@ contract POF is Core {
         performanceIndicator(state.contractPerformance)
         * roleSign(terms.contractRole)
         * yearFraction(
-            shiftCalcTime(state.lastEventTime, terms.businessDayConvention, terms.calendar),
+            shiftCalcTime(state.statusDate, terms.businessDayConvention, terms.calendar),
             shiftCalcTime(scheduleTime, terms.businessDayConvention, terms.calendar),
             terms.dayCountConvention,
             terms.maturityDate
@@ -189,7 +189,7 @@ contract POF is Core {
         performanceIndicator(state.contractPerformance)
         * roleSign(terms.contractRole)
         * yearFraction(
-            shiftCalcTime(state.lastEventTime, terms.businessDayConvention, terms.calendar),
+            shiftCalcTime(state.statusDate, terms.businessDayConvention, terms.calendar),
             shiftCalcTime(scheduleTime, terms.businessDayConvention, terms.calendar),
             terms.dayCountConvention,
             terms.maturityDate
@@ -217,7 +217,7 @@ contract POF is Core {
         .add(state.accruedInterest)
         .add(
           yearFraction(
-            shiftCalcTime(state.lastEventTime, terms.businessDayConvention, terms.calendar),
+            shiftCalcTime(state.statusDate, terms.businessDayConvention, terms.calendar),
             shiftCalcTime(scheduleTime, terms.businessDayConvention, terms.calendar),
             terms.dayCountConvention,
             terms.maturityDate
@@ -250,7 +250,7 @@ contract POF is Core {
         * state.feeAccrued
           .add(
             yearFraction(
-              shiftCalcTime(state.lastEventTime, terms.businessDayConvention, terms.calendar),
+              shiftCalcTime(state.statusDate, terms.businessDayConvention, terms.calendar),
               shiftCalcTime(scheduleTime, terms.businessDayConvention, terms.calendar),
               terms.dayCountConvention,
               terms.maturityDate
@@ -283,7 +283,7 @@ contract POF is Core {
                 state.nextPrincipalRedemptionPayment
                 - state.accruedInterest
                 - yearFraction(
-                  shiftCalcTime(state.lastEventTime, terms.businessDayConvention, terms.calendar),
+                  shiftCalcTime(state.statusDate, terms.businessDayConvention, terms.calendar),
                   shiftCalcTime(scheduleTime, terms.businessDayConvention, terms.calendar),
                   terms.dayCountConvention,
                   terms.maturityDate
@@ -385,7 +385,7 @@ contract POF is Core {
       * state.feeAccrued
         .add(
           yearFraction(
-            shiftCalcTime(state.lastEventTime, terms.businessDayConvention, terms.calendar),
+            shiftCalcTime(state.statusDate, terms.businessDayConvention, terms.calendar),
             shiftCalcTime(scheduleTime, terms.businessDayConvention, terms.calendar),
             terms.dayCountConvention,
             terms.maturityDate

@@ -17,7 +17,7 @@ contract STF is Core {
     returns (State memory)
   {
     int256 timeFromLastEvent = yearFraction(
-      shiftCalcTime(state.lastEventTime, terms.businessDayConvention, terms.calendar),
+      shiftCalcTime(state.statusDate, terms.businessDayConvention, terms.calendar),
       shiftCalcTime(scheduleTime, terms.businessDayConvention, terms.calendar),
       terms.dayCountConvention,
       terms.maturityDate
@@ -34,7 +34,7 @@ contract STF is Core {
       .floatMult(state.notionalPrincipal)
       .floatMult(timeFromLastEvent)
     );
-    state.lastEventTime = scheduleTime;
+    state.statusDate = scheduleTime;
 
     return state;
   }
@@ -50,7 +50,7 @@ contract STF is Core {
     returns (State memory)
   {
     int256 timeFromLastEvent = yearFraction(
-      shiftCalcTime(state.lastEventTime, terms.businessDayConvention, terms.calendar),
+      shiftCalcTime(state.statusDate, terms.businessDayConvention, terms.calendar),
       shiftCalcTime(scheduleTime, terms.businessDayConvention, terms.calendar),
       terms.dayCountConvention,
       terms.maturityDate
@@ -68,7 +68,7 @@ contract STF is Core {
       .floatMult(timeFromLastEvent)
     );
     state.contractPerformance = ContractPerformance.DF;
-    state.lastEventTime = scheduleTime;
+    state.statusDate = scheduleTime;
 
     return state;
   }
@@ -84,7 +84,7 @@ contract STF is Core {
     returns (State memory)
   {
     int256 timeFromLastEvent = yearFraction(
-      shiftCalcTime(state.lastEventTime, terms.businessDayConvention, terms.calendar),
+      shiftCalcTime(state.statusDate, terms.businessDayConvention, terms.calendar),
       shiftCalcTime(scheduleTime, terms.businessDayConvention, terms.calendar),
       terms.dayCountConvention,
       terms.maturityDate
@@ -96,7 +96,7 @@ contract STF is Core {
       .floatMult(timeFromLastEvent)
     );
     state.feeAccrued = 0;
-    state.lastEventTime = scheduleTime;
+    state.statusDate = scheduleTime;
 
     return state;
   }
@@ -112,29 +112,31 @@ contract STF is Core {
     returns (State memory)
   {
     int256 timeFromLastEvent = yearFraction(
-      shiftCalcTime(state.lastEventTime, terms.businessDayConvention, terms.calendar),
+      shiftCalcTime(state.statusDate, terms.businessDayConvention, terms.calendar),
       shiftCalcTime(scheduleTime, terms.businessDayConvention, terms.calendar),
       terms.dayCountConvention,
       terms.maturityDate
     );
     state.notionalPrincipal = roleSign(terms.contractRole) * terms.notionalPrincipal;
     state.nominalInterestRate = terms.nominalInterestRate;
-    state.lastEventTime = scheduleTime;
+    state.statusDate = scheduleTime;
 
-    if (terms.cycleAnchorDateOfInterestPayment != 0 &&
-      terms.cycleAnchorDateOfInterestPayment < terms.initialExchangeDate
-    ) {
-      state.accruedInterest = state.nominalInterestRate
-      .floatMult(state.notionalPrincipal)
-      .floatMult(
-        yearFraction(
-          terms.cycleAnchorDateOfInterestPayment,
-          scheduleTime,
-          terms.dayCountConvention,
-          terms.maturityDate
-        )
-      );
-    }
+    state.accruedInterest = terms.accruedInterest;
+
+    // if (terms.cycleAnchorDateOfInterestPayment != 0 &&
+    //   terms.cycleAnchorDateOfInterestPayment < terms.initialExchangeDate
+    // ) {
+    //   state.accruedInterest = state.nominalInterestRate
+    //   .floatMult(state.notionalPrincipal)
+    //   .floatMult(
+    //     yearFraction(
+    //       terms.cycleAnchorDateOfInterestPayment,
+    //       scheduleTime,
+    //       terms.dayCountConvention,
+    //       terms.maturityDate
+    //     )
+    //   );
+    // }
 
     return state;
   }
@@ -150,7 +152,7 @@ contract STF is Core {
     returns (State memory)
   {
     int256 timeFromLastEvent = yearFraction(
-      shiftCalcTime(state.lastEventTime, terms.businessDayConvention, terms.calendar),
+      shiftCalcTime(state.statusDate, terms.businessDayConvention, terms.calendar),
       shiftCalcTime(scheduleTime, terms.businessDayConvention, terms.calendar),
       terms.dayCountConvention,
       terms.maturityDate
@@ -171,7 +173,7 @@ contract STF is Core {
       .floatMult(state.notionalPrincipal)
       .floatMult(timeFromLastEvent)
     );
-    state.lastEventTime = scheduleTime;
+    state.statusDate = scheduleTime;
 
     return state;
   }
@@ -187,7 +189,7 @@ contract STF is Core {
     returns (State memory)
   {
     int256 timeFromLastEvent = yearFraction(
-      shiftCalcTime(state.lastEventTime, terms.businessDayConvention, terms.calendar),
+      shiftCalcTime(state.statusDate, terms.businessDayConvention, terms.calendar),
       shiftCalcTime(scheduleTime, terms.businessDayConvention, terms.calendar),
       terms.dayCountConvention,
       terms.maturityDate
@@ -199,7 +201,7 @@ contract STF is Core {
       .floatMult(state.notionalPrincipal)
       .floatMult(timeFromLastEvent)
     );
-    state.lastEventTime = scheduleTime;
+    state.statusDate = scheduleTime;
     
     return state;
   }
@@ -215,7 +217,7 @@ contract STF is Core {
     returns (State memory)
   {
     int256 timeFromLastEvent = yearFraction(
-      shiftCalcTime(state.lastEventTime, terms.businessDayConvention, terms.calendar),
+      shiftCalcTime(state.statusDate, terms.businessDayConvention, terms.calendar),
       shiftCalcTime(scheduleTime, terms.businessDayConvention, terms.calendar),
       terms.dayCountConvention,
       terms.maturityDate
@@ -233,7 +235,7 @@ contract STF is Core {
       .floatMult(timeFromLastEvent)
     );
     state.notionalPrincipal -= 0; // riskFactor(terms.objectCodeOfPrepaymentModel, scheduleTime, state, terms) * state.notionalPrincipal;
-    state.lastEventTime = scheduleTime;
+    state.statusDate = scheduleTime;
 
     return state;
   }
@@ -249,7 +251,7 @@ contract STF is Core {
     returns (State memory)
   {
     int256 timeFromLastEvent = yearFraction(
-      shiftCalcTime(state.lastEventTime, terms.businessDayConvention, terms.calendar),
+      shiftCalcTime(state.statusDate, terms.businessDayConvention, terms.calendar),
       shiftCalcTime(scheduleTime, terms.businessDayConvention, terms.calendar),
       terms.dayCountConvention,
       terms.maturityDate
@@ -266,7 +268,7 @@ contract STF is Core {
       .floatMult(state.notionalPrincipal)
       .floatMult(timeFromLastEvent)
     );
-    state.lastEventTime = scheduleTime;
+    state.statusDate = scheduleTime;
 
     return state;
   }
@@ -282,7 +284,7 @@ contract STF is Core {
     returns (State memory)
   {
     int256 timeFromLastEvent = yearFraction(
-      shiftCalcTime(state.lastEventTime, terms.businessDayConvention, terms.calendar),
+      shiftCalcTime(state.statusDate, terms.businessDayConvention, terms.calendar),
       shiftCalcTime(scheduleTime, terms.businessDayConvention, terms.calendar),
       terms.dayCountConvention,
       terms.maturityDate
@@ -300,7 +302,7 @@ contract STF is Core {
       .floatMult(timeFromLastEvent)
     );
     state.notionalPrincipal = 0;
-    state.lastEventTime = scheduleTime;
+    state.statusDate = scheduleTime;
 
     return state;
   }
@@ -316,7 +318,7 @@ contract STF is Core {
     returns (State memory)
   {
     int256 timeFromLastEvent = yearFraction(
-      shiftCalcTime(state.lastEventTime, terms.businessDayConvention, terms.calendar),
+      shiftCalcTime(state.statusDate, terms.businessDayConvention, terms.calendar),
       shiftCalcTime(scheduleTime, terms.businessDayConvention, terms.calendar),
       terms.dayCountConvention,
       terms.maturityDate
@@ -333,7 +335,7 @@ contract STF is Core {
       .floatMult(state.notionalPrincipal)
       .floatMult(timeFromLastEvent)
     );
-    state.lastEventTime = scheduleTime;
+    state.statusDate = scheduleTime;
 
     return state;
   }
@@ -349,7 +351,7 @@ contract STF is Core {
     returns (State memory)
   {
     int256 timeFromLastEvent = yearFraction(
-      shiftCalcTime(state.lastEventTime, terms.businessDayConvention, terms.calendar),
+      shiftCalcTime(state.statusDate, terms.businessDayConvention, terms.calendar),
       shiftCalcTime(scheduleTime, terms.businessDayConvention, terms.calendar),
       terms.dayCountConvention,
       terms.maturityDate
@@ -367,7 +369,7 @@ contract STF is Core {
       .floatMult(timeFromLastEvent)
     );
     state.nominalInterestRate = terms.nextResetRate;
-    state.lastEventTime = scheduleTime;
+    state.statusDate = scheduleTime;
 
     return state;
   }
@@ -403,7 +405,7 @@ contract STF is Core {
     }
 
     int256 timeFromLastEvent = yearFraction(
-      shiftCalcTime(state.lastEventTime, terms.businessDayConvention, terms.calendar),
+      shiftCalcTime(state.statusDate, terms.businessDayConvention, terms.calendar),
       shiftCalcTime(scheduleTime, terms.businessDayConvention, terms.calendar),
       terms.dayCountConvention,
       terms.maturityDate
@@ -415,7 +417,7 @@ contract STF is Core {
       .floatMult(timeFromLastEvent)
     );
     state.nominalInterestRate = rate;
-    state.lastEventTime = scheduleTime;
+    state.statusDate = scheduleTime;
 
     return state;
   }
@@ -431,7 +433,7 @@ contract STF is Core {
     returns (State memory)
   {
     int256 timeFromLastEvent = yearFraction(
-      shiftCalcTime(state.lastEventTime, terms.businessDayConvention, terms.calendar),
+      shiftCalcTime(state.statusDate, terms.businessDayConvention, terms.calendar),
       shiftCalcTime(scheduleTime, terms.businessDayConvention, terms.calendar),
       terms.dayCountConvention,
       terms.maturityDate
@@ -464,7 +466,7 @@ contract STF is Core {
       state.notionalScalingMultiplier = 0; // riskFactor(terms.marketObjectCodeOfScalingIndex, scheduleTime, state, terms)
     }
 
-    state.lastEventTime = scheduleTime;
+    state.statusDate = scheduleTime;
 
     return state;
   }
@@ -480,7 +482,7 @@ contract STF is Core {
     returns (State memory)
   {
     int256 timeFromLastEvent = yearFraction(
-      shiftCalcTime(state.lastEventTime, terms.businessDayConvention, terms.calendar),
+      shiftCalcTime(state.statusDate, terms.businessDayConvention, terms.calendar),
       shiftCalcTime(scheduleTime, terms.businessDayConvention, terms.calendar),
       terms.dayCountConvention,
       terms.maturityDate
@@ -488,7 +490,7 @@ contract STF is Core {
     state.notionalPrincipal = 0;
     state.accruedInterest = 0;
     state.feeAccrued = 0;
-    state.lastEventTime = scheduleTime;
+    state.statusDate = scheduleTime;
 
     return state;
   }
@@ -546,7 +548,7 @@ contract STF is Core {
   //   returns (State memory)
   // {
   //   int256 timeFromLastEvent = yearFraction(
-  //     shiftCalcTime(state.lastEventTime, terms.businessDayConvention, terms.calendar),
+  //     shiftCalcTime(state.statusDate, terms.businessDayConvention, terms.calendar),
   //     shiftCalcTime(scheduleTime, terms.businessDayConvention, terms.calendar),
   //     terms.dayCountConvention,
   //     terms.maturityDate
@@ -563,7 +565,7 @@ contract STF is Core {
   //     .floatMult(state.notionalPrincipal)
   //     .floatMult(timeFromLastEvent)
   //   );
-  //   state.lastEventTime = scheduleTime;
+  //   state.statusDate = scheduleTime;
 
   //   return state;
   // }
@@ -578,7 +580,7 @@ contract STF is Core {
   //   returns (State memory)
   // {
   //   int256 timeFromLastEvent = yearFraction(
-  //     shiftCalcTime(state.lastEventTime, terms.businessDayConvention, terms.calendar),
+  //     shiftCalcTime(state.statusDate, terms.businessDayConvention, terms.calendar),
   //     shiftCalcTime(scheduleTime, terms.businessDayConvention, terms.calendar),
   //     terms.dayCountConvention,
   //     terms.maturityDate
@@ -596,7 +598,7 @@ contract STF is Core {
   //     .floatMult(timeFromLastEvent)
   //   );
   //   state.ContractPerformance = ContractPerformance.DF;
-  //   state.lastEventTime = scheduleTime;
+  //   state.statusDate = scheduleTime;
 
   //   return state;
   // }
@@ -611,7 +613,7 @@ contract STF is Core {
   //   returns (State memory)
   // {
   //   int256 timeFromLastEvent = yearFraction(
-  //     shiftCalcTime(state.lastEventTime, terms.businessDayConvention, terms.calendar),
+  //     shiftCalcTime(state.statusDate, terms.businessDayConvention, terms.calendar),
   //     shiftCalcTime(scheduleTime, terms.businessDayConvention, terms.calendar),
   //     terms.dayCountConvention,
   //     terms.maturityDate
@@ -623,7 +625,7 @@ contract STF is Core {
   //     .floatMult(timeFromLastEvent)
   //   );
   //   state.feeAccrued = 0;
-  //   state.lastEventTime = scheduleTime;
+  //   state.statusDate = scheduleTime;
 
   //   return state;
   // }
@@ -639,29 +641,31 @@ contract STF is Core {
     returns (State memory)
   {
     int256 timeFromLastEvent = yearFraction(
-      shiftCalcTime(state.lastEventTime, terms.businessDayConvention, terms.calendar),
+      shiftCalcTime(state.statusDate, terms.businessDayConvention, terms.calendar),
       shiftCalcTime(scheduleTime, terms.businessDayConvention, terms.calendar),
       terms.dayCountConvention,
       terms.maturityDate
     );
     state.notionalPrincipal = roleSign(terms.contractRole) * terms.notionalPrincipal;
     state.nominalInterestRate = terms.nominalInterestRate;
-    state.lastEventTime = scheduleTime;
+    state.statusDate = scheduleTime;
 
-    if (terms.cycleAnchorDateOfInterestPayment != 0 &&
-      terms.cycleAnchorDateOfInterestPayment < terms.initialExchangeDate
-    ) {
-      state.accruedInterest = state.nominalInterestRate
-      .floatMult(state.notionalPrincipal)
-      .floatMult(
-        yearFraction(
-          shiftCalcTime(terms.cycleAnchorDateOfInterestPayment, terms.businessDayConvention, terms.calendar),
-          shiftCalcTime(scheduleTime, terms.businessDayConvention, terms.calendar),
-          terms.dayCountConvention,
-          terms.maturityDate
-        )
-      );
-    }
+    state.accruedInterest = terms.accruedInterest;
+
+    // if (terms.cycleAnchorDateOfInterestPayment != 0 &&
+    //   terms.cycleAnchorDateOfInterestPayment < terms.initialExchangeDate
+    // ) {
+    //   state.accruedInterest = state.nominalInterestRate
+    //   .floatMult(state.notionalPrincipal)
+    //   .floatMult(
+    //     yearFraction(
+    //       shiftCalcTime(terms.cycleAnchorDateOfInterestPayment, terms.businessDayConvention, terms.calendar),
+    //       shiftCalcTime(scheduleTime, terms.businessDayConvention, terms.calendar),
+    //       terms.dayCountConvention,
+    //       terms.maturityDate
+    //     )
+    //   );
+    // }
 
     return state;
   }
@@ -677,7 +681,7 @@ contract STF is Core {
     returns (State memory)
   {
     int256 timeFromLastEvent = yearFraction(
-      shiftCalcTime(state.lastEventTime, terms.businessDayConvention, terms.calendar),
+      shiftCalcTime(state.statusDate, terms.businessDayConvention, terms.calendar),
       shiftCalcTime(scheduleTime, terms.businessDayConvention, terms.calendar),
       terms.dayCountConvention,
       terms.maturityDate
@@ -698,7 +702,7 @@ contract STF is Core {
       .floatMult(state.notionalPrincipal)
       .floatMult(timeFromLastEvent)
     );
-    state.lastEventTime = scheduleTime;
+    state.statusDate = scheduleTime;
 
     return state;
   }
@@ -714,7 +718,7 @@ contract STF is Core {
     returns (State memory)
   {
     int256 timeFromLastEvent = yearFraction(
-      shiftCalcTime(state.lastEventTime, terms.businessDayConvention, terms.calendar),
+      shiftCalcTime(state.statusDate, terms.businessDayConvention, terms.calendar),
       shiftCalcTime(scheduleTime, terms.businessDayConvention, terms.calendar),
       terms.dayCountConvention,
       terms.maturityDate
@@ -726,7 +730,7 @@ contract STF is Core {
       .floatMult(state.notionalPrincipal)
       .floatMult(timeFromLastEvent)
     );
-    state.lastEventTime = scheduleTime;
+    state.statusDate = scheduleTime;
 
     return state;
   }
@@ -741,7 +745,7 @@ contract STF is Core {
   //   returns (State memory)
   // {
   //   int256 timeFromLastEvent = yearFraction(
-  //     shiftCalcTime(state.lastEventTime, terms.businessDayConvention, terms.calendar),
+  //     shiftCalcTime(state.statusDate, terms.businessDayConvention, terms.calendar),
   //     shiftCalcTime(scheduleTime, terms.businessDayConvention, terms.calendar),
   //     terms.dayCountConvention,
   //     terms.maturityDate
@@ -759,7 +763,7 @@ contract STF is Core {
   //     .floatMult(timeFromLastEvent)
   //   );
   //   state.notionalPrincipal -= 0; // riskFactor(terms.objectCodeOfPrepaymentModel, scheduleTime, state, terms) * state.notionalPrincipal;
-  //   state.lastEventTime = scheduleTime;
+  //   state.statusDate = scheduleTime;
 
   //   return state;
   // }
@@ -775,7 +779,7 @@ contract STF is Core {
   //   returns (State memory)
   // {
   //   int256 timeFromLastEvent = yearFraction(
-  //     shiftCalcTime(state.lastEventTime, terms.businessDayConvention, terms.calendar),
+  //     shiftCalcTime(state.statusDate, terms.businessDayConvention, terms.calendar),
   //     shiftCalcTime(scheduleTime, terms.businessDayConvention, terms.calendar),
   //     terms.dayCountConvention,
   //     terms.maturityDate
@@ -792,7 +796,7 @@ contract STF is Core {
   //     .floatMult(state.notionalPrincipal)
   //     .floatMult(timeFromLastEvent)
   //   );
-  //   state.lastEventTime = scheduleTime;
+  //   state.statusDate = scheduleTime;
 
   //   return state;
   // }
@@ -808,7 +812,7 @@ contract STF is Core {
     returns (State memory)
   {
     int256 timeFromLastEvent = yearFraction(
-      shiftCalcTime(state.lastEventTime, terms.businessDayConvention, terms.calendar),
+      shiftCalcTime(state.statusDate, terms.businessDayConvention, terms.calendar),
       shiftCalcTime(scheduleTime, terms.businessDayConvention, terms.calendar),
       terms.dayCountConvention,
       terms.maturityDate
@@ -841,7 +845,7 @@ contract STF is Core {
       )
     );
 
-    state.lastEventTime = scheduleTime;
+    state.statusDate = scheduleTime;
 
     return state;
   }
@@ -857,7 +861,7 @@ contract STF is Core {
     returns (State memory)
   {
     int256 timeFromLastEvent = yearFraction(
-      shiftCalcTime(state.lastEventTime, terms.businessDayConvention, terms.calendar),
+      shiftCalcTime(state.statusDate, terms.businessDayConvention, terms.calendar),
       shiftCalcTime(scheduleTime, terms.businessDayConvention, terms.calendar),
       terms.dayCountConvention,
       terms.maturityDate
@@ -875,7 +879,7 @@ contract STF is Core {
       .floatMult(timeFromLastEvent)
     );
     state.notionalPrincipal = 0.0;
-    state.lastEventTime = scheduleTime;
+    state.statusDate = scheduleTime;
 
     return state;
   }
@@ -891,7 +895,7 @@ contract STF is Core {
   //   returns (State memory)
   // {
   //   int256 timeFromLastEvent = yearFraction(
-  //     shiftCalcTime(state.lastEventTime, terms.businessDayConvention, terms.calendar),
+  //     shiftCalcTime(state.statusDate, terms.businessDayConvention, terms.calendar),
   //     shiftCalcTime(scheduleTime, terms.businessDayConvention, terms.calendar),
   //     terms.dayCountConvention,
   //     terms.maturityDate
@@ -908,7 +912,7 @@ contract STF is Core {
   //     .floatMult(state.notionalPrincipal)
   //     .floatMult(timeFromLastEvent)
   //   );
-  //   state.lastEventTime = scheduleTime;
+  //   state.statusDate = scheduleTime;
 
   //   return state;
   // }
@@ -923,7 +927,7 @@ contract STF is Core {
   //   returns (State memory)
   // {
   //   int256 timeFromLastEvent = yearFraction(
-  //     shiftCalcTime(state.lastEventTime, terms.businessDayConvention, terms.calendar),
+  //     shiftCalcTime(state.statusDate, terms.businessDayConvention, terms.calendar),
   //     shiftCalcTime(scheduleTime, terms.businessDayConvention, terms.calendar),
   //     terms.dayCountConvention,
   //     terms.maturityDate
@@ -941,7 +945,7 @@ contract STF is Core {
   //     .floatMult(timeFromLastEvent)
   //   );
   //   state.nominalInterestRate = terms.nextResetRate;
-  //   state.lastEventTime = scheduleTime;
+  //   state.statusDate = scheduleTime;
 
   //   return state;
   // }
@@ -977,7 +981,7 @@ contract STF is Core {
     }
 
     int256 timeFromLastEvent = yearFraction(
-      shiftCalcTime(state.lastEventTime, terms.businessDayConvention, terms.calendar),
+      shiftCalcTime(state.statusDate, terms.businessDayConvention, terms.calendar),
       shiftCalcTime(scheduleTime, terms.businessDayConvention, terms.calendar),
       terms.dayCountConvention,
       terms.maturityDate
@@ -990,7 +994,7 @@ contract STF is Core {
     );
     state.nominalInterestRate = rate;
     state.nextPrincipalRedemptionPayment = 0; // TODO: implement annuity calculator
-    state.lastEventTime = scheduleTime;
+    state.statusDate = scheduleTime;
 
     return state;
   }
@@ -1006,7 +1010,7 @@ contract STF is Core {
     returns (State memory)
   {
     int256 timeFromLastEvent = yearFraction(
-      shiftCalcTime(state.lastEventTime, terms.businessDayConvention, terms.calendar),
+      shiftCalcTime(state.statusDate, terms.businessDayConvention, terms.calendar),
       shiftCalcTime(scheduleTime, terms.businessDayConvention, terms.calendar),
       terms.dayCountConvention,
       terms.maturityDate
@@ -1039,7 +1043,7 @@ contract STF is Core {
       state.notionalScalingMultiplier = 0; // riskFactor(terms.marketObjectCodeOfScalingIndex, scheduleTime, state, terms)
     }
 
-    state.lastEventTime = scheduleTime;
+    state.statusDate = scheduleTime;
     return state;
   }
 
@@ -1053,7 +1057,7 @@ contract STF is Core {
   //   returns (State memory)
   // {
   //   int256 timeFromLastEvent = yearFraction(
-  //     shiftCalcTime(state.lastEventTime, terms.businessDayConvention, terms.calendar),
+  //     shiftCalcTime(state.statusDate, terms.businessDayConvention, terms.calendar),
   //     shiftCalcTime(scheduleTime, terms.businessDayConvention, terms.calendar),
   //     terms.dayCountConvention,
   //     terms.maturityDate
@@ -1061,7 +1065,7 @@ contract STF is Core {
   //   state.notionalPrincipal = 0;
   //   state.nominalAccrued = 0;
   //   state.feeAccrued = 0;
-  //   state.lastEventTime = scheduleTime;
+  //   state.statusDate = scheduleTime;
 
   //   return state;
   // }
@@ -1077,7 +1081,7 @@ contract STF is Core {
     returns (State memory)
   {
     state.notionalPrincipal = 0;
-    state.lastEventTime = scheduleTime;
+    state.statusDate = scheduleTime;
 
     return state;
   }
@@ -1093,7 +1097,7 @@ contract STF is Core {
     returns (State memory)
   {
     state.notionalPrincipal = 0;
-    state.lastEventTime = scheduleTime;
+    state.statusDate = scheduleTime;
 
     return state;
   }
@@ -1110,7 +1114,7 @@ contract STF is Core {
   {
     state.notionalPrincipal = roleSign(terms.contractRole) * terms.notionalPrincipal;
     state.nominalInterestRate = terms.feeRate;
-    state.lastEventTime = scheduleTime;
+    state.statusDate = scheduleTime;
 
     return state;
   }
@@ -1126,13 +1130,13 @@ contract STF is Core {
     returns (State memory)
   {
     // uint256 timeFromLastEvent = yearFraction(
-    //   shiftCalcTime(state.lastEventTime, terms.businessDayConvention, terms.calendar),
+    //   shiftCalcTime(state.statusDate, terms.businessDayConvention, terms.calendar),
     //   shiftCalcTime(scheduleTime, terms.businessDayConvention, terms.calendar),
     //   terms.dayCountConvention,
     //   terms.maturityDate
     // );
     state.feeAccrued = 0;
-    state.lastEventTime = scheduleTime;
+    state.statusDate = scheduleTime;
 
     return state;
   }
@@ -1148,7 +1152,7 @@ contract STF is Core {
     returns (State memory)
   {
     // uint256 timeFromLastEvent = yearFraction(
-    //   shiftCalcTime(state.lastEventTime, terms.businessDayConvention, terms.calendar),
+    //   shiftCalcTime(state.statusDate, terms.businessDayConvention, terms.calendar),
     //   shiftCalcTime(scheduleTime, terms.businessDayConvention, terms.calendar),
     //   terms.dayCountConvention,
     //   terms.maturityDate
@@ -1156,7 +1160,7 @@ contract STF is Core {
     state.notionalPrincipal = 0;
     state.accruedInterest = 0;
     state.feeAccrued = 0;
-    state.lastEventTime = scheduleTime;
+    state.statusDate = scheduleTime;
 
     return state;
   }

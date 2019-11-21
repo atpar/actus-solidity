@@ -1,6 +1,6 @@
 {
-  "lastEventTime": {
-    "id": "lastEventTime",
+  "statusDate": {
+    "id": "statusDate",
     "name": "Last Event Time",
     "type": "date"
   },

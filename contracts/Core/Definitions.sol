@@ -65,8 +65,9 @@ contract Definitions {
 	}
 
 	struct State {
-		uint256 lastEventTime;
+		uint256 statusDate;
 		uint256 nonPerformingDate;
+		uint256 maturityDate;
 		ContractPerformance contractPerformance;
 		int256 notionalPrincipal;
 		// int256 notionalPrincipal2;
@@ -94,11 +95,7 @@ contract Definitions {
 		ContractStructure contractStructure;
 
 		uint256 statusDate;
-		uint256 initialExchangeDate;
 		uint256 maturityDate;
-		uint256 terminationDate;
-		uint256 purchaseDate;
-		uint256 cycleAnchorDateOfInterestPayment;
 
 		int256 notionalPrincipal;
 		int256 nominalInterestRate;
