@@ -78,7 +78,8 @@ contract Definitions {
 		int256 interestScalingMultiplier;
 		int256 notionalScalingMultiplier;
 		int256 nextPrincipalRedemptionPayment;
-		// int256 payoffAtSettlement;
+		uint256 executionDate;
+		int256 executionAmount;
 	}
 
 	struct LifecycleTerms {

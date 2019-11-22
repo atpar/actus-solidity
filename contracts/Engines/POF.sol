@@ -336,12 +336,20 @@ contract POF is Core {
     pure
     returns(int256)
   {
-    return (
-      performanceIndicator(state.contractPerformance)
-      * roleSign(terms.contractRole)
-      * terms.coverageOfCreditEnhancement
-        .floatMult(state.notionalPrincipal)
-    );
+    return 0;
+  }
+
+  function POF_CEG_STD (
+    uint256 scheduleTime,
+    LifecycleTerms memory terms,
+    State memory state,
+    uint256 currentTimestamp
+  )
+    internal
+    pure
+    returns(int256)
+  {
+    return state.executionAmount + state.feeAccrued;
   }
 
   function POF_CEG_PRD (

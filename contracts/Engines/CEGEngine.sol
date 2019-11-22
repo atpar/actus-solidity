@@ -180,58 +180,31 @@ contract CEGEngine is Core, IEngine, STF, POF {
 			}
 		}
 
-		// revert("CEGEngine.computeCyclicScheduleSegment: UNKNOWN_CYCLIC_EVENT_TYPE");
 		return _eventSchedule;
 	}
 
-	// function applyEventsToEventSchedule(
-	// 	Event[MAX_EVENT_SCHEDULE_SIZE] memory _eventSchedule,
-	// 	Event[MAX_EVENT_SCHEDULE_SIZE] memory _events
-	// )
-	// 	public
-	// 	pure
-	// 	returns (Event[MAX_EVENT_SCHEDULE_SIZE] memory)
-	// {
-	// 	// for loop can be removed after reimplementation of sortEventSchedule
-	// 	// check if _eventSchedule[MAX_EVENT_SCHEDULE_SIZE - numberOfEvents].scheduleTime == 0 is sufficient
-	// 	uint256 index = 0;
-	// 	for (uint256 j = 0; index < MAX_EVENT_SCHEDULE_SIZE; index++) {
-	// 		if (_events[j].eventTime == 0) {
-	// 			if (j != 0) break;
-	// 			return _eventSchedule;
-	// 		}
-	// 		if (_eventSchedule[index].eventTime == 0) {
-	// 			_eventSchedule[index] = _events[j];
-	// 			j++;
-	// 		}
-	// 	}
-	// 	sortEventSchedule(_eventSchedule, index);
+	function isEventScheduled(
+		bytes32 _event,
+		LifecycleTerms memory terms,
+		State memory state,
+		State memory underlyingState
+	)
+		public
+		pure
+		returns (bool)
+	{
+		(EventType eventType, uint256 scheduleTime) = decodeEvent(_event);
 
-	// 	// CEGEngine specific schedule rules
+		// FP, MD events only scheduled up to execution of the Guarantee
+		if (
+			(eventType == EventType.FP || eventType == EventType.MD)
+			&& underlyingState.executionAmount > int256(0)
+		) {
+			return false;
+		}
 
-	// 	bool afterExecutionDate = false;
-	// 	for (uint256 i = 1; i < MAX_EVENT_SCHEDULE_SIZE; i++) {
-	// 		if (_eventSchedule[i - 1].eventTime == 0) {
-	// 			delete _eventSchedule[i];
-	// 			continue;
-	// 		}
-	// 		if (
-	// 			afterExecutionDate == false
-	// 			&& _eventSchedule[i].eventType == EventType.XD
-	// 		) {
-	// 			afterExecutionDate = true;
-	// 		}
-	// 		// remove all FP events after execution date
-	// 		if (
-	// 			afterExecutionDate == true
-	// 			&& _eventSchedule[i].eventType == EventType.FP
-	// 		) {
-	// 			delete _eventSchedule[i];
-	// 		}
-	// 	}
-
-	// 	return _eventSchedule;
-	// }
+		return true;
+	}
 
 	/**
 	 * computes the next contract state based on the contract terms, state and the event type
@@ -260,6 +233,7 @@ contract CEGEngine is Core, IEngine, STF, POF {
 		if (eventType == EventType.PRD) return STF_CEG_PRD(scheduleTime, terms, state, currentTimestamp);
 		if (eventType == EventType.FP) return STF_CEG_FP(scheduleTime, terms, state, currentTimestamp);
 		if (eventType == EventType.XD) return STF_CEG_XD(scheduleTime, terms, state, currentTimestamp);
+		if (eventType == EventType.STD) return STF_CEG_STD(scheduleTime, terms, state, currentTimestamp);
 		if (eventType == EventType.MD) return STF_CEG_MD(scheduleTime, terms, state, currentTimestamp);
 		if (eventType == EventType.CE) return STF_PAM_DEL(scheduleTime, terms, state, currentTimestamp);
 
@@ -293,6 +267,7 @@ contract CEGEngine is Core, IEngine, STF, POF {
 		if (eventType == EventType.PRD) return POF_CEG_PRD(scheduleTime, terms, state, currentTimestamp);
 		if (eventType == EventType.FP) return POF_CEG_FP(scheduleTime, terms, state, currentTimestamp);
 		if (eventType == EventType.XD) return POF_CEG_XD(scheduleTime, terms, state, currentTimestamp);
+		if (eventType == EventType.STD) return POF_CEG_STD(scheduleTime, terms, state, currentTimestamp);
 		if (eventType == EventType.MD) return POF_CEG_MD(scheduleTime, terms, state, currentTimestamp);
 
 		revert("CEGEngine.payoffFunction: ATTRIBUTE_NOT_FOUND");
