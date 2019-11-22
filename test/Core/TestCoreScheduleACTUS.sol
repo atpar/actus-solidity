@@ -16,11 +16,10 @@ contract TestCoreScheduleACTUS is Core {
     uint256[MAX_CYCLE_SIZE] memory generatedDates;
 
     IPS memory c = IPS(1, P.D, S.SHORT, true); // Every 1 day
-    EndOfMonthConvention eomc = EndOfMonthConvention.SD;
     uint256 start = 1451606400; // 2016-01-01T00:00:00
     uint256 end = 1452816000; // 2016-01-15T00:00:00
 
-    generatedDates = computeDatesFromCycleSegment(start, end, c, eomc, true, 0, 9999999999);
+    generatedDates = computeDatesFromCycleSegment(start, end, c, true, 0, 9999999999);
 
     for (uint i = 0; i < 15; i++){
       expectedDates[i] = start + i*86400;
@@ -38,11 +37,10 @@ contract TestCoreScheduleACTUS is Core {
     uint256[MAX_CYCLE_SIZE] memory generatedDates;
 
     IPS memory c = IPS(1, P.D, S.SHORT, true); // Every 1 day
-    EndOfMonthConvention eomc = EndOfMonthConvention.EOM;
     uint256 start = 1451606400; // 2016-01-01T00:00:00
     uint256 end = 1452816000; // 2016-01-15T00:00:00
 
-    generatedDates = computeDatesFromCycleSegment(start, end, c, eomc, true, 0, 9999999999);
+    generatedDates = computeDatesFromCycleSegment(start, end, c, true, 0, 9999999999);
 
     for (uint i = 0; i < 15; i++){
       expectedDates[i] = start + i*86400;
@@ -60,11 +58,10 @@ contract TestCoreScheduleACTUS is Core {
     uint256[MAX_CYCLE_SIZE] memory generatedDates;
 
     IPS memory c = IPS(1, P.D, S.LONG, true); // Every 1 day
-    EndOfMonthConvention eomc = EndOfMonthConvention.SD;
     uint256 start = 1451606400; // 2016-01-01T00:00:00
     uint256 end = 1452816000; // 2016-01-15T00:00:00
 
-    generatedDates = computeDatesFromCycleSegment(start, end, c, eomc, true, 0, 9999999999);
+    generatedDates = computeDatesFromCycleSegment(start, end, c, true, 0, 9999999999);
 
     for (uint i = 0; i < 15; i++){
       expectedDates[i] = start + i*86400;
@@ -82,11 +79,10 @@ contract TestCoreScheduleACTUS is Core {
     uint256[MAX_CYCLE_SIZE] memory generatedDates;
 
     IPS memory c = IPS(1, P.D, S.SHORT, true); // Every 1 day
-    EndOfMonthConvention eomc = EndOfMonthConvention.SD;
     uint256 start = 1451606400; // 2016-01-01T00:00:00
     uint256 end = 1452815999; // 2016-01-14T23:59:59
 
-    generatedDates = computeDatesFromCycleSegment(start, end, c, eomc, true, 0, 9999999999);
+    generatedDates = computeDatesFromCycleSegment(start, end, c, true, 0, 9999999999);
 
     for (uint i = 0; i < 14; i++){
       expectedDates[i] = start + i*86400;
@@ -105,11 +101,10 @@ contract TestCoreScheduleACTUS is Core {
     uint256[MAX_CYCLE_SIZE] memory generatedDates;
 
     IPS memory c = IPS(1, P.D, S.LONG, true); // Every 1 day
-    EndOfMonthConvention eomc = EndOfMonthConvention.SD;
     uint256 start = 1451606400; // 2016-01-01T00:00:00
     uint256 end = 1452815999; // 2016-01-14T23:59:59
 
-    generatedDates = computeDatesFromCycleSegment(start, end, c, eomc, true, 0, 9999999999);
+    generatedDates = computeDatesFromCycleSegment(start, end, c, true, 0, 9999999999);
 
     for (uint i = 0; i < 13; i++){
       expectedDates[i] = start + i*86400;
@@ -128,11 +123,10 @@ contract TestCoreScheduleACTUS is Core {
     uint256[MAX_CYCLE_SIZE] memory generatedDates;
 
     IPS memory c = IPS(2, P.D, S.SHORT, true); // Every 2 days
-    EndOfMonthConvention eomc = EndOfMonthConvention.SD;
     uint256 start = 1451606400; // 2016-01-01T00:00:00
     uint256 end = 1453852800; // 2016-01-27T00:00:00
 
-    generatedDates = computeDatesFromCycleSegment(start, end, c, eomc, true, 0, 9999999999);
+    generatedDates = computeDatesFromCycleSegment(start, end, c, true, 0, 9999999999);
 
     uint256 index;
     for (uint i = 0; i < 28; i += 2){
@@ -152,14 +146,12 @@ contract TestCoreScheduleACTUS is Core {
     uint256[MAX_CYCLE_SIZE] memory generatedDates;
 
     IPS memory c = IPS(31, P.D, S.SHORT, true);
-    EndOfMonthConvention eomc = EndOfMonthConvention.EOM;
     uint256 start = 1456704000; // 2016-02-29T00:00:00
     uint256 end = 1483228800; // 2017-01-01T00:00:00
 
-    generatedDates = computeDatesFromCycleSegment(start, end, c, eomc, true, 0, 9999999999);
+    generatedDates = computeDatesFromCycleSegment(start, end, c, true, 0, 9999999999);
 
-    eomc = EndOfMonthConvention.SD;
-    expectedDates = computeDatesFromCycleSegment(start, end, c, eomc, true, 0, 9999999999);
+    expectedDates = computeDatesFromCycleSegment(start, end, c, true, 0, 9999999999);
 
     Assert.equal(
       keccak256(abi.encode(expectedDates)),
@@ -173,15 +165,13 @@ contract TestCoreScheduleACTUS is Core {
     uint256[MAX_CYCLE_SIZE] memory generatedDates;
 
     IPS memory c = IPS(1, P.W, S.SHORT, true);
-    EndOfMonthConvention eomc = EndOfMonthConvention.SD;
     uint256 start = 1451606400; // 2016-01-01T00:00:00
     uint256 end = 1459468800; // 2016-04-01T00:00:00
 
-    generatedDates = computeDatesFromCycleSegment(start, end, c, eomc, true, 0, 9999999999);
+    generatedDates = computeDatesFromCycleSegment(start, end, c, true, 0, 9999999999);
 
     c = IPS(7, P.D, S.SHORT, true);
-    eomc = EndOfMonthConvention.SD;
-    expectedDates = computeDatesFromCycleSegment(start, end, c, eomc, true, 0, 9999999999);
+    expectedDates = computeDatesFromCycleSegment(start, end, c, true, 0, 9999999999);
 
     Assert.equal(
       keccak256(abi.encode(expectedDates)),
@@ -195,15 +185,13 @@ contract TestCoreScheduleACTUS is Core {
     uint256[MAX_CYCLE_SIZE] memory generatedDates;
 
     IPS memory c = IPS(1, P.W, S.LONG, true);
-    EndOfMonthConvention eomc = EndOfMonthConvention.SD;
     uint256 start = 1451606400; // 2016-01-01T00:00:00
     uint256 end = 1459468800; // 2016-04-01T00:00:00
 
-    generatedDates = computeDatesFromCycleSegment(start, end, c, eomc, true, 0, 9999999999);
+    generatedDates = computeDatesFromCycleSegment(start, end, c, true, 0, 9999999999);
 
     c = IPS(7, P.D, S.LONG, true);
-    eomc = EndOfMonthConvention.SD;
-    expectedDates = computeDatesFromCycleSegment(start, end, c, eomc, true, 0, 9999999999);
+    expectedDates = computeDatesFromCycleSegment(start, end, c, true, 0, 9999999999);
 
     Assert.equal(
       keccak256(abi.encode(expectedDates)),
@@ -217,15 +205,13 @@ contract TestCoreScheduleACTUS is Core {
     uint256[MAX_CYCLE_SIZE] memory generatedDates;
 
     IPS memory c = IPS(1, P.W, S.SHORT, true);
-    EndOfMonthConvention eomc = EndOfMonthConvention.SD;
     uint256 start = 1451606400; // 2016-01-01T00:00:00
     uint256 end = 1459468800; // 2016-04-01T00:00:00
 
-    generatedDates = computeDatesFromCycleSegment(start, end, c, eomc, true, 0, 9999999999);
+    generatedDates = computeDatesFromCycleSegment(start, end, c, true, 0, 9999999999);
 
     c = IPS(7, P.D, S.SHORT, true);
-    eomc = EndOfMonthConvention.SD;
-    expectedDates = computeDatesFromCycleSegment(start, end, c, eomc, true, 0, 9999999999);
+    expectedDates = computeDatesFromCycleSegment(start, end, c, true, 0, 9999999999);
 
     Assert.equal(
       keccak256(abi.encode(expectedDates)),
@@ -239,15 +225,13 @@ contract TestCoreScheduleACTUS is Core {
     uint256[MAX_CYCLE_SIZE] memory generatedDates;
 
     IPS memory c = IPS(1, P.W, S.SHORT, true);
-    EndOfMonthConvention eomc = EndOfMonthConvention.SD;
     uint256 start = 1456704000; // 2016-02-29T00:00:00
     uint256 end = 1459468800; // 2016-04-01T00:00:00
 
-    generatedDates = computeDatesFromCycleSegment(start, end, c, eomc, true, 0, 9999999999);
+    generatedDates = computeDatesFromCycleSegment(start, end, c, true, 0, 9999999999);
 
     c = IPS(7, P.D, S.SHORT, true);
-    eomc = EndOfMonthConvention.SD;
-    expectedDates = computeDatesFromCycleSegment(start, end, c, eomc, true, 0, 9999999999);
+    expectedDates = computeDatesFromCycleSegment(start, end, c, true, 0, 9999999999);
 
     Assert.equal(
       keccak256(abi.encode(expectedDates)),
@@ -261,15 +245,13 @@ contract TestCoreScheduleACTUS is Core {
     uint256[MAX_CYCLE_SIZE] memory generatedDates;
 
     IPS memory c = IPS(4, P.W, S.LONG, true);
-    EndOfMonthConvention eomc = EndOfMonthConvention.SD;
     uint256 start = 1456704000; // 2016-02-29T00:00:00
     uint256 end = 1483228800; // 2017-01-01T00:00:00
 
-    generatedDates = computeDatesFromCycleSegment(start, end, c, eomc, true, 0, 9999999999);
+    generatedDates = computeDatesFromCycleSegment(start, end, c, true, 0, 9999999999);
 
     c = IPS(28, P.D, S.LONG, true);
-    eomc = EndOfMonthConvention.SD;
-    expectedDates = computeDatesFromCycleSegment(start, end, c, eomc, true, 0, 9999999999);
+    expectedDates = computeDatesFromCycleSegment(start, end, c, true, 0, 9999999999);
 
     Assert.equal(
       keccak256(abi.encode(expectedDates)),
@@ -283,15 +265,13 @@ contract TestCoreScheduleACTUS is Core {
     uint256[MAX_CYCLE_SIZE] memory generatedDates;
 
     IPS memory c = IPS(4, P.W, S.LONG, true);
-    EndOfMonthConvention eomc = EndOfMonthConvention.EOM;
     uint256 start = 1456704000; // 2016-02-29T00:00:00
     uint256 end = 1483228800; // 2017-01-01T00:00:00
 
-    generatedDates = computeDatesFromCycleSegment(start, end, c, eomc, true, 0, 9999999999);
+    generatedDates = computeDatesFromCycleSegment(start, end, c, true, 0, 9999999999);
 
     c = IPS(28, P.D, S.LONG, true);
-    eomc = EndOfMonthConvention.SD;
-    expectedDates = computeDatesFromCycleSegment(start, end, c, eomc, true, 0, 9999999999);
+    expectedDates = computeDatesFromCycleSegment(start, end, c, true, 0, 9999999999);
 
     Assert.equal(
       keccak256(abi.encode(expectedDates)),
@@ -305,15 +285,13 @@ contract TestCoreScheduleACTUS is Core {
     uint256[MAX_CYCLE_SIZE] memory generatedDates;
 
     IPS memory c = IPS(4, P.W, S.SHORT, true);
-    EndOfMonthConvention eomc = EndOfMonthConvention.EOM;
     uint256 start = 1456704000; // 2016-02-29T00:00:00
     uint256 end = 1483228800; // 2017-01-01T00:00:00
 
-    generatedDates = computeDatesFromCycleSegment(start, end, c, eomc, true, 0, 9999999999);
+    generatedDates = computeDatesFromCycleSegment(start, end, c, true, 0, 9999999999);
 
     c = IPS(28, P.D, S.SHORT, true);
-    eomc = EndOfMonthConvention.SD;
-    expectedDates = computeDatesFromCycleSegment(start, end, c, eomc, true, 0, 9999999999);
+    expectedDates = computeDatesFromCycleSegment(start, end, c, true, 0, 9999999999);
 
     Assert.equal(
       keccak256(abi.encode(expectedDates)),
@@ -327,11 +305,10 @@ contract TestCoreScheduleACTUS is Core {
     uint256[MAX_CYCLE_SIZE] memory generatedDates;
 
     IPS memory c = IPS(1, P.M, S.SHORT, true);
-    EndOfMonthConvention eomc = EndOfMonthConvention.SD;
     uint256 start = 1451606400; // 2016-01-01T00:00:00
     uint256 end = 1483228800; // 2017-01-01T00:00:00
 
-    generatedDates = computeDatesFromCycleSegment(start, end, c, eomc, true, 0, 9999999999);
+    generatedDates = computeDatesFromCycleSegment(start, end, c, true, 0, 9999999999);
 
     expectedDates[0] = 1451606400; // 2016-01-01T00:00:00
     expectedDates[1] = 1454284800; // 2016-02-01T00:00:00
@@ -359,11 +336,10 @@ contract TestCoreScheduleACTUS is Core {
     uint256[MAX_CYCLE_SIZE] memory generatedDates;
 
     IPS memory c = IPS(1, P.M, S.LONG, true);
-    EndOfMonthConvention eomc = EndOfMonthConvention.SD;
     uint256 start = 1451606400; // 2016-01-01T00:00:00
     uint256 end = 1483228800; // 2017-01-01T00:00:00
 
-    generatedDates = computeDatesFromCycleSegment(start, end, c, eomc, true, 0, 9999999999);
+    generatedDates = computeDatesFromCycleSegment(start, end, c, true, 0, 9999999999);
 
     expectedDates[0] = 1451606400; // 2016-01-01T00:00:00
     expectedDates[1] = 1454284800; // 2016-02-01T00:00:00
@@ -391,11 +367,10 @@ contract TestCoreScheduleACTUS is Core {
     uint256[MAX_CYCLE_SIZE] memory generatedDates;
 
     IPS memory c = IPS(1, P.M, S.SHORT, true);
-    EndOfMonthConvention eomc = EndOfMonthConvention.SD;
     uint256 start = 1452816000; // 2016-01-15T00:00:00
     uint256 end = 1483228800; // 2017-01-01T00:00:00
 
-    generatedDates = computeDatesFromCycleSegment(start, end, c, eomc, true, 0, 9999999999);
+    generatedDates = computeDatesFromCycleSegment(start, end, c, true, 0, 9999999999);
 
     expectedDates[0] = 1452816000; // 2016-01-15T00:00:00
     expectedDates[1] = 1455494400; // 2016-02-15T00:00:00
@@ -423,11 +398,10 @@ contract TestCoreScheduleACTUS is Core {
     uint256[MAX_CYCLE_SIZE] memory generatedDates;
 
     IPS memory c = IPS(1, P.M, S.LONG, true);
-    EndOfMonthConvention eomc = EndOfMonthConvention.SD;
     uint256 start = 1452816000; // 2016-01-15T00:00:00
     uint256 end = 1483228800; // 2017-01-01T00:00:00
 
-    generatedDates = computeDatesFromCycleSegment(start, end, c, eomc, true, 0, 9999999999);
+    generatedDates = computeDatesFromCycleSegment(start, end, c, true, 0, 9999999999);
 
     expectedDates[0] = 1452816000; // 2016-01-15T00:00:00
     expectedDates[1] = 1455494400; // 2016-02-15T00:00:00
@@ -454,11 +428,10 @@ contract TestCoreScheduleACTUS is Core {
     uint256[MAX_CYCLE_SIZE] memory generatedDates;
 
     IPS memory c = IPS(2, P.M, S.LONG, true);
-    EndOfMonthConvention eomc = EndOfMonthConvention.SD;
     uint256 start = 1451606400; // 2016-01-01T00:00:00
     uint256 end = 1483228800; // 2017-01-01T00:00:00
 
-    generatedDates = computeDatesFromCycleSegment(start, end, c, eomc, true, 0, 9999999999);
+    generatedDates = computeDatesFromCycleSegment(start, end, c, true, 0, 9999999999);
 
     expectedDates[0] = 1451606400; // 2016-01-01T00:00:00
     expectedDates[1] = 1456790400; // 2016-03-01T00:00:00
@@ -480,11 +453,10 @@ contract TestCoreScheduleACTUS is Core {
     uint256[MAX_CYCLE_SIZE] memory generatedDates;
 
     IPS memory c = IPS(2, P.M, S.LONG, true);
-    EndOfMonthConvention eomc = EndOfMonthConvention.SD;
     uint256 start = 1452816000; // 2016-01-15T00:00:00
     uint256 end = 1483228800; // 2017-01-01T00:00:00
 
-    generatedDates = computeDatesFromCycleSegment(start, end, c, eomc, true, 0, 9999999999);
+    generatedDates = computeDatesFromCycleSegment(start, end, c, true, 0, 9999999999);
 
     expectedDates[0] = 1452816000; // 2016-01-15T00:00:00
     expectedDates[1] = 1458000000; // 2016-03-15T00:00:00
@@ -504,12 +476,11 @@ contract TestCoreScheduleACTUS is Core {
     uint256[MAX_CYCLE_SIZE] memory expectedDates;
     uint256[MAX_CYCLE_SIZE] memory generatedDates;
 
-    EndOfMonthConvention eomc = EndOfMonthConvention.EOM;
     IPS memory c = IPS(1, P.M, S.SHORT, true);
     uint256 start = 1452816000; // 2016-01-15T00:00:00
     uint256 end = 1483228800; // 2017-01-01T00:00:00
 
-    generatedDates = computeDatesFromCycleSegment(start, end, c, eomc, true, 0, 9999999999);
+    generatedDates = computeDatesFromCycleSegment(start, end, c, true, 0, 9999999999);
 
     expectedDates[0] = 1452816000; // 2016-01-15T00:00:00
     expectedDates[1] = 1455494400; // 2016-02-15T00:00:00
@@ -532,16 +503,19 @@ contract TestCoreScheduleACTUS is Core {
     );
   }
 
-  function test_Schedule_Monthly_EOM_shortstub_startEndMonthFeb() public {
+
+/*
+ *  End of Month Tests (deactivated)
+ *
+    function test_Schedule_Monthly_EOM_shortstub_startEndMonthFeb() public {
     uint256[MAX_CYCLE_SIZE] memory expectedDates;
     uint256[MAX_CYCLE_SIZE] memory generatedDates;
 
-    EndOfMonthConvention eomc = EndOfMonthConvention.EOM;
     IPS memory c = IPS(1, P.M, S.SHORT, true);
     uint256 start = 1456704000; // 2016-02-29T00:00:00
     uint256 end = 1483228800; // 2017-01-01T00:00:00
 
-    generatedDates = computeDatesFromCycleSegment(start, end, c, eomc, true, 0, 9999999999);
+    generatedDates = computeDatesFromCycleSegment(start, end, c, true, 0, 9999999999);
 
     expectedDates[0] = 1456704000; // 2016-02-29T00:00:00
     expectedDates[1] = 1459382400; // 2016-03-31T00:00:00
@@ -567,12 +541,11 @@ contract TestCoreScheduleACTUS is Core {
     uint256[MAX_CYCLE_SIZE] memory expectedDates;
     uint256[MAX_CYCLE_SIZE] memory generatedDates;
 
-    EndOfMonthConvention eomc = EndOfMonthConvention.EOM;
     IPS memory c = IPS(1, P.M, S.LONG, true);
     uint256 start = 1456704000; // 2016-02-29T00:00:00
     uint256 end = 1483228800; // 2017-01-01T00:00:00
 
-    generatedDates = computeDatesFromCycleSegment(start, end, c, eomc, true, 0, 9999999999);
+    generatedDates = computeDatesFromCycleSegment(start, end, c, true, 0, 9999999999);
 
     expectedDates[0] = 1456704000; // 2016-02-29T00:00:00
     expectedDates[1] = 1459382400; // 2016-03-31T00:00:00
@@ -597,12 +570,11 @@ contract TestCoreScheduleACTUS is Core {
     uint256[MAX_CYCLE_SIZE] memory expectedDates;
     uint256[MAX_CYCLE_SIZE] memory generatedDates;
 
-    EndOfMonthConvention eomc = EndOfMonthConvention.EOM;
     IPS memory c = IPS(1, P.M, S.LONG, true);
     uint256 start = 1459382400; // 2016-03-31T00:00:00
     uint256 end = 1483228800; // 2017-01-01T00:00:00
 
-    generatedDates = computeDatesFromCycleSegment(start, end, c, eomc, true, 0, 9999999999);
+    generatedDates = computeDatesFromCycleSegment(start, end, c, true, 0, 9999999999);
 
     expectedDates[0] = 1459382400; // 2016-03-31T00:00:00
     expectedDates[1] = 1461974400; // 2016-04-30T00:00:00
@@ -626,12 +598,11 @@ contract TestCoreScheduleACTUS is Core {
     uint256[MAX_CYCLE_SIZE] memory expectedDates;
     uint256[MAX_CYCLE_SIZE] memory generatedDates;
 
-    EndOfMonthConvention eomc = EndOfMonthConvention.EOM;
     IPS memory c = IPS(1, P.M, S.LONG, true);
     uint256 start = 1461974400; // 2016-04-30T00:00:00
     uint256 end = 1483228800; // 2017-01-01T00:00:00
 
-    generatedDates = computeDatesFromCycleSegment(start, end, c, eomc, true, 0, 9999999999);
+    generatedDates = computeDatesFromCycleSegment(start, end, c, true, 0, 9999999999);
 
     expectedDates[0] = 1461974400; // 2016-04-30T00:00:00
     expectedDates[1] = 1464652800; // 2016-05-31T00:00:00
@@ -654,12 +625,11 @@ contract TestCoreScheduleACTUS is Core {
     uint256[MAX_CYCLE_SIZE] memory expectedDates;
     uint256[MAX_CYCLE_SIZE] memory generatedDates;
 
-    EndOfMonthConvention eomc = EndOfMonthConvention.EOM;
     IPS memory c = IPS(2, P.M, S.LONG, true);
     uint256 start = 1456704000; // 2016-02-29T00:00:00
     uint256 end = 1483228800; // 2017-01-01T00:00:00
 
-    generatedDates = computeDatesFromCycleSegment(start, end, c, eomc, true, 0, 9999999999);
+    generatedDates = computeDatesFromCycleSegment(start, end, c, true, 0, 9999999999);
 
     expectedDates[0] = 1456704000; // 2016-02-29T00:00:00
     expectedDates[1] = 1461974400; // 2016-04-30T00:00:00
@@ -673,18 +643,17 @@ contract TestCoreScheduleACTUS is Core {
       keccak256(abi.encode(generatedDates)),
       "Generated schedules should be equal."
     );
-  }
+  } */
 
   function test_Schedule_BiMonthly_SD_shortstub_onlyStartAndEndTimes() public {
     uint256[MAX_CYCLE_SIZE] memory expectedDates;
     uint256[MAX_CYCLE_SIZE] memory generatedDates;
 
-    EndOfMonthConvention eomc = EndOfMonthConvention.SD;
     IPS memory c = IPS(2, P.M, S.SHORT, true);
     uint256 start = 1477958400; // 2016-11-01T00:00:00
     uint256 end = 1483228800; // 2017-01-01T00:00:00
 
-    generatedDates = computeDatesFromCycleSegment(start, end, c, eomc, true, 0, 9999999999);
+    generatedDates = computeDatesFromCycleSegment(start, end, c, true, 0, 9999999999);
 
     expectedDates[0] = 1477958400; // 2016-11-01T00:00:00
     expectedDates[1] = 1483228800; // 2017-01-01T00:00:00
@@ -700,12 +669,11 @@ contract TestCoreScheduleACTUS is Core {
     uint256[MAX_CYCLE_SIZE] memory expectedDates;
     uint256[MAX_CYCLE_SIZE] memory generatedDates;
 
-    EndOfMonthConvention eomc = EndOfMonthConvention.EOM;
     IPS memory c = IPS(2, P.M, S.SHORT, true);
     uint256 start = 1480464000; // 2016-11-30T00:00:00
     uint256 end = 1483228800; // 2017-01-01T00:00:00
 
-    generatedDates = computeDatesFromCycleSegment(start, end, c, eomc, true, 0, 9999999999);
+    generatedDates = computeDatesFromCycleSegment(start, end, c, true, 0, 9999999999);
 
     expectedDates[0] = 1480464000; // 2016-11-30T00:00:00
     expectedDates[1] = 1483228800; // 2017-01-01T00:00:00
@@ -721,12 +689,11 @@ contract TestCoreScheduleACTUS is Core {
     uint256[MAX_CYCLE_SIZE] memory expectedDates;
     uint256[MAX_CYCLE_SIZE] memory generatedDates;
 
-    EndOfMonthConvention eomc = EndOfMonthConvention.EOM;
     IPS memory c = IPS(2, P.M, S.LONG, true);
     uint256 start = 1480464000; // 2016-11-30T00:00:00
     uint256 end = 1483228800; // 2017-01-01T00:00:00
 
-    generatedDates = computeDatesFromCycleSegment(start, end, c, eomc, true, 0, 9999999999);
+    generatedDates = computeDatesFromCycleSegment(start, end, c, true, 0, 9999999999);
 
     expectedDates[0] = 1480464000; // 2016-11-30T00:00:00
     expectedDates[1] = 1483228800; // 2017-01-01T00:00:00
@@ -742,17 +709,16 @@ contract TestCoreScheduleACTUS is Core {
     uint256[MAX_CYCLE_SIZE] memory expectedDates;
     uint256[MAX_CYCLE_SIZE] memory generatedDates;
 
-    EndOfMonthConvention eomc = EndOfMonthConvention.SD;
     IPS memory c = IPS(1, P.Q, S.SHORT, true);
     uint256 start = 1456704000; // 2016-02-29T00:00:00
     uint256 end = 1546300800; // 2019-01-01T00:00:00
 
     generatedDates = computeDatesFromCycleSegment(
-        start, end, c, eomc, true, 0, 9999999999);
+        start, end, c, true, 0, 9999999999);
 
     c = IPS(3, P.M, S.SHORT, true);
     expectedDates = computeDatesFromCycleSegment(
-        start, end, c, eomc, true, 0, 9999999999);
+        start, end, c, true, 0, 9999999999);
 
     Assert.equal(
       keccak256(abi.encode(expectedDates)),
@@ -765,17 +731,16 @@ contract TestCoreScheduleACTUS is Core {
     uint256[MAX_CYCLE_SIZE] memory expectedDates;
     uint256[MAX_CYCLE_SIZE] memory generatedDates;
 
-    EndOfMonthConvention eomc = EndOfMonthConvention.SD;
     IPS memory c = IPS(1, P.Q, S.LONG, true);
     uint256 start = 1456704000; // 2016-02-29T00:00:00
     uint256 end = 1546300800; // 2019-01-01T00:00:00
 
     generatedDates = computeDatesFromCycleSegment(
-        start, end, c, eomc, true, 0, 9999999999);
+        start, end, c, true, 0, 9999999999);
 
     c = IPS(3, P.M, S.LONG, true);
     expectedDates = computeDatesFromCycleSegment(
-        start, end, c, eomc, true, 0, 9999999999);
+        start, end, c, true, 0, 9999999999);
 
     Assert.equal(
       keccak256(abi.encode(expectedDates)),
@@ -788,17 +753,16 @@ contract TestCoreScheduleACTUS is Core {
     uint256[MAX_CYCLE_SIZE] memory expectedDates;
     uint256[MAX_CYCLE_SIZE] memory generatedDates;
 
-    EndOfMonthConvention eomc = EndOfMonthConvention.EOM;
     IPS memory c = IPS(1, P.Q, S.LONG, true);
     uint256 start = 1456704000; // 2016-02-29T00:00:00
     uint256 end = 1546300800; // 2019-01-01T00:00:00
 
     generatedDates = computeDatesFromCycleSegment(
-        start, end, c, eomc, true, 0, 9999999999);
+        start, end, c, true, 0, 9999999999);
 
     c = IPS(3, P.M, S.LONG, true);
     expectedDates = computeDatesFromCycleSegment(
-        start, end, c, eomc, true, 0, 9999999999);
+        start, end, c, true, 0, 9999999999);
 
     Assert.equal(
       keccak256(abi.encode(expectedDates)),
@@ -811,17 +775,16 @@ contract TestCoreScheduleACTUS is Core {
     uint256[MAX_CYCLE_SIZE] memory expectedDates;
     uint256[MAX_CYCLE_SIZE] memory generatedDates;
 
-    EndOfMonthConvention eomc = EndOfMonthConvention.EOM;
     IPS memory c = IPS(2, P.Q, S.LONG, true);
     uint256 start = 1456704000; // 2016-02-29T00:00:00
     uint256 end = 1640995200; // 2022-01-01T00:00:00
 
     generatedDates = computeDatesFromCycleSegment(
-        start, end, c, eomc, true, 0, 9999999999);
+        start, end, c, true, 0, 9999999999);
 
     c = IPS(6, P.M, S.LONG, true);
     expectedDates = computeDatesFromCycleSegment(
-        start, end, c, eomc, true, 0, 9999999999);
+        start, end, c, true, 0, 9999999999);
 
     Assert.equal(
       keccak256(abi.encode(expectedDates)),
@@ -834,17 +797,16 @@ contract TestCoreScheduleACTUS is Core {
     uint256[MAX_CYCLE_SIZE] memory expectedDates;
     uint256[MAX_CYCLE_SIZE] memory generatedDates;
 
-    EndOfMonthConvention eomc = EndOfMonthConvention.EOM;
     IPS memory c = IPS(1, P.H, S.LONG, true);
     uint256 start = 1456704000; // 2016-02-29T00:00:00
     uint256 end = 1640995200; // 2022-01-01T00:00:00
 
     generatedDates = computeDatesFromCycleSegment(
-        start, end, c, eomc, true, 0, 9999999999);
+        start, end, c, true, 0, 9999999999);
 
     c = IPS(2, P.Q, S.LONG, true);
     expectedDates = computeDatesFromCycleSegment(
-        start, end, c, eomc, true, 0, 9999999999);
+        start, end, c, true, 0, 9999999999);
 
     Assert.equal(
       keccak256(abi.encode(expectedDates)),
@@ -857,17 +819,16 @@ contract TestCoreScheduleACTUS is Core {
     uint256[MAX_CYCLE_SIZE] memory expectedDates;
     uint256[MAX_CYCLE_SIZE] memory generatedDates;
 
-    EndOfMonthConvention eomc = EndOfMonthConvention.EOM;
     IPS memory c = IPS(1, P.Y, S.LONG, true);
     uint256 start = 1456704000; // 2016-02-29T00:00:00
     uint256 end = 1640995200; // 2022-01-01T00:00:00
 
     generatedDates = computeDatesFromCycleSegment(
-        start, end, c, eomc, true, 0, 9999999999);
+        start, end, c, true, 0, 9999999999);
 
     c = IPS(2, P.H, S.LONG, true);
     expectedDates = computeDatesFromCycleSegment(
-        start, end, c, eomc, true, 0, 9999999999);
+        start, end, c, true, 0, 9999999999);
 
     Assert.equal(
       keccak256(abi.encode(expectedDates)),
@@ -880,17 +841,16 @@ contract TestCoreScheduleACTUS is Core {
     uint256[MAX_CYCLE_SIZE] memory expectedDates;
     uint256[MAX_CYCLE_SIZE] memory generatedDates;
 
-    EndOfMonthConvention eomc = EndOfMonthConvention.EOM;
     IPS memory c = IPS(2, P.Y, S.LONG, true);
     uint256 start = 1456704000; // 2016-02-29T00:00:00
     uint256 end = 1767225600; // 2026-01-01T00:00:00
 
     generatedDates = computeDatesFromCycleSegment(
-        start, end, c, eomc, true, 0, 9999999999);
+        start, end, c, true, 0, 9999999999);
 
     c = IPS(4, P.H, S.LONG, true);
     expectedDates = computeDatesFromCycleSegment(
-        start, end, c, eomc, true, 0, 9999999999);
+        start, end, c, true, 0, 9999999999);
 
     Assert.equal(
       keccak256(abi.encode(expectedDates)),

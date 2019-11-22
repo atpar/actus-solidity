@@ -180,7 +180,6 @@ contract PAMEngine is Core, IEngine, STF, POF {
 					terms.cycleAnchorDateOfInterestPayment,
 					terms.maturityDate,
 					terms.cycleOfInterestPayment,
-					terms.endOfMonthConvention,
 					true,
 					segmentStart,
 					segmentEnd
@@ -226,7 +225,6 @@ contract PAMEngine is Core, IEngine, STF, POF {
 					terms.cycleAnchorDateOfRateReset,
 					terms.maturityDate,
 					terms.cycleOfRateReset,
-					terms.endOfMonthConvention,
 					false,
 					segmentStart,
 					segmentEnd
@@ -250,7 +248,6 @@ contract PAMEngine is Core, IEngine, STF, POF {
 					terms.cycleAnchorDateOfFee,
 					terms.maturityDate,
 					terms.cycleOfFee,
-					terms.endOfMonthConvention,
 					true,
 					segmentStart,
 					segmentEnd
@@ -275,7 +272,6 @@ contract PAMEngine is Core, IEngine, STF, POF {
 					terms.cycleAnchorDateOfScalingIndex,
 					terms.maturityDate,
 					terms.cycleOfScalingIndex,
-					terms.endOfMonthConvention,
 					true,
 					segmentStart,
 					segmentEnd
