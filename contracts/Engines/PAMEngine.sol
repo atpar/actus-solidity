@@ -302,8 +302,6 @@ contract PAMEngine is Core, IEngine, STF, POF {
 		pure
 		returns (bool)
 	{
-		// ...
-
 		return true;
 	}
 

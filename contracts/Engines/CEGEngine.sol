@@ -197,10 +197,13 @@ contract CEGEngine is Core, IEngine, STF, POF {
 		(EventType eventType, uint256 scheduleTime) = decodeEvent(_event);
 
 		// FP, MD events only scheduled up to execution of the Guarantee
-		if ( (eventType == EventType.FP || eventType == EventType.MD) &&
-				underlyingState.executionAmount > 0.0 ) {
+		if (
+			(eventType == EventType.FP || eventType == EventType.MD)
+			&& underlyingState.executionAmount > int256(0)
+		) {
 			return false;
 		}
+
 		return true;
 	}
 

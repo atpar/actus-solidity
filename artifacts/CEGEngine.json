@@ -774,6 +774,14 @@
             {
               "name": "nextPrincipalRedemptionPayment",
               "type": "int256"
+            },
+            {
+              "name": "executionDate",
+              "type": "uint256"
+            },
+            {
+              "name": "executionAmount",
+              "type": "int256"
             }
           ],
           "name": "",
@@ -1003,6 +1011,14 @@
             },
             {
               "name": "nextPrincipalRedemptionPayment",
+              "type": "int256"
+            },
+            {
+              "name": "executionDate",
+              "type": "uint256"
+            },
+            {
+              "name": "executionAmount",
               "type": "int256"
             }
           ],
@@ -1065,6 +1081,14 @@
             {
               "name": "nextPrincipalRedemptionPayment",
               "type": "int256"
+            },
+            {
+              "name": "executionDate",
+              "type": "uint256"
+            },
+            {
+              "name": "executionAmount",
+              "type": "int256"
             }
           ],
           "name": "",
@@ -1294,6 +1318,14 @@
             },
             {
               "name": "nextPrincipalRedemptionPayment",
+              "type": "int256"
+            },
+            {
+              "name": "executionDate",
+              "type": "uint256"
+            },
+            {
+              "name": "executionAmount",
               "type": "int256"
             }
           ],
@@ -2018,6 +2050,14 @@
             {
               "name": "nextPrincipalRedemptionPayment",
               "type": "int256"
+            },
+            {
+              "name": "executionDate",
+              "type": "uint256"
+            },
+            {
+              "name": "executionAmount",
+              "type": "int256"
             }
           ],
           "name": "state",
@@ -2068,6 +2108,14 @@
             {
               "name": "nextPrincipalRedemptionPayment",
               "type": "int256"
+            },
+            {
+              "name": "executionDate",
+              "type": "uint256"
+            },
+            {
+              "name": "executionAmount",
+              "type": "int256"
             }
           ],
           "name": "underlyingState",
@@ -2093,5 +2141,5 @@
     "version": "0.5.2+commit.1df8f40c.Emscripten.clang"
   },
   "networks": {},
-  "updatedAt": "2019-11-21T13:18:31.528Z"
+  "updatedAt": "2019-11-22T09:18:03.457Z"
 }
