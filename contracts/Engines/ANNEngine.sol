@@ -275,6 +275,7 @@ contract ANNEngine is Core, IEngine, STF, POF {
 		bytes32 _event,
 		LifecycleTerms memory terms,
 		State memory state,
+		bool hasUnderlying,
 		State memory underlyingState
 	)
 		public

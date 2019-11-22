@@ -187,6 +187,7 @@ contract CEGEngine is Core, IEngine, STF, POF {
 		bytes32 _event,
 		LifecycleTerms memory terms,
 		State memory state,
+		bool hasUnderlying,
 		State memory underlyingState
 	)
 		public
@@ -195,12 +196,14 @@ contract CEGEngine is Core, IEngine, STF, POF {
 	{
 		(EventType eventType, uint256 scheduleTime) = decodeEvent(_event);
 
-		// FP, MD events only scheduled up to execution of the Guarantee
-		if (
-			(eventType == EventType.FP || eventType == EventType.MD)
-			&& underlyingState.executionAmount > int256(0)
-		) {
-			return false;
+		if (hasUnderlying) {
+			// FP, MD events only scheduled up to execution of the Guarantee
+			if (
+				(eventType == EventType.FP || eventType == EventType.MD)
+				&& underlyingState.executionAmount > int256(0)
+			) {
+				return false;
+			}
 		}
 
 		return true;

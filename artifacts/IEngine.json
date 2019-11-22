@@ -822,10 +822,6 @@
         {
           "components": [
             {
-              "name": "endOfMonthConvention",
-              "type": "uint8"
-            },
-            {
               "name": "scalingEffect",
               "type": "uint8"
             },
@@ -1056,10 +1052,6 @@
       "inputs": [
         {
           "components": [
-            {
-              "name": "endOfMonthConvention",
-              "type": "uint8"
-            },
             {
               "name": "scalingEffect",
               "type": "uint8"
@@ -1528,6 +1520,10 @@
           "type": "tuple"
         },
         {
+          "name": "hasUnderlying",
+          "type": "bool"
+        },
+        {
           "components": [
             {
               "name": "statusDate",
@@ -1605,5 +1601,5 @@
     "version": "0.5.2+commit.1df8f40c.Emscripten.clang"
   },
   "networks": {},
-  "updatedAt": "2019-11-22T09:18:03.464Z"
+  "updatedAt": "2019-11-22T10:26:41.492Z"
 }

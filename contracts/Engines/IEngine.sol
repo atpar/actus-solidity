@@ -103,6 +103,7 @@ contract IEngine is Definitions {
 		bytes32 _event,
 		LifecycleTerms memory terms,
 		State memory state,
+		bool hasUnderlying,
 		State memory underlyingState
 	)
 		public

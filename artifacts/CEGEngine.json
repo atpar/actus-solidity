@@ -241,67 +241,7 @@
       "constant": true,
       "inputs": [
         {
-          "name": "_event",
-          "type": "bytes32"
-        }
-      ],
-      "name": "decodeEvent",
-      "outputs": [
-        {
-          "name": "",
-          "type": "uint8"
-        },
-        {
-          "name": "",
-          "type": "uint256"
-        }
-      ],
-      "payable": false,
-      "stateMutability": "pure",
-      "type": "function"
-    },
-    {
-      "constant": true,
-      "inputs": [
-        {
-          "name": "eventType",
-          "type": "uint8"
-        }
-      ],
-      "name": "getEpochOffset",
-      "outputs": [
-        {
-          "name": "",
-          "type": "uint256"
-        }
-      ],
-      "payable": false,
-      "stateMutability": "pure",
-      "type": "function"
-    },
-    {
-      "constant": true,
-      "inputs": [],
-      "name": "PRECISION",
-      "outputs": [
-        {
-          "name": "",
-          "type": "uint256"
-        }
-      ],
-      "payable": false,
-      "stateMutability": "view",
-      "type": "function"
-    },
-    {
-      "constant": true,
-      "inputs": [
-        {
           "components": [
-            {
-              "name": "endOfMonthConvention",
-              "type": "uint8"
-            },
             {
               "name": "scalingEffect",
               "type": "uint8"
@@ -526,6 +466,62 @@
       ],
       "payable": false,
       "stateMutability": "pure",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "name": "_event",
+          "type": "bytes32"
+        }
+      ],
+      "name": "decodeEvent",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint8"
+        },
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "pure",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "name": "eventType",
+          "type": "uint8"
+        }
+      ],
+      "name": "getEpochOffset",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "pure",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "PRECISION",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
       "type": "function"
     },
     {
@@ -1358,10 +1354,6 @@
         {
           "components": [
             {
-              "name": "endOfMonthConvention",
-              "type": "uint8"
-            },
-            {
               "name": "scalingEffect",
               "type": "uint8"
             },
@@ -1592,10 +1584,6 @@
       "inputs": [
         {
           "components": [
-            {
-              "name": "endOfMonthConvention",
-              "type": "uint8"
-            },
             {
               "name": "scalingEffect",
               "type": "uint8"
@@ -2064,6 +2052,10 @@
           "type": "tuple"
         },
         {
+          "name": "hasUnderlying",
+          "type": "bool"
+        },
+        {
           "components": [
             {
               "name": "statusDate",
@@ -2141,5 +2133,5 @@
     "version": "0.5.2+commit.1df8f40c.Emscripten.clang"
   },
   "networks": {},
-  "updatedAt": "2019-11-22T09:18:03.457Z"
+  "updatedAt": "2019-11-22T10:26:41.486Z"
 }
