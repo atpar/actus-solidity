@@ -153,6 +153,20 @@ contract CECEngine is Core, IEngine, STF, POF {
 		return _eventSchedule;
 	}
 
+	function isEventScheduled(
+		bytes32 _event,
+		LifecycleTerms memory terms,
+		State memory state,
+		bool hasUnderlying,
+		State memory underlyingState
+	)
+		public
+		pure
+		returns (bool)
+	{
+		return true;
+	}
+
 	/**
 	 * computes the next contract state based on the contract terms, state and the event type
 	 * TODO:
