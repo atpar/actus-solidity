@@ -192,7 +192,6 @@ contract ANNEngine is Core, IEngine, STF, POF {
 					terms.cycleAnchorDateOfInterestPayment,
 					terms.cycleAnchorDateOfPrincipalRedemption, // pure IP schedule ends at beginning of combined IP/PR schedule
 					terms.cycleOfInterestPayment,
-					terms.endOfMonthConvention,
 					false, // do not create an event for cycleAnchorDateOfPrincipalRedemption as covered with the PR schedule
 					segmentStart,
 					segmentEnd
@@ -234,7 +233,6 @@ contract ANNEngine is Core, IEngine, STF, POF {
 					terms.cycleAnchorDateOfFee,
 					terms.maturityDate,
 					terms.cycleOfFee,
-					terms.endOfMonthConvention,
 					true,
 					segmentStart,
 					segmentEnd
@@ -256,7 +254,6 @@ contract ANNEngine is Core, IEngine, STF, POF {
 				terms.cycleAnchorDateOfPrincipalRedemption,
 				terms.maturityDate,
 				terms.cycleOfPrincipalRedemption,
-				terms.endOfMonthConvention,
 				false,
 				segmentStart,
 				segmentEnd
@@ -271,58 +268,22 @@ contract ANNEngine is Core, IEngine, STF, POF {
 			}
 		}
 
-		// revert("ANNEngine.computeCyclicScheduleSegment: UNKNOWN_CYCLIC_EVENT_TYPE");
 		return _eventSchedule;
 	}
 
-	// function applyEventsToEventSchedule(
-	// 	Event[MAX_EVENT_SCHEDULE_SIZE] memory _eventSchedule,
-	// 	Event[MAX_EVENT_SCHEDULE_SIZE] memory _events
-	// )
-	// 	public
-	// 	pure
-	// 	returns (Event[MAX_EVENT_SCHEDULE_SIZE] memory)
-	// {
-	// 	// for loop can be removed after reimplementation of sortEventSchedule
-	// 	// check if _eventSchedule[MAX_EVENT_SCHEDULE_SIZE - numberOfEvents].scheduleTime == 0 is sufficient
-	// 	uint256 index = 0;
-	// 	for (uint256 j = 0; index < MAX_EVENT_SCHEDULE_SIZE; index++) {
-	// 		if (_events[j].eventTime == 0) {
-	// 			if (j != 0) break;
-	// 			return _eventSchedule;
-	// 		}
-	// 		if (_eventSchedule[index].eventTime == 0) {
-	// 			_eventSchedule[index] = _events[j];
-	// 			j++;
-	// 		}
-	// 	}
-	// 	sortEventSchedule(_eventSchedule, index);
-
-	// 	// CEGEngine specific schedule rules
-
-	// 	bool afterExecutionDate = false;
-	// 	for (uint256 i = 1; i < MAX_EVENT_SCHEDULE_SIZE; i++) {
-	// 		if (_eventSchedule[i - 1].eventTime == 0) {
-	// 			delete _eventSchedule[i];
-	// 			continue;
-	// 		}
-	// 		if (
-	// 			afterExecutionDate == false
-	// 			&& _eventSchedule[i].eventType == EventType.XD
-	// 		) {
-	// 			afterExecutionDate = true;
-	// 		}
-	// 		// remove all FP events after execution date
-	// 		if (
-	// 			afterExecutionDate == true
-	// 			&& _eventSchedule[i].eventType == EventType.FP
-	// 		) {
-	// 			delete _eventSchedule[i];
-	// 		}
-	// 	}
-
-	// 	return _eventSchedule;
-	// }
+	function isEventScheduled(
+		bytes32 _event,
+		LifecycleTerms memory terms,
+		State memory state,
+		bool hasUnderlying,
+		State memory underlyingState
+	)
+		public
+		pure
+		returns (bool)
+	{
+		return true;
+	}
 
 	/**
 	 * computes the next contract state based on the contract terms, state and the event type

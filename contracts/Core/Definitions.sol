@@ -65,10 +65,13 @@ contract Definitions {
 	}
 
 	struct State {
+		ContractPerformance contractPerformance;
+
 		uint256 statusDate;
 		uint256 nonPerformingDate;
 		uint256 maturityDate;
-		ContractPerformance contractPerformance;
+		uint256 executionDate;
+
 		int256 notionalPrincipal;
 		// int256 notionalPrincipal2;
 		int256 accruedInterest;
@@ -78,7 +81,7 @@ contract Definitions {
 		int256 interestScalingMultiplier;
 		int256 notionalScalingMultiplier;
 		int256 nextPrincipalRedemptionPayment;
-		// int256 payoffAtSettlement;
+		int256 executionAmount;
 	}
 
 	struct LifecycleTerms {
@@ -120,7 +123,6 @@ contract Definitions {
 	}
 
 	struct GeneratingTerms {
-		EndOfMonthConvention endOfMonthConvention;
 		ScalingEffect scalingEffect;
 
 		uint256 contractDealDate;

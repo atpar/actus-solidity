@@ -241,67 +241,7 @@
       "constant": true,
       "inputs": [
         {
-          "name": "_event",
-          "type": "bytes32"
-        }
-      ],
-      "name": "decodeEvent",
-      "outputs": [
-        {
-          "name": "",
-          "type": "uint8"
-        },
-        {
-          "name": "",
-          "type": "uint256"
-        }
-      ],
-      "payable": false,
-      "stateMutability": "pure",
-      "type": "function"
-    },
-    {
-      "constant": true,
-      "inputs": [
-        {
-          "name": "eventType",
-          "type": "uint8"
-        }
-      ],
-      "name": "getEpochOffset",
-      "outputs": [
-        {
-          "name": "",
-          "type": "uint256"
-        }
-      ],
-      "payable": false,
-      "stateMutability": "pure",
-      "type": "function"
-    },
-    {
-      "constant": true,
-      "inputs": [],
-      "name": "PRECISION",
-      "outputs": [
-        {
-          "name": "",
-          "type": "uint256"
-        }
-      ],
-      "payable": false,
-      "stateMutability": "view",
-      "type": "function"
-    },
-    {
-      "constant": true,
-      "inputs": [
-        {
           "components": [
-            {
-              "name": "endOfMonthConvention",
-              "type": "uint8"
-            },
             {
               "name": "scalingEffect",
               "type": "uint8"
@@ -532,6 +472,62 @@
       "constant": true,
       "inputs": [
         {
+          "name": "_event",
+          "type": "bytes32"
+        }
+      ],
+      "name": "decodeEvent",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint8"
+        },
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "pure",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "name": "eventType",
+          "type": "uint8"
+        }
+      ],
+      "name": "getEpochOffset",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "pure",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "PRECISION",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [
+        {
           "name": "eventType",
           "type": "uint8"
         },
@@ -732,6 +728,10 @@
         {
           "components": [
             {
+              "name": "contractPerformance",
+              "type": "uint8"
+            },
+            {
               "name": "statusDate",
               "type": "uint256"
             },
@@ -744,8 +744,8 @@
               "type": "uint256"
             },
             {
-              "name": "contractPerformance",
-              "type": "uint8"
+              "name": "executionDate",
+              "type": "uint256"
             },
             {
               "name": "notionalPrincipal",
@@ -773,6 +773,10 @@
             },
             {
               "name": "nextPrincipalRedemptionPayment",
+              "type": "int256"
+            },
+            {
+              "name": "executionAmount",
               "type": "int256"
             }
           ],
@@ -962,6 +966,10 @@
         {
           "components": [
             {
+              "name": "contractPerformance",
+              "type": "uint8"
+            },
+            {
               "name": "statusDate",
               "type": "uint256"
             },
@@ -974,8 +982,8 @@
               "type": "uint256"
             },
             {
-              "name": "contractPerformance",
-              "type": "uint8"
+              "name": "executionDate",
+              "type": "uint256"
             },
             {
               "name": "notionalPrincipal",
@@ -1003,6 +1011,10 @@
             },
             {
               "name": "nextPrincipalRedemptionPayment",
+              "type": "int256"
+            },
+            {
+              "name": "executionAmount",
               "type": "int256"
             }
           ],
@@ -1023,6 +1035,10 @@
         {
           "components": [
             {
+              "name": "contractPerformance",
+              "type": "uint8"
+            },
+            {
               "name": "statusDate",
               "type": "uint256"
             },
@@ -1035,8 +1051,8 @@
               "type": "uint256"
             },
             {
-              "name": "contractPerformance",
-              "type": "uint8"
+              "name": "executionDate",
+              "type": "uint256"
             },
             {
               "name": "notionalPrincipal",
@@ -1064,6 +1080,10 @@
             },
             {
               "name": "nextPrincipalRedemptionPayment",
+              "type": "int256"
+            },
+            {
+              "name": "executionAmount",
               "type": "int256"
             }
           ],
@@ -1253,6 +1273,10 @@
         {
           "components": [
             {
+              "name": "contractPerformance",
+              "type": "uint8"
+            },
+            {
               "name": "statusDate",
               "type": "uint256"
             },
@@ -1265,8 +1289,8 @@
               "type": "uint256"
             },
             {
-              "name": "contractPerformance",
-              "type": "uint8"
+              "name": "executionDate",
+              "type": "uint256"
             },
             {
               "name": "notionalPrincipal",
@@ -1294,6 +1318,10 @@
             },
             {
               "name": "nextPrincipalRedemptionPayment",
+              "type": "int256"
+            },
+            {
+              "name": "executionAmount",
               "type": "int256"
             }
           ],
@@ -1325,10 +1353,6 @@
       "inputs": [
         {
           "components": [
-            {
-              "name": "endOfMonthConvention",
-              "type": "uint8"
-            },
             {
               "name": "scalingEffect",
               "type": "uint8"
@@ -1561,10 +1585,6 @@
         {
           "components": [
             {
-              "name": "endOfMonthConvention",
-              "type": "uint8"
-            },
-            {
               "name": "scalingEffect",
               "type": "uint8"
             },
@@ -1793,6 +1813,317 @@
       "payable": false,
       "stateMutability": "pure",
       "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "name": "_event",
+          "type": "bytes32"
+        },
+        {
+          "components": [
+            {
+              "name": "calendar",
+              "type": "uint8"
+            },
+            {
+              "name": "contractRole",
+              "type": "uint8"
+            },
+            {
+              "name": "dayCountConvention",
+              "type": "uint8"
+            },
+            {
+              "name": "businessDayConvention",
+              "type": "uint8"
+            },
+            {
+              "name": "endOfMonthConvention",
+              "type": "uint8"
+            },
+            {
+              "name": "currency",
+              "type": "address"
+            },
+            {
+              "name": "scalingEffect",
+              "type": "uint8"
+            },
+            {
+              "name": "penaltyType",
+              "type": "uint8"
+            },
+            {
+              "name": "feeBasis",
+              "type": "uint8"
+            },
+            {
+              "name": "creditEventTypeCovered",
+              "type": "uint8"
+            },
+            {
+              "components": [
+                {
+                  "name": "object",
+                  "type": "bytes32"
+                },
+                {
+                  "name": "contractReferenceType",
+                  "type": "uint8"
+                },
+                {
+                  "name": "contractReferenceRole",
+                  "type": "uint8"
+                }
+              ],
+              "name": "contractStructure",
+              "type": "tuple"
+            },
+            {
+              "name": "statusDate",
+              "type": "uint256"
+            },
+            {
+              "name": "maturityDate",
+              "type": "uint256"
+            },
+            {
+              "name": "notionalPrincipal",
+              "type": "int256"
+            },
+            {
+              "name": "nominalInterestRate",
+              "type": "int256"
+            },
+            {
+              "name": "feeAccrued",
+              "type": "int256"
+            },
+            {
+              "name": "accruedInterest",
+              "type": "int256"
+            },
+            {
+              "name": "rateSpread",
+              "type": "int256"
+            },
+            {
+              "name": "feeRate",
+              "type": "int256"
+            },
+            {
+              "name": "nextResetRate",
+              "type": "int256"
+            },
+            {
+              "name": "penaltyRate",
+              "type": "int256"
+            },
+            {
+              "name": "premiumDiscountAtIED",
+              "type": "int256"
+            },
+            {
+              "name": "priceAtPurchaseDate",
+              "type": "int256"
+            },
+            {
+              "name": "nextPrincipalRedemptionPayment",
+              "type": "int256"
+            },
+            {
+              "name": "coverageOfCreditEnhancement",
+              "type": "int256"
+            },
+            {
+              "components": [
+                {
+                  "name": "i",
+                  "type": "uint256"
+                },
+                {
+                  "name": "p",
+                  "type": "uint8"
+                },
+                {
+                  "name": "isSet",
+                  "type": "bool"
+                }
+              ],
+              "name": "gracePeriod",
+              "type": "tuple"
+            },
+            {
+              "components": [
+                {
+                  "name": "i",
+                  "type": "uint256"
+                },
+                {
+                  "name": "p",
+                  "type": "uint8"
+                },
+                {
+                  "name": "isSet",
+                  "type": "bool"
+                }
+              ],
+              "name": "delinquencyPeriod",
+              "type": "tuple"
+            },
+            {
+              "name": "lifeCap",
+              "type": "int256"
+            },
+            {
+              "name": "lifeFloor",
+              "type": "int256"
+            },
+            {
+              "name": "periodCap",
+              "type": "int256"
+            },
+            {
+              "name": "periodFloor",
+              "type": "int256"
+            }
+          ],
+          "name": "terms",
+          "type": "tuple"
+        },
+        {
+          "components": [
+            {
+              "name": "contractPerformance",
+              "type": "uint8"
+            },
+            {
+              "name": "statusDate",
+              "type": "uint256"
+            },
+            {
+              "name": "nonPerformingDate",
+              "type": "uint256"
+            },
+            {
+              "name": "maturityDate",
+              "type": "uint256"
+            },
+            {
+              "name": "executionDate",
+              "type": "uint256"
+            },
+            {
+              "name": "notionalPrincipal",
+              "type": "int256"
+            },
+            {
+              "name": "accruedInterest",
+              "type": "int256"
+            },
+            {
+              "name": "feeAccrued",
+              "type": "int256"
+            },
+            {
+              "name": "nominalInterestRate",
+              "type": "int256"
+            },
+            {
+              "name": "interestScalingMultiplier",
+              "type": "int256"
+            },
+            {
+              "name": "notionalScalingMultiplier",
+              "type": "int256"
+            },
+            {
+              "name": "nextPrincipalRedemptionPayment",
+              "type": "int256"
+            },
+            {
+              "name": "executionAmount",
+              "type": "int256"
+            }
+          ],
+          "name": "state",
+          "type": "tuple"
+        },
+        {
+          "name": "hasUnderlying",
+          "type": "bool"
+        },
+        {
+          "components": [
+            {
+              "name": "contractPerformance",
+              "type": "uint8"
+            },
+            {
+              "name": "statusDate",
+              "type": "uint256"
+            },
+            {
+              "name": "nonPerformingDate",
+              "type": "uint256"
+            },
+            {
+              "name": "maturityDate",
+              "type": "uint256"
+            },
+            {
+              "name": "executionDate",
+              "type": "uint256"
+            },
+            {
+              "name": "notionalPrincipal",
+              "type": "int256"
+            },
+            {
+              "name": "accruedInterest",
+              "type": "int256"
+            },
+            {
+              "name": "feeAccrued",
+              "type": "int256"
+            },
+            {
+              "name": "nominalInterestRate",
+              "type": "int256"
+            },
+            {
+              "name": "interestScalingMultiplier",
+              "type": "int256"
+            },
+            {
+              "name": "notionalScalingMultiplier",
+              "type": "int256"
+            },
+            {
+              "name": "nextPrincipalRedemptionPayment",
+              "type": "int256"
+            },
+            {
+              "name": "executionAmount",
+              "type": "int256"
+            }
+          ],
+          "name": "underlyingState",
+          "type": "tuple"
+        }
+      ],
+      "name": "isEventScheduled",
+      "outputs": [
+        {
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "pure",
+      "type": "function"
     }
   ],
   "metadata": "",
@@ -1802,5 +2133,5 @@
     "version": "0.5.2+commit.1df8f40c.Emscripten.clang"
   },
   "networks": {},
-  "updatedAt": "2019-11-21T12:22:00.423Z"
+  "updatedAt": "2019-11-22T11:05:00.786Z"
 }
