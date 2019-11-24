@@ -43,7 +43,6 @@ contract CECEngine is Core, IEngine, STF, POF {
 		state.statusDate = terms.statusDate;
 		state.maturityDate = terms.maturityDate;
 		state.notionalPrincipal = roleSign(terms.contractRole) * terms.notionalPrincipal;
-		state.feeAccrued = terms.feeAccrued;
 
 		return state;
 	}
@@ -191,8 +190,6 @@ contract CECEngine is Core, IEngine, STF, POF {
 	{
 		(EventType eventType, uint256 scheduleTime) = decodeEvent(_event);
 
-		if (eventType == EventType.PRD) return STF_CEG_PRD(scheduleTime, terms, state, currentTimestamp);
-		if (eventType == EventType.FP) return STF_CEG_FP(scheduleTime, terms, state, currentTimestamp);
 		if (eventType == EventType.XD) return STF_CEG_XD(scheduleTime, terms, state, currentTimestamp);
 		if (eventType == EventType.MD) return STF_CEG_MD(scheduleTime, terms, state, currentTimestamp);
 		if (eventType == EventType.CE) return STF_PAM_DEL(scheduleTime, terms, state, currentTimestamp);
@@ -224,8 +221,6 @@ contract CECEngine is Core, IEngine, STF, POF {
 		(EventType eventType, uint256 scheduleTime) = decodeEvent(_event);
 
 		if (eventType == EventType.CE) return 0;
-		if (eventType == EventType.PRD) return POF_CEG_PRD(scheduleTime, terms, state, currentTimestamp);
-		if (eventType == EventType.FP) return POF_CEG_FP(scheduleTime, terms, state, currentTimestamp);
 		if (eventType == EventType.XD) return POF_CEG_XD(scheduleTime, terms, state, currentTimestamp);
 		if (eventType == EventType.MD) return POF_CEG_MD(scheduleTime, terms, state, currentTimestamp);
 
