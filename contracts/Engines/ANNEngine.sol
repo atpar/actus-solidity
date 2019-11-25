@@ -69,9 +69,9 @@ contract ANNEngine is Core, IEngine, STF, POF {
 		returns (State memory)
 	{
 		return stateTransitionFunction(
-			_event,
-			state,
 			terms,
+			state,
+			_event,
 			externalData
 		);
 	}
@@ -96,9 +96,9 @@ contract ANNEngine is Core, IEngine, STF, POF {
 		returns (int256)
 	{
 		return payoffFunction(
-			_event,
-			state,
 			terms,
+			state,
+			_event,
 			externalData
 		);
 	}
@@ -291,16 +291,16 @@ contract ANNEngine is Core, IEngine, STF, POF {
 	 * - annuity calculator for RR/RRF events
 	 * - IPCB events and Icb state variable
 	 * - Icb state variable updates in Nac-updating events
-	 * @param _event proto event for which to evaluate the next state for
-	 * @param state current state of the contract
 	 * @param terms terms of the contract
+	 * @param state current state of the contract
+	 * @param _event proto event for which to evaluate the next state for
 	 * @param externalData external data needed for POF evaluation
 	 * @return next contract state
 	 */
 	function stateTransitionFunction(
-		bytes32 _event,
-		State memory state,
 		LifecycleTerms memory terms,
+		State memory state,
+		bytes32 _event,
 		bytes32 externalData
 	)
 		private
@@ -309,22 +309,22 @@ contract ANNEngine is Core, IEngine, STF, POF {
 	{
 		(EventType eventType, uint256 scheduleTime) = decodeEvent(_event);
 
-		if (eventType == EventType.AD) return STF_PAM_AD(scheduleTime, terms, state, externalData);
-		if (eventType == EventType.CD) return STF_PAM_CD(scheduleTime, terms, state, externalData);
-		if (eventType == EventType.FP) return STF_PAM_FP(scheduleTime, terms, state, externalData);
-		if (eventType == EventType.IED) return STF_ANN_IED(scheduleTime, terms, state, externalData);
-		if (eventType == EventType.IPCI) return STF_ANN_IPCI(scheduleTime, terms, state, externalData);
-		if (eventType == EventType.IP) return STF_ANN_IP(scheduleTime, terms, state, externalData);
-		if (eventType == EventType.PP) return STF_PAM_PP(scheduleTime, terms, state, externalData);
-		if (eventType == EventType.PRD) return STF_PAM_PRD(scheduleTime, terms, state, externalData);
-		if (eventType == EventType.PR) return STF_ANN_PR(scheduleTime, terms, state, externalData);
-		if (eventType == EventType.MD) return STF_ANN_MD(scheduleTime, terms, state, externalData);
-		if (eventType == EventType.PY) return STF_PAM_PY(scheduleTime, terms, state, externalData);
-		if (eventType == EventType.RRF) return STF_PAM_RRF(scheduleTime, terms, state, externalData);
-		if (eventType == EventType.RR) return STF_ANN_RR(scheduleTime, terms, state, externalData);
-		if (eventType == EventType.SC) return STF_ANN_SC(scheduleTime, terms, state, externalData);
-		if (eventType == EventType.TD) return STF_PAM_TD(scheduleTime, terms, state, externalData);
-		if (eventType == EventType.CE) return STF_PAM_DEL(scheduleTime, terms, state, externalData);
+		if (eventType == EventType.AD) return STF_PAM_AD(terms, state, scheduleTime, externalData);
+		if (eventType == EventType.CD) return STF_PAM_CD(terms, state, scheduleTime, externalData);
+		if (eventType == EventType.FP) return STF_PAM_FP(terms, state, scheduleTime, externalData);
+		if (eventType == EventType.IED) return STF_ANN_IED(terms, state, scheduleTime, externalData);
+		if (eventType == EventType.IPCI) return STF_ANN_IPCI(terms, state, scheduleTime, externalData);
+		if (eventType == EventType.IP) return STF_ANN_IP(terms, state, scheduleTime, externalData);
+		if (eventType == EventType.PP) return STF_PAM_PP(terms, state, scheduleTime, externalData);
+		if (eventType == EventType.PRD) return STF_PAM_PRD(terms, state, scheduleTime, externalData);
+		if (eventType == EventType.PR) return STF_ANN_PR(terms, state, scheduleTime, externalData);
+		if (eventType == EventType.MD) return STF_ANN_MD(terms, state, scheduleTime, externalData);
+		if (eventType == EventType.PY) return STF_PAM_PY(terms, state, scheduleTime, externalData);
+		if (eventType == EventType.RRF) return STF_PAM_RRF(terms, state, scheduleTime, externalData);
+		if (eventType == EventType.RR) return STF_ANN_RR(terms, state, scheduleTime, externalData);
+		if (eventType == EventType.SC) return STF_ANN_SC(terms, state, scheduleTime, externalData);
+		if (eventType == EventType.TD) return STF_PAM_TD(terms, state, scheduleTime, externalData);
+		if (eventType == EventType.CE) return STF_PAM_DEL(terms, state, scheduleTime, externalData);
 
 		revert("ANNEngine.stateTransitionFunction: ATTRIBUTE_NOT_FOUND");
 	}
@@ -334,16 +334,16 @@ contract ANNEngine is Core, IEngine, STF, POF {
 	 * state and the event type
 	 * - IPCB events and Icb state variable
 	 * - Icb state variable updates in IP-paying events
-	 * @param _event proto event for which to evaluate the payoff for
-	 * @param state current state of the contract
 	 * @param terms terms of the contract
+	 * @param state current state of the contract
+	 * @param _event proto event for which to evaluate the payoff for
 	 * @param externalData external data needed for POF evaluation
 	 * @return payoff
 	 */
 	function payoffFunction(
-		bytes32 _event,
-		State memory state,
 		LifecycleTerms memory terms,
+		State memory state,
+		bytes32 _event,
 		bytes32 externalData
 	)
 		private
@@ -359,15 +359,15 @@ contract ANNEngine is Core, IEngine, STF, POF {
 		if (eventType == EventType.RR) return 0;
 		if (eventType == EventType.SC) return 0;
 		if (eventType == EventType.CE) return 0;
-		if (eventType == EventType.FP) return POF_ANN_FP(scheduleTime, terms, state, externalData);
-		if (eventType == EventType.IED) return POF_PAM_IED(scheduleTime, terms, state, externalData);
-		if (eventType == EventType.IP) return POF_PAM_IP(scheduleTime, terms, state, externalData);
-		if (eventType == EventType.PP) return POF_PAM_PP(scheduleTime, terms, state, externalData);
-		if (eventType == EventType.PRD) return POF_PAM_PRD(scheduleTime, terms, state, externalData);
-		if (eventType == EventType.PR) return POF_ANN_PR(scheduleTime, terms, state, externalData);
-		if (eventType == EventType.MD) return POF_ANN_MD(scheduleTime, terms, state, externalData);
-		if (eventType == EventType.PY) return POF_PAM_PY(scheduleTime, terms, state, externalData);
-		if (eventType == EventType.TD) return POF_PAM_TD(scheduleTime, terms, state, externalData);
+		if (eventType == EventType.FP) return POF_ANN_FP(terms, state, scheduleTime, externalData);
+		if (eventType == EventType.IED) return POF_PAM_IED(terms, state, scheduleTime, externalData);
+		if (eventType == EventType.IP) return POF_PAM_IP(terms, state, scheduleTime, externalData);
+		if (eventType == EventType.PP) return POF_PAM_PP(terms, state, scheduleTime, externalData);
+		if (eventType == EventType.PRD) return POF_PAM_PRD(terms, state, scheduleTime, externalData);
+		if (eventType == EventType.PR) return POF_ANN_PR(terms, state, scheduleTime, externalData);
+		if (eventType == EventType.MD) return POF_ANN_MD(terms, state, scheduleTime, externalData);
+		if (eventType == EventType.PY) return POF_PAM_PY(terms, state, scheduleTime, externalData);
+		if (eventType == EventType.TD) return POF_PAM_TD(terms, state, scheduleTime, externalData);
 
 		revert("ANNEngine.payoffFunction: ATTRIBUTE_NOT_FOUND");
 	}

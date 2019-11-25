@@ -67,9 +67,9 @@ contract CECEngine is Core, IEngine, STF, POF {
 		returns (State memory)
 	{
 		return stateTransitionFunction(
-			_event,
-			state,
 			terms,
+			state,
+			_event,
 			externalData
 		);
 	}
@@ -94,9 +94,9 @@ contract CECEngine is Core, IEngine, STF, POF {
 		returns (int256)
 	{
 		return payoffFunction(
-			_event,
-			state,
 			terms,
+			state,
+			_event,
 			externalData
 		);
 	}
@@ -172,16 +172,16 @@ contract CECEngine is Core, IEngine, STF, POF {
 	 * - annuity calculator for RR/RRF events
 	 * - IPCB events and Icb state variable
 	 * - Icb state variable updates in Nac-updating events
-	 * @param _event proto event for which to evaluate the next state for
-	 * @param state current state of the contract
 	 * @param terms terms of the contract
+	 * @param state current state of the contract
+	 * @param _event proto event for which to evaluate the next state for
 	 * @param externalData external data needed for POF evaluation
 	 * @return next contract state
 	 */
 	function stateTransitionFunction(
-		bytes32 _event,
-		State memory state,
 		LifecycleTerms memory terms,
+		State memory state,
+		bytes32 _event,
 		bytes32 externalData
 	)
 		private
@@ -190,9 +190,9 @@ contract CECEngine is Core, IEngine, STF, POF {
 	{
 		(EventType eventType, uint256 scheduleTime) = decodeEvent(_event);
 
-		if (eventType == EventType.XD) return STF_CEG_XD(scheduleTime, terms, state, externalData);
-		if (eventType == EventType.MD) return STF_CEG_MD(scheduleTime, terms, state, externalData);
-		if (eventType == EventType.CE) return STF_PAM_DEL(scheduleTime, terms, state, externalData);
+		if (eventType == EventType.XD) return STF_CEG_XD(terms, state, scheduleTime, externalData);
+		if (eventType == EventType.MD) return STF_CEG_MD(terms, state, scheduleTime, externalData);
+		if (eventType == EventType.CE) return STF_PAM_DEL(terms, state, scheduleTime, externalData);
 
 		revert("CEGEngine.stateTransitionFunction: ATTRIBUTE_NOT_FOUND");
 	}
@@ -202,16 +202,16 @@ contract CECEngine is Core, IEngine, STF, POF {
 	 * state and the event type
 	 * - IPCB events and Icb state variable
 	 * - Icb state variable updates in IP-paying events
-	 * @param _event proto event for which to evaluate the payoff for
-	 * @param state current state of the contract
 	 * @param terms terms of the contract
+	 * @param state current state of the contract
+	 * @param _event proto event for which to evaluate the payoff for
 	 * @param externalData external data needed for POF evaluation
 	 * @return payoff
 	 */
 	function payoffFunction(
-		bytes32 _event,
-		State memory state,
 		LifecycleTerms memory terms,
+		State memory state,
+		bytes32 _event,
 		bytes32 externalData
 	)
 		private
@@ -221,8 +221,8 @@ contract CECEngine is Core, IEngine, STF, POF {
 		(EventType eventType, uint256 scheduleTime) = decodeEvent(_event);
 
 		if (eventType == EventType.CE) return 0;
-		if (eventType == EventType.XD) return POF_CEG_XD(scheduleTime, terms, state, externalData);
-		if (eventType == EventType.MD) return POF_CEG_MD(scheduleTime, terms, state, externalData);
+		if (eventType == EventType.XD) return POF_CEG_XD(terms, state, scheduleTime, externalData);
+		if (eventType == EventType.MD) return POF_CEG_MD(terms, state, scheduleTime, externalData);
 
 		revert("CEGEngine.payoffFunction: ATTRIBUTE_NOT_FOUND");
 	}

@@ -65,9 +65,9 @@ contract PAMEngine is Core, IEngine, STF, POF {
 		returns (State memory)
 	{
 		return stateTransitionFunction(
-			_event,
-			state,
 			terms,
+			state,
+			_event,
 			externalData
 		);
 	}
@@ -92,9 +92,9 @@ contract PAMEngine is Core, IEngine, STF, POF {
 		returns (int256)
 	{
 		return payoffFunction(
-			_event,
-			state,
 			terms,
+			state,
+			_event,
 			externalData
 		);
 	}
@@ -304,16 +304,16 @@ contract PAMEngine is Core, IEngine, STF, POF {
 
 	/**
 	 * computes the next contract state based on the contract terms, state and the event type
-	 * @param _event proto event for which to evaluate the next state for
-	 * @param state current state of the contract
 	 * @param terms terms of the contract
+	 * @param state current state of the contract
+	 * @param _event proto event for which to evaluate the next state for
 	 * @param externalData external data needed for POF evaluation
 	 * @return next contract state
 	 */
 	function stateTransitionFunction(
-		bytes32 _event,
-		State memory state,
 		LifecycleTerms memory terms,
+		State memory state,
+		bytes32 _event,
 		bytes32 externalData
 	)
 		private
@@ -322,21 +322,21 @@ contract PAMEngine is Core, IEngine, STF, POF {
 	{
 		(EventType eventType, uint256 scheduleTime) = decodeEvent(_event);
 
-		if (eventType == EventType.AD) return STF_PAM_AD(scheduleTime, terms, state, externalData);
-		if (eventType == EventType.CD) return STF_PAM_CD(scheduleTime, terms, state, externalData);
-		if (eventType == EventType.FP) return STF_PAM_FP(scheduleTime, terms, state, externalData);
-		if (eventType == EventType.IED) return STF_PAM_IED(scheduleTime, terms, state, externalData);
-		if (eventType == EventType.IPCI) return STF_PAM_IPCI(scheduleTime, terms, state, externalData);
-		if (eventType == EventType.IP) return STF_PAM_IP(scheduleTime, terms, state, externalData);
-		if (eventType == EventType.PP) return STF_PAM_PP(scheduleTime, terms, state, externalData);
-		if (eventType == EventType.PRD) return STF_PAM_PRD(scheduleTime, terms, state, externalData);
-		if (eventType == EventType.MD) return STF_PAM_PR(scheduleTime, terms, state, externalData);
-		if (eventType == EventType.PY) return STF_PAM_PY(scheduleTime, terms, state, externalData);
-		if (eventType == EventType.RRF) return STF_PAM_RRF(scheduleTime, terms, state, externalData);
-		if (eventType == EventType.RR) return STF_PAM_RR(scheduleTime, terms, state, externalData);
-		if (eventType == EventType.SC) return STF_PAM_SC(scheduleTime, terms, state, externalData);
-		if (eventType == EventType.TD) return STF_PAM_TD(scheduleTime, terms, state, externalData);
-		if (eventType == EventType.CE)  return STF_PAM_DEL(scheduleTime, terms, state, externalData);
+		if (eventType == EventType.AD) return STF_PAM_AD(terms, state, scheduleTime, externalData);
+		if (eventType == EventType.CD) return STF_PAM_CD(terms, state, scheduleTime, externalData);
+		if (eventType == EventType.FP) return STF_PAM_FP(terms, state, scheduleTime, externalData);
+		if (eventType == EventType.IED) return STF_PAM_IED(terms, state, scheduleTime, externalData);
+		if (eventType == EventType.IPCI) return STF_PAM_IPCI(terms, state, scheduleTime, externalData);
+		if (eventType == EventType.IP) return STF_PAM_IP(terms, state, scheduleTime, externalData);
+		if (eventType == EventType.PP) return STF_PAM_PP(terms, state, scheduleTime, externalData);
+		if (eventType == EventType.PRD) return STF_PAM_PRD(terms, state, scheduleTime, externalData);
+		if (eventType == EventType.MD) return STF_PAM_PR(terms, state, scheduleTime, externalData);
+		if (eventType == EventType.PY) return STF_PAM_PY(terms, state, scheduleTime, externalData);
+		if (eventType == EventType.RRF) return STF_PAM_RRF(terms, state, scheduleTime, externalData);
+		if (eventType == EventType.RR) return STF_PAM_RR(terms, state, scheduleTime, externalData);
+		if (eventType == EventType.SC) return STF_PAM_SC(terms, state, scheduleTime, externalData);
+		if (eventType == EventType.TD) return STF_PAM_TD(terms, state, scheduleTime, externalData);
+		if (eventType == EventType.CE)  return STF_PAM_DEL(terms, state, scheduleTime, externalData);
 
 		revert("PAMEngine.stateTransitionFunction: ATTRIBUTE_NOT_FOUND");
 	}
@@ -344,16 +344,16 @@ contract PAMEngine is Core, IEngine, STF, POF {
 	/**
 	 * calculates the payoff for the current time based on the contract terms,
 	 * state and the event type
-	 * @param _event proto event for which to evaluate the payoff for
-	 * @param state current state of the contract
 	 * @param terms terms of the contract
+	 * @param state current state of the contract
+	 * @param _event proto event for which to evaluate the payoff for
 	 * @param externalData external data needed for POF evaluation
 	 * @return payoff
 	 */
 	function payoffFunction(
-		bytes32 _event,
-		State memory state,
 		LifecycleTerms memory terms,
+		State memory state,
+		bytes32 _event,
 		bytes32 externalData
 	)
 		private
@@ -369,14 +369,14 @@ contract PAMEngine is Core, IEngine, STF, POF {
 		if (eventType == EventType.RR) return 0;
 		if (eventType == EventType.SC) return 0;
 		if (eventType == EventType.CE) return 0;
-		if (eventType == EventType.FP) return POF_PAM_FP(scheduleTime, terms, state, externalData);
-		if (eventType == EventType.IED) return POF_PAM_IED(scheduleTime, terms, state, externalData);
-		if (eventType == EventType.IP) return POF_PAM_IP(scheduleTime, terms, state, externalData);
-		if (eventType == EventType.PP) return POF_PAM_PP(scheduleTime, terms, state, externalData);
-		if (eventType == EventType.PRD) return POF_PAM_PRD(scheduleTime, terms, state, externalData);
-		if (eventType == EventType.MD) return POF_PAM_PR(scheduleTime, terms, state, externalData);
-		if (eventType == EventType.PY) return POF_PAM_PY(scheduleTime, terms, state, externalData);
-		if (eventType == EventType.TD) return POF_PAM_TD(scheduleTime, terms, state, externalData);
+		if (eventType == EventType.FP) return POF_PAM_FP(terms, state, scheduleTime, externalData);
+		if (eventType == EventType.IED) return POF_PAM_IED(terms, state, scheduleTime, externalData);
+		if (eventType == EventType.IP) return POF_PAM_IP(terms, state, scheduleTime, externalData);
+		if (eventType == EventType.PP) return POF_PAM_PP(terms, state, scheduleTime, externalData);
+		if (eventType == EventType.PRD) return POF_PAM_PRD(terms, state, scheduleTime, externalData);
+		if (eventType == EventType.MD) return POF_PAM_PR(terms, state, scheduleTime, externalData);
+		if (eventType == EventType.PY) return POF_PAM_PY(terms, state, scheduleTime, externalData);
+		if (eventType == EventType.TD) return POF_PAM_TD(terms, state, scheduleTime, externalData);
 
 		revert("PAMEngine.payoffFunction: ATTRIBUTE_NOT_FOUND");
 	}
