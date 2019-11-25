@@ -76,10 +76,6 @@
               "type": "uint8"
             },
             {
-              "name": "currency",
-              "type": "address"
-            },
-            {
               "name": "scalingEffect",
               "type": "uint8"
             },
@@ -112,6 +108,14 @@
               ],
               "name": "contractStructure",
               "type": "tuple"
+            },
+            {
+              "name": "currency",
+              "type": "address"
+            },
+            {
+              "name": "marketObjectCodeRateReset",
+              "type": "bytes32"
             },
             {
               "name": "statusDate",
@@ -573,10 +577,6 @@
               "type": "uint8"
             },
             {
-              "name": "currency",
-              "type": "address"
-            },
-            {
               "name": "scalingEffect",
               "type": "uint8"
             },
@@ -609,6 +609,14 @@
               ],
               "name": "contractStructure",
               "type": "tuple"
+            },
+            {
+              "name": "currency",
+              "type": "address"
+            },
+            {
+              "name": "marketObjectCodeRateReset",
+              "type": "bytes32"
             },
             {
               "name": "statusDate",
@@ -778,6 +786,10 @@
             {
               "name": "executionAmount",
               "type": "int256"
+            },
+            {
+              "name": "resetRate",
+              "type": "int256"
             }
           ],
           "name": "",
@@ -814,10 +826,6 @@
               "type": "uint8"
             },
             {
-              "name": "currency",
-              "type": "address"
-            },
-            {
               "name": "scalingEffect",
               "type": "uint8"
             },
@@ -850,6 +858,14 @@
               ],
               "name": "contractStructure",
               "type": "tuple"
+            },
+            {
+              "name": "currency",
+              "type": "address"
+            },
+            {
+              "name": "marketObjectCodeRateReset",
+              "type": "bytes32"
             },
             {
               "name": "statusDate",
@@ -1015,6 +1031,10 @@
             },
             {
               "name": "executionAmount",
+              "type": "int256"
+            },
+            {
+              "name": "resetRate",
               "type": "int256"
             }
           ],
@@ -1085,6 +1105,10 @@
             {
               "name": "executionAmount",
               "type": "int256"
+            },
+            {
+              "name": "resetRate",
+              "type": "int256"
             }
           ],
           "name": "",
@@ -1121,10 +1145,6 @@
               "type": "uint8"
             },
             {
-              "name": "currency",
-              "type": "address"
-            },
-            {
               "name": "scalingEffect",
               "type": "uint8"
             },
@@ -1157,6 +1177,14 @@
               ],
               "name": "contractStructure",
               "type": "tuple"
+            },
+            {
+              "name": "currency",
+              "type": "address"
+            },
+            {
+              "name": "marketObjectCodeRateReset",
+              "type": "bytes32"
             },
             {
               "name": "statusDate",
@@ -1322,6 +1350,10 @@
             },
             {
               "name": "executionAmount",
+              "type": "int256"
+            },
+            {
+              "name": "resetRate",
               "type": "int256"
             }
           ],
@@ -1844,10 +1876,6 @@
               "type": "uint8"
             },
             {
-              "name": "currency",
-              "type": "address"
-            },
-            {
               "name": "scalingEffect",
               "type": "uint8"
             },
@@ -1880,6 +1908,14 @@
               ],
               "name": "contractStructure",
               "type": "tuple"
+            },
+            {
+              "name": "currency",
+              "type": "address"
+            },
+            {
+              "name": "marketObjectCodeRateReset",
+              "type": "bytes32"
             },
             {
               "name": "statusDate",
@@ -2046,6 +2082,10 @@
             {
               "name": "executionAmount",
               "type": "int256"
+            },
+            {
+              "name": "resetRate",
+              "type": "int256"
             }
           ],
           "name": "state",
@@ -2108,6 +2148,10 @@
             {
               "name": "executionAmount",
               "type": "int256"
+            },
+            {
+              "name": "resetRate",
+              "type": "int256"
             }
           ],
           "name": "underlyingState",
@@ -2133,5 +2177,5 @@
     "version": "0.5.2+commit.1df8f40c.Emscripten.clang"
   },
   "networks": {},
-  "updatedAt": "2019-11-23T14:30:46.003Z"
+  "updatedAt": "2019-11-25T10:56:21.450Z"
 }
