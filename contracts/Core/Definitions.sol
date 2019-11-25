@@ -82,6 +82,7 @@ contract Definitions {
 		int256 notionalScalingMultiplier;
 		int256 nextPrincipalRedemptionPayment;
 		int256 executionAmount;
+		int256 resetRate;
 	}
 
 	struct LifecycleTerms {
@@ -90,12 +91,15 @@ contract Definitions {
 		DayCountConvention dayCountConvention;
 		BusinessDayConvention businessDayConvention;
 		EndOfMonthConvention endOfMonthConvention;
-		address currency;
 		ScalingEffect scalingEffect;
 		PenaltyType penaltyType;
 		FeeBasis feeBasis;
 		ContractPerformance creditEventTypeCovered;
 		ContractStructure contractStructure;
+
+		address currency;
+
+		bytes32 marketObjectCodeRateReset;
 
 		uint256 statusDate;
 		uint256 maturityDate;
@@ -154,17 +158,20 @@ contract Definitions {
 		ContractType contractType;
 		Calendar calendar;
 		ContractRole contractRole;
-		bytes32 creatorID;
-		bytes32 counterpartyID;
 		DayCountConvention dayCountConvention;
 		BusinessDayConvention businessDayConvention;
 		EndOfMonthConvention endOfMonthConvention;
-		address currency;
 		ScalingEffect scalingEffect;
 		PenaltyType penaltyType;
 		FeeBasis feeBasis;
 		ContractPerformance creditEventTypeCovered;
 		ContractStructure contractStructure;
+
+		address currency;
+
+		bytes32 creatorID;
+		bytes32 counterpartyID;
+		bytes32 marketObjectCodeRateReset;
 
 		uint256 contractDealDate;
 		uint256 statusDate;
