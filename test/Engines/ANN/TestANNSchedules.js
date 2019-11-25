@@ -70,13 +70,13 @@ contract('ANNEngine', () => {
         lifecycleTerms,
         state,
         _event,
-        scheduleTime
+        web3.utils.toHex(scheduleTime)
       );
       const nextState = await this.ANNEngineInstance.computeStateForEvent(
         lifecycleTerms, 
         state, 
         _event, 
-        scheduleTime
+        web3.utils.toHex(scheduleTime)
       );
       
       state = nextState;

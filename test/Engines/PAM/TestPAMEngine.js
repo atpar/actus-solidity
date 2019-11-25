@@ -65,7 +65,7 @@ contract('PAMEngine', () => {
       this.lifecycleTerms,
       initialState,
       _eventSchedule[0],
-      decodeEvent(_eventSchedule[0]).scheduleTime
+      web3.utils.toHex(decodeEvent(_eventSchedule[0]).scheduleTime)
     );
 
     assert.equal(Number(nextState.statusDate), decodeEvent(_eventSchedule[0]).scheduleTime);
@@ -127,7 +127,7 @@ contract('PAMEngine', () => {
         this.lifecycleTerms,
         state,
         _event,
-        decodeEvent(_event).scheduleTime
+        web3.utils.toHex(decodeEvent(_event).scheduleTime)
       );
 
       state = nextState;
@@ -138,16 +138,12 @@ contract('PAMEngine', () => {
     const initialState = await this.PAMEngineInstance.computeInitialState(this.lifecycleTerms, {});
     
     state = initialState;
-    state.resetRate = '1000000000';
-    state[13] = '1000000000';
 
     const nextState = await this.PAMEngineInstance.computeStateForEvent(
       this.lifecycleTerms,
       state,
       '0x1200000000000000000000000000000000000000000000000000000051922D80',
-      1368534400
+      web3.utils.toHex(555555533333)
     );
-
-    console.log(nextState);
   });
 });

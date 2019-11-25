@@ -6,10 +6,10 @@ import "../Core/Core.sol";
 
 contract POF is Core {
   function POF_PAM_FP (
-    uint256 scheduleTime,
     LifecycleTerms memory terms,
     State memory state,
-    uint256 currentTimestamp
+    uint256 scheduleTime,
+    bytes32 externalData
   )
     internal
     pure
@@ -40,10 +40,10 @@ contract POF is Core {
   }
 
   function POF_PAM_IED (
-    uint256 scheduleTime,
     LifecycleTerms memory terms,
     State memory state,
-    uint256 currentTimestamp
+    uint256 scheduleTime,
+    bytes32 externalData
   )
     internal
     pure
@@ -59,10 +59,10 @@ contract POF is Core {
   }
 
   function POF_PAM_IP (
-    uint256 scheduleTime,
     LifecycleTerms memory terms,
     State memory state,
-    uint256 currentTimestamp
+    uint256 scheduleTime,
+    bytes32 externalData
   )
     internal
     pure
@@ -88,10 +88,10 @@ contract POF is Core {
   }
 
   function POF_PAM_PP (
-    uint256 scheduleTime,
     LifecycleTerms memory terms,
     State memory state,
-    uint256 currentTimestamp
+    uint256 scheduleTime,
+    bytes32 externalData
   )
     internal
     pure
@@ -106,10 +106,10 @@ contract POF is Core {
   }
 
   function POF_PAM_PRD (
-    uint256 scheduleTime,
     LifecycleTerms memory terms,
     State memory state,
-    uint256 currentTimestamp
+    uint256 scheduleTime,
+    bytes32 externalData
   )
     internal
     pure
@@ -135,10 +135,10 @@ contract POF is Core {
   }
 
   function POF_PAM_PR (
-    uint256 scheduleTime,
     LifecycleTerms memory terms,
     State memory state,
-    uint256 currentTimestamp
+    uint256 scheduleTime,
+    bytes32 externalData
   )
     internal
     pure
@@ -152,10 +152,10 @@ contract POF is Core {
   }
 
   function POF_PAM_PY (
-    uint256 scheduleTime,
     LifecycleTerms memory terms,
     State memory state,
-    uint256 currentTimestamp
+    uint256 scheduleTime,
+    bytes32 externalData
   )
     internal
     pure
@@ -201,10 +201,10 @@ contract POF is Core {
   }
 
   function POF_PAM_TD (
-    uint256 scheduleTime,
     LifecycleTerms memory terms,
     State memory state,
-    uint256 currentTimestamp
+    uint256 scheduleTime,
+    bytes32 externalData
   )
     internal
     pure
@@ -229,10 +229,10 @@ contract POF is Core {
   }
 
   function POF_ANN_FP (
-    uint256 scheduleTime,
     LifecycleTerms memory terms,
     State memory state,
-    uint256 currentTimestamp
+    uint256 scheduleTime,
+    bytes32 externalData
   )
     internal
     pure
@@ -263,10 +263,10 @@ contract POF is Core {
   }
 
   function POF_ANN_PR (
-    uint256 scheduleTime,
     LifecycleTerms memory terms,
     State memory state,
-    uint256 currentTimestamp
+    uint256 scheduleTime,
+    bytes32 externalData
   )
     internal
     pure
@@ -297,10 +297,10 @@ contract POF is Core {
   }
 
   function POF_ANN_MD (
-    uint256 scheduleTime,
     LifecycleTerms memory terms,
     State memory state,
-    uint256 currentTimestamp
+    uint256 scheduleTime,
+    bytes32 externalData
   )
     internal
     pure
@@ -314,10 +314,10 @@ contract POF is Core {
   }
 
   function POF_CEG_MD (
-    uint256 scheduleTime,
     LifecycleTerms memory terms,
     State memory state,
-    uint256 currentTimestamp
+    uint256 scheduleTime,
+    bytes32 externalData
   )
     internal
     pure
@@ -327,10 +327,10 @@ contract POF is Core {
   }
 
   function POF_CEG_XD (
-    uint256 scheduleTime,
     LifecycleTerms memory terms,
     State memory state,
-    uint256 currentTimestamp
+    uint256 scheduleTime,
+    bytes32 externalData
   )
     internal
     pure
@@ -340,10 +340,10 @@ contract POF is Core {
   }
 
   function POF_CEG_STD (
-    uint256 scheduleTime,
     LifecycleTerms memory terms,
     State memory state,
-    uint256 currentTimestamp
+    uint256 scheduleTime,
+    bytes32 externalData
   )
     internal
     pure
@@ -353,10 +353,10 @@ contract POF is Core {
   }
 
   function POF_CEG_PRD (
-    uint256 scheduleTime,
     LifecycleTerms memory terms,
     State memory state,
-    uint256 currentTimestamp
+    uint256 scheduleTime,
+    bytes32 externalData
   )
     internal
     pure
@@ -371,10 +371,10 @@ contract POF is Core {
   }
 
   function POF_CEG_FP (
-    uint256 scheduleTime,
     LifecycleTerms memory terms,
     State memory state,
-    uint256 currentTimestamp
+    uint256 scheduleTime,
+    bytes32 externalData
   )
     internal
     pure

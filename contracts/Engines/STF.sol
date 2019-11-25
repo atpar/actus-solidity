@@ -7,10 +7,10 @@ import "../Core/Core.sol";
 contract STF is Core {
 
   function STF_PAM_AD (
-    uint256 scheduleTime,
     LifecycleTerms memory terms,
     State memory state,
-    uint256 currentTimestamp
+    uint256 scheduleTime,
+    bytes32 externalData
   )
     internal
     pure
@@ -40,10 +40,10 @@ contract STF is Core {
   }
 
   function STF_PAM_CD (
-    uint256 scheduleTime,
     LifecycleTerms memory terms,
     State memory state,
-    uint256 currentTimestamp
+    uint256 scheduleTime,
+    bytes32 externalData
   )
     internal
     pure
@@ -74,10 +74,10 @@ contract STF is Core {
   }
 
   function STF_PAM_FP (
-    uint256 scheduleTime,
     LifecycleTerms memory terms,
     State memory state,
-    uint256 currentTimestamp
+    uint256 scheduleTime,
+    bytes32 externalData
   )
     internal
     pure
@@ -102,10 +102,10 @@ contract STF is Core {
   }
 
   function STF_PAM_IED (
-    uint256 scheduleTime,
     LifecycleTerms memory terms,
     State memory state,
-    uint256 currentTimestamp
+    uint256 scheduleTime,
+    bytes32 externalData
   )
     internal
     pure
@@ -142,10 +142,10 @@ contract STF is Core {
   }
 
   function STF_PAM_IPCI (
-    uint256 scheduleTime,
     LifecycleTerms memory terms,
     State memory state,
-    uint256 currentTimestamp
+    uint256 scheduleTime,
+    bytes32 externalData
   )
     internal
     pure
@@ -179,10 +179,10 @@ contract STF is Core {
   }
 
   function STF_PAM_IP (
-    uint256 scheduleTime,
     LifecycleTerms memory terms,
     State memory state,
-    uint256 currentTimestamp
+    uint256 scheduleTime,
+    bytes32 externalData
   )
     internal
     pure
@@ -207,10 +207,10 @@ contract STF is Core {
   }
 
   function STF_PAM_PP (
-    uint256 scheduleTime,
     LifecycleTerms memory terms,
     State memory state,
-    uint256 currentTimestamp
+    uint256 scheduleTime,
+    bytes32 externalData
   )
     internal
     pure
@@ -241,10 +241,10 @@ contract STF is Core {
   }
 
   function STF_PAM_PRD (
-    uint256 scheduleTime,
     LifecycleTerms memory terms,
     State memory state,
-    uint256 currentTimestamp
+    uint256 scheduleTime,
+    bytes32 externalData
   )
     internal
     pure
@@ -274,10 +274,10 @@ contract STF is Core {
   }
 
   function STF_PAM_PR (
-    uint256 scheduleTime,
     LifecycleTerms memory terms,
     State memory state,
-    uint256 currentTimestamp
+    uint256 scheduleTime,
+    bytes32 externalData
   )
     internal
     pure
@@ -308,10 +308,10 @@ contract STF is Core {
   }
 
   function STF_PAM_PY (
-    uint256 scheduleTime,
     LifecycleTerms memory terms,
     State memory state,
-    uint256 currentTimestamp
+    uint256 scheduleTime,
+    bytes32 externalData
   )
     internal
     pure
@@ -341,10 +341,10 @@ contract STF is Core {
   }
 
   function STF_PAM_RRF (
-    uint256 scheduleTime,
     LifecycleTerms memory terms,
     State memory state,
-    uint256 currentTimestamp
+    uint256 scheduleTime,
+    bytes32 externalData
   )
     internal
     pure
@@ -375,10 +375,10 @@ contract STF is Core {
   }
 
   function STF_PAM_RR (
-    uint256 scheduleTime,
     LifecycleTerms memory terms,
     State memory state,
-    uint256 currentTimestamp
+    uint256 scheduleTime,
+    bytes32 externalData
   )
     internal
     pure
@@ -386,7 +386,8 @@ contract STF is Core {
   {
     // int256 rate = //riskFactor(terms.marketObjectCodeOfRateReset, scheduleTime, state, terms)
     // 	* terms.rateMultiplier + terms.rateSpread;
-    int256 deltaRate = state.resetRate.sub(state.nominalInterestRate);
+    int256 rate = int256(externalData) * terms.rateMultiplier + terms.rateSpread;
+    int256 deltaRate = rate.sub(state.nominalInterestRate);
 
       // apply period cap/floor
     if ((terms.lifeCap < deltaRate) && (terms.lifeCap < ((-1) * terms.periodFloor))) {
@@ -394,7 +395,7 @@ contract STF is Core {
     } else if (deltaRate < ((-1) * terms.periodFloor)) {
       deltaRate = ((-1) * terms.periodFloor);
     }
-    int256 rate = state.nominalInterestRate.add(deltaRate);
+    rate = state.nominalInterestRate.add(deltaRate);
 
     // apply life cap/floor
     if (terms.lifeCap < rate && terms.lifeCap < terms.lifeFloor) {
@@ -422,10 +423,10 @@ contract STF is Core {
   }
 
   function STF_PAM_SC (
-    uint256 scheduleTime,
     LifecycleTerms memory terms,
     State memory state,
-    uint256 currentTimestamp
+    uint256 scheduleTime,
+    bytes32 externalData
   )
     internal
     pure
@@ -471,10 +472,10 @@ contract STF is Core {
   }
 
   function STF_PAM_TD (
-    uint256 scheduleTime,
     LifecycleTerms memory terms,
     State memory state,
-    uint256 currentTimestamp
+    uint256 scheduleTime,
+    bytes32 externalData
   )
     internal
     pure
@@ -495,10 +496,10 @@ contract STF is Core {
   }
 
   function STF_PAM_DEL (
-    uint256 scheduleTime,
     LifecycleTerms memory terms,
     State memory state,
-    uint256 currentTimestamp
+    uint256 scheduleTime,
+    bytes32 externalData
   )
     internal
     pure
@@ -507,6 +508,8 @@ contract STF is Core {
     uint256 nonPerformingDate = (state.nonPerformingDate == 0)
       ? shiftEventTime(scheduleTime, terms.businessDayConvention, terms.calendar)
       : state.nonPerformingDate;
+
+    uint256 currentTimestamp = uint256(externalData);
 
     bool isInGracePeriod = false;
     if (terms.gracePeriod.isSet) {
@@ -630,10 +633,10 @@ contract STF is Core {
   // }
 
   function STF_ANN_IED (
-    uint256 scheduleTime,
     LifecycleTerms memory terms,
     State memory state,
-    uint256 currentTimestamp
+    uint256 scheduleTime,
+    bytes32 externalData
   )
     internal
     pure
@@ -670,10 +673,10 @@ contract STF is Core {
   }
 
   function STF_ANN_IPCI (
-    uint256 scheduleTime,
     LifecycleTerms memory terms,
     State memory state,
-    uint256 currentTimestamp
+    uint256 scheduleTime,
+    bytes32 externalData
   )
     internal
     pure
@@ -707,10 +710,10 @@ contract STF is Core {
   }
 
   function STF_ANN_IP (
-    uint256 scheduleTime,
     LifecycleTerms memory terms,
     State memory state,
-    uint256 currentTimestamp
+    uint256 scheduleTime,
+    bytes32 externalData
   )
     internal
     pure
@@ -801,10 +804,10 @@ contract STF is Core {
   // }
 
   function STF_ANN_PR (
-    uint256 scheduleTime,
     LifecycleTerms memory terms,
     State memory state,
-    uint256 currentTimestamp
+    uint256 scheduleTime,
+    bytes32 externalData
   )
     internal
     pure
@@ -850,10 +853,10 @@ contract STF is Core {
   }
 
   function STF_ANN_MD (
-    uint256 scheduleTime,
     LifecycleTerms memory terms,
     State memory state,
-    uint256 currentTimestamp
+    uint256 scheduleTime,
+    bytes32 externalData
   )
     internal
     pure
@@ -950,10 +953,10 @@ contract STF is Core {
   // }
 
   function STF_ANN_RR (
-    uint256 scheduleTime,
     LifecycleTerms memory terms,
     State memory state,
-    uint256 currentTimestamp
+    uint256 scheduleTime,
+    bytes32 externalData
   )
     internal
     pure
@@ -961,7 +964,7 @@ contract STF is Core {
   {
     // int256 rate = //riskFactor(terms.marketObjectCodeOfRateReset, scheduleTime, state, terms)
     // 	* terms.rateMultiplier + terms.rateSpread;
-    int256 rate = state.resetRate;
+    int256 rate = int256(externalData) * terms.rateMultiplier + terms.rateSpread;
     int256 deltaRate = rate.sub(state.nominalInterestRate);
 
       // apply period cap/floor
@@ -999,10 +1002,10 @@ contract STF is Core {
   }
 
   function STF_ANN_SC (
-    uint256 scheduleTime,
     LifecycleTerms memory terms,
     State memory state,
-    uint256 currentTimestamp
+    uint256 scheduleTime,
+    bytes32 externalData
   )
     internal
     pure
@@ -1070,10 +1073,10 @@ contract STF is Core {
   // }
 
   function STF_CEG_MD (
-    uint256 scheduleTime,
     LifecycleTerms memory terms,
     State memory state,
-    uint256 currentTimestamp
+    uint256 scheduleTime,
+    bytes32 externalData
   )
     internal
     pure
@@ -1086,10 +1089,10 @@ contract STF is Core {
   }
 
   function STF_CEG_XD (
-    uint256 scheduleTime,
     LifecycleTerms memory terms,
     State memory state,
-    uint256 currentTimestamp
+    uint256 scheduleTime,
+    bytes32 externalData
   )
     internal
     pure
@@ -1119,10 +1122,10 @@ contract STF is Core {
   }
 
   function STF_CEG_STD (
-    uint256 scheduleTime,
     LifecycleTerms memory terms,
     State memory state,
-    uint256 currentTimestamp
+    uint256 scheduleTime,
+    bytes32 externalData
   )
     internal
     pure
@@ -1136,10 +1139,10 @@ contract STF is Core {
   }
 
   function STF_CEG_PRD (
-    uint256 scheduleTime,
     LifecycleTerms memory terms,
     State memory state,
-    uint256 currentTimestamp
+    uint256 scheduleTime,
+    bytes32 externalData
   )
     internal
     pure
@@ -1153,10 +1156,10 @@ contract STF is Core {
   }
 
   function STF_CEG_FP (
-    uint256 scheduleTime,
     LifecycleTerms memory terms,
     State memory state,
-    uint256 currentTimestamp
+    uint256 scheduleTime,
+    bytes32 externalData
   )
     internal
     pure
@@ -1175,10 +1178,10 @@ contract STF is Core {
   }
 
     function STF_CEG_TD (
-    uint256 scheduleTime,
     LifecycleTerms memory terms,
     State memory state,
-    uint256 currentTimestamp
+    uint256 scheduleTime,
+    bytes32 externalData
   )
     internal
     pure
