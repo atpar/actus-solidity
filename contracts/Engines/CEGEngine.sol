@@ -54,14 +54,14 @@ contract CEGEngine is Core, IEngine, STF, POF {
 	 * @param terms terms of the contract
 	 * @param state current state of the contract
 	 * @param _event prototype event to be evaluated and applied to the contract state
-	 * @param currentTimestamp current timestamp
+	 * @param externalData external data needed for POF evaluation
 	 * @return the new contract state and the evaluated event
 	 */
 	function computeStateForEvent(
 		LifecycleTerms memory terms,
 		State memory state,
 		bytes32 _event,
-		uint256 currentTimestamp
+		bytes32 externalData
 	)
 		public
 		pure
@@ -71,7 +71,7 @@ contract CEGEngine is Core, IEngine, STF, POF {
 			_event,
 			state,
 			terms,
-			currentTimestamp
+			externalData
 		);
 	}
 
@@ -81,14 +81,14 @@ contract CEGEngine is Core, IEngine, STF, POF {
 	 * @param terms terms of the contract
 	 * @param state current state of the contract
 	 * @param _event prototype event to be evaluated and applied to the contract state
-	 * @param currentTimestamp current timestamp
+	 * @param externalData external data needed for POF evaluation
 	 * @return the new contract state and the evaluated event
 	 */
 	function computePayoffForEvent(
 		LifecycleTerms memory terms,
 		State memory state,
 		bytes32 _event,
-		uint256 currentTimestamp
+		bytes32 externalData
 	)
 		public
 		pure
@@ -98,7 +98,7 @@ contract CEGEngine is Core, IEngine, STF, POF {
 			_event,
 			state,
 			terms,
-			currentTimestamp
+			externalData
 		);
 	}
 
@@ -218,14 +218,14 @@ contract CEGEngine is Core, IEngine, STF, POF {
 	 * @param _event proto event for which to evaluate the next state for
 	 * @param state current state of the contract
 	 * @param terms terms of the contract
-	 * @param currentTimestamp current timestamp
+	 * @param externalData external data needed for POF evaluation
 	 * @return next contract state
 	 */
 	function stateTransitionFunction(
 		bytes32 _event,
 		State memory state,
 		LifecycleTerms memory terms,
-		uint256 currentTimestamp
+		bytes32 externalData
 	)
 		private
 		pure
@@ -233,12 +233,12 @@ contract CEGEngine is Core, IEngine, STF, POF {
 	{
 		(EventType eventType, uint256 scheduleTime) = decodeEvent(_event);
 
-		if (eventType == EventType.PRD) return STF_CEG_PRD(scheduleTime, terms, state, currentTimestamp);
-		if (eventType == EventType.FP) return STF_CEG_FP(scheduleTime, terms, state, currentTimestamp);
-		if (eventType == EventType.XD) return STF_CEG_XD(scheduleTime, terms, state, currentTimestamp);
-		if (eventType == EventType.STD) return STF_CEG_STD(scheduleTime, terms, state, currentTimestamp);
-		if (eventType == EventType.MD) return STF_CEG_MD(scheduleTime, terms, state, currentTimestamp);
-		if (eventType == EventType.CE) return STF_PAM_DEL(scheduleTime, terms, state, currentTimestamp);
+		if (eventType == EventType.PRD) return STF_CEG_PRD(scheduleTime, terms, state, externalData);
+		if (eventType == EventType.FP) return STF_CEG_FP(scheduleTime, terms, state, externalData);
+		if (eventType == EventType.XD) return STF_CEG_XD(scheduleTime, terms, state, externalData);
+		if (eventType == EventType.STD) return STF_CEG_STD(scheduleTime, terms, state, externalData);
+		if (eventType == EventType.MD) return STF_CEG_MD(scheduleTime, terms, state, externalData);
+		if (eventType == EventType.CE) return STF_PAM_DEL(scheduleTime, terms, state, externalData);
 
 		revert("CEGEngine.stateTransitionFunction: ATTRIBUTE_NOT_FOUND");
 	}
@@ -251,14 +251,14 @@ contract CEGEngine is Core, IEngine, STF, POF {
 	 * @param _event proto event for which to evaluate the payoff for
 	 * @param state current state of the contract
 	 * @param terms terms of the contract
-	 * @param currentTimestamp current timestamp
+	 * @param externalData external data needed for POF evaluation
 	 * @return payoff
 	 */
 	function payoffFunction(
 		bytes32 _event,
 		State memory state,
 		LifecycleTerms memory terms,
-		uint256 currentTimestamp
+		bytes32 externalData
 	)
 		private
 		pure
@@ -267,11 +267,11 @@ contract CEGEngine is Core, IEngine, STF, POF {
 		(EventType eventType, uint256 scheduleTime) = decodeEvent(_event);
 
 		if (eventType == EventType.CE) return 0;
-		if (eventType == EventType.PRD) return POF_CEG_PRD(scheduleTime, terms, state, currentTimestamp);
-		if (eventType == EventType.FP) return POF_CEG_FP(scheduleTime, terms, state, currentTimestamp);
-		if (eventType == EventType.XD) return POF_CEG_XD(scheduleTime, terms, state, currentTimestamp);
-		if (eventType == EventType.STD) return POF_CEG_STD(scheduleTime, terms, state, currentTimestamp);
-		if (eventType == EventType.MD) return POF_CEG_MD(scheduleTime, terms, state, currentTimestamp);
+		if (eventType == EventType.PRD) return POF_CEG_PRD(scheduleTime, terms, state, externalData);
+		if (eventType == EventType.FP) return POF_CEG_FP(scheduleTime, terms, state, externalData);
+		if (eventType == EventType.XD) return POF_CEG_XD(scheduleTime, terms, state, externalData);
+		if (eventType == EventType.STD) return POF_CEG_STD(scheduleTime, terms, state, externalData);
+		if (eventType == EventType.MD) return POF_CEG_MD(scheduleTime, terms, state, externalData);
 
 		revert("CEGEngine.payoffFunction: ATTRIBUTE_NOT_FOUND");
 	}

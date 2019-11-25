@@ -69,13 +69,13 @@ contract('PAMEngine', () => {
         lifecycleTerms,
         state,
         _event,
-        scheduleTime
+        web3.utils.toHex(scheduleTime)
       );
       const nextState = await this.PAMEngineInstance.computeStateForEvent(
         lifecycleTerms, 
         state, 
         _event, 
-        scheduleTime
+        web3.utils.toHex(scheduleTime)
       );
       
       state = nextState;

@@ -27,14 +27,14 @@ contract IEngine is Definitions {
 	 * @param terms terms of the contract
 	 * @param state current state of the contract
 	 * @param _event event to apply to the current state of the contract
-	 * @param currentTimestamp current timestamp
+	 * @param externalData external data needed for STF evaluation
 	 * @return next state of the contract
 	 */
 	function computeStateForEvent(
 		LifecycleTerms memory terms,
 		State memory state,
 		bytes32 _event,
-		uint256 currentTimestamp
+		bytes32 externalData
 	)
 		public
 		pure
@@ -45,14 +45,14 @@ contract IEngine is Definitions {
 	 * @param terms terms of the contract
 	 * @param state current state of the contract
 	 * @param _event event to compute the payoff for
-	 * @param currentTimestamp current timestamp
+	 * @param externalData external data needed for POF evaluation
 	 * @return payoff of the given event
 	 */
 	function computePayoffForEvent(
 		LifecycleTerms memory terms,
 		State memory state,
 		bytes32 _event,
-		uint256 currentTimestamp
+		bytes32 externalData
 	)
 		public
 		pure

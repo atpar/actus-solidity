@@ -9,7 +9,7 @@ contract POF is Core {
     uint256 scheduleTime,
     LifecycleTerms memory terms,
     State memory state,
-    uint256 currentTimestamp
+    bytes32 externalData
   )
     internal
     pure
@@ -43,7 +43,7 @@ contract POF is Core {
     uint256 scheduleTime,
     LifecycleTerms memory terms,
     State memory state,
-    uint256 currentTimestamp
+    bytes32 externalData
   )
     internal
     pure
@@ -62,7 +62,7 @@ contract POF is Core {
     uint256 scheduleTime,
     LifecycleTerms memory terms,
     State memory state,
-    uint256 currentTimestamp
+    bytes32 externalData
   )
     internal
     pure
@@ -91,7 +91,7 @@ contract POF is Core {
     uint256 scheduleTime,
     LifecycleTerms memory terms,
     State memory state,
-    uint256 currentTimestamp
+    bytes32 externalData
   )
     internal
     pure
@@ -109,7 +109,7 @@ contract POF is Core {
     uint256 scheduleTime,
     LifecycleTerms memory terms,
     State memory state,
-    uint256 currentTimestamp
+    bytes32 externalData
   )
     internal
     pure
@@ -138,7 +138,7 @@ contract POF is Core {
     uint256 scheduleTime,
     LifecycleTerms memory terms,
     State memory state,
-    uint256 currentTimestamp
+    bytes32 externalData
   )
     internal
     pure
@@ -155,7 +155,7 @@ contract POF is Core {
     uint256 scheduleTime,
     LifecycleTerms memory terms,
     State memory state,
-    uint256 currentTimestamp
+    bytes32 externalData
   )
     internal
     pure
@@ -204,7 +204,7 @@ contract POF is Core {
     uint256 scheduleTime,
     LifecycleTerms memory terms,
     State memory state,
-    uint256 currentTimestamp
+    bytes32 externalData
   )
     internal
     pure
@@ -232,7 +232,7 @@ contract POF is Core {
     uint256 scheduleTime,
     LifecycleTerms memory terms,
     State memory state,
-    uint256 currentTimestamp
+    bytes32 externalData
   )
     internal
     pure
@@ -266,7 +266,7 @@ contract POF is Core {
     uint256 scheduleTime,
     LifecycleTerms memory terms,
     State memory state,
-    uint256 currentTimestamp
+    bytes32 externalData
   )
     internal
     pure
@@ -300,7 +300,7 @@ contract POF is Core {
     uint256 scheduleTime,
     LifecycleTerms memory terms,
     State memory state,
-    uint256 currentTimestamp
+    bytes32 externalData
   )
     internal
     pure
@@ -317,7 +317,7 @@ contract POF is Core {
     uint256 scheduleTime,
     LifecycleTerms memory terms,
     State memory state,
-    uint256 currentTimestamp
+    bytes32 externalData
   )
     internal
     pure
@@ -330,7 +330,7 @@ contract POF is Core {
     uint256 scheduleTime,
     LifecycleTerms memory terms,
     State memory state,
-    uint256 currentTimestamp
+    bytes32 externalData
   )
     internal
     pure
@@ -343,7 +343,7 @@ contract POF is Core {
     uint256 scheduleTime,
     LifecycleTerms memory terms,
     State memory state,
-    uint256 currentTimestamp
+    bytes32 externalData
   )
     internal
     pure
@@ -356,7 +356,7 @@ contract POF is Core {
     uint256 scheduleTime,
     LifecycleTerms memory terms,
     State memory state,
-    uint256 currentTimestamp
+    bytes32 externalData
   )
     internal
     pure
@@ -374,7 +374,7 @@ contract POF is Core {
     uint256 scheduleTime,
     LifecycleTerms memory terms,
     State memory state,
-    uint256 currentTimestamp
+    bytes32 externalData
   )
     internal
     pure

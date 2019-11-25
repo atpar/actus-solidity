@@ -82,7 +82,6 @@ contract Definitions {
 		int256 notionalScalingMultiplier;
 		int256 nextPrincipalRedemptionPayment;
 		int256 executionAmount;
-		int256 resetRate;
 	}
 
 	struct LifecycleTerms {
@@ -108,6 +107,7 @@ contract Definitions {
 		int256 nominalInterestRate;
 		int256 feeAccrued;
 		int256 accruedInterest;
+		int256 rateMultiplier;
 		int256 rateSpread;
 		int256 feeRate;
 		int256 nextResetRate;

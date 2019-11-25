@@ -107,6 +107,10 @@
               "type": "int256"
             },
             {
+              "name": "rateMultiplier",
+              "type": "int256"
+            },
+            {
               "name": "rateSpread",
               "type": "int256"
             },
@@ -250,10 +254,6 @@
             {
               "name": "executionAmount",
               "type": "int256"
-            },
-            {
-              "name": "resetRate",
-              "type": "int256"
             }
           ],
           "name": "",
@@ -353,6 +353,10 @@
             },
             {
               "name": "accruedInterest",
+              "type": "int256"
+            },
+            {
+              "name": "rateMultiplier",
               "type": "int256"
             },
             {
@@ -496,10 +500,6 @@
             {
               "name": "executionAmount",
               "type": "int256"
-            },
-            {
-              "name": "resetRate",
-              "type": "int256"
             }
           ],
           "name": "state",
@@ -510,8 +510,8 @@
           "type": "bytes32"
         },
         {
-          "name": "currentTimestamp",
-          "type": "uint256"
+          "name": "externalData",
+          "type": "bytes32"
         }
       ],
       "name": "computeStateForEvent",
@@ -569,10 +569,6 @@
             {
               "name": "executionAmount",
               "type": "int256"
-            },
-            {
-              "name": "resetRate",
-              "type": "int256"
             }
           ],
           "name": "",
@@ -672,6 +668,10 @@
             },
             {
               "name": "accruedInterest",
+              "type": "int256"
+            },
+            {
+              "name": "rateMultiplier",
               "type": "int256"
             },
             {
@@ -815,10 +815,6 @@
             {
               "name": "executionAmount",
               "type": "int256"
-            },
-            {
-              "name": "resetRate",
-              "type": "int256"
             }
           ],
           "name": "state",
@@ -829,8 +825,8 @@
           "type": "bytes32"
         },
         {
-          "name": "currentTimestamp",
-          "type": "uint256"
+          "name": "externalData",
+          "type": "bytes32"
         }
       ],
       "name": "computePayoffForEvent",
@@ -1406,6 +1402,10 @@
               "type": "int256"
             },
             {
+              "name": "rateMultiplier",
+              "type": "int256"
+            },
+            {
               "name": "rateSpread",
               "type": "int256"
             },
@@ -1546,10 +1546,6 @@
             {
               "name": "executionAmount",
               "type": "int256"
-            },
-            {
-              "name": "resetRate",
-              "type": "int256"
             }
           ],
           "name": "state",
@@ -1612,10 +1608,6 @@
             {
               "name": "executionAmount",
               "type": "int256"
-            },
-            {
-              "name": "resetRate",
-              "type": "int256"
             }
           ],
           "name": "underlyingState",
@@ -1641,5 +1633,5 @@
     "version": "0.5.2+commit.1df8f40c.Emscripten.clang"
   },
   "networks": {},
-  "updatedAt": "2019-11-25T14:06:34.382Z"
+  "updatedAt": "2019-11-25T16:01:32.084Z"
 }

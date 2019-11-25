@@ -65,7 +65,7 @@ contract('ANNEngine', () => {
       this.lifecycleTerms,
       initialState,
       _eventSchedule[0],
-      decodeEvent(_eventSchedule[0]).scheduleTime
+      web3.utils.toHex(decodeEvent(_eventSchedule[0]).scheduleTime)
     );
 
     assert.equal(Number(nextState.statusDate), decodeEvent(_eventSchedule[0]).scheduleTime);
@@ -127,7 +127,7 @@ contract('ANNEngine', () => {
         this.lifecycleTerms,
         state,
         _event,
-        decodeEvent(_event).scheduleTime
+        web3.utils.toHex(decodeEvent(_event).scheduleTime)
       );
 
       state = nextState;
