@@ -386,8 +386,7 @@ contract STF is Core {
   {
     // int256 rate = //riskFactor(terms.marketObjectCodeOfRateReset, scheduleTime, state, terms)
     // 	* terms.rateMultiplier + terms.rateSpread;
-    int256 rate = state.resetRate;
-    int256 deltaRate = rate.sub(state.nominalInterestRate);
+    int256 deltaRate = state.resetRate.sub(state.nominalInterestRate);
 
       // apply period cap/floor
     if ((terms.lifeCap < deltaRate) && (terms.lifeCap < ((-1) * terms.periodFloor))) {
@@ -395,7 +394,7 @@ contract STF is Core {
     } else if (deltaRate < ((-1) * terms.periodFloor)) {
       deltaRate = ((-1) * terms.periodFloor);
     }
-    rate = state.nominalInterestRate.add(deltaRate);
+    int256 rate = state.nominalInterestRate.add(deltaRate);
 
     // apply life cap/floor
     if (terms.lifeCap < rate && terms.lifeCap < terms.lifeFloor) {

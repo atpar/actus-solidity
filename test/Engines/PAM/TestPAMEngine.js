@@ -133,4 +133,21 @@ contract('PAMEngine', () => {
       state = nextState;
     }
   })
+
+  it('should yield the state for RR', async () => {
+    const initialState = await this.PAMEngineInstance.computeInitialState(this.lifecycleTerms, {});
+    
+    state = initialState;
+    state.resetRate = '1000000000';
+    state[13] = '1000000000';
+
+    const nextState = await this.PAMEngineInstance.computeStateForEvent(
+      this.lifecycleTerms,
+      state,
+      '0x1200000000000000000000000000000000000000000000000000000051922D80',
+      1368534400
+    );
+
+    console.log(nextState);
+  });
 });
