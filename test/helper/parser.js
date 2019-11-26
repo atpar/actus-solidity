@@ -83,7 +83,12 @@ const parseTermsFromObject = (terms) => {
   for (const attribute of Terms) {
     const value = terms[attribute];
 
-    if (TermsDefinitions[attribute].type === 'Enum' || TermsDefinitions[attribute].type === 'Enum[]') {
+    if (attribute === 'contractReferences') {
+      parsedTerms[attribute] = [
+        { object: toHex(''), contractReferenceType: 0, contractReferenceRole: 0 },
+        { object: toHex(''), contractReferenceType: 0, contractReferenceRole: 0 }
+      ];
+    } else if (TermsDefinitions[attribute].type === 'Enum' || TermsDefinitions[attribute].type === 'Enum[]') {
       parsedTerms[attribute] = (value) ? getIndexOfAttribute(attribute, value) : 0;
     } else if (TermsDefinitions[attribute].type === 'Varchar') {
       parsedTerms[attribute] = toHex((value) ? value : '');
@@ -95,8 +100,9 @@ const parseTermsFromObject = (terms) => {
       parsedTerms[attribute] = parseCycleToIPS(value);
     } else if (TermsDefinitions[attribute].type === 'Period') {
       parsedTerms[attribute] = parsePeriodToIP(value);
-    } else if (TermsDefinitions[attribute].type === 'ContractStructure') {
-      parsedTerms[attribute] = { object: toHex(''), contractReferenceType: 0, contractReferenceRole: 0 };
+    // } else if (TermsDefinitions[attribute].type === 'ContractStructure') {
+    //   parsedTerms[attribute] = { object: toHex(''), contractReferenceType: 0, contractReferenceRole: 0 };
+    // }
     }
   }
 

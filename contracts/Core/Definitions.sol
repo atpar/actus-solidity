@@ -58,7 +58,7 @@ contract Definitions {
 	enum ContractReferenceType {CT, CID, MOC, LEI, CS}
 	enum ContractReferenceRole {UDY, FL, SL, CVE, CVI}
 
-	struct ContractStructure {
+	struct ContractReference {
 		bytes32 object;
 		ContractReferenceType contractReferenceType;
 		ContractReferenceRole contractReferenceRole;
@@ -94,7 +94,7 @@ contract Definitions {
 		PenaltyType penaltyType;
 		FeeBasis feeBasis;
 		ContractPerformance creditEventTypeCovered;
-		ContractStructure contractStructure;
+		ContractReference[2] contractReferences;
 
 		address currency;
 
@@ -165,7 +165,8 @@ contract Definitions {
 		PenaltyType penaltyType;
 		FeeBasis feeBasis;
 		ContractPerformance creditEventTypeCovered;
-		ContractStructure contractStructure;
+
+		ContractReference[2] contractReferences;
 
 		address currency;
 

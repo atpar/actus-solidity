@@ -9,7 +9,7 @@
   "penaltyType",
   "feeBasis",
   "creditEventTypeCovered",
-  "contractStructure",
+  "contractReferences",
   "currency",
   "creatorID",
   "counterpartyID",

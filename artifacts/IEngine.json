@@ -71,8 +71,8 @@
                   "type": "uint8"
                 }
               ],
-              "name": "contractStructure",
-              "type": "tuple"
+              "name": "contractReferences",
+              "type": "tuple[2]"
             },
             {
               "name": "currency",
@@ -320,8 +320,8 @@
                   "type": "uint8"
                 }
               ],
-              "name": "contractStructure",
-              "type": "tuple"
+              "name": "contractReferences",
+              "type": "tuple[2]"
             },
             {
               "name": "currency",
@@ -635,8 +635,8 @@
                   "type": "uint8"
                 }
               ],
-              "name": "contractStructure",
-              "type": "tuple"
+              "name": "contractReferences",
+              "type": "tuple[2]"
             },
             {
               "name": "currency",
@@ -1366,8 +1366,8 @@
                   "type": "uint8"
                 }
               ],
-              "name": "contractStructure",
-              "type": "tuple"
+              "name": "contractReferences",
+              "type": "tuple[2]"
             },
             {
               "name": "currency",
@@ -1633,5 +1633,5 @@
     "version": "0.5.2+commit.1df8f40c.Emscripten.clang"
   },
   "networks": {},
-  "updatedAt": "2019-11-25T16:01:32.084Z"
+  "updatedAt": "2019-11-26T09:48:53.563Z"
 }
