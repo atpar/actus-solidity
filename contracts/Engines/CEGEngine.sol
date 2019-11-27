@@ -109,7 +109,7 @@ contract CEGEngine is Core, IEngine, STF, POF {
 	 * @param segmentEnd end timestamp of the segement
 	 * @return event schedule segment
 	 */
-	function computeNonCylicEventScheduleSegment(
+	function computeNonCyclicScheduleSegment(
 		GeneratingTerms memory terms,
 		uint256 segmentStart,
 		uint256 segmentEnd
