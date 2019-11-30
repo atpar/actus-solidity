@@ -1,11 +1,13 @@
 pragma solidity ^0.5.2;
+pragma experimental ABIEncoderV2;
 
 import "../external/BokkyPooBah/BokkyPooBahsDateTimeLibrary.sol";
 
 import "./ACTUSTypes.sol";
+import "./Conventions/BusinessDayConvention.sol";
 
 
-contract Utils is ACTUSTypes {
+contract Utils is ACTUSTypes, BusinessDayConvention {
 
 	function encodeEvent(EventType eventType, uint256 scheduleTime)
 		public
@@ -27,6 +29,39 @@ contract Utils is ACTUSTypes {
 		uint256 scheduleTime = uint256(uint64(uint256(_event)));
 
 		return (eventType, scheduleTime);
+	}
+
+	function computeEventTimeForEvent(bytes32 _event, LifecycleTerms memory terms)
+		public
+		pure
+		returns (uint256)
+	{
+		(, uint256 scheduleTime) = decodeEvent(_event);
+		return shiftEventTime(scheduleTime, terms.businessDayConvention, terms.calendar);
+	}
+
+	function getEpochOffset(EventType eventType)
+		public
+		pure
+		returns (uint256)
+	{
+		if (eventType == EventType.IED) return 20;
+		if (eventType == EventType.PR) return 25;
+		if (eventType == EventType.IP) return 30;
+		if (eventType == EventType.IPCI) return 40;
+		if (eventType == EventType.FP) return 50;
+		if (eventType == EventType.DV) return 60;
+		if (eventType == EventType.MR) return 80;
+		if (eventType == EventType.RRF) return 90;
+		if (eventType == EventType.RR) return 100;
+		if (eventType == EventType.SC) return 110;
+		if (eventType == EventType.IPCB) return 120;
+		if (eventType == EventType.PRD) return 130;
+		if (eventType == EventType.TD) return 140;
+		if (eventType == EventType.STD) return 150;
+		if (eventType == EventType.MD) return 160;
+		if (eventType == EventType.AD) return 950;
+		return 0;
 	}
 
 	function getTimestampPlusPeriod(IP memory period, uint256 timestamp)
@@ -54,60 +89,6 @@ contract Utils is ACTUSTypes {
 
 		return newTimestamp;
 	}
-
-  // function sortEventSchedule(
-	// 	Event[MAX_EVENT_SCHEDULE_SIZE] memory _eventSchedule,
-	// 	uint256 numberOfEvents
-	// )
-	// 	internal
-	// 	pure
-	// {
-	// 	quickSortEventSchedule(_eventSchedule, uint(0), uint(_eventSchedule.length - 1));
-
-	// 	for (uint256 i = 0; i < numberOfEvents; i++) {
-	// 		_eventSchedule[i] = _eventSchedule[_eventSchedule.length - numberOfEvents + i];
-	// 		delete _eventSchedule[_eventSchedule.length - numberOfEvents + i];
-	// 	}
-	// }
-
-	// function quickSortEventSchedule(
-	// 	Event[MAX_EVENT_SCHEDULE_SIZE] memory _eventSchedule,
-	// 	uint left,
-	// 	uint right
-	// )
-	// 	internal
-	// 	pure
-	// {
-	// 	uint i = left;
-	// 	uint j = right;
-
-	// 	if (i == j) return;
-
-	// 	// pick event in the middle of the schedule
-	// 	uint pivot = _eventSchedule[left + (right - left) / 2].eventTimeWithEpochOffset;
-
-	// 	// do until pivot event is reached
-	// 	while (i <= j) {
-	// 		// search for event that is scheduled later than the pivot event
-	// 		while (_eventSchedule[i].eventTimeWithEpochOffset < pivot) i++;
-	// 		// search for event that is scheduled earlier than the pivot event
-	// 		while (pivot < _eventSchedule[j].eventTimeWithEpochOffset) j--;
-	// 		// if the event that is scheduled later comes before the event that is scheduled earlier, swap events
-	// 		if (i <= j) {
-	// 			(
-	// 				_eventSchedule[i], _eventSchedule[j]
-	// 			) = (
-	// 				_eventSchedule[j],
-	// 				_eventSchedule[i]
-	// 			);
-	// 			i++;
-	// 			j--;
-	// 		}
-	// 	}
-
-	// 	if (left < j) quickSortEventSchedule(_eventSchedule, left, j);
-	// 	if (i < right) quickSortEventSchedule(_eventSchedule, i, right);
-	// }
 
 	/**
 	 * checks if a timestamp is in a given period

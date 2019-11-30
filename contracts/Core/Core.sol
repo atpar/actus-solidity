@@ -14,11 +14,11 @@ import "./Conventions/EndOfMonthConvention.sol";
 
 contract Core is
 	ACTUSTypes,
-	Utils,
 	BusinessDayConvention,
 	ContractDefaultConvention,
 	ContractRoleConvention,
 	DayCountConvention,
 	EndOfMonthConvention,
+	Utils,
 	Schedule
 {}
