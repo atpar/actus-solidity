@@ -1,7 +1,7 @@
 pragma solidity ^0.5.2;
 pragma experimental ABIEncoderV2;
 
-import "./Definitions.sol";
+import "./ACTUSTypes.sol";
 import "./Utils.sol";
 import "./Schedule.sol";
 
@@ -13,7 +13,7 @@ import "./Conventions/EndOfMonthConvention.sol";
 
 
 contract Core is
-	Definitions,
+	ACTUSTypes,
 	Utils,
 	BusinessDayConvention,
 	ContractDefaultConvention,
@@ -21,15 +21,4 @@ contract Core is
 	DayCountConvention,
 	EndOfMonthConvention,
 	Schedule
-{
-
-	function signum(int value) internal pure returns (int256) {
-		if (value > 0) {
-			return 1;
-		} else if (value < 0) {
-			return -1;
-		} else {
-			return INT256_MIN;
-		}
-	}
-}
+{}

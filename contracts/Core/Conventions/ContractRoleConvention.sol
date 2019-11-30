@@ -1,9 +1,9 @@
 pragma solidity ^0.5.2;
 
-import "../Definitions.sol";
+import "../ACTUSTypes.sol";
 
 
-contract ContractRoleConvention is Definitions {
+contract ContractRoleConvention is ACTUSTypes {
 
   function roleSign(ContractRole contractRole)
 		internal

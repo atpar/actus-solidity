@@ -1,0 +1,27 @@
+{
+  "contractName": "ACTUSTypes",
+  "abi": [
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "PRECISION",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    }
+  ],
+  "metadata": "{\"compiler\":{\"version\":\"0.5.2+commit.1df8f40c\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"constant\":true,\"inputs\":[],\"name\":\"PRECISION\",\"outputs\":[{\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"}],\"devdoc\":{\"methods\":{}},\"userdoc\":{\"methods\":{}}},\"settings\":{\"compilationTarget\":{\"/Users/johannes/Documents/dev/actus-protocol/actus-solidity/contracts/Core/ACTUSTypes.sol\":\"ACTUSTypes\"},\"evmVersion\":\"byzantium\",\"libraries\":{},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[]},\"sources\":{\"/Users/johannes/Documents/dev/actus-protocol/actus-solidity/contracts/Core/ACTUSTypes.sol\":{\"keccak256\":\"0x11be021d15e3dfca8bbc35d5cfa7d878104b3bb70040cb02118eb708b340f9ca\",\"urls\":[\"bzzr://2f9f288bd94934728265441b875e1e68ac70e9412ff62bccf1ea754b83afbe22\"]}},\"version\":1}",
+  "bytecode": "0x6080604052348015600f57600080fd5b5060928061001e6000396000f3fe6080604052348015600f57600080fd5b50600436106044577c01000000000000000000000000000000000000000000000000000000006000350463aaf5eb6881146049575b600080fd5b604f6061565b60408051918252519081900360200190f35b60128156fea165627a7a723058202ad118028f34a929110a24f733325beac1597b64d37d203bfe675666feedbe1c0029",
+  "compiler": {
+    "name": "solc",
+    "version": "0.5.2+commit.1df8f40c.Emscripten.clang"
+  },
+  "networks": {},
+  "updatedAt": "2019-11-30T20:31:54.104Z"
+}

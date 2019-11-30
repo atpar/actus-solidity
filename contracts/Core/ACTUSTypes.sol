@@ -1,7 +1,7 @@
 pragma solidity ^0.5.2;
 
 
-contract Definitions {
+contract ACTUSTypes {
 
 	int256 constant INT256_MIN = int256((uint256(1) << 255));
 	int256 constant INT256_MAX = int256(~((uint256(1) << 255)));

@@ -4,11 +4,11 @@ import "openzeppelin-solidity/contracts/math/SafeMath.sol";
 import "openzeppelin-solidity/contracts/drafts/SignedSafeMath.sol";
 import "../../external/BokkyPooBah/BokkyPooBahsDateTimeLibrary.sol";
 
-import "../Definitions.sol";
+import "../ACTUSTypes.sol";
 import "../SignedMath.sol";
 
 
-contract DayCountConvention is Definitions {
+contract DayCountConvention is ACTUSTypes {
 
 	using SafeMath for uint;
 	using SignedSafeMath for int;

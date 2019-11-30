@@ -20,11 +20,6 @@ contract TestCore is Core {
     Assert.equal(roleSign(ContractRole.RPL), -1, "Sign should be -1");
   }
 
-  function testSignum() public {
-    Assert.equal(signum(1), 1, "Sign should be 1");
-    Assert.equal(signum(-2), -1, "Sign should be -1");
-  }
-
   function testYearFraction() public {
     // A/360 convention
     Assert.equal(

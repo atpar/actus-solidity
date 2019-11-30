@@ -1,7 +1,7 @@
 pragma solidity ^0.5.2;
 pragma experimental ABIEncoderV2;
 
-import "../Core/Definitions.sol";
+import "../Core/ACTUSTypes.sol";
 
 
 /**
@@ -10,7 +10,7 @@ import "../Core/Definitions.sol";
  * @dev all numbers except unix timestamp are represented as multiple of 10 ** 18
  * inputs have to be multiplied by 10 ** 18, outputs have to divided by 10 ** 18
  */
-contract IEngine is Definitions {
+contract IEngine is ACTUSTypes {
 
 	/**
 	 * get the initial contract state

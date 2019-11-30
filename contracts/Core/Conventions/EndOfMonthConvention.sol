@@ -3,10 +3,10 @@ pragma experimental ABIEncoderV2;
 
 import "../../external/BokkyPooBah/BokkyPooBahsDateTimeLibrary.sol";
 
-import "../Definitions.sol";
+import "../ACTUSTypes.sol";
 
 
-contract EndOfMonthConvention is Definitions {
+contract EndOfMonthConvention is ACTUSTypes {
 
 	/**
 	 * This function makes an adjustment on the end of month convention.

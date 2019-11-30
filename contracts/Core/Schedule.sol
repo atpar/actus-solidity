@@ -3,13 +3,13 @@ pragma experimental ABIEncoderV2;
 
 import "../external/BokkyPooBah/BokkyPooBahsDateTimeLibrary.sol";
 
-import "./Definitions.sol";
+import "./ACTUSTypes.sol";
 import "./Utils.sol";
 
 import "./Conventions/BusinessDayConvention.sol";
 
 
-contract Schedule is Definitions, Utils, BusinessDayConvention {
+contract Schedule is ACTUSTypes, Utils, BusinessDayConvention {
 
 	function computeEventTimeForEvent(bytes32 _event, LifecycleTerms memory terms)
 		public

@@ -1,11 +1,8 @@
 pragma solidity ^0.5.2;
 pragma experimental ABIEncoderV2;
 
-import "openzeppelin-solidity/contracts/math/SafeMath.sol";
-import "openzeppelin-solidity/contracts/drafts/SignedSafeMath.sol";
-
 import "../Core/Core.sol";
-import "../Core/SignedMath.sol";
+import "./BaseEngine.sol";
 import "./IEngine.sol";
 import "./STF.sol";
 import "./POF.sol";
@@ -17,12 +14,7 @@ import "./POF.sol";
  * @dev all numbers except unix timestamp are represented as multiple of 10 ** 18
  * inputs have to be multiplied by 10 ** 18, outputs have to divided by 10 ** 18
  */
-contract CECEngine is Core, IEngine, STF, POF {
-
-	using SafeMath for uint;
-	using SignedSafeMath for int;
-	using SignedMath for int;
-
+contract CECEngine is BaseEngine, STF, POF {
 
 	/**
 	 * initialize contract state space based on the contract terms
@@ -45,60 +37,6 @@ contract CECEngine is Core, IEngine, STF, POF {
 		state.notionalPrincipal = roleSign(terms.contractRole) * terms.notionalPrincipal;
 
 		return state;
-	}
-
-	/**
-	 * applys a prototype event to the current state of a contract and
-	 * returns the contrat event and the new contract state
-	 * @param terms terms of the contract
-	 * @param state current state of the contract
-	 * @param _event prototype event to be evaluated and applied to the contract state
-	 * @param externalData external data needed for POF evaluation
-	 * @return the new contract state and the evaluated event
-	 */
-	function computeStateForEvent(
-		LifecycleTerms memory terms,
-		State memory state,
-		bytes32 _event,
-		bytes32 externalData
-	)
-		public
-		pure
-		returns (State memory)
-	{
-		return stateTransitionFunction(
-			terms,
-			state,
-			_event,
-			externalData
-		);
-	}
-
-	/**
-	 * applys a prototype event to the current state of a contract and
-	 * returns the contrat event and the new contract state
-	 * @param terms terms of the contract
-	 * @param state current state of the contract
-	 * @param _event prototype event to be evaluated and applied to the contract state
-	 * @param externalData external data needed for POF evaluation
-	 * @return the new contract state and the evaluated event
-	 */
-	function computePayoffForEvent(
-		LifecycleTerms memory terms,
-		State memory state,
-		bytes32 _event,
-		bytes32 externalData
-	)
-		public
-		pure
-		returns (int256)
-	{
-		return payoffFunction(
-			terms,
-			state,
-			_event,
-			externalData
-		);
 	}
 
 	/**

@@ -2,10 +2,10 @@ pragma solidity ^0.5.2;
 
 import "../external/BokkyPooBah/BokkyPooBahsDateTimeLibrary.sol";
 
-import "./Definitions.sol";
+import "./ACTUSTypes.sol";
 
 
-contract Utils is Definitions {
+contract Utils is ACTUSTypes {
 
 	function encodeEvent(EventType eventType, uint256 scheduleTime)
 		public

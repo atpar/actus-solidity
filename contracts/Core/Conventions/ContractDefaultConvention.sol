@@ -1,9 +1,9 @@
 pragma solidity ^0.5.2;
 
-import "../Definitions.sol";
+import "../ACTUSTypes.sol";
 
 
-contract ContractDefaultConvention is Definitions {
+contract ContractDefaultConvention is ACTUSTypes {
 
   function performanceIndicator(ContractPerformance contractPerformance)
 		internal

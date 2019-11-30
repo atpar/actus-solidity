@@ -2,10 +2,10 @@ pragma solidity ^0.5.2;
 
 import "../../external/BokkyPooBah/BokkyPooBahsDateTimeLibrary.sol";
 
-import "../Definitions.sol";
+import "../ACTUSTypes.sol";
 
 
-contract BusinessDayConvention is Definitions {
+contract BusinessDayConvention is ACTUSTypes {
 
 	// used in POFs and STFs for DCFs
 	function shiftCalcTime(
