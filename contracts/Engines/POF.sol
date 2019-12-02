@@ -3,8 +3,21 @@ pragma experimental ABIEncoderV2;
 
 import "../Core/Core.sol";
 
-
+/**
+ * @title Contract containing all pay-off functions (POF)
+ * @dev ..
+ */
 contract POF is Core {
+
+  /**
+	 * initialize contract state space based on the contract terms
+	 * @dev see initStateSpace()
+	 * @param terms Lifecycle Terms
+   * @param state State
+   * @param scheduleTime time
+   * @param externalData data
+	 * @return initial contract state
+	 */
   function POF_PAM_FP (
     LifecycleTerms memory terms,
     State memory state,
