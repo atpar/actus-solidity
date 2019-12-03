@@ -8,12 +8,65 @@ contract('TestPOF', () => {
         this.PAMEngineInstance = await PAMEngine.new(); 
         this.terms = await getDefaultTestTerms('PAM');
         this.lifecycleTerms = parseTermsToLifecycleTerms(this.terms);
-        this.initialState = await this.PAMEngineInstance.computeInitialState(this.lifecycleTerms, {});
         this.TestPOF = await TestPOF.new();
     });
 
-    it('should work', async () => {
-            this.TestPOF._POF_PAM_FP(this.lifecycleTerms, this.initialState, 0, "" );
+    /*
+    *
+    * TEST POF_PAM_FP
+    * 
+    */
+
+    // feeBasis.A
+    it('PAM fee basis A: should yield a fee of 5', async () => {
+        const state = await this.PAMEngineInstance.computeInitialState(this.lifecycleTerms, {});
+        const externalData = "0x0000000000000000000000000000000000000000000000000000000000000000";
+        const scheduleTime = 0;
+
+        this.lifecycleTerms.feeBasis = 0; // FeeBasis.A
+        this.lifecycleTerms.feeRate = web3.utils.toWei("5"); // set fixed fee
+        this.contractRole = 0; //RPA -> roleSign = 1
+        state.contractPerformance = 0; // Performant
+        
+        const payoff = await this.TestPOF._POF_PAM_FP(
+            this.lifecycleTerms, 
+            state, 
+            scheduleTime, 
+            externalData 
+            );
+        assert.equal(payoff.toString(), "5000000000000000000");
+    });
+
+    // feeBasis.N
+    it('PAM fee basis N: should yield a fee of 10100', async () => {
+        const state = await this.PAMEngineInstance.computeInitialState(this.lifecycleTerms, {});
+        const externalData = "0x0000000000000000000000000000000000000000000000000000000000000000";
+        const scheduleTime = 6307200; // .2 years
+
+        //console.log(this.lifecycleTerms)
+        //console.log(state)
+
+        this.lifecycleTerms.feeBasis = 1; // FeeBasis.N
+        state[0] = '0'; // contractPerformance = Performant
+        state[7] = web3.utils.toWei("100"); // feeAccrued = 100
+        state[1] = '0'; // statusDate = 0
+        this.lifecycleTerms.businessDayConvention = 0; // NULL
+        this.lifecycleTerms.calendar = 0; // NoCalendar
+        this.lifecycleTerms.dayCountConvention = 2; // A_365
+        this.lifecycleTerms.maturityDate = 31536000; // 1 year
+
+        this.lifecycleTerms.feeRate = web3.utils.toWei(".05"); // set fee rate
+        state[5] = web3.utils.toWei("1000000"); // .notionalPrincipal = 1M
+        
+        console.log(state[0], state[7], state[1], state[5]);
+
+        const payoff = await this.TestPOF._POF_PAM_FP(
+            this.lifecycleTerms, 
+            state, 
+            scheduleTime, 
+            externalData 
+            );
+        assert.equal(payoff.toString(), "10100000000000000000000");
     });
 
 });

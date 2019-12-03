@@ -3,20 +3,21 @@ pragma experimental ABIEncoderV2;
 
 import "../Core/Core.sol";
 
+
 /**
  * @title Contract containing all pay-off functions (POF)
- * @dev ..
  */
 contract POF is Core {
 
   /**
-	 * initialize contract state space based on the contract terms
+	 * Calculate the pay-off for PAM Fees. The method how to calculate the fee
+   * heavily depends on the selected Fee Basis.
 	 * @dev see initStateSpace()
 	 * @param terms Lifecycle Terms
    * @param state State
    * @param scheduleTime time
    * @param externalData data
-	 * @return initial contract state
+	 * @return the fee amount
 	 */
   function POF_PAM_FP (
     LifecycleTerms memory terms,

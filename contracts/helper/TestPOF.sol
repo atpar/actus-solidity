@@ -8,10 +8,10 @@ import "../Engines/POF.sol";
 */
 contract TestPOF is POF {
     function _POF_PAM_FP (
-    LifecycleTerms memory terms,
-    State memory state,
-    uint256 scheduleTime,
-    bytes32 externalData
+        LifecycleTerms memory terms,
+        State memory state,
+        uint256 scheduleTime,
+        bytes32 externalData
   )
     public
     pure
