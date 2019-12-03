@@ -50,267 +50,6 @@
       "constant": true,
       "inputs": [
         {
-          "components": [
-            {
-              "name": "calendar",
-              "type": "uint8"
-            },
-            {
-              "name": "contractRole",
-              "type": "uint8"
-            },
-            {
-              "name": "dayCountConvention",
-              "type": "uint8"
-            },
-            {
-              "name": "businessDayConvention",
-              "type": "uint8"
-            },
-            {
-              "name": "endOfMonthConvention",
-              "type": "uint8"
-            },
-            {
-              "name": "scalingEffect",
-              "type": "uint8"
-            },
-            {
-              "name": "penaltyType",
-              "type": "uint8"
-            },
-            {
-              "name": "feeBasis",
-              "type": "uint8"
-            },
-            {
-              "name": "creditEventTypeCovered",
-              "type": "uint8"
-            },
-            {
-              "components": [
-                {
-                  "name": "object",
-                  "type": "bytes32"
-                },
-                {
-                  "name": "contractReferenceType",
-                  "type": "uint8"
-                },
-                {
-                  "name": "contractReferenceRole",
-                  "type": "uint8"
-                }
-              ],
-              "name": "contractReferences",
-              "type": "tuple[2]"
-            },
-            {
-              "name": "currency",
-              "type": "address"
-            },
-            {
-              "name": "marketObjectCodeRateReset",
-              "type": "bytes32"
-            },
-            {
-              "name": "statusDate",
-              "type": "uint256"
-            },
-            {
-              "name": "maturityDate",
-              "type": "uint256"
-            },
-            {
-              "name": "notionalPrincipal",
-              "type": "int256"
-            },
-            {
-              "name": "nominalInterestRate",
-              "type": "int256"
-            },
-            {
-              "name": "feeAccrued",
-              "type": "int256"
-            },
-            {
-              "name": "accruedInterest",
-              "type": "int256"
-            },
-            {
-              "name": "rateMultiplier",
-              "type": "int256"
-            },
-            {
-              "name": "rateSpread",
-              "type": "int256"
-            },
-            {
-              "name": "feeRate",
-              "type": "int256"
-            },
-            {
-              "name": "nextResetRate",
-              "type": "int256"
-            },
-            {
-              "name": "penaltyRate",
-              "type": "int256"
-            },
-            {
-              "name": "premiumDiscountAtIED",
-              "type": "int256"
-            },
-            {
-              "name": "priceAtPurchaseDate",
-              "type": "int256"
-            },
-            {
-              "name": "nextPrincipalRedemptionPayment",
-              "type": "int256"
-            },
-            {
-              "name": "coverageOfCreditEnhancement",
-              "type": "int256"
-            },
-            {
-              "components": [
-                {
-                  "name": "i",
-                  "type": "uint256"
-                },
-                {
-                  "name": "p",
-                  "type": "uint8"
-                },
-                {
-                  "name": "isSet",
-                  "type": "bool"
-                }
-              ],
-              "name": "gracePeriod",
-              "type": "tuple"
-            },
-            {
-              "components": [
-                {
-                  "name": "i",
-                  "type": "uint256"
-                },
-                {
-                  "name": "p",
-                  "type": "uint8"
-                },
-                {
-                  "name": "isSet",
-                  "type": "bool"
-                }
-              ],
-              "name": "delinquencyPeriod",
-              "type": "tuple"
-            },
-            {
-              "name": "lifeCap",
-              "type": "int256"
-            },
-            {
-              "name": "lifeFloor",
-              "type": "int256"
-            },
-            {
-              "name": "periodCap",
-              "type": "int256"
-            },
-            {
-              "name": "periodFloor",
-              "type": "int256"
-            }
-          ],
-          "name": "terms",
-          "type": "tuple"
-        },
-        {
-          "components": [
-            {
-              "name": "contractPerformance",
-              "type": "uint8"
-            },
-            {
-              "name": "statusDate",
-              "type": "uint256"
-            },
-            {
-              "name": "nonPerformingDate",
-              "type": "uint256"
-            },
-            {
-              "name": "maturityDate",
-              "type": "uint256"
-            },
-            {
-              "name": "executionDate",
-              "type": "uint256"
-            },
-            {
-              "name": "notionalPrincipal",
-              "type": "int256"
-            },
-            {
-              "name": "accruedInterest",
-              "type": "int256"
-            },
-            {
-              "name": "feeAccrued",
-              "type": "int256"
-            },
-            {
-              "name": "nominalInterestRate",
-              "type": "int256"
-            },
-            {
-              "name": "interestScalingMultiplier",
-              "type": "int256"
-            },
-            {
-              "name": "notionalScalingMultiplier",
-              "type": "int256"
-            },
-            {
-              "name": "nextPrincipalRedemptionPayment",
-              "type": "int256"
-            },
-            {
-              "name": "executionAmount",
-              "type": "int256"
-            }
-          ],
-          "name": "state",
-          "type": "tuple"
-        },
-        {
-          "name": "_event",
-          "type": "bytes32"
-        },
-        {
-          "name": "externalData",
-          "type": "bytes32"
-        }
-      ],
-      "name": "computePayoffForEvent",
-      "outputs": [
-        {
-          "name": "",
-          "type": "int256"
-        }
-      ],
-      "payable": false,
-      "stateMutability": "pure",
-      "type": "function"
-    },
-    {
-      "constant": true,
-      "inputs": [
-        {
           "name": "_event",
           "type": "bytes32"
         },
@@ -367,8 +106,26 @@
                   "type": "uint8"
                 }
               ],
-              "name": "contractReferences",
-              "type": "tuple[2]"
+              "name": "contractReference_1",
+              "type": "tuple"
+            },
+            {
+              "components": [
+                {
+                  "name": "object",
+                  "type": "bytes32"
+                },
+                {
+                  "name": "contractReferenceType",
+                  "type": "uint8"
+                },
+                {
+                  "name": "contractReferenceRole",
+                  "type": "uint8"
+                }
+              ],
+              "name": "contractReference_2",
+              "type": "tuple"
             },
             {
               "name": "currency",
@@ -510,48 +267,6 @@
       "constant": true,
       "inputs": [
         {
-          "name": "_event",
-          "type": "bytes32"
-        }
-      ],
-      "name": "decodeEvent",
-      "outputs": [
-        {
-          "name": "",
-          "type": "uint8"
-        },
-        {
-          "name": "",
-          "type": "uint256"
-        }
-      ],
-      "payable": false,
-      "stateMutability": "pure",
-      "type": "function"
-    },
-    {
-      "constant": true,
-      "inputs": [
-        {
-          "name": "eventType",
-          "type": "uint8"
-        }
-      ],
-      "name": "getEpochOffset",
-      "outputs": [
-        {
-          "name": "",
-          "type": "uint256"
-        }
-      ],
-      "payable": false,
-      "stateMutability": "pure",
-      "type": "function"
-    },
-    {
-      "constant": true,
-      "inputs": [
-        {
           "components": [
             {
               "name": "calendar",
@@ -604,8 +319,26 @@
                   "type": "uint8"
                 }
               ],
-              "name": "contractReferences",
-              "type": "tuple[2]"
+              "name": "contractReference_1",
+              "type": "tuple"
+            },
+            {
+              "components": [
+                {
+                  "name": "object",
+                  "type": "bytes32"
+                },
+                {
+                  "name": "contractReferenceType",
+                  "type": "uint8"
+                },
+                {
+                  "name": "contractReferenceRole",
+                  "type": "uint8"
+                }
+              ],
+              "name": "contractReference_2",
+              "type": "tuple"
             },
             {
               "name": "currency",
@@ -865,6 +598,48 @@
     },
     {
       "constant": true,
+      "inputs": [
+        {
+          "name": "_event",
+          "type": "bytes32"
+        }
+      ],
+      "name": "decodeEvent",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint8"
+        },
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "pure",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "name": "eventType",
+          "type": "uint8"
+        }
+      ],
+      "name": "getEpochOffset",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "pure",
+      "type": "function"
+    },
+    {
+      "constant": true,
       "inputs": [],
       "name": "PRECISION",
       "outputs": [
@@ -956,8 +731,305 @@
                   "type": "uint8"
                 }
               ],
-              "name": "contractReferences",
-              "type": "tuple[2]"
+              "name": "contractReference_1",
+              "type": "tuple"
+            },
+            {
+              "components": [
+                {
+                  "name": "object",
+                  "type": "bytes32"
+                },
+                {
+                  "name": "contractReferenceType",
+                  "type": "uint8"
+                },
+                {
+                  "name": "contractReferenceRole",
+                  "type": "uint8"
+                }
+              ],
+              "name": "contractReference_2",
+              "type": "tuple"
+            },
+            {
+              "name": "currency",
+              "type": "address"
+            },
+            {
+              "name": "marketObjectCodeRateReset",
+              "type": "bytes32"
+            },
+            {
+              "name": "statusDate",
+              "type": "uint256"
+            },
+            {
+              "name": "maturityDate",
+              "type": "uint256"
+            },
+            {
+              "name": "notionalPrincipal",
+              "type": "int256"
+            },
+            {
+              "name": "nominalInterestRate",
+              "type": "int256"
+            },
+            {
+              "name": "feeAccrued",
+              "type": "int256"
+            },
+            {
+              "name": "accruedInterest",
+              "type": "int256"
+            },
+            {
+              "name": "rateMultiplier",
+              "type": "int256"
+            },
+            {
+              "name": "rateSpread",
+              "type": "int256"
+            },
+            {
+              "name": "feeRate",
+              "type": "int256"
+            },
+            {
+              "name": "nextResetRate",
+              "type": "int256"
+            },
+            {
+              "name": "penaltyRate",
+              "type": "int256"
+            },
+            {
+              "name": "premiumDiscountAtIED",
+              "type": "int256"
+            },
+            {
+              "name": "priceAtPurchaseDate",
+              "type": "int256"
+            },
+            {
+              "name": "nextPrincipalRedemptionPayment",
+              "type": "int256"
+            },
+            {
+              "name": "coverageOfCreditEnhancement",
+              "type": "int256"
+            },
+            {
+              "components": [
+                {
+                  "name": "i",
+                  "type": "uint256"
+                },
+                {
+                  "name": "p",
+                  "type": "uint8"
+                },
+                {
+                  "name": "isSet",
+                  "type": "bool"
+                }
+              ],
+              "name": "gracePeriod",
+              "type": "tuple"
+            },
+            {
+              "components": [
+                {
+                  "name": "i",
+                  "type": "uint256"
+                },
+                {
+                  "name": "p",
+                  "type": "uint8"
+                },
+                {
+                  "name": "isSet",
+                  "type": "bool"
+                }
+              ],
+              "name": "delinquencyPeriod",
+              "type": "tuple"
+            },
+            {
+              "name": "lifeCap",
+              "type": "int256"
+            },
+            {
+              "name": "lifeFloor",
+              "type": "int256"
+            },
+            {
+              "name": "periodCap",
+              "type": "int256"
+            },
+            {
+              "name": "periodFloor",
+              "type": "int256"
+            }
+          ],
+          "name": "terms",
+          "type": "tuple"
+        },
+        {
+          "components": [
+            {
+              "name": "contractPerformance",
+              "type": "uint8"
+            },
+            {
+              "name": "statusDate",
+              "type": "uint256"
+            },
+            {
+              "name": "nonPerformingDate",
+              "type": "uint256"
+            },
+            {
+              "name": "maturityDate",
+              "type": "uint256"
+            },
+            {
+              "name": "executionDate",
+              "type": "uint256"
+            },
+            {
+              "name": "notionalPrincipal",
+              "type": "int256"
+            },
+            {
+              "name": "accruedInterest",
+              "type": "int256"
+            },
+            {
+              "name": "feeAccrued",
+              "type": "int256"
+            },
+            {
+              "name": "nominalInterestRate",
+              "type": "int256"
+            },
+            {
+              "name": "interestScalingMultiplier",
+              "type": "int256"
+            },
+            {
+              "name": "notionalScalingMultiplier",
+              "type": "int256"
+            },
+            {
+              "name": "nextPrincipalRedemptionPayment",
+              "type": "int256"
+            },
+            {
+              "name": "executionAmount",
+              "type": "int256"
+            }
+          ],
+          "name": "state",
+          "type": "tuple"
+        },
+        {
+          "name": "_event",
+          "type": "bytes32"
+        },
+        {
+          "name": "externalData",
+          "type": "bytes32"
+        }
+      ],
+      "name": "computePayoffForEvent",
+      "outputs": [
+        {
+          "name": "",
+          "type": "int256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "pure",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "components": [
+            {
+              "name": "calendar",
+              "type": "uint8"
+            },
+            {
+              "name": "contractRole",
+              "type": "uint8"
+            },
+            {
+              "name": "dayCountConvention",
+              "type": "uint8"
+            },
+            {
+              "name": "businessDayConvention",
+              "type": "uint8"
+            },
+            {
+              "name": "endOfMonthConvention",
+              "type": "uint8"
+            },
+            {
+              "name": "scalingEffect",
+              "type": "uint8"
+            },
+            {
+              "name": "penaltyType",
+              "type": "uint8"
+            },
+            {
+              "name": "feeBasis",
+              "type": "uint8"
+            },
+            {
+              "name": "creditEventTypeCovered",
+              "type": "uint8"
+            },
+            {
+              "components": [
+                {
+                  "name": "object",
+                  "type": "bytes32"
+                },
+                {
+                  "name": "contractReferenceType",
+                  "type": "uint8"
+                },
+                {
+                  "name": "contractReferenceRole",
+                  "type": "uint8"
+                }
+              ],
+              "name": "contractReference_1",
+              "type": "tuple"
+            },
+            {
+              "components": [
+                {
+                  "name": "object",
+                  "type": "bytes32"
+                },
+                {
+                  "name": "contractReferenceType",
+                  "type": "uint8"
+                },
+                {
+                  "name": "contractReferenceRole",
+                  "type": "uint8"
+                }
+              ],
+              "name": "contractReference_2",
+              "type": "tuple"
             },
             {
               "name": "currency",
@@ -1675,8 +1747,26 @@
                   "type": "uint8"
                 }
               ],
-              "name": "contractReferences",
-              "type": "tuple[2]"
+              "name": "contractReference_1",
+              "type": "tuple"
+            },
+            {
+              "components": [
+                {
+                  "name": "object",
+                  "type": "bytes32"
+                },
+                {
+                  "name": "contractReferenceType",
+                  "type": "uint8"
+                },
+                {
+                  "name": "contractReferenceRole",
+                  "type": "uint8"
+                }
+              ],
+              "name": "contractReference_2",
+              "type": "tuple"
             },
             {
               "name": "currency",
@@ -1935,12 +2025,12 @@
       "type": "function"
     }
   ],
-  "metadata": "{\"compiler\":{\"version\":\"0.5.2+commit.1df8f40c\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"constant\":true,\"inputs\":[{\"name\":\"eomc\",\"type\":\"uint8\"},{\"name\":\"startTime\",\"type\":\"uint256\"},{\"components\":[{\"name\":\"i\",\"type\":\"uint256\"},{\"name\":\"p\",\"type\":\"uint8\"},{\"name\":\"s\",\"type\":\"uint8\"},{\"name\":\"isSet\",\"type\":\"bool\"}],\"name\":\"cycle\",\"type\":\"tuple\"}],\"name\":\"adjustEndOfMonthConvention\",\"outputs\":[{\"name\":\"\",\"type\":\"uint8\"}],\"payable\":false,\"stateMutability\":\"pure\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"components\":[{\"name\":\"calendar\",\"type\":\"uint8\"},{\"name\":\"contractRole\",\"type\":\"uint8\"},{\"name\":\"dayCountConvention\",\"type\":\"uint8\"},{\"name\":\"businessDayConvention\",\"type\":\"uint8\"},{\"name\":\"endOfMonthConvention\",\"type\":\"uint8\"},{\"name\":\"scalingEffect\",\"type\":\"uint8\"},{\"name\":\"penaltyType\",\"type\":\"uint8\"},{\"name\":\"feeBasis\",\"type\":\"uint8\"},{\"name\":\"creditEventTypeCovered\",\"type\":\"uint8\"},{\"components\":[{\"name\":\"object\",\"type\":\"bytes32\"},{\"name\":\"contractReferenceType\",\"type\":\"uint8\"},{\"name\":\"contractReferenceRole\",\"type\":\"uint8\"}],\"name\":\"contractReferences\",\"type\":\"tuple[2]\"},{\"name\":\"currency\",\"type\":\"address\"},{\"name\":\"marketObjectCodeRateReset\",\"type\":\"bytes32\"},{\"name\":\"statusDate\",\"type\":\"uint256\"},{\"name\":\"maturityDate\",\"type\":\"uint256\"},{\"name\":\"notionalPrincipal\",\"type\":\"int256\"},{\"name\":\"nominalInterestRate\",\"type\":\"int256\"},{\"name\":\"feeAccrued\",\"type\":\"int256\"},{\"name\":\"accruedInterest\",\"type\":\"int256\"},{\"name\":\"rateMultiplier\",\"type\":\"int256\"},{\"name\":\"rateSpread\",\"type\":\"int256\"},{\"name\":\"feeRate\",\"type\":\"int256\"},{\"name\":\"nextResetRate\",\"type\":\"int256\"},{\"name\":\"penaltyRate\",\"type\":\"int256\"},{\"name\":\"premiumDiscountAtIED\",\"type\":\"int256\"},{\"name\":\"priceAtPurchaseDate\",\"type\":\"int256\"},{\"name\":\"nextPrincipalRedemptionPayment\",\"type\":\"int256\"},{\"name\":\"coverageOfCreditEnhancement\",\"type\":\"int256\"},{\"components\":[{\"name\":\"i\",\"type\":\"uint256\"},{\"name\":\"p\",\"type\":\"uint8\"},{\"name\":\"isSet\",\"type\":\"bool\"}],\"name\":\"gracePeriod\",\"type\":\"tuple\"},{\"components\":[{\"name\":\"i\",\"type\":\"uint256\"},{\"name\":\"p\",\"type\":\"uint8\"},{\"name\":\"isSet\",\"type\":\"bool\"}],\"name\":\"delinquencyPeriod\",\"type\":\"tuple\"},{\"name\":\"lifeCap\",\"type\":\"int256\"},{\"name\":\"lifeFloor\",\"type\":\"int256\"},{\"name\":\"periodCap\",\"type\":\"int256\"},{\"name\":\"periodFloor\",\"type\":\"int256\"}],\"name\":\"terms\",\"type\":\"tuple\"},{\"components\":[{\"name\":\"contractPerformance\",\"type\":\"uint8\"},{\"name\":\"statusDate\",\"type\":\"uint256\"},{\"name\":\"nonPerformingDate\",\"type\":\"uint256\"},{\"name\":\"maturityDate\",\"type\":\"uint256\"},{\"name\":\"executionDate\",\"type\":\"uint256\"},{\"name\":\"notionalPrincipal\",\"type\":\"int256\"},{\"name\":\"accruedInterest\",\"type\":\"int256\"},{\"name\":\"feeAccrued\",\"type\":\"int256\"},{\"name\":\"nominalInterestRate\",\"type\":\"int256\"},{\"name\":\"interestScalingMultiplier\",\"type\":\"int256\"},{\"name\":\"notionalScalingMultiplier\",\"type\":\"int256\"},{\"name\":\"nextPrincipalRedemptionPayment\",\"type\":\"int256\"},{\"name\":\"executionAmount\",\"type\":\"int256\"}],\"name\":\"state\",\"type\":\"tuple\"},{\"name\":\"_event\",\"type\":\"bytes32\"},{\"name\":\"externalData\",\"type\":\"bytes32\"}],\"name\":\"computePayoffForEvent\",\"outputs\":[{\"name\":\"\",\"type\":\"int256\"}],\"payable\":false,\"stateMutability\":\"pure\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"name\":\"_event\",\"type\":\"bytes32\"},{\"components\":[{\"name\":\"calendar\",\"type\":\"uint8\"},{\"name\":\"contractRole\",\"type\":\"uint8\"},{\"name\":\"dayCountConvention\",\"type\":\"uint8\"},{\"name\":\"businessDayConvention\",\"type\":\"uint8\"},{\"name\":\"endOfMonthConvention\",\"type\":\"uint8\"},{\"name\":\"scalingEffect\",\"type\":\"uint8\"},{\"name\":\"penaltyType\",\"type\":\"uint8\"},{\"name\":\"feeBasis\",\"type\":\"uint8\"},{\"name\":\"creditEventTypeCovered\",\"type\":\"uint8\"},{\"components\":[{\"name\":\"object\",\"type\":\"bytes32\"},{\"name\":\"contractReferenceType\",\"type\":\"uint8\"},{\"name\":\"contractReferenceRole\",\"type\":\"uint8\"}],\"name\":\"contractReferences\",\"type\":\"tuple[2]\"},{\"name\":\"currency\",\"type\":\"address\"},{\"name\":\"marketObjectCodeRateReset\",\"type\":\"bytes32\"},{\"name\":\"statusDate\",\"type\":\"uint256\"},{\"name\":\"maturityDate\",\"type\":\"uint256\"},{\"name\":\"notionalPrincipal\",\"type\":\"int256\"},{\"name\":\"nominalInterestRate\",\"type\":\"int256\"},{\"name\":\"feeAccrued\",\"type\":\"int256\"},{\"name\":\"accruedInterest\",\"type\":\"int256\"},{\"name\":\"rateMultiplier\",\"type\":\"int256\"},{\"name\":\"rateSpread\",\"type\":\"int256\"},{\"name\":\"feeRate\",\"type\":\"int256\"},{\"name\":\"nextResetRate\",\"type\":\"int256\"},{\"name\":\"penaltyRate\",\"type\":\"int256\"},{\"name\":\"premiumDiscountAtIED\",\"type\":\"int256\"},{\"name\":\"priceAtPurchaseDate\",\"type\":\"int256\"},{\"name\":\"nextPrincipalRedemptionPayment\",\"type\":\"int256\"},{\"name\":\"coverageOfCreditEnhancement\",\"type\":\"int256\"},{\"components\":[{\"name\":\"i\",\"type\":\"uint256\"},{\"name\":\"p\",\"type\":\"uint8\"},{\"name\":\"isSet\",\"type\":\"bool\"}],\"name\":\"gracePeriod\",\"type\":\"tuple\"},{\"components\":[{\"name\":\"i\",\"type\":\"uint256\"},{\"name\":\"p\",\"type\":\"uint8\"},{\"name\":\"isSet\",\"type\":\"bool\"}],\"name\":\"delinquencyPeriod\",\"type\":\"tuple\"},{\"name\":\"lifeCap\",\"type\":\"int256\"},{\"name\":\"lifeFloor\",\"type\":\"int256\"},{\"name\":\"periodCap\",\"type\":\"int256\"},{\"name\":\"periodFloor\",\"type\":\"int256\"}],\"name\":\"terms\",\"type\":\"tuple\"}],\"name\":\"computeEventTimeForEvent\",\"outputs\":[{\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"pure\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"components\":[{\"name\":\"scalingEffect\",\"type\":\"uint8\"},{\"name\":\"contractDealDate\",\"type\":\"uint256\"},{\"name\":\"statusDate\",\"type\":\"uint256\"},{\"name\":\"initialExchangeDate\",\"type\":\"uint256\"},{\"name\":\"maturityDate\",\"type\":\"uint256\"},{\"name\":\"terminationDate\",\"type\":\"uint256\"},{\"name\":\"purchaseDate\",\"type\":\"uint256\"},{\"name\":\"capitalizationEndDate\",\"type\":\"uint256\"},{\"name\":\"cycleAnchorDateOfInterestPayment\",\"type\":\"uint256\"},{\"name\":\"cycleAnchorDateOfRateReset\",\"type\":\"uint256\"},{\"name\":\"cycleAnchorDateOfScalingIndex\",\"type\":\"uint256\"},{\"name\":\"cycleAnchorDateOfFee\",\"type\":\"uint256\"},{\"name\":\"cycleAnchorDateOfPrincipalRedemption\",\"type\":\"uint256\"},{\"name\":\"nominalInterestRate\",\"type\":\"int256\"},{\"components\":[{\"name\":\"i\",\"type\":\"uint256\"},{\"name\":\"p\",\"type\":\"uint8\"},{\"name\":\"s\",\"type\":\"uint8\"},{\"name\":\"isSet\",\"type\":\"bool\"}],\"name\":\"cycleOfInterestPayment\",\"type\":\"tuple\"},{\"components\":[{\"name\":\"i\",\"type\":\"uint256\"},{\"name\":\"p\",\"type\":\"uint8\"},{\"name\":\"s\",\"type\":\"uint8\"},{\"name\":\"isSet\",\"type\":\"bool\"}],\"name\":\"cycleOfRateReset\",\"type\":\"tuple\"},{\"components\":[{\"name\":\"i\",\"type\":\"uint256\"},{\"name\":\"p\",\"type\":\"uint8\"},{\"name\":\"s\",\"type\":\"uint8\"},{\"name\":\"isSet\",\"type\":\"bool\"}],\"name\":\"cycleOfScalingIndex\",\"type\":\"tuple\"},{\"components\":[{\"name\":\"i\",\"type\":\"uint256\"},{\"name\":\"p\",\"type\":\"uint8\"},{\"name\":\"s\",\"type\":\"uint8\"},{\"name\":\"isSet\",\"type\":\"bool\"}],\"name\":\"cycleOfFee\",\"type\":\"tuple\"},{\"components\":[{\"name\":\"i\",\"type\":\"uint256\"},{\"name\":\"p\",\"type\":\"uint8\"},{\"name\":\"s\",\"type\":\"uint8\"},{\"name\":\"isSet\",\"type\":\"bool\"}],\"name\":\"cycleOfPrincipalRedemption\",\"type\":\"tuple\"},{\"components\":[{\"name\":\"i\",\"type\":\"uint256\"},{\"name\":\"p\",\"type\":\"uint8\"},{\"name\":\"isSet\",\"type\":\"bool\"}],\"name\":\"gracePeriod\",\"type\":\"tuple\"},{\"components\":[{\"name\":\"i\",\"type\":\"uint256\"},{\"name\":\"p\",\"type\":\"uint8\"},{\"name\":\"isSet\",\"type\":\"bool\"}],\"name\":\"delinquencyPeriod\",\"type\":\"tuple\"}],\"name\":\"terms\",\"type\":\"tuple\"},{\"name\":\"segmentStart\",\"type\":\"uint256\"},{\"name\":\"segmentEnd\",\"type\":\"uint256\"}],\"name\":\"computeNonCyclicScheduleSegment\",\"outputs\":[{\"name\":\"\",\"type\":\"bytes32[64]\"}],\"payable\":false,\"stateMutability\":\"pure\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"name\":\"_event\",\"type\":\"bytes32\"}],\"name\":\"decodeEvent\",\"outputs\":[{\"name\":\"\",\"type\":\"uint8\"},{\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"pure\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"name\":\"eventType\",\"type\":\"uint8\"}],\"name\":\"getEpochOffset\",\"outputs\":[{\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"pure\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"components\":[{\"name\":\"calendar\",\"type\":\"uint8\"},{\"name\":\"contractRole\",\"type\":\"uint8\"},{\"name\":\"dayCountConvention\",\"type\":\"uint8\"},{\"name\":\"businessDayConvention\",\"type\":\"uint8\"},{\"name\":\"endOfMonthConvention\",\"type\":\"uint8\"},{\"name\":\"scalingEffect\",\"type\":\"uint8\"},{\"name\":\"penaltyType\",\"type\":\"uint8\"},{\"name\":\"feeBasis\",\"type\":\"uint8\"},{\"name\":\"creditEventTypeCovered\",\"type\":\"uint8\"},{\"components\":[{\"name\":\"object\",\"type\":\"bytes32\"},{\"name\":\"contractReferenceType\",\"type\":\"uint8\"},{\"name\":\"contractReferenceRole\",\"type\":\"uint8\"}],\"name\":\"contractReferences\",\"type\":\"tuple[2]\"},{\"name\":\"currency\",\"type\":\"address\"},{\"name\":\"marketObjectCodeRateReset\",\"type\":\"bytes32\"},{\"name\":\"statusDate\",\"type\":\"uint256\"},{\"name\":\"maturityDate\",\"type\":\"uint256\"},{\"name\":\"notionalPrincipal\",\"type\":\"int256\"},{\"name\":\"nominalInterestRate\",\"type\":\"int256\"},{\"name\":\"feeAccrued\",\"type\":\"int256\"},{\"name\":\"accruedInterest\",\"type\":\"int256\"},{\"name\":\"rateMultiplier\",\"type\":\"int256\"},{\"name\":\"rateSpread\",\"type\":\"int256\"},{\"name\":\"feeRate\",\"type\":\"int256\"},{\"name\":\"nextResetRate\",\"type\":\"int256\"},{\"name\":\"penaltyRate\",\"type\":\"int256\"},{\"name\":\"premiumDiscountAtIED\",\"type\":\"int256\"},{\"name\":\"priceAtPurchaseDate\",\"type\":\"int256\"},{\"name\":\"nextPrincipalRedemptionPayment\",\"type\":\"int256\"},{\"name\":\"coverageOfCreditEnhancement\",\"type\":\"int256\"},{\"components\":[{\"name\":\"i\",\"type\":\"uint256\"},{\"name\":\"p\",\"type\":\"uint8\"},{\"name\":\"isSet\",\"type\":\"bool\"}],\"name\":\"gracePeriod\",\"type\":\"tuple\"},{\"components\":[{\"name\":\"i\",\"type\":\"uint256\"},{\"name\":\"p\",\"type\":\"uint8\"},{\"name\":\"isSet\",\"type\":\"bool\"}],\"name\":\"delinquencyPeriod\",\"type\":\"tuple\"},{\"name\":\"lifeCap\",\"type\":\"int256\"},{\"name\":\"lifeFloor\",\"type\":\"int256\"},{\"name\":\"periodCap\",\"type\":\"int256\"},{\"name\":\"periodFloor\",\"type\":\"int256\"}],\"name\":\"terms\",\"type\":\"tuple\"},{\"components\":[{\"name\":\"contractPerformance\",\"type\":\"uint8\"},{\"name\":\"statusDate\",\"type\":\"uint256\"},{\"name\":\"nonPerformingDate\",\"type\":\"uint256\"},{\"name\":\"maturityDate\",\"type\":\"uint256\"},{\"name\":\"executionDate\",\"type\":\"uint256\"},{\"name\":\"notionalPrincipal\",\"type\":\"int256\"},{\"name\":\"accruedInterest\",\"type\":\"int256\"},{\"name\":\"feeAccrued\",\"type\":\"int256\"},{\"name\":\"nominalInterestRate\",\"type\":\"int256\"},{\"name\":\"interestScalingMultiplier\",\"type\":\"int256\"},{\"name\":\"notionalScalingMultiplier\",\"type\":\"int256\"},{\"name\":\"nextPrincipalRedemptionPayment\",\"type\":\"int256\"},{\"name\":\"executionAmount\",\"type\":\"int256\"}],\"name\":\"state\",\"type\":\"tuple\"},{\"name\":\"_event\",\"type\":\"bytes32\"},{\"name\":\"externalData\",\"type\":\"bytes32\"}],\"name\":\"computeStateForEvent\",\"outputs\":[{\"components\":[{\"name\":\"contractPerformance\",\"type\":\"uint8\"},{\"name\":\"statusDate\",\"type\":\"uint256\"},{\"name\":\"nonPerformingDate\",\"type\":\"uint256\"},{\"name\":\"maturityDate\",\"type\":\"uint256\"},{\"name\":\"executionDate\",\"type\":\"uint256\"},{\"name\":\"notionalPrincipal\",\"type\":\"int256\"},{\"name\":\"accruedInterest\",\"type\":\"int256\"},{\"name\":\"feeAccrued\",\"type\":\"int256\"},{\"name\":\"nominalInterestRate\",\"type\":\"int256\"},{\"name\":\"interestScalingMultiplier\",\"type\":\"int256\"},{\"name\":\"notionalScalingMultiplier\",\"type\":\"int256\"},{\"name\":\"nextPrincipalRedemptionPayment\",\"type\":\"int256\"},{\"name\":\"executionAmount\",\"type\":\"int256\"}],\"name\":\"\",\"type\":\"tuple\"}],\"payable\":false,\"stateMutability\":\"pure\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"PRECISION\",\"outputs\":[{\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"components\":[{\"name\":\"calendar\",\"type\":\"uint8\"},{\"name\":\"contractRole\",\"type\":\"uint8\"},{\"name\":\"dayCountConvention\",\"type\":\"uint8\"},{\"name\":\"businessDayConvention\",\"type\":\"uint8\"},{\"name\":\"endOfMonthConvention\",\"type\":\"uint8\"},{\"name\":\"scalingEffect\",\"type\":\"uint8\"},{\"name\":\"penaltyType\",\"type\":\"uint8\"},{\"name\":\"feeBasis\",\"type\":\"uint8\"},{\"name\":\"creditEventTypeCovered\",\"type\":\"uint8\"},{\"components\":[{\"name\":\"object\",\"type\":\"bytes32\"},{\"name\":\"contractReferenceType\",\"type\":\"uint8\"},{\"name\":\"contractReferenceRole\",\"type\":\"uint8\"}],\"name\":\"contractReferences\",\"type\":\"tuple[2]\"},{\"name\":\"currency\",\"type\":\"address\"},{\"name\":\"marketObjectCodeRateReset\",\"type\":\"bytes32\"},{\"name\":\"statusDate\",\"type\":\"uint256\"},{\"name\":\"maturityDate\",\"type\":\"uint256\"},{\"name\":\"notionalPrincipal\",\"type\":\"int256\"},{\"name\":\"nominalInterestRate\",\"type\":\"int256\"},{\"name\":\"feeAccrued\",\"type\":\"int256\"},{\"name\":\"accruedInterest\",\"type\":\"int256\"},{\"name\":\"rateMultiplier\",\"type\":\"int256\"},{\"name\":\"rateSpread\",\"type\":\"int256\"},{\"name\":\"feeRate\",\"type\":\"int256\"},{\"name\":\"nextResetRate\",\"type\":\"int256\"},{\"name\":\"penaltyRate\",\"type\":\"int256\"},{\"name\":\"premiumDiscountAtIED\",\"type\":\"int256\"},{\"name\":\"priceAtPurchaseDate\",\"type\":\"int256\"},{\"name\":\"nextPrincipalRedemptionPayment\",\"type\":\"int256\"},{\"name\":\"coverageOfCreditEnhancement\",\"type\":\"int256\"},{\"components\":[{\"name\":\"i\",\"type\":\"uint256\"},{\"name\":\"p\",\"type\":\"uint8\"},{\"name\":\"isSet\",\"type\":\"bool\"}],\"name\":\"gracePeriod\",\"type\":\"tuple\"},{\"components\":[{\"name\":\"i\",\"type\":\"uint256\"},{\"name\":\"p\",\"type\":\"uint8\"},{\"name\":\"isSet\",\"type\":\"bool\"}],\"name\":\"delinquencyPeriod\",\"type\":\"tuple\"},{\"name\":\"lifeCap\",\"type\":\"int256\"},{\"name\":\"lifeFloor\",\"type\":\"int256\"},{\"name\":\"periodCap\",\"type\":\"int256\"},{\"name\":\"periodFloor\",\"type\":\"int256\"}],\"name\":\"terms\",\"type\":\"tuple\"}],\"name\":\"computeInitialState\",\"outputs\":[{\"components\":[{\"name\":\"contractPerformance\",\"type\":\"uint8\"},{\"name\":\"statusDate\",\"type\":\"uint256\"},{\"name\":\"nonPerformingDate\",\"type\":\"uint256\"},{\"name\":\"maturityDate\",\"type\":\"uint256\"},{\"name\":\"executionDate\",\"type\":\"uint256\"},{\"name\":\"notionalPrincipal\",\"type\":\"int256\"},{\"name\":\"accruedInterest\",\"type\":\"int256\"},{\"name\":\"feeAccrued\",\"type\":\"int256\"},{\"name\":\"nominalInterestRate\",\"type\":\"int256\"},{\"name\":\"interestScalingMultiplier\",\"type\":\"int256\"},{\"name\":\"notionalScalingMultiplier\",\"type\":\"int256\"},{\"name\":\"nextPrincipalRedemptionPayment\",\"type\":\"int256\"},{\"name\":\"executionAmount\",\"type\":\"int256\"}],\"name\":\"\",\"type\":\"tuple\"}],\"payable\":false,\"stateMutability\":\"pure\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"name\":\"eventType\",\"type\":\"uint8\"},{\"name\":\"scheduleTime\",\"type\":\"uint256\"}],\"name\":\"encodeEvent\",\"outputs\":[{\"name\":\"\",\"type\":\"bytes32\"}],\"payable\":false,\"stateMutability\":\"pure\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"name\":\"_event\",\"type\":\"bytes32\"},{\"components\":[{\"name\":\"calendar\",\"type\":\"uint8\"},{\"name\":\"contractRole\",\"type\":\"uint8\"},{\"name\":\"dayCountConvention\",\"type\":\"uint8\"},{\"name\":\"businessDayConvention\",\"type\":\"uint8\"},{\"name\":\"endOfMonthConvention\",\"type\":\"uint8\"},{\"name\":\"scalingEffect\",\"type\":\"uint8\"},{\"name\":\"penaltyType\",\"type\":\"uint8\"},{\"name\":\"feeBasis\",\"type\":\"uint8\"},{\"name\":\"creditEventTypeCovered\",\"type\":\"uint8\"},{\"components\":[{\"name\":\"object\",\"type\":\"bytes32\"},{\"name\":\"contractReferenceType\",\"type\":\"uint8\"},{\"name\":\"contractReferenceRole\",\"type\":\"uint8\"}],\"name\":\"contractReferences\",\"type\":\"tuple[2]\"},{\"name\":\"currency\",\"type\":\"address\"},{\"name\":\"marketObjectCodeRateReset\",\"type\":\"bytes32\"},{\"name\":\"statusDate\",\"type\":\"uint256\"},{\"name\":\"maturityDate\",\"type\":\"uint256\"},{\"name\":\"notionalPrincipal\",\"type\":\"int256\"},{\"name\":\"nominalInterestRate\",\"type\":\"int256\"},{\"name\":\"feeAccrued\",\"type\":\"int256\"},{\"name\":\"accruedInterest\",\"type\":\"int256\"},{\"name\":\"rateMultiplier\",\"type\":\"int256\"},{\"name\":\"rateSpread\",\"type\":\"int256\"},{\"name\":\"feeRate\",\"type\":\"int256\"},{\"name\":\"nextResetRate\",\"type\":\"int256\"},{\"name\":\"penaltyRate\",\"type\":\"int256\"},{\"name\":\"premiumDiscountAtIED\",\"type\":\"int256\"},{\"name\":\"priceAtPurchaseDate\",\"type\":\"int256\"},{\"name\":\"nextPrincipalRedemptionPayment\",\"type\":\"int256\"},{\"name\":\"coverageOfCreditEnhancement\",\"type\":\"int256\"},{\"components\":[{\"name\":\"i\",\"type\":\"uint256\"},{\"name\":\"p\",\"type\":\"uint8\"},{\"name\":\"isSet\",\"type\":\"bool\"}],\"name\":\"gracePeriod\",\"type\":\"tuple\"},{\"components\":[{\"name\":\"i\",\"type\":\"uint256\"},{\"name\":\"p\",\"type\":\"uint8\"},{\"name\":\"isSet\",\"type\":\"bool\"}],\"name\":\"delinquencyPeriod\",\"type\":\"tuple\"},{\"name\":\"lifeCap\",\"type\":\"int256\"},{\"name\":\"lifeFloor\",\"type\":\"int256\"},{\"name\":\"periodCap\",\"type\":\"int256\"},{\"name\":\"periodFloor\",\"type\":\"int256\"}],\"name\":\"terms\",\"type\":\"tuple\"},{\"components\":[{\"name\":\"contractPerformance\",\"type\":\"uint8\"},{\"name\":\"statusDate\",\"type\":\"uint256\"},{\"name\":\"nonPerformingDate\",\"type\":\"uint256\"},{\"name\":\"maturityDate\",\"type\":\"uint256\"},{\"name\":\"executionDate\",\"type\":\"uint256\"},{\"name\":\"notionalPrincipal\",\"type\":\"int256\"},{\"name\":\"accruedInterest\",\"type\":\"int256\"},{\"name\":\"feeAccrued\",\"type\":\"int256\"},{\"name\":\"nominalInterestRate\",\"type\":\"int256\"},{\"name\":\"interestScalingMultiplier\",\"type\":\"int256\"},{\"name\":\"notionalScalingMultiplier\",\"type\":\"int256\"},{\"name\":\"nextPrincipalRedemptionPayment\",\"type\":\"int256\"},{\"name\":\"executionAmount\",\"type\":\"int256\"}],\"name\":\"state\",\"type\":\"tuple\"},{\"name\":\"hasUnderlying\",\"type\":\"bool\"},{\"components\":[{\"name\":\"contractPerformance\",\"type\":\"uint8\"},{\"name\":\"statusDate\",\"type\":\"uint256\"},{\"name\":\"nonPerformingDate\",\"type\":\"uint256\"},{\"name\":\"maturityDate\",\"type\":\"uint256\"},{\"name\":\"executionDate\",\"type\":\"uint256\"},{\"name\":\"notionalPrincipal\",\"type\":\"int256\"},{\"name\":\"accruedInterest\",\"type\":\"int256\"},{\"name\":\"feeAccrued\",\"type\":\"int256\"},{\"name\":\"nominalInterestRate\",\"type\":\"int256\"},{\"name\":\"interestScalingMultiplier\",\"type\":\"int256\"},{\"name\":\"notionalScalingMultiplier\",\"type\":\"int256\"},{\"name\":\"nextPrincipalRedemptionPayment\",\"type\":\"int256\"},{\"name\":\"executionAmount\",\"type\":\"int256\"}],\"name\":\"underlyingState\",\"type\":\"tuple\"}],\"name\":\"isEventScheduled\",\"outputs\":[{\"name\":\"\",\"type\":\"bool\"}],\"payable\":false,\"stateMutability\":\"pure\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"components\":[{\"name\":\"scalingEffect\",\"type\":\"uint8\"},{\"name\":\"contractDealDate\",\"type\":\"uint256\"},{\"name\":\"statusDate\",\"type\":\"uint256\"},{\"name\":\"initialExchangeDate\",\"type\":\"uint256\"},{\"name\":\"maturityDate\",\"type\":\"uint256\"},{\"name\":\"terminationDate\",\"type\":\"uint256\"},{\"name\":\"purchaseDate\",\"type\":\"uint256\"},{\"name\":\"capitalizationEndDate\",\"type\":\"uint256\"},{\"name\":\"cycleAnchorDateOfInterestPayment\",\"type\":\"uint256\"},{\"name\":\"cycleAnchorDateOfRateReset\",\"type\":\"uint256\"},{\"name\":\"cycleAnchorDateOfScalingIndex\",\"type\":\"uint256\"},{\"name\":\"cycleAnchorDateOfFee\",\"type\":\"uint256\"},{\"name\":\"cycleAnchorDateOfPrincipalRedemption\",\"type\":\"uint256\"},{\"name\":\"nominalInterestRate\",\"type\":\"int256\"},{\"components\":[{\"name\":\"i\",\"type\":\"uint256\"},{\"name\":\"p\",\"type\":\"uint8\"},{\"name\":\"s\",\"type\":\"uint8\"},{\"name\":\"isSet\",\"type\":\"bool\"}],\"name\":\"cycleOfInterestPayment\",\"type\":\"tuple\"},{\"components\":[{\"name\":\"i\",\"type\":\"uint256\"},{\"name\":\"p\",\"type\":\"uint8\"},{\"name\":\"s\",\"type\":\"uint8\"},{\"name\":\"isSet\",\"type\":\"bool\"}],\"name\":\"cycleOfRateReset\",\"type\":\"tuple\"},{\"components\":[{\"name\":\"i\",\"type\":\"uint256\"},{\"name\":\"p\",\"type\":\"uint8\"},{\"name\":\"s\",\"type\":\"uint8\"},{\"name\":\"isSet\",\"type\":\"bool\"}],\"name\":\"cycleOfScalingIndex\",\"type\":\"tuple\"},{\"components\":[{\"name\":\"i\",\"type\":\"uint256\"},{\"name\":\"p\",\"type\":\"uint8\"},{\"name\":\"s\",\"type\":\"uint8\"},{\"name\":\"isSet\",\"type\":\"bool\"}],\"name\":\"cycleOfFee\",\"type\":\"tuple\"},{\"components\":[{\"name\":\"i\",\"type\":\"uint256\"},{\"name\":\"p\",\"type\":\"uint8\"},{\"name\":\"s\",\"type\":\"uint8\"},{\"name\":\"isSet\",\"type\":\"bool\"}],\"name\":\"cycleOfPrincipalRedemption\",\"type\":\"tuple\"},{\"components\":[{\"name\":\"i\",\"type\":\"uint256\"},{\"name\":\"p\",\"type\":\"uint8\"},{\"name\":\"isSet\",\"type\":\"bool\"}],\"name\":\"gracePeriod\",\"type\":\"tuple\"},{\"components\":[{\"name\":\"i\",\"type\":\"uint256\"},{\"name\":\"p\",\"type\":\"uint8\"},{\"name\":\"isSet\",\"type\":\"bool\"}],\"name\":\"delinquencyPeriod\",\"type\":\"tuple\"}],\"name\":\"terms\",\"type\":\"tuple\"},{\"name\":\"segmentStart\",\"type\":\"uint256\"},{\"name\":\"segmentEnd\",\"type\":\"uint256\"},{\"name\":\"eventType\",\"type\":\"uint8\"}],\"name\":\"computeCyclicScheduleSegment\",\"outputs\":[{\"name\":\"\",\"type\":\"bytes32[64]\"}],\"payable\":false,\"stateMutability\":\"pure\",\"type\":\"function\"}],\"devdoc\":{\"details\":\"all numbers except unix timestamp are represented as multiple of 10 ** 18 inputs have to be multiplied by 10 ** 18, outputs have to divided by 10 ** 18\",\"methods\":{\"adjustEndOfMonthConvention(uint8,uint256,(uint256,uint8,uint8,bool))\":{\"details\":\"The following is considered to dertermine if schedule dates are shifted to the end of month: - The convention SD (same day) means not adjusting, EM (end of month) means adjusting - Dates are only shifted if the schedule start date is an end-of-month date - Dates are only shifted if the schedule cycle is based on an \\\"M\\\" period unit or multiple thereof\",\"params\":{\"cycle\":\"the cycle struct\",\"eomc\":\"the end of month convention to adjust\",\"startTime\":\"timestemp of the cycle start\"},\"return\":\"the adjusted end of month convention\"},\"computeCyclicScheduleSegment((uint8,uint256,uint256,uint256,uint256,uint256,uint256,uint256,uint256,uint256,uint256,uint256,uint256,int256,(uint256,uint8,uint8,bool),(uint256,uint8,uint8,bool),(uint256,uint8,uint8,bool),(uint256,uint8,uint8,bool),(uint256,uint8,uint8,bool),(uint256,uint8,bool),(uint256,uint8,bool)),uint256,uint256,uint8)\":{\"params\":{\"eventType\":\"eventType of the cyclic schedule\",\"segmentEnd\":\"end timestamp of the segement\",\"segmentStart\":\"start timestamp of the segment\",\"terms\":\"terms of the contract\"},\"return\":\"event schedule segment\"},\"computeInitialState((uint8,uint8,uint8,uint8,uint8,uint8,uint8,uint8,uint8,(bytes32,uint8,uint8)[2],address,bytes32,uint256,uint256,int256,int256,int256,int256,int256,int256,int256,int256,int256,int256,int256,int256,int256,(uint256,uint8,bool),(uint256,uint8,bool),int256,int256,int256,int256))\":{\"details\":\"see initStateSpace()\",\"params\":{\"terms\":\"terms of the contract\"},\"return\":\"initial contract state\"},\"computeNonCyclicScheduleSegment((uint8,uint256,uint256,uint256,uint256,uint256,uint256,uint256,uint256,uint256,uint256,uint256,uint256,int256,(uint256,uint8,uint8,bool),(uint256,uint8,uint8,bool),(uint256,uint8,uint8,bool),(uint256,uint8,uint8,bool),(uint256,uint8,uint8,bool),(uint256,uint8,bool),(uint256,uint8,bool)),uint256,uint256)\":{\"params\":{\"segmentEnd\":\"end timestamp of the segement\",\"segmentStart\":\"start timestamp of the segment\",\"terms\":\"terms of the contract\"},\"return\":\"event schedule segment\"},\"computePayoffForEvent((uint8,uint8,uint8,uint8,uint8,uint8,uint8,uint8,uint8,(bytes32,uint8,uint8)[2],address,bytes32,uint256,uint256,int256,int256,int256,int256,int256,int256,int256,int256,int256,int256,int256,int256,int256,(uint256,uint8,bool),(uint256,uint8,bool),int256,int256,int256,int256),(uint8,uint256,uint256,uint256,uint256,int256,int256,int256,int256,int256,int256,int256,int256),bytes32,bytes32)\":{\"params\":{\"_event\":\"prototype event to be evaluated and applied to the contract state\",\"externalData\":\"external data needed for POF evaluation\",\"state\":\"current state of the contract\",\"terms\":\"terms of the contract\"},\"return\":\"the new contract state and the evaluated event\"},\"computeStateForEvent((uint8,uint8,uint8,uint8,uint8,uint8,uint8,uint8,uint8,(bytes32,uint8,uint8)[2],address,bytes32,uint256,uint256,int256,int256,int256,int256,int256,int256,int256,int256,int256,int256,int256,int256,int256,(uint256,uint8,bool),(uint256,uint8,bool),int256,int256,int256,int256),(uint8,uint256,uint256,uint256,uint256,int256,int256,int256,int256,int256,int256,int256,int256),bytes32,bytes32)\":{\"params\":{\"_event\":\"prototype event to be evaluated and applied to the contract state\",\"externalData\":\"external data needed for POF evaluation\",\"state\":\"current state of the contract\",\"terms\":\"terms of the contract\"},\"return\":\"the new contract state and the evaluated event\"}},\"title\":\"the stateless component for a CEG contract implements the STF and POF of the Actus standard for a CEG contract\"},\"userdoc\":{\"methods\":{\"adjustEndOfMonthConvention(uint8,uint256,(uint256,uint8,uint8,bool))\":{\"notice\":\"This function makes an adjustment on the end of month convention.\"},\"computeCyclicScheduleSegment((uint8,uint256,uint256,uint256,uint256,uint256,uint256,uint256,uint256,uint256,uint256,uint256,uint256,int256,(uint256,uint8,uint8,bool),(uint256,uint8,uint8,bool),(uint256,uint8,uint8,bool),(uint256,uint8,uint8,bool),(uint256,uint8,uint8,bool),(uint256,uint8,bool),(uint256,uint8,bool)),uint256,uint256,uint8)\":{\"notice\":\"computes a schedule segment of cyclic contract events based on the contract terms and the specified period\"},\"computeInitialState((uint8,uint8,uint8,uint8,uint8,uint8,uint8,uint8,uint8,(bytes32,uint8,uint8)[2],address,bytes32,uint256,uint256,int256,int256,int256,int256,int256,int256,int256,int256,int256,int256,int256,int256,int256,(uint256,uint8,bool),(uint256,uint8,bool),int256,int256,int256,int256))\":{\"notice\":\"initialize contract state space based on the contract terms TODO: - implement annuity calculator\"},\"computeNonCyclicScheduleSegment((uint8,uint256,uint256,uint256,uint256,uint256,uint256,uint256,uint256,uint256,uint256,uint256,uint256,int256,(uint256,uint8,uint8,bool),(uint256,uint8,uint8,bool),(uint256,uint8,uint8,bool),(uint256,uint8,uint8,bool),(uint256,uint8,uint8,bool),(uint256,uint8,bool),(uint256,uint8,bool)),uint256,uint256)\":{\"notice\":\"computes a schedule segment of non-cyclic contract events based on the contract terms and the specified period\"},\"computePayoffForEvent((uint8,uint8,uint8,uint8,uint8,uint8,uint8,uint8,uint8,(bytes32,uint8,uint8)[2],address,bytes32,uint256,uint256,int256,int256,int256,int256,int256,int256,int256,int256,int256,int256,int256,int256,int256,(uint256,uint8,bool),(uint256,uint8,bool),int256,int256,int256,int256),(uint8,uint256,uint256,uint256,uint256,int256,int256,int256,int256,int256,int256,int256,int256),bytes32,bytes32)\":{\"notice\":\"applys a prototype event to the current state of a contract and returns the contrat event and the new contract state\"},\"computeStateForEvent((uint8,uint8,uint8,uint8,uint8,uint8,uint8,uint8,uint8,(bytes32,uint8,uint8)[2],address,bytes32,uint256,uint256,int256,int256,int256,int256,int256,int256,int256,int256,int256,int256,int256,int256,int256,(uint256,uint8,bool),(uint256,uint8,bool),int256,int256,int256,int256),(uint8,uint256,uint256,uint256,uint256,int256,int256,int256,int256,int256,int256,int256,int256),bytes32,bytes32)\":{\"notice\":\"applys a prototype event to the current state of a contract and returns the contrat event and the new contract state\"}}}},\"settings\":{\"compilationTarget\":{\"/Users/johannes/Documents/dev/actus-protocol/actus-solidity/contracts/Engines/CEGEngine.sol\":\"CEGEngine\"},\"evmVersion\":\"byzantium\",\"libraries\":{},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[]},\"sources\":{\"/Users/johannes/Documents/dev/actus-protocol/actus-solidity/contracts/Core/ACTUSTypes.sol\":{\"keccak256\":\"0x11be021d15e3dfca8bbc35d5cfa7d878104b3bb70040cb02118eb708b340f9ca\",\"urls\":[\"bzzr://2f9f288bd94934728265441b875e1e68ac70e9412ff62bccf1ea754b83afbe22\"]},\"/Users/johannes/Documents/dev/actus-protocol/actus-solidity/contracts/Core/Conventions/BusinessDayConvention.sol\":{\"keccak256\":\"0x292ea9d1eea093d8de5f418f8d86679b263c97d7b325155053e9d0135369e857\",\"urls\":[\"bzzr://66bf21f1ea32b4454f1beb61ed40f332a9dc942b9d726759effeb52648904717\"]},\"/Users/johannes/Documents/dev/actus-protocol/actus-solidity/contracts/Core/Conventions/ContractDefaultConvention.sol\":{\"keccak256\":\"0xfdb8fd78d35fa25cc7db727936fdd5c3d46a1d30c20b08037418ec681bd91e94\",\"urls\":[\"bzzr://9291b7185b7d046fb09425bcff71544fae6457b822fe416420841b381b994e5a\"]},\"/Users/johannes/Documents/dev/actus-protocol/actus-solidity/contracts/Core/Conventions/ContractRoleConvention.sol\":{\"keccak256\":\"0xbba83f32c925c72d2c464e23fff587b8f321d979dcd6537a9ac81e7565ee48d8\",\"urls\":[\"bzzr://970113b515fb120fea78f12704e5890a6654ca81bb46b65ddf0c0ac305c35ea5\"]},\"/Users/johannes/Documents/dev/actus-protocol/actus-solidity/contracts/Core/Conventions/DayCountConvention.sol\":{\"keccak256\":\"0x47e9a80579bfe220c358f89486b1a4645ced1fdc81045782b4ba7c6279e410da\",\"urls\":[\"bzzr://f7a26c34c302ab934ab1a5aba5302409f07ee6933ba303b4b10f4969b7cb3659\"]},\"/Users/johannes/Documents/dev/actus-protocol/actus-solidity/contracts/Core/Conventions/EndOfMonthConvention.sol\":{\"keccak256\":\"0xfe3fa9685de0e079c4e0194a5fc58456c8cc591cc0d8c6480c915bcebe7d8474\",\"urls\":[\"bzzr://e7a55d6232e2fd949acdc8669d693748ad8c6fc89618be4a017ddbacab0c25ad\"]},\"/Users/johannes/Documents/dev/actus-protocol/actus-solidity/contracts/Core/Core.sol\":{\"keccak256\":\"0x06cb3186a6af3fba28f23a90bcfadc26deb42f2fdffe319682af888cbedefd6e\",\"urls\":[\"bzzr://30f98614432e4d3ca4d7a149eb5eba9c3d567eae23be2626b19017f297adad97\"]},\"/Users/johannes/Documents/dev/actus-protocol/actus-solidity/contracts/Core/Schedule.sol\":{\"keccak256\":\"0x4b5debf0fb883ef3fbac4e9e068ac81562ed766afd8d2e7bf40c21f36d450fb9\",\"urls\":[\"bzzr://1a52592b6932363e977d077056a61093f39495802fe2ce0dbe9bad5cbca3dae5\"]},\"/Users/johannes/Documents/dev/actus-protocol/actus-solidity/contracts/Core/SignedMath.sol\":{\"keccak256\":\"0x087ce99293084f1440d9005e9888bd12aff770f72ee0ff977adae1255ce899e6\",\"urls\":[\"bzzr://682c9a17df08c3c0e121abaf5b55f15752c0543fcbb45cdcaa7ddf545e688b30\"]},\"/Users/johannes/Documents/dev/actus-protocol/actus-solidity/contracts/Core/Utils.sol\":{\"keccak256\":\"0x6ddd0bbd9233a3efbc06787287a1d657a7e29dc63b18d4384002e28b6693fefc\",\"urls\":[\"bzzr://2dc3d46069ce1dcc8d49f774ff922ae0394ac3ee144a403015fbce3a26952a1d\"]},\"/Users/johannes/Documents/dev/actus-protocol/actus-solidity/contracts/Engines/BaseEngine.sol\":{\"keccak256\":\"0x1058ca2e922cfbb0a0089f0ecb27831d2853a9d9e58d7260753ba838f488a72b\",\"urls\":[\"bzzr://7a800a9ee347954be71b4f41d7d1f7fb03d961222df88d465662bac3dac637ef\"]},\"/Users/johannes/Documents/dev/actus-protocol/actus-solidity/contracts/Engines/CEGEngine.sol\":{\"keccak256\":\"0x52233c555979c968a95f252a5e786d6c9e937691bdd0c7665d6f531581b0016f\",\"urls\":[\"bzzr://46fe3a88c74d8dec3fb13c1ae83b42f085a58d8e1e1ce926bd01b7f487970338\"]},\"/Users/johannes/Documents/dev/actus-protocol/actus-solidity/contracts/Engines/IEngine.sol\":{\"keccak256\":\"0x2867e1710b028298d1f33f62da76f902c4e0a4c9af7babe58abb257be2e74fb8\",\"urls\":[\"bzzr://0884526a7a4945399ed7e5ba1fc21539b7223caa2344ecd3d60cf210bdfcb747\"]},\"/Users/johannes/Documents/dev/actus-protocol/actus-solidity/contracts/Engines/POF.sol\":{\"keccak256\":\"0xfa3cfb375e8bfa8c8d5b333a3fd5e1daf20ad96ace1f8e00ea597b56145b41a4\",\"urls\":[\"bzzr://b7a2d0e36ee926085728c94105259bdb6d23cdbbeac22ce8ac57f672fa907a9f\"]},\"/Users/johannes/Documents/dev/actus-protocol/actus-solidity/contracts/Engines/STF.sol\":{\"keccak256\":\"0x3199eac4bab60f640a9497b98caee4dbd35acbb76556450852bcacf201723876\",\"urls\":[\"bzzr://f51e3350a09c8fb90c2db73dd6e6180833a6230705e62831e9492d07ae97ee09\"]},\"/Users/johannes/Documents/dev/actus-protocol/actus-solidity/contracts/external/BokkyPooBah/BokkyPooBahsDateTimeLibrary.sol\":{\"keccak256\":\"0x55ce115963ca5ee7a98b7b2e644e6decfbfdd70ada0b18e09a60344d9cdfe345\",\"urls\":[\"bzzr://9e24ebbec8dc7775ab45c4e41f9ac1958bb5710daf538df1f5cfd70b27650cb1\"]},\"openzeppelin-solidity/contracts/drafts/SignedSafeMath.sol\":{\"keccak256\":\"0xb4b45cd5475c318722ac0f8d7e2b9e77fee6f4f36374c1110fe615d50fbc0650\",\"urls\":[\"bzzr://a90fb457269c8a03ec5b811c71acef08a2751a4d2019b0661328610f9357dae7\"]},\"openzeppelin-solidity/contracts/math/SafeMath.sol\":{\"keccak256\":\"0x4ccf2d7b51873db1ccfd54ca2adae5eac3b184f9699911ed4490438419f1c690\",\"urls\":[\"bzzr://1604f5b6d6e916c154efd8c6720cda069e5ba32dfa0a9dedf2b42e5b02d07f89\"]}},\"version\":1}",
-  "bytecode": "0x608060405234801561001057600080fd5b50613503806100206000396000f3fe608060405234801561001057600080fd5b50600436106100d1576000357c01000000000000000000000000000000000000000000000000000000009004806390c7d5e81161008e57806390c7d5e814610186578063aaf5eb68146101a6578063ccd163a1146101ae578063e05a66e0146101c1578063f2c11be7146101d4578063fb8eb230146101f4576100d1565b8063179331f3146100d65780632295a776146100ff57806324e7d22f1461011f57806355464e37146101325780637254000314610152578063811322fb14610173575b600080fd5b6100e96100e436600461282d565b610207565b6040516100f69190613204565b60405180910390f35b61011261010d366004612992565b6102d9565b6040516100f691906131f6565b61011261012d366004612779565b6102f2565b6101456101403660046128c8565b61031e565b6040516100f691906131d9565b61016561016036600461275b565b6103c1565b6040516100f6929190613212565b61011261018136600461287a565b61040b565b610199610194366004612992565b6105d7565b6040516100f6919061336d565b6101126105eb565b6101996101bc366004612973565b6105f0565b6101126101cf366004612898565b61064b565b6101e76101e23660046127b4565b610670565b6040516100f691906131e8565b61014561020236600461290e565b6106de565b60008084600181111561021657fe5b141561029257610225836107f2565b61022e84610817565b14801561027d575060028260200151600581111561024857fe5b1480610263575060038260200151600581111561026157fe5b145b8061027d575060048260200151600581111561027b57fe5b145b1561028a575060006102d2565b5060016102d2565b60018460018111156102a057fe5b14156102ae575060016102d2565b60405160e560020a62461bcd0281526004016102c99061333d565b60405180910390fd5b9392505050565b60006102e785858585610832565b90505b949350505050565b6000806102fe846103c1565b9150506103148184606001518560000151610928565b9150505b92915050565b610326611eac565b61032e611eac565b60c0850151600090156103775761034a8660c001518686610a6b565b156103775761035e60108760c0015161064b565b8261ffff83166040811061036e57fe5b60200201526001015b61038686608001518686610a6b565b1515600114156103b85761039f600a876080015161064b565b8261ffff8316604081106103af57fe5b60200201526001015b50949350505050565b6000808060ff7f010000000000000000000000000000000000000000000000000000000000000085041660168111156103f657fe5b92505067ffffffffffffffff83169050915091565b6000600582601681111561041b57fe5b1415610429575060146105d2565b600f82601681111561043757fe5b1415610445575060196105d2565b600882601681111561045357fe5b14156104615750601e6105d2565b600782601681111561046f57fe5b141561047d575060286105d2565b600482601681111561048b57fe5b1415610499575060326105d2565b60028260168111156104a757fe5b14156104b55750603c6105d2565b60098260168111156104c357fe5b14156104d1575060506105d2565b60118260168111156104df57fe5b14156104ed5750605a6105d2565b60128260168111156104fb57fe5b1415610509575060646105d2565b601382601681111561051757fe5b14156105255750606e6105d2565b600682601681111561053357fe5b1415610541575060786105d2565b601082601681111561054f57fe5b141561055d575060826105d2565b601582601681111561056b57fe5b14156105795750608c6105d2565b601482601681111561058757fe5b1415610595575060966105d2565b600a8260168111156105a357fe5b14156105b1575060a06105d2565b60008260168111156105bf57fe5b14156105ce57506103b66105d2565b5060005b919050565b6105df611ecc565b6102e785858585610a93565b601281565b6105f8611ecc565b610600611ecc565b600081526101808301516020808301919091526101a084015160608301526101c08401519084015161063190610b87565b60000b0260a0820152610200929092015160e08301525090565b60008160f884601681111561065c57fe5b60ff166001029060020a0217905092915050565b600080600061067e886103c1565b9150915084156106ce57600482601681111561069657fe5b14806106ad5750600a8260168111156106ab57fe5b145b80156106be57506000846101800151135b156106ce576000925050506106d5565b6001925050505b95945050505050565b6106e6611eac565b6106ee611eac565b60048360168111156106fc57fe5b14156102e7576102208601516060015160009015156001148015610724575061016087015115155b156107e857610731611f35565b61074e88610160015189608001518a610220015160018b8b610c4e565b905060005b60108160ff1610156107e5578160ff82166010811061076e57fe5b6020020151151561077e576107e5565b61079c8260ff83166010811061079057fe5b60200201518989610a6b565b15156107a7576107dd565b6107c560048360ff8416601081106107bb57fe5b602002015161064b565b8484604081106107d157fe5b60200201526001909201915b600101610753565b50505b5095945050505050565b600080808061080662015180865b04610e0d565b919450925090506106d58383610ea5565b600080806108286201518085610800565b9695505050505050565b6000806000610840856103c1565b9092509050601682601681111561085357fe5b1415610864576000925050506102ea565b601082601681111561087257fe5b141561088d5761088487878387610f2b565b925050506102ea565b600482601681111561089b57fe5b14156108ad5761088487878387610f5e565b60038260168111156108bb57fe5b14156108cd5761088487878387611027565b60148260168111156108db57fe5b14156108ed5761088487878387611031565b600a8260168111156108fb57fe5b141561090d5761088487878387611027565b60405160e560020a62461bcd0281526004016102c9906132dd565b6000600183600881111561093857fe5b148061094f5750600383600881111561094d57fe5b145b156109655761095e8483611045565b90506102d2565b600283600881111561097357fe5b148061098a5750600483600881111561098857fe5b145b156109ce57600061099b8584611045565b90506109a6856110a1565b6109af826110a1565b14156109bc5790506102d2565b6109c685846110b2565b9150506102d2565b60058360088111156109dc57fe5b14806109f3575060078360088111156109f157fe5b145b15610a025761095e84836110b2565b6006836008811115610a1057fe5b1480610a2757506008836008811115610a2557fe5b145b15610a63576000610a3885846110b2565b9050610a43856110a1565b610a4c826110a1565b1415610a595790506102d2565b6109c68584611045565b509192915050565b60008383108015610a7c5750838210155b15610a89575060016102d2565b5060009392505050565b610a9b611ecc565b600080610aa7856103c1565b90925090506010826016811115610aba57fe5b1415610acc5761088487878387611100565b6004826016811115610ada57fe5b1415610aec576108848787838761113f565b6003826016811115610afa57fe5b1415610b0c576108848787838761115a565b6014826016811115610b1a57fe5b1415610b2c5761088487878387611206565b600a826016811115610b3a57fe5b1415610b4c5761088487878387611228565b6016826016811115610b5a57fe5b1415610b6c5761088487878387611243565b60405160e560020a62461bcd0281526004016102c99061335d565b600080826009811115610b9657fe5b1415610ba4575060016105d2565b6001826009811115610bb257fe5b1415610bc157506000196105d2565b6006826009811115610bcf57fe5b1415610bdd575060016105d2565b6007826009811115610beb57fe5b1415610bfa57506000196105d2565b6004826009811115610c0857fe5b1415610c16575060016105d2565b6005826009811115610c2457fe5b1415610c3357506000196105d2565b60405160e560020a62461bcd0281526004016102c9906132bd565b610c56611f35565b610c5e611f35565b60608601516000901515610cc857610c77898686610a6b565b15610c925788828260108110610c8957fe5b60200201526001015b610c9d888686610a6b565b15610cc05760018615151415610cc05787828260108110610cba57fe5b60200201525b509050610828565b8860005b89821015610d3557610cdf828888610a6b565b15610d2057600e8310610d075760405160e560020a62461bcd0281526004016102c99061322d565b81848460108110610d1457fe5b60200201526001909201915b600101610d2e898c83611324565b9150610ccc565b60018815151415610d6357610d4b8a8888610a6b565b15610d635789848460108110610d5d57fe5b60200201525b600083118015610d8d5750610d8d84600019850160108110610d8157fe5b60200201518888610a6b565b15610dfe57600089604001516001811115610da457fe5b148015610db15750600183115b8015610dbd5750818a14155b15610dfe57838360108110610dce57fe5b602002015184600019850160108110610de357fe5b6020020152838360108110610df457fe5b6020020160008152505b50919998505050505050505050565b60008080836226496581018262023ab1600483020590506004600362023ab18302010590910390600062164b09610fa0600185010205905060046105b58202058303601f019250600061098f84605002811515610e6657fe5b0590506000605061098f83020585039050600b820560301994909401606402929092018301996002600c90940290910392909201975095509350505050565b60008160011480610eb65750816003145b80610ec15750816005145b80610ecc5750816007145b80610ed75750816008145b80610ee2575081600a145b80610eed575081600c145b15610efa5750601f610318565b60028214610f0a5750601e610318565b610f1383611441565b610f1e57601c610f21565b601d5b60ff169392505050565b6000846103000151610f408660200151610b87565b8551610f4b90611466565b026000190260000b029050949350505050565b6000808560e001516001811115610f7157fe5b1415610fa157846102800151610f8a8660200151610b87565b8551610f9590611466565b0260000b0290506102ea565b61100f610ffe8560a00151610ff2886102800151610ff2610fcf8a602001518c606001518d6000015161148c565b610fe28a8d606001518e6000015161148c565b8c604001518d6101a001516114f6565b9063ffffffff6115ba16565b60e08601519063ffffffff61166516565b845161101a90611466565b60000b0295945050505050565b6000949350505050565b60e083015161018084015101949350505050565b6000600182600181111561105557fe5b141561109a57611064836116b0565b6006141561107e576110778360026116c3565b9050610318565b611087836116b0565b6007141561109a576110778360016116c3565b5090919050565b600080806107e86201518085610800565b600060018260018111156110c257fe5b141561109a576110d1836116b0565b600614156110e4576110778360016116d8565b6110ed836116b0565b6007141561109a576110778360026116d8565b611108611ecc565b846101c0015161111b8660200151610b87565b60000b0260a085015250506102809290920151610100820152602081019190915290565b611147611ecc565b5050600060e08301526020820152919050565b611162611ecc565b6020840183905260a08401516103408601516111839163ffffffff6115ba16565b6101808501526080840183905260008560e0015160018111156111a257fe5b14156111c9578461028001516111bb8660200151610b87565b60000b0260e08501526111fd565b6111f7610ffe8560a00151610ff2886102800151610ff2610fcf8a602001518c606001518d6000015161148c565b60e08501525b50919392505050565b61120e611ecc565b50506020820152600060a0820181905260e0820152919050565b611230611ecc565b5050600060a08301526020820152919050565b61124b611ecc565b60008460400151600014611263578460400151611276565b6112768487606001518860000151610928565b610360870151604001519091508390600090156112b157600061129e896103600151856116ed565b90508083116112af57600180895291505b505b8761038001516040015180156112c5575080155b156112f45760006112db896103800151856116ed565b90508083116112ed57600288526112f2565b600388525b505b60408701511515611318576113128689606001518a60000151610928565b60408801525b50949695505050505050565b600080808560200151600581111561133857fe5b14156113555761134e84848760000151026116c3565b90506102ea565b60018560200151600581111561136757fe5b14156113805761134e84848760000151600702026116c3565b60028560200151600581111561139257fe5b14156113a85761134e84848760000151026117f7565b6003856020015160058111156113ba57fe5b14156113d35761134e84848760000151600302026117f7565b6004856020015160058111156113e557fe5b14156113fe5761134e84848760000151600602026117f7565b60058560200151600581111561141057fe5b14156114265761134e848487600001510261186e565b60405160e560020a62461bcd0281526004016102c99061324d565b60006004820615801561145657506064820615155b8061031857505061019090061590565b6000600382600381111561147657fe5b1415611484575060006105d2565b506001919050565b6000600383600881111561149c57fe5b14806114b3575060048360088111156114b157fe5b145b806114c9575060078360088111156114c757fe5b145b806114df575060088360088111156114dd57fe5b145b156114eb5750826102d2565b6102ea848484610928565b60008484101561151b5760405160e560020a62461bcd0281526004016102c99061332d565b600083600681111561152957fe5b14156115395761134e8585611895565b600183600681111561154757fe5b14156115575761134e85856119b5565b600283600681111561156557fe5b14156115755761134e85856119e0565b600483600681111561158357fe5b14156115935761134e85856119ff565b60038360068111156115a157fe5b14156115b25761134e858584611ac0565b5060016102ea565b60008215806115c7575081155b156115d457506000610318565b826000191480156115e8575060ff60020a82145b156116085760405160e560020a62461bcd0281526004016102c99061331d565b82820282848281151561161757fe5b05146116385760405160e560020a62461bcd0281526004016102c99061331d565b670de0b6b3a764000081058015156103145760405160e560020a62461bcd0281526004016102c9906132fd565b600082820181831280159061167a5750838112155b8061168f575060008312801561168f57508381125b15156102d25760405160e560020a62461bcd0281526004016102c99061328d565b6007620151809091046003010660010190565b62015180810282018281101561031857600080fd5b62015180810282038281111561031857600080fd5b600080808460200151600581111561170157fe5b14156117155761095e8385600001516116c3565b60018460200151600581111561172757fe5b141561173e5761095e8385600001516007026116c3565b60028460200151600581111561175057fe5b14156117645761095e8385600001516117f7565b60038460200151600581111561177657fe5b141561178d5761095e8385600001516003026117f7565b60048460200151600581111561179f57fe5b14156117b65761095e8385600001516006026117f7565b6005846020015160058111156117c857fe5b14156117dc5761095e83856000015161186e565b60405160e560020a62461bcd0281526004016102c99061329d565b60008080806118096201518087610800565b600c9188016000190182810493909301955091066001019250905060006118308484610ea5565b90508082111561183e578091505b62015180870662015180611853868686611b96565b020194508685101561186457600080fd5b5050505092915050565b60008080806118806201518087610800565b91870194509250905060006118308484610ea5565b6000806118a184611bfc565b905060006118ae84611bfc565b905060006118bb86611c18565b6118c75761016d6118cb565b61016e5b61ffff169050818314156118fd576118f3816118e78888611c3a565b9063ffffffff611c5516565b9350505050610318565b600061190886611c18565b6119145761016d611918565b61016e5b61ffff1690506000611949836118e78a61194461193c8a600163ffffffff611d2716565b600180611d4f565b611c3a565b90506000611966836118e761196088600180611d4f565b8b611c3a565b90506119a861198c6001611980888a63ffffffff611d6916565b9063ffffffff611d6916565b61199c848463ffffffff61166516565b9063ffffffff61166516565b9998505050505050505050565b60006102d26101686118e7620151806119d4868863ffffffff611d6916565b9063ffffffff611d9416565b60006102d261016d6118e7620151806119d4868863ffffffff611d6916565b6000806000806000806000611a1389611dce565b975095509350611a2288611dce565b945092509050601f861415611a3657601e95505b82601f1415611a4457601e92505b6000611a56848863ffffffff611dec16565b90506000611a6a848863ffffffff611dec16565b90506000611a7e848863ffffffff611dec16565b9050611ab06101686118e78561199c611a9e87601e63ffffffff611e3716565b61199c8761016863ffffffff611e3716565b9c9b505050505050505050505050565b6000806000806000806000611ad48a611dce565b975095509350611ae389611dce565b945092509050611af28a6107f2565b861415611afe57601e95505b8789148015611b0d5750816002145b158015611b215750611b1e896107f2565b83145b15611b2b57601e92505b6000611b3d848863ffffffff611dec16565b90506000611b51848863ffffffff611dec16565b90506000611b65848863ffffffff611dec16565b9050611b856101686118e78561199c611a9e87601e63ffffffff611e3716565b9d9c50505050505050505050505050565b60006107b2841015611ba757600080fd5b506225bad61960046064600c600d1986018190059687016113248101929092056003028390056112c09092016105b502929092059093016001199582029094039490940161016f029390930591909101030190565b60008080611c0d6201518085610800565b509095945050505050565b6000808080611c2a6201518086610800565b919450925090506106d583611441565b600081831115611c4957600080fd5b50620151809190030490565b6000811515611c795760405160e560020a62461bcd0281526004016102c99061325d565b821515611c8857506000610318565b670de0b6b3a7640000838102908482811515611ca057fe5b0514611cc15760405160e560020a62461bcd0281526004016102c9906132ed565b82600019148015611cd5575060ff60020a84145b15611cf55760405160e560020a62461bcd0281526004016102c99061323d565b60008382811515611d0257fe5b0590508015156103145760405160e560020a62461bcd0281526004016102c99061327d565b6000828201838110156102d25760405160e560020a62461bcd0281526004016102c99061326d565b600062015180611d60858585611b96565b02949350505050565b600082821115611d8e5760405160e560020a62461bcd0281526004016102c9906132ad565b50900390565b6000808211611db85760405160e560020a62461bcd0281526004016102c9906132cd565b60008284811515611dc557fe5b04949350505050565b60008080611ddf6201518085610800565b9196909550909350915050565b6000818303818312801590611e015750838113155b80611e165750600083128015611e1657508381135b15156102d25760405160e560020a62461bcd0281526004016102c99061334d565b6000821515611e4857506000610318565b82600019148015611e5c575060ff60020a82145b15611e7c5760405160e560020a62461bcd0281526004016102c99061330d565b828202828482811515611e8b57fe5b05146102d25760405160e560020a62461bcd0281526004016102c99061330d565b610800604051908101604052806040906020820280388339509192915050565b604080516101a0810190915280600081526020016000815260200160008152602001600081526020016000815260200160008152602001600081526020016000815260200160008152602001600081526020016000815260200160008152602001600081525090565b610200604051908101604052806010906020820280388339509192915050565b60006102d28235613416565b6000601f82018313611f7257600080fd5b6002611f85611f80826133a3565b61337c565b91508183856060840282011115611f9b57600080fd5b60005b838110156118645781611fb1888261204d565b84525060209092019160609190910190600101611f9e565b60006102d282356133d0565b60006102d282356133c1565b60006102d28235613421565b60006102d28235613430565b60006102d2823561343f565b60006102d2823561344e565b60006102d2823561345d565b60006102d2823561346c565b60006102d2823561347b565b60006102d2823561348a565b60006102d28235613499565b60006060828403121561205f57600080fd5b612069606061337c565b905060006120778484611fd5565b825250602061208884848301612005565b602083015250604061209c84828501612005565b60408301525092915050565b600061050082840312156120bb57600080fd5b6120c66102a061337c565b905060006120d48484612041565b82525060206120e584848301611fd5565b60208301525060406120f984828501611fd5565b604083015250606061210d84828501611fd5565b606083015250608061212184828501611fd5565b60808301525060a061213584828501611fd5565b60a08301525060c061214984828501611fd5565b60c08301525060e061215d84828501611fd5565b60e08301525061010061217284828501611fd5565b6101008301525061012061218884828501611fd5565b6101208301525061014061219e84828501611fd5565b610140830152506101606121b484828501611fd5565b610160830152506101806121ca84828501611fd5565b610180830152506101a06121e084828501611fd5565b6101a0830152506101c06121f684828501612287565b6101c08301525061024061220c84828501612287565b6101e0830152506102c061222284828501612287565b6102008301525061034061223884828501612287565b610220830152506103c061224e84828501612287565b61024083015250610440612264848285016122f6565b610260830152506104a061227a848285016122f6565b6102808301525092915050565b60006080828403121561229957600080fd5b6122a3608061337c565b905060006122b18484611fd5565b82525060206122c284848301612035565b60208301525060406122d684828501611fed565b60408301525060606122ea84828501611fc9565b60608301525092915050565b60006060828403121561230857600080fd5b612312606061337c565b905060006123208484611fd5565b825250602061233184848301612035565b602083015250604061209c84828501611fc9565b6000610540828403121561235857600080fd5b61236361042061337c565b905060006123718484611fed565b825250602061238284848301612011565b60208301525060406123968482850161201d565b60408301525060606123aa84828501611fe1565b60608301525060806123be84828501611fed565b60808301525060a06123d284828501612041565b60a08301525060c06123e684828501611ff9565b60c08301525060e06123fa84828501611fed565b60e08301525061010061240f84828501611ff9565b6101008301525061012061242584828501611f61565b610120830152506101e061243b84828501611f55565b6101408301525061020061245184828501611fd5565b6101608301525061022061246784828501611fd5565b6101808301525061024061247d84828501611fd5565b6101a08301525061026061249384828501611fd5565b6101c0830152506102806124a984828501611fd5565b6101e0830152506102a06124bf84828501611fd5565b610200830152506102c06124d584828501611fd5565b610220830152506102e06124eb84828501611fd5565b6102408301525061030061250184828501611fd5565b6102608301525061032061251784828501611fd5565b6102808301525061034061252d84828501611fd5565b6102a08301525061036061254384828501611fd5565b6102c08301525061038061255984828501611fd5565b6102e0830152506103a061256f84828501611fd5565b610300830152506103c061258584828501611fd5565b610320830152506103e061259b84828501611fd5565b610340830152506104006125b1848285016122f6565b610360830152506104606125c7848285016122f6565b610380830152506104c06125dd84828501611fd5565b6103a0830152506104e06125f384828501611fd5565b6103c08301525061050061260984828501611fd5565b6103e08301525061052061261f84828501611fd5565b6104008301525092915050565b60006101a0828403121561263f57600080fd5b61264a6101a061337c565b905060006126588484611ff9565b825250602061266984848301611fd5565b602083015250604061267d84828501611fd5565b604083015250606061269184828501611fd5565b60608301525060806126a584828501611fd5565b60808301525060a06126b984828501611fd5565b60a08301525060c06126cd84828501611fd5565b60c08301525060e06126e184828501611fd5565b60e0830152506101006126f684828501611fd5565b6101008301525061012061270c84828501611fd5565b6101208301525061014061272284828501611fd5565b6101408301525061016061273884828501611fd5565b6101608301525061018061274e84828501611fd5565b6101808301525092915050565b60006020828403121561276d57600080fd5b60006103148484611fd5565b600080610560838503121561278d57600080fd5b60006127998585611fd5565b92505060206127aa85828601612345565b9150509250929050565b60008060008060006108c086880312156127cd57600080fd5b60006127d98888611fd5565b95505060206127ea88828901612345565b9450506105606127fc8882890161262c565b93505061070061280e88828901611fc9565b9250506107206128208882890161262c565b9150509295509295909350565b600080600060c0848603121561284257600080fd5b600061284e8686611fed565b935050602061285f86828701611fd5565b925050604061287086828701612287565b9150509250925092565b60006020828403121561288c57600080fd5b60006103148484612029565b600080604083850312156128ab57600080fd5b60006128b78585612029565b92505060206127aa85828601611fd5565b600080600061054084860312156128de57600080fd5b60006128ea86866120a8565b9350506105006128fc86828701611fd5565b92505061052061287086828701611fd5565b600080600080610560858703121561292557600080fd5b600061293187876120a8565b94505061050061294387828801611fd5565b93505061052061295587828801611fd5565b92505061054061296787828801612029565b91505092959194509250565b6000610540828403121561298657600080fd5b60006103148484612345565b60008060008061072085870312156129a957600080fd5b60006129b58787612345565b9450506105406129c78782880161262c565b9350506106e06129d987828801611fd5565b92505061070061296787828801611fd5565b6129f4816133c4565b6129fd826133c1565b60005b82811015612a2d57612a13858351612a43565b612a1c826133ca565b602095909501949150600101612a00565b5050505050565b612a3d816133d0565b82525050565b612a3d816133c1565b612a3d816134a8565b612a3d816134b3565b612a3d816134be565b602e81527f5363686564756c652e636f6d70757465446174657346726f6d4379636c653a2060208201527f4d41585f4359434c455f53495a45000000000000000000000000000000000000604082015260600190565b602581527f466c6f61744d4154482e666c6f61744469763a204f564552464c4f575f44455460208201527f4543544544000000000000000000000000000000000000000000000000000000604082015260600190565b602e81527f5363686564756c652e6765744e6578744379636c65446174653a20415454524960208201527f425554455f4e4f545f464f554e44000000000000000000000000000000000000604082015260600190565b602281527f466c6f61744d6174682e666c6f61744469763a204449564944454442595f5a4560208201527f524f000000000000000000000000000000000000000000000000000000000000604082015260600190565b601b81527f536166654d6174683a206164646974696f6e206f766572666c6f770000000000602082015260400190565b603081527f466c6f61744d6174682e666c6f61744469763a2043414e4e4f545f524550524560208201527f53454e545f4752414e554c415249545900000000000000000000000000000000604082015260600190565b602181527f5369676e6564536166654d6174683a206164646974696f6e206f766572666c6f60208201527f7700000000000000000000000000000000000000000000000000000000000000604082015260600190565b603081527f436f72652e67657454696d657374616d70506c7573506572696f643a2041545460208201527f5249425554455f4e4f545f464f554e4400000000000000000000000000000000604082015260600190565b601e81527f536166654d6174683a207375627472616374696f6e206f766572666c6f770000602082015260400190565b603481527f436f6e7472616374526f6c65436f6e76656e74696f6e2e726f6c655369676e3a60208201527f204154545249425554455f4e4f545f464f554e44000000000000000000000000604082015260600190565b601a81527f536166654d6174683a206469766973696f6e206279207a65726f000000000000602082015260400190565b602d81527f434547456e67696e652e7061796f666646756e6374696f6e3a2041545452494260208201527f5554455f4e4f545f464f554e4400000000000000000000000000000000000000604082015260600190565b602581527f466c6f61744d6174682e666c6f61744469763a204f564552464c4f575f44455460208201527f4543544544000000000000000000000000000000000000000000000000000000604082015260600190565b603181527f466c6f61744d6174682e666c6f61744d756c743a2043414e4e4f545f5245505260208201527f4553454e545f4752414e554c4152495459000000000000000000000000000000604082015260600190565b602781527f5369676e6564536166654d6174683a206d756c7469706c69636174696f6e206f60208201527f766572666c6f7700000000000000000000000000000000000000000000000000604082015260600190565b602681527f466c6f61744d6174682e666c6f61744d756c743a204f564552464c4f575f444560208201527f5445435445440000000000000000000000000000000000000000000000000000604082015260600190565b602281527f436f72652e796561724672616374696f6e3a20554e4d45545f434f4e4449544960208201527f4f4e000000000000000000000000000000000000000000000000000000000000604082015260600190565b604581527f456e644f664d6f6e7468436f6e76656e74696f6e2e61646a757374456e644f6660208201527f4d6f6e7468436f6e76656e74696f6e3a204154545249425554455f4e4f545f4660408201527f4f554e442e000000000000000000000000000000000000000000000000000000606082015260800190565b602481527f5369676e6564536166654d6174683a207375627472616374696f6e206f76657260208201527f666c6f7700000000000000000000000000000000000000000000000000000000604082015260600190565b603681527f434547456e67696e652e73746174655472616e736974696f6e46756e6374696f60208201527f6e3a204154545249425554455f4e4f545f464f554e4400000000000000000000604082015260600190565b80516101a08301906130e58482612a4c565b5060208201516130f86020850182612a43565b50604082015161310b6040850182612a43565b50606082015161311e6060850182612a43565b5060808201516131316080850182612a43565b5060a082015161314460a0850182612a43565b5060c082015161315760c0850182612a43565b5060e082015161316a60e0850182612a43565b5061010082015161317f610100850182612a43565b50610120820151613194610120850182612a43565b506101408201516131a9610140850182612a43565b506101608201516131be610160850182612a43565b506101808201516131d3610180850182612a43565b50505050565b610800810161031882846129eb565b602081016103188284612a34565b602081016103188284612a43565b602081016103188284612a55565b604081016132208285612a5e565b6102d26020830184612a43565b6020808252810161031881612a67565b6020808252810161031881612abd565b6020808252810161031881612b13565b6020808252810161031881612b69565b6020808252810161031881612bbf565b6020808252810161031881612bef565b6020808252810161031881612c45565b6020808252810161031881612c9b565b6020808252810161031881612cf1565b6020808252810161031881612d21565b6020808252810161031881612d77565b6020808252810161031881612da7565b6020808252810161031881612dfd565b6020808252810161031881612e53565b6020808252810161031881612ea9565b6020808252810161031881612eff565b6020808252810161031881612f55565b6020808252810161031881612fab565b6020808252810161031881613027565b602080825281016103188161307d565b6101a0810161031882846130d3565b60405181810167ffffffffffffffff8111828210171561339b57600080fd5b604052919050565b600067ffffffffffffffff8211156133ba57600080fd5b5060200290565b90565b50604090565b60200190565b151590565b6000600482106133e157fe5b5090565b6000600282106133e157fe5b6000601782106133e157fe5b73ffffffffffffffffffffffffffffffffffffffff1690565b6000610318826133fd565b6000600982106133e157600080fd5b6000600282106133e157600080fd5b6000600482106133e157600080fd5b6000600582106133e157600080fd5b6000600a82106133e157600080fd5b6000600782106133e157600080fd5b6000601782106133e157600080fd5b6000600682106133e157600080fd5b6000600882106133e157600080fd5b6000610318826133d5565b6000610318826133e5565b6000610318826133f156fea265627a7a7230582047c797e6190a77f97f9ee9f15f2e0f1b499406d728967f2c332ca67b4a305a406c6578706572696d656e74616cf50037",
+  "metadata": "{\"compiler\":{\"version\":\"0.5.2+commit.1df8f40c\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"constant\":true,\"inputs\":[{\"name\":\"eomc\",\"type\":\"uint8\"},{\"name\":\"startTime\",\"type\":\"uint256\"},{\"components\":[{\"name\":\"i\",\"type\":\"uint256\"},{\"name\":\"p\",\"type\":\"uint8\"},{\"name\":\"s\",\"type\":\"uint8\"},{\"name\":\"isSet\",\"type\":\"bool\"}],\"name\":\"cycle\",\"type\":\"tuple\"}],\"name\":\"adjustEndOfMonthConvention\",\"outputs\":[{\"name\":\"\",\"type\":\"uint8\"}],\"payable\":false,\"stateMutability\":\"pure\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"name\":\"_event\",\"type\":\"bytes32\"},{\"components\":[{\"name\":\"calendar\",\"type\":\"uint8\"},{\"name\":\"contractRole\",\"type\":\"uint8\"},{\"name\":\"dayCountConvention\",\"type\":\"uint8\"},{\"name\":\"businessDayConvention\",\"type\":\"uint8\"},{\"name\":\"endOfMonthConvention\",\"type\":\"uint8\"},{\"name\":\"scalingEffect\",\"type\":\"uint8\"},{\"name\":\"penaltyType\",\"type\":\"uint8\"},{\"name\":\"feeBasis\",\"type\":\"uint8\"},{\"name\":\"creditEventTypeCovered\",\"type\":\"uint8\"},{\"components\":[{\"name\":\"object\",\"type\":\"bytes32\"},{\"name\":\"contractReferenceType\",\"type\":\"uint8\"},{\"name\":\"contractReferenceRole\",\"type\":\"uint8\"}],\"name\":\"contractReference_1\",\"type\":\"tuple\"},{\"components\":[{\"name\":\"object\",\"type\":\"bytes32\"},{\"name\":\"contractReferenceType\",\"type\":\"uint8\"},{\"name\":\"contractReferenceRole\",\"type\":\"uint8\"}],\"name\":\"contractReference_2\",\"type\":\"tuple\"},{\"name\":\"currency\",\"type\":\"address\"},{\"name\":\"marketObjectCodeRateReset\",\"type\":\"bytes32\"},{\"name\":\"statusDate\",\"type\":\"uint256\"},{\"name\":\"maturityDate\",\"type\":\"uint256\"},{\"name\":\"notionalPrincipal\",\"type\":\"int256\"},{\"name\":\"nominalInterestRate\",\"type\":\"int256\"},{\"name\":\"feeAccrued\",\"type\":\"int256\"},{\"name\":\"accruedInterest\",\"type\":\"int256\"},{\"name\":\"rateMultiplier\",\"type\":\"int256\"},{\"name\":\"rateSpread\",\"type\":\"int256\"},{\"name\":\"feeRate\",\"type\":\"int256\"},{\"name\":\"nextResetRate\",\"type\":\"int256\"},{\"name\":\"penaltyRate\",\"type\":\"int256\"},{\"name\":\"premiumDiscountAtIED\",\"type\":\"int256\"},{\"name\":\"priceAtPurchaseDate\",\"type\":\"int256\"},{\"name\":\"nextPrincipalRedemptionPayment\",\"type\":\"int256\"},{\"name\":\"coverageOfCreditEnhancement\",\"type\":\"int256\"},{\"components\":[{\"name\":\"i\",\"type\":\"uint256\"},{\"name\":\"p\",\"type\":\"uint8\"},{\"name\":\"isSet\",\"type\":\"bool\"}],\"name\":\"gracePeriod\",\"type\":\"tuple\"},{\"components\":[{\"name\":\"i\",\"type\":\"uint256\"},{\"name\":\"p\",\"type\":\"uint8\"},{\"name\":\"isSet\",\"type\":\"bool\"}],\"name\":\"delinquencyPeriod\",\"type\":\"tuple\"},{\"name\":\"lifeCap\",\"type\":\"int256\"},{\"name\":\"lifeFloor\",\"type\":\"int256\"},{\"name\":\"periodCap\",\"type\":\"int256\"},{\"name\":\"periodFloor\",\"type\":\"int256\"}],\"name\":\"terms\",\"type\":\"tuple\"}],\"name\":\"computeEventTimeForEvent\",\"outputs\":[{\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"pure\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"components\":[{\"name\":\"calendar\",\"type\":\"uint8\"},{\"name\":\"contractRole\",\"type\":\"uint8\"},{\"name\":\"dayCountConvention\",\"type\":\"uint8\"},{\"name\":\"businessDayConvention\",\"type\":\"uint8\"},{\"name\":\"endOfMonthConvention\",\"type\":\"uint8\"},{\"name\":\"scalingEffect\",\"type\":\"uint8\"},{\"name\":\"penaltyType\",\"type\":\"uint8\"},{\"name\":\"feeBasis\",\"type\":\"uint8\"},{\"name\":\"creditEventTypeCovered\",\"type\":\"uint8\"},{\"components\":[{\"name\":\"object\",\"type\":\"bytes32\"},{\"name\":\"contractReferenceType\",\"type\":\"uint8\"},{\"name\":\"contractReferenceRole\",\"type\":\"uint8\"}],\"name\":\"contractReference_1\",\"type\":\"tuple\"},{\"components\":[{\"name\":\"object\",\"type\":\"bytes32\"},{\"name\":\"contractReferenceType\",\"type\":\"uint8\"},{\"name\":\"contractReferenceRole\",\"type\":\"uint8\"}],\"name\":\"contractReference_2\",\"type\":\"tuple\"},{\"name\":\"currency\",\"type\":\"address\"},{\"name\":\"marketObjectCodeRateReset\",\"type\":\"bytes32\"},{\"name\":\"statusDate\",\"type\":\"uint256\"},{\"name\":\"maturityDate\",\"type\":\"uint256\"},{\"name\":\"notionalPrincipal\",\"type\":\"int256\"},{\"name\":\"nominalInterestRate\",\"type\":\"int256\"},{\"name\":\"feeAccrued\",\"type\":\"int256\"},{\"name\":\"accruedInterest\",\"type\":\"int256\"},{\"name\":\"rateMultiplier\",\"type\":\"int256\"},{\"name\":\"rateSpread\",\"type\":\"int256\"},{\"name\":\"feeRate\",\"type\":\"int256\"},{\"name\":\"nextResetRate\",\"type\":\"int256\"},{\"name\":\"penaltyRate\",\"type\":\"int256\"},{\"name\":\"premiumDiscountAtIED\",\"type\":\"int256\"},{\"name\":\"priceAtPurchaseDate\",\"type\":\"int256\"},{\"name\":\"nextPrincipalRedemptionPayment\",\"type\":\"int256\"},{\"name\":\"coverageOfCreditEnhancement\",\"type\":\"int256\"},{\"components\":[{\"name\":\"i\",\"type\":\"uint256\"},{\"name\":\"p\",\"type\":\"uint8\"},{\"name\":\"isSet\",\"type\":\"bool\"}],\"name\":\"gracePeriod\",\"type\":\"tuple\"},{\"components\":[{\"name\":\"i\",\"type\":\"uint256\"},{\"name\":\"p\",\"type\":\"uint8\"},{\"name\":\"isSet\",\"type\":\"bool\"}],\"name\":\"delinquencyPeriod\",\"type\":\"tuple\"},{\"name\":\"lifeCap\",\"type\":\"int256\"},{\"name\":\"lifeFloor\",\"type\":\"int256\"},{\"name\":\"periodCap\",\"type\":\"int256\"},{\"name\":\"periodFloor\",\"type\":\"int256\"}],\"name\":\"terms\",\"type\":\"tuple\"},{\"components\":[{\"name\":\"contractPerformance\",\"type\":\"uint8\"},{\"name\":\"statusDate\",\"type\":\"uint256\"},{\"name\":\"nonPerformingDate\",\"type\":\"uint256\"},{\"name\":\"maturityDate\",\"type\":\"uint256\"},{\"name\":\"executionDate\",\"type\":\"uint256\"},{\"name\":\"notionalPrincipal\",\"type\":\"int256\"},{\"name\":\"accruedInterest\",\"type\":\"int256\"},{\"name\":\"feeAccrued\",\"type\":\"int256\"},{\"name\":\"nominalInterestRate\",\"type\":\"int256\"},{\"name\":\"interestScalingMultiplier\",\"type\":\"int256\"},{\"name\":\"notionalScalingMultiplier\",\"type\":\"int256\"},{\"name\":\"nextPrincipalRedemptionPayment\",\"type\":\"int256\"},{\"name\":\"executionAmount\",\"type\":\"int256\"}],\"name\":\"state\",\"type\":\"tuple\"},{\"name\":\"_event\",\"type\":\"bytes32\"},{\"name\":\"externalData\",\"type\":\"bytes32\"}],\"name\":\"computeStateForEvent\",\"outputs\":[{\"components\":[{\"name\":\"contractPerformance\",\"type\":\"uint8\"},{\"name\":\"statusDate\",\"type\":\"uint256\"},{\"name\":\"nonPerformingDate\",\"type\":\"uint256\"},{\"name\":\"maturityDate\",\"type\":\"uint256\"},{\"name\":\"executionDate\",\"type\":\"uint256\"},{\"name\":\"notionalPrincipal\",\"type\":\"int256\"},{\"name\":\"accruedInterest\",\"type\":\"int256\"},{\"name\":\"feeAccrued\",\"type\":\"int256\"},{\"name\":\"nominalInterestRate\",\"type\":\"int256\"},{\"name\":\"interestScalingMultiplier\",\"type\":\"int256\"},{\"name\":\"notionalScalingMultiplier\",\"type\":\"int256\"},{\"name\":\"nextPrincipalRedemptionPayment\",\"type\":\"int256\"},{\"name\":\"executionAmount\",\"type\":\"int256\"}],\"name\":\"\",\"type\":\"tuple\"}],\"payable\":false,\"stateMutability\":\"pure\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"name\":\"_event\",\"type\":\"bytes32\"},{\"components\":[{\"name\":\"calendar\",\"type\":\"uint8\"},{\"name\":\"contractRole\",\"type\":\"uint8\"},{\"name\":\"dayCountConvention\",\"type\":\"uint8\"},{\"name\":\"businessDayConvention\",\"type\":\"uint8\"},{\"name\":\"endOfMonthConvention\",\"type\":\"uint8\"},{\"name\":\"scalingEffect\",\"type\":\"uint8\"},{\"name\":\"penaltyType\",\"type\":\"uint8\"},{\"name\":\"feeBasis\",\"type\":\"uint8\"},{\"name\":\"creditEventTypeCovered\",\"type\":\"uint8\"},{\"components\":[{\"name\":\"object\",\"type\":\"bytes32\"},{\"name\":\"contractReferenceType\",\"type\":\"uint8\"},{\"name\":\"contractReferenceRole\",\"type\":\"uint8\"}],\"name\":\"contractReference_1\",\"type\":\"tuple\"},{\"components\":[{\"name\":\"object\",\"type\":\"bytes32\"},{\"name\":\"contractReferenceType\",\"type\":\"uint8\"},{\"name\":\"contractReferenceRole\",\"type\":\"uint8\"}],\"name\":\"contractReference_2\",\"type\":\"tuple\"},{\"name\":\"currency\",\"type\":\"address\"},{\"name\":\"marketObjectCodeRateReset\",\"type\":\"bytes32\"},{\"name\":\"statusDate\",\"type\":\"uint256\"},{\"name\":\"maturityDate\",\"type\":\"uint256\"},{\"name\":\"notionalPrincipal\",\"type\":\"int256\"},{\"name\":\"nominalInterestRate\",\"type\":\"int256\"},{\"name\":\"feeAccrued\",\"type\":\"int256\"},{\"name\":\"accruedInterest\",\"type\":\"int256\"},{\"name\":\"rateMultiplier\",\"type\":\"int256\"},{\"name\":\"rateSpread\",\"type\":\"int256\"},{\"name\":\"feeRate\",\"type\":\"int256\"},{\"name\":\"nextResetRate\",\"type\":\"int256\"},{\"name\":\"penaltyRate\",\"type\":\"int256\"},{\"name\":\"premiumDiscountAtIED\",\"type\":\"int256\"},{\"name\":\"priceAtPurchaseDate\",\"type\":\"int256\"},{\"name\":\"nextPrincipalRedemptionPayment\",\"type\":\"int256\"},{\"name\":\"coverageOfCreditEnhancement\",\"type\":\"int256\"},{\"components\":[{\"name\":\"i\",\"type\":\"uint256\"},{\"name\":\"p\",\"type\":\"uint8\"},{\"name\":\"isSet\",\"type\":\"bool\"}],\"name\":\"gracePeriod\",\"type\":\"tuple\"},{\"components\":[{\"name\":\"i\",\"type\":\"uint256\"},{\"name\":\"p\",\"type\":\"uint8\"},{\"name\":\"isSet\",\"type\":\"bool\"}],\"name\":\"delinquencyPeriod\",\"type\":\"tuple\"},{\"name\":\"lifeCap\",\"type\":\"int256\"},{\"name\":\"lifeFloor\",\"type\":\"int256\"},{\"name\":\"periodCap\",\"type\":\"int256\"},{\"name\":\"periodFloor\",\"type\":\"int256\"}],\"name\":\"terms\",\"type\":\"tuple\"},{\"components\":[{\"name\":\"contractPerformance\",\"type\":\"uint8\"},{\"name\":\"statusDate\",\"type\":\"uint256\"},{\"name\":\"nonPerformingDate\",\"type\":\"uint256\"},{\"name\":\"maturityDate\",\"type\":\"uint256\"},{\"name\":\"executionDate\",\"type\":\"uint256\"},{\"name\":\"notionalPrincipal\",\"type\":\"int256\"},{\"name\":\"accruedInterest\",\"type\":\"int256\"},{\"name\":\"feeAccrued\",\"type\":\"int256\"},{\"name\":\"nominalInterestRate\",\"type\":\"int256\"},{\"name\":\"interestScalingMultiplier\",\"type\":\"int256\"},{\"name\":\"notionalScalingMultiplier\",\"type\":\"int256\"},{\"name\":\"nextPrincipalRedemptionPayment\",\"type\":\"int256\"},{\"name\":\"executionAmount\",\"type\":\"int256\"}],\"name\":\"state\",\"type\":\"tuple\"},{\"name\":\"hasUnderlying\",\"type\":\"bool\"},{\"components\":[{\"name\":\"contractPerformance\",\"type\":\"uint8\"},{\"name\":\"statusDate\",\"type\":\"uint256\"},{\"name\":\"nonPerformingDate\",\"type\":\"uint256\"},{\"name\":\"maturityDate\",\"type\":\"uint256\"},{\"name\":\"executionDate\",\"type\":\"uint256\"},{\"name\":\"notionalPrincipal\",\"type\":\"int256\"},{\"name\":\"accruedInterest\",\"type\":\"int256\"},{\"name\":\"feeAccrued\",\"type\":\"int256\"},{\"name\":\"nominalInterestRate\",\"type\":\"int256\"},{\"name\":\"interestScalingMultiplier\",\"type\":\"int256\"},{\"name\":\"notionalScalingMultiplier\",\"type\":\"int256\"},{\"name\":\"nextPrincipalRedemptionPayment\",\"type\":\"int256\"},{\"name\":\"executionAmount\",\"type\":\"int256\"}],\"name\":\"underlyingState\",\"type\":\"tuple\"}],\"name\":\"isEventScheduled\",\"outputs\":[{\"name\":\"\",\"type\":\"bool\"}],\"payable\":false,\"stateMutability\":\"pure\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"components\":[{\"name\":\"scalingEffect\",\"type\":\"uint8\"},{\"name\":\"contractDealDate\",\"type\":\"uint256\"},{\"name\":\"statusDate\",\"type\":\"uint256\"},{\"name\":\"initialExchangeDate\",\"type\":\"uint256\"},{\"name\":\"maturityDate\",\"type\":\"uint256\"},{\"name\":\"terminationDate\",\"type\":\"uint256\"},{\"name\":\"purchaseDate\",\"type\":\"uint256\"},{\"name\":\"capitalizationEndDate\",\"type\":\"uint256\"},{\"name\":\"cycleAnchorDateOfInterestPayment\",\"type\":\"uint256\"},{\"name\":\"cycleAnchorDateOfRateReset\",\"type\":\"uint256\"},{\"name\":\"cycleAnchorDateOfScalingIndex\",\"type\":\"uint256\"},{\"name\":\"cycleAnchorDateOfFee\",\"type\":\"uint256\"},{\"name\":\"cycleAnchorDateOfPrincipalRedemption\",\"type\":\"uint256\"},{\"name\":\"nominalInterestRate\",\"type\":\"int256\"},{\"components\":[{\"name\":\"i\",\"type\":\"uint256\"},{\"name\":\"p\",\"type\":\"uint8\"},{\"name\":\"s\",\"type\":\"uint8\"},{\"name\":\"isSet\",\"type\":\"bool\"}],\"name\":\"cycleOfInterestPayment\",\"type\":\"tuple\"},{\"components\":[{\"name\":\"i\",\"type\":\"uint256\"},{\"name\":\"p\",\"type\":\"uint8\"},{\"name\":\"s\",\"type\":\"uint8\"},{\"name\":\"isSet\",\"type\":\"bool\"}],\"name\":\"cycleOfRateReset\",\"type\":\"tuple\"},{\"components\":[{\"name\":\"i\",\"type\":\"uint256\"},{\"name\":\"p\",\"type\":\"uint8\"},{\"name\":\"s\",\"type\":\"uint8\"},{\"name\":\"isSet\",\"type\":\"bool\"}],\"name\":\"cycleOfScalingIndex\",\"type\":\"tuple\"},{\"components\":[{\"name\":\"i\",\"type\":\"uint256\"},{\"name\":\"p\",\"type\":\"uint8\"},{\"name\":\"s\",\"type\":\"uint8\"},{\"name\":\"isSet\",\"type\":\"bool\"}],\"name\":\"cycleOfFee\",\"type\":\"tuple\"},{\"components\":[{\"name\":\"i\",\"type\":\"uint256\"},{\"name\":\"p\",\"type\":\"uint8\"},{\"name\":\"s\",\"type\":\"uint8\"},{\"name\":\"isSet\",\"type\":\"bool\"}],\"name\":\"cycleOfPrincipalRedemption\",\"type\":\"tuple\"},{\"components\":[{\"name\":\"i\",\"type\":\"uint256\"},{\"name\":\"p\",\"type\":\"uint8\"},{\"name\":\"isSet\",\"type\":\"bool\"}],\"name\":\"gracePeriod\",\"type\":\"tuple\"},{\"components\":[{\"name\":\"i\",\"type\":\"uint256\"},{\"name\":\"p\",\"type\":\"uint8\"},{\"name\":\"isSet\",\"type\":\"bool\"}],\"name\":\"delinquencyPeriod\",\"type\":\"tuple\"}],\"name\":\"terms\",\"type\":\"tuple\"},{\"name\":\"segmentStart\",\"type\":\"uint256\"},{\"name\":\"segmentEnd\",\"type\":\"uint256\"}],\"name\":\"computeNonCyclicScheduleSegment\",\"outputs\":[{\"name\":\"\",\"type\":\"bytes32[64]\"}],\"payable\":false,\"stateMutability\":\"pure\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"name\":\"_event\",\"type\":\"bytes32\"}],\"name\":\"decodeEvent\",\"outputs\":[{\"name\":\"\",\"type\":\"uint8\"},{\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"pure\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"name\":\"eventType\",\"type\":\"uint8\"}],\"name\":\"getEpochOffset\",\"outputs\":[{\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"pure\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"PRECISION\",\"outputs\":[{\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"components\":[{\"name\":\"calendar\",\"type\":\"uint8\"},{\"name\":\"contractRole\",\"type\":\"uint8\"},{\"name\":\"dayCountConvention\",\"type\":\"uint8\"},{\"name\":\"businessDayConvention\",\"type\":\"uint8\"},{\"name\":\"endOfMonthConvention\",\"type\":\"uint8\"},{\"name\":\"scalingEffect\",\"type\":\"uint8\"},{\"name\":\"penaltyType\",\"type\":\"uint8\"},{\"name\":\"feeBasis\",\"type\":\"uint8\"},{\"name\":\"creditEventTypeCovered\",\"type\":\"uint8\"},{\"components\":[{\"name\":\"object\",\"type\":\"bytes32\"},{\"name\":\"contractReferenceType\",\"type\":\"uint8\"},{\"name\":\"contractReferenceRole\",\"type\":\"uint8\"}],\"name\":\"contractReference_1\",\"type\":\"tuple\"},{\"components\":[{\"name\":\"object\",\"type\":\"bytes32\"},{\"name\":\"contractReferenceType\",\"type\":\"uint8\"},{\"name\":\"contractReferenceRole\",\"type\":\"uint8\"}],\"name\":\"contractReference_2\",\"type\":\"tuple\"},{\"name\":\"currency\",\"type\":\"address\"},{\"name\":\"marketObjectCodeRateReset\",\"type\":\"bytes32\"},{\"name\":\"statusDate\",\"type\":\"uint256\"},{\"name\":\"maturityDate\",\"type\":\"uint256\"},{\"name\":\"notionalPrincipal\",\"type\":\"int256\"},{\"name\":\"nominalInterestRate\",\"type\":\"int256\"},{\"name\":\"feeAccrued\",\"type\":\"int256\"},{\"name\":\"accruedInterest\",\"type\":\"int256\"},{\"name\":\"rateMultiplier\",\"type\":\"int256\"},{\"name\":\"rateSpread\",\"type\":\"int256\"},{\"name\":\"feeRate\",\"type\":\"int256\"},{\"name\":\"nextResetRate\",\"type\":\"int256\"},{\"name\":\"penaltyRate\",\"type\":\"int256\"},{\"name\":\"premiumDiscountAtIED\",\"type\":\"int256\"},{\"name\":\"priceAtPurchaseDate\",\"type\":\"int256\"},{\"name\":\"nextPrincipalRedemptionPayment\",\"type\":\"int256\"},{\"name\":\"coverageOfCreditEnhancement\",\"type\":\"int256\"},{\"components\":[{\"name\":\"i\",\"type\":\"uint256\"},{\"name\":\"p\",\"type\":\"uint8\"},{\"name\":\"isSet\",\"type\":\"bool\"}],\"name\":\"gracePeriod\",\"type\":\"tuple\"},{\"components\":[{\"name\":\"i\",\"type\":\"uint256\"},{\"name\":\"p\",\"type\":\"uint8\"},{\"name\":\"isSet\",\"type\":\"bool\"}],\"name\":\"delinquencyPeriod\",\"type\":\"tuple\"},{\"name\":\"lifeCap\",\"type\":\"int256\"},{\"name\":\"lifeFloor\",\"type\":\"int256\"},{\"name\":\"periodCap\",\"type\":\"int256\"},{\"name\":\"periodFloor\",\"type\":\"int256\"}],\"name\":\"terms\",\"type\":\"tuple\"}],\"name\":\"computeInitialState\",\"outputs\":[{\"components\":[{\"name\":\"contractPerformance\",\"type\":\"uint8\"},{\"name\":\"statusDate\",\"type\":\"uint256\"},{\"name\":\"nonPerformingDate\",\"type\":\"uint256\"},{\"name\":\"maturityDate\",\"type\":\"uint256\"},{\"name\":\"executionDate\",\"type\":\"uint256\"},{\"name\":\"notionalPrincipal\",\"type\":\"int256\"},{\"name\":\"accruedInterest\",\"type\":\"int256\"},{\"name\":\"feeAccrued\",\"type\":\"int256\"},{\"name\":\"nominalInterestRate\",\"type\":\"int256\"},{\"name\":\"interestScalingMultiplier\",\"type\":\"int256\"},{\"name\":\"notionalScalingMultiplier\",\"type\":\"int256\"},{\"name\":\"nextPrincipalRedemptionPayment\",\"type\":\"int256\"},{\"name\":\"executionAmount\",\"type\":\"int256\"}],\"name\":\"\",\"type\":\"tuple\"}],\"payable\":false,\"stateMutability\":\"pure\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"name\":\"eventType\",\"type\":\"uint8\"},{\"name\":\"scheduleTime\",\"type\":\"uint256\"}],\"name\":\"encodeEvent\",\"outputs\":[{\"name\":\"\",\"type\":\"bytes32\"}],\"payable\":false,\"stateMutability\":\"pure\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"components\":[{\"name\":\"calendar\",\"type\":\"uint8\"},{\"name\":\"contractRole\",\"type\":\"uint8\"},{\"name\":\"dayCountConvention\",\"type\":\"uint8\"},{\"name\":\"businessDayConvention\",\"type\":\"uint8\"},{\"name\":\"endOfMonthConvention\",\"type\":\"uint8\"},{\"name\":\"scalingEffect\",\"type\":\"uint8\"},{\"name\":\"penaltyType\",\"type\":\"uint8\"},{\"name\":\"feeBasis\",\"type\":\"uint8\"},{\"name\":\"creditEventTypeCovered\",\"type\":\"uint8\"},{\"components\":[{\"name\":\"object\",\"type\":\"bytes32\"},{\"name\":\"contractReferenceType\",\"type\":\"uint8\"},{\"name\":\"contractReferenceRole\",\"type\":\"uint8\"}],\"name\":\"contractReference_1\",\"type\":\"tuple\"},{\"components\":[{\"name\":\"object\",\"type\":\"bytes32\"},{\"name\":\"contractReferenceType\",\"type\":\"uint8\"},{\"name\":\"contractReferenceRole\",\"type\":\"uint8\"}],\"name\":\"contractReference_2\",\"type\":\"tuple\"},{\"name\":\"currency\",\"type\":\"address\"},{\"name\":\"marketObjectCodeRateReset\",\"type\":\"bytes32\"},{\"name\":\"statusDate\",\"type\":\"uint256\"},{\"name\":\"maturityDate\",\"type\":\"uint256\"},{\"name\":\"notionalPrincipal\",\"type\":\"int256\"},{\"name\":\"nominalInterestRate\",\"type\":\"int256\"},{\"name\":\"feeAccrued\",\"type\":\"int256\"},{\"name\":\"accruedInterest\",\"type\":\"int256\"},{\"name\":\"rateMultiplier\",\"type\":\"int256\"},{\"name\":\"rateSpread\",\"type\":\"int256\"},{\"name\":\"feeRate\",\"type\":\"int256\"},{\"name\":\"nextResetRate\",\"type\":\"int256\"},{\"name\":\"penaltyRate\",\"type\":\"int256\"},{\"name\":\"premiumDiscountAtIED\",\"type\":\"int256\"},{\"name\":\"priceAtPurchaseDate\",\"type\":\"int256\"},{\"name\":\"nextPrincipalRedemptionPayment\",\"type\":\"int256\"},{\"name\":\"coverageOfCreditEnhancement\",\"type\":\"int256\"},{\"components\":[{\"name\":\"i\",\"type\":\"uint256\"},{\"name\":\"p\",\"type\":\"uint8\"},{\"name\":\"isSet\",\"type\":\"bool\"}],\"name\":\"gracePeriod\",\"type\":\"tuple\"},{\"components\":[{\"name\":\"i\",\"type\":\"uint256\"},{\"name\":\"p\",\"type\":\"uint8\"},{\"name\":\"isSet\",\"type\":\"bool\"}],\"name\":\"delinquencyPeriod\",\"type\":\"tuple\"},{\"name\":\"lifeCap\",\"type\":\"int256\"},{\"name\":\"lifeFloor\",\"type\":\"int256\"},{\"name\":\"periodCap\",\"type\":\"int256\"},{\"name\":\"periodFloor\",\"type\":\"int256\"}],\"name\":\"terms\",\"type\":\"tuple\"},{\"components\":[{\"name\":\"contractPerformance\",\"type\":\"uint8\"},{\"name\":\"statusDate\",\"type\":\"uint256\"},{\"name\":\"nonPerformingDate\",\"type\":\"uint256\"},{\"name\":\"maturityDate\",\"type\":\"uint256\"},{\"name\":\"executionDate\",\"type\":\"uint256\"},{\"name\":\"notionalPrincipal\",\"type\":\"int256\"},{\"name\":\"accruedInterest\",\"type\":\"int256\"},{\"name\":\"feeAccrued\",\"type\":\"int256\"},{\"name\":\"nominalInterestRate\",\"type\":\"int256\"},{\"name\":\"interestScalingMultiplier\",\"type\":\"int256\"},{\"name\":\"notionalScalingMultiplier\",\"type\":\"int256\"},{\"name\":\"nextPrincipalRedemptionPayment\",\"type\":\"int256\"},{\"name\":\"executionAmount\",\"type\":\"int256\"}],\"name\":\"state\",\"type\":\"tuple\"},{\"name\":\"_event\",\"type\":\"bytes32\"},{\"name\":\"externalData\",\"type\":\"bytes32\"}],\"name\":\"computePayoffForEvent\",\"outputs\":[{\"name\":\"\",\"type\":\"int256\"}],\"payable\":false,\"stateMutability\":\"pure\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"components\":[{\"name\":\"scalingEffect\",\"type\":\"uint8\"},{\"name\":\"contractDealDate\",\"type\":\"uint256\"},{\"name\":\"statusDate\",\"type\":\"uint256\"},{\"name\":\"initialExchangeDate\",\"type\":\"uint256\"},{\"name\":\"maturityDate\",\"type\":\"uint256\"},{\"name\":\"terminationDate\",\"type\":\"uint256\"},{\"name\":\"purchaseDate\",\"type\":\"uint256\"},{\"name\":\"capitalizationEndDate\",\"type\":\"uint256\"},{\"name\":\"cycleAnchorDateOfInterestPayment\",\"type\":\"uint256\"},{\"name\":\"cycleAnchorDateOfRateReset\",\"type\":\"uint256\"},{\"name\":\"cycleAnchorDateOfScalingIndex\",\"type\":\"uint256\"},{\"name\":\"cycleAnchorDateOfFee\",\"type\":\"uint256\"},{\"name\":\"cycleAnchorDateOfPrincipalRedemption\",\"type\":\"uint256\"},{\"name\":\"nominalInterestRate\",\"type\":\"int256\"},{\"components\":[{\"name\":\"i\",\"type\":\"uint256\"},{\"name\":\"p\",\"type\":\"uint8\"},{\"name\":\"s\",\"type\":\"uint8\"},{\"name\":\"isSet\",\"type\":\"bool\"}],\"name\":\"cycleOfInterestPayment\",\"type\":\"tuple\"},{\"components\":[{\"name\":\"i\",\"type\":\"uint256\"},{\"name\":\"p\",\"type\":\"uint8\"},{\"name\":\"s\",\"type\":\"uint8\"},{\"name\":\"isSet\",\"type\":\"bool\"}],\"name\":\"cycleOfRateReset\",\"type\":\"tuple\"},{\"components\":[{\"name\":\"i\",\"type\":\"uint256\"},{\"name\":\"p\",\"type\":\"uint8\"},{\"name\":\"s\",\"type\":\"uint8\"},{\"name\":\"isSet\",\"type\":\"bool\"}],\"name\":\"cycleOfScalingIndex\",\"type\":\"tuple\"},{\"components\":[{\"name\":\"i\",\"type\":\"uint256\"},{\"name\":\"p\",\"type\":\"uint8\"},{\"name\":\"s\",\"type\":\"uint8\"},{\"name\":\"isSet\",\"type\":\"bool\"}],\"name\":\"cycleOfFee\",\"type\":\"tuple\"},{\"components\":[{\"name\":\"i\",\"type\":\"uint256\"},{\"name\":\"p\",\"type\":\"uint8\"},{\"name\":\"s\",\"type\":\"uint8\"},{\"name\":\"isSet\",\"type\":\"bool\"}],\"name\":\"cycleOfPrincipalRedemption\",\"type\":\"tuple\"},{\"components\":[{\"name\":\"i\",\"type\":\"uint256\"},{\"name\":\"p\",\"type\":\"uint8\"},{\"name\":\"isSet\",\"type\":\"bool\"}],\"name\":\"gracePeriod\",\"type\":\"tuple\"},{\"components\":[{\"name\":\"i\",\"type\":\"uint256\"},{\"name\":\"p\",\"type\":\"uint8\"},{\"name\":\"isSet\",\"type\":\"bool\"}],\"name\":\"delinquencyPeriod\",\"type\":\"tuple\"}],\"name\":\"terms\",\"type\":\"tuple\"},{\"name\":\"segmentStart\",\"type\":\"uint256\"},{\"name\":\"segmentEnd\",\"type\":\"uint256\"},{\"name\":\"eventType\",\"type\":\"uint8\"}],\"name\":\"computeCyclicScheduleSegment\",\"outputs\":[{\"name\":\"\",\"type\":\"bytes32[64]\"}],\"payable\":false,\"stateMutability\":\"pure\",\"type\":\"function\"}],\"devdoc\":{\"details\":\"all numbers except unix timestamp are represented as multiple of 10 ** 18 inputs have to be multiplied by 10 ** 18, outputs have to divided by 10 ** 18\",\"methods\":{\"adjustEndOfMonthConvention(uint8,uint256,(uint256,uint8,uint8,bool))\":{\"details\":\"The following is considered to dertermine if schedule dates are shifted to the end of month: - The convention SD (same day) means not adjusting, EM (end of month) means adjusting - Dates are only shifted if the schedule start date is an end-of-month date - Dates are only shifted if the schedule cycle is based on an \\\"M\\\" period unit or multiple thereof\",\"params\":{\"cycle\":\"the cycle struct\",\"eomc\":\"the end of month convention to adjust\",\"startTime\":\"timestemp of the cycle start\"},\"return\":\"the adjusted end of month convention\"},\"computeCyclicScheduleSegment((uint8,uint256,uint256,uint256,uint256,uint256,uint256,uint256,uint256,uint256,uint256,uint256,uint256,int256,(uint256,uint8,uint8,bool),(uint256,uint8,uint8,bool),(uint256,uint8,uint8,bool),(uint256,uint8,uint8,bool),(uint256,uint8,uint8,bool),(uint256,uint8,bool),(uint256,uint8,bool)),uint256,uint256,uint8)\":{\"params\":{\"eventType\":\"eventType of the cyclic schedule\",\"segmentEnd\":\"end timestamp of the segement\",\"segmentStart\":\"start timestamp of the segment\",\"terms\":\"terms of the contract\"},\"return\":\"event schedule segment\"},\"computeInitialState((uint8,uint8,uint8,uint8,uint8,uint8,uint8,uint8,uint8,(bytes32,uint8,uint8),(bytes32,uint8,uint8),address,bytes32,uint256,uint256,int256,int256,int256,int256,int256,int256,int256,int256,int256,int256,int256,int256,int256,(uint256,uint8,bool),(uint256,uint8,bool),int256,int256,int256,int256))\":{\"details\":\"see initStateSpace()\",\"params\":{\"terms\":\"terms of the contract\"},\"return\":\"initial contract state\"},\"computeNonCyclicScheduleSegment((uint8,uint256,uint256,uint256,uint256,uint256,uint256,uint256,uint256,uint256,uint256,uint256,uint256,int256,(uint256,uint8,uint8,bool),(uint256,uint8,uint8,bool),(uint256,uint8,uint8,bool),(uint256,uint8,uint8,bool),(uint256,uint8,uint8,bool),(uint256,uint8,bool),(uint256,uint8,bool)),uint256,uint256)\":{\"params\":{\"segmentEnd\":\"end timestamp of the segement\",\"segmentStart\":\"start timestamp of the segment\",\"terms\":\"terms of the contract\"},\"return\":\"event schedule segment\"},\"computePayoffForEvent((uint8,uint8,uint8,uint8,uint8,uint8,uint8,uint8,uint8,(bytes32,uint8,uint8),(bytes32,uint8,uint8),address,bytes32,uint256,uint256,int256,int256,int256,int256,int256,int256,int256,int256,int256,int256,int256,int256,int256,(uint256,uint8,bool),(uint256,uint8,bool),int256,int256,int256,int256),(uint8,uint256,uint256,uint256,uint256,int256,int256,int256,int256,int256,int256,int256,int256),bytes32,bytes32)\":{\"params\":{\"_event\":\"prototype event to be evaluated and applied to the contract state\",\"externalData\":\"external data needed for POF evaluation\",\"state\":\"current state of the contract\",\"terms\":\"terms of the contract\"},\"return\":\"the new contract state and the evaluated event\"},\"computeStateForEvent((uint8,uint8,uint8,uint8,uint8,uint8,uint8,uint8,uint8,(bytes32,uint8,uint8),(bytes32,uint8,uint8),address,bytes32,uint256,uint256,int256,int256,int256,int256,int256,int256,int256,int256,int256,int256,int256,int256,int256,(uint256,uint8,bool),(uint256,uint8,bool),int256,int256,int256,int256),(uint8,uint256,uint256,uint256,uint256,int256,int256,int256,int256,int256,int256,int256,int256),bytes32,bytes32)\":{\"params\":{\"_event\":\"prototype event to be evaluated and applied to the contract state\",\"externalData\":\"external data needed for POF evaluation\",\"state\":\"current state of the contract\",\"terms\":\"terms of the contract\"},\"return\":\"the new contract state and the evaluated event\"}},\"title\":\"the stateless component for a CEG contract implements the STF and POF of the Actus standard for a CEG contract\"},\"userdoc\":{\"methods\":{\"adjustEndOfMonthConvention(uint8,uint256,(uint256,uint8,uint8,bool))\":{\"notice\":\"This function makes an adjustment on the end of month convention.\"},\"computeCyclicScheduleSegment((uint8,uint256,uint256,uint256,uint256,uint256,uint256,uint256,uint256,uint256,uint256,uint256,uint256,int256,(uint256,uint8,uint8,bool),(uint256,uint8,uint8,bool),(uint256,uint8,uint8,bool),(uint256,uint8,uint8,bool),(uint256,uint8,uint8,bool),(uint256,uint8,bool),(uint256,uint8,bool)),uint256,uint256,uint8)\":{\"notice\":\"computes a schedule segment of cyclic contract events based on the contract terms and the specified period\"},\"computeInitialState((uint8,uint8,uint8,uint8,uint8,uint8,uint8,uint8,uint8,(bytes32,uint8,uint8),(bytes32,uint8,uint8),address,bytes32,uint256,uint256,int256,int256,int256,int256,int256,int256,int256,int256,int256,int256,int256,int256,int256,(uint256,uint8,bool),(uint256,uint8,bool),int256,int256,int256,int256))\":{\"notice\":\"initialize contract state space based on the contract terms TODO: - implement annuity calculator\"},\"computeNonCyclicScheduleSegment((uint8,uint256,uint256,uint256,uint256,uint256,uint256,uint256,uint256,uint256,uint256,uint256,uint256,int256,(uint256,uint8,uint8,bool),(uint256,uint8,uint8,bool),(uint256,uint8,uint8,bool),(uint256,uint8,uint8,bool),(uint256,uint8,uint8,bool),(uint256,uint8,bool),(uint256,uint8,bool)),uint256,uint256)\":{\"notice\":\"computes a schedule segment of non-cyclic contract events based on the contract terms and the specified period\"},\"computePayoffForEvent((uint8,uint8,uint8,uint8,uint8,uint8,uint8,uint8,uint8,(bytes32,uint8,uint8),(bytes32,uint8,uint8),address,bytes32,uint256,uint256,int256,int256,int256,int256,int256,int256,int256,int256,int256,int256,int256,int256,int256,(uint256,uint8,bool),(uint256,uint8,bool),int256,int256,int256,int256),(uint8,uint256,uint256,uint256,uint256,int256,int256,int256,int256,int256,int256,int256,int256),bytes32,bytes32)\":{\"notice\":\"applys a prototype event to the current state of a contract and returns the contrat event and the new contract state\"},\"computeStateForEvent((uint8,uint8,uint8,uint8,uint8,uint8,uint8,uint8,uint8,(bytes32,uint8,uint8),(bytes32,uint8,uint8),address,bytes32,uint256,uint256,int256,int256,int256,int256,int256,int256,int256,int256,int256,int256,int256,int256,int256,(uint256,uint8,bool),(uint256,uint8,bool),int256,int256,int256,int256),(uint8,uint256,uint256,uint256,uint256,int256,int256,int256,int256,int256,int256,int256,int256),bytes32,bytes32)\":{\"notice\":\"applys a prototype event to the current state of a contract and returns the contrat event and the new contract state\"}}}},\"settings\":{\"compilationTarget\":{\"/Users/johannes/Documents/dev/actus-protocol/actus-solidity/contracts/Engines/CEGEngine.sol\":\"CEGEngine\"},\"evmVersion\":\"byzantium\",\"libraries\":{},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[]},\"sources\":{\"/Users/johannes/Documents/dev/actus-protocol/actus-solidity/contracts/Core/ACTUSTypes.sol\":{\"keccak256\":\"0x7e614f56e1a6695a38e78d69325c6d161d120e1349fadc1be77e82c68797a314\",\"urls\":[\"bzzr://eafbd57e4dea531f83cac955b802f0512bfe0f94cd9e58a7dc6ca1d0c66eaffa\"]},\"/Users/johannes/Documents/dev/actus-protocol/actus-solidity/contracts/Core/Conventions/BusinessDayConvention.sol\":{\"keccak256\":\"0x292ea9d1eea093d8de5f418f8d86679b263c97d7b325155053e9d0135369e857\",\"urls\":[\"bzzr://66bf21f1ea32b4454f1beb61ed40f332a9dc942b9d726759effeb52648904717\"]},\"/Users/johannes/Documents/dev/actus-protocol/actus-solidity/contracts/Core/Conventions/ContractDefaultConvention.sol\":{\"keccak256\":\"0xfdb8fd78d35fa25cc7db727936fdd5c3d46a1d30c20b08037418ec681bd91e94\",\"urls\":[\"bzzr://9291b7185b7d046fb09425bcff71544fae6457b822fe416420841b381b994e5a\"]},\"/Users/johannes/Documents/dev/actus-protocol/actus-solidity/contracts/Core/Conventions/ContractRoleConvention.sol\":{\"keccak256\":\"0xbba83f32c925c72d2c464e23fff587b8f321d979dcd6537a9ac81e7565ee48d8\",\"urls\":[\"bzzr://970113b515fb120fea78f12704e5890a6654ca81bb46b65ddf0c0ac305c35ea5\"]},\"/Users/johannes/Documents/dev/actus-protocol/actus-solidity/contracts/Core/Conventions/DayCountConvention.sol\":{\"keccak256\":\"0x47e9a80579bfe220c358f89486b1a4645ced1fdc81045782b4ba7c6279e410da\",\"urls\":[\"bzzr://f7a26c34c302ab934ab1a5aba5302409f07ee6933ba303b4b10f4969b7cb3659\"]},\"/Users/johannes/Documents/dev/actus-protocol/actus-solidity/contracts/Core/Conventions/EndOfMonthConvention.sol\":{\"keccak256\":\"0xfe3fa9685de0e079c4e0194a5fc58456c8cc591cc0d8c6480c915bcebe7d8474\",\"urls\":[\"bzzr://e7a55d6232e2fd949acdc8669d693748ad8c6fc89618be4a017ddbacab0c25ad\"]},\"/Users/johannes/Documents/dev/actus-protocol/actus-solidity/contracts/Core/Core.sol\":{\"keccak256\":\"0x06cb3186a6af3fba28f23a90bcfadc26deb42f2fdffe319682af888cbedefd6e\",\"urls\":[\"bzzr://30f98614432e4d3ca4d7a149eb5eba9c3d567eae23be2626b19017f297adad97\"]},\"/Users/johannes/Documents/dev/actus-protocol/actus-solidity/contracts/Core/Schedule.sol\":{\"keccak256\":\"0x4b5debf0fb883ef3fbac4e9e068ac81562ed766afd8d2e7bf40c21f36d450fb9\",\"urls\":[\"bzzr://1a52592b6932363e977d077056a61093f39495802fe2ce0dbe9bad5cbca3dae5\"]},\"/Users/johannes/Documents/dev/actus-protocol/actus-solidity/contracts/Core/SignedMath.sol\":{\"keccak256\":\"0x087ce99293084f1440d9005e9888bd12aff770f72ee0ff977adae1255ce899e6\",\"urls\":[\"bzzr://682c9a17df08c3c0e121abaf5b55f15752c0543fcbb45cdcaa7ddf545e688b30\"]},\"/Users/johannes/Documents/dev/actus-protocol/actus-solidity/contracts/Core/Utils.sol\":{\"keccak256\":\"0x6ddd0bbd9233a3efbc06787287a1d657a7e29dc63b18d4384002e28b6693fefc\",\"urls\":[\"bzzr://2dc3d46069ce1dcc8d49f774ff922ae0394ac3ee144a403015fbce3a26952a1d\"]},\"/Users/johannes/Documents/dev/actus-protocol/actus-solidity/contracts/Engines/BaseEngine.sol\":{\"keccak256\":\"0x1058ca2e922cfbb0a0089f0ecb27831d2853a9d9e58d7260753ba838f488a72b\",\"urls\":[\"bzzr://7a800a9ee347954be71b4f41d7d1f7fb03d961222df88d465662bac3dac637ef\"]},\"/Users/johannes/Documents/dev/actus-protocol/actus-solidity/contracts/Engines/CEGEngine.sol\":{\"keccak256\":\"0x52233c555979c968a95f252a5e786d6c9e937691bdd0c7665d6f531581b0016f\",\"urls\":[\"bzzr://46fe3a88c74d8dec3fb13c1ae83b42f085a58d8e1e1ce926bd01b7f487970338\"]},\"/Users/johannes/Documents/dev/actus-protocol/actus-solidity/contracts/Engines/IEngine.sol\":{\"keccak256\":\"0x2867e1710b028298d1f33f62da76f902c4e0a4c9af7babe58abb257be2e74fb8\",\"urls\":[\"bzzr://0884526a7a4945399ed7e5ba1fc21539b7223caa2344ecd3d60cf210bdfcb747\"]},\"/Users/johannes/Documents/dev/actus-protocol/actus-solidity/contracts/Engines/POF.sol\":{\"keccak256\":\"0xfa3cfb375e8bfa8c8d5b333a3fd5e1daf20ad96ace1f8e00ea597b56145b41a4\",\"urls\":[\"bzzr://b7a2d0e36ee926085728c94105259bdb6d23cdbbeac22ce8ac57f672fa907a9f\"]},\"/Users/johannes/Documents/dev/actus-protocol/actus-solidity/contracts/Engines/STF.sol\":{\"keccak256\":\"0x3199eac4bab60f640a9497b98caee4dbd35acbb76556450852bcacf201723876\",\"urls\":[\"bzzr://f51e3350a09c8fb90c2db73dd6e6180833a6230705e62831e9492d07ae97ee09\"]},\"/Users/johannes/Documents/dev/actus-protocol/actus-solidity/contracts/external/BokkyPooBah/BokkyPooBahsDateTimeLibrary.sol\":{\"keccak256\":\"0x55ce115963ca5ee7a98b7b2e644e6decfbfdd70ada0b18e09a60344d9cdfe345\",\"urls\":[\"bzzr://9e24ebbec8dc7775ab45c4e41f9ac1958bb5710daf538df1f5cfd70b27650cb1\"]},\"openzeppelin-solidity/contracts/drafts/SignedSafeMath.sol\":{\"keccak256\":\"0xb4b45cd5475c318722ac0f8d7e2b9e77fee6f4f36374c1110fe615d50fbc0650\",\"urls\":[\"bzzr://a90fb457269c8a03ec5b811c71acef08a2751a4d2019b0661328610f9357dae7\"]},\"openzeppelin-solidity/contracts/math/SafeMath.sol\":{\"keccak256\":\"0x4ccf2d7b51873db1ccfd54ca2adae5eac3b184f9699911ed4490438419f1c690\",\"urls\":[\"bzzr://1604f5b6d6e916c154efd8c6720cda069e5ba32dfa0a9dedf2b42e5b02d07f89\"]}},\"version\":1}",
+  "bytecode": "0x608060405234801561001057600080fd5b50613493806100206000396000f3fe608060405234801561001057600080fd5b50600436106100d1576000357c010000000000000000000000000000000000000000000000000000000090048063811322fb1161008e578063811322fb146101a0578063aaf5eb68146101b3578063cb1e15fd146101bb578063e05a66e0146101ce578063e49172e0146101e1578063fb8eb230146101f4576100d1565b8063179331f3146100d65780631890068a146100ff5780631ab80df41461011f578063445186161461013f57806355464e371461015f578063725400031461017f575b600080fd5b6100e96100e43660046127db565b610207565b6040516100f691906131b2565b60405180910390f35b61011261010d366004612727565b6102d9565b6040516100f691906131a4565b61013261012d366004612940565b610305565b6040516100f6919061331b565b61015261014d366004612762565b610324565b6040516100f69190613196565b61017261016d366004612876565b610392565b6040516100f69190613187565b61019261018d366004612709565b610435565b6040516100f69291906131c0565b6101126101ae366004612828565b61047f565b61011261064b565b6101326101c9366004612921565b610650565b6101126101dc366004612846565b6106ab565b6101126101ef366004612940565b6106d0565b6101726102023660046128bc565b6106de565b60008084600181111561021657fe5b141561029257610225836107f2565b61022e84610817565b14801561027d575060028260200151600581111561024857fe5b1480610263575060038260200151600581111561026157fe5b145b8061027d575060048260200151600581111561027b57fe5b145b1561028a575060006102d2565b5060016102d2565b60018460018111156102a057fe5b14156102ae575060016102d2565b60405160e560020a62461bcd0281526004016102c9906132eb565b60405180910390fd5b9392505050565b6000806102e584610435565b9150506102fb8184606001518560000151610832565b9150505b92915050565b61030d611eac565b61031985858585610975565b90505b949350505050565b600080600061033288610435565b91509150841561038257600482601681111561034a57fe5b14806103615750600a82601681111561035f57fe5b145b801561037257506000846101800151135b1561038257600092505050610389565b6001925050505b95945050505050565b61039a611f15565b6103a2611f15565b60c0850151600090156103eb576103be8660c001518686610a72565b156103eb576103d260108760c001516106ab565b8261ffff8316604081106103e257fe5b60200201526001015b6103fa86608001518686610a72565b15156001141561042c57610413600a87608001516106ab565b8261ffff83166040811061042357fe5b60200201526001015b50949350505050565b6000808060ff7f0100000000000000000000000000000000000000000000000000000000000000850416601681111561046a57fe5b92505067ffffffffffffffff83169050915091565b6000600582601681111561048f57fe5b141561049d57506014610646565b600f8260168111156104ab57fe5b14156104b957506019610646565b60088260168111156104c757fe5b14156104d55750601e610646565b60078260168111156104e357fe5b14156104f157506028610646565b60048260168111156104ff57fe5b141561050d57506032610646565b600282601681111561051b57fe5b14156105295750603c610646565b600982601681111561053757fe5b141561054557506050610646565b601182601681111561055357fe5b14156105615750605a610646565b601282601681111561056f57fe5b141561057d57506064610646565b601382601681111561058b57fe5b14156105995750606e610646565b60068260168111156105a757fe5b14156105b557506078610646565b60108260168111156105c357fe5b14156105d157506082610646565b60158260168111156105df57fe5b14156105ed5750608c610646565b60148260168111156105fb57fe5b141561060957506096610646565b600a82601681111561061757fe5b1415610625575060a0610646565b600082601681111561063357fe5b141561064257506103b6610646565b5060005b919050565b601281565b610658611eac565b610660611eac565b600081526101a08301516020808301919091526101c084015160608301526101e08401519084015161069190610a9a565b60000b0260a0820152610220929092015160e08301525090565b60008160f88460168111156106bc57fe5b60ff166001029060020a0217905092915050565b600061031985858585610b61565b6106e6611f15565b6106ee611f15565b60048360168111156106fc57fe5b1415610319576102208601516060015160009015156001148015610724575061016087015115155b156107e857610731611f35565b61074e88610160015189608001518a610220015160018b8b610c4e565b905060005b60108160ff1610156107e5578160ff82166010811061076e57fe5b6020020151151561077e576107e5565b61079c8260ff83166010811061079057fe5b60200201518989610a72565b15156107a7576107dd565b6107c560048360ff8416601081106107bb57fe5b60200201516106ab565b8484604081106107d157fe5b60200201526001909201915b600101610753565b50505b5095945050505050565b600080808061080662015180865b04610e0d565b919450925090506103898383610ea5565b600080806108286201518085610800565b9695505050505050565b6000600183600881111561084257fe5b14806108595750600383600881111561085757fe5b145b1561086f576108688483610f2b565b90506102d2565b600283600881111561087d57fe5b14806108945750600483600881111561089257fe5b145b156108d85760006108a58584610f2b565b90506108b085610f87565b6108b982610f87565b14156108c65790506102d2565b6108d08584610f98565b9150506102d2565b60058360088111156108e657fe5b14806108fd575060078360088111156108fb57fe5b145b1561090c576108688483610f98565b600683600881111561091a57fe5b14806109315750600883600881111561092f57fe5b145b1561096d5760006109428584610f98565b905061094d85610f87565b61095682610f87565b14156109635790506102d2565b6108d08584610f2b565b509192915050565b61097d611eac565b60008061098985610435565b9092509050601082601681111561099c57fe5b14156109b7576109ae87878387610fe6565b9250505061031c565b60048260168111156109c557fe5b14156109d7576109ae87878387611025565b60038260168111156109e557fe5b14156109f7576109ae87878387611040565b6014826016811115610a0557fe5b1415610a17576109ae8787838761112c565b600a826016811115610a2557fe5b1415610a37576109ae8787838761114e565b6016826016811115610a4557fe5b1415610a57576109ae87878387611169565b60405160e560020a62461bcd0281526004016102c99061330b565b60008383108015610a835750838210155b15610a90575060016102d2565b5060009392505050565b600080826009811115610aa957fe5b1415610ab757506001610646565b6001826009811115610ac557fe5b1415610ad45750600019610646565b6006826009811115610ae257fe5b1415610af057506001610646565b6007826009811115610afe57fe5b1415610b0d5750600019610646565b6004826009811115610b1b57fe5b1415610b2957506001610646565b6005826009811115610b3757fe5b1415610b465750600019610646565b60405160e560020a62461bcd0281526004016102c99061326b565b6000806000610b6f85610435565b90925090506016826016811115610b8257fe5b1415610b935760009250505061031c565b6010826016811115610ba157fe5b1415610bb3576109ae8787838761124a565b6004826016811115610bc157fe5b1415610bd3576109ae8787838761127d565b6003826016811115610be157fe5b1415610bf3576109ae87878387611306565b6014826016811115610c0157fe5b1415610c13576109ae87878387611310565b600a826016811115610c2157fe5b1415610c33576109ae87878387611306565b60405160e560020a62461bcd0281526004016102c99061328b565b610c56611f35565b610c5e611f35565b60608601516000901515610cc857610c77898686610a72565b15610c925788828260108110610c8957fe5b60200201526001015b610c9d888686610a72565b15610cc05760018615151415610cc05787828260108110610cba57fe5b60200201525b509050610828565b8860005b89821015610d3557610cdf828888610a72565b15610d2057600e8310610d075760405160e560020a62461bcd0281526004016102c9906131db565b81848460108110610d1457fe5b60200201526001909201915b600101610d2e898c83611324565b9150610ccc565b60018815151415610d6357610d4b8a8888610a72565b15610d635789848460108110610d5d57fe5b60200201525b600083118015610d8d5750610d8d84600019850160108110610d8157fe5b60200201518888610a72565b15610dfe57600089604001516001811115610da457fe5b148015610db15750600183115b8015610dbd5750818a14155b15610dfe57838360108110610dce57fe5b602002015184600019850160108110610de357fe5b6020020152838360108110610df457fe5b6020020160008152505b50919998505050505050505050565b60008080836226496581018262023ab1600483020590506004600362023ab18302010590910390600062164b09610fa0600185010205905060046105b58202058303601f019250600061098f84605002811515610e6657fe5b0590506000605061098f83020585039050600b820560301994909401606402929092018301996002600c90940290910392909201975095509350505050565b60008160011480610eb65750816003145b80610ec15750816005145b80610ecc5750816007145b80610ed75750816008145b80610ee2575081600a145b80610eed575081600c145b15610efa5750601f6102ff565b60028214610f0a5750601e6102ff565b610f1383611441565b610f1e57601c610f21565b601d5b60ff169392505050565b60006001826001811115610f3b57fe5b1415610f8057610f4a83611466565b60061415610f6457610f5d836002611479565b90506102ff565b610f6d83611466565b60071415610f8057610f5d836001611479565b5090919050565b600080806107e86201518085610800565b60006001826001811115610fa857fe5b1415610f8057610fb783611466565b60061415610fca57610f5d83600161148e565b610fd383611466565b60071415610f8057610f5d83600261148e565b610fee611eac565b846101e001516110018660200151610a9a565b60000b0260a085015250506102a09290920151610100820152602081019190915290565b61102d611eac565b5050600060e08301526020820152919050565b611048611eac565b6020840183905260a08401516103608601516110699163ffffffff6114a316565b6101808501526080840183905260008560e00151600181111561108857fe5b14156110af57846102a001516110a18660200151610a9a565b60000b0260e0850152611123565b61111d61110c8560a00151611100886102a001516111006110dd8a602001518c606001518d6000015161154e565b6110f08a8d606001518e6000015161154e565b8c604001518d6101c001516115b8565b9063ffffffff6114a316565b60e08601519063ffffffff61167c16565b60e08501525b50919392505050565b611134611eac565b50506020820152600060a0820181905260e0820152919050565b611156611eac565b5050600060a08301526020820152919050565b611171611eac565b6000846040015160001461118957846040015161119c565b61119c8487606001518860000151610832565b610380870151604001519091508390600090156111d75760006111c4896103800151856116c7565b90508083116111d557600180895291505b505b876103a001516040015180156111eb575080155b1561121a576000611201896103a00151856116c7565b90508083116112135760028852611218565b600388525b505b6040870151151561123e576112388689606001518a60000151610832565b60408801525b50949695505050505050565b600084610320015161125f8660200151610a9a565b855161126a906117d1565b026000190260000b029050949350505050565b6000808560e00151600181111561129057fe5b14156112c057846102a001516112a98660200151610a9a565b85516112b4906117d1565b0260000b02905061031c565b6112ee61110c8560a00151611100886102a001516111006110dd8a602001518c606001518d6000015161154e565b84516112f9906117d1565b60000b0295945050505050565b6000949350505050565b60e083015161018084015101949350505050565b600080808560200151600581111561133857fe5b14156113555761134e8484876000015102611479565b905061031c565b60018560200151600581111561136757fe5b14156113805761134e8484876000015160070202611479565b60028560200151600581111561139257fe5b14156113a85761134e84848760000151026117f7565b6003856020015160058111156113ba57fe5b14156113d35761134e84848760000151600302026117f7565b6004856020015160058111156113e557fe5b14156113fe5761134e84848760000151600602026117f7565b60058560200151600581111561141057fe5b14156114265761134e848487600001510261186e565b60405160e560020a62461bcd0281526004016102c9906131fb565b60006004820615801561145657506064820615155b806102ff57505061019090061590565b6007620151809091046003010660010190565b6201518081028201828110156102ff57600080fd5b6201518081028203828111156102ff57600080fd5b60008215806114b0575081155b156114bd575060006102ff565b826000191480156114d1575060ff60020a82145b156114f15760405160e560020a62461bcd0281526004016102c9906132cb565b82820282848281151561150057fe5b05146115215760405160e560020a62461bcd0281526004016102c9906132cb565b670de0b6b3a764000081058015156102fb5760405160e560020a62461bcd0281526004016102c9906132ab565b6000600383600881111561155e57fe5b14806115755750600483600881111561157357fe5b145b8061158b5750600783600881111561158957fe5b145b806115a15750600883600881111561159f57fe5b145b156115ad5750826102d2565b61031c848484610832565b6000848410156115dd5760405160e560020a62461bcd0281526004016102c9906132db565b60008360068111156115eb57fe5b14156115fb5761134e8585611895565b600183600681111561160957fe5b14156116195761134e85856119b5565b600283600681111561162757fe5b14156116375761134e85856119e0565b600483600681111561164557fe5b14156116555761134e85856119ff565b600383600681111561166357fe5b14156116745761134e858584611ac0565b50600161031c565b60008282018183128015906116915750838112155b806116a657506000831280156116a657508381125b15156102d25760405160e560020a62461bcd0281526004016102c99061323b565b60008080846020015160058111156116db57fe5b14156116ef57610868838560000151611479565b60018460200151600581111561170157fe5b141561171857610868838560000151600702611479565b60028460200151600581111561172a57fe5b141561173e576108688385600001516117f7565b60038460200151600581111561175057fe5b1415611767576108688385600001516003026117f7565b60048460200151600581111561177957fe5b1415611790576108688385600001516006026117f7565b6005846020015160058111156117a257fe5b14156117b65761086883856000015161186e565b60405160e560020a62461bcd0281526004016102c99061324b565b600060038260038111156117e157fe5b14156117ef57506000610646565b506001919050565b60008080806118096201518087610800565b600c9188016000190182810493909301955091066001019250905060006118308484610ea5565b90508082111561183e578091505b62015180870662015180611853868686611b96565b020194508685101561186457600080fd5b5050505092915050565b60008080806118806201518087610800565b91870194509250905060006118308484610ea5565b6000806118a184611bfc565b905060006118ae84611bfc565b905060006118bb86611c18565b6118c75761016d6118cb565b61016e5b61ffff169050818314156118fd576118f3816118e78888611c3a565b9063ffffffff611c5516565b93505050506102ff565b600061190886611c18565b6119145761016d611918565b61016e5b61ffff1690506000611949836118e78a61194461193c8a600163ffffffff611d2716565b600180611d4f565b611c3a565b90506000611966836118e761196088600180611d4f565b8b611c3a565b90506119a861198c6001611980888a63ffffffff611d6916565b9063ffffffff611d6916565b61199c848463ffffffff61167c16565b9063ffffffff61167c16565b9998505050505050505050565b60006102d26101686118e7620151806119d4868863ffffffff611d6916565b9063ffffffff611d9416565b60006102d261016d6118e7620151806119d4868863ffffffff611d6916565b6000806000806000806000611a1389611dce565b975095509350611a2288611dce565b945092509050601f861415611a3657601e95505b82601f1415611a4457601e92505b6000611a56848863ffffffff611dec16565b90506000611a6a848863ffffffff611dec16565b90506000611a7e848863ffffffff611dec16565b9050611ab06101686118e78561199c611a9e87601e63ffffffff611e3716565b61199c8761016863ffffffff611e3716565b9c9b505050505050505050505050565b6000806000806000806000611ad48a611dce565b975095509350611ae389611dce565b945092509050611af28a6107f2565b861415611afe57601e95505b8789148015611b0d5750816002145b158015611b215750611b1e896107f2565b83145b15611b2b57601e92505b6000611b3d848863ffffffff611dec16565b90506000611b51848863ffffffff611dec16565b90506000611b65848863ffffffff611dec16565b9050611b856101686118e78561199c611a9e87601e63ffffffff611e3716565b9d9c50505050505050505050505050565b60006107b2841015611ba757600080fd5b506225bad61960046064600c600d1986018190059687016113248101929092056003028390056112c09092016105b502929092059093016001199582029094039490940161016f029390930591909101030190565b60008080611c0d6201518085610800565b509095945050505050565b6000808080611c2a6201518086610800565b9194509250905061038983611441565b600081831115611c4957600080fd5b50620151809190030490565b6000811515611c795760405160e560020a62461bcd0281526004016102c99061320b565b821515611c88575060006102ff565b670de0b6b3a7640000838102908482811515611ca057fe5b0514611cc15760405160e560020a62461bcd0281526004016102c99061329b565b82600019148015611cd5575060ff60020a84145b15611cf55760405160e560020a62461bcd0281526004016102c9906131eb565b60008382811515611d0257fe5b0590508015156102fb5760405160e560020a62461bcd0281526004016102c99061322b565b6000828201838110156102d25760405160e560020a62461bcd0281526004016102c99061321b565b600062015180611d60858585611b96565b02949350505050565b600082821115611d8e5760405160e560020a62461bcd0281526004016102c99061325b565b50900390565b6000808211611db85760405160e560020a62461bcd0281526004016102c99061327b565b60008284811515611dc557fe5b04949350505050565b60008080611ddf6201518085610800565b9196909550909350915050565b6000818303818312801590611e015750838113155b80611e165750600083128015611e1657508381135b15156102d25760405160e560020a62461bcd0281526004016102c9906132fb565b6000821515611e48575060006102ff565b82600019148015611e5c575060ff60020a82145b15611e7c5760405160e560020a62461bcd0281526004016102c9906132bb565b828202828482811515611e8b57fe5b05146102d25760405160e560020a62461bcd0281526004016102c9906132bb565b604080516101a0810190915280600081526020016000815260200160008152602001600081526020016000815260200160008152602001600081526020016000815260200160008152602001600081526020016000815260200160008152602001600081525090565b610800604051908101604052806040906020820280388339509192915050565b610200604051908101604052806010906020820280388339509192915050565b60006102d282356133a6565b60006102d28235613360565b60006102d28235613351565b60006102d282356133b1565b60006102d282356133c0565b60006102d282356133cf565b60006102d282356133de565b60006102d282356133ed565b60006102d282356133fc565b60006102d2823561340b565b60006102d2823561341a565b60006102d28235613429565b600060608284031215611ff757600080fd5b612001606061332a565b9050600061200f8484611f6d565b825250602061202084848301611f9d565b602083015250604061203484828501611f9d565b60408301525092915050565b6000610500828403121561205357600080fd5b61205e6102a061332a565b9050600061206c8484611fd9565b825250602061207d84848301611f6d565b602083015250604061209184828501611f6d565b60408301525060606120a584828501611f6d565b60608301525060806120b984828501611f6d565b60808301525060a06120cd84828501611f6d565b60a08301525060c06120e184828501611f6d565b60c08301525060e06120f584828501611f6d565b60e08301525061010061210a84828501611f6d565b6101008301525061012061212084828501611f6d565b6101208301525061014061213684828501611f6d565b6101408301525061016061214c84828501611f6d565b6101608301525061018061216284828501611f6d565b610180830152506101a061217884828501611f6d565b6101a0830152506101c061218e8482850161221f565b6101c0830152506102406121a48482850161221f565b6101e0830152506102c06121ba8482850161221f565b610200830152506103406121d08482850161221f565b610220830152506103c06121e68482850161221f565b610240830152506104406121fc8482850161228e565b610260830152506104a06122128482850161228e565b6102808301525092915050565b60006080828403121561223157600080fd5b61223b608061332a565b905060006122498484611f6d565b825250602061225a84848301611fcd565b602083015250604061226e84828501611f85565b604083015250606061228284828501611f61565b60608301525092915050565b6000606082840312156122a057600080fd5b6122aa606061332a565b905060006122b88484611f6d565b82525060206122c984848301611fcd565b602083015250604061203484828501611f61565b600061054082840312156122f057600080fd5b6122fb61044061332a565b905060006123098484611f85565b825250602061231a84848301611fa9565b602083015250604061232e84828501611fb5565b604083015250606061234284828501611f79565b606083015250608061235684828501611f85565b60808301525060a061236a84828501611fd9565b60a08301525060c061237e84828501611f91565b60c08301525060e061239284828501611f85565b60e0830152506101006123a784828501611f91565b610100830152506101206123bd84828501611fe5565b610120830152506101806123d384828501611fe5565b610140830152506101e06123e984828501611f55565b610160830152506102006123ff84828501611f6d565b6101808301525061022061241584828501611f6d565b6101a08301525061024061242b84828501611f6d565b6101c08301525061026061244184828501611f6d565b6101e08301525061028061245784828501611f6d565b610200830152506102a061246d84828501611f6d565b610220830152506102c061248384828501611f6d565b610240830152506102e061249984828501611f6d565b610260830152506103006124af84828501611f6d565b610280830152506103206124c584828501611f6d565b6102a0830152506103406124db84828501611f6d565b6102c0830152506103606124f184828501611f6d565b6102e08301525061038061250784828501611f6d565b610300830152506103a061251d84828501611f6d565b610320830152506103c061253384828501611f6d565b610340830152506103e061254984828501611f6d565b6103608301525061040061255f8482850161228e565b610380830152506104606125758482850161228e565b6103a0830152506104c061258b84828501611f6d565b6103c0830152506104e06125a184828501611f6d565b6103e0830152506105006125b784828501611f6d565b610400830152506105206125cd84828501611f6d565b6104208301525092915050565b60006101a082840312156125ed57600080fd5b6125f86101a061332a565b905060006126068484611f91565b825250602061261784848301611f6d565b602083015250604061262b84828501611f6d565b604083015250606061263f84828501611f6d565b606083015250608061265384828501611f6d565b60808301525060a061266784828501611f6d565b60a08301525060c061267b84828501611f6d565b60c08301525060e061268f84828501611f6d565b60e0830152506101006126a484828501611f6d565b610100830152506101206126ba84828501611f6d565b610120830152506101406126d084828501611f6d565b610140830152506101606126e684828501611f6d565b610160830152506101806126fc84828501611f6d565b6101808301525092915050565b60006020828403121561271b57600080fd5b60006102fb8484611f6d565b600080610560838503121561273b57600080fd5b60006127478585611f6d565b9250506020612758858286016122dd565b9150509250929050565b60008060008060006108c0868803121561277b57600080fd5b60006127878888611f6d565b9550506020612798888289016122dd565b9450506105606127aa888289016125da565b9350506107006127bc88828901611f61565b9250506107206127ce888289016125da565b9150509295509295909350565b600080600060c084860312156127f057600080fd5b60006127fc8686611f85565b935050602061280d86828701611f6d565b925050604061281e8682870161221f565b9150509250925092565b60006020828403121561283a57600080fd5b60006102fb8484611fc1565b6000806040838503121561285957600080fd5b60006128658585611fc1565b925050602061275885828601611f6d565b6000806000610540848603121561288c57600080fd5b60006128988686612040565b9350506105006128aa86828701611f6d565b92505061052061281e86828701611f6d565b60008060008061056085870312156128d357600080fd5b60006128df8787612040565b9450506105006128f187828801611f6d565b93505061052061290387828801611f6d565b92505061054061291587828801611fc1565b91505092959194509250565b6000610540828403121561293457600080fd5b60006102fb84846122dd565b600080600080610720858703121561295757600080fd5b600061296387876122dd565b945050610540612975878288016125da565b9350506106e061298787828801611f6d565b92505061070061291587828801611f6d565b6129a281613354565b6129ab82613351565b60005b828110156129db576129c18583516129f1565b6129ca8261335a565b6020959095019491506001016129ae565b5050505050565b6129eb81613360565b82525050565b6129eb81613351565b6129eb81613438565b6129eb81613443565b6129eb8161344e565b602e81527f5363686564756c652e636f6d70757465446174657346726f6d4379636c653a2060208201527f4d41585f4359434c455f53495a45000000000000000000000000000000000000604082015260600190565b602581527f466c6f61744d4154482e666c6f61744469763a204f564552464c4f575f44455460208201527f4543544544000000000000000000000000000000000000000000000000000000604082015260600190565b602e81527f5363686564756c652e6765744e6578744379636c65446174653a20415454524960208201527f425554455f4e4f545f464f554e44000000000000000000000000000000000000604082015260600190565b602281527f466c6f61744d6174682e666c6f61744469763a204449564944454442595f5a4560208201527f524f000000000000000000000000000000000000000000000000000000000000604082015260600190565b601b81527f536166654d6174683a206164646974696f6e206f766572666c6f770000000000602082015260400190565b603081527f466c6f61744d6174682e666c6f61744469763a2043414e4e4f545f524550524560208201527f53454e545f4752414e554c415249545900000000000000000000000000000000604082015260600190565b602181527f5369676e6564536166654d6174683a206164646974696f6e206f766572666c6f60208201527f7700000000000000000000000000000000000000000000000000000000000000604082015260600190565b603081527f436f72652e67657454696d657374616d70506c7573506572696f643a2041545460208201527f5249425554455f4e4f545f464f554e4400000000000000000000000000000000604082015260600190565b601e81527f536166654d6174683a207375627472616374696f6e206f766572666c6f770000602082015260400190565b603481527f436f6e7472616374526f6c65436f6e76656e74696f6e2e726f6c655369676e3a60208201527f204154545249425554455f4e4f545f464f554e44000000000000000000000000604082015260600190565b601a81527f536166654d6174683a206469766973696f6e206279207a65726f000000000000602082015260400190565b602d81527f434547456e67696e652e7061796f666646756e6374696f6e3a2041545452494260208201527f5554455f4e4f545f464f554e4400000000000000000000000000000000000000604082015260600190565b602581527f466c6f61744d6174682e666c6f61744469763a204f564552464c4f575f44455460208201527f4543544544000000000000000000000000000000000000000000000000000000604082015260600190565b603181527f466c6f61744d6174682e666c6f61744d756c743a2043414e4e4f545f5245505260208201527f4553454e545f4752414e554c4152495459000000000000000000000000000000604082015260600190565b602781527f5369676e6564536166654d6174683a206d756c7469706c69636174696f6e206f60208201527f766572666c6f7700000000000000000000000000000000000000000000000000604082015260600190565b602681527f466c6f61744d6174682e666c6f61744d756c743a204f564552464c4f575f444560208201527f5445435445440000000000000000000000000000000000000000000000000000604082015260600190565b602281527f436f72652e796561724672616374696f6e3a20554e4d45545f434f4e4449544960208201527f4f4e000000000000000000000000000000000000000000000000000000000000604082015260600190565b604581527f456e644f664d6f6e7468436f6e76656e74696f6e2e61646a757374456e644f6660208201527f4d6f6e7468436f6e76656e74696f6e3a204154545249425554455f4e4f545f4660408201527f4f554e442e000000000000000000000000000000000000000000000000000000606082015260800190565b602481527f5369676e6564536166654d6174683a207375627472616374696f6e206f76657260208201527f666c6f7700000000000000000000000000000000000000000000000000000000604082015260600190565b603681527f434547456e67696e652e73746174655472616e736974696f6e46756e6374696f60208201527f6e3a204154545249425554455f4e4f545f464f554e4400000000000000000000604082015260600190565b80516101a083019061309384826129fa565b5060208201516130a660208501826129f1565b5060408201516130b960408501826129f1565b5060608201516130cc60608501826129f1565b5060808201516130df60808501826129f1565b5060a08201516130f260a08501826129f1565b5060c082015161310560c08501826129f1565b5060e082015161311860e08501826129f1565b5061010082015161312d6101008501826129f1565b506101208201516131426101208501826129f1565b506101408201516131576101408501826129f1565b5061016082015161316c6101608501826129f1565b506101808201516131816101808501826129f1565b50505050565b61080081016102ff8284612999565b602081016102ff82846129e2565b602081016102ff82846129f1565b602081016102ff8284612a03565b604081016131ce8285612a0c565b6102d260208301846129f1565b602080825281016102ff81612a15565b602080825281016102ff81612a6b565b602080825281016102ff81612ac1565b602080825281016102ff81612b17565b602080825281016102ff81612b6d565b602080825281016102ff81612b9d565b602080825281016102ff81612bf3565b602080825281016102ff81612c49565b602080825281016102ff81612c9f565b602080825281016102ff81612ccf565b602080825281016102ff81612d25565b602080825281016102ff81612d55565b602080825281016102ff81612dab565b602080825281016102ff81612e01565b602080825281016102ff81612e57565b602080825281016102ff81612ead565b602080825281016102ff81612f03565b602080825281016102ff81612f59565b602080825281016102ff81612fd5565b602080825281016102ff8161302b565b6101a081016102ff8284613081565b60405181810167ffffffffffffffff8111828210171561334957600080fd5b604052919050565b90565b50604090565b60200190565b151590565b60006004821061337157fe5b5090565b60006002821061337157fe5b60006017821061337157fe5b73ffffffffffffffffffffffffffffffffffffffff1690565b60006102ff8261338d565b60006009821061337157600080fd5b60006002821061337157600080fd5b60006004821061337157600080fd5b60006005821061337157600080fd5b6000600a821061337157600080fd5b60006007821061337157600080fd5b60006017821061337157600080fd5b60006006821061337157600080fd5b60006008821061337157600080fd5b60006102ff82613365565b60006102ff82613375565b60006102ff8261338156fea265627a7a72305820a048be7823ec41afae9930bf623ea52fdb027aed5a0904461f93efd583dd20056c6578706572696d656e74616cf50037",
   "compiler": {
     "name": "solc",
     "version": "0.5.2+commit.1df8f40c.Emscripten.clang"
   },
   "networks": {},
-  "updatedAt": "2019-11-30T20:55:27.975Z"
+  "updatedAt": "2019-12-03T10:09:11.264Z"
 }

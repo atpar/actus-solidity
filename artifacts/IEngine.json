@@ -71,8 +71,26 @@
                   "type": "uint8"
                 }
               ],
-              "name": "contractReferences",
-              "type": "tuple[2]"
+              "name": "contractReference_1",
+              "type": "tuple"
+            },
+            {
+              "components": [
+                {
+                  "name": "object",
+                  "type": "bytes32"
+                },
+                {
+                  "name": "contractReferenceType",
+                  "type": "uint8"
+                },
+                {
+                  "name": "contractReferenceRole",
+                  "type": "uint8"
+                }
+              ],
+              "name": "contractReference_2",
+              "type": "tuple"
             },
             {
               "name": "currency",
@@ -320,8 +338,26 @@
                   "type": "uint8"
                 }
               ],
-              "name": "contractReferences",
-              "type": "tuple[2]"
+              "name": "contractReference_1",
+              "type": "tuple"
+            },
+            {
+              "components": [
+                {
+                  "name": "object",
+                  "type": "bytes32"
+                },
+                {
+                  "name": "contractReferenceType",
+                  "type": "uint8"
+                },
+                {
+                  "name": "contractReferenceRole",
+                  "type": "uint8"
+                }
+              ],
+              "name": "contractReference_2",
+              "type": "tuple"
             },
             {
               "name": "currency",
@@ -635,8 +671,26 @@
                   "type": "uint8"
                 }
               ],
-              "name": "contractReferences",
-              "type": "tuple[2]"
+              "name": "contractReference_1",
+              "type": "tuple"
+            },
+            {
+              "components": [
+                {
+                  "name": "object",
+                  "type": "bytes32"
+                },
+                {
+                  "name": "contractReferenceType",
+                  "type": "uint8"
+                },
+                {
+                  "name": "contractReferenceRole",
+                  "type": "uint8"
+                }
+              ],
+              "name": "contractReference_2",
+              "type": "tuple"
             },
             {
               "name": "currency",
@@ -1366,8 +1420,26 @@
                   "type": "uint8"
                 }
               ],
-              "name": "contractReferences",
-              "type": "tuple[2]"
+              "name": "contractReference_1",
+              "type": "tuple"
+            },
+            {
+              "components": [
+                {
+                  "name": "object",
+                  "type": "bytes32"
+                },
+                {
+                  "name": "contractReferenceType",
+                  "type": "uint8"
+                },
+                {
+                  "name": "contractReferenceRole",
+                  "type": "uint8"
+                }
+              ],
+              "name": "contractReference_2",
+              "type": "tuple"
             },
             {
               "name": "currency",
@@ -1633,5 +1705,5 @@
     "version": "0.5.2+commit.1df8f40c.Emscripten.clang"
   },
   "networks": {},
-  "updatedAt": "2019-11-30T20:55:27.981Z"
+  "updatedAt": "2019-12-03T10:09:11.270Z"
 }
