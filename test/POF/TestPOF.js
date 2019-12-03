@@ -12,9 +12,7 @@ contract('TestPOF', () => {
     });
 
     /*
-    *
     * TEST POF_PAM_FP
-    * 
     */
 
     // feeBasis.A
@@ -25,8 +23,8 @@ contract('TestPOF', () => {
 
         this.lifecycleTerms.feeBasis = 0; // FeeBasis.A
         this.lifecycleTerms.feeRate = web3.utils.toWei("5"); // set fixed fee
-        this.contractRole = 0; //RPA -> roleSign = 1
-        state.contractPerformance = 0; // Performant
+        this.lifecycleTerms.contractRole = 0; //RPA -> roleSign = 1
+        state[0] = '0'; // contractPerformance = Performant
         
         const payoff = await this.TestPOF._POF_PAM_FP(
             this.lifecycleTerms, 
@@ -56,7 +54,7 @@ contract('TestPOF', () => {
         this.lifecycleTerms.maturityDate = 31536000; // 1 year
 
         this.lifecycleTerms.feeRate = web3.utils.toWei(".05"); // set fee rate
-        state[5] = web3.utils.toWei("1000000"); // .notionalPrincipal = 1M
+        state[5] = web3.utils.toWei("1000000"); // notionalPrincipal = 1M
         
         console.log(state[0], state[7], state[1], state[5]);
 
@@ -67,6 +65,29 @@ contract('TestPOF', () => {
             externalData 
             );
         assert.equal(payoff.toString(), "10100000000000000000000");
+    });
+
+    /*
+    * TEST POF_PAM_IED
+    */
+
+    it('Should yield an initial exchange amount of -1000100', async () => {
+        const state = await this.PAMEngineInstance.computeInitialState(this.lifecycleTerms, {});
+        const externalData = "0x0000000000000000000000000000000000000000000000000000000000000000";
+        const scheduleTime = 0;
+
+        state[0] = '0'; // contractPerformance = Performant
+        this.lifecycleTerms.contractRole = 0; //RPA -> roleSign = 1
+        this.lifecycleTerms.notionalPrincipal = web3.utils.toWei("1000000"); // notionalPrincipal = 1M
+        this.lifecycleTerms.premiumDiscountAtIED = web3.utils.toWei("100"); // premiumDiscountAtIED = 100
+
+        const payoff = await this.TestPOF._POF_PAM_IED(
+            this.lifecycleTerms, 
+            state, 
+            scheduleTime, 
+            externalData 
+            );
+        assert.equal(payoff.toString(), "-1000100000000000000000000");
     });
 
 });
