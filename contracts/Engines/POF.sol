@@ -116,7 +116,6 @@ contract POF is Core {
   {
     return (
       roleSign(terms.contractRole)
-      * 0 // riskFactor(scheduleTime, state, terms, terms.objectCodeOfPrepaymentModel)
       * state.notionalPrincipal
     );
   }

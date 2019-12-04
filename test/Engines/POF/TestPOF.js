@@ -112,5 +112,27 @@ contract('TestPOF', () => {
             );
         assert.equal(payoff.toString(), "20200000000000000000000");
     });
+
+    /*
+    * TEST POF_PAM_PP
+    */
+
+    it('Should yield a principal prepayment of 1000000', async () => {
+        const state = await this.PAMEngineInstance.computeInitialState(this.lifecycleTerms, {});
+        const externalData = "0x0000000000000000000000000000000000000000000000000000000000000000";
+        const scheduleTime = 6307200; // .2 years
+
+        // used data
+        this.lifecycleTerms.contractRole = 0; //RPA -> roleSign = 1
+        state[5] = web3.utils.toWei("1000000"); // notionalPrincipal = 1M
+
+        const payoff = await this.TestPOF._POF_PAM_PP(
+            this.lifecycleTerms, 
+            state, 
+            scheduleTime, 
+            externalData 
+            );
+        assert.equal(payoff.toString(), "1000000000000000000000000");
+    });
     
 });
