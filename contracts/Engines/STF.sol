@@ -1099,7 +1099,8 @@ contract STF is Core {
     returns (State memory)
   {
     state.statusDate = scheduleTime;
-    state.executionAmount = terms.coverageOfCreditEnhancement.floatMult(state.notionalPrincipal);
+    // decode state.notionalPrincipal of underlying from externalData
+    state.executionAmount = terms.coverageOfCreditEnhancement.floatMult(int256(externalData));
     state.executionDate = scheduleTime;
 
     if (terms.feeBasis == FeeBasis.A) {
