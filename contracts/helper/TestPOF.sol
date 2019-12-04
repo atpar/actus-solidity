@@ -95,4 +95,22 @@ contract TestPOF is POF {
             externalData
         );
     }
+
+    function _POF_PAM_PR (
+        LifecycleTerms memory terms,
+        State memory state,
+        uint256 scheduleTime,
+        bytes32 externalData
+    )
+    public
+    pure
+    returns(int256)
+    {
+        return POF_PAM_PR(
+            terms,
+            state,
+            scheduleTime,
+            externalData
+        );
+    }
 }

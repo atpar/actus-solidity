@@ -143,8 +143,6 @@ contract('TestPOF', () => {
         const state = await this.PAMEngineInstance.computeInitialState(this.lifecycleTerms, {});
         const externalData = "0x0000000000000000000000000000000000000000000000000000000000000000";
 
-        console.log(this.lifecycleTerms)
-
         // used data
         const scheduleTime = 6307200; // .2 years
         this.lifecycleTerms.contractRole = 0; //RPA -> roleSign = 1
@@ -165,6 +163,30 @@ contract('TestPOF', () => {
             externalData 
             );
         assert.equal(payoff.toString(), "-89900000000000000000000");
+    });
+
+    /*
+    * TEST POF_PAM_PR
+    */
+
+    it('Should yield a principal redemptoin of 1100000', async () => {
+        const state = await this.PAMEngineInstance.computeInitialState(this.lifecycleTerms, {});
+        const externalData = "0x0000000000000000000000000000000000000000000000000000000000000000";
+        const scheduleTime = 6307200; // .2 years
+
+        // used data
+        state[10] = web3.utils.toWei("1.1"); // notionalScalingMultiplier
+        state[5] = web3.utils.toWei("1000000"); // notionalPrincipal = 1M
+        
+        console.log(state)
+
+        const payoff = await this.TestPOF._POF_PAM_PR(
+            this.lifecycleTerms, 
+            state, 
+            scheduleTime, 
+            externalData 
+            );
+        assert.equal(payoff.toString(), "1100000000000000000000000");
     });
     
 });
