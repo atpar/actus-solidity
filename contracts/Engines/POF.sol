@@ -12,11 +12,6 @@ contract POF is Core {
   /**
 	 * Calculate the pay-off for PAM Fees. The method how to calculate the fee
    * heavily depends on the selected Fee Basis.
-	 * @dev see initStateSpace()
-	 * @param terms Lifecycle Terms
-   * @param state State
-   * @param scheduleTime time
-   * @param externalData data
 	 * @return the fee amount
 	 */
   function POF_PAM_FP (
@@ -31,15 +26,13 @@ contract POF is Core {
   {
     if (terms.feeBasis == FeeBasis.A) {
       return (
-        performanceIndicator(state.contractPerformance)
-        * roleSign(terms.contractRole)
+        roleSign(terms.contractRole)
         * terms.feeRate
       );
     }
 
     return (
-      performanceIndicator(state.contractPerformance)
-      * state.feeAccrued
+      state.feeAccrued
         .add(
           yearFraction(
             shiftCalcTime(state.statusDate, terms.businessDayConvention, terms.calendar),
@@ -53,6 +46,10 @@ contract POF is Core {
     );
   }
 
+  /**
+	 * Calculate the payoff for the initial exchange
+	 * @return the payoff at iniitial exchange
+	 */
   function POF_PAM_IED (
     LifecycleTerms memory terms,
     State memory state,
@@ -64,14 +61,17 @@ contract POF is Core {
     returns(int256)
   {
     return (
-      performanceIndicator(state.contractPerformance)
-      * roleSign(terms.contractRole)
+      roleSign(terms.contractRole)
       * (-1)
       * terms.notionalPrincipal
         .add(terms.premiumDiscountAtIED)
     );
   }
 
+  /**
+	 * Calculate the interest payment payoff
+	 * @return the interest amount to pay
+	 */
   function POF_PAM_IP (
     LifecycleTerms memory terms,
     State memory state,
@@ -83,8 +83,7 @@ contract POF is Core {
     returns(int256)
   {
     return (
-      performanceIndicator(state.contractPerformance)
-      * state.interestScalingMultiplier
+      state.interestScalingMultiplier
         .floatMult(
           state.accruedInterest
           .add(
@@ -101,6 +100,10 @@ contract POF is Core {
     );
   }
 
+  /**
+	 * Calculate the principal prepayment payoff
+	 * @return the principal prepayment amount
+	 */
   function POF_PAM_PP (
     LifecycleTerms memory terms,
     State memory state,
@@ -112,8 +115,7 @@ contract POF is Core {
     returns(int256)
   {
     return (
-      performanceIndicator(state.contractPerformance)
-      * roleSign(terms.contractRole)
+      roleSign(terms.contractRole)
       * 0 // riskFactor(scheduleTime, state, terms, terms.objectCodeOfPrepaymentModel)
       * state.notionalPrincipal
     );
@@ -130,8 +132,7 @@ contract POF is Core {
     returns(int256)
   {
     return (
-      performanceIndicator(state.contractPerformance)
-      * roleSign(terms.contractRole)
+      roleSign(terms.contractRole)
       * (-1)
       * terms.priceAtPurchaseDate
         .add(state.accruedInterest)
@@ -159,8 +160,7 @@ contract POF is Core {
     returns(int256)
   {
     return (
-      performanceIndicator(state.contractPerformance)
-      * state.notionalScalingMultiplier
+      state.notionalScalingMultiplier
         .floatMult(state.notionalPrincipal)
     );
   }
@@ -177,14 +177,12 @@ contract POF is Core {
   {
     if (terms.penaltyType == PenaltyType.A) {
       return (
-        performanceIndicator(state.contractPerformance)
-        * roleSign(terms.contractRole)
+        roleSign(terms.contractRole)
         * terms.penaltyRate
       );
     } else if (terms.penaltyType == PenaltyType.N) {
       return (
-        performanceIndicator(state.contractPerformance)
-        * roleSign(terms.contractRole)
+        roleSign(terms.contractRole)
         * yearFraction(
             shiftCalcTime(state.statusDate, terms.businessDayConvention, terms.calendar),
             shiftCalcTime(scheduleTime, terms.businessDayConvention, terms.calendar),
@@ -200,8 +198,7 @@ contract POF is Core {
       int256 param = 0;
       if (state.nominalInterestRate - risk > 0) param = state.nominalInterestRate - risk;
       return (
-        performanceIndicator(state.contractPerformance)
-        * roleSign(terms.contractRole)
+        roleSign(terms.contractRole)
         * yearFraction(
             shiftCalcTime(state.statusDate, terms.businessDayConvention, terms.calendar),
             shiftCalcTime(scheduleTime, terms.businessDayConvention, terms.calendar),
@@ -225,8 +222,7 @@ contract POF is Core {
     returns(int256)
   {
     return (
-      performanceIndicator(state.contractPerformance)
-      * roleSign(terms.contractRole)
+      roleSign(terms.contractRole)
       * terms.priceAtPurchaseDate
         .add(state.accruedInterest)
         .add(
@@ -254,14 +250,12 @@ contract POF is Core {
   {
     if (terms.feeBasis == FeeBasis.A) {
       return (
-        performanceIndicator(state.contractPerformance)
-        * roleSign(terms.contractRole)
+        roleSign(terms.contractRole)
         * terms.feeRate
       );
     } else {
       return (
-        performanceIndicator(state.contractPerformance)
-        * state.feeAccrued
+        state.feeAccrued
           .add(
             yearFraction(
               shiftCalcTime(state.statusDate, terms.businessDayConvention, terms.calendar),
@@ -287,8 +281,7 @@ contract POF is Core {
     returns(int256)
   {
     return (
-      performanceIndicator(state.contractPerformance)
-      * (state.notionalScalingMultiplier * roleSign(terms.contractRole))
+      (state.notionalScalingMultiplier * roleSign(terms.contractRole))
         .floatMult(
           (roleSign(terms.contractRole) * state.notionalPrincipal)
           .min(
@@ -321,8 +314,7 @@ contract POF is Core {
     returns(int256)
   {
     return (
-      performanceIndicator(state.contractPerformance)
-      * state.notionalScalingMultiplier
+      state.notionalScalingMultiplier
         .floatMult(state.notionalPrincipal)
     );
   }
@@ -377,8 +369,7 @@ contract POF is Core {
     returns(int256)
   {
     return (
-      performanceIndicator(state.contractPerformance)
-      * roleSign(terms.contractRole)
+      roleSign(terms.contractRole)
       * (-1)
       * terms.priceAtPurchaseDate
     );
@@ -396,15 +387,13 @@ contract POF is Core {
   {
     if (terms.feeBasis == FeeBasis.A) {
       return (
-        performanceIndicator(state.contractPerformance)
-        * roleSign(terms.contractRole)
+        roleSign(terms.contractRole)
         * terms.feeRate
       );
     }
 
     return (
-      performanceIndicator(state.contractPerformance)
-      * state.feeAccrued
+      state.feeAccrued
         .add(
           yearFraction(
             shiftCalcTime(state.statusDate, terms.businessDayConvention, terms.calendar),
