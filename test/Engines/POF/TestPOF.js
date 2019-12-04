@@ -169,7 +169,7 @@ contract('TestPOF', () => {
     * TEST POF_PAM_PR
     */
 
-    it('Should yield a principal redemptoin of 1100000', async () => {
+    it('Should yield a principal redemption of 1100000', async () => {
         const state = await this.PAMEngineInstance.computeInitialState(this.lifecycleTerms, {});
         const externalData = "0x0000000000000000000000000000000000000000000000000000000000000000";
         const scheduleTime = 6307200; // .2 years
@@ -263,6 +263,37 @@ contract('TestPOF', () => {
             externalData 
             );
         assert.equal(payoff.toString(), "200000000000000000000000");
+    });
+
+    /*
+    * TEST POF_PAM_TD
+    */
+
+    it('Should yield a termination payoff of 110100', async () => {
+        const state = await this.PAMEngineInstance.computeInitialState(this.lifecycleTerms, {});
+        const externalData = "0x0000000000000000000000000000000000000000000000000000000000000000";
+
+        // used data
+        state[6] = web3.utils.toWei("100"); // accruedInterest
+        this.lifecycleTerms.priceAtPurchaseDate = web3.utils.toWei("100000");
+        const scheduleTime = 6307200; // .2 years
+        this.lifecycleTerms.contractRole = 0; //RPA -> roleSign = 1
+        this.lifecycleTerms.priceAtPurchaseDate = web3.utils.toWei("100000");
+        this.lifecycleTerms.businessDayConvention = 0; // NULL
+        this.lifecycleTerms.calendar = 0; // NoCalendar
+        this.lifecycleTerms.dayCountConvention = 2; // A_365
+        this.lifecycleTerms.maturityDate = 31536000; // 1 year
+        state[1] = '0'; // statusDate = 0
+        state[8] = web3.utils.toWei("0.05"); // nominalInterestRate
+        state[5] = web3.utils.toWei("1000000"); // notionalPrincipal = 1M
+
+        const payoff = await this.TestPOF._POF_PAM_TD(
+            this.lifecycleTerms, 
+            state, 
+            scheduleTime, 
+            externalData 
+            );
+        assert.equal(payoff.toString(), "110100000000000000000000");
     });
     
 });

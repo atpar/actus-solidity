@@ -219,6 +219,10 @@ contract POF is Core {
     }
   }
 
+  /**
+   * Calculate the payoff in case of termination of a contract
+   * @return the termination payoff amount
+   */
   function POF_PAM_TD (
     LifecycleTerms memory terms,
     State memory state,
