@@ -130,9 +130,10 @@ contract CECEngine is BaseEngine, STF, POF {
 
 		if (eventType == EventType.XD) return STF_CEG_XD(terms, state, scheduleTime, externalData);
 		if (eventType == EventType.MD) return STF_CEG_MD(terms, state, scheduleTime, externalData);
+		if (eventType == EventType.STD) return STF_CEG_STD(terms, state, scheduleTime, externalData);
 		if (eventType == EventType.CE) return STF_PAM_DEL(terms, state, scheduleTime, externalData);
 
-		revert("CEGEngine.stateTransitionFunction: ATTRIBUTE_NOT_FOUND");
+		revert("CECEngine.stateTransitionFunction: ATTRIBUTE_NOT_FOUND");
 	}
 
 	/**
@@ -160,8 +161,9 @@ contract CECEngine is BaseEngine, STF, POF {
 
 		if (eventType == EventType.CE) return 0;
 		if (eventType == EventType.XD) return POF_CEG_XD(terms, state, scheduleTime, externalData);
+		if (eventType == EventType.STD) return POF_CEG_STD(terms, state, scheduleTime, externalData);
 		if (eventType == EventType.MD) return POF_CEG_MD(terms, state, scheduleTime, externalData);
 
-		revert("CEGEngine.payoffFunction: ATTRIBUTE_NOT_FOUND");
+		revert("CECEngine.payoffFunction: ATTRIBUTE_NOT_FOUND");
 	}
 }
