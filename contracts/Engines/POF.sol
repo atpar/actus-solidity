@@ -12,7 +12,7 @@ contract POF is Core {
   /**
 	 * Calculate the pay-off for PAM Fees. The method how to calculate the fee
    * heavily depends on the selected Fee Basis.
-	 * @return the fee amount
+	 * @return the fee amount for PAM contracts
 	 */
   function POF_PAM_FP (
     LifecycleTerms memory terms,
@@ -48,7 +48,7 @@ contract POF is Core {
 
   /**
 	 * Calculate the payoff for the initial exchange
-	 * @return the payoff at iniitial exchange
+	 * @return the payoff at iniitial exchange for PAM contracts
 	 */
   function POF_PAM_IED (
     LifecycleTerms memory terms,
@@ -70,7 +70,7 @@ contract POF is Core {
 
   /**
 	 * Calculate the interest payment payoff
-	 * @return the interest amount to pay
+	 * @return the interest amount to pay for PAM contracts
 	 */
   function POF_PAM_IP (
     LifecycleTerms memory terms,
@@ -102,7 +102,7 @@ contract POF is Core {
 
   /**
 	 * Calculate the principal prepayment payoff
-	 * @return the principal prepayment amount
+	 * @return the principal prepayment amount for PAM contracts
 	 */
   function POF_PAM_PP (
     LifecycleTerms memory terms,
@@ -122,7 +122,7 @@ contract POF is Core {
 
   /**
    * Calculate the payoff in case of a purchase of the contract
-   * @return the purchase amount
+   * @return the purchase amount for PAM contracts
    */
   function POF_PAM_PRD (
     LifecycleTerms memory terms,
@@ -155,10 +155,10 @@ contract POF is Core {
   }
 
   /**
-   * Calculate the payoff in case of a scheduled principal redemption payment
-   * @return the principal redemption amount
+   * Calculate the payoff in case of maturity
+   * @return the maturity payoff for PAM contracts
    */
-  function POF_PAM_PR (
+  function POF_PAM_MD (
     LifecycleTerms memory terms,
     State memory state,
     uint256 scheduleTime,
@@ -176,7 +176,7 @@ contract POF is Core {
 
   /**
    * Calculate the payoff in case of a penalty event
-   * @return the penalty amount
+   * @return the penalty amount for PAM contracts
    */
   function POF_PAM_PY (
     LifecycleTerms memory terms,
@@ -221,7 +221,7 @@ contract POF is Core {
 
   /**
    * Calculate the payoff in case of termination of a contract
-   * @return the termination payoff amount
+   * @return the termination payoff amount for PAM contracts
    */
   function POF_PAM_TD (
     LifecycleTerms memory terms,
@@ -248,38 +248,6 @@ contract POF is Core {
           .floatMult(state.notionalPrincipal)
         )
     );
-  }
-
-  function POF_ANN_FP (
-    LifecycleTerms memory terms,
-    State memory state,
-    uint256 scheduleTime,
-    bytes32 externalData
-  )
-    internal
-    pure
-    returns(int256)
-  {
-    if (terms.feeBasis == FeeBasis.A) {
-      return (
-        roleSign(terms.contractRole)
-        * terms.feeRate
-      );
-    } else {
-      return (
-        state.feeAccrued
-          .add(
-            yearFraction(
-              shiftCalcTime(state.statusDate, terms.businessDayConvention, terms.calendar),
-              shiftCalcTime(scheduleTime, terms.businessDayConvention, terms.calendar),
-              terms.dayCountConvention,
-              terms.maturityDate
-            )
-            .floatMult(terms.feeRate)
-            .floatMult(state.notionalPrincipal)
-          )
-      );
-    }
   }
 
   function POF_ANN_PR (
@@ -312,22 +280,6 @@ contract POF is Core {
               )
             )
         )
-    );
-  }
-
-  function POF_ANN_MD (
-    LifecycleTerms memory terms,
-    State memory state,
-    uint256 scheduleTime,
-    bytes32 externalData
-  )
-    internal
-    pure
-    returns(int256)
-  {
-    return (
-      state.notionalScalingMultiplier
-        .floatMult(state.notionalPrincipal)
     );
   }
 

@@ -96,7 +96,7 @@ contract TestPOF is POF {
         );
     }
 
-    function _POF_PAM_PR (
+    function _POF_PAM_MD (
         LifecycleTerms memory terms,
         State memory state,
         uint256 scheduleTime,
@@ -106,7 +106,7 @@ contract TestPOF is POF {
     pure
     returns(int256)
     {
-        return POF_PAM_PR(
+        return POF_PAM_MD(
             terms,
             state,
             scheduleTime,

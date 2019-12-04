@@ -295,22 +295,30 @@ contract ANNEngine is BaseEngine, STF, POF {
 	{
 		(EventType eventType, uint256 scheduleTime) = decodeEvent(_event);
 
-		if (eventType == EventType.AD) return 0;
-		if (eventType == EventType.CD) return 0;
-		if (eventType == EventType.IPCI) return 0;
-		if (eventType == EventType.RRF) return 0;
-		if (eventType == EventType.RR) return 0;
-		if (eventType == EventType.SC) return 0;
-		if (eventType == EventType.CE) return 0;
-		if (eventType == EventType.FP) return POF_ANN_FP(terms, state, scheduleTime, externalData);
-		if (eventType == EventType.IED) return POF_PAM_IED(terms, state, scheduleTime, externalData);
-		if (eventType == EventType.IP) return POF_PAM_IP(terms, state, scheduleTime, externalData);
-		if (eventType == EventType.PP) return POF_PAM_PP(terms, state, scheduleTime, externalData);
-		if (eventType == EventType.PRD) return POF_PAM_PRD(terms, state, scheduleTime, externalData);
-		if (eventType == EventType.PR) return POF_ANN_PR(terms, state, scheduleTime, externalData);
-		if (eventType == EventType.MD) return POF_ANN_MD(terms, state, scheduleTime, externalData);
-		if (eventType == EventType.PY) return POF_PAM_PY(terms, state, scheduleTime, externalData);
-		if (eventType == EventType.TD) return POF_PAM_TD(terms, state, scheduleTime, externalData);
+		/*
+		 * Note: all ANN payoff functions that rely on NAM/LAM have been replaced by PAM
+		 * actus-solidity currently doesn't support interestCalculationBase, thus we can use PAM
+		 * 
+		 * There is a reference to a POF_ANN_PR function which was added because PAM doesn't have PR Events in ACTUS 1.0
+		 * and NAM, which ANN refers to in the specification, is not yet supported
+		 *
+		 * not supported: IPCB events
+		 */
+		if (eventType == EventType.AD) return 0; // Analysis Event
+		if (eventType == EventType.IPCI) return 0; // Interest Capitalization Event
+		if (eventType == EventType.RRF) return 0; // Rate Reset Fixed
+		if (eventType == EventType.RR) return 0; // Rate Reset Variable
+		if (eventType == EventType.SC) return 0; // Scaling Index Revision
+		if (eventType == EventType.CE) return 0; // Credit Event
+		if (eventType == EventType.FP) return POF_PAM_FP(terms, state, scheduleTime, externalData); // Fee Payment
+		if (eventType == EventType.IED) return POF_PAM_IED(terms, state, scheduleTime, externalData); // Intital Exchange
+		if (eventType == EventType.IP) return POF_PAM_IP(terms, state, scheduleTime, externalData); // Interest Payment
+		if (eventType == EventType.PP) return POF_PAM_PP(terms, state, scheduleTime, externalData); // Principal Prepayment
+		if (eventType == EventType.PRD) return POF_PAM_PRD(terms, state, scheduleTime, externalData); // Purchase
+		if (eventType == EventType.PR) return POF_ANN_PR(terms, state, scheduleTime, externalData); // Principal Redemption
+		if (eventType == EventType.MD) return POF_PAM_MD(terms, state, scheduleTime, externalData); // Maturity
+		if (eventType == EventType.PY) return POF_PAM_PY(terms, state, scheduleTime, externalData); // Penalty Payment
+		if (eventType == EventType.TD) return POF_PAM_TD(terms, state, scheduleTime, externalData); // Termination
 
 		revert("ANNEngine.payoffFunction: ATTRIBUTE_NOT_FOUND");
 	}
