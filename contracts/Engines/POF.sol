@@ -120,6 +120,10 @@ contract POF is Core {
     );
   }
 
+  /**
+    * Calculate the payoff in case of a purchase of the contract
+    * @return the purchase amount
+    */
   function POF_PAM_PRD (
     LifecycleTerms memory terms,
     State memory state,
@@ -131,9 +135,11 @@ contract POF is Core {
     returns(int256)
   {
     return (
-      roleSign(terms.contractRole)
-      * (-1)
-      * terms.priceAtPurchaseDate
+      (
+        roleSign(terms.contractRole)
+        * terms.priceAtPurchaseDate
+        * -1
+      )
         .add(state.accruedInterest)
         .add(
           yearFraction(
@@ -147,6 +153,11 @@ contract POF is Core {
         )
     );
   }
+
+  /**
+    * Calculate the payoff in case of a scheduled principal redemption payment
+    * @return the principal redemption amount
+    */
 
   function POF_PAM_PR (
     LifecycleTerms memory terms,
