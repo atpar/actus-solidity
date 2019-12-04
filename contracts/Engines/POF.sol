@@ -121,9 +121,9 @@ contract POF is Core {
   }
 
   /**
-    * Calculate the payoff in case of a purchase of the contract
-    * @return the purchase amount
-    */
+   * Calculate the payoff in case of a purchase of the contract
+   * @return the purchase amount
+   */
   function POF_PAM_PRD (
     LifecycleTerms memory terms,
     State memory state,
@@ -155,10 +155,9 @@ contract POF is Core {
   }
 
   /**
-    * Calculate the payoff in case of a scheduled principal redemption payment
-    * @return the principal redemption amount
-    */
-
+   * Calculate the payoff in case of a scheduled principal redemption payment
+   * @return the principal redemption amount
+   */
   function POF_PAM_PR (
     LifecycleTerms memory terms,
     State memory state,
@@ -175,6 +174,10 @@ contract POF is Core {
     );
   }
 
+  /**
+   * Calculate the payoff in case of a penalty event
+   * @return the penalty amount
+   */
   function POF_PAM_PY (
     LifecycleTerms memory terms,
     State memory state,
@@ -203,10 +206,6 @@ contract POF is Core {
           .floatMult(state.notionalPrincipal)
       );
     } else {
-      // riskFactor(scheduleTime, state, terms, terms.marketObjectCodeOfRateReset);
-      int256 risk = 0;
-      int256 param = 0;
-      if (state.nominalInterestRate - risk > 0) param = state.nominalInterestRate - risk;
       return (
         roleSign(terms.contractRole)
         * yearFraction(
@@ -216,7 +215,6 @@ contract POF is Core {
             terms.maturityDate
           )
           .floatMult(state.notionalPrincipal)
-          .floatMult(param)
       );
     }
   }
