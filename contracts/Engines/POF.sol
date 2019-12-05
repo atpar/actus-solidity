@@ -251,9 +251,9 @@ contract POF is Core {
   }
 
   /**
-   * Calculate the payoff in case of termination of a contract
-   * @dev This is a replacement of the POF_ANN_NAM which we have not implemented, yet
-   * @return the termination payoff amount for PAM contracts
+   * Calculate the payoff for principal redemption
+   * @dev This is a replacement of the POF_PR_NAM which we have not implemented, yet
+   * @return the principal redemption amount for ANN contracts
    */
   function POF_ANN_PR (
     LifecycleTerms memory terms,
@@ -305,6 +305,10 @@ contract POF is Core {
     return state.executionAmount + state.feeAccrued;
   }
 
+  /**
+   * Calculate the payoff in case of a purchase of the contract
+   * @return the purchase payoff amount for CEG contracts
+   */
   function POF_CEG_PRD (
     LifecycleTerms memory terms,
     State memory state,

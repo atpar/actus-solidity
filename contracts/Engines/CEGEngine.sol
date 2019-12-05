@@ -210,7 +210,7 @@ contract CEGEngine is BaseEngine, STF, POF {
 		if (eventType == EventType.XD) return 0;
 		if (eventType == EventType.STD) return POF_CEG_STD(terms, state, scheduleTime, externalData);
 		if (eventType == EventType.MD) return 0;
-
+		
 		revert("CEGEngine.payoffFunction: ATTRIBUTE_NOT_FOUND");
 	}
 }

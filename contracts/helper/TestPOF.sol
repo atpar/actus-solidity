@@ -185,4 +185,40 @@ contract TestPOF is POF {
             externalData
         );
     }
+
+    function _POF_CEG_PRD (
+        LifecycleTerms memory terms,
+        State memory state,
+        uint256 scheduleTime,
+        bytes32 externalData
+    )
+    public
+    pure
+    returns(int256)
+    {
+        return POF_CEG_PRD(
+            terms,
+            state,
+            scheduleTime,
+            externalData
+        );
+    }
+
+    function _POF_CEG_FP (
+        LifecycleTerms memory terms,
+        State memory state,
+        uint256 scheduleTime,
+        bytes32 externalData
+    )
+    public
+    pure
+    returns(int256)
+    {
+        return POF_CEG_FP(
+            terms,
+            state,
+            scheduleTime,
+            externalData
+        );
+    }
 }

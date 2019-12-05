@@ -160,9 +160,9 @@ contract CECEngine is BaseEngine, STF, POF {
 		(EventType eventType, uint256 scheduleTime) = decodeEvent(_event);
 
 		if (eventType == EventType.CE) return 0;
-		if (eventType == EventType.XD) return POF_CEG_XD(terms, state, scheduleTime, externalData);
+		if (eventType == EventType.XD) return 0;
 		if (eventType == EventType.STD) return POF_CEG_STD(terms, state, scheduleTime, externalData);
-		if (eventType == EventType.MD) return POF_CEG_MD(terms, state, scheduleTime, externalData);
+		if (eventType == EventType.MD) return 0;
 
 		revert("CECEngine.payoffFunction: ATTRIBUTE_NOT_FOUND");
 	}
