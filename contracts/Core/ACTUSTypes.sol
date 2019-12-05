@@ -94,7 +94,8 @@ contract ACTUSTypes {
 		PenaltyType penaltyType;
 		FeeBasis feeBasis;
 		ContractPerformance creditEventTypeCovered;
-		ContractReference[2] contractReferences;
+    ContractReference contractReference_1;
+    ContractReference contractReference_2;
 
 		address currency;
 
@@ -166,7 +167,8 @@ contract ACTUSTypes {
 		FeeBasis feeBasis;
 		ContractPerformance creditEventTypeCovered;
 
-		ContractReference[2] contractReferences;
+		ContractReference contractReference_1;
+    ContractReference contractReference_2;
 
 		address currency;
 
