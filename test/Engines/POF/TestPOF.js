@@ -1,6 +1,7 @@
 const TestPOF = artifacts.require('TestPOF.sol');
 const PAMEngine = artifacts.require('PAMEngine.sol');
 const ANNEngine = artifacts.require('ANNEngine.sol');
+const CEGEngine = artifacts.require('CEGEngine.sol');
 const { getDefaultTestTerms } = require('../../helper/tests');
 const { parseTermsToLifecycleTerms } = require('../../helper/parser');
 
@@ -13,6 +14,10 @@ contract('TestPOF', () => {
         this.ANNEngineInstance = await ANNEngine.new(); 
         this.ANNTerms = await getDefaultTestTerms('ANN');
         this.ANNLifecycleTerms = parseTermsToLifecycleTerms(this.ANNTerms);
+
+        this.CEGEngineInstance = await CEGEngine.new(); 
+        this.CEGTerms = await getDefaultTestTerms('CEG');
+        this.CEGLifecycleTerms = parseTermsToLifecycleTerms(this.CEGTerms);
 
         this.TestPOF = await TestPOF.new();
     });
@@ -297,6 +302,67 @@ contract('TestPOF', () => {
             externalData 
             );
         assert.equal(payoff.toString(), "110100000000000000000000");
+    });    
+    
+    /*
+    * TEST POF_ANN_PR
+    */
+
+    it('Should yield a termination principal prepayment of 1110010', async () => {
+        const state = await this.PAMEngineInstance.computeInitialState(this.PAMLifecycleTerms, {});
+        const externalData = "0x0000000000000000000000000000000000000000000000000000000000000000";
+
+        // used data
+        state[10] = web3.utils.toWei("1.1"); // notionalScalingMultiplier
+        this.PAMLifecycleTerms.contractRole = 0; //RPA -> roleSign = 1
+        state[5] = web3.utils.toWei("1000000"); // notionalPrincipal = 1M
+        state[11] = web3.utils.toWei("1000"); // nextPrinipalRedemptionPayment
+        state[6] = web3.utils.toWei("100"); // accruedInterest
+
+
+        this.PAMLifecycleTerms.priceAtPurchaseDate = web3.utils.toWei("100000");
+        const scheduleTime = 6307200; // .2 years
+        this.PAMLifecycleTerms.priceAtPurchaseDate = web3.utils.toWei("100000");
+        this.PAMLifecycleTerms.businessDayConvention = 0; // NULL
+        this.PAMLifecycleTerms.calendar = 0; // NoCalendar
+        this.PAMLifecycleTerms.dayCountConvention = 2; // A_365
+        this.PAMLifecycleTerms.maturityDate = 31536000; // 1 year
+        state[1] = '0'; // statusDate = 0
+        state[8] = web3.utils.toWei("0.05"); // nominalInterestRate
+
+        console.log(state)
+
+        const payoff = await this.TestPOF._POF_ANN_PR(
+            this.PAMLifecycleTerms, 
+            state, 
+            scheduleTime,
+            externalData 
+            );
+        assert.equal(payoff.toString(), "1110010000000000000000000");
+    });
+
+    /*
+    * TEST POF_CEG_STD
+    */
+
+    it('Should yield a settlement payoff of 100005', async () => {
+        const state = await this.CEGEngineInstance.computeInitialState(this.PAMLifecycleTerms, {});
+        const externalData = "0x0000000000000000000000000000000000000000000000000000000000000000";
+        const scheduleTime = 6307200; // .2 years
+
+        // used data
+        state[1] = web3.utils.toWei("100000"); // executionAmount
+        state[1] = web3.utils.toWei("5"); // feeAccrued
+
+
+        const payoff = await this.TestPOF._POF_PAM_MD(
+            this.PAMLifecycleTerms, 
+            state, 
+            scheduleTime, 
+            externalData 
+            );
+        assert.equal(payoff.toString(), "100005000000000000000000");
     });
     
+
 });

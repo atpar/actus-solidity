@@ -250,6 +250,11 @@ contract POF is Core {
     );
   }
 
+  /**
+   * Calculate the payoff in case of termination of a contract
+   * @dev This is a replacement of the POF_ANN_NAM which we have not implemented, yet
+   * @return the termination payoff amount for PAM contracts
+   */
   function POF_ANN_PR (
     LifecycleTerms memory terms,
     State memory state,
@@ -283,32 +288,10 @@ contract POF is Core {
     );
   }
 
-  function POF_CEG_MD (
-    LifecycleTerms memory terms,
-    State memory state,
-    uint256 scheduleTime,
-    bytes32 externalData
-  )
-    internal
-    pure
-    returns(int256)
-  {
-    return 0;
-  }
-
-  function POF_CEG_XD (
-    LifecycleTerms memory terms,
-    State memory state,
-    uint256 scheduleTime,
-    bytes32 externalData
-  )
-    internal
-    pure
-    returns(int256)
-  {
-    return 0;
-  }
-
+  /**
+   * Calculate the payoff in case of settlement
+   * @return the settlement payoff amount for CEG contracts
+   */
   function POF_CEG_STD (
     LifecycleTerms memory terms,
     State memory state,

@@ -251,7 +251,10 @@ contract ANNEngine is BaseEngine, STF, POF {
 		returns (State memory)
 	{
 		(EventType eventType, uint256 scheduleTime) = decodeEvent(_event);
-
+/*
+		 * Note:
+		 * not supported: IPCB events
+		 */
 		if (eventType == EventType.AD) return STF_PAM_AD(terms, state, scheduleTime, externalData);
 		if (eventType == EventType.CD) return STF_PAM_CD(terms, state, scheduleTime, externalData);
 		if (eventType == EventType.FP) return STF_PAM_FP(terms, state, scheduleTime, externalData);
@@ -298,7 +301,7 @@ contract ANNEngine is BaseEngine, STF, POF {
 		/*
 		 * Note: all ANN payoff functions that rely on NAM/LAM have been replaced by PAM
 		 * actus-solidity currently doesn't support interestCalculationBase, thus we can use PAM
-		 * 
+		 *
 		 * There is a reference to a POF_ANN_PR function which was added because PAM doesn't have PR Events in ACTUS 1.0
 		 * and NAM, which ANN refers to in the specification, is not yet supported
 		 *
