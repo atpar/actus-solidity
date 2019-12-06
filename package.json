@@ -47,9 +47,9 @@
     "ganache-cli": "^6.4.3",
     "openzeppelin-solidity": "^2.1.2",
     "openzeppelin-test-helpers": "^0.1.2",
-    "truffle": "5.0.28",
+    "truffle": "^5.1.2",
     "truffle-hdwallet-provider": "^1.0.9",
     "truffle-security": "^1.4.4",
-    "web3-utils": "1.0.0-beta.46"
+    "web3-utils": "^1.2.4"
   }
 }
