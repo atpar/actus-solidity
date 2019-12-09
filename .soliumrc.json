@@ -10,6 +10,7 @@
     "no-empty-blocks": "off",
     "operator-whitespace": "off",
     "lbrace": "off",
-    "no-experimental": "off"
+    "no-experimental": "off",
+    "mixedcase": "off"
   }
 }
