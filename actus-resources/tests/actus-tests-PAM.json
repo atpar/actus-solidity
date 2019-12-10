@@ -2598,9 +2598,19 @@
         "cyclePointOfRateReset": "0",
         "cyclePointOfInterestPayment": "1",
         "fixingDays": "0D",
-        "contractRole": "RPA",
-        "interestRateDates": "2013-02-01T00:00:00,2013-05-01T00:00:00,2013-08-01T00:00:00,2013-11-01T00:00:00",
-        "interestRateValues": "0.0098271604945178,0.0109382716029818,0.0120493827160494,0.0131604938271605"
+        "contractRole": "RPA"
+      },
+    "externalData": {
+      "interestRateDates": [
+        "2013-02-01T00:00:00",
+        "2013-05-01T00:00:00",
+        "2013-08-01T00:00:00",
+        "2013-11-01T00:00:00"],
+      "interestRateValues": [
+        "0.0098271604945178",
+        "0.0109382716029818",
+        "0.0120493827160494",
+        "0.0131604938271605"]
       },
     "results": [
       {
