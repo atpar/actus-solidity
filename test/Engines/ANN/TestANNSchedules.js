@@ -51,7 +51,7 @@ contract('ANNEngine', () => {
     const lifecycleTerms = parseTermsToLifecycleTerms(terms);
     const generatingTerms = parseTermsToGeneratingTerms(terms);
 
-    const initialState = await this.ANNEngineInstance.computeInitialState(lifecycleTerms, {});
+    const initialState = await this.ANNEngineInstance.computeInitialState(lifecycleTerms);
     const _eventSchedule = removeNullEvents(await computeEventScheduleSegment(
       generatingTerms,
       generatingTerms.contractDealDate,
@@ -81,7 +81,7 @@ contract('ANNEngine', () => {
       
       state = nextState;
 
-      const eventTime = await this.ANNEngineInstance.computeEventTimeForEvent(_event, lifecycleTerms, {});
+      const eventTime = await this.ANNEngineInstance.computeEventTimeForEvent(_event, lifecycleTerms);
 
       evaluatedSchedule.push(parseToTestEvent(eventType, eventTime, payoff, state));
     }
