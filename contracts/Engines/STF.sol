@@ -3,9 +3,28 @@ pragma experimental ABIEncoderV2;
 
 import "../Core/Core.sol";
 
-
+/**
+  * @title ACTUS state transition functions
+  */
 contract STF is Core {
 
+
+
+  function testConversion (
+    bytes32 externalData
+  )
+  public
+  pure
+  returns (int256 data)
+  {
+    return int256(externalData);
+  }
+
+  /**
+	 * State transition for PAM analysis events
+   * @param state the old state
+	 * @return the new state
+	 */
   function STF_PAM_AD (
     LifecycleTerms memory terms,
     State memory state,
@@ -39,40 +58,11 @@ contract STF is Core {
     return state;
   }
 
-  function STF_PAM_CD (
-    LifecycleTerms memory terms,
-    State memory state,
-    uint256 scheduleTime,
-    bytes32 externalData
-  )
-    internal
-    pure
-    returns (State memory)
-  {
-    int256 timeFromLastEvent = yearFraction(
-      shiftCalcTime(state.statusDate, terms.businessDayConvention, terms.calendar),
-      shiftCalcTime(scheduleTime, terms.businessDayConvention, terms.calendar),
-      terms.dayCountConvention,
-      terms.maturityDate
-    );
-    state.accruedInterest = state.accruedInterest
-    .add(
-      state.nominalInterestRate
-      .floatMult(state.notionalPrincipal)
-      .floatMult(timeFromLastEvent)
-    );
-    state.feeAccrued = state.feeAccrued
-    .add(
-      terms.feeRate
-      .floatMult(state.notionalPrincipal)
-      .floatMult(timeFromLastEvent)
-    );
-    state.contractPerformance = ContractPerformance.DF;
-    state.statusDate = scheduleTime;
-
-    return state;
-  }
-
+  /**
+	 * State transition for PAM fee payment events
+   * @param state the old state
+	 * @return the new state
+	 */
   function STF_PAM_FP (
     LifecycleTerms memory terms,
     State memory state,
@@ -101,6 +91,11 @@ contract STF is Core {
     return state;
   }
 
+  /**
+	 * State transition for PAM initial exchange
+   * @param state the old state
+	 * @return the new state
+	 */
   function STF_PAM_IED (
     LifecycleTerms memory terms,
     State memory state,
@@ -141,6 +136,11 @@ contract STF is Core {
     return state;
   }
 
+  /**
+	 * State transition for PAM interest capitalization
+   * @param state the old state
+	 * @return the new state
+	 */
   function STF_PAM_IPCI (
     LifecycleTerms memory terms,
     State memory state,
@@ -178,6 +178,11 @@ contract STF is Core {
     return state;
   }
 
+  /**
+	 * State transition for PAM interest payment
+   * @param state the old state
+	 * @return the new state
+	 */
   function STF_PAM_IP (
     LifecycleTerms memory terms,
     State memory state,
@@ -202,10 +207,15 @@ contract STF is Core {
       .floatMult(timeFromLastEvent)
     );
     state.statusDate = scheduleTime;
-    
+
     return state;
   }
 
+  /**
+	 * State transition for PAM principal prepayment
+   * @param state the old state
+	 * @return the new state
+	 */
   function STF_PAM_PP (
     LifecycleTerms memory terms,
     State memory state,
@@ -240,6 +250,11 @@ contract STF is Core {
     return state;
   }
 
+  /**
+	 * State transition for PAM purchase event
+   * @param state the old state
+	 * @return the new state
+	 */
   function STF_PAM_PRD (
     LifecycleTerms memory terms,
     State memory state,
@@ -273,6 +288,11 @@ contract STF is Core {
     return state;
   }
 
+  /**
+	 * State transition for PAM principal redemption
+   * @param state the old state
+	 * @return the new state
+	 */
   function STF_PAM_PR (
     LifecycleTerms memory terms,
     State memory state,
@@ -307,6 +327,11 @@ contract STF is Core {
     return state;
   }
 
+  /**
+	 * State transition for PAM penalty payments
+   * @param state the old state
+	 * @return the new state
+	 */
   function STF_PAM_PY (
     LifecycleTerms memory terms,
     State memory state,
@@ -340,6 +365,11 @@ contract STF is Core {
     return state;
   }
 
+  /**
+	 * State transition for PAM fixed rate resets
+   * @param state the old state
+	 * @return the new state
+	 */
   function STF_PAM_RRF (
     LifecycleTerms memory terms,
     State memory state,
@@ -374,6 +404,11 @@ contract STF is Core {
     return state;
   }
 
+  /**
+	 * State transition for PAM variable rate resets
+   * @param state the old state
+	 * @return the new state
+	 */
   function STF_PAM_RR (
     LifecycleTerms memory terms,
     State memory state,
@@ -386,10 +421,10 @@ contract STF is Core {
   {
     // int256 rate = //riskFactor(terms.marketObjectCodeOfRateReset, scheduleTime, state, terms)
     // 	* terms.rateMultiplier + terms.rateSpread;
-    int256 rate = int256(externalData) * terms.rateMultiplier + terms.rateSpread;
+    int256 rate = int256(uint256(externalData)).floatMult(terms.rateMultiplier).add(terms.rateSpread);
     int256 deltaRate = rate.sub(state.nominalInterestRate);
 
-      // apply period cap/floor
+    // apply period cap/floor
     if ((terms.lifeCap < deltaRate) && (terms.lifeCap < ((-1) * terms.periodFloor))) {
       deltaRate = terms.lifeCap;
     } else if (deltaRate < ((-1) * terms.periodFloor)) {
@@ -422,6 +457,11 @@ contract STF is Core {
     return state;
   }
 
+  /**
+	 * State transition for PAM scaling index revision events
+   * @param state the old state
+	 * @return the new state
+	 */
   function STF_PAM_SC (
     LifecycleTerms memory terms,
     State memory state,
@@ -471,6 +511,11 @@ contract STF is Core {
     return state;
   }
 
+  /**
+	 * State transition for PAM termination events
+   * @param state the old state
+	 * @return the new state
+	 */
   function STF_PAM_TD (
     LifecycleTerms memory terms,
     State memory state,
@@ -495,7 +540,12 @@ contract STF is Core {
     return state;
   }
 
-  function STF_PAM_DEL (
+  /**
+	 * State transition for PAM credit events
+   * @param state the old state
+	 * @return the new state
+	 */
+  function STF_PAM_CE (
     LifecycleTerms memory terms,
     State memory state,
     uint256 scheduleTime,

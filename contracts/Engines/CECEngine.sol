@@ -131,7 +131,7 @@ contract CECEngine is BaseEngine, STF, POF {
 		if (eventType == EventType.XD) return STF_CEG_XD(terms, state, scheduleTime, externalData);
 		if (eventType == EventType.MD) return STF_CEG_MD(terms, state, scheduleTime, externalData);
 		if (eventType == EventType.STD) return STF_CEG_STD(terms, state, scheduleTime, externalData);
-		if (eventType == EventType.CE) return STF_PAM_DEL(terms, state, scheduleTime, externalData);
+		if (eventType == EventType.CE) return STF_PAM_CE(terms, state, scheduleTime, externalData);
 
 		revert("CECEngine.stateTransitionFunction: ATTRIBUTE_NOT_FOUND");
 	}

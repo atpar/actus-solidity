@@ -256,7 +256,6 @@ contract ANNEngine is BaseEngine, STF, POF {
 		 * not supported: IPCB events
 		 */
 		if (eventType == EventType.AD) return STF_PAM_AD(terms, state, scheduleTime, externalData);
-		if (eventType == EventType.CD) return STF_PAM_CD(terms, state, scheduleTime, externalData);
 		if (eventType == EventType.FP) return STF_PAM_FP(terms, state, scheduleTime, externalData);
 		if (eventType == EventType.IED) return STF_ANN_IED(terms, state, scheduleTime, externalData);
 		if (eventType == EventType.IPCI) return STF_ANN_IPCI(terms, state, scheduleTime, externalData);
@@ -270,7 +269,7 @@ contract ANNEngine is BaseEngine, STF, POF {
 		if (eventType == EventType.RR) return STF_ANN_RR(terms, state, scheduleTime, externalData);
 		if (eventType == EventType.SC) return STF_ANN_SC(terms, state, scheduleTime, externalData);
 		if (eventType == EventType.TD) return STF_PAM_TD(terms, state, scheduleTime, externalData);
-		if (eventType == EventType.CE) return STF_PAM_DEL(terms, state, scheduleTime, externalData);
+		if (eventType == EventType.CE) return STF_PAM_CE(terms, state, scheduleTime, externalData);
 
 		revert("ANNEngine.stateTransitionFunction: ATTRIBUTE_NOT_FOUND");
 	}

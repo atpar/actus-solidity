@@ -326,6 +326,10 @@ contract POF is Core {
     );
   }
 
+  /**
+	 * Calculate the pay-off for CEG Fees.
+	 * @return the fee amount for CEG contracts
+	 */
   function POF_CEG_FP (
     LifecycleTerms memory terms,
     State memory state,
