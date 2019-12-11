@@ -10,6 +10,7 @@ contract ACTUSTypes {
     int256 constant DOUBLE_NULL = INT256_MIN;
 
     uint256 constant public PRECISION = 18;
+    int256 constant public ONE_POINT_ZERO = 1 * 10 ** 18;
 
     uint256 constant MAX_CYCLE_SIZE = 16;
     uint256 constant MAX_EVENT_SCHEDULE_SIZE = 64; // 4x MAX_CYCLE_SIZE for IP, RR, FP and SC
