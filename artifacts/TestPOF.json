@@ -1,0 +1,3144 @@
+{
+  "contractName": "TestPOF",
+  "abi": [
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "name": "eomc",
+          "type": "uint8"
+        },
+        {
+          "name": "startTime",
+          "type": "uint256"
+        },
+        {
+          "components": [
+            {
+              "name": "i",
+              "type": "uint256"
+            },
+            {
+              "name": "p",
+              "type": "uint8"
+            },
+            {
+              "name": "s",
+              "type": "uint8"
+            },
+            {
+              "name": "isSet",
+              "type": "bool"
+            }
+          ],
+          "name": "cycle",
+          "type": "tuple"
+        }
+      ],
+      "name": "adjustEndOfMonthConvention",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint8"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "pure",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "name": "_event",
+          "type": "bytes32"
+        },
+        {
+          "components": [
+            {
+              "name": "calendar",
+              "type": "uint8"
+            },
+            {
+              "name": "contractRole",
+              "type": "uint8"
+            },
+            {
+              "name": "dayCountConvention",
+              "type": "uint8"
+            },
+            {
+              "name": "businessDayConvention",
+              "type": "uint8"
+            },
+            {
+              "name": "endOfMonthConvention",
+              "type": "uint8"
+            },
+            {
+              "name": "scalingEffect",
+              "type": "uint8"
+            },
+            {
+              "name": "penaltyType",
+              "type": "uint8"
+            },
+            {
+              "name": "feeBasis",
+              "type": "uint8"
+            },
+            {
+              "name": "creditEventTypeCovered",
+              "type": "uint8"
+            },
+            {
+              "components": [
+                {
+                  "name": "object",
+                  "type": "bytes32"
+                },
+                {
+                  "name": "contractReferenceType",
+                  "type": "uint8"
+                },
+                {
+                  "name": "contractReferenceRole",
+                  "type": "uint8"
+                }
+              ],
+              "name": "contractReference_1",
+              "type": "tuple"
+            },
+            {
+              "components": [
+                {
+                  "name": "object",
+                  "type": "bytes32"
+                },
+                {
+                  "name": "contractReferenceType",
+                  "type": "uint8"
+                },
+                {
+                  "name": "contractReferenceRole",
+                  "type": "uint8"
+                }
+              ],
+              "name": "contractReference_2",
+              "type": "tuple"
+            },
+            {
+              "name": "currency",
+              "type": "address"
+            },
+            {
+              "name": "marketObjectCodeRateReset",
+              "type": "bytes32"
+            },
+            {
+              "name": "statusDate",
+              "type": "uint256"
+            },
+            {
+              "name": "maturityDate",
+              "type": "uint256"
+            },
+            {
+              "name": "notionalPrincipal",
+              "type": "int256"
+            },
+            {
+              "name": "nominalInterestRate",
+              "type": "int256"
+            },
+            {
+              "name": "feeAccrued",
+              "type": "int256"
+            },
+            {
+              "name": "accruedInterest",
+              "type": "int256"
+            },
+            {
+              "name": "rateMultiplier",
+              "type": "int256"
+            },
+            {
+              "name": "rateSpread",
+              "type": "int256"
+            },
+            {
+              "name": "feeRate",
+              "type": "int256"
+            },
+            {
+              "name": "nextResetRate",
+              "type": "int256"
+            },
+            {
+              "name": "penaltyRate",
+              "type": "int256"
+            },
+            {
+              "name": "premiumDiscountAtIED",
+              "type": "int256"
+            },
+            {
+              "name": "priceAtPurchaseDate",
+              "type": "int256"
+            },
+            {
+              "name": "nextPrincipalRedemptionPayment",
+              "type": "int256"
+            },
+            {
+              "name": "coverageOfCreditEnhancement",
+              "type": "int256"
+            },
+            {
+              "components": [
+                {
+                  "name": "i",
+                  "type": "uint256"
+                },
+                {
+                  "name": "p",
+                  "type": "uint8"
+                },
+                {
+                  "name": "isSet",
+                  "type": "bool"
+                }
+              ],
+              "name": "gracePeriod",
+              "type": "tuple"
+            },
+            {
+              "components": [
+                {
+                  "name": "i",
+                  "type": "uint256"
+                },
+                {
+                  "name": "p",
+                  "type": "uint8"
+                },
+                {
+                  "name": "isSet",
+                  "type": "bool"
+                }
+              ],
+              "name": "delinquencyPeriod",
+              "type": "tuple"
+            },
+            {
+              "name": "lifeCap",
+              "type": "int256"
+            },
+            {
+              "name": "lifeFloor",
+              "type": "int256"
+            },
+            {
+              "name": "periodCap",
+              "type": "int256"
+            },
+            {
+              "name": "periodFloor",
+              "type": "int256"
+            }
+          ],
+          "name": "terms",
+          "type": "tuple"
+        }
+      ],
+      "name": "computeEventTimeForEvent",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "pure",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "name": "_event",
+          "type": "bytes32"
+        }
+      ],
+      "name": "decodeEvent",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint8"
+        },
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "pure",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "name": "eventType",
+          "type": "uint8"
+        }
+      ],
+      "name": "getEpochOffset",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "pure",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "PRECISION",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "name": "eventType",
+          "type": "uint8"
+        },
+        {
+          "name": "scheduleTime",
+          "type": "uint256"
+        }
+      ],
+      "name": "encodeEvent",
+      "outputs": [
+        {
+          "name": "",
+          "type": "bytes32"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "pure",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "components": [
+            {
+              "name": "calendar",
+              "type": "uint8"
+            },
+            {
+              "name": "contractRole",
+              "type": "uint8"
+            },
+            {
+              "name": "dayCountConvention",
+              "type": "uint8"
+            },
+            {
+              "name": "businessDayConvention",
+              "type": "uint8"
+            },
+            {
+              "name": "endOfMonthConvention",
+              "type": "uint8"
+            },
+            {
+              "name": "scalingEffect",
+              "type": "uint8"
+            },
+            {
+              "name": "penaltyType",
+              "type": "uint8"
+            },
+            {
+              "name": "feeBasis",
+              "type": "uint8"
+            },
+            {
+              "name": "creditEventTypeCovered",
+              "type": "uint8"
+            },
+            {
+              "components": [
+                {
+                  "name": "object",
+                  "type": "bytes32"
+                },
+                {
+                  "name": "contractReferenceType",
+                  "type": "uint8"
+                },
+                {
+                  "name": "contractReferenceRole",
+                  "type": "uint8"
+                }
+              ],
+              "name": "contractReference_1",
+              "type": "tuple"
+            },
+            {
+              "components": [
+                {
+                  "name": "object",
+                  "type": "bytes32"
+                },
+                {
+                  "name": "contractReferenceType",
+                  "type": "uint8"
+                },
+                {
+                  "name": "contractReferenceRole",
+                  "type": "uint8"
+                }
+              ],
+              "name": "contractReference_2",
+              "type": "tuple"
+            },
+            {
+              "name": "currency",
+              "type": "address"
+            },
+            {
+              "name": "marketObjectCodeRateReset",
+              "type": "bytes32"
+            },
+            {
+              "name": "statusDate",
+              "type": "uint256"
+            },
+            {
+              "name": "maturityDate",
+              "type": "uint256"
+            },
+            {
+              "name": "notionalPrincipal",
+              "type": "int256"
+            },
+            {
+              "name": "nominalInterestRate",
+              "type": "int256"
+            },
+            {
+              "name": "feeAccrued",
+              "type": "int256"
+            },
+            {
+              "name": "accruedInterest",
+              "type": "int256"
+            },
+            {
+              "name": "rateMultiplier",
+              "type": "int256"
+            },
+            {
+              "name": "rateSpread",
+              "type": "int256"
+            },
+            {
+              "name": "feeRate",
+              "type": "int256"
+            },
+            {
+              "name": "nextResetRate",
+              "type": "int256"
+            },
+            {
+              "name": "penaltyRate",
+              "type": "int256"
+            },
+            {
+              "name": "premiumDiscountAtIED",
+              "type": "int256"
+            },
+            {
+              "name": "priceAtPurchaseDate",
+              "type": "int256"
+            },
+            {
+              "name": "nextPrincipalRedemptionPayment",
+              "type": "int256"
+            },
+            {
+              "name": "coverageOfCreditEnhancement",
+              "type": "int256"
+            },
+            {
+              "components": [
+                {
+                  "name": "i",
+                  "type": "uint256"
+                },
+                {
+                  "name": "p",
+                  "type": "uint8"
+                },
+                {
+                  "name": "isSet",
+                  "type": "bool"
+                }
+              ],
+              "name": "gracePeriod",
+              "type": "tuple"
+            },
+            {
+              "components": [
+                {
+                  "name": "i",
+                  "type": "uint256"
+                },
+                {
+                  "name": "p",
+                  "type": "uint8"
+                },
+                {
+                  "name": "isSet",
+                  "type": "bool"
+                }
+              ],
+              "name": "delinquencyPeriod",
+              "type": "tuple"
+            },
+            {
+              "name": "lifeCap",
+              "type": "int256"
+            },
+            {
+              "name": "lifeFloor",
+              "type": "int256"
+            },
+            {
+              "name": "periodCap",
+              "type": "int256"
+            },
+            {
+              "name": "periodFloor",
+              "type": "int256"
+            }
+          ],
+          "name": "terms",
+          "type": "tuple"
+        },
+        {
+          "components": [
+            {
+              "name": "contractPerformance",
+              "type": "uint8"
+            },
+            {
+              "name": "statusDate",
+              "type": "uint256"
+            },
+            {
+              "name": "nonPerformingDate",
+              "type": "uint256"
+            },
+            {
+              "name": "maturityDate",
+              "type": "uint256"
+            },
+            {
+              "name": "executionDate",
+              "type": "uint256"
+            },
+            {
+              "name": "notionalPrincipal",
+              "type": "int256"
+            },
+            {
+              "name": "accruedInterest",
+              "type": "int256"
+            },
+            {
+              "name": "feeAccrued",
+              "type": "int256"
+            },
+            {
+              "name": "nominalInterestRate",
+              "type": "int256"
+            },
+            {
+              "name": "interestScalingMultiplier",
+              "type": "int256"
+            },
+            {
+              "name": "notionalScalingMultiplier",
+              "type": "int256"
+            },
+            {
+              "name": "nextPrincipalRedemptionPayment",
+              "type": "int256"
+            },
+            {
+              "name": "executionAmount",
+              "type": "int256"
+            }
+          ],
+          "name": "state",
+          "type": "tuple"
+        },
+        {
+          "name": "scheduleTime",
+          "type": "uint256"
+        },
+        {
+          "name": "externalData",
+          "type": "bytes32"
+        }
+      ],
+      "name": "_POF_PAM_FP",
+      "outputs": [
+        {
+          "name": "",
+          "type": "int256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "pure",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "components": [
+            {
+              "name": "calendar",
+              "type": "uint8"
+            },
+            {
+              "name": "contractRole",
+              "type": "uint8"
+            },
+            {
+              "name": "dayCountConvention",
+              "type": "uint8"
+            },
+            {
+              "name": "businessDayConvention",
+              "type": "uint8"
+            },
+            {
+              "name": "endOfMonthConvention",
+              "type": "uint8"
+            },
+            {
+              "name": "scalingEffect",
+              "type": "uint8"
+            },
+            {
+              "name": "penaltyType",
+              "type": "uint8"
+            },
+            {
+              "name": "feeBasis",
+              "type": "uint8"
+            },
+            {
+              "name": "creditEventTypeCovered",
+              "type": "uint8"
+            },
+            {
+              "components": [
+                {
+                  "name": "object",
+                  "type": "bytes32"
+                },
+                {
+                  "name": "contractReferenceType",
+                  "type": "uint8"
+                },
+                {
+                  "name": "contractReferenceRole",
+                  "type": "uint8"
+                }
+              ],
+              "name": "contractReference_1",
+              "type": "tuple"
+            },
+            {
+              "components": [
+                {
+                  "name": "object",
+                  "type": "bytes32"
+                },
+                {
+                  "name": "contractReferenceType",
+                  "type": "uint8"
+                },
+                {
+                  "name": "contractReferenceRole",
+                  "type": "uint8"
+                }
+              ],
+              "name": "contractReference_2",
+              "type": "tuple"
+            },
+            {
+              "name": "currency",
+              "type": "address"
+            },
+            {
+              "name": "marketObjectCodeRateReset",
+              "type": "bytes32"
+            },
+            {
+              "name": "statusDate",
+              "type": "uint256"
+            },
+            {
+              "name": "maturityDate",
+              "type": "uint256"
+            },
+            {
+              "name": "notionalPrincipal",
+              "type": "int256"
+            },
+            {
+              "name": "nominalInterestRate",
+              "type": "int256"
+            },
+            {
+              "name": "feeAccrued",
+              "type": "int256"
+            },
+            {
+              "name": "accruedInterest",
+              "type": "int256"
+            },
+            {
+              "name": "rateMultiplier",
+              "type": "int256"
+            },
+            {
+              "name": "rateSpread",
+              "type": "int256"
+            },
+            {
+              "name": "feeRate",
+              "type": "int256"
+            },
+            {
+              "name": "nextResetRate",
+              "type": "int256"
+            },
+            {
+              "name": "penaltyRate",
+              "type": "int256"
+            },
+            {
+              "name": "premiumDiscountAtIED",
+              "type": "int256"
+            },
+            {
+              "name": "priceAtPurchaseDate",
+              "type": "int256"
+            },
+            {
+              "name": "nextPrincipalRedemptionPayment",
+              "type": "int256"
+            },
+            {
+              "name": "coverageOfCreditEnhancement",
+              "type": "int256"
+            },
+            {
+              "components": [
+                {
+                  "name": "i",
+                  "type": "uint256"
+                },
+                {
+                  "name": "p",
+                  "type": "uint8"
+                },
+                {
+                  "name": "isSet",
+                  "type": "bool"
+                }
+              ],
+              "name": "gracePeriod",
+              "type": "tuple"
+            },
+            {
+              "components": [
+                {
+                  "name": "i",
+                  "type": "uint256"
+                },
+                {
+                  "name": "p",
+                  "type": "uint8"
+                },
+                {
+                  "name": "isSet",
+                  "type": "bool"
+                }
+              ],
+              "name": "delinquencyPeriod",
+              "type": "tuple"
+            },
+            {
+              "name": "lifeCap",
+              "type": "int256"
+            },
+            {
+              "name": "lifeFloor",
+              "type": "int256"
+            },
+            {
+              "name": "periodCap",
+              "type": "int256"
+            },
+            {
+              "name": "periodFloor",
+              "type": "int256"
+            }
+          ],
+          "name": "terms",
+          "type": "tuple"
+        },
+        {
+          "components": [
+            {
+              "name": "contractPerformance",
+              "type": "uint8"
+            },
+            {
+              "name": "statusDate",
+              "type": "uint256"
+            },
+            {
+              "name": "nonPerformingDate",
+              "type": "uint256"
+            },
+            {
+              "name": "maturityDate",
+              "type": "uint256"
+            },
+            {
+              "name": "executionDate",
+              "type": "uint256"
+            },
+            {
+              "name": "notionalPrincipal",
+              "type": "int256"
+            },
+            {
+              "name": "accruedInterest",
+              "type": "int256"
+            },
+            {
+              "name": "feeAccrued",
+              "type": "int256"
+            },
+            {
+              "name": "nominalInterestRate",
+              "type": "int256"
+            },
+            {
+              "name": "interestScalingMultiplier",
+              "type": "int256"
+            },
+            {
+              "name": "notionalScalingMultiplier",
+              "type": "int256"
+            },
+            {
+              "name": "nextPrincipalRedemptionPayment",
+              "type": "int256"
+            },
+            {
+              "name": "executionAmount",
+              "type": "int256"
+            }
+          ],
+          "name": "state",
+          "type": "tuple"
+        },
+        {
+          "name": "scheduleTime",
+          "type": "uint256"
+        },
+        {
+          "name": "externalData",
+          "type": "bytes32"
+        }
+      ],
+      "name": "_POF_PAM_IED",
+      "outputs": [
+        {
+          "name": "",
+          "type": "int256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "pure",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "components": [
+            {
+              "name": "calendar",
+              "type": "uint8"
+            },
+            {
+              "name": "contractRole",
+              "type": "uint8"
+            },
+            {
+              "name": "dayCountConvention",
+              "type": "uint8"
+            },
+            {
+              "name": "businessDayConvention",
+              "type": "uint8"
+            },
+            {
+              "name": "endOfMonthConvention",
+              "type": "uint8"
+            },
+            {
+              "name": "scalingEffect",
+              "type": "uint8"
+            },
+            {
+              "name": "penaltyType",
+              "type": "uint8"
+            },
+            {
+              "name": "feeBasis",
+              "type": "uint8"
+            },
+            {
+              "name": "creditEventTypeCovered",
+              "type": "uint8"
+            },
+            {
+              "components": [
+                {
+                  "name": "object",
+                  "type": "bytes32"
+                },
+                {
+                  "name": "contractReferenceType",
+                  "type": "uint8"
+                },
+                {
+                  "name": "contractReferenceRole",
+                  "type": "uint8"
+                }
+              ],
+              "name": "contractReference_1",
+              "type": "tuple"
+            },
+            {
+              "components": [
+                {
+                  "name": "object",
+                  "type": "bytes32"
+                },
+                {
+                  "name": "contractReferenceType",
+                  "type": "uint8"
+                },
+                {
+                  "name": "contractReferenceRole",
+                  "type": "uint8"
+                }
+              ],
+              "name": "contractReference_2",
+              "type": "tuple"
+            },
+            {
+              "name": "currency",
+              "type": "address"
+            },
+            {
+              "name": "marketObjectCodeRateReset",
+              "type": "bytes32"
+            },
+            {
+              "name": "statusDate",
+              "type": "uint256"
+            },
+            {
+              "name": "maturityDate",
+              "type": "uint256"
+            },
+            {
+              "name": "notionalPrincipal",
+              "type": "int256"
+            },
+            {
+              "name": "nominalInterestRate",
+              "type": "int256"
+            },
+            {
+              "name": "feeAccrued",
+              "type": "int256"
+            },
+            {
+              "name": "accruedInterest",
+              "type": "int256"
+            },
+            {
+              "name": "rateMultiplier",
+              "type": "int256"
+            },
+            {
+              "name": "rateSpread",
+              "type": "int256"
+            },
+            {
+              "name": "feeRate",
+              "type": "int256"
+            },
+            {
+              "name": "nextResetRate",
+              "type": "int256"
+            },
+            {
+              "name": "penaltyRate",
+              "type": "int256"
+            },
+            {
+              "name": "premiumDiscountAtIED",
+              "type": "int256"
+            },
+            {
+              "name": "priceAtPurchaseDate",
+              "type": "int256"
+            },
+            {
+              "name": "nextPrincipalRedemptionPayment",
+              "type": "int256"
+            },
+            {
+              "name": "coverageOfCreditEnhancement",
+              "type": "int256"
+            },
+            {
+              "components": [
+                {
+                  "name": "i",
+                  "type": "uint256"
+                },
+                {
+                  "name": "p",
+                  "type": "uint8"
+                },
+                {
+                  "name": "isSet",
+                  "type": "bool"
+                }
+              ],
+              "name": "gracePeriod",
+              "type": "tuple"
+            },
+            {
+              "components": [
+                {
+                  "name": "i",
+                  "type": "uint256"
+                },
+                {
+                  "name": "p",
+                  "type": "uint8"
+                },
+                {
+                  "name": "isSet",
+                  "type": "bool"
+                }
+              ],
+              "name": "delinquencyPeriod",
+              "type": "tuple"
+            },
+            {
+              "name": "lifeCap",
+              "type": "int256"
+            },
+            {
+              "name": "lifeFloor",
+              "type": "int256"
+            },
+            {
+              "name": "periodCap",
+              "type": "int256"
+            },
+            {
+              "name": "periodFloor",
+              "type": "int256"
+            }
+          ],
+          "name": "terms",
+          "type": "tuple"
+        },
+        {
+          "components": [
+            {
+              "name": "contractPerformance",
+              "type": "uint8"
+            },
+            {
+              "name": "statusDate",
+              "type": "uint256"
+            },
+            {
+              "name": "nonPerformingDate",
+              "type": "uint256"
+            },
+            {
+              "name": "maturityDate",
+              "type": "uint256"
+            },
+            {
+              "name": "executionDate",
+              "type": "uint256"
+            },
+            {
+              "name": "notionalPrincipal",
+              "type": "int256"
+            },
+            {
+              "name": "accruedInterest",
+              "type": "int256"
+            },
+            {
+              "name": "feeAccrued",
+              "type": "int256"
+            },
+            {
+              "name": "nominalInterestRate",
+              "type": "int256"
+            },
+            {
+              "name": "interestScalingMultiplier",
+              "type": "int256"
+            },
+            {
+              "name": "notionalScalingMultiplier",
+              "type": "int256"
+            },
+            {
+              "name": "nextPrincipalRedemptionPayment",
+              "type": "int256"
+            },
+            {
+              "name": "executionAmount",
+              "type": "int256"
+            }
+          ],
+          "name": "state",
+          "type": "tuple"
+        },
+        {
+          "name": "scheduleTime",
+          "type": "uint256"
+        },
+        {
+          "name": "externalData",
+          "type": "bytes32"
+        }
+      ],
+      "name": "_POF_PAM_IP",
+      "outputs": [
+        {
+          "name": "",
+          "type": "int256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "pure",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "components": [
+            {
+              "name": "calendar",
+              "type": "uint8"
+            },
+            {
+              "name": "contractRole",
+              "type": "uint8"
+            },
+            {
+              "name": "dayCountConvention",
+              "type": "uint8"
+            },
+            {
+              "name": "businessDayConvention",
+              "type": "uint8"
+            },
+            {
+              "name": "endOfMonthConvention",
+              "type": "uint8"
+            },
+            {
+              "name": "scalingEffect",
+              "type": "uint8"
+            },
+            {
+              "name": "penaltyType",
+              "type": "uint8"
+            },
+            {
+              "name": "feeBasis",
+              "type": "uint8"
+            },
+            {
+              "name": "creditEventTypeCovered",
+              "type": "uint8"
+            },
+            {
+              "components": [
+                {
+                  "name": "object",
+                  "type": "bytes32"
+                },
+                {
+                  "name": "contractReferenceType",
+                  "type": "uint8"
+                },
+                {
+                  "name": "contractReferenceRole",
+                  "type": "uint8"
+                }
+              ],
+              "name": "contractReference_1",
+              "type": "tuple"
+            },
+            {
+              "components": [
+                {
+                  "name": "object",
+                  "type": "bytes32"
+                },
+                {
+                  "name": "contractReferenceType",
+                  "type": "uint8"
+                },
+                {
+                  "name": "contractReferenceRole",
+                  "type": "uint8"
+                }
+              ],
+              "name": "contractReference_2",
+              "type": "tuple"
+            },
+            {
+              "name": "currency",
+              "type": "address"
+            },
+            {
+              "name": "marketObjectCodeRateReset",
+              "type": "bytes32"
+            },
+            {
+              "name": "statusDate",
+              "type": "uint256"
+            },
+            {
+              "name": "maturityDate",
+              "type": "uint256"
+            },
+            {
+              "name": "notionalPrincipal",
+              "type": "int256"
+            },
+            {
+              "name": "nominalInterestRate",
+              "type": "int256"
+            },
+            {
+              "name": "feeAccrued",
+              "type": "int256"
+            },
+            {
+              "name": "accruedInterest",
+              "type": "int256"
+            },
+            {
+              "name": "rateMultiplier",
+              "type": "int256"
+            },
+            {
+              "name": "rateSpread",
+              "type": "int256"
+            },
+            {
+              "name": "feeRate",
+              "type": "int256"
+            },
+            {
+              "name": "nextResetRate",
+              "type": "int256"
+            },
+            {
+              "name": "penaltyRate",
+              "type": "int256"
+            },
+            {
+              "name": "premiumDiscountAtIED",
+              "type": "int256"
+            },
+            {
+              "name": "priceAtPurchaseDate",
+              "type": "int256"
+            },
+            {
+              "name": "nextPrincipalRedemptionPayment",
+              "type": "int256"
+            },
+            {
+              "name": "coverageOfCreditEnhancement",
+              "type": "int256"
+            },
+            {
+              "components": [
+                {
+                  "name": "i",
+                  "type": "uint256"
+                },
+                {
+                  "name": "p",
+                  "type": "uint8"
+                },
+                {
+                  "name": "isSet",
+                  "type": "bool"
+                }
+              ],
+              "name": "gracePeriod",
+              "type": "tuple"
+            },
+            {
+              "components": [
+                {
+                  "name": "i",
+                  "type": "uint256"
+                },
+                {
+                  "name": "p",
+                  "type": "uint8"
+                },
+                {
+                  "name": "isSet",
+                  "type": "bool"
+                }
+              ],
+              "name": "delinquencyPeriod",
+              "type": "tuple"
+            },
+            {
+              "name": "lifeCap",
+              "type": "int256"
+            },
+            {
+              "name": "lifeFloor",
+              "type": "int256"
+            },
+            {
+              "name": "periodCap",
+              "type": "int256"
+            },
+            {
+              "name": "periodFloor",
+              "type": "int256"
+            }
+          ],
+          "name": "terms",
+          "type": "tuple"
+        },
+        {
+          "components": [
+            {
+              "name": "contractPerformance",
+              "type": "uint8"
+            },
+            {
+              "name": "statusDate",
+              "type": "uint256"
+            },
+            {
+              "name": "nonPerformingDate",
+              "type": "uint256"
+            },
+            {
+              "name": "maturityDate",
+              "type": "uint256"
+            },
+            {
+              "name": "executionDate",
+              "type": "uint256"
+            },
+            {
+              "name": "notionalPrincipal",
+              "type": "int256"
+            },
+            {
+              "name": "accruedInterest",
+              "type": "int256"
+            },
+            {
+              "name": "feeAccrued",
+              "type": "int256"
+            },
+            {
+              "name": "nominalInterestRate",
+              "type": "int256"
+            },
+            {
+              "name": "interestScalingMultiplier",
+              "type": "int256"
+            },
+            {
+              "name": "notionalScalingMultiplier",
+              "type": "int256"
+            },
+            {
+              "name": "nextPrincipalRedemptionPayment",
+              "type": "int256"
+            },
+            {
+              "name": "executionAmount",
+              "type": "int256"
+            }
+          ],
+          "name": "state",
+          "type": "tuple"
+        },
+        {
+          "name": "scheduleTime",
+          "type": "uint256"
+        },
+        {
+          "name": "externalData",
+          "type": "bytes32"
+        }
+      ],
+      "name": "_POF_PAM_PP",
+      "outputs": [
+        {
+          "name": "",
+          "type": "int256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "pure",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "components": [
+            {
+              "name": "calendar",
+              "type": "uint8"
+            },
+            {
+              "name": "contractRole",
+              "type": "uint8"
+            },
+            {
+              "name": "dayCountConvention",
+              "type": "uint8"
+            },
+            {
+              "name": "businessDayConvention",
+              "type": "uint8"
+            },
+            {
+              "name": "endOfMonthConvention",
+              "type": "uint8"
+            },
+            {
+              "name": "scalingEffect",
+              "type": "uint8"
+            },
+            {
+              "name": "penaltyType",
+              "type": "uint8"
+            },
+            {
+              "name": "feeBasis",
+              "type": "uint8"
+            },
+            {
+              "name": "creditEventTypeCovered",
+              "type": "uint8"
+            },
+            {
+              "components": [
+                {
+                  "name": "object",
+                  "type": "bytes32"
+                },
+                {
+                  "name": "contractReferenceType",
+                  "type": "uint8"
+                },
+                {
+                  "name": "contractReferenceRole",
+                  "type": "uint8"
+                }
+              ],
+              "name": "contractReference_1",
+              "type": "tuple"
+            },
+            {
+              "components": [
+                {
+                  "name": "object",
+                  "type": "bytes32"
+                },
+                {
+                  "name": "contractReferenceType",
+                  "type": "uint8"
+                },
+                {
+                  "name": "contractReferenceRole",
+                  "type": "uint8"
+                }
+              ],
+              "name": "contractReference_2",
+              "type": "tuple"
+            },
+            {
+              "name": "currency",
+              "type": "address"
+            },
+            {
+              "name": "marketObjectCodeRateReset",
+              "type": "bytes32"
+            },
+            {
+              "name": "statusDate",
+              "type": "uint256"
+            },
+            {
+              "name": "maturityDate",
+              "type": "uint256"
+            },
+            {
+              "name": "notionalPrincipal",
+              "type": "int256"
+            },
+            {
+              "name": "nominalInterestRate",
+              "type": "int256"
+            },
+            {
+              "name": "feeAccrued",
+              "type": "int256"
+            },
+            {
+              "name": "accruedInterest",
+              "type": "int256"
+            },
+            {
+              "name": "rateMultiplier",
+              "type": "int256"
+            },
+            {
+              "name": "rateSpread",
+              "type": "int256"
+            },
+            {
+              "name": "feeRate",
+              "type": "int256"
+            },
+            {
+              "name": "nextResetRate",
+              "type": "int256"
+            },
+            {
+              "name": "penaltyRate",
+              "type": "int256"
+            },
+            {
+              "name": "premiumDiscountAtIED",
+              "type": "int256"
+            },
+            {
+              "name": "priceAtPurchaseDate",
+              "type": "int256"
+            },
+            {
+              "name": "nextPrincipalRedemptionPayment",
+              "type": "int256"
+            },
+            {
+              "name": "coverageOfCreditEnhancement",
+              "type": "int256"
+            },
+            {
+              "components": [
+                {
+                  "name": "i",
+                  "type": "uint256"
+                },
+                {
+                  "name": "p",
+                  "type": "uint8"
+                },
+                {
+                  "name": "isSet",
+                  "type": "bool"
+                }
+              ],
+              "name": "gracePeriod",
+              "type": "tuple"
+            },
+            {
+              "components": [
+                {
+                  "name": "i",
+                  "type": "uint256"
+                },
+                {
+                  "name": "p",
+                  "type": "uint8"
+                },
+                {
+                  "name": "isSet",
+                  "type": "bool"
+                }
+              ],
+              "name": "delinquencyPeriod",
+              "type": "tuple"
+            },
+            {
+              "name": "lifeCap",
+              "type": "int256"
+            },
+            {
+              "name": "lifeFloor",
+              "type": "int256"
+            },
+            {
+              "name": "periodCap",
+              "type": "int256"
+            },
+            {
+              "name": "periodFloor",
+              "type": "int256"
+            }
+          ],
+          "name": "terms",
+          "type": "tuple"
+        },
+        {
+          "components": [
+            {
+              "name": "contractPerformance",
+              "type": "uint8"
+            },
+            {
+              "name": "statusDate",
+              "type": "uint256"
+            },
+            {
+              "name": "nonPerformingDate",
+              "type": "uint256"
+            },
+            {
+              "name": "maturityDate",
+              "type": "uint256"
+            },
+            {
+              "name": "executionDate",
+              "type": "uint256"
+            },
+            {
+              "name": "notionalPrincipal",
+              "type": "int256"
+            },
+            {
+              "name": "accruedInterest",
+              "type": "int256"
+            },
+            {
+              "name": "feeAccrued",
+              "type": "int256"
+            },
+            {
+              "name": "nominalInterestRate",
+              "type": "int256"
+            },
+            {
+              "name": "interestScalingMultiplier",
+              "type": "int256"
+            },
+            {
+              "name": "notionalScalingMultiplier",
+              "type": "int256"
+            },
+            {
+              "name": "nextPrincipalRedemptionPayment",
+              "type": "int256"
+            },
+            {
+              "name": "executionAmount",
+              "type": "int256"
+            }
+          ],
+          "name": "state",
+          "type": "tuple"
+        },
+        {
+          "name": "scheduleTime",
+          "type": "uint256"
+        },
+        {
+          "name": "externalData",
+          "type": "bytes32"
+        }
+      ],
+      "name": "_POF_PAM_MD",
+      "outputs": [
+        {
+          "name": "",
+          "type": "int256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "pure",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "components": [
+            {
+              "name": "calendar",
+              "type": "uint8"
+            },
+            {
+              "name": "contractRole",
+              "type": "uint8"
+            },
+            {
+              "name": "dayCountConvention",
+              "type": "uint8"
+            },
+            {
+              "name": "businessDayConvention",
+              "type": "uint8"
+            },
+            {
+              "name": "endOfMonthConvention",
+              "type": "uint8"
+            },
+            {
+              "name": "scalingEffect",
+              "type": "uint8"
+            },
+            {
+              "name": "penaltyType",
+              "type": "uint8"
+            },
+            {
+              "name": "feeBasis",
+              "type": "uint8"
+            },
+            {
+              "name": "creditEventTypeCovered",
+              "type": "uint8"
+            },
+            {
+              "components": [
+                {
+                  "name": "object",
+                  "type": "bytes32"
+                },
+                {
+                  "name": "contractReferenceType",
+                  "type": "uint8"
+                },
+                {
+                  "name": "contractReferenceRole",
+                  "type": "uint8"
+                }
+              ],
+              "name": "contractReference_1",
+              "type": "tuple"
+            },
+            {
+              "components": [
+                {
+                  "name": "object",
+                  "type": "bytes32"
+                },
+                {
+                  "name": "contractReferenceType",
+                  "type": "uint8"
+                },
+                {
+                  "name": "contractReferenceRole",
+                  "type": "uint8"
+                }
+              ],
+              "name": "contractReference_2",
+              "type": "tuple"
+            },
+            {
+              "name": "currency",
+              "type": "address"
+            },
+            {
+              "name": "marketObjectCodeRateReset",
+              "type": "bytes32"
+            },
+            {
+              "name": "statusDate",
+              "type": "uint256"
+            },
+            {
+              "name": "maturityDate",
+              "type": "uint256"
+            },
+            {
+              "name": "notionalPrincipal",
+              "type": "int256"
+            },
+            {
+              "name": "nominalInterestRate",
+              "type": "int256"
+            },
+            {
+              "name": "feeAccrued",
+              "type": "int256"
+            },
+            {
+              "name": "accruedInterest",
+              "type": "int256"
+            },
+            {
+              "name": "rateMultiplier",
+              "type": "int256"
+            },
+            {
+              "name": "rateSpread",
+              "type": "int256"
+            },
+            {
+              "name": "feeRate",
+              "type": "int256"
+            },
+            {
+              "name": "nextResetRate",
+              "type": "int256"
+            },
+            {
+              "name": "penaltyRate",
+              "type": "int256"
+            },
+            {
+              "name": "premiumDiscountAtIED",
+              "type": "int256"
+            },
+            {
+              "name": "priceAtPurchaseDate",
+              "type": "int256"
+            },
+            {
+              "name": "nextPrincipalRedemptionPayment",
+              "type": "int256"
+            },
+            {
+              "name": "coverageOfCreditEnhancement",
+              "type": "int256"
+            },
+            {
+              "components": [
+                {
+                  "name": "i",
+                  "type": "uint256"
+                },
+                {
+                  "name": "p",
+                  "type": "uint8"
+                },
+                {
+                  "name": "isSet",
+                  "type": "bool"
+                }
+              ],
+              "name": "gracePeriod",
+              "type": "tuple"
+            },
+            {
+              "components": [
+                {
+                  "name": "i",
+                  "type": "uint256"
+                },
+                {
+                  "name": "p",
+                  "type": "uint8"
+                },
+                {
+                  "name": "isSet",
+                  "type": "bool"
+                }
+              ],
+              "name": "delinquencyPeriod",
+              "type": "tuple"
+            },
+            {
+              "name": "lifeCap",
+              "type": "int256"
+            },
+            {
+              "name": "lifeFloor",
+              "type": "int256"
+            },
+            {
+              "name": "periodCap",
+              "type": "int256"
+            },
+            {
+              "name": "periodFloor",
+              "type": "int256"
+            }
+          ],
+          "name": "terms",
+          "type": "tuple"
+        },
+        {
+          "components": [
+            {
+              "name": "contractPerformance",
+              "type": "uint8"
+            },
+            {
+              "name": "statusDate",
+              "type": "uint256"
+            },
+            {
+              "name": "nonPerformingDate",
+              "type": "uint256"
+            },
+            {
+              "name": "maturityDate",
+              "type": "uint256"
+            },
+            {
+              "name": "executionDate",
+              "type": "uint256"
+            },
+            {
+              "name": "notionalPrincipal",
+              "type": "int256"
+            },
+            {
+              "name": "accruedInterest",
+              "type": "int256"
+            },
+            {
+              "name": "feeAccrued",
+              "type": "int256"
+            },
+            {
+              "name": "nominalInterestRate",
+              "type": "int256"
+            },
+            {
+              "name": "interestScalingMultiplier",
+              "type": "int256"
+            },
+            {
+              "name": "notionalScalingMultiplier",
+              "type": "int256"
+            },
+            {
+              "name": "nextPrincipalRedemptionPayment",
+              "type": "int256"
+            },
+            {
+              "name": "executionAmount",
+              "type": "int256"
+            }
+          ],
+          "name": "state",
+          "type": "tuple"
+        },
+        {
+          "name": "scheduleTime",
+          "type": "uint256"
+        },
+        {
+          "name": "externalData",
+          "type": "bytes32"
+        }
+      ],
+      "name": "_POF_PAM_PY",
+      "outputs": [
+        {
+          "name": "",
+          "type": "int256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "pure",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "components": [
+            {
+              "name": "calendar",
+              "type": "uint8"
+            },
+            {
+              "name": "contractRole",
+              "type": "uint8"
+            },
+            {
+              "name": "dayCountConvention",
+              "type": "uint8"
+            },
+            {
+              "name": "businessDayConvention",
+              "type": "uint8"
+            },
+            {
+              "name": "endOfMonthConvention",
+              "type": "uint8"
+            },
+            {
+              "name": "scalingEffect",
+              "type": "uint8"
+            },
+            {
+              "name": "penaltyType",
+              "type": "uint8"
+            },
+            {
+              "name": "feeBasis",
+              "type": "uint8"
+            },
+            {
+              "name": "creditEventTypeCovered",
+              "type": "uint8"
+            },
+            {
+              "components": [
+                {
+                  "name": "object",
+                  "type": "bytes32"
+                },
+                {
+                  "name": "contractReferenceType",
+                  "type": "uint8"
+                },
+                {
+                  "name": "contractReferenceRole",
+                  "type": "uint8"
+                }
+              ],
+              "name": "contractReference_1",
+              "type": "tuple"
+            },
+            {
+              "components": [
+                {
+                  "name": "object",
+                  "type": "bytes32"
+                },
+                {
+                  "name": "contractReferenceType",
+                  "type": "uint8"
+                },
+                {
+                  "name": "contractReferenceRole",
+                  "type": "uint8"
+                }
+              ],
+              "name": "contractReference_2",
+              "type": "tuple"
+            },
+            {
+              "name": "currency",
+              "type": "address"
+            },
+            {
+              "name": "marketObjectCodeRateReset",
+              "type": "bytes32"
+            },
+            {
+              "name": "statusDate",
+              "type": "uint256"
+            },
+            {
+              "name": "maturityDate",
+              "type": "uint256"
+            },
+            {
+              "name": "notionalPrincipal",
+              "type": "int256"
+            },
+            {
+              "name": "nominalInterestRate",
+              "type": "int256"
+            },
+            {
+              "name": "feeAccrued",
+              "type": "int256"
+            },
+            {
+              "name": "accruedInterest",
+              "type": "int256"
+            },
+            {
+              "name": "rateMultiplier",
+              "type": "int256"
+            },
+            {
+              "name": "rateSpread",
+              "type": "int256"
+            },
+            {
+              "name": "feeRate",
+              "type": "int256"
+            },
+            {
+              "name": "nextResetRate",
+              "type": "int256"
+            },
+            {
+              "name": "penaltyRate",
+              "type": "int256"
+            },
+            {
+              "name": "premiumDiscountAtIED",
+              "type": "int256"
+            },
+            {
+              "name": "priceAtPurchaseDate",
+              "type": "int256"
+            },
+            {
+              "name": "nextPrincipalRedemptionPayment",
+              "type": "int256"
+            },
+            {
+              "name": "coverageOfCreditEnhancement",
+              "type": "int256"
+            },
+            {
+              "components": [
+                {
+                  "name": "i",
+                  "type": "uint256"
+                },
+                {
+                  "name": "p",
+                  "type": "uint8"
+                },
+                {
+                  "name": "isSet",
+                  "type": "bool"
+                }
+              ],
+              "name": "gracePeriod",
+              "type": "tuple"
+            },
+            {
+              "components": [
+                {
+                  "name": "i",
+                  "type": "uint256"
+                },
+                {
+                  "name": "p",
+                  "type": "uint8"
+                },
+                {
+                  "name": "isSet",
+                  "type": "bool"
+                }
+              ],
+              "name": "delinquencyPeriod",
+              "type": "tuple"
+            },
+            {
+              "name": "lifeCap",
+              "type": "int256"
+            },
+            {
+              "name": "lifeFloor",
+              "type": "int256"
+            },
+            {
+              "name": "periodCap",
+              "type": "int256"
+            },
+            {
+              "name": "periodFloor",
+              "type": "int256"
+            }
+          ],
+          "name": "terms",
+          "type": "tuple"
+        },
+        {
+          "components": [
+            {
+              "name": "contractPerformance",
+              "type": "uint8"
+            },
+            {
+              "name": "statusDate",
+              "type": "uint256"
+            },
+            {
+              "name": "nonPerformingDate",
+              "type": "uint256"
+            },
+            {
+              "name": "maturityDate",
+              "type": "uint256"
+            },
+            {
+              "name": "executionDate",
+              "type": "uint256"
+            },
+            {
+              "name": "notionalPrincipal",
+              "type": "int256"
+            },
+            {
+              "name": "accruedInterest",
+              "type": "int256"
+            },
+            {
+              "name": "feeAccrued",
+              "type": "int256"
+            },
+            {
+              "name": "nominalInterestRate",
+              "type": "int256"
+            },
+            {
+              "name": "interestScalingMultiplier",
+              "type": "int256"
+            },
+            {
+              "name": "notionalScalingMultiplier",
+              "type": "int256"
+            },
+            {
+              "name": "nextPrincipalRedemptionPayment",
+              "type": "int256"
+            },
+            {
+              "name": "executionAmount",
+              "type": "int256"
+            }
+          ],
+          "name": "state",
+          "type": "tuple"
+        },
+        {
+          "name": "scheduleTime",
+          "type": "uint256"
+        },
+        {
+          "name": "externalData",
+          "type": "bytes32"
+        }
+      ],
+      "name": "_POF_PAM_TD",
+      "outputs": [
+        {
+          "name": "",
+          "type": "int256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "pure",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "components": [
+            {
+              "name": "calendar",
+              "type": "uint8"
+            },
+            {
+              "name": "contractRole",
+              "type": "uint8"
+            },
+            {
+              "name": "dayCountConvention",
+              "type": "uint8"
+            },
+            {
+              "name": "businessDayConvention",
+              "type": "uint8"
+            },
+            {
+              "name": "endOfMonthConvention",
+              "type": "uint8"
+            },
+            {
+              "name": "scalingEffect",
+              "type": "uint8"
+            },
+            {
+              "name": "penaltyType",
+              "type": "uint8"
+            },
+            {
+              "name": "feeBasis",
+              "type": "uint8"
+            },
+            {
+              "name": "creditEventTypeCovered",
+              "type": "uint8"
+            },
+            {
+              "components": [
+                {
+                  "name": "object",
+                  "type": "bytes32"
+                },
+                {
+                  "name": "contractReferenceType",
+                  "type": "uint8"
+                },
+                {
+                  "name": "contractReferenceRole",
+                  "type": "uint8"
+                }
+              ],
+              "name": "contractReference_1",
+              "type": "tuple"
+            },
+            {
+              "components": [
+                {
+                  "name": "object",
+                  "type": "bytes32"
+                },
+                {
+                  "name": "contractReferenceType",
+                  "type": "uint8"
+                },
+                {
+                  "name": "contractReferenceRole",
+                  "type": "uint8"
+                }
+              ],
+              "name": "contractReference_2",
+              "type": "tuple"
+            },
+            {
+              "name": "currency",
+              "type": "address"
+            },
+            {
+              "name": "marketObjectCodeRateReset",
+              "type": "bytes32"
+            },
+            {
+              "name": "statusDate",
+              "type": "uint256"
+            },
+            {
+              "name": "maturityDate",
+              "type": "uint256"
+            },
+            {
+              "name": "notionalPrincipal",
+              "type": "int256"
+            },
+            {
+              "name": "nominalInterestRate",
+              "type": "int256"
+            },
+            {
+              "name": "feeAccrued",
+              "type": "int256"
+            },
+            {
+              "name": "accruedInterest",
+              "type": "int256"
+            },
+            {
+              "name": "rateMultiplier",
+              "type": "int256"
+            },
+            {
+              "name": "rateSpread",
+              "type": "int256"
+            },
+            {
+              "name": "feeRate",
+              "type": "int256"
+            },
+            {
+              "name": "nextResetRate",
+              "type": "int256"
+            },
+            {
+              "name": "penaltyRate",
+              "type": "int256"
+            },
+            {
+              "name": "premiumDiscountAtIED",
+              "type": "int256"
+            },
+            {
+              "name": "priceAtPurchaseDate",
+              "type": "int256"
+            },
+            {
+              "name": "nextPrincipalRedemptionPayment",
+              "type": "int256"
+            },
+            {
+              "name": "coverageOfCreditEnhancement",
+              "type": "int256"
+            },
+            {
+              "components": [
+                {
+                  "name": "i",
+                  "type": "uint256"
+                },
+                {
+                  "name": "p",
+                  "type": "uint8"
+                },
+                {
+                  "name": "isSet",
+                  "type": "bool"
+                }
+              ],
+              "name": "gracePeriod",
+              "type": "tuple"
+            },
+            {
+              "components": [
+                {
+                  "name": "i",
+                  "type": "uint256"
+                },
+                {
+                  "name": "p",
+                  "type": "uint8"
+                },
+                {
+                  "name": "isSet",
+                  "type": "bool"
+                }
+              ],
+              "name": "delinquencyPeriod",
+              "type": "tuple"
+            },
+            {
+              "name": "lifeCap",
+              "type": "int256"
+            },
+            {
+              "name": "lifeFloor",
+              "type": "int256"
+            },
+            {
+              "name": "periodCap",
+              "type": "int256"
+            },
+            {
+              "name": "periodFloor",
+              "type": "int256"
+            }
+          ],
+          "name": "terms",
+          "type": "tuple"
+        },
+        {
+          "components": [
+            {
+              "name": "contractPerformance",
+              "type": "uint8"
+            },
+            {
+              "name": "statusDate",
+              "type": "uint256"
+            },
+            {
+              "name": "nonPerformingDate",
+              "type": "uint256"
+            },
+            {
+              "name": "maturityDate",
+              "type": "uint256"
+            },
+            {
+              "name": "executionDate",
+              "type": "uint256"
+            },
+            {
+              "name": "notionalPrincipal",
+              "type": "int256"
+            },
+            {
+              "name": "accruedInterest",
+              "type": "int256"
+            },
+            {
+              "name": "feeAccrued",
+              "type": "int256"
+            },
+            {
+              "name": "nominalInterestRate",
+              "type": "int256"
+            },
+            {
+              "name": "interestScalingMultiplier",
+              "type": "int256"
+            },
+            {
+              "name": "notionalScalingMultiplier",
+              "type": "int256"
+            },
+            {
+              "name": "nextPrincipalRedemptionPayment",
+              "type": "int256"
+            },
+            {
+              "name": "executionAmount",
+              "type": "int256"
+            }
+          ],
+          "name": "state",
+          "type": "tuple"
+        },
+        {
+          "name": "scheduleTime",
+          "type": "uint256"
+        },
+        {
+          "name": "externalData",
+          "type": "bytes32"
+        }
+      ],
+      "name": "_POF_ANN_PR",
+      "outputs": [
+        {
+          "name": "",
+          "type": "int256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "pure",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "components": [
+            {
+              "name": "calendar",
+              "type": "uint8"
+            },
+            {
+              "name": "contractRole",
+              "type": "uint8"
+            },
+            {
+              "name": "dayCountConvention",
+              "type": "uint8"
+            },
+            {
+              "name": "businessDayConvention",
+              "type": "uint8"
+            },
+            {
+              "name": "endOfMonthConvention",
+              "type": "uint8"
+            },
+            {
+              "name": "scalingEffect",
+              "type": "uint8"
+            },
+            {
+              "name": "penaltyType",
+              "type": "uint8"
+            },
+            {
+              "name": "feeBasis",
+              "type": "uint8"
+            },
+            {
+              "name": "creditEventTypeCovered",
+              "type": "uint8"
+            },
+            {
+              "components": [
+                {
+                  "name": "object",
+                  "type": "bytes32"
+                },
+                {
+                  "name": "contractReferenceType",
+                  "type": "uint8"
+                },
+                {
+                  "name": "contractReferenceRole",
+                  "type": "uint8"
+                }
+              ],
+              "name": "contractReference_1",
+              "type": "tuple"
+            },
+            {
+              "components": [
+                {
+                  "name": "object",
+                  "type": "bytes32"
+                },
+                {
+                  "name": "contractReferenceType",
+                  "type": "uint8"
+                },
+                {
+                  "name": "contractReferenceRole",
+                  "type": "uint8"
+                }
+              ],
+              "name": "contractReference_2",
+              "type": "tuple"
+            },
+            {
+              "name": "currency",
+              "type": "address"
+            },
+            {
+              "name": "marketObjectCodeRateReset",
+              "type": "bytes32"
+            },
+            {
+              "name": "statusDate",
+              "type": "uint256"
+            },
+            {
+              "name": "maturityDate",
+              "type": "uint256"
+            },
+            {
+              "name": "notionalPrincipal",
+              "type": "int256"
+            },
+            {
+              "name": "nominalInterestRate",
+              "type": "int256"
+            },
+            {
+              "name": "feeAccrued",
+              "type": "int256"
+            },
+            {
+              "name": "accruedInterest",
+              "type": "int256"
+            },
+            {
+              "name": "rateMultiplier",
+              "type": "int256"
+            },
+            {
+              "name": "rateSpread",
+              "type": "int256"
+            },
+            {
+              "name": "feeRate",
+              "type": "int256"
+            },
+            {
+              "name": "nextResetRate",
+              "type": "int256"
+            },
+            {
+              "name": "penaltyRate",
+              "type": "int256"
+            },
+            {
+              "name": "premiumDiscountAtIED",
+              "type": "int256"
+            },
+            {
+              "name": "priceAtPurchaseDate",
+              "type": "int256"
+            },
+            {
+              "name": "nextPrincipalRedemptionPayment",
+              "type": "int256"
+            },
+            {
+              "name": "coverageOfCreditEnhancement",
+              "type": "int256"
+            },
+            {
+              "components": [
+                {
+                  "name": "i",
+                  "type": "uint256"
+                },
+                {
+                  "name": "p",
+                  "type": "uint8"
+                },
+                {
+                  "name": "isSet",
+                  "type": "bool"
+                }
+              ],
+              "name": "gracePeriod",
+              "type": "tuple"
+            },
+            {
+              "components": [
+                {
+                  "name": "i",
+                  "type": "uint256"
+                },
+                {
+                  "name": "p",
+                  "type": "uint8"
+                },
+                {
+                  "name": "isSet",
+                  "type": "bool"
+                }
+              ],
+              "name": "delinquencyPeriod",
+              "type": "tuple"
+            },
+            {
+              "name": "lifeCap",
+              "type": "int256"
+            },
+            {
+              "name": "lifeFloor",
+              "type": "int256"
+            },
+            {
+              "name": "periodCap",
+              "type": "int256"
+            },
+            {
+              "name": "periodFloor",
+              "type": "int256"
+            }
+          ],
+          "name": "terms",
+          "type": "tuple"
+        },
+        {
+          "components": [
+            {
+              "name": "contractPerformance",
+              "type": "uint8"
+            },
+            {
+              "name": "statusDate",
+              "type": "uint256"
+            },
+            {
+              "name": "nonPerformingDate",
+              "type": "uint256"
+            },
+            {
+              "name": "maturityDate",
+              "type": "uint256"
+            },
+            {
+              "name": "executionDate",
+              "type": "uint256"
+            },
+            {
+              "name": "notionalPrincipal",
+              "type": "int256"
+            },
+            {
+              "name": "accruedInterest",
+              "type": "int256"
+            },
+            {
+              "name": "feeAccrued",
+              "type": "int256"
+            },
+            {
+              "name": "nominalInterestRate",
+              "type": "int256"
+            },
+            {
+              "name": "interestScalingMultiplier",
+              "type": "int256"
+            },
+            {
+              "name": "notionalScalingMultiplier",
+              "type": "int256"
+            },
+            {
+              "name": "nextPrincipalRedemptionPayment",
+              "type": "int256"
+            },
+            {
+              "name": "executionAmount",
+              "type": "int256"
+            }
+          ],
+          "name": "state",
+          "type": "tuple"
+        },
+        {
+          "name": "scheduleTime",
+          "type": "uint256"
+        },
+        {
+          "name": "externalData",
+          "type": "bytes32"
+        }
+      ],
+      "name": "_POF_CEG_STD",
+      "outputs": [
+        {
+          "name": "",
+          "type": "int256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "pure",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "components": [
+            {
+              "name": "calendar",
+              "type": "uint8"
+            },
+            {
+              "name": "contractRole",
+              "type": "uint8"
+            },
+            {
+              "name": "dayCountConvention",
+              "type": "uint8"
+            },
+            {
+              "name": "businessDayConvention",
+              "type": "uint8"
+            },
+            {
+              "name": "endOfMonthConvention",
+              "type": "uint8"
+            },
+            {
+              "name": "scalingEffect",
+              "type": "uint8"
+            },
+            {
+              "name": "penaltyType",
+              "type": "uint8"
+            },
+            {
+              "name": "feeBasis",
+              "type": "uint8"
+            },
+            {
+              "name": "creditEventTypeCovered",
+              "type": "uint8"
+            },
+            {
+              "components": [
+                {
+                  "name": "object",
+                  "type": "bytes32"
+                },
+                {
+                  "name": "contractReferenceType",
+                  "type": "uint8"
+                },
+                {
+                  "name": "contractReferenceRole",
+                  "type": "uint8"
+                }
+              ],
+              "name": "contractReference_1",
+              "type": "tuple"
+            },
+            {
+              "components": [
+                {
+                  "name": "object",
+                  "type": "bytes32"
+                },
+                {
+                  "name": "contractReferenceType",
+                  "type": "uint8"
+                },
+                {
+                  "name": "contractReferenceRole",
+                  "type": "uint8"
+                }
+              ],
+              "name": "contractReference_2",
+              "type": "tuple"
+            },
+            {
+              "name": "currency",
+              "type": "address"
+            },
+            {
+              "name": "marketObjectCodeRateReset",
+              "type": "bytes32"
+            },
+            {
+              "name": "statusDate",
+              "type": "uint256"
+            },
+            {
+              "name": "maturityDate",
+              "type": "uint256"
+            },
+            {
+              "name": "notionalPrincipal",
+              "type": "int256"
+            },
+            {
+              "name": "nominalInterestRate",
+              "type": "int256"
+            },
+            {
+              "name": "feeAccrued",
+              "type": "int256"
+            },
+            {
+              "name": "accruedInterest",
+              "type": "int256"
+            },
+            {
+              "name": "rateMultiplier",
+              "type": "int256"
+            },
+            {
+              "name": "rateSpread",
+              "type": "int256"
+            },
+            {
+              "name": "feeRate",
+              "type": "int256"
+            },
+            {
+              "name": "nextResetRate",
+              "type": "int256"
+            },
+            {
+              "name": "penaltyRate",
+              "type": "int256"
+            },
+            {
+              "name": "premiumDiscountAtIED",
+              "type": "int256"
+            },
+            {
+              "name": "priceAtPurchaseDate",
+              "type": "int256"
+            },
+            {
+              "name": "nextPrincipalRedemptionPayment",
+              "type": "int256"
+            },
+            {
+              "name": "coverageOfCreditEnhancement",
+              "type": "int256"
+            },
+            {
+              "components": [
+                {
+                  "name": "i",
+                  "type": "uint256"
+                },
+                {
+                  "name": "p",
+                  "type": "uint8"
+                },
+                {
+                  "name": "isSet",
+                  "type": "bool"
+                }
+              ],
+              "name": "gracePeriod",
+              "type": "tuple"
+            },
+            {
+              "components": [
+                {
+                  "name": "i",
+                  "type": "uint256"
+                },
+                {
+                  "name": "p",
+                  "type": "uint8"
+                },
+                {
+                  "name": "isSet",
+                  "type": "bool"
+                }
+              ],
+              "name": "delinquencyPeriod",
+              "type": "tuple"
+            },
+            {
+              "name": "lifeCap",
+              "type": "int256"
+            },
+            {
+              "name": "lifeFloor",
+              "type": "int256"
+            },
+            {
+              "name": "periodCap",
+              "type": "int256"
+            },
+            {
+              "name": "periodFloor",
+              "type": "int256"
+            }
+          ],
+          "name": "terms",
+          "type": "tuple"
+        },
+        {
+          "components": [
+            {
+              "name": "contractPerformance",
+              "type": "uint8"
+            },
+            {
+              "name": "statusDate",
+              "type": "uint256"
+            },
+            {
+              "name": "nonPerformingDate",
+              "type": "uint256"
+            },
+            {
+              "name": "maturityDate",
+              "type": "uint256"
+            },
+            {
+              "name": "executionDate",
+              "type": "uint256"
+            },
+            {
+              "name": "notionalPrincipal",
+              "type": "int256"
+            },
+            {
+              "name": "accruedInterest",
+              "type": "int256"
+            },
+            {
+              "name": "feeAccrued",
+              "type": "int256"
+            },
+            {
+              "name": "nominalInterestRate",
+              "type": "int256"
+            },
+            {
+              "name": "interestScalingMultiplier",
+              "type": "int256"
+            },
+            {
+              "name": "notionalScalingMultiplier",
+              "type": "int256"
+            },
+            {
+              "name": "nextPrincipalRedemptionPayment",
+              "type": "int256"
+            },
+            {
+              "name": "executionAmount",
+              "type": "int256"
+            }
+          ],
+          "name": "state",
+          "type": "tuple"
+        },
+        {
+          "name": "scheduleTime",
+          "type": "uint256"
+        },
+        {
+          "name": "externalData",
+          "type": "bytes32"
+        }
+      ],
+      "name": "_POF_CEG_FP",
+      "outputs": [
+        {
+          "name": "",
+          "type": "int256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "pure",
+      "type": "function"
+    }
+  ],
+  "metadata": "{\"compiler\":{\"version\":\"0.5.2+commit.1df8f40c\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"constant\":true,\"inputs\":[{\"components\":[{\"name\":\"calendar\",\"type\":\"uint8\"},{\"name\":\"contractRole\",\"type\":\"uint8\"},{\"name\":\"dayCountConvention\",\"type\":\"uint8\"},{\"name\":\"businessDayConvention\",\"type\":\"uint8\"},{\"name\":\"endOfMonthConvention\",\"type\":\"uint8\"},{\"name\":\"scalingEffect\",\"type\":\"uint8\"},{\"name\":\"penaltyType\",\"type\":\"uint8\"},{\"name\":\"feeBasis\",\"type\":\"uint8\"},{\"name\":\"creditEventTypeCovered\",\"type\":\"uint8\"},{\"components\":[{\"name\":\"object\",\"type\":\"bytes32\"},{\"name\":\"contractReferenceType\",\"type\":\"uint8\"},{\"name\":\"contractReferenceRole\",\"type\":\"uint8\"}],\"name\":\"contractReference_1\",\"type\":\"tuple\"},{\"components\":[{\"name\":\"object\",\"type\":\"bytes32\"},{\"name\":\"contractReferenceType\",\"type\":\"uint8\"},{\"name\":\"contractReferenceRole\",\"type\":\"uint8\"}],\"name\":\"contractReference_2\",\"type\":\"tuple\"},{\"name\":\"currency\",\"type\":\"address\"},{\"name\":\"marketObjectCodeRateReset\",\"type\":\"bytes32\"},{\"name\":\"statusDate\",\"type\":\"uint256\"},{\"name\":\"maturityDate\",\"type\":\"uint256\"},{\"name\":\"notionalPrincipal\",\"type\":\"int256\"},{\"name\":\"nominalInterestRate\",\"type\":\"int256\"},{\"name\":\"feeAccrued\",\"type\":\"int256\"},{\"name\":\"accruedInterest\",\"type\":\"int256\"},{\"name\":\"rateMultiplier\",\"type\":\"int256\"},{\"name\":\"rateSpread\",\"type\":\"int256\"},{\"name\":\"feeRate\",\"type\":\"int256\"},{\"name\":\"nextResetRate\",\"type\":\"int256\"},{\"name\":\"penaltyRate\",\"type\":\"int256\"},{\"name\":\"premiumDiscountAtIED\",\"type\":\"int256\"},{\"name\":\"priceAtPurchaseDate\",\"type\":\"int256\"},{\"name\":\"nextPrincipalRedemptionPayment\",\"type\":\"int256\"},{\"name\":\"coverageOfCreditEnhancement\",\"type\":\"int256\"},{\"components\":[{\"name\":\"i\",\"type\":\"uint256\"},{\"name\":\"p\",\"type\":\"uint8\"},{\"name\":\"isSet\",\"type\":\"bool\"}],\"name\":\"gracePeriod\",\"type\":\"tuple\"},{\"components\":[{\"name\":\"i\",\"type\":\"uint256\"},{\"name\":\"p\",\"type\":\"uint8\"},{\"name\":\"isSet\",\"type\":\"bool\"}],\"name\":\"delinquencyPeriod\",\"type\":\"tuple\"},{\"name\":\"lifeCap\",\"type\":\"int256\"},{\"name\":\"lifeFloor\",\"type\":\"int256\"},{\"name\":\"periodCap\",\"type\":\"int256\"},{\"name\":\"periodFloor\",\"type\":\"int256\"}],\"name\":\"terms\",\"type\":\"tuple\"},{\"components\":[{\"name\":\"contractPerformance\",\"type\":\"uint8\"},{\"name\":\"statusDate\",\"type\":\"uint256\"},{\"name\":\"nonPerformingDate\",\"type\":\"uint256\"},{\"name\":\"maturityDate\",\"type\":\"uint256\"},{\"name\":\"executionDate\",\"type\":\"uint256\"},{\"name\":\"notionalPrincipal\",\"type\":\"int256\"},{\"name\":\"accruedInterest\",\"type\":\"int256\"},{\"name\":\"feeAccrued\",\"type\":\"int256\"},{\"name\":\"nominalInterestRate\",\"type\":\"int256\"},{\"name\":\"interestScalingMultiplier\",\"type\":\"int256\"},{\"name\":\"notionalScalingMultiplier\",\"type\":\"int256\"},{\"name\":\"nextPrincipalRedemptionPayment\",\"type\":\"int256\"},{\"name\":\"executionAmount\",\"type\":\"int256\"}],\"name\":\"state\",\"type\":\"tuple\"},{\"name\":\"scheduleTime\",\"type\":\"uint256\"},{\"name\":\"externalData\",\"type\":\"bytes32\"}],\"name\":\"_POF_PAM_FP\",\"outputs\":[{\"name\":\"\",\"type\":\"int256\"}],\"payable\":false,\"stateMutability\":\"pure\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"name\":\"eomc\",\"type\":\"uint8\"},{\"name\":\"startTime\",\"type\":\"uint256\"},{\"components\":[{\"name\":\"i\",\"type\":\"uint256\"},{\"name\":\"p\",\"type\":\"uint8\"},{\"name\":\"s\",\"type\":\"uint8\"},{\"name\":\"isSet\",\"type\":\"bool\"}],\"name\":\"cycle\",\"type\":\"tuple\"}],\"name\":\"adjustEndOfMonthConvention\",\"outputs\":[{\"name\":\"\",\"type\":\"uint8\"}],\"payable\":false,\"stateMutability\":\"pure\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"name\":\"_event\",\"type\":\"bytes32\"},{\"components\":[{\"name\":\"calendar\",\"type\":\"uint8\"},{\"name\":\"contractRole\",\"type\":\"uint8\"},{\"name\":\"dayCountConvention\",\"type\":\"uint8\"},{\"name\":\"businessDayConvention\",\"type\":\"uint8\"},{\"name\":\"endOfMonthConvention\",\"type\":\"uint8\"},{\"name\":\"scalingEffect\",\"type\":\"uint8\"},{\"name\":\"penaltyType\",\"type\":\"uint8\"},{\"name\":\"feeBasis\",\"type\":\"uint8\"},{\"name\":\"creditEventTypeCovered\",\"type\":\"uint8\"},{\"components\":[{\"name\":\"object\",\"type\":\"bytes32\"},{\"name\":\"contractReferenceType\",\"type\":\"uint8\"},{\"name\":\"contractReferenceRole\",\"type\":\"uint8\"}],\"name\":\"contractReference_1\",\"type\":\"tuple\"},{\"components\":[{\"name\":\"object\",\"type\":\"bytes32\"},{\"name\":\"contractReferenceType\",\"type\":\"uint8\"},{\"name\":\"contractReferenceRole\",\"type\":\"uint8\"}],\"name\":\"contractReference_2\",\"type\":\"tuple\"},{\"name\":\"currency\",\"type\":\"address\"},{\"name\":\"marketObjectCodeRateReset\",\"type\":\"bytes32\"},{\"name\":\"statusDate\",\"type\":\"uint256\"},{\"name\":\"maturityDate\",\"type\":\"uint256\"},{\"name\":\"notionalPrincipal\",\"type\":\"int256\"},{\"name\":\"nominalInterestRate\",\"type\":\"int256\"},{\"name\":\"feeAccrued\",\"type\":\"int256\"},{\"name\":\"accruedInterest\",\"type\":\"int256\"},{\"name\":\"rateMultiplier\",\"type\":\"int256\"},{\"name\":\"rateSpread\",\"type\":\"int256\"},{\"name\":\"feeRate\",\"type\":\"int256\"},{\"name\":\"nextResetRate\",\"type\":\"int256\"},{\"name\":\"penaltyRate\",\"type\":\"int256\"},{\"name\":\"premiumDiscountAtIED\",\"type\":\"int256\"},{\"name\":\"priceAtPurchaseDate\",\"type\":\"int256\"},{\"name\":\"nextPrincipalRedemptionPayment\",\"type\":\"int256\"},{\"name\":\"coverageOfCreditEnhancement\",\"type\":\"int256\"},{\"components\":[{\"name\":\"i\",\"type\":\"uint256\"},{\"name\":\"p\",\"type\":\"uint8\"},{\"name\":\"isSet\",\"type\":\"bool\"}],\"name\":\"gracePeriod\",\"type\":\"tuple\"},{\"components\":[{\"name\":\"i\",\"type\":\"uint256\"},{\"name\":\"p\",\"type\":\"uint8\"},{\"name\":\"isSet\",\"type\":\"bool\"}],\"name\":\"delinquencyPeriod\",\"type\":\"tuple\"},{\"name\":\"lifeCap\",\"type\":\"int256\"},{\"name\":\"lifeFloor\",\"type\":\"int256\"},{\"name\":\"periodCap\",\"type\":\"int256\"},{\"name\":\"periodFloor\",\"type\":\"int256\"}],\"name\":\"terms\",\"type\":\"tuple\"}],\"name\":\"computeEventTimeForEvent\",\"outputs\":[{\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"pure\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"components\":[{\"name\":\"calendar\",\"type\":\"uint8\"},{\"name\":\"contractRole\",\"type\":\"uint8\"},{\"name\":\"dayCountConvention\",\"type\":\"uint8\"},{\"name\":\"businessDayConvention\",\"type\":\"uint8\"},{\"name\":\"endOfMonthConvention\",\"type\":\"uint8\"},{\"name\":\"scalingEffect\",\"type\":\"uint8\"},{\"name\":\"penaltyType\",\"type\":\"uint8\"},{\"name\":\"feeBasis\",\"type\":\"uint8\"},{\"name\":\"creditEventTypeCovered\",\"type\":\"uint8\"},{\"components\":[{\"name\":\"object\",\"type\":\"bytes32\"},{\"name\":\"contractReferenceType\",\"type\":\"uint8\"},{\"name\":\"contractReferenceRole\",\"type\":\"uint8\"}],\"name\":\"contractReference_1\",\"type\":\"tuple\"},{\"components\":[{\"name\":\"object\",\"type\":\"bytes32\"},{\"name\":\"contractReferenceType\",\"type\":\"uint8\"},{\"name\":\"contractReferenceRole\",\"type\":\"uint8\"}],\"name\":\"contractReference_2\",\"type\":\"tuple\"},{\"name\":\"currency\",\"type\":\"address\"},{\"name\":\"marketObjectCodeRateReset\",\"type\":\"bytes32\"},{\"name\":\"statusDate\",\"type\":\"uint256\"},{\"name\":\"maturityDate\",\"type\":\"uint256\"},{\"name\":\"notionalPrincipal\",\"type\":\"int256\"},{\"name\":\"nominalInterestRate\",\"type\":\"int256\"},{\"name\":\"feeAccrued\",\"type\":\"int256\"},{\"name\":\"accruedInterest\",\"type\":\"int256\"},{\"name\":\"rateMultiplier\",\"type\":\"int256\"},{\"name\":\"rateSpread\",\"type\":\"int256\"},{\"name\":\"feeRate\",\"type\":\"int256\"},{\"name\":\"nextResetRate\",\"type\":\"int256\"},{\"name\":\"penaltyRate\",\"type\":\"int256\"},{\"name\":\"premiumDiscountAtIED\",\"type\":\"int256\"},{\"name\":\"priceAtPurchaseDate\",\"type\":\"int256\"},{\"name\":\"nextPrincipalRedemptionPayment\",\"type\":\"int256\"},{\"name\":\"coverageOfCreditEnhancement\",\"type\":\"int256\"},{\"components\":[{\"name\":\"i\",\"type\":\"uint256\"},{\"name\":\"p\",\"type\":\"uint8\"},{\"name\":\"isSet\",\"type\":\"bool\"}],\"name\":\"gracePeriod\",\"type\":\"tuple\"},{\"components\":[{\"name\":\"i\",\"type\":\"uint256\"},{\"name\":\"p\",\"type\":\"uint8\"},{\"name\":\"isSet\",\"type\":\"bool\"}],\"name\":\"delinquencyPeriod\",\"type\":\"tuple\"},{\"name\":\"lifeCap\",\"type\":\"int256\"},{\"name\":\"lifeFloor\",\"type\":\"int256\"},{\"name\":\"periodCap\",\"type\":\"int256\"},{\"name\":\"periodFloor\",\"type\":\"int256\"}],\"name\":\"terms\",\"type\":\"tuple\"},{\"components\":[{\"name\":\"contractPerformance\",\"type\":\"uint8\"},{\"name\":\"statusDate\",\"type\":\"uint256\"},{\"name\":\"nonPerformingDate\",\"type\":\"uint256\"},{\"name\":\"maturityDate\",\"type\":\"uint256\"},{\"name\":\"executionDate\",\"type\":\"uint256\"},{\"name\":\"notionalPrincipal\",\"type\":\"int256\"},{\"name\":\"accruedInterest\",\"type\":\"int256\"},{\"name\":\"feeAccrued\",\"type\":\"int256\"},{\"name\":\"nominalInterestRate\",\"type\":\"int256\"},{\"name\":\"interestScalingMultiplier\",\"type\":\"int256\"},{\"name\":\"notionalScalingMultiplier\",\"type\":\"int256\"},{\"name\":\"nextPrincipalRedemptionPayment\",\"type\":\"int256\"},{\"name\":\"executionAmount\",\"type\":\"int256\"}],\"name\":\"state\",\"type\":\"tuple\"},{\"name\":\"scheduleTime\",\"type\":\"uint256\"},{\"name\":\"externalData\",\"type\":\"bytes32\"}],\"name\":\"_POF_ANN_PR\",\"outputs\":[{\"name\":\"\",\"type\":\"int256\"}],\"payable\":false,\"stateMutability\":\"pure\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"components\":[{\"name\":\"calendar\",\"type\":\"uint8\"},{\"name\":\"contractRole\",\"type\":\"uint8\"},{\"name\":\"dayCountConvention\",\"type\":\"uint8\"},{\"name\":\"businessDayConvention\",\"type\":\"uint8\"},{\"name\":\"endOfMonthConvention\",\"type\":\"uint8\"},{\"name\":\"scalingEffect\",\"type\":\"uint8\"},{\"name\":\"penaltyType\",\"type\":\"uint8\"},{\"name\":\"feeBasis\",\"type\":\"uint8\"},{\"name\":\"creditEventTypeCovered\",\"type\":\"uint8\"},{\"components\":[{\"name\":\"object\",\"type\":\"bytes32\"},{\"name\":\"contractReferenceType\",\"type\":\"uint8\"},{\"name\":\"contractReferenceRole\",\"type\":\"uint8\"}],\"name\":\"contractReference_1\",\"type\":\"tuple\"},{\"components\":[{\"name\":\"object\",\"type\":\"bytes32\"},{\"name\":\"contractReferenceType\",\"type\":\"uint8\"},{\"name\":\"contractReferenceRole\",\"type\":\"uint8\"}],\"name\":\"contractReference_2\",\"type\":\"tuple\"},{\"name\":\"currency\",\"type\":\"address\"},{\"name\":\"marketObjectCodeRateReset\",\"type\":\"bytes32\"},{\"name\":\"statusDate\",\"type\":\"uint256\"},{\"name\":\"maturityDate\",\"type\":\"uint256\"},{\"name\":\"notionalPrincipal\",\"type\":\"int256\"},{\"name\":\"nominalInterestRate\",\"type\":\"int256\"},{\"name\":\"feeAccrued\",\"type\":\"int256\"},{\"name\":\"accruedInterest\",\"type\":\"int256\"},{\"name\":\"rateMultiplier\",\"type\":\"int256\"},{\"name\":\"rateSpread\",\"type\":\"int256\"},{\"name\":\"feeRate\",\"type\":\"int256\"},{\"name\":\"nextResetRate\",\"type\":\"int256\"},{\"name\":\"penaltyRate\",\"type\":\"int256\"},{\"name\":\"premiumDiscountAtIED\",\"type\":\"int256\"},{\"name\":\"priceAtPurchaseDate\",\"type\":\"int256\"},{\"name\":\"nextPrincipalRedemptionPayment\",\"type\":\"int256\"},{\"name\":\"coverageOfCreditEnhancement\",\"type\":\"int256\"},{\"components\":[{\"name\":\"i\",\"type\":\"uint256\"},{\"name\":\"p\",\"type\":\"uint8\"},{\"name\":\"isSet\",\"type\":\"bool\"}],\"name\":\"gracePeriod\",\"type\":\"tuple\"},{\"components\":[{\"name\":\"i\",\"type\":\"uint256\"},{\"name\":\"p\",\"type\":\"uint8\"},{\"name\":\"isSet\",\"type\":\"bool\"}],\"name\":\"delinquencyPeriod\",\"type\":\"tuple\"},{\"name\":\"lifeCap\",\"type\":\"int256\"},{\"name\":\"lifeFloor\",\"type\":\"int256\"},{\"name\":\"periodCap\",\"type\":\"int256\"},{\"name\":\"periodFloor\",\"type\":\"int256\"}],\"name\":\"terms\",\"type\":\"tuple\"},{\"components\":[{\"name\":\"contractPerformance\",\"type\":\"uint8\"},{\"name\":\"statusDate\",\"type\":\"uint256\"},{\"name\":\"nonPerformingDate\",\"type\":\"uint256\"},{\"name\":\"maturityDate\",\"type\":\"uint256\"},{\"name\":\"executionDate\",\"type\":\"uint256\"},{\"name\":\"notionalPrincipal\",\"type\":\"int256\"},{\"name\":\"accruedInterest\",\"type\":\"int256\"},{\"name\":\"feeAccrued\",\"type\":\"int256\"},{\"name\":\"nominalInterestRate\",\"type\":\"int256\"},{\"name\":\"interestScalingMultiplier\",\"type\":\"int256\"},{\"name\":\"notionalScalingMultiplier\",\"type\":\"int256\"},{\"name\":\"nextPrincipalRedemptionPayment\",\"type\":\"int256\"},{\"name\":\"executionAmount\",\"type\":\"int256\"}],\"name\":\"state\",\"type\":\"tuple\"},{\"name\":\"scheduleTime\",\"type\":\"uint256\"},{\"name\":\"externalData\",\"type\":\"bytes32\"}],\"name\":\"_POF_PAM_PP\",\"outputs\":[{\"name\":\"\",\"type\":\"int256\"}],\"payable\":false,\"stateMutability\":\"pure\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"components\":[{\"name\":\"calendar\",\"type\":\"uint8\"},{\"name\":\"contractRole\",\"type\":\"uint8\"},{\"name\":\"dayCountConvention\",\"type\":\"uint8\"},{\"name\":\"businessDayConvention\",\"type\":\"uint8\"},{\"name\":\"endOfMonthConvention\",\"type\":\"uint8\"},{\"name\":\"scalingEffect\",\"type\":\"uint8\"},{\"name\":\"penaltyType\",\"type\":\"uint8\"},{\"name\":\"feeBasis\",\"type\":\"uint8\"},{\"name\":\"creditEventTypeCovered\",\"type\":\"uint8\"},{\"components\":[{\"name\":\"object\",\"type\":\"bytes32\"},{\"name\":\"contractReferenceType\",\"type\":\"uint8\"},{\"name\":\"contractReferenceRole\",\"type\":\"uint8\"}],\"name\":\"contractReference_1\",\"type\":\"tuple\"},{\"components\":[{\"name\":\"object\",\"type\":\"bytes32\"},{\"name\":\"contractReferenceType\",\"type\":\"uint8\"},{\"name\":\"contractReferenceRole\",\"type\":\"uint8\"}],\"name\":\"contractReference_2\",\"type\":\"tuple\"},{\"name\":\"currency\",\"type\":\"address\"},{\"name\":\"marketObjectCodeRateReset\",\"type\":\"bytes32\"},{\"name\":\"statusDate\",\"type\":\"uint256\"},{\"name\":\"maturityDate\",\"type\":\"uint256\"},{\"name\":\"notionalPrincipal\",\"type\":\"int256\"},{\"name\":\"nominalInterestRate\",\"type\":\"int256\"},{\"name\":\"feeAccrued\",\"type\":\"int256\"},{\"name\":\"accruedInterest\",\"type\":\"int256\"},{\"name\":\"rateMultiplier\",\"type\":\"int256\"},{\"name\":\"rateSpread\",\"type\":\"int256\"},{\"name\":\"feeRate\",\"type\":\"int256\"},{\"name\":\"nextResetRate\",\"type\":\"int256\"},{\"name\":\"penaltyRate\",\"type\":\"int256\"},{\"name\":\"premiumDiscountAtIED\",\"type\":\"int256\"},{\"name\":\"priceAtPurchaseDate\",\"type\":\"int256\"},{\"name\":\"nextPrincipalRedemptionPayment\",\"type\":\"int256\"},{\"name\":\"coverageOfCreditEnhancement\",\"type\":\"int256\"},{\"components\":[{\"name\":\"i\",\"type\":\"uint256\"},{\"name\":\"p\",\"type\":\"uint8\"},{\"name\":\"isSet\",\"type\":\"bool\"}],\"name\":\"gracePeriod\",\"type\":\"tuple\"},{\"components\":[{\"name\":\"i\",\"type\":\"uint256\"},{\"name\":\"p\",\"type\":\"uint8\"},{\"name\":\"isSet\",\"type\":\"bool\"}],\"name\":\"delinquencyPeriod\",\"type\":\"tuple\"},{\"name\":\"lifeCap\",\"type\":\"int256\"},{\"name\":\"lifeFloor\",\"type\":\"int256\"},{\"name\":\"periodCap\",\"type\":\"int256\"},{\"name\":\"periodFloor\",\"type\":\"int256\"}],\"name\":\"terms\",\"type\":\"tuple\"},{\"components\":[{\"name\":\"contractPerformance\",\"type\":\"uint8\"},{\"name\":\"statusDate\",\"type\":\"uint256\"},{\"name\":\"nonPerformingDate\",\"type\":\"uint256\"},{\"name\":\"maturityDate\",\"type\":\"uint256\"},{\"name\":\"executionDate\",\"type\":\"uint256\"},{\"name\":\"notionalPrincipal\",\"type\":\"int256\"},{\"name\":\"accruedInterest\",\"type\":\"int256\"},{\"name\":\"feeAccrued\",\"type\":\"int256\"},{\"name\":\"nominalInterestRate\",\"type\":\"int256\"},{\"name\":\"interestScalingMultiplier\",\"type\":\"int256\"},{\"name\":\"notionalScalingMultiplier\",\"type\":\"int256\"},{\"name\":\"nextPrincipalRedemptionPayment\",\"type\":\"int256\"},{\"name\":\"executionAmount\",\"type\":\"int256\"}],\"name\":\"state\",\"type\":\"tuple\"},{\"name\":\"scheduleTime\",\"type\":\"uint256\"},{\"name\":\"externalData\",\"type\":\"bytes32\"}],\"name\":\"_POF_CEG_STD\",\"outputs\":[{\"name\":\"\",\"type\":\"int256\"}],\"payable\":false,\"stateMutability\":\"pure\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"components\":[{\"name\":\"calendar\",\"type\":\"uint8\"},{\"name\":\"contractRole\",\"type\":\"uint8\"},{\"name\":\"dayCountConvention\",\"type\":\"uint8\"},{\"name\":\"businessDayConvention\",\"type\":\"uint8\"},{\"name\":\"endOfMonthConvention\",\"type\":\"uint8\"},{\"name\":\"scalingEffect\",\"type\":\"uint8\"},{\"name\":\"penaltyType\",\"type\":\"uint8\"},{\"name\":\"feeBasis\",\"type\":\"uint8\"},{\"name\":\"creditEventTypeCovered\",\"type\":\"uint8\"},{\"components\":[{\"name\":\"object\",\"type\":\"bytes32\"},{\"name\":\"contractReferenceType\",\"type\":\"uint8\"},{\"name\":\"contractReferenceRole\",\"type\":\"uint8\"}],\"name\":\"contractReference_1\",\"type\":\"tuple\"},{\"components\":[{\"name\":\"object\",\"type\":\"bytes32\"},{\"name\":\"contractReferenceType\",\"type\":\"uint8\"},{\"name\":\"contractReferenceRole\",\"type\":\"uint8\"}],\"name\":\"contractReference_2\",\"type\":\"tuple\"},{\"name\":\"currency\",\"type\":\"address\"},{\"name\":\"marketObjectCodeRateReset\",\"type\":\"bytes32\"},{\"name\":\"statusDate\",\"type\":\"uint256\"},{\"name\":\"maturityDate\",\"type\":\"uint256\"},{\"name\":\"notionalPrincipal\",\"type\":\"int256\"},{\"name\":\"nominalInterestRate\",\"type\":\"int256\"},{\"name\":\"feeAccrued\",\"type\":\"int256\"},{\"name\":\"accruedInterest\",\"type\":\"int256\"},{\"name\":\"rateMultiplier\",\"type\":\"int256\"},{\"name\":\"rateSpread\",\"type\":\"int256\"},{\"name\":\"feeRate\",\"type\":\"int256\"},{\"name\":\"nextResetRate\",\"type\":\"int256\"},{\"name\":\"penaltyRate\",\"type\":\"int256\"},{\"name\":\"premiumDiscountAtIED\",\"type\":\"int256\"},{\"name\":\"priceAtPurchaseDate\",\"type\":\"int256\"},{\"name\":\"nextPrincipalRedemptionPayment\",\"type\":\"int256\"},{\"name\":\"coverageOfCreditEnhancement\",\"type\":\"int256\"},{\"components\":[{\"name\":\"i\",\"type\":\"uint256\"},{\"name\":\"p\",\"type\":\"uint8\"},{\"name\":\"isSet\",\"type\":\"bool\"}],\"name\":\"gracePeriod\",\"type\":\"tuple\"},{\"components\":[{\"name\":\"i\",\"type\":\"uint256\"},{\"name\":\"p\",\"type\":\"uint8\"},{\"name\":\"isSet\",\"type\":\"bool\"}],\"name\":\"delinquencyPeriod\",\"type\":\"tuple\"},{\"name\":\"lifeCap\",\"type\":\"int256\"},{\"name\":\"lifeFloor\",\"type\":\"int256\"},{\"name\":\"periodCap\",\"type\":\"int256\"},{\"name\":\"periodFloor\",\"type\":\"int256\"}],\"name\":\"terms\",\"type\":\"tuple\"},{\"components\":[{\"name\":\"contractPerformance\",\"type\":\"uint8\"},{\"name\":\"statusDate\",\"type\":\"uint256\"},{\"name\":\"nonPerformingDate\",\"type\":\"uint256\"},{\"name\":\"maturityDate\",\"type\":\"uint256\"},{\"name\":\"executionDate\",\"type\":\"uint256\"},{\"name\":\"notionalPrincipal\",\"type\":\"int256\"},{\"name\":\"accruedInterest\",\"type\":\"int256\"},{\"name\":\"feeAccrued\",\"type\":\"int256\"},{\"name\":\"nominalInterestRate\",\"type\":\"int256\"},{\"name\":\"interestScalingMultiplier\",\"type\":\"int256\"},{\"name\":\"notionalScalingMultiplier\",\"type\":\"int256\"},{\"name\":\"nextPrincipalRedemptionPayment\",\"type\":\"int256\"},{\"name\":\"executionAmount\",\"type\":\"int256\"}],\"name\":\"state\",\"type\":\"tuple\"},{\"name\":\"scheduleTime\",\"type\":\"uint256\"},{\"name\":\"externalData\",\"type\":\"bytes32\"}],\"name\":\"_POF_CEG_FP\",\"outputs\":[{\"name\":\"\",\"type\":\"int256\"}],\"payable\":false,\"stateMutability\":\"pure\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"components\":[{\"name\":\"calendar\",\"type\":\"uint8\"},{\"name\":\"contractRole\",\"type\":\"uint8\"},{\"name\":\"dayCountConvention\",\"type\":\"uint8\"},{\"name\":\"businessDayConvention\",\"type\":\"uint8\"},{\"name\":\"endOfMonthConvention\",\"type\":\"uint8\"},{\"name\":\"scalingEffect\",\"type\":\"uint8\"},{\"name\":\"penaltyType\",\"type\":\"uint8\"},{\"name\":\"feeBasis\",\"type\":\"uint8\"},{\"name\":\"creditEventTypeCovered\",\"type\":\"uint8\"},{\"components\":[{\"name\":\"object\",\"type\":\"bytes32\"},{\"name\":\"contractReferenceType\",\"type\":\"uint8\"},{\"name\":\"contractReferenceRole\",\"type\":\"uint8\"}],\"name\":\"contractReference_1\",\"type\":\"tuple\"},{\"components\":[{\"name\":\"object\",\"type\":\"bytes32\"},{\"name\":\"contractReferenceType\",\"type\":\"uint8\"},{\"name\":\"contractReferenceRole\",\"type\":\"uint8\"}],\"name\":\"contractReference_2\",\"type\":\"tuple\"},{\"name\":\"currency\",\"type\":\"address\"},{\"name\":\"marketObjectCodeRateReset\",\"type\":\"bytes32\"},{\"name\":\"statusDate\",\"type\":\"uint256\"},{\"name\":\"maturityDate\",\"type\":\"uint256\"},{\"name\":\"notionalPrincipal\",\"type\":\"int256\"},{\"name\":\"nominalInterestRate\",\"type\":\"int256\"},{\"name\":\"feeAccrued\",\"type\":\"int256\"},{\"name\":\"accruedInterest\",\"type\":\"int256\"},{\"name\":\"rateMultiplier\",\"type\":\"int256\"},{\"name\":\"rateSpread\",\"type\":\"int256\"},{\"name\":\"feeRate\",\"type\":\"int256\"},{\"name\":\"nextResetRate\",\"type\":\"int256\"},{\"name\":\"penaltyRate\",\"type\":\"int256\"},{\"name\":\"premiumDiscountAtIED\",\"type\":\"int256\"},{\"name\":\"priceAtPurchaseDate\",\"type\":\"int256\"},{\"name\":\"nextPrincipalRedemptionPayment\",\"type\":\"int256\"},{\"name\":\"coverageOfCreditEnhancement\",\"type\":\"int256\"},{\"components\":[{\"name\":\"i\",\"type\":\"uint256\"},{\"name\":\"p\",\"type\":\"uint8\"},{\"name\":\"isSet\",\"type\":\"bool\"}],\"name\":\"gracePeriod\",\"type\":\"tuple\"},{\"components\":[{\"name\":\"i\",\"type\":\"uint256\"},{\"name\":\"p\",\"type\":\"uint8\"},{\"name\":\"isSet\",\"type\":\"bool\"}],\"name\":\"delinquencyPeriod\",\"type\":\"tuple\"},{\"name\":\"lifeCap\",\"type\":\"int256\"},{\"name\":\"lifeFloor\",\"type\":\"int256\"},{\"name\":\"periodCap\",\"type\":\"int256\"},{\"name\":\"periodFloor\",\"type\":\"int256\"}],\"name\":\"terms\",\"type\":\"tuple\"},{\"components\":[{\"name\":\"contractPerformance\",\"type\":\"uint8\"},{\"name\":\"statusDate\",\"type\":\"uint256\"},{\"name\":\"nonPerformingDate\",\"type\":\"uint256\"},{\"name\":\"maturityDate\",\"type\":\"uint256\"},{\"name\":\"executionDate\",\"type\":\"uint256\"},{\"name\":\"notionalPrincipal\",\"type\":\"int256\"},{\"name\":\"accruedInterest\",\"type\":\"int256\"},{\"name\":\"feeAccrued\",\"type\":\"int256\"},{\"name\":\"nominalInterestRate\",\"type\":\"int256\"},{\"name\":\"interestScalingMultiplier\",\"type\":\"int256\"},{\"name\":\"notionalScalingMultiplier\",\"type\":\"int256\"},{\"name\":\"nextPrincipalRedemptionPayment\",\"type\":\"int256\"},{\"name\":\"executionAmount\",\"type\":\"int256\"}],\"name\":\"state\",\"type\":\"tuple\"},{\"name\":\"scheduleTime\",\"type\":\"uint256\"},{\"name\":\"externalData\",\"type\":\"bytes32\"}],\"name\":\"_POF_PAM_MD\",\"outputs\":[{\"name\":\"\",\"type\":\"int256\"}],\"payable\":false,\"stateMutability\":\"pure\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"components\":[{\"name\":\"calendar\",\"type\":\"uint8\"},{\"name\":\"contractRole\",\"type\":\"uint8\"},{\"name\":\"dayCountConvention\",\"type\":\"uint8\"},{\"name\":\"businessDayConvention\",\"type\":\"uint8\"},{\"name\":\"endOfMonthConvention\",\"type\":\"uint8\"},{\"name\":\"scalingEffect\",\"type\":\"uint8\"},{\"name\":\"penaltyType\",\"type\":\"uint8\"},{\"name\":\"feeBasis\",\"type\":\"uint8\"},{\"name\":\"creditEventTypeCovered\",\"type\":\"uint8\"},{\"components\":[{\"name\":\"object\",\"type\":\"bytes32\"},{\"name\":\"contractReferenceType\",\"type\":\"uint8\"},{\"name\":\"contractReferenceRole\",\"type\":\"uint8\"}],\"name\":\"contractReference_1\",\"type\":\"tuple\"},{\"components\":[{\"name\":\"object\",\"type\":\"bytes32\"},{\"name\":\"contractReferenceType\",\"type\":\"uint8\"},{\"name\":\"contractReferenceRole\",\"type\":\"uint8\"}],\"name\":\"contractReference_2\",\"type\":\"tuple\"},{\"name\":\"currency\",\"type\":\"address\"},{\"name\":\"marketObjectCodeRateReset\",\"type\":\"bytes32\"},{\"name\":\"statusDate\",\"type\":\"uint256\"},{\"name\":\"maturityDate\",\"type\":\"uint256\"},{\"name\":\"notionalPrincipal\",\"type\":\"int256\"},{\"name\":\"nominalInterestRate\",\"type\":\"int256\"},{\"name\":\"feeAccrued\",\"type\":\"int256\"},{\"name\":\"accruedInterest\",\"type\":\"int256\"},{\"name\":\"rateMultiplier\",\"type\":\"int256\"},{\"name\":\"rateSpread\",\"type\":\"int256\"},{\"name\":\"feeRate\",\"type\":\"int256\"},{\"name\":\"nextResetRate\",\"type\":\"int256\"},{\"name\":\"penaltyRate\",\"type\":\"int256\"},{\"name\":\"premiumDiscountAtIED\",\"type\":\"int256\"},{\"name\":\"priceAtPurchaseDate\",\"type\":\"int256\"},{\"name\":\"nextPrincipalRedemptionPayment\",\"type\":\"int256\"},{\"name\":\"coverageOfCreditEnhancement\",\"type\":\"int256\"},{\"components\":[{\"name\":\"i\",\"type\":\"uint256\"},{\"name\":\"p\",\"type\":\"uint8\"},{\"name\":\"isSet\",\"type\":\"bool\"}],\"name\":\"gracePeriod\",\"type\":\"tuple\"},{\"components\":[{\"name\":\"i\",\"type\":\"uint256\"},{\"name\":\"p\",\"type\":\"uint8\"},{\"name\":\"isSet\",\"type\":\"bool\"}],\"name\":\"delinquencyPeriod\",\"type\":\"tuple\"},{\"name\":\"lifeCap\",\"type\":\"int256\"},{\"name\":\"lifeFloor\",\"type\":\"int256\"},{\"name\":\"periodCap\",\"type\":\"int256\"},{\"name\":\"periodFloor\",\"type\":\"int256\"}],\"name\":\"terms\",\"type\":\"tuple\"},{\"components\":[{\"name\":\"contractPerformance\",\"type\":\"uint8\"},{\"name\":\"statusDate\",\"type\":\"uint256\"},{\"name\":\"nonPerformingDate\",\"type\":\"uint256\"},{\"name\":\"maturityDate\",\"type\":\"uint256\"},{\"name\":\"executionDate\",\"type\":\"uint256\"},{\"name\":\"notionalPrincipal\",\"type\":\"int256\"},{\"name\":\"accruedInterest\",\"type\":\"int256\"},{\"name\":\"feeAccrued\",\"type\":\"int256\"},{\"name\":\"nominalInterestRate\",\"type\":\"int256\"},{\"name\":\"interestScalingMultiplier\",\"type\":\"int256\"},{\"name\":\"notionalScalingMultiplier\",\"type\":\"int256\"},{\"name\":\"nextPrincipalRedemptionPayment\",\"type\":\"int256\"},{\"name\":\"executionAmount\",\"type\":\"int256\"}],\"name\":\"state\",\"type\":\"tuple\"},{\"name\":\"scheduleTime\",\"type\":\"uint256\"},{\"name\":\"externalData\",\"type\":\"bytes32\"}],\"name\":\"_POF_PAM_IED\",\"outputs\":[{\"name\":\"\",\"type\":\"int256\"}],\"payable\":false,\"stateMutability\":\"pure\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"name\":\"_event\",\"type\":\"bytes32\"}],\"name\":\"decodeEvent\",\"outputs\":[{\"name\":\"\",\"type\":\"uint8\"},{\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"pure\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"name\":\"eventType\",\"type\":\"uint8\"}],\"name\":\"getEpochOffset\",\"outputs\":[{\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"pure\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"components\":[{\"name\":\"calendar\",\"type\":\"uint8\"},{\"name\":\"contractRole\",\"type\":\"uint8\"},{\"name\":\"dayCountConvention\",\"type\":\"uint8\"},{\"name\":\"businessDayConvention\",\"type\":\"uint8\"},{\"name\":\"endOfMonthConvention\",\"type\":\"uint8\"},{\"name\":\"scalingEffect\",\"type\":\"uint8\"},{\"name\":\"penaltyType\",\"type\":\"uint8\"},{\"name\":\"feeBasis\",\"type\":\"uint8\"},{\"name\":\"creditEventTypeCovered\",\"type\":\"uint8\"},{\"components\":[{\"name\":\"object\",\"type\":\"bytes32\"},{\"name\":\"contractReferenceType\",\"type\":\"uint8\"},{\"name\":\"contractReferenceRole\",\"type\":\"uint8\"}],\"name\":\"contractReference_1\",\"type\":\"tuple\"},{\"components\":[{\"name\":\"object\",\"type\":\"bytes32\"},{\"name\":\"contractReferenceType\",\"type\":\"uint8\"},{\"name\":\"contractReferenceRole\",\"type\":\"uint8\"}],\"name\":\"contractReference_2\",\"type\":\"tuple\"},{\"name\":\"currency\",\"type\":\"address\"},{\"name\":\"marketObjectCodeRateReset\",\"type\":\"bytes32\"},{\"name\":\"statusDate\",\"type\":\"uint256\"},{\"name\":\"maturityDate\",\"type\":\"uint256\"},{\"name\":\"notionalPrincipal\",\"type\":\"int256\"},{\"name\":\"nominalInterestRate\",\"type\":\"int256\"},{\"name\":\"feeAccrued\",\"type\":\"int256\"},{\"name\":\"accruedInterest\",\"type\":\"int256\"},{\"name\":\"rateMultiplier\",\"type\":\"int256\"},{\"name\":\"rateSpread\",\"type\":\"int256\"},{\"name\":\"feeRate\",\"type\":\"int256\"},{\"name\":\"nextResetRate\",\"type\":\"int256\"},{\"name\":\"penaltyRate\",\"type\":\"int256\"},{\"name\":\"premiumDiscountAtIED\",\"type\":\"int256\"},{\"name\":\"priceAtPurchaseDate\",\"type\":\"int256\"},{\"name\":\"nextPrincipalRedemptionPayment\",\"type\":\"int256\"},{\"name\":\"coverageOfCreditEnhancement\",\"type\":\"int256\"},{\"components\":[{\"name\":\"i\",\"type\":\"uint256\"},{\"name\":\"p\",\"type\":\"uint8\"},{\"name\":\"isSet\",\"type\":\"bool\"}],\"name\":\"gracePeriod\",\"type\":\"tuple\"},{\"components\":[{\"name\":\"i\",\"type\":\"uint256\"},{\"name\":\"p\",\"type\":\"uint8\"},{\"name\":\"isSet\",\"type\":\"bool\"}],\"name\":\"delinquencyPeriod\",\"type\":\"tuple\"},{\"name\":\"lifeCap\",\"type\":\"int256\"},{\"name\":\"lifeFloor\",\"type\":\"int256\"},{\"name\":\"periodCap\",\"type\":\"int256\"},{\"name\":\"periodFloor\",\"type\":\"int256\"}],\"name\":\"terms\",\"type\":\"tuple\"},{\"components\":[{\"name\":\"contractPerformance\",\"type\":\"uint8\"},{\"name\":\"statusDate\",\"type\":\"uint256\"},{\"name\":\"nonPerformingDate\",\"type\":\"uint256\"},{\"name\":\"maturityDate\",\"type\":\"uint256\"},{\"name\":\"executionDate\",\"type\":\"uint256\"},{\"name\":\"notionalPrincipal\",\"type\":\"int256\"},{\"name\":\"accruedInterest\",\"type\":\"int256\"},{\"name\":\"feeAccrued\",\"type\":\"int256\"},{\"name\":\"nominalInterestRate\",\"type\":\"int256\"},{\"name\":\"interestScalingMultiplier\",\"type\":\"int256\"},{\"name\":\"notionalScalingMultiplier\",\"type\":\"int256\"},{\"name\":\"nextPrincipalRedemptionPayment\",\"type\":\"int256\"},{\"name\":\"executionAmount\",\"type\":\"int256\"}],\"name\":\"state\",\"type\":\"tuple\"},{\"name\":\"scheduleTime\",\"type\":\"uint256\"},{\"name\":\"externalData\",\"type\":\"bytes32\"}],\"name\":\"_POF_PAM_TD\",\"outputs\":[{\"name\":\"\",\"type\":\"int256\"}],\"payable\":false,\"stateMutability\":\"pure\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"components\":[{\"name\":\"calendar\",\"type\":\"uint8\"},{\"name\":\"contractRole\",\"type\":\"uint8\"},{\"name\":\"dayCountConvention\",\"type\":\"uint8\"},{\"name\":\"businessDayConvention\",\"type\":\"uint8\"},{\"name\":\"endOfMonthConvention\",\"type\":\"uint8\"},{\"name\":\"scalingEffect\",\"type\":\"uint8\"},{\"name\":\"penaltyType\",\"type\":\"uint8\"},{\"name\":\"feeBasis\",\"type\":\"uint8\"},{\"name\":\"creditEventTypeCovered\",\"type\":\"uint8\"},{\"components\":[{\"name\":\"object\",\"type\":\"bytes32\"},{\"name\":\"contractReferenceType\",\"type\":\"uint8\"},{\"name\":\"contractReferenceRole\",\"type\":\"uint8\"}],\"name\":\"contractReference_1\",\"type\":\"tuple\"},{\"components\":[{\"name\":\"object\",\"type\":\"bytes32\"},{\"name\":\"contractReferenceType\",\"type\":\"uint8\"},{\"name\":\"contractReferenceRole\",\"type\":\"uint8\"}],\"name\":\"contractReference_2\",\"type\":\"tuple\"},{\"name\":\"currency\",\"type\":\"address\"},{\"name\":\"marketObjectCodeRateReset\",\"type\":\"bytes32\"},{\"name\":\"statusDate\",\"type\":\"uint256\"},{\"name\":\"maturityDate\",\"type\":\"uint256\"},{\"name\":\"notionalPrincipal\",\"type\":\"int256\"},{\"name\":\"nominalInterestRate\",\"type\":\"int256\"},{\"name\":\"feeAccrued\",\"type\":\"int256\"},{\"name\":\"accruedInterest\",\"type\":\"int256\"},{\"name\":\"rateMultiplier\",\"type\":\"int256\"},{\"name\":\"rateSpread\",\"type\":\"int256\"},{\"name\":\"feeRate\",\"type\":\"int256\"},{\"name\":\"nextResetRate\",\"type\":\"int256\"},{\"name\":\"penaltyRate\",\"type\":\"int256\"},{\"name\":\"premiumDiscountAtIED\",\"type\":\"int256\"},{\"name\":\"priceAtPurchaseDate\",\"type\":\"int256\"},{\"name\":\"nextPrincipalRedemptionPayment\",\"type\":\"int256\"},{\"name\":\"coverageOfCreditEnhancement\",\"type\":\"int256\"},{\"components\":[{\"name\":\"i\",\"type\":\"uint256\"},{\"name\":\"p\",\"type\":\"uint8\"},{\"name\":\"isSet\",\"type\":\"bool\"}],\"name\":\"gracePeriod\",\"type\":\"tuple\"},{\"components\":[{\"name\":\"i\",\"type\":\"uint256\"},{\"name\":\"p\",\"type\":\"uint8\"},{\"name\":\"isSet\",\"type\":\"bool\"}],\"name\":\"delinquencyPeriod\",\"type\":\"tuple\"},{\"name\":\"lifeCap\",\"type\":\"int256\"},{\"name\":\"lifeFloor\",\"type\":\"int256\"},{\"name\":\"periodCap\",\"type\":\"int256\"},{\"name\":\"periodFloor\",\"type\":\"int256\"}],\"name\":\"terms\",\"type\":\"tuple\"},{\"components\":[{\"name\":\"contractPerformance\",\"type\":\"uint8\"},{\"name\":\"statusDate\",\"type\":\"uint256\"},{\"name\":\"nonPerformingDate\",\"type\":\"uint256\"},{\"name\":\"maturityDate\",\"type\":\"uint256\"},{\"name\":\"executionDate\",\"type\":\"uint256\"},{\"name\":\"notionalPrincipal\",\"type\":\"int256\"},{\"name\":\"accruedInterest\",\"type\":\"int256\"},{\"name\":\"feeAccrued\",\"type\":\"int256\"},{\"name\":\"nominalInterestRate\",\"type\":\"int256\"},{\"name\":\"interestScalingMultiplier\",\"type\":\"int256\"},{\"name\":\"notionalScalingMultiplier\",\"type\":\"int256\"},{\"name\":\"nextPrincipalRedemptionPayment\",\"type\":\"int256\"},{\"name\":\"executionAmount\",\"type\":\"int256\"}],\"name\":\"state\",\"type\":\"tuple\"},{\"name\":\"scheduleTime\",\"type\":\"uint256\"},{\"name\":\"externalData\",\"type\":\"bytes32\"}],\"name\":\"_POF_PAM_IP\",\"outputs\":[{\"name\":\"\",\"type\":\"int256\"}],\"payable\":false,\"stateMutability\":\"pure\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"PRECISION\",\"outputs\":[{\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"components\":[{\"name\":\"calendar\",\"type\":\"uint8\"},{\"name\":\"contractRole\",\"type\":\"uint8\"},{\"name\":\"dayCountConvention\",\"type\":\"uint8\"},{\"name\":\"businessDayConvention\",\"type\":\"uint8\"},{\"name\":\"endOfMonthConvention\",\"type\":\"uint8\"},{\"name\":\"scalingEffect\",\"type\":\"uint8\"},{\"name\":\"penaltyType\",\"type\":\"uint8\"},{\"name\":\"feeBasis\",\"type\":\"uint8\"},{\"name\":\"creditEventTypeCovered\",\"type\":\"uint8\"},{\"components\":[{\"name\":\"object\",\"type\":\"bytes32\"},{\"name\":\"contractReferenceType\",\"type\":\"uint8\"},{\"name\":\"contractReferenceRole\",\"type\":\"uint8\"}],\"name\":\"contractReference_1\",\"type\":\"tuple\"},{\"components\":[{\"name\":\"object\",\"type\":\"bytes32\"},{\"name\":\"contractReferenceType\",\"type\":\"uint8\"},{\"name\":\"contractReferenceRole\",\"type\":\"uint8\"}],\"name\":\"contractReference_2\",\"type\":\"tuple\"},{\"name\":\"currency\",\"type\":\"address\"},{\"name\":\"marketObjectCodeRateReset\",\"type\":\"bytes32\"},{\"name\":\"statusDate\",\"type\":\"uint256\"},{\"name\":\"maturityDate\",\"type\":\"uint256\"},{\"name\":\"notionalPrincipal\",\"type\":\"int256\"},{\"name\":\"nominalInterestRate\",\"type\":\"int256\"},{\"name\":\"feeAccrued\",\"type\":\"int256\"},{\"name\":\"accruedInterest\",\"type\":\"int256\"},{\"name\":\"rateMultiplier\",\"type\":\"int256\"},{\"name\":\"rateSpread\",\"type\":\"int256\"},{\"name\":\"feeRate\",\"type\":\"int256\"},{\"name\":\"nextResetRate\",\"type\":\"int256\"},{\"name\":\"penaltyRate\",\"type\":\"int256\"},{\"name\":\"premiumDiscountAtIED\",\"type\":\"int256\"},{\"name\":\"priceAtPurchaseDate\",\"type\":\"int256\"},{\"name\":\"nextPrincipalRedemptionPayment\",\"type\":\"int256\"},{\"name\":\"coverageOfCreditEnhancement\",\"type\":\"int256\"},{\"components\":[{\"name\":\"i\",\"type\":\"uint256\"},{\"name\":\"p\",\"type\":\"uint8\"},{\"name\":\"isSet\",\"type\":\"bool\"}],\"name\":\"gracePeriod\",\"type\":\"tuple\"},{\"components\":[{\"name\":\"i\",\"type\":\"uint256\"},{\"name\":\"p\",\"type\":\"uint8\"},{\"name\":\"isSet\",\"type\":\"bool\"}],\"name\":\"delinquencyPeriod\",\"type\":\"tuple\"},{\"name\":\"lifeCap\",\"type\":\"int256\"},{\"name\":\"lifeFloor\",\"type\":\"int256\"},{\"name\":\"periodCap\",\"type\":\"int256\"},{\"name\":\"periodFloor\",\"type\":\"int256\"}],\"name\":\"terms\",\"type\":\"tuple\"},{\"components\":[{\"name\":\"contractPerformance\",\"type\":\"uint8\"},{\"name\":\"statusDate\",\"type\":\"uint256\"},{\"name\":\"nonPerformingDate\",\"type\":\"uint256\"},{\"name\":\"maturityDate\",\"type\":\"uint256\"},{\"name\":\"executionDate\",\"type\":\"uint256\"},{\"name\":\"notionalPrincipal\",\"type\":\"int256\"},{\"name\":\"accruedInterest\",\"type\":\"int256\"},{\"name\":\"feeAccrued\",\"type\":\"int256\"},{\"name\":\"nominalInterestRate\",\"type\":\"int256\"},{\"name\":\"interestScalingMultiplier\",\"type\":\"int256\"},{\"name\":\"notionalScalingMultiplier\",\"type\":\"int256\"},{\"name\":\"nextPrincipalRedemptionPayment\",\"type\":\"int256\"},{\"name\":\"executionAmount\",\"type\":\"int256\"}],\"name\":\"state\",\"type\":\"tuple\"},{\"name\":\"scheduleTime\",\"type\":\"uint256\"},{\"name\":\"externalData\",\"type\":\"bytes32\"}],\"name\":\"_POF_PAM_PY\",\"outputs\":[{\"name\":\"\",\"type\":\"int256\"}],\"payable\":false,\"stateMutability\":\"pure\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"name\":\"eventType\",\"type\":\"uint8\"},{\"name\":\"scheduleTime\",\"type\":\"uint256\"}],\"name\":\"encodeEvent\",\"outputs\":[{\"name\":\"\",\"type\":\"bytes32\"}],\"payable\":false,\"stateMutability\":\"pure\",\"type\":\"function\"}],\"devdoc\":{\"methods\":{\"adjustEndOfMonthConvention(uint8,uint256,(uint256,uint8,uint8,bool))\":{\"details\":\"The following is considered to dertermine if schedule dates are shifted to the end of month: - The convention SD (same day) means not adjusting, EM (end of month) means adjusting - Dates are only shifted if the schedule start date is an end-of-month date - Dates are only shifted if the schedule cycle is based on an \\\"M\\\" period unit or multiple thereof\",\"params\":{\"cycle\":\"the cycle struct\",\"eomc\":\"the end of month convention to adjust\",\"startTime\":\"timestemp of the cycle start\"},\"return\":\"the adjusted end of month convention\"}}},\"userdoc\":{\"methods\":{\"adjustEndOfMonthConvention(uint8,uint256,(uint256,uint8,uint8,bool))\":{\"notice\":\"This function makes an adjustment on the end of month convention.\"}},\"notice\":\"These helper contracts expose internal functions for unit testing.\"}},\"settings\":{\"compilationTarget\":{\"/home/jo/projects/atpar/actus-solidity/contracts/helper/TestPOF.sol\":\"TestPOF\"},\"evmVersion\":\"byzantium\",\"libraries\":{},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[]},\"sources\":{\"/home/jo/projects/atpar/actus-solidity/contracts/Core/ACTUSTypes.sol\":{\"keccak256\":\"0xd5d3ed7913a8fe4b90d21b9c799423b92799f9332cdd64975c524cf934e6edaa\",\"urls\":[\"bzzr://e55a66b2183cf679a0e89c4e3b7ba3033a30a567e228d7afdf66f6ef6a74d9b0\"]},\"/home/jo/projects/atpar/actus-solidity/contracts/Core/Conventions/BusinessDayConvention.sol\":{\"keccak256\":\"0xf1600a50f0ac29acd1b825c74dfd073225a83e051b1dbb9f4dceba1ce92f8cec\",\"urls\":[\"bzzr://f047d2a1b5390fb2d92fa31f4bf12253a68db419163c96374067370cc49ecf2a\"]},\"/home/jo/projects/atpar/actus-solidity/contracts/Core/Conventions/ContractDefaultConvention.sol\":{\"keccak256\":\"0xfa84b30c8cc42a606f55054e71eed9df538dd5177576e1a4c1a704abe56e80b0\",\"urls\":[\"bzzr://2e81520b90b5973983113769bc36b4fe96b0807fa50722521729cef1cb8335db\"]},\"/home/jo/projects/atpar/actus-solidity/contracts/Core/Conventions/ContractRoleConvention.sol\":{\"keccak256\":\"0x6f3b6524457ac67b17197f7ef162132da166aa0b827d2b36408d3f1256065a33\",\"urls\":[\"bzzr://3d776749e74b8e92188e257ffcc004cd86d01db51980cace9bed7dafba6d51fa\"]},\"/home/jo/projects/atpar/actus-solidity/contracts/Core/Conventions/DayCountConvention.sol\":{\"keccak256\":\"0x5dc0d86a295eed99daaab83c8be5eb0f854856f664c9c1414ff1d288668c6b7a\",\"urls\":[\"bzzr://1bc8aa76c69fbb2ef5d4e6652301d194c2ba8ecd75ff9c33e86732c73efd1d72\"]},\"/home/jo/projects/atpar/actus-solidity/contracts/Core/Conventions/EndOfMonthConvention.sol\":{\"keccak256\":\"0x18b9edf68b62a1941c9a089aa482832724b98811136bc71542bdb303e4d93381\",\"urls\":[\"bzzr://fd259b7d86c1ba779695c2d3d53da590467d2d3f0f36244171a679433aa931f8\"]},\"/home/jo/projects/atpar/actus-solidity/contracts/Core/Core.sol\":{\"keccak256\":\"0xa31f6c760a45125e6b973aa9bd00374181d67262543af548b211ae9829ceebf9\",\"urls\":[\"bzzr://a64c5b8a9df3ea6ad420258636bf0d780aff5258cbbfb7580c064f877a4d85f2\"]},\"/home/jo/projects/atpar/actus-solidity/contracts/Core/Schedule.sol\":{\"keccak256\":\"0x2ecd082e5b1f4976f2350ba8be2a4e01a134ebd7401d4c6328c34ee0539e908d\",\"urls\":[\"bzzr://cbf7d41ff6cfeb62ecf2b7a3f62d3605b5899adcc0853c8271cb6265183ca0e5\"]},\"/home/jo/projects/atpar/actus-solidity/contracts/Core/SignedMath.sol\":{\"keccak256\":\"0x3f1e797d781f6d50bcf76d1a9d8d70434c858d530b8bd12f1c2e7a8d75455f2f\",\"urls\":[\"bzzr://05f35b51bb89c25b67dc1630fa8ace8667d7e251a7d0f6ab88d01a19a01badd5\"]},\"/home/jo/projects/atpar/actus-solidity/contracts/Core/Utils.sol\":{\"keccak256\":\"0x8ab2c98976531f1d2be76452c380d39e195e3e7476f0c30a85e13fe16031de2b\",\"urls\":[\"bzzr://1646ffbabcfb960d533c24ab7407e7eae6ed9d4027d397211d7770e9f3ef6fdd\"]},\"/home/jo/projects/atpar/actus-solidity/contracts/Engines/POF.sol\":{\"keccak256\":\"0x7b94f43882fde0078d5bd439d38946bae8c33ded0fb8bc8948fd34710d9325a4\",\"urls\":[\"bzzr://71d665991ac3bd617422687a45f710437a87a03889d8adbdca3abae4c32ebcb9\"]},\"/home/jo/projects/atpar/actus-solidity/contracts/external/BokkyPooBah/BokkyPooBahsDateTimeLibrary.sol\":{\"keccak256\":\"0x7162caa2f09437b4d09f5a33e20a249f1e6a53c4afb3934cdea86fdba3591347\",\"urls\":[\"bzzr://780e5ff6c452639b751083da979392fbe1d98adf6772d794d084a1632873ad21\"]},\"/home/jo/projects/atpar/actus-solidity/contracts/helper/TestPOF.sol\":{\"keccak256\":\"0x5c32bcb0144684b365a09be62b67c772a30090a853da8e5f14bf5967cff66f57\",\"urls\":[\"bzzr://dd7558d689dddaa1fe7222b6a9858031410c140de384dd225d3ec5ff4faf2357\"]},\"openzeppelin-solidity/contracts/drafts/SignedSafeMath.sol\":{\"keccak256\":\"0xf1587a6daea33c93e85fff4e205967183de459159aafcb01b7397fb7ec1f9f77\",\"urls\":[\"bzzr://3fa5ad67118819b61448882baec9ca9964dde65630f574ab3c38841110082923\"]},\"openzeppelin-solidity/contracts/math/SafeMath.sol\":{\"keccak256\":\"0x640b6dee7a4b830bdfd52b5031a07fc2b12209f5b2e29e5d364a7d37f69d8076\",\"urls\":[\"bzzr://292843005e754e752644f767477ec5ad7a1ffc91ddb18c38b8079c62f3993cad\"]}},\"version\":1}",
+  "bytecode": "0x608060405234801561001057600080fd5b506125a3806100206000396000f3fe608060405234801561001057600080fd5b506004361061011d576000357c0100000000000000000000000000000000000000000000000000000000900480636eaa84ab116100b457806393f8b9fd1161008357806393f8b9fd14610224578063aaf5eb6814610237578063ce5c3d261461023f578063e05a66e0146102525761011d565b80636eaa84ab146101ca57806372540003146101dd578063811322fb146101fe57806392a2c973146102115761011d565b806346a93b9e116100f057806346a93b9e146101915780634f0703a3146101a45780635034cf851461012257806354593981146101b75761011d565b8063125d4cfa14610122578063179331f31461014b5780631890068a1461016b578063276fc1171461017e575b600080fd5b610135610130366004611dee565b610265565b6040516101429190612307565b60405180910390f35b61015e610159366004611d53565b61027e565b6040516101429190612315565b610135610179366004611d18565b610350565b61013561018c366004611dee565b61037c565b61013561019f366004611dee565b61038a565b6101356101b2366004611dee565b610398565b6101356101c5366004611dee565b6103a6565b6101356101d8366004611dee565b6103b4565b6101f06101eb366004611cfa565b6103c2565b604051610142929190612323565b61013561020c366004611da0565b61040c565b61013561021f366004611dee565b6105d8565b610135610232366004611dee565b6105e6565b6101356105f4565b61013561024d366004611dee565b6105f9565b610135610260366004611dbe565b610607565b60006102738585858561062c565b90505b949350505050565b60008084600181111561028d57fe5b14156103095761029c836106d1565b6102a5846106ff565b1480156102f457506002826020015160058111156102bf57fe5b14806102da57506003826020015160058111156102d857fe5b145b806102f457506004826020015160058111156102f257fe5b145b1561030157506000610349565b506001610349565b600184600181111561031757fe5b141561032557506001610349565b60405160e560020a62461bcd028152600401610340906123ff565b60405180910390fd5b9392505050565b60008061035c846103c2565b915050610372818460600151856000015161071a565b9150505b92915050565b60006102738585858561085d565b600061027385858585610918565b600061027385858585610939565b60006102738585858561094d565b60006102738585858561096b565b6000808060ff7f010000000000000000000000000000000000000000000000000000000000000085041660168111156103f757fe5b92505067ffffffffffffffff83169050915091565b6000600582601681111561041c57fe5b141561042a575060146105d3565b600f82601681111561043857fe5b1415610446575060196105d3565b600882601681111561045457fe5b14156104625750601e6105d3565b600782601681111561047057fe5b141561047e575060286105d3565b600482601681111561048c57fe5b141561049a575060326105d3565b60028260168111156104a857fe5b14156104b65750603c6105d3565b60098260168111156104c457fe5b14156104d2575060506105d3565b60118260168111156104e057fe5b14156104ee5750605a6105d3565b60128260168111156104fc57fe5b141561050a575060646105d3565b601382601681111561051857fe5b14156105265750606e6105d3565b600682601681111561053457fe5b1415610542575060786105d3565b601082601681111561055057fe5b141561055e575060826105d3565b601582601681111561056c57fe5b141561057a5750608c6105d3565b601482601681111561058857fe5b1415610596575060966105d3565b600a8260168111156105a457fe5b14156105b2575060a06105d3565b60008260168111156105c057fe5b14156105cf57506103b66105d3565b5060005b919050565b6000610273858585856109a9565b600061027385858585610a0c565b601281565b600061027385858585610a62565b60008160f884601681111561061857fe5b60ff166001029060020a0217905092915050565b6000808560e00151600181111561063f57fe5b141561066357846102a001516106588660200151610b47565b60000b029050610276565b6102736106c08560a001516106b4886102a001516106b46106918a602001518c606001518d60000151610c0e565b6106a48a8d606001518e60000151610c0e565b8c604001518d6101c00151610c78565b9063ffffffff610d4316565b60e08601519063ffffffff610dee16565b60008080806106e562015180865b04610e39565b919450925090506106f68383610ed1565b95945050505050565b6000808061071062015180856106df565b9695505050505050565b6000600183600881111561072a57fe5b14806107415750600383600881111561073f57fe5b145b15610757576107508483610f57565b9050610349565b600283600881111561076557fe5b148061077c5750600483600881111561077a57fe5b145b156107c057600061078d8584610f57565b905061079885610fb3565b6107a182610fb3565b14156107ae579050610349565b6107b88584610fce565b915050610349565b60058360088111156107ce57fe5b14806107e5575060078360088111156107e357fe5b145b156107f4576107508483610fce565b600683600881111561080257fe5b14806108195750600883600881111561081757fe5b145b1561085557600061082a8584610fce565b905061083585610fb3565b61083e82610fb3565b141561084b579050610349565b6107b88584610f57565b509192915050565b60006102736108f36108b38660a001516106b48861010001516106b46108908b602001518d606001518e60000151610c0e565b6108a38b8e606001518f60000151610c0e565b8d604001518e6101c00151610c78565b8660c0015187610160015103036108cd8860200151610b47565b60000b028660a001516108e38960200151610b47565b60000b029063ffffffff61101c16565b6109008760200151610b47565b60000b86610140015102610d4390919063ffffffff16565b60008360a0015161092c8660200151610b47565b60000b0295945050505050565b60e083015161018084015101949350505050565b60006102738460a00151856101400151610d4390919063ffffffff16565b600061098a856103000151866101e00151610dee90919063ffffffff16565b6109978660200151610b47565b6000190260000b029050949350505050565b60006109ff6109d98560a001516106b48761010001516106b46106918a602001518c606001518d60000151610c0e565b60c08601516103208801516109f39163ffffffff610dee16565b9063ffffffff610dee16565b61092c8660200151610b47565b6000610273610a50610a3f8660a001516106b48861010001516106b46108908b602001518d606001518e60000151610c0e565b60c08701519063ffffffff610dee16565b6101208601519063ffffffff610d4316565b600060018560c001516003811115610a7657fe5b1415610a8f57846102e001516106588660200151610b47565b60028560c001516003811115610aa157fe5b1415610b0257610af58460a001516106b4876102e001516106b4610ad289602001518b606001518c60000151610c0e565b610ae5898c606001518d60000151610c0e565b8b604001518c6101c00151610c78565b6106588660200151610b47565b610af58460a001516106b4610b24876020015189606001518a60000151610c0e565b610b37878a606001518b60000151610c0e565b89604001518a6101c00151610c78565b600080826009811115610b5657fe5b1415610b64575060016105d3565b6001826009811115610b7257fe5b1415610b8157506000196105d3565b6006826009811115610b8f57fe5b1415610b9d575060016105d3565b6007826009811115610bab57fe5b1415610bba57506000196105d3565b6004826009811115610bc857fe5b1415610bd6575060016105d3565b6005826009811115610be457fe5b1415610bf357506000196105d3565b60405160e560020a62461bcd0281526004016103409061239f565b60006003836008811115610c1e57fe5b1480610c3557506004836008811115610c3357fe5b145b80610c4b57506007836008811115610c4957fe5b145b80610c6157506008836008811115610c5f57fe5b145b15610c6d575082610349565b61027684848461071a565b600084841015610c9d5760405160e560020a62461bcd028152600401610340906123ef565b6000836006811115610cab57fe5b1415610cc257610cbb858561102c565b9050610276565b6001836006811115610cd057fe5b1415610ce057610cbb8585611140565b6002836006811115610cee57fe5b1415610cfe57610cbb858561116b565b6004836006811115610d0c57fe5b1415610d1c57610cbb858561118a565b6003836006811115610d2a57fe5b1415610d3b57610cbb85858461124b565b506001610276565b6000821580610d50575081155b15610d5d57506000610376565b82600019148015610d71575060ff60020a82145b15610d915760405160e560020a62461bcd028152600401610340906123df565b828202828482811515610da057fe5b0514610dc15760405160e560020a62461bcd028152600401610340906123df565b670de0b6b3a764000081058015156103725760405160e560020a62461bcd028152600401610340906123bf565b6000828201818312801590610e035750838112155b80610e185750600083128015610e1857508381125b15156103495760405160e560020a62461bcd0281526004016103409061238f565b60008080836226496581018262023ab1600483020590506004600362023ab18302010590910390600062164b09610fa0600185010205905060046105b58202058303601f019250600061098f84605002811515610e9257fe5b0590506000605061098f83020585039050600b820560301994909401606402929092018301996002600c90940290910392909201975095509350505050565b60008160011480610ee25750816003145b80610eed5750816005145b80610ef85750816007145b80610f035750816008145b80610f0e575081600a145b80610f19575081600c145b15610f265750601f610376565b60028214610f365750601e610376565b610f3f83611321565b610f4a57601c610f4d565b601d5b60ff169392505050565b60006001826001811115610f6757fe5b1415610fac57610f7683611346565b60061415610f9057610f89836002611359565b9050610376565b610f9983611346565b60071415610fac57610f89836001611359565b5090919050565b60008080610fc462015180856106df565b5095945050505050565b60006001826001811115610fde57fe5b1415610fac57610fed83611346565b6006141561100057610f8983600161136e565b61100983611346565b60071415610fac57610f8983600261136e565b600081831315610fac5750919050565b60008061103884611383565b9050600061104584611383565b905060006110528661139f565b61105e5761016d611062565b61016e5b61ffff169050818314156110945761108a8161107e88886113c1565b9063ffffffff6113dc16565b9350505050610376565b600061109f8661139f565b6110ab5761016d6110af565b61016e5b61ffff16905060006110e08361107e8a6110db6110d38a600163ffffffff6114ae16565b6001806114d6565b6113c1565b905060006110fd8361107e6110f7886001806114d6565b8b6113c1565b90506111336111236001611117888a63ffffffff6114f016565b9063ffffffff6114f016565b6109f3848463ffffffff610dee16565b9998505050505050505050565b600061034961016861107e6201518061115f868863ffffffff6114f016565b9063ffffffff61153216565b600061034961016d61107e6201518061115f868863ffffffff6114f016565b600080600080600080600061119e89611574565b9750955093506111ad88611574565b945092509050601f8614156111c157601e95505b82601f14156111cf57601e92505b60006111e1848863ffffffff61159216565b905060006111f5848863ffffffff61159216565b90506000611209848863ffffffff61159216565b905061123b61016861107e856109f361122987601e63ffffffff6115dd16565b6109f38761016863ffffffff6115dd16565b9c9b505050505050505050505050565b600080600080600080600061125f8a611574565b97509550935061126e89611574565b94509250905061127d8a6106d1565b86141561128957601e95505b87891480156112985750816002145b1580156112ac57506112a9896106d1565b83145b156112b657601e92505b60006112c8848863ffffffff61159216565b905060006112dc848863ffffffff61159216565b905060006112f0848863ffffffff61159216565b905061131061016861107e856109f361122987601e63ffffffff6115dd16565b9d9c50505050505050505050505050565b60006004820615801561133657506064820615155b8061037657505061019090061590565b6007620151809091046003010660010190565b62015180810282018281101561037657600080fd5b62015180810282038281111561037657600080fd5b6000808061139462015180856106df565b509095945050505050565b60008080806113b162015180866106df565b919450925090506106f683611321565b6000818311156113d057600080fd5b50620151809190030490565b60008115156114005760405160e560020a62461bcd0281526004016103409061235f565b82151561140f57506000610376565b670de0b6b3a764000083810290848281151561142757fe5b05146114485760405160e560020a62461bcd028152600401610340906123af565b8260001914801561145c575060ff60020a84145b1561147c5760405160e560020a62461bcd0281526004016103409061234f565b6000838281151561148957fe5b0590508015156103725760405160e560020a62461bcd0281526004016103409061237f565b6000828201838110156103495760405160e560020a62461bcd0281526004016103409061236f565b6000620151806114e7858585611652565b02949350505050565b600061034983836040805190810160405280601e81526020017f536166654d6174683a207375627472616374696f6e206f766572666c6f7700008152506116b8565b600061034983836040805190810160405280601a81526020017f536166654d6174683a206469766973696f6e206279207a65726f0000000000008152506116e7565b6000808061158562015180856106df565b9196909550909350915050565b60008183038183128015906115a75750838113155b806115bc57506000831280156115bc57508381135b15156103495760405160e560020a62461bcd0281526004016103409061240f565b60008215156115ee57506000610376565b82600019148015611602575060ff60020a82145b156116225760405160e560020a62461bcd028152600401610340906123cf565b82820282848281151561163157fe5b05146103495760405160e560020a62461bcd028152600401610340906123cf565b60006107b284101561166357600080fd5b506225bad61960046064600c600d1986018190059687016113248101929092056003028390056112c09092016105b502929092059093016001199582029094039490940161016f029390930591909101030190565b600081848411156116df5760405160e560020a62461bcd028152600401610340919061233e565b505050900390565b60008181841161170d5760405160e560020a62461bcd028152600401610340919061233e565b506000838581151561171b57fe5b0495945050505050565b60006103498235612482565b6000610349823561248d565b6000610349823561244a565b60006103498235612492565b600061034982356124a1565b600061034982356124b0565b600061034982356124bf565b600061034982356124ce565b600061034982356124dd565b600061034982356124ec565b600061034982356124fb565b6000610349823561250a565b6000606082840312156117c757600080fd5b6117d1606061241f565b905060006117df848461173d565b82525060206117f08484830161176d565b60208301525060406118048482850161176d565b60408301525092915050565b60006080828403121561182257600080fd5b61182c608061241f565b9050600061183a848461173d565b825250602061184b8484830161179d565b602083015250604061185f84828501611755565b604083015250606061187384828501611731565b60608301525092915050565b60006060828403121561189157600080fd5b61189b606061241f565b905060006118a9848461173d565b82525060206118ba8484830161179d565b602083015250604061180484828501611731565b600061054082840312156118e157600080fd5b6118ec61044061241f565b905060006118fa8484611755565b825250602061190b84848301611779565b602083015250604061191f84828501611785565b604083015250606061193384828501611749565b606083015250608061194784828501611755565b60808301525060a061195b848285016117a9565b60a08301525060c061196f84828501611761565b60c08301525060e061198384828501611755565b60e08301525061010061199884828501611761565b610100830152506101206119ae848285016117b5565b610120830152506101806119c4848285016117b5565b610140830152506101e06119da84828501611725565b610160830152506102006119f08482850161173d565b61018083015250610220611a068482850161173d565b6101a083015250610240611a1c8482850161173d565b6101c083015250610260611a328482850161173d565b6101e083015250610280611a488482850161173d565b610200830152506102a0611a5e8482850161173d565b610220830152506102c0611a748482850161173d565b610240830152506102e0611a8a8482850161173d565b61026083015250610300611aa08482850161173d565b61028083015250610320611ab68482850161173d565b6102a083015250610340611acc8482850161173d565b6102c083015250610360611ae28482850161173d565b6102e083015250610380611af88482850161173d565b610300830152506103a0611b0e8482850161173d565b610320830152506103c0611b248482850161173d565b610340830152506103e0611b3a8482850161173d565b61036083015250610400611b508482850161187f565b61038083015250610460611b668482850161187f565b6103a0830152506104c0611b7c8482850161173d565b6103c0830152506104e0611b928482850161173d565b6103e083015250610500611ba88482850161173d565b61040083015250610520611bbe8482850161173d565b6104208301525092915050565b60006101a08284031215611bde57600080fd5b611be96101a061241f565b90506000611bf78484611761565b8252506020611c088484830161173d565b6020830152506040611c1c8482850161173d565b6040830152506060611c308482850161173d565b6060830152506080611c448482850161173d565b60808301525060a0611c588482850161173d565b60a08301525060c0611c6c8482850161173d565b60c08301525060e0611c808482850161173d565b60e083015250610100611c958482850161173d565b61010083015250610120611cab8482850161173d565b61012083015250610140611cc18482850161173d565b61014083015250610160611cd78482850161173d565b61016083015250610180611ced8482850161173d565b6101808301525092915050565b600060208284031215611d0c57600080fd5b6000610372848461173d565b6000806105608385031215611d2c57600080fd5b6000611d38858561173d565b9250506020611d49858286016118ce565b9150509250929050565b600080600060c08486031215611d6857600080fd5b6000611d748686611755565b9350506020611d858682870161173d565b9250506040611d9686828701611810565b9150509250925092565b600060208284031215611db257600080fd5b60006103728484611791565b60008060408385031215611dd157600080fd5b6000611ddd8585611791565b9250506020611d498582860161173d565b6000806000806107208587031215611e0557600080fd5b6000611e1187876118ce565b945050610540611e2387828801611bcb565b9350506106e0611e358782880161173d565b925050610700611e478782880161173d565b91505092959194509250565b611e5c8161244a565b82525050565b611e5c81612519565b611e5c81612524565b6000611e7f82612446565b808452611e9381602086016020860161252f565b611e9c8161255f565b9093016020019392505050565b602581527f466c6f61744d4154482e666c6f61744469763a204f564552464c4f575f44455460208201527f4543544544000000000000000000000000000000000000000000000000000000604082015260600190565b602281527f466c6f61744d6174682e666c6f61744469763a204449564944454442595f5a4560208201527f524f000000000000000000000000000000000000000000000000000000000000604082015260600190565b601b81527f536166654d6174683a206164646974696f6e206f766572666c6f770000000000602082015260400190565b603081527f466c6f61744d6174682e666c6f61744469763a2043414e4e4f545f524550524560208201527f53454e545f4752414e554c415249545900000000000000000000000000000000604082015260600190565b602181527f5369676e6564536166654d6174683a206164646974696f6e206f766572666c6f60208201527f7700000000000000000000000000000000000000000000000000000000000000604082015260600190565b603481527f436f6e7472616374526f6c65436f6e76656e74696f6e2e726f6c655369676e3a60208201527f204154545249425554455f4e4f545f464f554e44000000000000000000000000604082015260600190565b602581527f466c6f61744d6174682e666c6f61744469763a204f564552464c4f575f44455460208201527f4543544544000000000000000000000000000000000000000000000000000000604082015260600190565b603181527f466c6f61744d6174682e666c6f61744d756c743a2043414e4e4f545f5245505260208201527f4553454e545f4752414e554c4152495459000000000000000000000000000000604082015260600190565b602781527f5369676e6564536166654d6174683a206d756c7469706c69636174696f6e206f60208201527f766572666c6f7700000000000000000000000000000000000000000000000000604082015260600190565b602681527f466c6f61744d6174682e666c6f61744d756c743a204f564552464c4f575f444560208201527f5445435445440000000000000000000000000000000000000000000000000000604082015260600190565b602281527f436f72652e796561724672616374696f6e3a20554e4d45545f434f4e4449544960208201527f4f4e000000000000000000000000000000000000000000000000000000000000604082015260600190565b604581527f456e644f664d6f6e7468436f6e76656e74696f6e2e61646a757374456e644f6660208201527f4d6f6e7468436f6e76656e74696f6e3a204154545249425554455f4e4f545f4660408201527f4f554e442e000000000000000000000000000000000000000000000000000000606082015260800190565b602481527f5369676e6564536166654d6174683a207375627472616374696f6e206f76657260208201527f666c6f7700000000000000000000000000000000000000000000000000000000604082015260600190565b602081016103768284611e53565b602081016103768284611e62565b604081016123318285611e6b565b6103496020830184611e53565b602080825281016103498184611e74565b6020808252810161037681611ea9565b6020808252810161037681611eff565b6020808252810161037681611f55565b6020808252810161037681611f85565b6020808252810161037681611fdb565b6020808252810161037681612031565b6020808252810161037681612087565b60208082528101610376816120dd565b6020808252810161037681612133565b6020808252810161037681612189565b60208082528101610376816121df565b6020808252810161037681612235565b60208082528101610376816122b1565b60405181810167ffffffffffffffff8111828210171561243e57600080fd5b604052919050565b5190565b90565b60006002821061245957fe5b5090565b60006017821061245957fe5b73ffffffffffffffffffffffffffffffffffffffff1690565b600061037682612469565b151590565b60006009821061245957600080fd5b60006002821061245957600080fd5b60006004821061245957600080fd5b60006005821061245957600080fd5b6000600a821061245957600080fd5b60006007821061245957600080fd5b60006017821061245957600080fd5b60006006821061245957600080fd5b60006008821061245957600080fd5b60006103768261244d565b60006103768261245d565b60005b8381101561254a578181015183820152602001612532565b83811115612559576000848401525b50505050565b601f01601f19169056fea265627a7a72305820e70885bee00d0bf4a4517bf08ad904b5a38ffbec1870a40fb39cbb8e894355da6c6578706572696d656e74616cf50037",
+  "compiler": {
+    "name": "solc",
+    "version": "0.5.2+commit.1df8f40c.Emscripten.clang"
+  },
+  "networks": {},
+  "updatedAt": "2019-12-11T15:11:53.935Z"
+}

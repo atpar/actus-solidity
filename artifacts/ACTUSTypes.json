@@ -16,12 +16,12 @@
       "type": "function"
     }
   ],
-  "metadata": "{\"compiler\":{\"version\":\"0.5.2+commit.1df8f40c\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"constant\":true,\"inputs\":[],\"name\":\"PRECISION\",\"outputs\":[{\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"}],\"devdoc\":{\"methods\":{}},\"userdoc\":{\"methods\":{}}},\"settings\":{\"compilationTarget\":{\"/Users/johannes/Documents/dev/actus-protocol/actus-solidity/contracts/Core/ACTUSTypes.sol\":\"ACTUSTypes\"},\"evmVersion\":\"byzantium\",\"libraries\":{},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[]},\"sources\":{\"/Users/johannes/Documents/dev/actus-protocol/actus-solidity/contracts/Core/ACTUSTypes.sol\":{\"keccak256\":\"0xd25c36fe38a0dfb2f4625578f77dfbf6a545f58c0e25adf2832bd43ace1d8636\",\"urls\":[\"bzzr://7b6c85ca9324b427f7710c5fe043ed77e694764a3f29afc37c5c5cd5227b05ed\"]}},\"version\":1}",
-  "bytecode": "0x6080604052348015600f57600080fd5b5060928061001e6000396000f3fe6080604052348015600f57600080fd5b50600436106044577c01000000000000000000000000000000000000000000000000000000006000350463aaf5eb6881146049575b600080fd5b604f6061565b60408051918252519081900360200190f35b60128156fea165627a7a72305820cb4188ce232fe1b787271ef5c328b8bd8d504bc4b01617aa56f14f9d0820e9170029",
+  "metadata": "{\"compiler\":{\"version\":\"0.5.2+commit.1df8f40c\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"constant\":true,\"inputs\":[],\"name\":\"PRECISION\",\"outputs\":[{\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"}],\"devdoc\":{\"methods\":{}},\"userdoc\":{\"methods\":{}}},\"settings\":{\"compilationTarget\":{\"/home/jo/projects/atpar/actus-solidity/contracts/Core/ACTUSTypes.sol\":\"ACTUSTypes\"},\"evmVersion\":\"byzantium\",\"libraries\":{},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[]},\"sources\":{\"/home/jo/projects/atpar/actus-solidity/contracts/Core/ACTUSTypes.sol\":{\"keccak256\":\"0xd5d3ed7913a8fe4b90d21b9c799423b92799f9332cdd64975c524cf934e6edaa\",\"urls\":[\"bzzr://e55a66b2183cf679a0e89c4e3b7ba3033a30a567e228d7afdf66f6ef6a74d9b0\"]}},\"version\":1}",
+  "bytecode": "0x6080604052348015600f57600080fd5b5060928061001e6000396000f3fe6080604052348015600f57600080fd5b50600436106044577c01000000000000000000000000000000000000000000000000000000006000350463aaf5eb6881146049575b600080fd5b604f6061565b60408051918252519081900360200190f35b60128156fea165627a7a72305820f49ce72d725d26be86d65227916956c62b0e0c61031a844aa27a985edd4a97900029",
   "compiler": {
     "name": "solc",
     "version": "0.5.2+commit.1df8f40c.Emscripten.clang"
   },
   "networks": {},
-  "updatedAt": "2019-12-09T17:00:17.680Z"
+  "updatedAt": "2019-12-11T10:01:20.875Z"
 }
