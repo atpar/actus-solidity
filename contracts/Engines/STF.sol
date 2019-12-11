@@ -8,18 +8,6 @@ import "../Core/Core.sol";
  */
 contract STF is Core {
 
-
-
-    function testConversion (
-        bytes32 externalData
-    )
-    public
-    pure
-    returns (int256 data)
-    {
-        return int256(externalData);
-    }
-
     /**
      * State transition for PAM analysis events
      * @param state the old state
@@ -421,23 +409,25 @@ contract STF is Core {
     {
         // int256 rate = //riskFactor(terms.marketObjectCodeOfRateReset, scheduleTime, state, terms)
         // 	* terms.rateMultiplier + terms.rateSpread;
+
+        // apply external rate, multiply with rateMultiplier and add the spread
         int256 rate = int256(uint256(externalData)).floatMult(terms.rateMultiplier).add(terms.rateSpread);
+
+        // deltaRate is the difference between the rate that includes external data, spread and multiplier and the currently active rate from the state
         int256 deltaRate = rate.sub(state.nominalInterestRate);
 
         // apply period cap/floor
-        if ((terms.lifeCap < deltaRate) && (terms.lifeCap < ((-1) * terms.periodFloor))) {
-            deltaRate = terms.lifeCap;
-        } else if (deltaRate < ((-1) * terms.periodFloor)) {
-            deltaRate = ((-1) * terms.periodFloor);
-        }
+        // the deltaRate (the interest rate change) cannot be bigger than the period cap
+        // and not smaller than the period floor
+        // math: deltaRate = min(max(deltaRate, periodFloor),lifeCap)
+        deltaRate = deltaRate.max(-terms.periodFloor).min(terms.periodCap);
         rate = state.nominalInterestRate.add(deltaRate);
 
         // apply life cap/floor
-        if (terms.lifeCap < rate && terms.lifeCap < terms.lifeFloor) {
-            rate = terms.lifeCap;
-        } else if (rate < terms.lifeFloor) {
-            rate = terms.lifeFloor;
-        }
+        // the rate cannot be higher than the lifeCap
+        // and not smaller than the lifeFloor
+        // math: rate = min(max(rate,lifeFloor),lifeCap)
+        rate = rate.max(terms.lifeFloor).min(terms.lifeCap);
 
         int256 timeFromLastEvent = yearFraction(
             shiftCalcTime(state.statusDate, terms.businessDayConvention, terms.calendar),

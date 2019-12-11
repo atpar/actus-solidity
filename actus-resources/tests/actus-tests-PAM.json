@@ -2598,7 +2598,11 @@
         "cyclePointOfRateReset": "0",
         "cyclePointOfInterestPayment": "1",
         "fixingDays": "0D",
-        "contractRole": "RPA"
+        "contractRole": "RPA",
+        "periodFloor": ".5",
+        "lifeFloor": "0",
+        "periodCap": ".5",
+        "lifeCap": ".5"
       },
     "externalData": {
       "interestRateDates": [
