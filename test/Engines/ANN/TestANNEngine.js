@@ -30,6 +30,12 @@ contract('ANNEngine', () => {
       terms,
       segmentStart,
       segmentEnd,
+      7 // IPCI
+    ));
+    _eventSchedule.push(... await this.ANNEngineInstance.computeCyclicScheduleSegment(
+      terms,
+      segmentStart,
+      segmentEnd,
       8 // IP
     ));
     _eventSchedule.push(... await this.ANNEngineInstance.computeCyclicScheduleSegment(
