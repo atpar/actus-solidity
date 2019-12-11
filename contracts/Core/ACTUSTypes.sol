@@ -98,6 +98,7 @@ contract ACTUSTypes {
         ContractReference contractReference_2;
 
         address currency;
+        address settlementCurrency;
 
         bytes32 marketObjectCodeRateReset;
 
@@ -171,6 +172,7 @@ contract ACTUSTypes {
         ContractReference contractReference_2;
 
         address currency;
+        address settlementCurrency;
 
         bytes32 creatorID;
         bytes32 counterpartyID;

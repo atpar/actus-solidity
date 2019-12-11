@@ -12,6 +12,7 @@
   "contractReference_1",
   "contractReference_2",
   "currency",
+  "settlementCurrency",
   "creatorID",
   "counterpartyID",
   "marketObjectCodeRateReset",

@@ -11,6 +11,7 @@
   "contractReference_1",
   "contractReference_2",
   "currency",
+  "settlementCurrency",
   "marketObjectCodeRateReset",
   "statusDate",
   "maturityDate",
