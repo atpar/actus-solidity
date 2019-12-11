@@ -4,6 +4,20 @@
     {
       "constant": true,
       "inputs": [],
+      "name": "ONE_POINT_ZERO",
+      "outputs": [
+        {
+          "name": "",
+          "type": "int256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
       "name": "PRECISION",
       "outputs": [
         {
@@ -94,6 +108,10 @@
             },
             {
               "name": "currency",
+              "type": "address"
+            },
+            {
+              "name": "settlementCurrency",
               "type": "address"
             },
             {
@@ -361,6 +379,10 @@
             },
             {
               "name": "currency",
+              "type": "address"
+            },
+            {
+              "name": "settlementCurrency",
               "type": "address"
             },
             {
@@ -694,6 +716,10 @@
             },
             {
               "name": "currency",
+              "type": "address"
+            },
+            {
+              "name": "settlementCurrency",
               "type": "address"
             },
             {
@@ -1446,6 +1472,10 @@
               "type": "address"
             },
             {
+              "name": "settlementCurrency",
+              "type": "address"
+            },
+            {
               "name": "marketObjectCodeRateReset",
               "type": "bytes32"
             },
@@ -1705,5 +1735,5 @@
     "version": "0.5.2+commit.1df8f40c.Emscripten.clang"
   },
   "networks": {},
-  "updatedAt": "2019-12-11T16:08:10.324Z"
+  "updatedAt": "2019-12-11T16:48:43.177Z"
 }

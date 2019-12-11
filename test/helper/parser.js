@@ -101,6 +101,7 @@ const parseTermsFromObject = (terms) => {
   }
 
   parsedTerms['currency'] = '0x0000000000000000000000000000000000000000';
+  parsedTerms['settlementCurrency'] = '0x0000000000000000000000000000000000000000';
 
   return parsedTerms;
 }

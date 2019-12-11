@@ -4,6 +4,20 @@
     {
       "constant": true,
       "inputs": [],
+      "name": "ONE_POINT_ZERO",
+      "outputs": [
+        {
+          "name": "",
+          "type": "int256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
       "name": "PRECISION",
       "outputs": [
         {
@@ -16,12 +30,12 @@
       "type": "function"
     }
   ],
-  "metadata": "{\"compiler\":{\"version\":\"0.5.2+commit.1df8f40c\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"constant\":true,\"inputs\":[],\"name\":\"PRECISION\",\"outputs\":[{\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"}],\"devdoc\":{\"methods\":{}},\"userdoc\":{\"methods\":{}}},\"settings\":{\"compilationTarget\":{\"/Users/johannes/Documents/dev/actus-protocol/actus-solidity/contracts/Core/Conventions/ContractDefaultConvention.sol\":\"ContractDefaultConvention\"},\"evmVersion\":\"byzantium\",\"libraries\":{},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[]},\"sources\":{\"/Users/johannes/Documents/dev/actus-protocol/actus-solidity/contracts/Core/ACTUSTypes.sol\":{\"keccak256\":\"0xd5d3ed7913a8fe4b90d21b9c799423b92799f9332cdd64975c524cf934e6edaa\",\"urls\":[\"bzzr://e55a66b2183cf679a0e89c4e3b7ba3033a30a567e228d7afdf66f6ef6a74d9b0\"]},\"/Users/johannes/Documents/dev/actus-protocol/actus-solidity/contracts/Core/Conventions/ContractDefaultConvention.sol\":{\"keccak256\":\"0xfa84b30c8cc42a606f55054e71eed9df538dd5177576e1a4c1a704abe56e80b0\",\"urls\":[\"bzzr://2e81520b90b5973983113769bc36b4fe96b0807fa50722521729cef1cb8335db\"]}},\"version\":1}",
-  "bytecode": "0x6080604052348015600f57600080fd5b5060928061001e6000396000f3fe6080604052348015600f57600080fd5b50600436106044577c01000000000000000000000000000000000000000000000000000000006000350463aaf5eb6881146049575b600080fd5b604f6061565b60408051918252519081900360200190f35b60128156fea165627a7a72305820b0e61e12e32a644c8806ccf3bc75a342a8658af105fb4381cf30c0bd850ddfc90029",
+  "metadata": "{\"compiler\":{\"version\":\"0.5.2+commit.1df8f40c\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"constant\":true,\"inputs\":[],\"name\":\"ONE_POINT_ZERO\",\"outputs\":[{\"name\":\"\",\"type\":\"int256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"PRECISION\",\"outputs\":[{\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"}],\"devdoc\":{\"methods\":{}},\"userdoc\":{\"methods\":{}}},\"settings\":{\"compilationTarget\":{\"/Users/johannes/Documents/dev/actus-protocol/actus-solidity/contracts/Core/Conventions/ContractDefaultConvention.sol\":\"ContractDefaultConvention\"},\"evmVersion\":\"byzantium\",\"libraries\":{},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[]},\"sources\":{\"/Users/johannes/Documents/dev/actus-protocol/actus-solidity/contracts/Core/ACTUSTypes.sol\":{\"keccak256\":\"0x4ff9eab34e7bc670373e673658a23a2a2ba3872fe7d85926f4d7784052b84b5c\",\"urls\":[\"bzzr://11036018403a32682d0bb2dd7cde3067ddd05b039c332a0f3a3506b4041786a1\"]},\"/Users/johannes/Documents/dev/actus-protocol/actus-solidity/contracts/Core/Conventions/ContractDefaultConvention.sol\":{\"keccak256\":\"0xfa84b30c8cc42a606f55054e71eed9df538dd5177576e1a4c1a704abe56e80b0\",\"urls\":[\"bzzr://2e81520b90b5973983113769bc36b4fe96b0807fa50722521729cef1cb8335db\"]}},\"version\":1}",
+  "bytecode": "0x608060405234801561001057600080fd5b5060ae8061001f6000396000f3fe6080604052348015600f57600080fd5b5060043610604e577c010000000000000000000000000000000000000000000000000000000060003504636f37e55b81146053578063aaf5eb6814606b575b600080fd5b60596071565b60408051918252519081900360200190f35b6059607d565b670de0b6b3a764000081565b60128156fea165627a7a723058206144149334fe7bd0a27c4e73064e257ea596e49ae7501b1672b89dda8427474d0029",
   "compiler": {
     "name": "solc",
     "version": "0.5.2+commit.1df8f40c.Emscripten.clang"
   },
   "networks": {},
-  "updatedAt": "2019-12-11T16:08:10.270Z"
+  "updatedAt": "2019-12-11T16:48:43.107Z"
 }
