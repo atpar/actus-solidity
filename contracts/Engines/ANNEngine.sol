@@ -251,9 +251,9 @@ contract ANNEngine is BaseEngine, STF, POF {
 		returns (State memory)
 	{
 		(EventType eventType, uint256 scheduleTime) = decodeEvent(_event);
-/*
+        /*
 		 * Note:
-		 * not supported: IPCB events
+		 * not supported: IPCB events, PRD events
 		 */
 		if (eventType == EventType.AD) return STF_PAM_AD(terms, state, scheduleTime, externalData);
 		if (eventType == EventType.FP) return STF_PAM_FP(terms, state, scheduleTime, externalData);
@@ -261,7 +261,7 @@ contract ANNEngine is BaseEngine, STF, POF {
 		if (eventType == EventType.IPCI) return STF_ANN_IPCI(terms, state, scheduleTime, externalData);
 		if (eventType == EventType.IP) return STF_ANN_IP(terms, state, scheduleTime, externalData);
 		if (eventType == EventType.PP) return STF_PAM_PP(terms, state, scheduleTime, externalData);
-		if (eventType == EventType.PRD) return STF_PAM_PRD(terms, state, scheduleTime, externalData);
+		//if (eventType == EventType.PRD) return STF_PAM_PRD(terms, state, scheduleTime, externalData);
 		if (eventType == EventType.PR) return STF_ANN_PR(terms, state, scheduleTime, externalData);
 		if (eventType == EventType.MD) return STF_ANN_MD(terms, state, scheduleTime, externalData);
 		if (eventType == EventType.PY) return STF_PAM_PY(terms, state, scheduleTime, externalData);
@@ -304,7 +304,7 @@ contract ANNEngine is BaseEngine, STF, POF {
 		 * There is a reference to a POF_ANN_PR function which was added because PAM doesn't have PR Events in ACTUS 1.0
 		 * and NAM, which ANN refers to in the specification, is not yet supported
 		 *
-		 * not supported: IPCB events
+		 * not supported: IPCB events, PRD events
 		 */
 		if (eventType == EventType.AD) return 0; // Analysis Event
 		if (eventType == EventType.IPCI) return 0; // Interest Capitalization Event
@@ -316,7 +316,7 @@ contract ANNEngine is BaseEngine, STF, POF {
 		if (eventType == EventType.IED) return POF_PAM_IED(terms, state, scheduleTime, externalData); // Intital Exchange
 		if (eventType == EventType.IP) return POF_PAM_IP(terms, state, scheduleTime, externalData); // Interest Payment
 		if (eventType == EventType.PP) return POF_PAM_PP(terms, state, scheduleTime, externalData); // Principal Prepayment
-		if (eventType == EventType.PRD) return POF_PAM_PRD(terms, state, scheduleTime, externalData); // Purchase
+		//if (eventType == EventType.PRD) return POF_PAM_PRD(terms, state, scheduleTime, externalData); // Purchase
 		if (eventType == EventType.PR) return POF_ANN_PR(terms, state, scheduleTime, externalData); // Principal Redemption
 		if (eventType == EventType.MD) return POF_PAM_MD(terms, state, scheduleTime, externalData); // Maturity
 		if (eventType == EventType.PY) return POF_PAM_PY(terms, state, scheduleTime, externalData); // Penalty Payment

@@ -1567,14 +1567,6 @@
       },
     "results": [
       {
-        "eventDate": "2012-12-31T00:00",
-        "eventType": "AD",
-        "eventValue": 0,
-        "notionalPrincipal": 0,
-        "nominalInterestRate": 0,
-        "accruedInterest": 0
-      },
-      {
         "eventDate": "2013-01-30T00:00",
         "eventType": "PRD",
         "eventValue": -1023.83561643836,
@@ -2599,7 +2591,7 @@
         "cyclePointOfInterestPayment": "1",
         "fixingDays": "0D",
         "contractRole": "RPA",
-        "periodFloor": ".5",
+        "periodFloor": "-.5",
         "lifeFloor": "0",
         "periodCap": ".5",
         "lifeCap": ".5"
@@ -2805,7 +2797,7 @@
         "cyclePointOfInterestPayment": "1",
         "fixingDays": "0D",
         "contractRole": "RPA",
-        "periodFloor": ".5",
+        "periodFloor": "-.5",
         "lifeFloor": "0",
         "periodCap": ".5",
         "lifeCap": ".5"
@@ -3011,7 +3003,7 @@
         "cyclePointOfInterestPayment": "1",
         "fixingDays": "0D",
         "contractRole": "RPA",
-        "periodFloor": ".5",
+        "periodFloor": "-.5",
         "lifeFloor": "0",
         "periodCap": ".5",
         "lifeCap": ".5"
@@ -3217,7 +3209,7 @@
         "cyclePointOfInterestPayment": "1",
         "fixingDays": "0D",
         "contractRole": "RPA",
-        "periodFloor": ".5",
+        "periodFloor": "-.5",
         "lifeFloor": "0",
         "periodCap": ".5",
         "lifeCap": ".5"

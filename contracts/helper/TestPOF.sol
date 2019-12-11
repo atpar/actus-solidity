@@ -78,24 +78,6 @@ contract TestPOF is POF {
         );
     }
 
-    function _POF_PAM_PRD (
-        LifecycleTerms memory terms,
-        State memory state,
-        uint256 scheduleTime,
-        bytes32 externalData
-    )
-    public
-    pure
-    returns(int256)
-    {
-        return POF_PAM_PRD(
-            terms,
-            state,
-            scheduleTime,
-            externalData
-        );
-    }
-
     function _POF_PAM_MD (
         LifecycleTerms memory terms,
         State memory state,
@@ -179,24 +161,6 @@ contract TestPOF is POF {
     returns(int256)
     {
         return POF_CEG_STD(
-            terms,
-            state,
-            scheduleTime,
-            externalData
-        );
-    }
-
-    function _POF_CEG_PRD (
-        LifecycleTerms memory terms,
-        State memory state,
-        uint256 scheduleTime,
-        bytes32 externalData
-    )
-    public
-    pure
-    returns(int256)
-    {
-        return POF_CEG_PRD(
             terms,
             state,
             scheduleTime,

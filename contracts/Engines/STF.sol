@@ -239,44 +239,6 @@ contract STF is Core {
     }
 
     /**
-     * State transition for PAM purchase event
-     * @param state the old state
-     * @return the new state
-     */
-    function STF_PAM_PRD (
-        LifecycleTerms memory terms,
-        State memory state,
-        uint256 scheduleTime,
-        bytes32 externalData
-    )
-        internal
-        pure
-        returns (State memory)
-    {
-        int256 timeFromLastEvent = yearFraction(
-            shiftCalcTime(state.statusDate, terms.businessDayConvention, terms.calendar),
-            shiftCalcTime(scheduleTime, terms.businessDayConvention, terms.calendar),
-            terms.dayCountConvention,
-            terms.maturityDate
-        );
-        state.accruedInterest = state.accruedInterest
-        .add(
-            state.nominalInterestRate
-            .floatMult(state.notionalPrincipal)
-            .floatMult(timeFromLastEvent)
-        );
-        state.feeAccrued = state.feeAccrued
-        .add(
-            terms.feeRate
-            .floatMult(state.notionalPrincipal)
-            .floatMult(timeFromLastEvent)
-        );
-        state.statusDate = scheduleTime;
-
-        return state;
-    }
-
-    /**
      * State transition for PAM principal redemption
      * @param state the old state
      * @return the new state
@@ -420,7 +382,7 @@ contract STF is Core {
         // the deltaRate (the interest rate change) cannot be bigger than the period cap
         // and not smaller than the period floor
         // math: deltaRate = min(max(deltaRate, periodFloor),lifeCap)
-        deltaRate = deltaRate.max(-terms.periodFloor).min(terms.periodCap);
+        deltaRate = deltaRate.max(terms.periodFloor).min(terms.periodCap);
         rate = state.nominalInterestRate.add(deltaRate);
 
         // apply life cap/floor
@@ -805,39 +767,6 @@ contract STF is Core {
     //     .floatMult(timeFromLastEvent)
     //   );
     //   state.notionalPrincipal -= 0; // riskFactor(terms.objectCodeOfPrepaymentModel, scheduleTime, state, terms) * state.notionalPrincipal;
-    //   state.statusDate = scheduleTime;
-
-    //   return state;
-    // }
-
-    // STF_PAM_PRD
-    // function STF_ANN_PRD (
-    //   uint256 scheduleTime,
-    //   LifecycleTerms memory terms,
-    //   State memory state
-    // )
-    //   internal
-    //   pure
-    //   returns (State memory)
-    // {
-    //   int256 timeFromLastEvent = yearFraction(
-    //     shiftCalcTime(state.statusDate, terms.businessDayConvention, terms.calendar),
-    //     shiftCalcTime(scheduleTime, terms.businessDayConvention, terms.calendar),
-    //     terms.dayCountConvention,
-    //     terms.maturityDate
-    //   );
-    //   state.nominalAccrued = state.nominalAccrued
-    //   .add(
-    //     state.nominalInterestRate
-    //     .floatMult(state.notionalPrincipal)
-    //     .floatMult(timeFromLastEvent)
-    //   );
-    //   state.feeAccrued = state.feeAccrued
-    //   .add(
-    //     terms.feeRate
-    //     .floatMult(state.notionalPrincipal)
-    //     .floatMult(timeFromLastEvent)
-    //   );
     //   state.statusDate = scheduleTime;
 
     //   return state;

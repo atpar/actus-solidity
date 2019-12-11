@@ -89,7 +89,8 @@ contract('PAMEngine', () => {
       );
 
       state = nextState;
-
+      if (eventType == 16) {console.log(payoff, nextState)}
+        
       const eventTime = await this.PAMEngineInstance.computeEventTimeForEvent(_event, lifecycleTerms);
 
       evaluatedSchedule.push(parseToTestEvent(eventType, eventTime, payoff, state));
@@ -97,7 +98,7 @@ contract('PAMEngine', () => {
 
     return evaluatedSchedule;
   };
-/* 
+ 
   it('should yield the expected evaluated contract schedule for test PAM10001', async () => {
     const testDetails = this.testCases['10001'];
     const evaluatedSchedule = await evaluateEventSchedule(testDetails['terms']);
@@ -173,17 +174,17 @@ contract('PAMEngine', () => {
     const evaluatedSchedule = await evaluateEventSchedule(testDetails['terms']);
 
     compareTestResults(evaluatedSchedule, testDetails['results']);
-  }); */
+  }); 
 
-  /*
-  // TODO: Purchase/Termination
-  it('should yield the expected evaluated contract schedule for test PAM10012', async () => {
-    const testDetails = this.testCases['10012'];
-    const evaluatedSchedule = await evaluateEventSchedule(testDetails['terms']);
+  
+  // TODO: Purchase/Termination not supported
+  // it('should yield the expected evaluated contract schedule for test PAM10012', async () => {
+  //   const testDetails = this.testCases['10012'];
+  //   const evaluatedSchedule = await evaluateEventSchedule(testDetails['terms']);
 
-    compareTestResults(evaluatedSchedule, testDetails['results']);
-  });
-  */
+  //   compareTestResults(evaluatedSchedule, testDetails['results']);
+  // });
+  
 
   // TODO: Precision Error
   // it('should yield the expected evaluated contract schedule for test PAM10013', async () => {
@@ -193,7 +194,7 @@ contract('PAMEngine', () => {
   //   compareTestResults(evaluatedSchedule, testDetails['results']);
   // });
 
-  /* it('should yield the expected evaluated contract schedule for test PAM10014', async () => {
+  it('should yield the expected evaluated contract schedule for test PAM10014', async () => {
     const testDetails = this.testCases['10014'];
     const evaluatedSchedule = await evaluateEventSchedule(testDetails['terms']);
 
@@ -226,9 +227,9 @@ contract('PAMEngine', () => {
     const evaluatedSchedule = await evaluateEventSchedule(testDetails['terms']);    
 
     compareTestResults(evaluatedSchedule, testDetails['results']);
-  }); */
+  });
 
-  // TODO: Purchase/Termination
+  // TODO: Purchase/Termination not supported
   // it('should yield the expected evaluated contract schedule for test PAM10019', async () => {
   //   const testDetails = this.testCases['10019'];
   //   const evaluatedSchedule = await evaluateEventSchedule(testDetails['terms']);

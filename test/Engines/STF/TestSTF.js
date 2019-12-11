@@ -370,5 +370,4 @@ contract('TestSTF', () => {
 
   });
 
-
 });

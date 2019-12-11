@@ -121,40 +121,6 @@ contract POF is Core {
     }
 
     /**
-     * Calculate the payoff in case of a purchase of the contract
-     * @return the purchase amount for PAM contracts
-     */
-    function POF_PAM_PRD (
-        LifecycleTerms memory terms,
-        State memory state,
-        uint256 scheduleTime,
-        bytes32 externalData
-    )
-        internal
-        pure
-        returns(int256)
-    {
-        return (
-            (
-                roleSign(terms.contractRole)
-                * terms.priceAtPurchaseDate
-                * -1
-            )
-                .add(state.accruedInterest)
-                .add(
-                    yearFraction(
-                        shiftCalcTime(state.statusDate, terms.businessDayConvention, terms.calendar),
-                        shiftCalcTime(scheduleTime, terms.businessDayConvention, terms.calendar),
-                        terms.dayCountConvention,
-                        terms.maturityDate
-                    )
-                    .floatMult(state.nominalInterestRate)
-                    .floatMult(state.notionalPrincipal)
-                )
-        );
-    }
-
-    /**
      * Calculate the payoff in case of maturity
      * @return the maturity payoff for PAM contracts
      */
@@ -303,27 +269,6 @@ contract POF is Core {
         returns(int256)
     {
         return state.executionAmount + state.feeAccrued;
-    }
-
-    /**
-     * Calculate the payoff in case of a purchase of the contract
-     * @return the purchase payoff amount for CEG contracts
-     */
-    function POF_CEG_PRD (
-        LifecycleTerms memory terms,
-        State memory state,
-        uint256 scheduleTime,
-        bytes32 externalData
-    )
-        internal
-        pure
-        returns(int256)
-    {
-        return (
-            roleSign(terms.contractRole)
-            * (-1)
-            * terms.priceAtPurchaseDate
-        );
     }
 
     /**

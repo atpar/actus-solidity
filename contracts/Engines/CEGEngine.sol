@@ -170,8 +170,8 @@ contract CEGEngine is BaseEngine, STF, POF {
         returns (State memory)
     {
         (EventType eventType, uint256 scheduleTime) = decodeEvent(_event);
-
-        if (eventType == EventType.PRD) return STF_CEG_PRD(terms, state, scheduleTime, externalData);
+        // PRD events not supported
+        //if (eventType == EventType.PRD) return STF_CEG_PRD(terms, state, scheduleTime, externalData);
         if (eventType == EventType.FP) return STF_CEG_FP(terms, state, scheduleTime, externalData);
         if (eventType == EventType.XD) return STF_CEG_XD(terms, state, scheduleTime, externalData);
         if (eventType == EventType.STD) return STF_CEG_STD(terms, state, scheduleTime, externalData);
@@ -204,8 +204,9 @@ contract CEGEngine is BaseEngine, STF, POF {
     {
         (EventType eventType, uint256 scheduleTime) = decodeEvent(_event);
 
+        // PRD events not supported
         if (eventType == EventType.CE) return 0;
-        if (eventType == EventType.PRD) return POF_CEG_PRD(terms, state, scheduleTime, externalData);
+        // if (eventType == EventType.PRD) return POF_CEG_PRD(terms, state, scheduleTime, externalData);
         if (eventType == EventType.FP) return POF_CEG_FP(terms, state, scheduleTime, externalData);
         if (eventType == EventType.XD) return 0;
         if (eventType == EventType.STD) return POF_CEG_STD(terms, state, scheduleTime, externalData);

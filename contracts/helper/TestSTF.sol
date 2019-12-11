@@ -109,23 +109,6 @@ contract TestSTF is STF {
         );
     }
 
-    function _STF_PAM_PRD (
-        LifecycleTerms memory terms,
-        State memory state,
-        uint256 scheduleTime,
-        bytes32 externalData
-    )
-    public
-    pure
-    returns(State memory) {
-        return STF_PAM_PRD(
-            terms,
-            state,
-            scheduleTime,
-            externalData
-        );
-    }
-
     function _STF_PAM_PR (
         LifecycleTerms memory terms,
         State memory state,
@@ -243,15 +226,5 @@ contract TestSTF is STF {
             scheduleTime,
             externalData
         );
-    }
-
-    function testConversion (
-    bytes32 externalData
-    )
-    public
-    pure
-    returns (int256 data)
-    {
-        return int256(externalData);
     }
 }

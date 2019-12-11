@@ -62,7 +62,7 @@ contract PAMEngine is BaseEngine, STF, POF {
         uint16 index = 0;
 
         // initial exchange
-        if (isInPeriod(terms.initialExchangeDate, segmentStart, segmentEnd)) {
+        if (terms.purchaseDate == 0 && isInPeriod(terms.initialExchangeDate, segmentStart, segmentEnd)) {
             _eventSchedule[index] = encodeEvent(EventType.IED, terms.initialExchangeDate);
             index++;
         }
@@ -264,14 +264,17 @@ contract PAMEngine is BaseEngine, STF, POF {
         returns (State memory)
     {
         (EventType eventType, uint256 scheduleTime) = decodeEvent(_event);
-
+        /*
+         * Note:
+         * Not supported: PRD events
+         */
 		if (eventType == EventType.AD) return STF_PAM_AD(terms, state, scheduleTime, externalData);
 		if (eventType == EventType.FP) return STF_PAM_FP(terms, state, scheduleTime, externalData);
 		if (eventType == EventType.IED) return STF_PAM_IED(terms, state, scheduleTime, externalData);
 		if (eventType == EventType.IPCI) return STF_PAM_IPCI(terms, state, scheduleTime, externalData);
 		if (eventType == EventType.IP) return STF_PAM_IP(terms, state, scheduleTime, externalData);
 		if (eventType == EventType.PP) return STF_PAM_PP(terms, state, scheduleTime, externalData);
-		if (eventType == EventType.PRD) return STF_PAM_PRD(terms, state, scheduleTime, externalData);
+		//if (eventType == EventType.PRD) return STF_PAM_PRD(terms, state, scheduleTime, externalData);
 		if (eventType == EventType.MD) return STF_PAM_PR(terms, state, scheduleTime, externalData);
 		if (eventType == EventType.PY) return STF_PAM_PY(terms, state, scheduleTime, externalData);
 		if (eventType == EventType.RRF) return STF_PAM_RRF(terms, state, scheduleTime, externalData);
@@ -306,6 +309,7 @@ contract PAMEngine is BaseEngine, STF, POF {
 
 		/*
 		 * Note: PAM contracts don't have IPCB and PR events.
+         * Not supported: PRD events
 		 */
 
 		if (eventType == EventType.AD) return 0; // Analysis Event
@@ -318,7 +322,7 @@ contract PAMEngine is BaseEngine, STF, POF {
 		if (eventType == EventType.IED) return POF_PAM_IED(terms, state, scheduleTime, externalData); // Intital Exchange
 		if (eventType == EventType.IP) return POF_PAM_IP(terms, state, scheduleTime, externalData); // Interest Payment
 		if (eventType == EventType.PP) return POF_PAM_PP(terms, state, scheduleTime, externalData); // Principal Prepayment
-		if (eventType == EventType.PRD) return POF_PAM_PRD(terms, state, scheduleTime, externalData); // Purchase
+		//if (eventType == EventType.PRD) return POF_PAM_PRD(terms, state, scheduleTime, externalData); // Purchase
 		if (eventType == EventType.MD) return POF_PAM_MD(terms, state, scheduleTime, externalData); // Maturity
 		if (eventType == EventType.PY) return POF_PAM_PY(terms, state, scheduleTime, externalData); // Penalty Payment
 		if (eventType == EventType.TD) return POF_PAM_TD(terms, state, scheduleTime, externalData); // Termination
