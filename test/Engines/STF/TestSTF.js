@@ -207,36 +207,6 @@ contract('TestSTF', () => {
   });
 
   /*
-  * TEST STF_PAM_PRD
-  */
-   it('PAM Purchase STF', async () => {
-  const oldState = getDefaultState();
-  const externalData = "0x0000000000000000000000000000000000000000000000000000000000000000";
-  const scheduleTime = 6307200; // .2 years
-
-  this.PAMLifecycleTerms.feeRate = toWei("0.01");
-  this.PAMLifecycleTerms.nominalInterestRate = toWei("0.05");
-  this.PAMLifecycleTerms.dayCountConvention = 2; // A_365
-  this.PAMLifecycleTerms.businessDayConvention = 0; // NULL
-
-  // Construct expected state from default state
-  const expectedState = getDefaultState();
-  expectedState.accruedInterest = toWei('10100');
-  expectedState.feeAccrued = toWei('2010');
-  expectedState.statusDate = 6307200;
-
-
-  const newState = await this.TestSTF._STF_PAM_PRD(
-    this.PAMLifecycleTerms, 
-    oldState, 
-    scheduleTime, 
-    externalData 
-    );
-
-  assertEqualStates(newState, expectedState);
-  });
-
-  /*
   * TEST STF_PAM_PR
   */
    it('PAM Princiapl Redemption STF', async () => {
