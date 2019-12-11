@@ -303,41 +303,41 @@ contract('TestSTF', () => {
   * TEST STF_PAM_RR
   */
 
-   it('PAM Fixed Rate Reset STF', async () => {
-  const oldState = getDefaultState();
-  const externalData = web3.utils.hexToBytes('0x00000000000000000000000000000000000000000000000000d529ae9e860000'); //0.6
-  const scheduleTime = 6307200; // .2 years
+  //  it('PAM Fixed Rate Reset STF', async () => {
+  // const oldState = getDefaultState();
+  // const externalData = web3.utils.hexToBytes('0x00000000000000000000000000000000000000000000000000d529ae9e860000'); //0.6
+  // const scheduleTime = 6307200; // .2 years
 
-  this.PAMLifecycleTerms.feeRate = toWei("0.01");
-  this.PAMLifecycleTerms.nominalInterestRate = toWei("0.05");
-  this.PAMLifecycleTerms.dayCountConvention = 2; // A_365
-  this.PAMLifecycleTerms.businessDayConvention = 0; // NULL
-  this.PAMLifecycleTerms.rateSpread = toWei('0.001');
-  this.PAMLifecycleTerms.rateMultiplier = toWei('1.001');
-  this.PAMLifecycleTerms.lifeCap = toWei('0.1');
-  this.PAMLifecycleTerms.lifeFloor = toWei('0.01');
-  this.PAMLifecycleTerms.periodCap = toWei('0.02')
-  this.PAMLifecycleTerms.periodFloor = toWei('-0.02');
+  // this.PAMLifecycleTerms.feeRate = toWei("0.01");
+  // this.PAMLifecycleTerms.nominalInterestRate = toWei("0.05");
+  // this.PAMLifecycleTerms.dayCountConvention = 2; // A_365
+  // this.PAMLifecycleTerms.businessDayConvention = 0; // NULL
+  // this.PAMLifecycleTerms.rateSpread = toWei('0.001');
+  // this.PAMLifecycleTerms.rateMultiplier = toWei('1.001');
+  // this.PAMLifecycleTerms.lifeCap = toWei('0.1');
+  // this.PAMLifecycleTerms.lifeFloor = toWei('0.01');
+  // this.PAMLifecycleTerms.periodCap = toWei('0.02')
+  // this.PAMLifecycleTerms.periodFloor = toWei('-0.02');
   
-  // Construct expected state from default state
-  const expectedState = getDefaultState();
-  expectedState.accruedInterest = toWei('10100');
-  expectedState.statusDate = 6307200;
+  // // Construct expected state from default state
+  // const expectedState = getDefaultState();
+  // expectedState.accruedInterest = toWei('10100');
+  // expectedState.statusDate = 6307200;
 
-  // rate: 0.05 * 1.001 + 0.001 = 0.06005
-  // deltaRate: rate - 0.05 = 0.01005
+  // // rate: 0.05 * 1.001 + 0.001 = 0.06005
+  // // deltaRate: rate - 0.05 = 0.01005
 
 
-  console.log(oldState)
-  const newState = await this.TestSTF._STF_PAM_RR(
-    this.PAMLifecycleTerms, 
-    oldState, 
-    scheduleTime, 
-    externalData 
-    );
-  console.log(newState)
-  assertEqualStates(newState, expectedState);
+  // console.log(oldState)
+  // const newState = await this.TestSTF._STF_PAM_RR(
+  //   this.PAMLifecycleTerms, 
+  //   oldState, 
+  //   scheduleTime, 
+  //   externalData 
+  //   );
+  // console.log(newState)
+  // assertEqualStates(newState, expectedState);
 
-  });
+  // });
 
 });

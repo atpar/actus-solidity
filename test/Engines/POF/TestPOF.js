@@ -147,31 +147,31 @@ contract('TestPOF', () => {
   * TEST POF_PAM_PRD
   */
 
-  it('Should yield a purchase price of −89900', async () => {
-    const state = await this.PAMEngineInstance.computeInitialState(this.PAMLifecycleTerms);
-    const externalData = "0x0000000000000000000000000000000000000000000000000000000000000000";
+  // it('Should yield a purchase price of −89900', async () => {
+  //   const state = await this.PAMEngineInstance.computeInitialState(this.PAMLifecycleTerms);
+  //   const externalData = "0x0000000000000000000000000000000000000000000000000000000000000000";
 
-    // used data
-    const scheduleTime = 6307200; // .2 years
-    this.PAMLifecycleTerms.contractRole = 0; //RPA -> roleSign = 1
-    this.PAMLifecycleTerms.priceAtPurchaseDate = web3.utils.toWei("100000");
-    this.PAMLifecycleTerms.businessDayConvention = 0; // NULL
-    this.PAMLifecycleTerms.calendar = 0; // NoCalendar
-    this.PAMLifecycleTerms.dayCountConvention = 2; // A_365
-    this.PAMLifecycleTerms.maturityDate = 31536000; // 1 year
-    state[1] = '0'; // statusDate = 0
-    state[6] = web3.utils.toWei("100"); // accruedInterest
-    state[8] = web3.utils.toWei("0.05"); // nominalInterestRate
-    state[5] = web3.utils.toWei("1000000"); // notionalPrincipal = 1M
+  //   // used data
+  //   const scheduleTime = 6307200; // .2 years
+  //   this.PAMLifecycleTerms.contractRole = 0; //RPA -> roleSign = 1
+  //   this.PAMLifecycleTerms.priceAtPurchaseDate = web3.utils.toWei("100000");
+  //   this.PAMLifecycleTerms.businessDayConvention = 0; // NULL
+  //   this.PAMLifecycleTerms.calendar = 0; // NoCalendar
+  //   this.PAMLifecycleTerms.dayCountConvention = 2; // A_365
+  //   this.PAMLifecycleTerms.maturityDate = 31536000; // 1 year
+  //   state[1] = '0'; // statusDate = 0
+  //   state[6] = web3.utils.toWei("100"); // accruedInterest
+  //   state[8] = web3.utils.toWei("0.05"); // nominalInterestRate
+  //   state[5] = web3.utils.toWei("1000000"); // notionalPrincipal = 1M
 
-    const payoff = await this.TestPOF._POF_PAM_PRD(
-      this.PAMLifecycleTerms, 
-      state, 
-      scheduleTime, 
-      externalData 
-      );
-    assert.equal(payoff.toString(), "-89900000000000000000000");
-  });
+  //   const payoff = await this.TestPOF._POF_PAM_PRD(
+  //     this.PAMLifecycleTerms, 
+  //     state, 
+  //     scheduleTime, 
+  //     externalData 
+  //     );
+  //   assert.equal(payoff.toString(), "-89900000000000000000000");
+  // });
 
   /*
   * TEST POF_PAM_MD
@@ -365,23 +365,23 @@ contract('TestPOF', () => {
   /*
   * TEST POF_CEG_PRD
   */
-  it('Should yield a purchase payoff of -100000', async () => {
-    const state = await this.CEGEngineInstance.computeInitialState(this.CEGLifecycleTerms);
-    const externalData = "0x0000000000000000000000000000000000000000000000000000000000000000";
-    const scheduleTime = 6307200; // .2 years
+  // it('Should yield a purchase payoff of -100000', async () => {
+  //   const state = await this.CEGEngineInstance.computeInitialState(this.CEGLifecycleTerms);
+  //   const externalData = "0x0000000000000000000000000000000000000000000000000000000000000000";
+  //   const scheduleTime = 6307200; // .2 years
 
-    // used data
-    this.CEGLifecycleTerms.contractRole = 0; //RPA -> roleSign = 1
-    this.CEGLifecycleTerms.priceAtPurchaseDate = web3.utils.toWei("100000");
+  //   // used data
+  //   this.CEGLifecycleTerms.contractRole = 0; //RPA -> roleSign = 1
+  //   this.CEGLifecycleTerms.priceAtPurchaseDate = web3.utils.toWei("100000");
 
-    const payoff = await this.TestPOF._POF_CEG_PRD(
-      this.CEGLifecycleTerms, 
-      state, 
-      scheduleTime, 
-      externalData 
-      );
-    assert.equal(payoff.toString(), "-100000000000000000000000");
-  });
+  //   const payoff = await this.TestPOF._POF_CEG_PRD(
+  //     this.CEGLifecycleTerms, 
+  //     state, 
+  //     scheduleTime, 
+  //     externalData 
+  //     );
+  //   assert.equal(payoff.toString(), "-100000000000000000000000");
+  // });
 
 /*
   * TEST POF_CEG_FP
