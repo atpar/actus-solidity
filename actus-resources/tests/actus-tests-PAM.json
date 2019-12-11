@@ -2805,8 +2805,22 @@
         "cyclePointOfInterestPayment": "1",
         "fixingDays": "0D",
         "contractRole": "RPA",
-        "interestRateDates": "2013-02-01T00:00:00,2013-05-01T00:00:00,2013-08-01T00:00:00,2013-11-01T00:00:00",
-        "interestRateValues": "0.009827160493827161,0.01093827160493827,0.01204938271604938,0.0131604938271605"
+        "periodFloor": ".5",
+        "lifeFloor": "0",
+        "periodCap": ".5",
+        "lifeCap": ".5"
+      },
+      "externalData": {
+        "interestRateDates": [
+          "2013-02-01T00:00:00",
+          "2013-05-01T00:00:00",
+          "2013-08-01T00:00:00",
+          "2013-11-01T00:00:00"],
+        "interestRateValues": [
+          "0.009827160493827161",
+          "0.01093827160493827",
+          "0.01204938271604938",
+          "0.0131604938271605"]
       },
     "results": [
       {
@@ -2846,31 +2860,31 @@
         "eventType": "RR",
         "eventValue": 0,
         "notionalPrincipal": 3000,
-        "nominalInterestRate": 0.0445679012362945,
+        "nominalInterestRate": 0.0445679012345679,
         "accruedInterest": 0
       },
       {
         "eventDate": "2013-03-01T00:00",
         "eventType": "IP",
-        "eventValue": 11.1419753090736,
+        "eventValue": 11.14197530864,
         "notionalPrincipal": 3000,
-        "nominalInterestRate": 0.0445679012362945,
+        "nominalInterestRate": 0.0445679012345679,
         "accruedInterest": 0
       },
       {
         "eventDate": "2013-04-01T00:00",
         "eventType": "IP",
-        "eventValue": 11.1419753090736,
+        "eventValue": 11.14197530864,
         "notionalPrincipal": 3000,
-        "nominalInterestRate": 0.0445679012362945,
+        "nominalInterestRate": 0.0445679012345679,
         "accruedInterest": 0
       },
       {
         "eventDate": "2013-05-01T00:00",
         "eventType": "IP",
-        "eventValue": 11.1419753090736,
+        "eventValue": 11.14197530864,
         "notionalPrincipal": 3000,
-        "nominalInterestRate": 0.0445679012362945,
+        "nominalInterestRate": 0.0445679012345679,
         "accruedInterest": 0
       },
       {
@@ -2878,31 +2892,31 @@
         "eventType": "RR",
         "eventValue": 0,
         "notionalPrincipal": 3000,
-        "nominalInterestRate": 0.0473456790074544,
+        "nominalInterestRate": 0.047345679012345675,
         "accruedInterest": 0
       },
       {
         "eventDate": "2013-06-01T00:00",
         "eventType": "IP",
-        "eventValue": 11.8364197518636,
+        "eventValue": 11.83641975309,
         "notionalPrincipal": 3000,
-        "nominalInterestRate": 0.0473456790074544,
+        "nominalInterestRate": 0.047345679012345675,
         "accruedInterest": 0
       },
       {
         "eventDate": "2013-07-01T00:00",
         "eventType": "IP",
-        "eventValue": 11.8364197518636,
+        "eventValue": 11.83641975309,
         "notionalPrincipal": 3000,
-        "nominalInterestRate": 0.0473456790074544,
+        "nominalInterestRate": 0.047345679012345675,
         "accruedInterest": 0
       },
       {
         "eventDate": "2013-08-01T00:00",
         "eventType": "IP",
-        "eventValue": 11.8364197518636,
+        "eventValue": 11.83641975309,
         "notionalPrincipal": 3000,
-        "nominalInterestRate": 0.0473456790074544,
+        "nominalInterestRate": 0.047345679012345675,
         "accruedInterest": 0
       },
       {
@@ -2910,7 +2924,7 @@
         "eventType": "RR",
         "eventValue": 0,
         "notionalPrincipal": 3000,
-        "nominalInterestRate": 0.0501234567901235,
+        "nominalInterestRate": 0.05012345679012345,
         "accruedInterest": 0
       },
       {
@@ -2918,7 +2932,7 @@
         "eventType": "IP",
         "eventValue": 12.5308641975309,
         "notionalPrincipal": 3000,
-        "nominalInterestRate": 0.0501234567901235,
+        "nominalInterestRate": 0.05012345679012345,
         "accruedInterest": 0
       },
       {
@@ -2926,7 +2940,7 @@
         "eventType": "IP",
         "eventValue": 12.5308641975309,
         "notionalPrincipal": 3000,
-        "nominalInterestRate": 0.0501234567901235,
+        "nominalInterestRate": 0.05012345679012345,
         "accruedInterest": 0
       },
       {
@@ -2934,7 +2948,7 @@
         "eventType": "IP",
         "eventValue": 12.5308641975309,
         "notionalPrincipal": 3000,
-        "nominalInterestRate": 0.0501234567901235,
+        "nominalInterestRate": 0.05012345679012345,
         "accruedInterest": 0
       },
       {
@@ -2942,7 +2956,7 @@
         "eventType": "RR",
         "eventValue": 0,
         "notionalPrincipal": 3000,
-        "nominalInterestRate": 0.0529012345679012,
+        "nominalInterestRate": 0.05290123456790125,
         "accruedInterest": 0
       },
       {
@@ -2950,7 +2964,7 @@
         "eventType": "IP",
         "eventValue": 13.2253086419753,
         "notionalPrincipal": 3000,
-        "nominalInterestRate": 0.0529012345679012,
+        "nominalInterestRate": 0.05290123456790125,
         "accruedInterest": 0
       },
       {
@@ -2958,7 +2972,7 @@
         "eventType": "IP",
         "eventValue": 13.2253086419753,
         "notionalPrincipal": 3000,
-        "nominalInterestRate": 0.0529012345679012,
+        "nominalInterestRate": 0.05290123456790125,
         "accruedInterest": 0
       },
       {
@@ -2966,7 +2980,7 @@
         "eventType": "MD",
         "eventValue": 3000,
         "notionalPrincipal": 0,
-        "nominalInterestRate": 0.0529012345679012,
+        "nominalInterestRate": 0.05290123456790125,
         "accruedInterest": 0
       }
     ]
@@ -2997,8 +3011,22 @@
         "cyclePointOfInterestPayment": "1",
         "fixingDays": "0D",
         "contractRole": "RPA",
-        "interestRateDates": "2013-02-01T00:00:00,2013-05-01T00:00:00,2013-08-01T00:00:00,2013-11-01T00:00:00",
-        "interestRateValues": "0.015938271604938273,0.017049382716049385,0.018160493827160496,0.019271604938271607"
+        "periodFloor": ".5",
+        "lifeFloor": "0",
+        "periodCap": ".5",
+        "lifeCap": ".5"
+      },
+    "externalData": {
+        "interestRateDates": [
+          "2013-02-01T00:00:00",
+          "2013-05-01T00:00:00",
+          "2013-08-01T00:00:00",
+          "2013-11-01T00:00:00"],
+        "interestRateValues": [
+          "0.015938271604938273",
+          "0.017049382716049385",
+          "0.018160493827160496",
+          "0.019271604938271607"]
       },
     "results": [
       {
@@ -3038,7 +3066,7 @@
         "eventType": "RR",
         "eventValue": 0,
         "notionalPrincipal": 3000,
-        "nominalInterestRate": 0.0359382716049383,
+        "nominalInterestRate": 0.035938271604938274,
         "accruedInterest": 0
       },
       {
@@ -3046,7 +3074,7 @@
         "eventType": "IP",
         "eventValue": 8.98456790123457,
         "notionalPrincipal": 3000,
-        "nominalInterestRate": 0.0359382716049383,
+        "nominalInterestRate": 0.035938271604938274,
         "accruedInterest": 0
       },
       {
@@ -3054,7 +3082,7 @@
         "eventType": "IP",
         "eventValue": 8.98456790123457,
         "notionalPrincipal": 3000,
-        "nominalInterestRate": 0.0359382716049383,
+        "nominalInterestRate": 0.035938271604938274,
         "accruedInterest": 0
       },
       {
@@ -3062,7 +3090,7 @@
         "eventType": "IP",
         "eventValue": 8.98456790123457,
         "notionalPrincipal": 3000,
-        "nominalInterestRate": 0.0359382716049383,
+        "nominalInterestRate": 0.035938271604938274,
         "accruedInterest": 0
       },
       {
@@ -3070,7 +3098,7 @@
         "eventType": "RR",
         "eventValue": 0,
         "notionalPrincipal": 3000,
-        "nominalInterestRate": 0.0370493827160494,
+        "nominalInterestRate": 0.037049382716049385,
         "accruedInterest": 0
       },
       {
@@ -3078,7 +3106,7 @@
         "eventType": "IP",
         "eventValue": 9.26234567901235,
         "notionalPrincipal": 3000,
-        "nominalInterestRate": 0.0370493827160494,
+        "nominalInterestRate": 0.037049382716049385,
         "accruedInterest": 0
       },
       {
@@ -3086,7 +3114,7 @@
         "eventType": "IP",
         "eventValue": 9.26234567901234,
         "notionalPrincipal": 3000,
-        "nominalInterestRate": 0.0370493827160494,
+        "nominalInterestRate": 0.037049382716049385,
         "accruedInterest": 0
       },
       {
@@ -3094,7 +3122,7 @@
         "eventType": "IP",
         "eventValue": 9.26234567901235,
         "notionalPrincipal": 3000,
-        "nominalInterestRate": 0.0370493827160494,
+        "nominalInterestRate": 0.037049382716049385,
         "accruedInterest": 0
       },
       {
@@ -3134,7 +3162,7 @@
         "eventType": "RR",
         "eventValue": 0,
         "notionalPrincipal": 3000,
-        "nominalInterestRate": 0.0392716049382716,
+        "nominalInterestRate": 0.03927160493827161,
         "accruedInterest": 0
       },
       {
@@ -3142,7 +3170,7 @@
         "eventType": "IP",
         "eventValue": 9.8179012345679,
         "notionalPrincipal": 3000,
-        "nominalInterestRate": 0.0392716049382716,
+        "nominalInterestRate": 0.03927160493827161,
         "accruedInterest": 0
       },
       {
@@ -3150,7 +3178,7 @@
         "eventType": "IP",
         "eventValue": 9.8179012345679,
         "notionalPrincipal": 3000,
-        "nominalInterestRate": 0.0392716049382716,
+        "nominalInterestRate": 0.03927160493827161,
         "accruedInterest": 0
       },
       {
@@ -3158,7 +3186,7 @@
         "eventType": "MD",
         "eventValue": 3000,
         "notionalPrincipal": 0,
-        "nominalInterestRate": 0.0392716049382716,
+        "nominalInterestRate": 0.03927160493827161,
         "accruedInterest": 0
       }
     ]
@@ -3189,9 +3217,29 @@
         "cyclePointOfInterestPayment": "1",
         "fixingDays": "0D",
         "contractRole": "RPA",
-        "interestRateDates": "2013-05-20T00:00:00,2013-06-18T00:00:00,2013-07-17T00:00:00,2013-08-15T00:00:00,2013-09-13T00:00:00,2013-10-12T00:00:00,2013-11-10T00:00:00",
-        "interestRateValues": "0.01079012345679013,0.011141975308641978,0.011493827160493818,0.011839506172839513,0.012191358024691361,0.012543209876543192,0.012895061728395062"
+        "periodFloor": ".5",
+        "lifeFloor": "0",
+        "periodCap": ".5",
+        "lifeCap": ".5"
       },
+    "externalData": {
+        "interestRateDates": [
+          "2013-05-20T00:00:00",
+          "2013-06-18T00:00:00",
+          "2013-07-17T00:00:00",
+          "2013-08-15T00:00:00",
+          "2013-09-13T00:00:00",
+          "2013-10-12T00:00:00",
+          "2013-11-10T00:00:00"],
+        "interestRateValues": [
+          "0.01079012345679013",
+          "0.011141975308641978",
+          "0.011493827160493818",
+          "0.011839506172839513",
+          "0.012191358024691361",
+          "0.012543209876543192",
+          "0.012895061728395062"]
+        },
     "results": [
       {
         "eventDate": "2012-12-31T00:00",
@@ -3254,15 +3302,15 @@
         "eventType": "RR",
         "eventValue": 0,
         "notionalPrincipal": 3000,
-        "nominalInterestRate": 0.0307901234536329,
+        "nominalInterestRate": 0.03079012345679013,
         "accruedInterest": 15.8333333333333
       },
       {
         "eventDate": "2013-06-01T00:00",
         "eventType": "IP",
-        "eventValue": 18.655761316583,
+        "eventValue": 18.6557613169,
         "notionalPrincipal": 3000,
-        "nominalInterestRate": 0.0307901234536329,
+        "nominalInterestRate": 0.03079012345679013,
         "accruedInterest": 0
       },
       {
@@ -3270,15 +3318,15 @@
         "eventType": "RR",
         "eventValue": 0,
         "notionalPrincipal": 3000,
-        "nominalInterestRate": 0.0311419753069273,
-        "accruedInterest": 4.36193415593133
+        "nominalInterestRate": 0.03114197530864198,
+        "accruedInterest": 4.361934156379
       },
       {
         "eventDate": "2013-07-01T00:00",
         "eventType": "IP",
-        "eventValue": 7.73564814751513,
+        "eventValue": 7.735648148148,
         "notionalPrincipal": 3000,
-        "nominalInterestRate": 0.0311419753069273,
+        "nominalInterestRate": 0.03114197530864198,
         "accruedInterest": 0
       },
       {
@@ -3286,15 +3334,15 @@
         "eventType": "RR",
         "eventValue": 0,
         "notionalPrincipal": 3000,
-        "nominalInterestRate": 0.0314938271604938,
-        "accruedInterest": 4.15226337425697
+        "nominalInterestRate": 0.031493827160493818,
+        "accruedInterest": 4.152263374486
       },
       {
         "eventDate": "2013-08-01T00:00",
         "eventType": "IP",
-        "eventValue": 7.82654320964792,
+        "eventValue": 7.826543209877,
         "notionalPrincipal": 3000,
-        "nominalInterestRate": 0.0314938271604938,
+        "nominalInterestRate": 0.031493827160493818,
         "accruedInterest": 0
       },
       {
@@ -3302,7 +3350,7 @@
         "eventType": "RR",
         "eventValue": 0,
         "notionalPrincipal": 3000,
-        "nominalInterestRate": 0.0318395061728395,
+        "nominalInterestRate": 0.031839506172839513,
         "accruedInterest": 3.67427983539095
       },
       {
@@ -3310,7 +3358,7 @@
         "eventType": "IP",
         "eventValue": 7.91954732510288,
         "notionalPrincipal": 3000,
-        "nominalInterestRate": 0.0318395061728395,
+        "nominalInterestRate": 0.031839506172839513,
         "accruedInterest": 0
       },
       {
@@ -3318,7 +3366,7 @@
         "eventType": "RR",
         "eventValue": 0,
         "notionalPrincipal": 3000,
-        "nominalInterestRate": 0.0321913580246914,
+        "nominalInterestRate": 0.032191358024691361,
         "accruedInterest": 3.18395061728395
       },
       {
@@ -3326,7 +3374,7 @@
         "eventType": "IP",
         "eventValue": 8.01265432098766,
         "notionalPrincipal": 3000,
-        "nominalInterestRate": 0.0321913580246914,
+        "nominalInterestRate": 0.032191358024691361,
         "accruedInterest": 0
       },
       {
@@ -3334,7 +3382,7 @@
         "eventType": "RR",
         "eventValue": 0,
         "notionalPrincipal": 3000,
-        "nominalInterestRate": 0.0325432098765432,
+        "nominalInterestRate": 0.032543209876543192,
         "accruedInterest": 2.95087448559671
       },
       {
@@ -3342,7 +3390,7 @@
         "eventType": "IP",
         "eventValue": 8.10354938271605,
         "notionalPrincipal": 3000,
-        "nominalInterestRate": 0.0325432098765432,
+        "nominalInterestRate": 0.032543209876543192,
         "accruedInterest": 0
       },
       {
@@ -3350,7 +3398,7 @@
         "eventType": "RR",
         "eventValue": 0,
         "notionalPrincipal": 3000,
-        "nominalInterestRate": 0.0328950617283951,
+        "nominalInterestRate": 0.032895061728395062,
         "accruedInterest": 2.44074074074074
       },
       {
@@ -3358,7 +3406,7 @@
         "eventType": "IP",
         "eventValue": 8.19737654320988,
         "notionalPrincipal": 3000,
-        "nominalInterestRate": 0.0328950617283951,
+        "nominalInterestRate": 0.032895061728395062,
         "accruedInterest": 0
       },
       {
@@ -3366,7 +3414,7 @@
         "eventType": "IP",
         "eventValue": 8.22376543209876,
         "notionalPrincipal": 3000,
-        "nominalInterestRate": 0.0328950617283951,
+        "nominalInterestRate": 0.032895061728395062,
         "accruedInterest": 0
       },
       {
@@ -3374,7 +3422,7 @@
         "eventType": "MD",
         "eventValue": 3000,
         "notionalPrincipal": 0,
-        "nominalInterestRate": 0.0328950617283951,
+        "nominalInterestRate": 0.032895061728395062,
         "accruedInterest": 0
       }
     ]
