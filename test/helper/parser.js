@@ -28,7 +28,7 @@ const getIndexOfAttribute = (attribute, value) => {
 }
 
 const toPrecision = (value) => {
-  return web3Utils.toHex(new BigNumber(value).shiftedBy(PRECISION));
+  return (new BigNumber(value).shiftedBy(PRECISION)).toFixed();
 }
 
 const fromPrecision = (value) => {

@@ -134,16 +134,16 @@ contract('PAMEngine', () => {
     }
   })
 
-  it('should yield the state for RR', async () => {
-    const initialState = await this.PAMEngineInstance.computeInitialState(this.lifecycleTerms);
+  // it('should yield the state for RR', async () => {
+  //   const initialState = await this.PAMEngineInstance.computeInitialState(this.lifecycleTerms);
     
-    state = initialState;
+  //   state = initialState;
 
-    const nextState = await this.PAMEngineInstance.computeStateForEvent(
-      this.lifecycleTerms,
-      state,
-      '0x1200000000000000000000000000000000000000000000000000000051922D80',
-      web3.utils.toHex(555555533333)
-    );
-  });
+  //   const nextState = await this.PAMEngineInstance.computeStateForEvent(
+  //     this.lifecycleTerms,
+  //     state,
+  //     '0x1200000000000000000000000000000000000000000000000000000051922D80',
+  //     web3.utils.toHex(555555533333)
+  //   );
+  // });
 });
