@@ -8,6 +8,8 @@ install: yarn
 script:
 - npm run build
 - npm run test
+- npm run coverage
+- cat coverage/lcov.info | coveralls
 deploy:
   provider: npm
   email: "$NPM_EMAIL"
