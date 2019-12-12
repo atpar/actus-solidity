@@ -4,7 +4,16 @@ pragma experimental ABIEncoderV2;
 import "../Core/Core.sol";
 
 
+/**
+ * @title Contract containing all pay-off functions (POF)
+ */
 contract POF is Core {
+
+    /**
+     * Calculate the pay-off for PAM Fees. The method how to calculate the fee
+     * heavily depends on the selected Fee Basis.
+     * @return the fee amount for PAM contracts
+     */
     function POF_PAM_FP (
         LifecycleTerms memory terms,
         State memory state,
@@ -17,15 +26,13 @@ contract POF is Core {
     {
         if (terms.feeBasis == FeeBasis.A) {
             return (
-                performanceIndicator(state.contractPerformance)
-                * roleSign(terms.contractRole)
+                roleSign(terms.contractRole)
                 * terms.feeRate
             );
         }
 
         return (
-            performanceIndicator(state.contractPerformance)
-            * state.feeAccrued
+            state.feeAccrued
                 .add(
                     yearFraction(
                         shiftCalcTime(state.statusDate, terms.businessDayConvention, terms.calendar),
@@ -39,6 +46,10 @@ contract POF is Core {
         );
     }
 
+    /**
+     * Calculate the payoff for the initial exchange
+     * @return the payoff at iniitial exchange for PAM contracts
+     */
     function POF_PAM_IED (
         LifecycleTerms memory terms,
         State memory state,
@@ -50,14 +61,17 @@ contract POF is Core {
         returns(int256)
     {
         return (
-            performanceIndicator(state.contractPerformance)
-            * roleSign(terms.contractRole)
+            roleSign(terms.contractRole)
             * (-1)
             * terms.notionalPrincipal
                 .add(terms.premiumDiscountAtIED)
         );
     }
 
+    /**
+     * Calculate the interest payment payoff
+     * @return the interest amount to pay for PAM contracts
+     */
     function POF_PAM_IP (
         LifecycleTerms memory terms,
         State memory state,
@@ -69,8 +83,7 @@ contract POF is Core {
         returns(int256)
     {
         return (
-            performanceIndicator(state.contractPerformance)
-            * state.interestScalingMultiplier
+            state.interestScalingMultiplier
                 .floatMult(
                     state.accruedInterest
                     .add(
@@ -87,6 +100,10 @@ contract POF is Core {
         );
     }
 
+    /**
+     * Calculate the principal prepayment payoff
+     * @return the principal prepayment amount for PAM contracts
+     */
     function POF_PAM_PP (
         LifecycleTerms memory terms,
         State memory state,
@@ -98,14 +115,16 @@ contract POF is Core {
         returns(int256)
     {
         return (
-            performanceIndicator(state.contractPerformance)
-            * roleSign(terms.contractRole)
-            * 0 // riskFactor(scheduleTime, state, terms, terms.objectCodeOfPrepaymentModel)
+            roleSign(terms.contractRole)
             * state.notionalPrincipal
         );
     }
 
-    function POF_PAM_PRD (
+    /**
+     * Calculate the payoff in case of maturity
+     * @return the maturity payoff for PAM contracts
+     */
+    function POF_PAM_MD (
         LifecycleTerms memory terms,
         State memory state,
         uint256 scheduleTime,
@@ -116,41 +135,15 @@ contract POF is Core {
         returns(int256)
     {
         return (
-            performanceIndicator(state.contractPerformance)
-            * roleSign(terms.contractRole)
-            * (-1)
-            * terms.priceAtPurchaseDate
-                .add(state.accruedInterest)
-                .add(
-                    yearFraction(
-                        shiftCalcTime(state.statusDate, terms.businessDayConvention, terms.calendar),
-                        shiftCalcTime(scheduleTime, terms.businessDayConvention, terms.calendar),
-                        terms.dayCountConvention,
-                        terms.maturityDate
-                    )
-                    .floatMult(state.nominalInterestRate)
-                    .floatMult(state.notionalPrincipal)
-                )
-        );
-    }
-
-    function POF_PAM_PR (
-        LifecycleTerms memory terms,
-        State memory state,
-        uint256 scheduleTime,
-        bytes32 externalData
-    )
-        internal
-        pure
-        returns(int256)
-    {
-        return (
-            performanceIndicator(state.contractPerformance)
-            * state.notionalScalingMultiplier
+            state.notionalScalingMultiplier
                 .floatMult(state.notionalPrincipal)
         );
     }
 
+    /**
+     * Calculate the payoff in case of a penalty event
+     * @return the penalty amount for PAM contracts
+     */
     function POF_PAM_PY (
         LifecycleTerms memory terms,
         State memory state,
@@ -163,14 +156,12 @@ contract POF is Core {
     {
         if (terms.penaltyType == PenaltyType.A) {
             return (
-                performanceIndicator(state.contractPerformance)
-                * roleSign(terms.contractRole)
+                roleSign(terms.contractRole)
                 * terms.penaltyRate
             );
         } else if (terms.penaltyType == PenaltyType.N) {
             return (
-                performanceIndicator(state.contractPerformance)
-                * roleSign(terms.contractRole)
+                roleSign(terms.contractRole)
                 * yearFraction(
                         shiftCalcTime(state.statusDate, terms.businessDayConvention, terms.calendar),
                         shiftCalcTime(scheduleTime, terms.businessDayConvention, terms.calendar),
@@ -181,13 +172,8 @@ contract POF is Core {
                     .floatMult(state.notionalPrincipal)
             );
         } else {
-            // riskFactor(scheduleTime, state, terms, terms.marketObjectCodeOfRateReset);
-            int256 risk = 0;
-            int256 param = 0;
-            if (state.nominalInterestRate - risk > 0) param = state.nominalInterestRate - risk;
             return (
-                performanceIndicator(state.contractPerformance)
-                * roleSign(terms.contractRole)
+                roleSign(terms.contractRole)
                 * yearFraction(
                         shiftCalcTime(state.statusDate, terms.businessDayConvention, terms.calendar),
                         shiftCalcTime(scheduleTime, terms.businessDayConvention, terms.calendar),
@@ -195,11 +181,14 @@ contract POF is Core {
                         terms.maturityDate
                     )
                     .floatMult(state.notionalPrincipal)
-                    .floatMult(param)
             );
         }
     }
 
+    /**
+     * Calculate the payoff in case of termination of a contract
+     * @return the termination payoff amount for PAM contracts
+     */
     function POF_PAM_TD (
         LifecycleTerms memory terms,
         State memory state,
@@ -211,8 +200,7 @@ contract POF is Core {
         returns(int256)
     {
         return (
-            performanceIndicator(state.contractPerformance)
-            * roleSign(terms.contractRole)
+            roleSign(terms.contractRole)
             * terms.priceAtPurchaseDate
                 .add(state.accruedInterest)
                 .add(
@@ -228,40 +216,11 @@ contract POF is Core {
         );
     }
 
-    function POF_ANN_FP (
-        LifecycleTerms memory terms,
-        State memory state,
-        uint256 scheduleTime,
-        bytes32 externalData
-    )
-        internal
-        pure
-        returns(int256)
-    {
-        if (terms.feeBasis == FeeBasis.A) {
-            return (
-                performanceIndicator(state.contractPerformance)
-                * roleSign(terms.contractRole)
-                * terms.feeRate
-            );
-        } else {
-            return (
-                performanceIndicator(state.contractPerformance)
-                * state.feeAccrued
-                    .add(
-                        yearFraction(
-                            shiftCalcTime(state.statusDate, terms.businessDayConvention, terms.calendar),
-                            shiftCalcTime(scheduleTime, terms.businessDayConvention, terms.calendar),
-                            terms.dayCountConvention,
-                            terms.maturityDate
-                        )
-                        .floatMult(terms.feeRate)
-                        .floatMult(state.notionalPrincipal)
-                    )
-            );
-        }
-    }
-
+    /**
+     * Calculate the payoff for principal redemption
+     * @dev This is a replacement of the POF_PR_NAM which we have not implemented, yet
+     * @return the principal redemption amount for ANN contracts
+     */
     function POF_ANN_PR (
         LifecycleTerms memory terms,
         State memory state,
@@ -273,8 +232,7 @@ contract POF is Core {
         returns(int256)
     {
         return (
-            performanceIndicator(state.contractPerformance)
-            * (state.notionalScalingMultiplier * roleSign(terms.contractRole))
+            (state.notionalScalingMultiplier * roleSign(terms.contractRole))
                 .floatMult(
                     (roleSign(terms.contractRole) * state.notionalPrincipal)
                     .min(
@@ -296,49 +254,10 @@ contract POF is Core {
         );
     }
 
-    function POF_ANN_MD (
-        LifecycleTerms memory terms,
-        State memory state,
-        uint256 scheduleTime,
-        bytes32 externalData
-    )
-        internal
-        pure
-        returns(int256)
-    {
-        return (
-            performanceIndicator(state.contractPerformance)
-            * state.notionalScalingMultiplier
-                .floatMult(state.notionalPrincipal)
-        );
-    }
-
-    function POF_CEG_MD (
-        LifecycleTerms memory terms,
-        State memory state,
-        uint256 scheduleTime,
-        bytes32 externalData
-    )
-        internal
-        pure
-        returns(int256)
-    {
-        return 0;
-    }
-
-    function POF_CEG_XD (
-        LifecycleTerms memory terms,
-        State memory state,
-        uint256 scheduleTime,
-        bytes32 externalData
-    )
-        internal
-        pure
-        returns(int256)
-    {
-        return 0;
-    }
-
+    /**
+     * Calculate the payoff in case of settlement
+     * @return the settlement payoff amount for CEG contracts
+     */
     function POF_CEG_STD (
         LifecycleTerms memory terms,
         State memory state,
@@ -352,24 +271,10 @@ contract POF is Core {
         return state.executionAmount + state.feeAccrued;
     }
 
-    function POF_CEG_PRD (
-        LifecycleTerms memory terms,
-        State memory state,
-        uint256 scheduleTime,
-        bytes32 externalData
-    )
-        internal
-        pure
-        returns(int256)
-    {
-        return (
-            performanceIndicator(state.contractPerformance)
-            * roleSign(terms.contractRole)
-            * (-1)
-            * terms.priceAtPurchaseDate
-        );
-    }
-
+    /**
+     * Calculate the pay-off for CEG Fees.
+     * @return the fee amount for CEG contracts
+     */
     function POF_CEG_FP (
         LifecycleTerms memory terms,
         State memory state,
@@ -382,15 +287,13 @@ contract POF is Core {
     {
         if (terms.feeBasis == FeeBasis.A) {
             return (
-                performanceIndicator(state.contractPerformance)
-                * roleSign(terms.contractRole)
+                roleSign(terms.contractRole)
                 * terms.feeRate
             );
         }
 
         return (
-            performanceIndicator(state.contractPerformance)
-            * state.feeAccrued
+            state.feeAccrued
                 .add(
                     yearFraction(
                         shiftCalcTime(state.statusDate, terms.businessDayConvention, terms.calendar),

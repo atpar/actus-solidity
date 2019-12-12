@@ -10,6 +10,7 @@ contract ACTUSTypes {
     int256 constant DOUBLE_NULL = INT256_MIN;
 
     uint256 constant public PRECISION = 18;
+    int256 constant public ONE_POINT_ZERO = 1 * 10 ** 18;
 
     uint256 constant MAX_CYCLE_SIZE = 16;
     uint256 constant MAX_EVENT_SCHEDULE_SIZE = 64; // 4x MAX_CYCLE_SIZE for IP, RR, FP and SC
@@ -30,6 +31,7 @@ contract ACTUSTypes {
         bool isSet;
     }
 
+    //               0   1   2   3   4    5     6     7   8   9  10  11  12  13   14  15   16   17  18  19   29  21  22
     enum EventType {AD, CD, DV, XD, FP, IED, IPCB, IPCI, IP, MR, MD, PY, PD, PRF, PP, PR, PRD, RRF, RR, SC, STD, TD, CE}
     enum Calendar {NoCalendar, MondayToFriday} // Custom: custom implementation of calendar
     enum BusinessDayConvention {NULL, SCF, SCMF, CSF, CSMF, SCP, SCMP, CSP, CSMP}
@@ -94,10 +96,11 @@ contract ACTUSTypes {
         PenaltyType penaltyType;
         FeeBasis feeBasis;
         ContractPerformance creditEventTypeCovered;
-        ContractReference contractReference_1;
-        ContractReference contractReference_2;
+    ContractReference contractReference_1;
+    ContractReference contractReference_2;
 
         address currency;
+        address settlementCurrency;
 
         bytes32 marketObjectCodeRateReset;
 
@@ -168,9 +171,10 @@ contract ACTUSTypes {
         ContractPerformance creditEventTypeCovered;
 
         ContractReference contractReference_1;
-        ContractReference contractReference_2;
+    ContractReference contractReference_2;
 
         address currency;
+        address settlementCurrency;
 
         bytes32 creatorID;
         bytes32 counterpartyID;

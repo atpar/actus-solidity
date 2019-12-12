@@ -57,6 +57,16 @@ contract BaseEngine is Core, IEngine {
         pure
         returns (int256)
     {
+        // if alternative settlementCurrency is set then apply fxRate to payoff
+        if (terms.settlementCurrency != address(0) && terms.currency != terms.settlementCurrency) {
+            return payoffFunction(
+                terms,
+                state,
+                _event,
+                externalData
+            ).floatMult(int256(externalData));
+        }
+
         return payoffFunction(
             terms,
             state,

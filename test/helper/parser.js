@@ -28,7 +28,7 @@ const getIndexOfAttribute = (attribute, value) => {
 }
 
 const toPrecision = (value) => {
-  return web3Utils.toHex(new BigNumber(value).shiftedBy(PRECISION));
+  return (new BigNumber(value).shiftedBy(PRECISION)).toFixed();
 }
 
 const fromPrecision = (value) => {
@@ -101,6 +101,7 @@ const parseTermsFromObject = (terms) => {
   }
 
   parsedTerms['currency'] = '0x0000000000000000000000000000000000000000';
+  parsedTerms['settlementCurrency'] = '0x0000000000000000000000000000000000000000';
 
   return parsedTerms;
 }
