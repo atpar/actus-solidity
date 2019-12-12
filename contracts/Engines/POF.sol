@@ -9,14 +9,6 @@ import "../Core/Core.sol";
  */
 contract POF is Core {
 
-    function applyFXRate(int256 payoff, int256 fxRate, LifecycleTerms memory terms)
-        internal
-        pure
-        returns (int256)
-    {
-        return payoff.floatMult((terms.currency != terms.settlementCurrency) ? fxRate : ONE_POINT_ZERO);
-    }
-
     /**
      * Calculate the pay-off for PAM Fees. The method how to calculate the fee
      * heavily depends on the selected Fee Basis.
@@ -33,16 +25,14 @@ contract POF is Core {
         returns(int256)
     {
         if (terms.feeBasis == FeeBasis.A) {
-            return applyFXRate(
-                (
-                    roleSign(terms.contractRole)
-                    * terms.feeRate
-                ), int256(externalData), terms
+            return (
+                roleSign(terms.contractRole)
+                * terms.feeRate
             );
         }
 
-        return applyFXRate(
-            (state.feeAccrued
+        return (
+            state.feeAccrued
                 .add(
                     yearFraction(
                         shiftCalcTime(state.statusDate, terms.businessDayConvention, terms.calendar),
@@ -53,7 +43,6 @@ contract POF is Core {
                     .floatMult(terms.feeRate)
                     .floatMult(state.notionalPrincipal)
                 )
-            ), int256(externalData), terms
         );
     }
 
@@ -71,30 +60,11 @@ contract POF is Core {
         pure
         returns(int256)
     {
-        return applyFXRate(
-            (
-                roleSign(terms.contractRole)
-                * (-1)
-                * terms.notionalPrincipal
-                    .add(terms.premiumDiscountAtIED)
-            ), int256(externalData), terms
-        );
-    }
-
-    function POF_PAM_IP_EVAL_YEAR_FRACTION (
-        LifecycleTerms memory terms,
-        State memory state,
-        uint256 scheduleTime
-    )
-        internal
-        pure
-        returns(int256)
-    {
-        return yearFraction(
-            shiftCalcTime(state.statusDate, terms.businessDayConvention, terms.calendar),
-            shiftCalcTime(scheduleTime, terms.businessDayConvention, terms.calendar),
-            terms.dayCountConvention,
-            terms.maturityDate
+        return (
+            roleSign(terms.contractRole)
+            * (-1)
+            * terms.notionalPrincipal
+                .add(terms.premiumDiscountAtIED)
         );
     }
 
@@ -112,18 +82,21 @@ contract POF is Core {
         pure
         returns(int256)
     {
-        return applyFXRate(
-            (
-                state.interestScalingMultiplier
-                    .floatMult(
-                        state.accruedInterest
-                        .add(
-                            POF_PAM_IP_EVAL_YEAR_FRACTION(terms, state, scheduleTime)
-                            .floatMult(state.nominalInterestRate)
-                            .floatMult(state.notionalPrincipal)
+        return (
+            state.interestScalingMultiplier
+                .floatMult(
+                    state.accruedInterest
+                    .add(
+                        yearFraction(
+                            shiftCalcTime(state.statusDate, terms.businessDayConvention, terms.calendar),
+                            shiftCalcTime(scheduleTime, terms.businessDayConvention, terms.calendar),
+                            terms.dayCountConvention,
+                            terms.maturityDate
                         )
+                        .floatMult(state.nominalInterestRate)
+                        .floatMult(state.notionalPrincipal)
                     )
-            ), int256(externalData), terms
+                )
         );
     }
 
@@ -141,11 +114,9 @@ contract POF is Core {
         pure
         returns(int256)
     {
-        return applyFXRate(
-            (
-                roleSign(terms.contractRole)
-                * state.notionalPrincipal
-            ), int256(externalData), terms
+        return (
+            roleSign(terms.contractRole)
+            * state.notionalPrincipal
         );
     }
 
@@ -163,11 +134,9 @@ contract POF is Core {
         pure
         returns(int256)
     {
-        return applyFXRate(
-            (
-                state.notionalScalingMultiplier
-                    .floatMult(state.notionalPrincipal)
-            ), int256(externalData), terms
+        return (
+            state.notionalScalingMultiplier
+                .floatMult(state.notionalPrincipal)
         );
     }
 
@@ -186,17 +155,14 @@ contract POF is Core {
         returns(int256)
     {
         if (terms.penaltyType == PenaltyType.A) {
-            return applyFXRate(
-                (
-                    roleSign(terms.contractRole)
-                    * terms.penaltyRate
-                ), int256(externalData), terms
+            return (
+                roleSign(terms.contractRole)
+                * terms.penaltyRate
             );
         } else if (terms.penaltyType == PenaltyType.N) {
-            return applyFXRate(
-                (
-                    roleSign(terms.contractRole)
-                    * yearFraction(
+            return (
+                roleSign(terms.contractRole)
+                * yearFraction(
                         shiftCalcTime(state.statusDate, terms.businessDayConvention, terms.calendar),
                         shiftCalcTime(scheduleTime, terms.businessDayConvention, terms.calendar),
                         terms.dayCountConvention,
@@ -204,20 +170,17 @@ contract POF is Core {
                     )
                     .floatMult(terms.penaltyRate)
                     .floatMult(state.notionalPrincipal)
-                ), int256(externalData), terms
             );
         } else {
-            return applyFXRate(
-                (
-                    roleSign(terms.contractRole)
-                    * yearFraction(
+            return (
+                roleSign(terms.contractRole)
+                * yearFraction(
                         shiftCalcTime(state.statusDate, terms.businessDayConvention, terms.calendar),
                         shiftCalcTime(scheduleTime, terms.businessDayConvention, terms.calendar),
                         terms.dayCountConvention,
                         terms.maturityDate
                     )
                     .floatMult(state.notionalPrincipal)
-                ), int256(externalData), terms
             );
         }
     }
@@ -236,39 +199,20 @@ contract POF is Core {
         pure
         returns(int256)
     {
-        return applyFXRate(
-            (
-                roleSign(terms.contractRole)
-                * terms.priceAtPurchaseDate
-                    .add(state.accruedInterest)
-                    .add(
-                        yearFraction(
-                            shiftCalcTime(state.statusDate, terms.businessDayConvention, terms.calendar),
-                            shiftCalcTime(scheduleTime, terms.businessDayConvention, terms.calendar),
-                            terms.dayCountConvention,
-                            terms.maturityDate
-                        )
-                        .floatMult(state.nominalInterestRate)
-                        .floatMult(state.notionalPrincipal)
+        return (
+            roleSign(terms.contractRole)
+            * terms.priceAtPurchaseDate
+                .add(state.accruedInterest)
+                .add(
+                    yearFraction(
+                        shiftCalcTime(state.statusDate, terms.businessDayConvention, terms.calendar),
+                        shiftCalcTime(scheduleTime, terms.businessDayConvention, terms.calendar),
+                        terms.dayCountConvention,
+                        terms.maturityDate
                     )
-            ), int256(externalData), terms
-        );
-    }
-
-    function POF_ANN_PR_YEAR_FRACTION(
-        LifecycleTerms memory terms,
-        State memory state,
-        uint256 scheduleTime
-    )
-        internal
-        pure
-        returns(int256)
-    {
-        return yearFraction(
-            shiftCalcTime(state.statusDate, terms.businessDayConvention, terms.calendar),
-            shiftCalcTime(scheduleTime, terms.businessDayConvention, terms.calendar),
-            terms.dayCountConvention,
-            terms.maturityDate
+                    .floatMult(state.nominalInterestRate)
+                    .floatMult(state.notionalPrincipal)
+                )
         );
     }
 
@@ -287,9 +231,8 @@ contract POF is Core {
         pure
         returns(int256)
     {
-        return applyFXRate(
-            (
-                (state.notionalScalingMultiplier * roleSign(terms.contractRole))
+        return (
+            (state.notionalScalingMultiplier * roleSign(terms.contractRole))
                 .floatMult(
                     (roleSign(terms.contractRole) * state.notionalPrincipal)
                     .min(
@@ -297,13 +240,17 @@ contract POF is Core {
                             * (
                                 state.nextPrincipalRedemptionPayment
                                 - state.accruedInterest
-                                - POF_ANN_PR_YEAR_FRACTION(terms, state, scheduleTime)
+                                - yearFraction(
+                                    shiftCalcTime(state.statusDate, terms.businessDayConvention, terms.calendar),
+                                    shiftCalcTime(scheduleTime, terms.businessDayConvention, terms.calendar),
+                                    terms.dayCountConvention,
+                                    terms.maturityDate
+                                )
                                 .floatMult(state.nominalInterestRate)
                                 .floatMult(state.notionalPrincipal)
                             )
                         )
                 )
-            ), int256(externalData), terms
         );
     }
 
@@ -321,11 +268,7 @@ contract POF is Core {
         pure
         returns(int256)
     {
-        return applyFXRate(
-            (state.executionAmount + state.feeAccrued),
-            int256(externalData),
-            terms
-        );
+        return state.executionAmount + state.feeAccrued;
     }
 
     /**
@@ -343,28 +286,24 @@ contract POF is Core {
         returns(int256)
     {
         if (terms.feeBasis == FeeBasis.A) {
-            return applyFXRate(
-                (
-                    roleSign(terms.contractRole)
-                    * terms.feeRate
-                ), int256(externalData), terms
+            return (
+                roleSign(terms.contractRole)
+                * terms.feeRate
             );
         }
 
-        return applyFXRate(
-            (
-                state.feeAccrued
-                    .add(
-                        yearFraction(
-                            shiftCalcTime(state.statusDate, terms.businessDayConvention, terms.calendar),
-                            shiftCalcTime(scheduleTime, terms.businessDayConvention, terms.calendar),
-                            terms.dayCountConvention,
-                            terms.maturityDate
-                        )
-                        .floatMult(terms.feeRate)
-                        .floatMult(state.notionalPrincipal)
+        return (
+            state.feeAccrued
+                .add(
+                    yearFraction(
+                        shiftCalcTime(state.statusDate, terms.businessDayConvention, terms.calendar),
+                        shiftCalcTime(scheduleTime, terms.businessDayConvention, terms.calendar),
+                        terms.dayCountConvention,
+                        terms.maturityDate
                     )
-            ), int256(externalData), terms
+                    .floatMult(terms.feeRate)
+                    .floatMult(state.notionalPrincipal)
+                )
         );
     }
 }
