@@ -13,6 +13,11 @@ contract('ANNEngine', () => {
   
   const computeEventScheduleSegment = async (terms, segmentStart, segmentEnd) => {
     const generatingTerms = parseTermsToGeneratingTerms(terms);
+
+    // fix for new schedule generation
+    generatingTerms.cycleAnchorDateOfInterestPayment = generatingTerms.cycleAnchorDateOfPrincipalRedemption;
+    generatingTerms.cycleOfInterestPayment = generatingTerms.cycleOfPrincipalRedemption;
+
     const _eventSchedule = [];
       
     _eventSchedule.push(... await this.ANNEngineInstance.computeNonCyclicScheduleSegment(

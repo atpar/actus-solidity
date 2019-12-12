@@ -120,13 +120,12 @@ contract PAMEngine is BaseEngine, STF, POF {
             if (
                 terms.cycleOfInterestPayment.isSet == true
                 && terms.cycleAnchorDateOfInterestPayment != 0
-                && terms.cycleAnchorDateOfInterestPayment < terms.cycleAnchorDateOfPrincipalRedemption
             ) {
                 uint256[MAX_CYCLE_SIZE] memory interestPaymentSchedule = computeDatesFromCycleSegment(
                     (terms.capitalizationEndDate == 0) ? terms.cycleAnchorDateOfInterestPayment : terms.capitalizationEndDate,
-                    terms.cycleAnchorDateOfPrincipalRedemption, // pure IP schedule ends at beginning of combined IP/PR schedule
+                    terms.maturityDate, // pure IP schedule ends at beginning of combined IP/PR schedule
                     terms.cycleOfInterestPayment,
-                    false, // do not create an event for cycleAnchorDateOfPrincipalRedemption as covered with the PR schedule
+                    true, // do not create an event for cycleAnchorDateOfPrincipalRedemption as covered with the PR schedule
                     segmentStart,
                     segmentEnd
                 );
@@ -147,28 +146,20 @@ contract PAMEngine is BaseEngine, STF, POF {
                 terms.cycleOfInterestPayment.isSet == true
                 && terms.cycleAnchorDateOfInterestPayment != 0
                 && terms.capitalizationEndDate != 0
-                && terms.cycleAnchorDateOfInterestPayment < terms.cycleAnchorDateOfPrincipalRedemption
+                && terms.capitalizationEndDate < terms.cycleAnchorDateOfPrincipalRedemption
             ) {
                 uint256[MAX_CYCLE_SIZE] memory interestPaymentSchedule = computeDatesFromCycleSegment(
                     terms.cycleAnchorDateOfInterestPayment,
                     terms.capitalizationEndDate,
                     terms.cycleOfInterestPayment,
-                    false, // do not create an event for cycleAnchorDateOfPrincipalRedemption as covered with the PR schedule
+                    true, // do not create an event for cycleAnchorDateOfPrincipalRedemption as covered with the PR schedule
                     segmentStart,
                     segmentEnd
                 );
                 for (uint8 i = 0; i < MAX_CYCLE_SIZE; i++) {
                     if (interestPaymentSchedule[i] == 0) break;
                     if (isInPeriod(interestPaymentSchedule[i], segmentStart, segmentEnd) == false) continue;
-                    if (interestPaymentSchedule[i] == terms.capitalizationEndDate) continue;
                     _eventSchedule[index] = encodeEvent(EventType.IPCI, interestPaymentSchedule[i]);
-                    index++;
-                }
-            }
-            // capitalization end date
-            if (terms.capitalizationEndDate < terms.cycleAnchorDateOfPrincipalRedemption) {
-                if (isInPeriod(terms.capitalizationEndDate, segmentStart, segmentEnd)) {
-                    _eventSchedule[index] = encodeEvent(EventType.IPCI, terms.capitalizationEndDate);
                     index++;
                 }
             }

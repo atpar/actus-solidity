@@ -41,7 +41,7 @@ contract('PAMEngine', () => {
       generatingTerms,
       segmentStart,
       segmentEnd,
-      18 // RR
+      15 // PR
     ));
     
     return sortEvents(removeNullEvents(_eventSchedule));

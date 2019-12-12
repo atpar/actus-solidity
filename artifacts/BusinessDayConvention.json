@@ -1,0 +1,41 @@
+{
+  "contractName": "BusinessDayConvention",
+  "abi": [
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "ONE_POINT_ZERO",
+      "outputs": [
+        {
+          "name": "",
+          "type": "int256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "PRECISION",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    }
+  ],
+  "metadata": "{\"compiler\":{\"version\":\"0.5.2+commit.1df8f40c\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"constant\":true,\"inputs\":[],\"name\":\"ONE_POINT_ZERO\",\"outputs\":[{\"name\":\"\",\"type\":\"int256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"PRECISION\",\"outputs\":[{\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"}],\"devdoc\":{\"methods\":{}},\"userdoc\":{\"methods\":{}}},\"settings\":{\"compilationTarget\":{\"/Users/johannes/Documents/dev/actus-protocol/actus-solidity/contracts/Core/Conventions/BusinessDayConvention.sol\":\"BusinessDayConvention\"},\"evmVersion\":\"byzantium\",\"libraries\":{},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[]},\"sources\":{\"/Users/johannes/Documents/dev/actus-protocol/actus-solidity/contracts/Core/ACTUSTypes.sol\":{\"keccak256\":\"0x4ff9eab34e7bc670373e673658a23a2a2ba3872fe7d85926f4d7784052b84b5c\",\"urls\":[\"bzzr://11036018403a32682d0bb2dd7cde3067ddd05b039c332a0f3a3506b4041786a1\"]},\"/Users/johannes/Documents/dev/actus-protocol/actus-solidity/contracts/Core/Conventions/BusinessDayConvention.sol\":{\"keccak256\":\"0xf1600a50f0ac29acd1b825c74dfd073225a83e051b1dbb9f4dceba1ce92f8cec\",\"urls\":[\"bzzr://f047d2a1b5390fb2d92fa31f4bf12253a68db419163c96374067370cc49ecf2a\"]},\"/Users/johannes/Documents/dev/actus-protocol/actus-solidity/contracts/external/BokkyPooBah/BokkyPooBahsDateTimeLibrary.sol\":{\"keccak256\":\"0x7162caa2f09437b4d09f5a33e20a249f1e6a53c4afb3934cdea86fdba3591347\",\"urls\":[\"bzzr://780e5ff6c452639b751083da979392fbe1d98adf6772d794d084a1632873ad21\"]}},\"version\":1}",
+  "bytecode": "0x608060405234801561001057600080fd5b5060ae8061001f6000396000f3fe6080604052348015600f57600080fd5b5060043610604e577c010000000000000000000000000000000000000000000000000000000060003504636f37e55b81146053578063aaf5eb6814606b575b600080fd5b60596071565b60408051918252519081900360200190f35b6059607d565b670de0b6b3a764000081565b60128156fea165627a7a7230582008efd9ea8824bdd09092d8ca9e86233579039e5e8507976bdd4e367cda8ee93f0029",
+  "compiler": {
+    "name": "solc",
+    "version": "0.5.2+commit.1df8f40c.Emscripten.clang"
+  },
+  "networks": {},
+  "updatedAt": "2019-12-12T12:59:08.835Z"
+}

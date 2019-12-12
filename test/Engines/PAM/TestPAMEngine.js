@@ -13,15 +13,16 @@ const {
 contract('PAMEngine', () => {
 
   const computeEventScheduleSegment = async (terms, segmentStart, segmentEnd) => {
+    const generatingTerms = parseTermsToGeneratingTerms(terms);
     const _eventSchedule = [];
       
     _eventSchedule.push(... await this.PAMEngineInstance.computeNonCyclicScheduleSegment(
-      terms,
+      generatingTerms,
       segmentStart,
       segmentEnd
     ));
     _eventSchedule.push(... await this.PAMEngineInstance.computeCyclicScheduleSegment(
-      terms,
+      generatingTerms,
       segmentStart,
       segmentEnd,
       4 // FP
@@ -33,16 +34,16 @@ contract('PAMEngine', () => {
       7 // IPCI
     ));
     _eventSchedule.push(... await this.PAMEngineInstance.computeCyclicScheduleSegment(
-      terms,
+      generatingTerms,
       segmentStart,
       segmentEnd,
       8 // IP
     ));
     _eventSchedule.push(... await this.PAMEngineInstance.computeCyclicScheduleSegment(
-      terms,
+      generatingTerms,
       segmentStart,
       segmentEnd,
-      18 // PR
+      15 // PR
     ));
     
     return sortEvents(removeNullEvents(_eventSchedule));
