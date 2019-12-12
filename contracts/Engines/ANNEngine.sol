@@ -95,8 +95,8 @@ contract ANNEngine is BaseEngine, STF, POF {
         if (isInPeriod(terms.maturityDate, segmentStart, segmentEnd) == true)  {
             _eventSchedule[index] = encodeEvent(EventType.MD, terms.maturityDate);
             index++;
-            _eventSchedule[index] = encodeEvent(EventType.IP, terms.maturityDate);
-            index++;
+            // _eventSchedule[index] = encodeEvent(EventType.IP, terms.maturityDate);
+            // index++;
         }
 
         return _eventSchedule;
@@ -122,46 +122,58 @@ contract ANNEngine is BaseEngine, STF, POF {
     {
         bytes32[MAX_EVENT_SCHEDULE_SIZE] memory _eventSchedule;
 
-        if (eventType == EventType.IP || eventType == EventType.IPCI) {
+        if (eventType == EventType.IP) {
             uint256 index = 0;
 
             // interest payment related (covers pre-repayment period only,
             // starting with PRANX interest is paid following the PR schedule)
-            if (terms.cycleOfInterestPayment.isSet == true &&
-                terms.cycleAnchorDateOfInterestPayment != 0 &&
-                terms.cycleAnchorDateOfInterestPayment < terms.cycleAnchorDateOfPrincipalRedemption)
-                {
+            if (
+                terms.cycleOfInterestPayment.isSet == true
+                && terms.cycleAnchorDateOfInterestPayment != 0
+            ) {
                 uint256[MAX_CYCLE_SIZE] memory interestPaymentSchedule = computeDatesFromCycleSegment(
                     terms.cycleAnchorDateOfInterestPayment,
-                    terms.cycleAnchorDateOfPrincipalRedemption, // pure IP schedule ends at beginning of combined IP/PR schedule
+                    terms.maturityDate,
                     terms.cycleOfInterestPayment,
-                    false, // do not create an event for cycleAnchorDateOfPrincipalRedemption as covered with the PR schedule
+                    true,
+                    segmentStart,
+                    segmentEnd
+                );
+                for (uint8 i = 0; i < MAX_CYCLE_SIZE; i++) {
+                    if (interestPaymentSchedule[i] == 0) break;
+                    if (interestPaymentSchedule[i] <= terms.capitalizationEndDate) continue;
+                    if (isInPeriod(interestPaymentSchedule[i], segmentStart, segmentEnd) == false) continue;
+                    _eventSchedule[index] = encodeEvent(EventType.IP, interestPaymentSchedule[i]);
+                    index++;
+                }
+            }
+        }
+
+        if (eventType == EventType.IPCI) {
+            uint256 index = 0;
+
+            // IPCI
+            if (
+                terms.cycleOfInterestPayment.isSet == true
+                && terms.cycleAnchorDateOfInterestPayment != 0
+                && terms.capitalizationEndDate != 0
+                && terms.capitalizationEndDate < terms.cycleAnchorDateOfPrincipalRedemption
+            ) {
+                IPS memory cycleOfInterestCapitalization = terms.cycleOfInterestPayment;
+                cycleOfInterestCapitalization.s = S.SHORT;
+
+                uint256[MAX_CYCLE_SIZE] memory interestPaymentSchedule = computeDatesFromCycleSegment(
+                    terms.cycleAnchorDateOfInterestPayment,
+                    terms.capitalizationEndDate,
+                    cycleOfInterestCapitalization,
+                    true,
                     segmentStart,
                     segmentEnd
                 );
                 for (uint8 i = 0; i < MAX_CYCLE_SIZE; i++) {
                     if (interestPaymentSchedule[i] == 0) break;
                     if (isInPeriod(interestPaymentSchedule[i], segmentStart, segmentEnd) == false) continue;
-                    if (
-                        terms.capitalizationEndDate != 0 &&
-                        interestPaymentSchedule[i] <= terms.capitalizationEndDate
-                    ) {
-                        if (interestPaymentSchedule[i] == terms.capitalizationEndDate) continue;
-                        _eventSchedule[index] = encodeEvent(EventType.IPCI, interestPaymentSchedule[i]);
-                        index++;
-                    } else {
-                        _eventSchedule[index] = encodeEvent(EventType.IP, interestPaymentSchedule[i]);
-                        index++;
-                    }
-                }
-            }
-            // capitalization end date
-            if (
-                terms.capitalizationEndDate != 0 &&
-                terms.capitalizationEndDate < terms.cycleAnchorDateOfPrincipalRedemption
-            ) {
-                if (isInPeriod(terms.capitalizationEndDate, segmentStart, segmentEnd)) {
-                    _eventSchedule[index] = encodeEvent(EventType.IPCI, terms.capitalizationEndDate);
+                    _eventSchedule[index] = encodeEvent(EventType.IPCI, interestPaymentSchedule[i]);
                     index++;
                 }
             }
@@ -192,7 +204,7 @@ contract ANNEngine is BaseEngine, STF, POF {
         if (eventType == EventType.PR) {
             uint256 index = 0;
 
-            // principal redemption related (covers also interest events post PRANX)
+            // principal redemption
             uint256[MAX_CYCLE_SIZE] memory principalRedemptionSchedule = computeDatesFromCycleSegment(
                 terms.cycleAnchorDateOfPrincipalRedemption,
                 terms.maturityDate,
@@ -205,8 +217,6 @@ contract ANNEngine is BaseEngine, STF, POF {
                 if (principalRedemptionSchedule[i] == 0) break;
                 if (isInPeriod(principalRedemptionSchedule[i], segmentStart, segmentEnd) == false) continue;
                 _eventSchedule[index] = encodeEvent(EventType.PR, principalRedemptionSchedule[i]);
-                index++;
-                _eventSchedule[index] = encodeEvent(EventType.IP, principalRedemptionSchedule[i]);
                 index++;
             }
         }

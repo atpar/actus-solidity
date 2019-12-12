@@ -13,6 +13,11 @@ contract('ANNEngine', () => {
   
   const computeEventScheduleSegment = async (terms, segmentStart, segmentEnd) => {
     const generatingTerms = parseTermsToGeneratingTerms(terms);
+
+    // fix for new schedule generation
+    generatingTerms.cycleAnchorDateOfInterestPayment = generatingTerms.cycleAnchorDateOfPrincipalRedemption;
+    generatingTerms.cycleOfInterestPayment = generatingTerms.cycleOfPrincipalRedemption;
+
     const _eventSchedule = [];
       
     _eventSchedule.push(... await this.ANNEngineInstance.computeNonCyclicScheduleSegment(
@@ -27,6 +32,12 @@ contract('ANNEngine', () => {
       4 // FP
     ));
     _eventSchedule.push(... await this.ANNEngineInstance.computeCyclicScheduleSegment(
+      terms,
+      segmentStart,
+      segmentEnd,
+      7 // IPCI
+    ));
+    _eventSchedule.push(... await this.ANNEngineInstance.computeCyclicScheduleSegment(
       generatingTerms,
       segmentStart,
       segmentEnd,
@@ -38,6 +49,13 @@ contract('ANNEngine', () => {
       segmentEnd,
       15 // PR
     ));
+    _eventSchedule.push(... await this.ANNEngineInstance.computeCyclicScheduleSegment(
+      generatingTerms,
+      segmentStart,
+      segmentEnd,
+      18 // RR
+    ));
+    
     
     return sortEvents(removeNullEvents(_eventSchedule));
   }

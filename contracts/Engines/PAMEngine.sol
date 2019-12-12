@@ -112,12 +112,14 @@ contract PAMEngine is BaseEngine, STF, POF {
     {
         bytes32[MAX_EVENT_SCHEDULE_SIZE] memory _eventSchedule;
 
-        if (eventType == EventType.IP || eventType == EventType.IPCI) {
+        if (eventType == EventType.IP) {
             uint256 index = 0;
 
-            // interest payment related (e.g. for reoccurring interest payments)
-            if (terms.nominalInterestRate != 0 && (
-                terms.cycleOfInterestPayment.isSet == true && terms.cycleAnchorDateOfInterestPayment != 0)
+            // interest payment related (covers pre-repayment period only,
+            // starting with PRANX interest is paid following the PR schedule)
+            if (
+                terms.cycleOfInterestPayment.isSet == true
+                && terms.cycleAnchorDateOfInterestPayment != 0
             ) {
                 uint256[MAX_CYCLE_SIZE] memory interestPaymentSchedule = computeDatesFromCycleSegment(
                     terms.cycleAnchorDateOfInterestPayment,
@@ -127,33 +129,40 @@ contract PAMEngine is BaseEngine, STF, POF {
                     segmentStart,
                     segmentEnd
                 );
-                if (terms.capitalizationEndDate != 0) {
-                    if (isInPeriod(terms.capitalizationEndDate, segmentStart, segmentEnd)) {
-                        _eventSchedule[index] = encodeEvent(EventType.IPCI, terms.capitalizationEndDate);
-                        index++;
-                    }
+                for (uint8 i = 0; i < MAX_CYCLE_SIZE; i++) {
+                    if (interestPaymentSchedule[i] == 0) break;
+                    if (interestPaymentSchedule[i] <= terms.capitalizationEndDate) continue;
+                    if (isInPeriod(interestPaymentSchedule[i], segmentStart, segmentEnd) == false) continue;
+                    _eventSchedule[index] = encodeEvent(EventType.IP, interestPaymentSchedule[i]);
+                    index++;
                 }
+            }
+        }
+
+        if (eventType == EventType.IPCI) {
+            uint256 index = 0;
+
+            // IPCI
+            if (
+                terms.cycleOfInterestPayment.isSet == true
+                && terms.cycleAnchorDateOfInterestPayment != 0
+                && terms.capitalizationEndDate != 0
+            ) {
+                IPS memory cycleOfInterestCapitalization = terms.cycleOfInterestPayment;
+                cycleOfInterestCapitalization.s = S.SHORT;
+
+                uint256[MAX_CYCLE_SIZE] memory interestPaymentSchedule = computeDatesFromCycleSegment(
+                    terms.cycleAnchorDateOfInterestPayment,
+                    terms.capitalizationEndDate,
+                    cycleOfInterestCapitalization,
+                    true,
+                    segmentStart,
+                    segmentEnd
+                );
                 for (uint8 i = 0; i < MAX_CYCLE_SIZE; i++) {
                     if (interestPaymentSchedule[i] == 0) break;
                     if (isInPeriod(interestPaymentSchedule[i], segmentStart, segmentEnd) == false) continue;
-                    if (
-                        terms.capitalizationEndDate != 0 &&
-                        interestPaymentSchedule[i] <= terms.capitalizationEndDate
-                    ) {
-                        if (interestPaymentSchedule[i] == terms.capitalizationEndDate) continue;
-                        _eventSchedule[index] = encodeEvent(EventType.IPCI, interestPaymentSchedule[i]);
-                        index++;
-                    } else {
-                        _eventSchedule[index] = encodeEvent(EventType.IP, interestPaymentSchedule[i]);
-                        index++;
-                    }
-                }
-            }
-
-            // capitalization end date
-            else if (terms.capitalizationEndDate != 0) {
-                if (isInPeriod(terms.capitalizationEndDate, segmentStart, segmentEnd)) {
-                    _eventSchedule[index] = encodeEvent(EventType.IPCI, terms.capitalizationEndDate);
+                    _eventSchedule[index] = encodeEvent(EventType.IPCI, interestPaymentSchedule[i]);
                     index++;
                 }
             }
