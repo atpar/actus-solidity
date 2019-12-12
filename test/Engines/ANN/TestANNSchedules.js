@@ -49,6 +49,13 @@ contract('ANNEngine', () => {
       segmentEnd,
       15 // PR
     ));
+    _eventSchedule.push(... await this.ANNEngineInstance.computeCyclicScheduleSegment(
+      generatingTerms,
+      segmentStart,
+      segmentEnd,
+      18 // RR
+    ));
+    
     
     return sortEvents(removeNullEvents(_eventSchedule));
   }

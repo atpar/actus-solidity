@@ -122,15 +122,16 @@ contract PAMEngine is BaseEngine, STF, POF {
                 && terms.cycleAnchorDateOfInterestPayment != 0
             ) {
                 uint256[MAX_CYCLE_SIZE] memory interestPaymentSchedule = computeDatesFromCycleSegment(
-                    (terms.capitalizationEndDate == 0) ? terms.cycleAnchorDateOfInterestPayment : terms.capitalizationEndDate,
-                    terms.maturityDate, // pure IP schedule ends at beginning of combined IP/PR schedule
+                    terms.cycleAnchorDateOfInterestPayment,
+                    terms.maturityDate,
                     terms.cycleOfInterestPayment,
-                    true, // do not create an event for cycleAnchorDateOfPrincipalRedemption as covered with the PR schedule
+                    true,
                     segmentStart,
                     segmentEnd
                 );
                 for (uint8 i = 0; i < MAX_CYCLE_SIZE; i++) {
                     if (interestPaymentSchedule[i] == 0) break;
+                    if (interestPaymentSchedule[i] <= terms.capitalizationEndDate) continue;
                     if (isInPeriod(interestPaymentSchedule[i], segmentStart, segmentEnd) == false) continue;
                     _eventSchedule[index] = encodeEvent(EventType.IP, interestPaymentSchedule[i]);
                     index++;
@@ -146,13 +147,15 @@ contract PAMEngine is BaseEngine, STF, POF {
                 terms.cycleOfInterestPayment.isSet == true
                 && terms.cycleAnchorDateOfInterestPayment != 0
                 && terms.capitalizationEndDate != 0
-                && terms.capitalizationEndDate < terms.cycleAnchorDateOfPrincipalRedemption
             ) {
+                IPS memory cycleOfInterestCapitalization = terms.cycleOfInterestPayment;
+                cycleOfInterestCapitalization.s = S.SHORT;
+
                 uint256[MAX_CYCLE_SIZE] memory interestPaymentSchedule = computeDatesFromCycleSegment(
                     terms.cycleAnchorDateOfInterestPayment,
                     terms.capitalizationEndDate,
-                    terms.cycleOfInterestPayment,
-                    true, // do not create an event for cycleAnchorDateOfPrincipalRedemption as covered with the PR schedule
+                    cycleOfInterestCapitalization,
+                    true,
                     segmentStart,
                     segmentEnd
                 );

@@ -43,6 +43,12 @@ contract('PAMEngine', () => {
       segmentEnd,
       15 // PR
     ));
+    _eventSchedule.push(... await this.PAMEngineInstance.computeCyclicScheduleSegment(
+      generatingTerms,
+      segmentStart,
+      segmentEnd,
+      18 // RR
+    ));
     
     return sortEvents(removeNullEvents(_eventSchedule));
   }
