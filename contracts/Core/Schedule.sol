@@ -7,8 +7,15 @@ import "./ACTUSTypes.sol";
 import "./Utils.sol";
 
 
+/**
+ * @title Schedule
+ * @notice Methods related to generating event schedules.
+ */
 contract Schedule is ACTUSTypes, Utils {
 
+    /**
+     * @notice Applies the cycle n - times (n := cycleIndex) to a given date
+     */
     function getNextCycleDate(IPS memory cycle, uint256 cycleStart, uint256 cycleIndex)
         internal
         pure

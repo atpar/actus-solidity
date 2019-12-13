@@ -5,10 +5,8 @@ import "../Core/ACTUSTypes.sol";
 
 
 /**
- * @title the stateless component for a PAM contract
- * implements the STF and POF of the Actus standard for a PAM contract
- * @dev all numbers except unix timestamp are represented as multiple of 10 ** 18
- * inputs have to be multiplied by 10 ** 18, outputs have to divided by 10 ** 18
+ * @title IEngine
+ * @notice Interface which all Engines have to implement
  */
 contract IEngine is ACTUSTypes {
 

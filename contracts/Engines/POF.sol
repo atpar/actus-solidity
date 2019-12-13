@@ -5,7 +5,8 @@ import "../Core/Core.sol";
 
 
 /**
- * @title Contract containing all pay-off functions (POF)
+ * @title POF
+ * @notice Contains all payoff functions (POFs) currently used by all Engines
  */
 contract POF is Core {
 

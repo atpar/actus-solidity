@@ -6,6 +6,10 @@ import "../../external/BokkyPooBah/BokkyPooBahsDateTimeLibrary.sol";
 import "../ACTUSTypes.sol";
 
 
+/**
+ * @title EndOfMonthConvention
+ * @notice Implements the ACTUS end of month convention.
+ */
 contract EndOfMonthConvention is ACTUSTypes {
 
     /**
@@ -15,7 +19,7 @@ contract EndOfMonthConvention is ACTUSTypes {
      * - Dates are only shifted if the schedule start date is an end-of-month date
      * - Dates are only shifted if the schedule cycle is based on an "M" period unit or multiple thereof
      * @param eomc the end of month convention to adjust
-     * @param startTime timestemp of the cycle start
+     * @param startTime timestamp of the cycle start
      * @param cycle the cycle struct
      * @return the adjusted end of month convention
      */
@@ -44,23 +48,23 @@ contract EndOfMonthConvention is ACTUSTypes {
         revert("EndOfMonthConvention.adjustEndOfMonthConvention: ATTRIBUTE_NOT_FOUND.");
     }
 
-    /**
-     * This function is for the EndOfMonthConvention.EOM convention and
-     * shifts a timestamp to the last day of the month.
-     * @param timestamp the timestmap to shift
-     * @return the shifted timestamp
-     */
-    function shiftEndOfMonth(uint256 timestamp)
-      internal
-      pure
-      returns (uint256)
-    {
-        uint256 year;
-        uint256 month;
-        uint256 day;
-        (year, month, day) = BokkyPooBahsDateTimeLibrary.timestampToDate(timestamp);
-        uint256 lastDayOfMonth = BokkyPooBahsDateTimeLibrary._getDaysInMonth(year, month);
+    // /**
+    //  * This function is for the EndOfMonthConvention.EOM convention and
+    //  * shifts a timestamp to the last day of the month.
+    //  * @param timestamp the timestamp to shift
+    //  * @return the shifted timestamp
+    //  */
+    // function shiftEndOfMonth(uint256 timestamp)
+    //   internal
+    //   pure
+    //   returns (uint256)
+    // {
+    //     uint256 year;
+    //     uint256 month;
+    //     uint256 day;
+    //     (year, month, day) = BokkyPooBahsDateTimeLibrary.timestampToDate(timestamp);
+    //     uint256 lastDayOfMonth = BokkyPooBahsDateTimeLibrary._getDaysInMonth(year, month);
 
-        return BokkyPooBahsDateTimeLibrary.timestampFromDate(year, month, lastDayOfMonth);
-    }
+    //     return BokkyPooBahsDateTimeLibrary.timestampFromDate(year, month, lastDayOfMonth);
+    // }
 }

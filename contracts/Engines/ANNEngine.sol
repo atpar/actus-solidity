@@ -9,10 +9,10 @@ import "./POF.sol";
 
 
 /**
- * @title the stateless component for a ANN contract
- * implements the STF and POF of the Actus standard for a ANN contract
- * @dev all numbers except unix timestamp are represented as multiple of 10 ** 18
- * inputs have to be multiplied by 10 ** 18, outputs have to divided by 10 ** 18
+ * @title ANNEngine
+ * @notice Implements the STF and POF of the Actus standard for a ANN contract
+ * @dev All numbers except unix timestamp are represented as multiple of 10 ** 18
+ * inputs have to be multiplied by 10 ** 18, outputs have to multplied by 10 ** -18
  */
 contract ANNEngine is BaseEngine, STF, POF {
 

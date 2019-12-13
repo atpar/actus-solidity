@@ -6,8 +6,8 @@ import "./IEngine.sol";
 
 
 /**
- * @title
- * @dev
+ * @title BaseEngine
+ * @notice Implements computeStateForEvent and computePayoffForEvent for all Engines
  */
 contract BaseEngine is Core, IEngine {
 

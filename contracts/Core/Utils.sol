@@ -7,6 +7,10 @@ import "./ACTUSTypes.sol";
 import "./Conventions/BusinessDayConvention.sol";
 
 
+/**
+ * @title Utils
+ * @notice Utility methods used throughout Core and all Engines
+ */
 contract Utils is ACTUSTypes, BusinessDayConvention {
 
     function encodeEvent(EventType eventType, uint256 scheduleTime)
@@ -31,6 +35,10 @@ contract Utils is ACTUSTypes, BusinessDayConvention {
         return (eventType, scheduleTime);
     }
 
+    /**
+     * @notice Returns the event time for a given schedule time
+     * by applying the BDC specified in the terms
+     */
     function computeEventTimeForEvent(bytes32 _event, LifecycleTerms memory terms)
         public
         pure
@@ -40,6 +48,10 @@ contract Utils is ACTUSTypes, BusinessDayConvention {
         return shiftEventTime(scheduleTime, terms.businessDayConvention, terms.calendar);
     }
 
+    /**
+     * @notice Returns the epoch offset for a given event type to determine the
+     * correct order of events if multiple events have the same timestamp
+     */
     function getEpochOffset(EventType eventType)
         public
         pure
@@ -64,6 +76,9 @@ contract Utils is ACTUSTypes, BusinessDayConvention {
         return 0;
     }
 
+    /**
+     * @notice Applies a period in IP notation to a given timestamp
+     */
     function getTimestampPlusPeriod(IP memory period, uint256 timestamp)
         internal
         pure
@@ -91,12 +106,7 @@ contract Utils is ACTUSTypes, BusinessDayConvention {
     }
 
     /**
-     * checks if a timestamp is in a given period
-     * @dev returns true of timestamp is in period
-     * @param timestamp timestamp to check
-     * @param startTimestamp start timestamp of the period
-     * @param endTimestamp end timestamp of the period
-     * @return boolean
+     * @notice Checks if a timestamp is in a given range.
      */
     function isInPeriod(
         uint256 timestamp,

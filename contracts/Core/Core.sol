@@ -12,6 +12,11 @@ import "./Conventions/DayCountConvention.sol";
 import "./Conventions/EndOfMonthConvention.sol";
 
 
+/**
+ * @title Core
+ * @notice Contains all type definitions, conventions as specified by the ACTUS Standard
+ * and utility methods for generating event schedules
+ */
 contract Core is
     ACTUSTypes,
     BusinessDayConvention,

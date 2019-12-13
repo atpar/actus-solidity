@@ -8,12 +8,19 @@ import "../ACTUSTypes.sol";
 import "../SignedMath.sol";
 
 
+/**
+ * @title DayCountConvention
+ * @notice Implements various ISDA day count conventions as specified by ACTUS
+ */
 contract DayCountConvention is ACTUSTypes {
 
     using SafeMath for uint;
     using SignedSafeMath for int;
     using SignedMath for int;
 
+    /**
+     * Returns the fraction of the year between two timestamps.
+     */
     function yearFraction(
         uint256 startTimestamp,
         uint256 endTimestamp,
@@ -35,11 +42,18 @@ contract DayCountConvention is ACTUSTypes {
             return thirtyEThreeSixty(startTimestamp, endTimestamp);
         } else if (ipdc == DayCountConvention._30E_360ISDA) {
             return thirtyEThreeSixtyISDA(startTimestamp, endTimestamp, maturityDate);
-        } else {
+        } else if (ipdc == DayCountConvention.BUS_252) {
+            // not implemented yet
             return int256(1 ** PRECISION);
+        } else {
+            // support 1/1 explicitly ?
+            revert("DayCountConvention.yearFraction: ATTRIBUTE_NOT_FOUND.");
         }
     }
 
+    /**
+     * ISDA A/A day count convention
+     */
     function actualActualISDA(uint256 startTime, uint256 endTime)
         internal
         pure
@@ -68,6 +82,9 @@ contract DayCountConvention is ACTUSTypes {
         return firstFraction.add(secondFraction).add(int256(d2Year.sub(d1Year).sub(1)));
     }
 
+    /**
+     * ISDA A/360 day count convention
+     */
     function actualThreeSixty(uint256 startTime, uint256 endTime)
         internal
         pure
@@ -76,6 +93,9 @@ contract DayCountConvention is ACTUSTypes {
         return (int256((endTime.sub(startTime)).div(86400)).floatDiv(360));
     }
 
+    /**
+     * ISDA A/365-Fixed day count convention
+     */
     function actualThreeSixtyFive(uint256 startTime, uint256 endTime)
         internal
         pure
@@ -84,6 +104,9 @@ contract DayCountConvention is ACTUSTypes {
         return (int256((endTime.sub(startTime)).div(86400)).floatDiv(365));
     }
 
+    /**
+     * ISDA 30E/360 day count convention
+     */
     function thirtyEThreeSixty(uint256 startTime, uint256 endTime)
         internal
         pure
@@ -115,6 +138,9 @@ contract DayCountConvention is ACTUSTypes {
         return ((delY.mul(360).add(delM.mul(30)).add(delD)).floatDiv(360));
     }
 
+    /**
+     * ISDA 30E/360-ISDA day count convention
+     */
     function thirtyEThreeSixtyISDA(uint256 startTime, uint256 endTime, uint256 maturityDate)
         internal
         pure

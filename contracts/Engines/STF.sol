@@ -3,8 +3,10 @@ pragma experimental ABIEncoderV2;
 
 import "../Core/Core.sol";
 
+
 /**
- * @title ACTUS state transition functions
+ * @title STF
+ * @notice Contains all state transition functions (STFs) currently used by all Engines
  */
 contract STF is Core {
 

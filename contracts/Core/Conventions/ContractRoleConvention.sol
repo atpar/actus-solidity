@@ -3,9 +3,15 @@ pragma solidity ^0.5.2;
 import "../ACTUSTypes.sol";
 
 
+/**
+ * @title ContractRoleConvention
+ */
 contract ContractRoleConvention is ACTUSTypes {
 
-  function roleSign(ContractRole contractRole)
+    /**
+     * Returns the role sign for a given Contract Role.
+     */
+    function roleSign(ContractRole contractRole)
         internal
         pure
         returns (int8)

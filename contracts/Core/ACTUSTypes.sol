@@ -1,13 +1,17 @@
 pragma solidity ^0.5.2;
 
 
+/**
+ * @title ACTUSTypes
+ * @notice Contains all type definitions for ACTUS
+ */
 contract ACTUSTypes {
 
-    int256 constant INT256_MIN = int256((uint256(1) << 255));
-    int256 constant INT256_MAX = int256(~((uint256(1) << 255)));
-    uint256 constant UINT256_MIN = 0;
-    uint256 constant UINT256_MAX = ~uint256(0);
-    int256 constant DOUBLE_NULL = INT256_MIN;
+    // int256 constant INT256_MIN = int256((uint256(1) << 255));
+    // int256 constant INT256_MAX = int256(~((uint256(1) << 255)));
+    // uint256 constant UINT256_MIN = 0;
+    // uint256 constant UINT256_MAX = ~uint256(0);
+    // int256 constant DOUBLE_NULL = INT256_MIN;
 
     uint256 constant public PRECISION = 18;
     int256 constant public ONE_POINT_ZERO = 1 * 10 ** 18;
@@ -86,6 +90,7 @@ contract ACTUSTypes {
         int256 executionAmount;
     }
 
+    // Subset of the ACTUS terms object (contains only attributes which are used in POFs and STFs)
     struct LifecycleTerms {
         Calendar calendar;
         ContractRole contractRole;
@@ -96,8 +101,8 @@ contract ACTUSTypes {
         PenaltyType penaltyType;
         FeeBasis feeBasis;
         ContractPerformance creditEventTypeCovered;
-    ContractReference contractReference_1;
-    ContractReference contractReference_2;
+        ContractReference contractReference_1;
+        ContractReference contractReference_2;
 
         address currency;
         address settlementCurrency;
@@ -130,6 +135,7 @@ contract ACTUSTypes {
         int256 periodFloor;
     }
 
+    // Subset of the ACTUS terms object (contains only attributes which are used in the schedule generation)
     struct GeneratingTerms {
         ScalingEffect scalingEffect;
 
@@ -158,6 +164,7 @@ contract ACTUSTypes {
         IP delinquencyPeriod;
     }
 
+    // ACTUS terms object
     struct Terms {
         ContractType contractType;
         Calendar calendar;
@@ -171,7 +178,7 @@ contract ACTUSTypes {
         ContractPerformance creditEventTypeCovered;
 
         ContractReference contractReference_1;
-    ContractReference contractReference_2;
+        ContractReference contractReference_2;
 
         address currency;
         address settlementCurrency;
