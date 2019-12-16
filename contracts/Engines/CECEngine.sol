@@ -10,19 +10,16 @@ import "./POF.sol";
 
 /**
  * @title CECEngine
- * @notice Implements the STF and POF of the Actus standard for a CEC contract
+ * @notice Inherits from BaseEngine by implementing STFs, POFs according to the ACTUS standard for a CEC contract
  * @dev All numbers except unix timestamp are represented as multiple of 10 ** 18
  * inputs have to be multiplied by 10 ** 18, outputs have to multplied by 10 ** -18
  */
 contract CECEngine is BaseEngine, STF, POF {
 
     /**
-     * initialize contract state space based on the contract terms
-     * TODO:
-     * - implement annuity calculator
-     * @dev see initStateSpace()
+     * @notice Initialize contract state space based on the contract terms.
      * @param terms terms of the contract
-     * @return initial contract state
+     * @return initial state of the contract
      */
     function computeInitialState(LifecycleTerms memory terms)
         public
@@ -40,11 +37,12 @@ contract CECEngine is BaseEngine, STF, POF {
     }
 
     /**
-     * computes a schedule segment of non-cyclic contract events based on the contract terms and the specified period
+     * @notice Computes a schedule segment of non-cyclic contract events based on the contract terms
+     * and the specified timestamps.
      * @param terms terms of the contract
      * @param segmentStart start timestamp of the segment
      * @param segmentEnd end timestamp of the segement
-     * @return event schedule segment
+     * @return segment of the non-cyclic schedule
      */
     function computeNonCyclicScheduleSegment(
         GeneratingTerms memory terms,
@@ -68,7 +66,8 @@ contract CECEngine is BaseEngine, STF, POF {
     }
 
     /**
-     * computes a schedule segment of cyclic contract events based on the contract terms and the specified period
+     * @notice Computes a schedule segment of cyclic contract events based on the contract terms
+     * and the specified timestamps.
      * @param terms terms of the contract
      * @param segmentStart start timestamp of the segment
      * @param segmentEnd end timestamp of the segement
@@ -90,6 +89,16 @@ contract CECEngine is BaseEngine, STF, POF {
         return _eventSchedule;
     }
 
+    /**
+     * @notice Verifies that the provided event is still scheduled under the terms, the current state of the
+     * contract and the current state of the underlying.
+     * @param _event event for which to check if its still scheduled
+     * @param terms terms of the contract
+     * @param state current state of the contract
+     * @param hasUnderlying boolean indicating whether the contract has an underlying contract
+     * @param underlyingState state of the underlying (empty state object if non-existing)
+     * @return boolean indicating whether event is still scheduled
+     */
     function isEventScheduled(
         bytes32 _event,
         LifecycleTerms memory terms,
@@ -105,16 +114,14 @@ contract CECEngine is BaseEngine, STF, POF {
     }
 
     /**
-     * computes the next contract state based on the contract terms, state and the event type
-     * TODO:
-     * - annuity calculator for RR/RRF events
-     * - IPCB events and Icb state variable
-     * - Icb state variable updates in Nac-updating events
+     * @notice Implements abstract method which is defined in BaseEngine.
+     * Applies an event to the current state of the contract and returns the resulting state.
+     * The inheriting Engine contract has to map the events type to the designated STF.
      * @param terms terms of the contract
      * @param state current state of the contract
-     * @param _event proto event for which to evaluate the next state for
-     * @param externalData external data needed for POF evaluation
-     * @return next contract state
+     * @param _event event for which to evaluate the next state for
+     * @param externalData external data needed for STF evaluation (e.g. rate for RR events)
+     * @return the resulting contract state
      */
     function stateTransitionFunction(
         LifecycleTerms memory terms,
@@ -137,15 +144,14 @@ contract CECEngine is BaseEngine, STF, POF {
     }
 
     /**
-     * calculates the payoff for the current time based on the contract terms,
-     * state and the event type
-     * - IPCB events and Icb state variable
-     * - Icb state variable updates in IP-paying events
+     * @notice Implements abstract method which is defined in BaseEngine.
+     * Computes the payoff for an event under the current state of the contract.
+     * The inheriting Engine contract has to map the events type to the designated POF.
      * @param terms terms of the contract
      * @param state current state of the contract
-     * @param _event proto event for which to evaluate the payoff for
-     * @param externalData external data needed for POF evaluation
-     * @return payoff
+     * @param _event event for which the payoff should be evaluated
+     * @param externalData external data needed for POF evaluation (e.g. fxRate)
+     * @return the payoff of the event
      */
     function payoffFunction(
         LifecycleTerms memory terms,

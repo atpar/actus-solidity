@@ -11,9 +11,9 @@ import "../Core/ACTUSTypes.sol";
 contract IEngine is ACTUSTypes {
 
     /**
-     * get the initial contract state
+     * @notice Initialize contract state space based on the contract terms.
      * @param terms terms of the contract
-     * @return initial contract state
+     * @return initial state of the contract
      */
     function computeInitialState(LifecycleTerms memory terms)
         public
@@ -21,12 +21,12 @@ contract IEngine is ACTUSTypes {
         returns (State memory);
 
     /**
-     * compute next state for a given event
+     * Applys an event to the current state of a contract and returns the resulting contract state.
      * @param terms terms of the contract
      * @param state current state of the contract
-     * @param _event event to apply to the current state of the contract
-     * @param externalData external data needed for STF evaluation
-     * @return next state of the contract
+     * @param _event event to be applied to the contract state
+     * @param externalData external data needed for STF evaluation (e.g. rate for RR events)
+     * @return the resulting contract state
      */
     function computeStateForEvent(
         LifecycleTerms memory terms,
@@ -39,12 +39,12 @@ contract IEngine is ACTUSTypes {
         returns (State memory);
 
     /**
-     * compute the payoff for a given event
+     * Evaluates the payoff for an event under the current state of the contract.
      * @param terms terms of the contract
      * @param state current state of the contract
-     * @param _event event to compute the payoff for
-     * @param externalData external data needed for POF evaluation
-     * @return payoff of the given event
+     * @param _event event for which the payoff should be evaluated
+     * @param externalData external data needed for POF evaluation (e.g. fxRate)
+     * @return the payoff of the event
      */
     function computePayoffForEvent(
         LifecycleTerms memory terms,
@@ -57,11 +57,12 @@ contract IEngine is ACTUSTypes {
         returns (int256);
 
     /**
-     * computes a schedule segment of non-cyclic contract events based on the contract terms and the specified period
+     * @notice Computes a schedule segment of non-cyclic contract events based on the contract terms
+     * and the specified timestamps.
      * @param terms terms of the contract
      * @param segmentStart start timestamp of the segment
      * @param segmentEnd end timestamp of the segement
-     * @return event schedule segment
+     * @return segment of the non-cyclic schedule
      */
     function computeNonCyclicScheduleSegment(
         GeneratingTerms memory terms,
@@ -73,7 +74,8 @@ contract IEngine is ACTUSTypes {
         returns (bytes32[MAX_EVENT_SCHEDULE_SIZE] memory);
 
     /**
-     * computes a schedule segment of cyclic contract events based on the contract terms and the specified period
+     * @notice Computes a schedule segment of cyclic contract events based on the contract terms
+     * and the specified timestamps.
      * @param terms terms of the contract
      * @param segmentStart start timestamp of the segment
      * @param segmentEnd end timestamp of the segement
@@ -91,11 +93,14 @@ contract IEngine is ACTUSTypes {
         returns (bytes32[MAX_EVENT_SCHEDULE_SIZE] memory);
 
     /**
-     * verifies that a given event is (still) scheduled under the current state of the contract
-     * @param _event event to verify
+     * @notice Verifies that the provided event is still scheduled under the terms, the current state of the
+     * contract and the current state of the underlying.
+     * @param _event event for which to check if its still scheduled
      * @param terms terms of the contract
      * @param state current state of the contract
-     * @return boolean if the the event is still scheduled
+     * @param hasUnderlying boolean indicating whether the contract has an underlying contract
+     * @param underlyingState state of the underlying (empty state object if non-existing)
+     * @return boolean indicating whether event is still scheduled
      */
     function isEventScheduled(
         bytes32 _event,

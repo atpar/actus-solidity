@@ -4,8 +4,8 @@ const TestSTF = artifacts.require('TestSTF.sol');
 const PAMEngine = artifacts.require('PAMEngine.sol');
 const ANNEngine = artifacts.require('ANNEngine.sol');
 const CEGEngine = artifacts.require('CEGEngine.sol');
-const { getDefaultTestTerms, getDefaultState, assertEqualStates} = require('../../helper/tests');
-const { parseTermsToLifecycleTerms } = require('../../helper/parser');
+const { getDefaultTestTerms, getDefaultState, assertEqualStates} = require('../helper/tests');
+const { parseTermsToLifecycleTerms } = require('../helper/parser');
 
 contract('TestSTF', () => {
   before(async () => {       

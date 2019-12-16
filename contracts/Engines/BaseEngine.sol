@@ -7,18 +7,18 @@ import "./IEngine.sol";
 
 /**
  * @title BaseEngine
- * @notice Implements computeStateForEvent and computePayoffForEvent for all Engines
+ * @notice Implements computeStateForEvent and computePayoffForEvent for all Engines.
+ * All Engine contracts have to inherit from BaseEngine and implement all abstract methods.
  */
 contract BaseEngine is Core, IEngine {
 
     /**
-     * applys a prototype event to the current state of a contract and
-     * returns the contrat event and the new contract state
+     * Applys an event to the current state of a contract and returns the resulting contract state.
      * @param terms terms of the contract
      * @param state current state of the contract
-     * @param _event prototype event to be evaluated and applied to the contract state
-     * @param externalData external data needed for POF evaluation
-     * @return the new contract state and the evaluated event
+     * @param _event event to be applied to the contract state
+     * @param externalData external data needed for STF evaluation (e.g. rate for RR events)
+     * @return the resulting contract state
      */
     function computeStateForEvent(
         LifecycleTerms memory terms,
@@ -39,13 +39,12 @@ contract BaseEngine is Core, IEngine {
     }
 
     /**
-     * applys a prototype event to the current state of a contract and
-     * returns the contrat event and the new contract state
+     * Evaluates the payoff for an event under the current state of the contract.
      * @param terms terms of the contract
      * @param state current state of the contract
-     * @param _event prototype event to be evaluated and applied to the contract state
-     * @param externalData external data needed for POF evaluation
-     * @return the new contract state and the evaluated event
+     * @param _event event for which the payoff should be evaluated
+     * @param externalData external data needed for POF evaluation (e.g. fxRate)
+     * @return the payoff of the event
      */
     function computePayoffForEvent(
         LifecycleTerms memory terms,
@@ -76,12 +75,14 @@ contract BaseEngine is Core, IEngine {
     }
 
     /**
-     * computes the next contract state based on the contract terms, state and the event type
+     * @notice Abstract method which has to be implemented by the inheriting Engine contract.
+     * Applies an event to the current state of the contract and returns the resulting state.
+     * The inheriting Engine contract has to map the events type to the designated STF.
      * @param terms terms of the contract
      * @param state current state of the contract
-     * @param _event proto event for which to evaluate the next state for
-     * @param externalData external data needed for POF evaluation
-     * @return next contract state
+     * @param _event event for which to evaluate the next state for
+     * @param externalData external data needed for STF evaluation (e.g. rate for RR events)
+     * @return the resulting contract state
      */
     function stateTransitionFunction(
         LifecycleTerms memory terms,
@@ -94,13 +95,14 @@ contract BaseEngine is Core, IEngine {
         returns (State memory);
 
     /**
-     * calculates the payoff for the current time based on the contract terms,
-     * state and the event type
+     * @notice Abstract method which has to be implemented by the inheriting Engine contract.
+     * Computes the payoff for an event under the current state of the contract.
+     * The inheriting Engine contract has to map the events type to the designated POF.
      * @param terms terms of the contract
      * @param state current state of the contract
-     * @param _event proto event for which to evaluate the payoff for
-     * @param externalData external data needed for POF evaluation
-     * @return payoff
+     * @param _event event for which the payoff should be evaluated
+     * @param externalData external data needed for POF evaluation (e.g. fxRate)
+     * @return the payoff of the event
      */
     function payoffFunction(
         LifecycleTerms memory terms,

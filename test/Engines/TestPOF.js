@@ -2,8 +2,8 @@ const TestPOF = artifacts.require('TestPOF.sol');
 const PAMEngine = artifacts.require('PAMEngine.sol');
 const ANNEngine = artifacts.require('ANNEngine.sol');
 const CEGEngine = artifacts.require('CEGEngine.sol');
-const { getDefaultTestTerms } = require('../../helper/tests');
-const { parseTermsToLifecycleTerms } = require('../../helper/parser');
+const { getDefaultTestTerms } = require('../helper/tests');
+const { parseTermsToLifecycleTerms } = require('../helper/parser');
 
 contract('TestPOF', () => {
   before(async () => {       
