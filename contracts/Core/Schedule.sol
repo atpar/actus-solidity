@@ -74,11 +74,11 @@ contract Schedule is ACTUSTypes, Utils {
         // we return the cycle start, if it's in the segment
         // in case of addEntTime = true, the cycle end is also returned if in the segment
         if (cycle.isSet == false) {
-            if (isInPeriod(cycleStart, segmentStart, segmentEnd)) {
+            if (isInSegment(cycleStart, segmentStart, segmentEnd)) {
                 dates[index] = cycleStart;
                 index++;
             }
-            if (isInPeriod(cycleEnd, segmentStart, segmentEnd)) {
+            if (isInSegment(cycleEnd, segmentStart, segmentEnd)) {
                 if (addEndTime == true) dates[index] = cycleEnd;
             }
             return dates;
@@ -90,7 +90,7 @@ contract Schedule is ACTUSTypes, Utils {
         // walk through the cycle and create the cycle dates to be returned
         while (date < cycleEnd) {
             // if date is in segment and MAX_CYCLE_SIZE is not reached add it to the output array
-            if (isInPeriod(date, segmentStart, segmentEnd)) {
+            if (isInSegment(date, segmentStart, segmentEnd)) {
                 require(index < (MAX_CYCLE_SIZE - 2), "Schedule.computeDatesFromCycle: MAX_CYCLE_SIZE");
                 dates[index] = date;
                 index++;
@@ -105,13 +105,13 @@ contract Schedule is ACTUSTypes, Utils {
 
         // add additional time at the end if addEndTime
         if (addEndTime == true) {
-            if (isInPeriod(cycleEnd, segmentStart, segmentEnd)) {
+            if (isInSegment(cycleEnd, segmentStart, segmentEnd)) {
                 dates[index] = cycleEnd;
             }
         }
 
         // handle a special case where S is set to LONG (e.g. for trimming a cycle to the maturity date)
-        if (index > 0 && isInPeriod(dates[index - 1], segmentStart, segmentEnd)) {
+        if (index > 0 && isInSegment(dates[index - 1], segmentStart, segmentEnd)) {
             if (cycle.s == S.LONG && index > 1 && cycleEnd != date) {
                 dates[index - 1] = dates[index];
                 delete dates[index];

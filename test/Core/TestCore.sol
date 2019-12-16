@@ -370,11 +370,11 @@ contract TestCore is Core {
     //   Assert.equal(uint256(_eventSchedule[4].eventTime), uint256(0), "Following Events should be 0");
     // }
 
-    function testIsInPeriod() public {
-        Assert.equal(isInPeriod(uint256(100), uint256(99), uint256(101)), true, "Timestamp should be contained in the period");
-        Assert.equal(isInPeriod(uint256(100), uint256(99), uint256(100)), true, "Timestamp should be contained in the period");
-        Assert.equal(isInPeriod(uint256(100), uint256(100), uint256(100)), false, "Timestamp should not be contained in the period");
-        Assert.equal(isInPeriod(uint256(100), uint256(100), uint256(99)), false, "Timestamp should not be contained in the period");
+    function testisInSegment() public {
+        Assert.equal(isInSegment(uint256(100), uint256(99), uint256(101)), true, "Timestamp should be contained in the period");
+        Assert.equal(isInSegment(uint256(100), uint256(99), uint256(100)), true, "Timestamp should be contained in the period");
+        Assert.equal(isInSegment(uint256(100), uint256(100), uint256(100)), false, "Timestamp should not be contained in the period");
+        Assert.equal(isInSegment(uint256(100), uint256(100), uint256(99)), false, "Timestamp should not be contained in the period");
     }
 
     function testGetTimestampPlusPeriod() public {

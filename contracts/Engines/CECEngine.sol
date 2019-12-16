@@ -57,7 +57,7 @@ contract CECEngine is BaseEngine, STF, POF {
         uint16 index = 0;
 
         // maturity event
-        if (isInPeriod(terms.maturityDate, segmentStart, segmentEnd) == true) {
+        if (isInSegment(terms.maturityDate, segmentStart, segmentEnd) == true) {
             _eventSchedule[index] = encodeEvent(EventType.MD, terms.maturityDate);
             index++;
         }

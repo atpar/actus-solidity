@@ -108,7 +108,7 @@ contract Utils is ACTUSTypes, BusinessDayConvention {
     /**
      * @notice Checks if a timestamp is in a given range.
      */
-    function isInPeriod(
+    function isInSegment(
         uint256 timestamp,
         uint256 startTimestamp,
         uint256 endTimestamp

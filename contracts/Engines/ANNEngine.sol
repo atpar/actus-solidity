@@ -65,14 +65,14 @@ contract ANNEngine is BaseEngine, STF, POF {
         uint16 index = 0;
 
         // initial exchange
-        if (isInPeriod(terms.initialExchangeDate, segmentStart, segmentEnd)) {
+        if (isInSegment(terms.initialExchangeDate, segmentStart, segmentEnd)) {
             _eventSchedule[index] = encodeEvent(EventType.IED, terms.initialExchangeDate);
             index++;
         }
 
         // purchase
         if (terms.purchaseDate != 0) {
-            if (isInPeriod(terms.purchaseDate, segmentStart, segmentEnd)) {
+            if (isInSegment(terms.purchaseDate, segmentStart, segmentEnd)) {
                 _eventSchedule[index] = encodeEvent(EventType.PRD, terms.purchaseDate);
                 index++;
             }
@@ -80,14 +80,14 @@ contract ANNEngine is BaseEngine, STF, POF {
 
         // termination
         if (terms.terminationDate != 0) {
-            if (isInPeriod(terms.terminationDate, segmentStart, segmentEnd)) {
+            if (isInSegment(terms.terminationDate, segmentStart, segmentEnd)) {
                 _eventSchedule[index] = encodeEvent(EventType.TD, terms.terminationDate);
                 index++;
             }
         }
 
         // principal redemption at maturity
-        if (isInPeriod(terms.maturityDate, segmentStart, segmentEnd) == true)  {
+        if (isInSegment(terms.maturityDate, segmentStart, segmentEnd) == true)  {
             _eventSchedule[index] = encodeEvent(EventType.MD, terms.maturityDate);
             index++;
         }
@@ -136,7 +136,7 @@ contract ANNEngine is BaseEngine, STF, POF {
                 for (uint8 i = 0; i < MAX_CYCLE_SIZE; i++) {
                     if (interestPaymentSchedule[i] == 0) break;
                     if (interestPaymentSchedule[i] <= terms.capitalizationEndDate) continue;
-                    if (isInPeriod(interestPaymentSchedule[i], segmentStart, segmentEnd) == false) continue;
+                    if (isInSegment(interestPaymentSchedule[i], segmentStart, segmentEnd) == false) continue;
                     _eventSchedule[index] = encodeEvent(EventType.IP, interestPaymentSchedule[i]);
                     index++;
                 }
@@ -166,7 +166,7 @@ contract ANNEngine is BaseEngine, STF, POF {
                 );
                 for (uint8 i = 0; i < MAX_CYCLE_SIZE; i++) {
                     if (interestPaymentSchedule[i] == 0) break;
-                    if (isInPeriod(interestPaymentSchedule[i], segmentStart, segmentEnd) == false) continue;
+                    if (isInSegment(interestPaymentSchedule[i], segmentStart, segmentEnd) == false) continue;
                     _eventSchedule[index] = encodeEvent(EventType.IPCI, interestPaymentSchedule[i]);
                     index++;
                 }
@@ -188,7 +188,7 @@ contract ANNEngine is BaseEngine, STF, POF {
                 );
                 for (uint8 i = 0; i < MAX_CYCLE_SIZE; i++) {
                     if (feeSchedule[i] == 0) break;
-                    if (isInPeriod(feeSchedule[i], segmentStart, segmentEnd) == false) continue;
+                    if (isInSegment(feeSchedule[i], segmentStart, segmentEnd) == false) continue;
                     _eventSchedule[index] = encodeEvent(EventType.FP, feeSchedule[i]);
                     index++;
                 }
@@ -209,7 +209,7 @@ contract ANNEngine is BaseEngine, STF, POF {
             );
             for (uint8 i = 0; i < MAX_CYCLE_SIZE; i++) {
                 if (principalRedemptionSchedule[i] == 0) break;
-                if (isInPeriod(principalRedemptionSchedule[i], segmentStart, segmentEnd) == false) continue;
+                if (isInSegment(principalRedemptionSchedule[i], segmentStart, segmentEnd) == false) continue;
                 _eventSchedule[index] = encodeEvent(EventType.PR, principalRedemptionSchedule[i]);
                 index++;
             }

@@ -61,14 +61,14 @@ contract PAMEngine is BaseEngine, STF, POF {
         uint16 index = 0;
 
         // initial exchange
-        if (terms.purchaseDate == 0 && isInPeriod(terms.initialExchangeDate, segmentStart, segmentEnd)) {
+        if (terms.purchaseDate == 0 && isInSegment(terms.initialExchangeDate, segmentStart, segmentEnd)) {
             _eventSchedule[index] = encodeEvent(EventType.IED, terms.initialExchangeDate);
             index++;
         }
 
         // purchase
         if (terms.purchaseDate != 0) {
-            if (isInPeriod(terms.purchaseDate, segmentStart, segmentEnd)) {
+            if (isInSegment(terms.purchaseDate, segmentStart, segmentEnd)) {
                 _eventSchedule[index] = encodeEvent(EventType.PRD, terms.purchaseDate);
                 index++;
             }
@@ -76,14 +76,14 @@ contract PAMEngine is BaseEngine, STF, POF {
 
         // termination
         if (terms.terminationDate != 0) {
-            if (isInPeriod(terms.terminationDate, segmentStart, segmentEnd)) {
+            if (isInSegment(terms.terminationDate, segmentStart, segmentEnd)) {
                 _eventSchedule[index] = encodeEvent(EventType.TD, terms.terminationDate);
                 index++;
             }
         }
 
         // principal redemption
-        if (isInPeriod(terms.maturityDate, segmentStart, segmentEnd)) {
+        if (isInSegment(terms.maturityDate, segmentStart, segmentEnd)) {
             _eventSchedule[index] = encodeEvent(EventType.MD, terms.maturityDate);
             index++;
         }
@@ -132,7 +132,7 @@ contract PAMEngine is BaseEngine, STF, POF {
                 for (uint8 i = 0; i < MAX_CYCLE_SIZE; i++) {
                     if (interestPaymentSchedule[i] == 0) break;
                     if (interestPaymentSchedule[i] <= terms.capitalizationEndDate) continue;
-                    if (isInPeriod(interestPaymentSchedule[i], segmentStart, segmentEnd) == false) continue;
+                    if (isInSegment(interestPaymentSchedule[i], segmentStart, segmentEnd) == false) continue;
                     _eventSchedule[index] = encodeEvent(EventType.IP, interestPaymentSchedule[i]);
                     index++;
                 }
@@ -161,7 +161,7 @@ contract PAMEngine is BaseEngine, STF, POF {
                 );
                 for (uint8 i = 0; i < MAX_CYCLE_SIZE; i++) {
                     if (interestPaymentSchedule[i] == 0) break;
-                    if (isInPeriod(interestPaymentSchedule[i], segmentStart, segmentEnd) == false) continue;
+                    if (isInSegment(interestPaymentSchedule[i], segmentStart, segmentEnd) == false) continue;
                     _eventSchedule[index] = encodeEvent(EventType.IPCI, interestPaymentSchedule[i]);
                     index++;
                 }
@@ -183,7 +183,7 @@ contract PAMEngine is BaseEngine, STF, POF {
                 );
                 for (uint8 i = 0; i < MAX_CYCLE_SIZE; i++) {
                     if (rateResetSchedule[i] == 0) break;
-                    if (isInPeriod(rateResetSchedule[i], segmentStart, segmentEnd) == false) continue;
+                    if (isInSegment(rateResetSchedule[i], segmentStart, segmentEnd) == false) continue;
                     _eventSchedule[index] = encodeEvent(EventType.RR, rateResetSchedule[i]);
                     index++;
                 }
@@ -206,7 +206,7 @@ contract PAMEngine is BaseEngine, STF, POF {
                 );
                 for (uint8 i = 0; i < MAX_CYCLE_SIZE; i++) {
                     if (feeSchedule[i] == 0) break;
-                    if (isInPeriod(feeSchedule[i], segmentStart, segmentEnd) == false) continue;
+                    if (isInSegment(feeSchedule[i], segmentStart, segmentEnd) == false) continue;
                     _eventSchedule[index] = encodeEvent(EventType.FP, feeSchedule[i]);
                     index++;
                 }
@@ -230,7 +230,7 @@ contract PAMEngine is BaseEngine, STF, POF {
                 );
                 for (uint8 i = 0; i < MAX_CYCLE_SIZE; i++) {
                     if (scalingSchedule[i] == 0) break;
-                    if (isInPeriod(scalingSchedule[i], segmentStart, segmentEnd) == false) continue;
+                    if (isInSegment(scalingSchedule[i], segmentStart, segmentEnd) == false) continue;
                     _eventSchedule[index] = encodeEvent(EventType.SC, scalingSchedule[i]);
                     index++;
                 }

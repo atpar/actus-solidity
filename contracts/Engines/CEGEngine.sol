@@ -59,14 +59,14 @@ contract CEGEngine is BaseEngine, STF, POF {
 
         // purchase
         if (terms.purchaseDate != 0) {
-            if (isInPeriod(terms.purchaseDate, segmentStart, segmentEnd)) {
+            if (isInSegment(terms.purchaseDate, segmentStart, segmentEnd)) {
                 _eventSchedule[index] = encodeEvent(EventType.PRD, terms.purchaseDate);
                 index++;
             }
         }
 
         // maturity event
-        if (isInPeriod(terms.maturityDate, segmentStart, segmentEnd) == true) {
+        if (isInSegment(terms.maturityDate, segmentStart, segmentEnd) == true) {
             _eventSchedule[index] = encodeEvent(EventType.MD, terms.maturityDate);
             index++;
         }
@@ -110,7 +110,7 @@ contract CEGEngine is BaseEngine, STF, POF {
                 );
                 for (uint8 i = 0; i < MAX_CYCLE_SIZE; i++) {
                     if (feeSchedule[i] == 0) break;
-                    if (isInPeriod(feeSchedule[i], segmentStart, segmentEnd) == false) continue;
+                    if (isInSegment(feeSchedule[i], segmentStart, segmentEnd) == false) continue;
                     _eventSchedule[index] = encodeEvent(EventType.FP, feeSchedule[i]);
                     index++;
                 }
