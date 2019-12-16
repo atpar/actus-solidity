@@ -41,7 +41,7 @@ library SignedMath {
         pure
         returns (int256)
     {
-        require(b != 0, "FloatMath.floatDiv: DIVIDEDBY_ZERO");
+        require(b != 0, "FloatMath.floatDiv: DIVIDED_BY_ZERO");
 
         // normalize (multiply by MULTIPLICATOR)
         if (a == 0) return 0;
