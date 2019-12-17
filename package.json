@@ -31,6 +31,7 @@
     "compile": "truffle compile",
     "coverage": "truffle run coverage",
     "generate-artifacts": "rm -rf ./artifacts && ./scripts/truffle-minimize.sh ./build/contracts ./artifacts",
+    "generate-docs": "./scripts/generate-docs.sh",
     "migrate:goerli": "truffle migrate --network goerli",
     "migrate:kovan": "truffle migrate --network kovan",
     "migrate:rinkeby": "truffle migrate --network rinkeby",
