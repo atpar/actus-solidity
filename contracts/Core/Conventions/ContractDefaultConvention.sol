@@ -1,16 +1,23 @@
 pragma solidity ^0.5.2;
 
-import "../Definitions.sol";
+import "../ACTUSTypes.sol";
 
 
-contract ContractDefaultConvention is Definitions {
+/**
+ * @title ContractDefaultConvention
+ */
+contract ContractDefaultConvention is ACTUSTypes {
 
-  function performanceIndicator(ContractStatus contractStatus)
-		internal
-		pure
-		returns (int8)
-	{
-		if (contractStatus == ContractStatus.DF) return 0;
-		return 1;
-	}
+    /**
+     * @notice Returns the performance indicator for a given performance
+     * (used a mutliplier in POFs)
+     */
+    function performanceIndicator(ContractPerformance contractPerformance)
+        internal
+        pure
+        returns (int8)
+    {
+        if (contractPerformance == ContractPerformance.DF) return 0;
+        return 1;
+    }
 }

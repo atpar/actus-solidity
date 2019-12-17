@@ -1,10 +1,64 @@
 const ANNEngine = artifacts.require('ANNEngine.sol');
 
-const { parseToTestEvent } = require('../../helper/parser');
-const { getTestCases, compareTestResults } = require('../../helper/tests');
+const { getTestCases, compareTestResults  } = require('../../helper/tests');
+const { parseToTestEvent, parseTermsToLifecycleTerms, parseTermsToGeneratingTerms } = require('../../helper/parser');
+const {
+  decodeEvent,
+  sortEvents,
+  removeNullEvents
+} = require('../../helper/schedule');
 
 
 contract('ANNEngine', () => {
+  
+  const computeEventScheduleSegment = async (terms, segmentStart, segmentEnd) => {
+    const generatingTerms = parseTermsToGeneratingTerms(terms);
+
+    // fix for new schedule generation
+    generatingTerms.cycleAnchorDateOfInterestPayment = generatingTerms.cycleAnchorDateOfPrincipalRedemption;
+    generatingTerms.cycleOfInterestPayment = generatingTerms.cycleOfPrincipalRedemption;
+
+    const _eventSchedule = [];
+      
+    _eventSchedule.push(... await this.ANNEngineInstance.computeNonCyclicScheduleSegment(
+      generatingTerms,
+      segmentStart,
+      segmentEnd
+    ));
+    _eventSchedule.push(... await this.ANNEngineInstance.computeCyclicScheduleSegment(
+      generatingTerms,
+      segmentStart,
+      segmentEnd,
+      4 // FP
+    ));
+    _eventSchedule.push(... await this.ANNEngineInstance.computeCyclicScheduleSegment(
+      terms,
+      segmentStart,
+      segmentEnd,
+      7 // IPCI
+    ));
+    _eventSchedule.push(... await this.ANNEngineInstance.computeCyclicScheduleSegment(
+      generatingTerms,
+      segmentStart,
+      segmentEnd,
+      8 // IP
+    ));
+    _eventSchedule.push(... await this.ANNEngineInstance.computeCyclicScheduleSegment(
+      generatingTerms,
+      segmentStart,
+      segmentEnd,
+      15 // PR
+    ));
+    _eventSchedule.push(... await this.ANNEngineInstance.computeCyclicScheduleSegment(
+      generatingTerms,
+      segmentStart,
+      segmentEnd,
+      18 // RR
+    ));
+    
+    
+    return sortEvents(removeNullEvents(_eventSchedule));
+  }
 
   before(async () => {    
     this.ANNEngineInstance = await ANNEngine.new();
@@ -12,28 +66,42 @@ contract('ANNEngine', () => {
   })
 
   const evaluateEventSchedule = async (terms) => {
-    const initialState = await this.ANNEngineInstance.computeInitialState(terms, {});
-    const protoEventSchedule = await this.ANNEngineInstance.computeProtoEventScheduleSegment(
-      terms,
-      terms.statusDate,
-      terms.maturityDate
-    );
+    const lifecycleTerms = parseTermsToLifecycleTerms(terms);
+    const generatingTerms = parseTermsToGeneratingTerms(terms);
+
+    const initialState = await this.ANNEngineInstance.computeInitialState(lifecycleTerms);
+    const _eventSchedule = removeNullEvents(await computeEventScheduleSegment(
+      generatingTerms,
+      generatingTerms.contractDealDate,
+      generatingTerms.maturityDate
+    ));
 
     const evaluatedSchedule = [];
     let state = initialState;
 
-    for (let i = 0; i < protoEventSchedule.length; i++) {
-      if (protoEventSchedule[i].scheduleTime == 0) { break; }
-      const { 0: nextContractState, 1: contractEvent } = await this.ANNEngineInstance.computeNextStateForProtoEvent(
-        terms, 
+    for (_event of _eventSchedule) {
+      const { eventType, scheduleTime } = decodeEvent(_event);
+
+      if (scheduleTime == 0) { break; }
+
+      const payoff = await this.ANNEngineInstance.computePayoffForEvent(
+        lifecycleTerms,
+        state,
+        _event,
+        web3.utils.toHex(scheduleTime)
+      );
+      const nextState = await this.ANNEngineInstance.computeStateForEvent(
+        lifecycleTerms, 
         state, 
-        protoEventSchedule[i], 
-        protoEventSchedule[i].scheduleTime
+        _event, 
+        web3.utils.toHex(scheduleTime)
       );
       
-      state = nextContractState;
+      state = nextState;
 
-      evaluatedSchedule.push(parseToTestEvent(contractEvent, state));
+      const eventTime = await this.ANNEngineInstance.computeEventTimeForEvent(_event, lifecycleTerms);
+
+      evaluatedSchedule.push(parseToTestEvent(eventType, eventTime, payoff, state));
     }
 
     return evaluatedSchedule;
@@ -261,5 +329,5 @@ contract('ANNEngine', () => {
     const evaluatedSchedule = await evaluateEventSchedule(testDetails['terms']);
   
     compareTestResults(evaluatedSchedule, testDetails['results']);
-    });
+  });
 });

@@ -1,10 +1,12 @@
 const web3Utils = require('web3-utils');
 const BigNumber = require('bignumber.js');
 
-// const ContractEventDefinitions = require('../../actus-resources/definitions/ContractEventDefinitions.json');
-const ContractEventDefinitions = require('actus-dictionary/actus-dictionary-event.json');
-const ContractTermsDefinitions = require('actus-dictionary/actus-dictionary-terms.json');
-const CoveredTerms = require('../../actus-resources/definitions/covered-terms.json');
+const EventDefinitions = require('actus-dictionary/actus-dictionary-event.json').event;
+const TermsDefinitions = require('actus-dictionary/actus-dictionary-terms.json').terms;
+
+const Terms = require('../../actus-resources/definitions/terms.json');
+const LifecycleTerms = require('../../actus-resources/definitions/lifecycle-terms.json');
+const GeneratingTerms = require('../../actus-resources/definitions/generating-terms.json');
 
 const PRECISION = 18; // solidity precision
 
@@ -22,11 +24,11 @@ const toHex = (value) => {
 }
 
 const getIndexOfAttribute = (attribute, value) => {
-  return ContractTermsDefinitions[attribute].allowedValues.indexOf(value);
+  return TermsDefinitions[attribute].allowedValues.indexOf(value);
 }
 
 const toPrecision = (value) => {
-  return web3Utils.toHex(new BigNumber(value).shiftedBy(PRECISION));
+  return (new BigNumber(value).shiftedBy(PRECISION)).toFixed();
 }
 
 const fromPrecision = (value) => {
@@ -53,7 +55,7 @@ const numberOfDecimals = (number) => {
 }
 
 const parseCycleToIPS = (cycle) => {
-  if (cycle === '' || !cycle) { return { i: 0, p: 0, s: 0, isSet: false }; }
+  if (!cycle || cycle === '') { return { i: 0, p: 0, s: 0, isSet: false }; }
 
   const pOptions = ['D', 'W', 'M', 'Q', 'H', 'Y'];
 
@@ -64,27 +66,42 @@ const parseCycleToIPS = (cycle) => {
   return { i: i, p: p, s: s, isSet: true };
 }
 
+const parsePeriodToIP = (period) => {
+  if (!period  || period === '') { return { i: 0, p: 0, isSet: false }; }
+
+  const pOptions = ['D', 'W', 'M', 'Q', 'H', 'Y'];
+
+  let i = String(cycle).slice(0, -2);
+  let p = pOptions.indexOf(String(cycle).slice(-2, -1));
+
+  return { i: i, p: p, isSet: true };
+}
 
 const parseTermsFromObject = (terms) => {
   const parsedTerms = {};
 
-  for (const attribute of CoveredTerms) {
+  for (const attribute of Terms) {
     const value = terms[attribute];
 
-    if (ContractTermsDefinitions[attribute].type === 'Enum') {
+    if (attribute === 'contractReference_1' || attribute === 'contractReference_2') {
+      parsedTerms[attribute] = { object: toHex(''), contractReferenceType: 0, contractReferenceRole: 0 };
+    } else if (TermsDefinitions[attribute].type === 'Enum' || TermsDefinitions[attribute].type === 'Enum[]') {
       parsedTerms[attribute] = (value) ? getIndexOfAttribute(attribute, value) : 0;
-    } else if (ContractTermsDefinitions[attribute].type === 'Varchar') {
+    } else if (TermsDefinitions[attribute].type === 'Varchar') {
       parsedTerms[attribute] = toHex((value) ? value : '');
-    } else if (ContractTermsDefinitions[attribute].type === 'Real') {
+    } else if (TermsDefinitions[attribute].type === 'Real') {
       parsedTerms[attribute] = (value) ? toPrecision(value) : 0;
-    } else if (ContractTermsDefinitions[attribute].type === 'Timestamp') {
+    } else if (TermsDefinitions[attribute].type === 'Timestamp') {
       parsedTerms[attribute] = (value) ? isoToUnix(value) : 0;
-    } else if (ContractTermsDefinitions[attribute].type === 'Cycle') {
+    } else if (TermsDefinitions[attribute].type === 'Cycle') {
       parsedTerms[attribute] = parseCycleToIPS(value);
+    } else if (TermsDefinitions[attribute].type === 'Period') {
+      parsedTerms[attribute] = parsePeriodToIP(value);
     }
   }
 
   parsedTerms['currency'] = '0x0000000000000000000000000000000000000000';
+  parsedTerms['settlementCurrency'] = '0x0000000000000000000000000000000000000000';
 
   return parsedTerms;
 }
@@ -93,37 +110,59 @@ const parseResultsFromObject = (schedule) => {
   const parsedResults = [];
 
   for (const event of schedule) {
-    const eventTypeIndex = ContractEventDefinitions.eventType.allowedValues.indexOf(event['eventType']);
+    const eventTypeIndex = EventDefinitions.eventType.allowedValues.indexOf(event['eventType']);
 
     if (eventTypeIndex === 0) { continue; } // filter out AD events
     parsedResults.push({
       eventDate: new Date(event['eventDate'] + 'Z').toISOString(),
       eventType: eventTypeIndex.toString(),
       eventValue: Number(event['eventValue']),
-      nominalValue: Number(event['nominalValue']),
-      nominalRate: Number(event['nominalRate']),
-      nominalAccrued: Number(event['nominalAccrued']),
+      notionalPrincipal: Number(event['notionalPrincipal']),
+      nominalInterestRate: Number(event['nominalInterestRate']),
+      accruedInterest: Number(event['accruedInterest']),
     });
   }
 
   return parsedResults;
 }
 
-function parseToTestEvent (event, state) {
+function parseToTestEvent (eventType, eventTime, payoff, state) {
   return {
-    eventDate: unixToISO(event['eventTime']),
-    eventType: event['eventType'],
-    eventValue: fromPrecision(event['payoff']),
-    nominalValue: fromPrecision(state['nominalValue']),
-    nominalRate: fromPrecision(state['nominalRate']),
-    nominalAccrued: fromPrecision(state['nominalAccrued']),
+    eventDate: unixToISO(eventTime),
+    eventType: String(eventType),
+    eventValue: fromPrecision(payoff),
+    notionalPrincipal: fromPrecision(state['notionalPrincipal']),
+    nominalInterestRate: fromPrecision(state['nominalInterestRate']),
+    accruedInterest: fromPrecision(state['accruedInterest']),
   };
+}
+
+function parseTermsToLifecycleTerms (terms) {
+  const lifecycleTerms = {};
+
+  for (const attribute of LifecycleTerms) {
+    lifecycleTerms[attribute] = terms[attribute];
+  }
+
+  return lifecycleTerms;
+}
+
+function parseTermsToGeneratingTerms (terms) {
+  const generatingTerms = {};
+
+  for (const attribute of GeneratingTerms) {
+    generatingTerms[attribute] = terms[attribute];
+  }
+
+  return generatingTerms;
 }
 
 module.exports = { 
   parseTermsFromObject, 
   parseResultsFromObject, 
-  parseToTestEvent, 
+  parseToTestEvent,
+  parseTermsToLifecycleTerms,
+  parseTermsToGeneratingTerms,
   fromPrecision, 
   unixToISO, 
   roundToDecimals, 

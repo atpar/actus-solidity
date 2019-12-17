@@ -1,119 +1,163 @@
 const PAMEngine = artifacts.require('PAMEngine.sol');
 
 const { getDefaultTestTerms } = require('../../helper/tests');
-const { removeNullEvents } = require('../../helper/schedule');
+const { parseTermsToLifecycleTerms, parseTermsToGeneratingTerms } = require('../../helper/parser');
+const { 
+  parseEventSchedule,
+  decodeEvent,
+  sortEvents,
+  removeNullEvents
+} = require('../../helper/schedule');
 
 
 contract('PAMEngine', () => {
 
+  const computeEventScheduleSegment = async (terms, segmentStart, segmentEnd) => {
+    const generatingTerms = parseTermsToGeneratingTerms(terms);
+    const _eventSchedule = [];
+      
+    _eventSchedule.push(... await this.PAMEngineInstance.computeNonCyclicScheduleSegment(
+      generatingTerms,
+      segmentStart,
+      segmentEnd
+    ));
+    _eventSchedule.push(... await this.PAMEngineInstance.computeCyclicScheduleSegment(
+      generatingTerms,
+      segmentStart,
+      segmentEnd,
+      4 // FP
+    ));
+    _eventSchedule.push(... await this.PAMEngineInstance.computeCyclicScheduleSegment(
+      terms,
+      segmentStart,
+      segmentEnd,
+      7 // IPCI
+    ));
+    _eventSchedule.push(... await this.PAMEngineInstance.computeCyclicScheduleSegment(
+      generatingTerms,
+      segmentStart,
+      segmentEnd,
+      8 // IP
+    ));
+    _eventSchedule.push(... await this.PAMEngineInstance.computeCyclicScheduleSegment(
+      generatingTerms,
+      segmentStart,
+      segmentEnd,
+      15 // PR
+    ));
+    _eventSchedule.push(... await this.PAMEngineInstance.computeCyclicScheduleSegment(
+      generatingTerms,
+      segmentStart,
+      segmentEnd,
+      18 // RR
+    ));
+    
+    
+    return sortEvents(removeNullEvents(_eventSchedule));
+  }
+
   before(async () => {        
     this.PAMEngineInstance = await PAMEngine.new();
     this.terms = await getDefaultTestTerms('PAM');
+    this.generatingTerms = parseTermsToGeneratingTerms(this.terms);
+    this.lifecycleTerms = parseTermsToLifecycleTerms(this.terms);
   });
 
   it('should yield the initial contract state', async () => {
-    const initialState = await this.PAMEngineInstance.computeInitialState(this.terms, {});
-    assert.isTrue(Number(initialState['lastEventTime']) === Number(this.terms['statusDate']));
+    const initialState = await this.PAMEngineInstance.computeInitialState(this.lifecycleTerms);
+    assert.isTrue(Number(initialState['statusDate']) === Number(this.generatingTerms['statusDate']));
   });
 
   it('should yield the next next contract state and the contract events', async() => {
-    const initialState = await this.PAMEngineInstance.computeInitialState(this.terms, {});
-    await this.PAMEngineInstance.computeNextState(this.terms, initialState, this.terms['maturityDate']);
-  });
-
-  it('should yield the same evaluated events for computeNextState and computeNextStateForProtoEvent', async () => {
-    const initialState = await this.PAMEngineInstance.computeInitialState(this.terms, {});
-
-    const protoEventSchedule = removeNullEvents(await this.PAMEngineInstance.computeProtoEventScheduleSegment(
-      this.terms, 
-      this.terms['statusDate'],
-      this.terms['maturityDate'],
-    ));
-
-    const endTimestamp = protoEventSchedule[Math.floor(protoEventSchedule.length / 2)].scheduleTime;
-
-    const { 0: state_computeNextState, 1: events_computeNextState } = await this.PAMEngineInstance.computeNextState(
-      this.terms, 
-      initialState, 
-      endTimestamp
+    const initialState = await this.PAMEngineInstance.computeInitialState(this.lifecycleTerms);
+    const _eventSchedule = await this.PAMEngineInstance.computeNonCyclicScheduleSegment(
+      this.generatingTerms,
+      this.generatingTerms.contractDealDate,
+      this.generatingTerms.maturityDate
+    )
+    const nextState = await this.PAMEngineInstance.computeStateForEvent(
+      this.lifecycleTerms,
+      initialState,
+      _eventSchedule[0],
+      web3.utils.toHex(decodeEvent(_eventSchedule[0]).scheduleTime)
     );
 
-    let state_computeNextStateForProtoEvent = initialState;
-    let events_computeNextStateForProtoEvent = [];
-
-    for (let i = 0; i < 20; i ++) {
-      if (protoEventSchedule[i].scheduleTime > endTimestamp) { break; }
-
-      const { 0: nextState_computeNextStateForProtoEvent, 1: contractEvent } = await this.PAMEngineInstance.computeNextStateForProtoEvent(
-        this.terms, 
-        state_computeNextStateForProtoEvent, 
-        protoEventSchedule[i], 
-        protoEventSchedule[i].scheduleTime
-      );
-
-      contractEvent[4] = endTimestamp;
-      contractEvent.actualEventTime = endTimestamp;
-
-      state_computeNextStateForProtoEvent = nextState_computeNextStateForProtoEvent;
-      events_computeNextStateForProtoEvent.push(contractEvent);
-    }
-
-    assert.deepEqual(state_computeNextState, state_computeNextStateForProtoEvent);
-    assert.deepEqual(removeNullEvents(events_computeNextState), removeNullEvents(events_computeNextStateForProtoEvent));
-  });
-
-  it('should yield all events', async () => {
-    const protoEventSchedule = await this.PAMEngineInstance.computeProtoEventScheduleSegment(
-      this.terms, 
-      this.terms['statusDate'],
-      this.terms['maturityDate'],
-    );
-
-    assert.isTrue(removeNullEvents(protoEventSchedule).length > 0);
+    assert.equal(Number(nextState.statusDate), decodeEvent(_eventSchedule[0]).scheduleTime);
   });
 
   it('should yield correct segment of events', async () => {
-    const entireProtoEventSchedule = removeNullEvents(
-      await this.PAMEngineInstance.computeProtoEventScheduleSegment(
-        this.terms, 
-        this.terms['statusDate'],
-        this.terms['maturityDate'],
-      )
-    );
+    const completeEventSchedule = parseEventSchedule(await computeEventScheduleSegment(
+      this.generatingTerms,
+      this.generatingTerms.contractDealDate,
+      this.generatingTerms.maturityDate
+    ));
 
-    let protoEventSchedule = [];
-    let lastEventTime = this.terms['statusDate'];
-    let timestamp = this.terms['statusDate'] + (this.terms['maturityDate'] - this.terms['statusDate']) / 4;
+    let _eventSchedule = [];
+    let statusDate = this.generatingTerms['statusDate'];
+    let timestamp = this.generatingTerms['statusDate'] + (this.generatingTerms['maturityDate'] - this.generatingTerms['statusDate']) / 4;
 
-    response = await this.PAMEngineInstance.computeProtoEventScheduleSegment(
-      this.terms, 
-      lastEventTime,
+    _eventSchedule.push(... await computeEventScheduleSegment(
+      this.generatingTerms, 
+      statusDate,
       timestamp
-    );
-    protoEventSchedule = [...response];
+    ));
 
-    lastEventTime = timestamp;
-    timestamp = this.terms['statusDate'] + (this.terms['maturityDate'] - this.terms['statusDate']) / 2;
+    statusDate = timestamp;
+    timestamp = this.generatingTerms['statusDate'] + (this.generatingTerms['maturityDate'] - this.generatingTerms['statusDate']) / 2;
 
-    response = await this.PAMEngineInstance.computeProtoEventScheduleSegment(
-      this.terms, 
-      lastEventTime,
+    _eventSchedule.push(... await computeEventScheduleSegment(
+    this.generatingTerms, 
+    statusDate,
       timestamp
-    );
-    protoEventSchedule = [...protoEventSchedule, ...response];
+    ));
     
-    lastEventTime = timestamp;
-    timestamp = this.terms['maturityDate'];
+    statusDate = timestamp;
+    timestamp = this.generatingTerms['maturityDate'];
 
-    response = await this.PAMEngineInstance.computeProtoEventScheduleSegment(
-      this.terms, 
-      lastEventTime,
+    _eventSchedule.push(... await computeEventScheduleSegment(
+      this.generatingTerms, 
+      statusDate,
       timestamp
-    );
-    protoEventSchedule = [...protoEventSchedule, ...response];
+    ));
     
-    protoEventSchedule = removeNullEvents(protoEventSchedule);
+    _eventSchedule = parseEventSchedule(sortEvents(_eventSchedule));
     
-    assert.isTrue(protoEventSchedule.toString() === entireProtoEventSchedule.toString());
+    assert.isTrue(_eventSchedule.toString() === completeEventSchedule.toString());
   });
+
+  it('should yield the state of each event', async () => {
+    const initialState = await this.PAMEngineInstance.computeInitialState(this.lifecycleTerms);
+
+    const _eventSchedule = removeNullEvents(await computeEventScheduleSegment(
+      this.generatingTerms,
+      this.generatingTerms.contractDealDate,
+      this.generatingTerms.maturityDate
+    ));
+
+    let state = initialState;
+
+    for (_event of _eventSchedule) {
+      const nextState = await this.PAMEngineInstance.computeStateForEvent(
+        this.lifecycleTerms,
+        state,
+        _event,
+        web3.utils.toHex(decodeEvent(_event).scheduleTime)
+      );
+
+      state = nextState;
+    }
+  })
+
+  // it('should yield the state for RR', async () => {
+  //   const initialState = await this.PAMEngineInstance.computeInitialState(this.lifecycleTerms);
+    
+  //   state = initialState;
+
+  //   const nextState = await this.PAMEngineInstance.computeStateForEvent(
+  //     this.lifecycleTerms,
+  //     state,
+  //     '0x1200000000000000000000000000000000000000000000000000000051922D80',
+  //     web3.utils.toHex(555555533333)
+  //   );
+  // });
 });

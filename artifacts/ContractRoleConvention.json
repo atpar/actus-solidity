@@ -4,6 +4,20 @@
     {
       "constant": true,
       "inputs": [],
+      "name": "ONE_POINT_ZERO",
+      "outputs": [
+        {
+          "name": "",
+          "type": "int256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
       "name": "PRECISION",
       "outputs": [
         {
@@ -16,12 +30,12 @@
       "type": "function"
     }
   ],
-  "metadata": "{\"compiler\":{\"version\":\"0.5.2+commit.1df8f40c\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"constant\":true,\"inputs\":[],\"name\":\"PRECISION\",\"outputs\":[{\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"}],\"devdoc\":{\"methods\":{}},\"userdoc\":{\"methods\":{}}},\"settings\":{\"compilationTarget\":{\"/Users/johannes/Documents/dev/actus-protocol/actus-solidity/contracts/Core/Conventions/ContractRoleConvention.sol\":\"ContractRoleConvention\"},\"evmVersion\":\"byzantium\",\"libraries\":{},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[]},\"sources\":{\"/Users/johannes/Documents/dev/actus-protocol/actus-solidity/contracts/Core/Conventions/ContractRoleConvention.sol\":{\"keccak256\":\"0xbbebeca945da80a5051c20fd36662cc70f5f55d8dd1b6ff01a92633d52c0ffaa\",\"urls\":[\"bzzr://c6201e9a541cc47220d615a33d1c5ecfd6b44ab75d91a8ef87f74c9ac3adc405\"]},\"/Users/johannes/Documents/dev/actus-protocol/actus-solidity/contracts/Core/Definitions.sol\":{\"keccak256\":\"0xa3214610069b96cbcf16177ddf1c6723c2692faf081946af9dccf8ad0da57ae4\",\"urls\":[\"bzzr://7da7e021462547e3bd620dab26c6b7c763c24e3bac224770cc7ca5eb0bf7ee50\"]}},\"version\":1}",
-  "bytecode": "0x6080604052348015600f57600080fd5b5060928061001e6000396000f3fe6080604052348015600f57600080fd5b50600436106044577c01000000000000000000000000000000000000000000000000000000006000350463aaf5eb6881146049575b600080fd5b604f6061565b60408051918252519081900360200190f35b60128156fea165627a7a723058207bedfe3003094e1041c47cdc90c393b05d441e33e6ec3b7e002da1bff97f34820029",
+  "metadata": "{\"compiler\":{\"version\":\"0.5.2+commit.1df8f40c\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"constant\":true,\"inputs\":[],\"name\":\"ONE_POINT_ZERO\",\"outputs\":[{\"name\":\"\",\"type\":\"int256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"PRECISION\",\"outputs\":[{\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"}],\"devdoc\":{\"methods\":{},\"title\":\"ContractRoleConvention\"},\"userdoc\":{\"methods\":{}}},\"settings\":{\"compilationTarget\":{\"/Users/johannes/Documents/dev/actus-protocol/actus-solidity/contracts/Core/Conventions/ContractRoleConvention.sol\":\"ContractRoleConvention\"},\"evmVersion\":\"byzantium\",\"libraries\":{},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[]},\"sources\":{\"/Users/johannes/Documents/dev/actus-protocol/actus-solidity/contracts/Core/ACTUSTypes.sol\":{\"keccak256\":\"0x7203a6ea07686313a33592e24c6144985f8d9a8f25b84293285bcb70d2fa9dcf\",\"urls\":[\"bzzr://78522b40fed87c6d4ab14731e2c19268f5255dc4263040941978dc355ed1f3d7\"]},\"/Users/johannes/Documents/dev/actus-protocol/actus-solidity/contracts/Core/Conventions/ContractRoleConvention.sol\":{\"keccak256\":\"0x8770e88da871e8e5c2c0916cc17278f0bd0e301f76cd31d382dcc68c658db901\",\"urls\":[\"bzzr://9ad96140f522365eada6883105bbccb24e985a61434238bb2898a9bf90fd666f\"]}},\"version\":1}",
+  "bytecode": "0x608060405234801561001057600080fd5b5060ae8061001f6000396000f3fe6080604052348015600f57600080fd5b5060043610604e577c010000000000000000000000000000000000000000000000000000000060003504636f37e55b81146053578063aaf5eb6814606b575b600080fd5b60596071565b60408051918252519081900360200190f35b6059607d565b670de0b6b3a764000081565b60128156fea165627a7a72305820f993bb94d8d0b0a81c62e32ad0c61bba20354f1212abcb3418833e7870566e890029",
   "compiler": {
     "name": "solc",
     "version": "0.5.2+commit.1df8f40c.Emscripten.clang"
   },
   "networks": {},
-  "updatedAt": "2019-10-17T09:48:57.875Z"
+  "updatedAt": "2019-12-13T14:31:53.586Z"
 }

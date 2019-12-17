@@ -1,503 +1,356 @@
 pragma solidity ^0.5.2;
 pragma experimental ABIEncoderV2;
 
-import "openzeppelin-solidity/contracts/math/SafeMath.sol";
-import "openzeppelin-solidity/contracts/drafts/SignedSafeMath.sol";
-
 import "../Core/Core.sol";
-import "../Core/SignedMath.sol";
+import "./BaseEngine.sol";
 import "./IEngine.sol";
 import "./STF.sol";
 import "./POF.sol";
 
 
 /**
- * @title the stateless component for a PAM contract
- * implements the STF and POF of the Actus standard for a PAM contract
- * @dev all numbers except unix timestamp are represented as multiple of 10 ** 18
- * inputs have to be multiplied by 10 ** 18, outputs have to divided by 10 ** 18
+ * @title PAMEngine
+ * @notice Inherits from BaseEngine by implementing STFs, POFs according to the ACTUS standard for a PAM contract
+ * @dev All numbers except unix timestamp are represented as multiple of 10 ** 18
  */
-contract PAMEngine is Core, IEngine, STF, POF {
+contract PAMEngine is BaseEngine, STF, POF {
 
-	using SafeMath for uint;
-	using SignedSafeMath for int;
-	using SignedMath for int;
+    /**
+     * @notice Initialize contract state space based on the contract terms.
+     * @param terms terms of the contract
+     * @return the initial state of the contract
+     */
+    function computeInitialState(LifecycleTerms memory terms)
+        public
+        pure
+        returns (State memory)
+    {
+        State memory state;
 
+        state.contractPerformance = ContractPerformance.PF;
+        state.notionalScalingMultiplier = int256(1 * 10 ** PRECISION);
+        state.interestScalingMultiplier = int256(1 * 10 ** PRECISION);
+        state.statusDate = terms.statusDate;
+        state.maturityDate = terms.maturityDate;
+        state.notionalPrincipal = terms.notionalPrincipal;
+        state.nominalInterestRate = terms.nominalInterestRate;
+        state.accruedInterest = terms.accruedInterest;
+        state.feeAccrued = terms.feeAccrued;
 
-	/**
-	 * get the initial contract state
-	 * @param contractTerms terms of the contract
-	 * @return initial contract state
-	 */
-	function computeInitialState(ContractTerms memory contractTerms)
-		public
-		pure
-		returns (ContractState memory)
-	{
-		return initializeContractState(contractTerms);
-	}
+        return state;
+    }
 
-	/**
-	 * computes pending events based on the contract state and
-	 * applys them to the contract state and returns the evaluated events and the new contract state
-	 * @dev evaluates all events between the scheduled time of the last executed event and now
-	 * (such that Led < Tev && now >= Tev)
-	 * @param contractTerms terms of the contract
-	 * @param contractState current state of the contract
-	 * @param timestamp current timestamp
-	 * @return the new contract state and the evaluated events
-	 */
-	function computeNextState(
-		ContractTerms memory contractTerms,
-		ContractState memory contractState,
-		uint256 timestamp
-	)
-		public
-		pure
-		returns (ContractState memory, ContractEvent[MAX_EVENT_SCHEDULE_SIZE] memory)
-	{
-		ContractState memory nextContractState = contractState;
-		ContractEvent[MAX_EVENT_SCHEDULE_SIZE] memory nextContractEvents;
+    /**
+     * @notice Computes a schedule segment of non-cyclic contract events based on the contract terms
+     * and the specified timestamps.
+     * @param terms terms of the contract
+     * @param segmentStart start timestamp of the segment
+     * @param segmentEnd end timestamp of the segement
+     * @return segment of the non-cyclic schedule
+     */
+    function computeNonCyclicScheduleSegment(
+        GeneratingTerms memory terms,
+        uint256 segmentStart,
+        uint256 segmentEnd
+    )
+        public
+        pure
+        returns (bytes32[MAX_EVENT_SCHEDULE_SIZE] memory)
+    {
+        bytes32[MAX_EVENT_SCHEDULE_SIZE] memory _eventSchedule;
+        uint16 index = 0;
 
-		ProtoEvent[MAX_EVENT_SCHEDULE_SIZE] memory pendingProtoEventSchedule = computeProtoEventScheduleSegment(
-			contractTerms,
-			shiftEventTime(contractState.lastEventTime, contractTerms.businessDayConvention, contractTerms.calendar),
-			timestamp
-		);
+        // initial exchange
+        if (terms.purchaseDate == 0 && isInSegment(terms.initialExchangeDate, segmentStart, segmentEnd)) {
+            _eventSchedule[index] = encodeEvent(EventType.IED, terms.initialExchangeDate);
+            index++;
+        }
 
-		for (uint8 index = 0; index < MAX_EVENT_SCHEDULE_SIZE; index++) {
-			if (pendingProtoEventSchedule[index].eventTime == 0) continue;
+        // purchase
+        if (terms.purchaseDate != 0) {
+            if (isInSegment(terms.purchaseDate, segmentStart, segmentEnd)) {
+                _eventSchedule[index] = encodeEvent(EventType.PRD, terms.purchaseDate);
+                index++;
+            }
+        }
 
-			nextContractEvents[index] = ContractEvent(
-				pendingProtoEventSchedule[index].eventTime,
-				pendingProtoEventSchedule[index].eventType,
-				pendingProtoEventSchedule[index].currency,
-				payoffFunction(
-					pendingProtoEventSchedule[index].scheduleTime,
-					contractTerms,
-					contractState,
-					pendingProtoEventSchedule[index].eventType
-				),
-				timestamp
-			);
+        // termination
+        if (terms.terminationDate != 0) {
+            if (isInSegment(terms.terminationDate, segmentStart, segmentEnd)) {
+                _eventSchedule[index] = encodeEvent(EventType.TD, terms.terminationDate);
+                index++;
+            }
+        }
 
-			nextContractState = stateTransitionFunction(
-				pendingProtoEventSchedule[index].scheduleTime,
-				contractTerms,
-				contractState,
-				pendingProtoEventSchedule[index].eventType
-			);
-		}
+        // principal redemption
+        if (isInSegment(terms.maturityDate, segmentStart, segmentEnd)) {
+            _eventSchedule[index] = encodeEvent(EventType.MD, terms.maturityDate);
+            index++;
+        }
 
-		return (nextContractState, nextContractEvents);
-	}
+        return _eventSchedule;
+    }
 
-	/**
-	 * applys a prototype event to the current state of a contract and
-	 * returns the contrat event and the new contract state
-	 * @param contractTerms terms of the contract
-	 * @param contractState current state of the contract
-	 * @param protoEvent prototype event to be evaluated and applied to the contract state
-	 * @param timestamp current timestamp
-	 * @return the new contract state and the evaluated event
-	 */
-	function computeNextStateForProtoEvent(
-		ContractTerms memory contractTerms,
-		ContractState memory contractState,
-		ProtoEvent memory protoEvent,
-		uint256 timestamp
-	)
-		public
-		pure
-		returns (ContractState memory, ContractEvent memory)
-	{
-		ContractEvent memory contractEvent = ContractEvent(
-			protoEvent.eventTime,
-			protoEvent.eventType,
-			protoEvent.currency,
-			payoffFunction(timestamp, contractTerms, contractState, protoEvent.pofType), // solium-disable-line
-			timestamp
-		);
+    /**
+     * @notice Computes a schedule segment of cyclic contract events based on the contract terms
+     * and the specified timestamps.
+     * @param terms terms of the contract
+     * @param segmentStart start timestamp of the segment
+     * @param segmentEnd end timestamp of the segement
+     * @param eventType eventType of the cyclic schedule
+     * @return event schedule segment
+     */
+    function computeCyclicScheduleSegment(
+        GeneratingTerms memory terms,
+        uint256 segmentStart,
+        uint256 segmentEnd,
+        EventType eventType
+    )
+        public
+        pure
+        returns(bytes32[MAX_EVENT_SCHEDULE_SIZE] memory)
+    {
+        bytes32[MAX_EVENT_SCHEDULE_SIZE] memory _eventSchedule;
 
-		ContractState memory nextContractState = stateTransitionFunction(
-			timestamp,
-			contractTerms,
-			contractState,
-			protoEvent.stfType
-		);
+        if (eventType == EventType.IP) {
+            uint256 index = 0;
 
-		return (nextContractState, contractEvent);
-	}
+            // interest payment related (covers pre-repayment period only,
+            // starting with PRANX interest is paid following the PR schedule)
+            if (
+                terms.cycleOfInterestPayment.isSet == true
+                && terms.cycleAnchorDateOfInterestPayment != 0
+            ) {
+                uint256[MAX_CYCLE_SIZE] memory interestPaymentSchedule = computeDatesFromCycleSegment(
+                    terms.cycleAnchorDateOfInterestPayment,
+                    terms.maturityDate,
+                    terms.cycleOfInterestPayment,
+                    true,
+                    segmentStart,
+                    segmentEnd
+                );
+                for (uint8 i = 0; i < MAX_CYCLE_SIZE; i++) {
+                    if (interestPaymentSchedule[i] == 0) break;
+                    if (interestPaymentSchedule[i] <= terms.capitalizationEndDate) continue;
+                    if (isInSegment(interestPaymentSchedule[i], segmentStart, segmentEnd) == false) continue;
+                    _eventSchedule[index] = encodeEvent(EventType.IP, interestPaymentSchedule[i]);
+                    index++;
+                }
+            }
+        }
 
-	/**
-	 * computes a schedule segment of contract events based on the contract terms and the specified period
-	 * @param contractTerms terms of the contract
-	 * @param segmentStart start timestamp of the segment
-	 * @param segmentEnd end timestamp of the segement
-	 * @return event schedule segment
-	 */
-	function computeProtoEventScheduleSegment(
-		ContractTerms memory contractTerms,
-		uint256 segmentStart,
-		uint256 segmentEnd
-	)
-		public
-		pure
-		returns (ProtoEvent[MAX_EVENT_SCHEDULE_SIZE] memory)
-	{
-		ProtoEvent[MAX_EVENT_SCHEDULE_SIZE] memory protoEventSchedule;
-		uint16 index = 0;
+        if (eventType == EventType.IPCI) {
+            uint256 index = 0;
 
-		// initial exchange
-		if (isInPeriod(contractTerms.initialExchangeDate, segmentStart, segmentEnd)) {
-			protoEventSchedule[index] = ProtoEvent(
-				contractTerms.initialExchangeDate,
-				contractTerms.initialExchangeDate.add(getEpochOffset(EventType.IED)),
-				contractTerms.initialExchangeDate,
-				EventType.IED,
-				contractTerms.currency,
-				EventType.IED,
-				EventType.IED
-			);
-			index++;
-		}
+            // IPCI
+            if (
+                terms.cycleOfInterestPayment.isSet == true
+                && terms.cycleAnchorDateOfInterestPayment != 0
+                && terms.capitalizationEndDate != 0
+            ) {
+                IPS memory cycleOfInterestCapitalization = terms.cycleOfInterestPayment;
+                cycleOfInterestCapitalization.s = S.SHORT;
 
-		// purchase
-		if (contractTerms.purchaseDate != 0) {
-			if (isInPeriod(contractTerms.purchaseDate, segmentStart, segmentEnd)) {
-				protoEventSchedule[index] = ProtoEvent(
-					contractTerms.purchaseDate,
-					contractTerms.purchaseDate.add(getEpochOffset(EventType.PRD)),
-					contractTerms.purchaseDate,
-					EventType.PRD,
-					contractTerms.currency,
-					EventType.PRD,
-					EventType.PRD
-				);
-				index++;
-			}
-		}
+                uint256[MAX_CYCLE_SIZE] memory interestPaymentSchedule = computeDatesFromCycleSegment(
+                    terms.cycleAnchorDateOfInterestPayment,
+                    terms.capitalizationEndDate,
+                    cycleOfInterestCapitalization,
+                    true,
+                    segmentStart,
+                    segmentEnd
+                );
+                for (uint8 i = 0; i < MAX_CYCLE_SIZE; i++) {
+                    if (interestPaymentSchedule[i] == 0) break;
+                    if (isInSegment(interestPaymentSchedule[i], segmentStart, segmentEnd) == false) continue;
+                    _eventSchedule[index] = encodeEvent(EventType.IPCI, interestPaymentSchedule[i]);
+                    index++;
+                }
+            }
+        }
 
-		// interest payment related (e.g. for reoccurring interest payments)
-		if (contractTerms.nominalInterestRate != 0 && (
-			contractTerms.cycleOfInterestPayment.isSet == true && contractTerms.cycleAnchorDateOfInterestPayment != 0)
-		) {
-			uint256[MAX_CYCLE_SIZE] memory interestPaymentSchedule = computeDatesFromCycleSegment(
-				contractTerms.cycleAnchorDateOfInterestPayment,
-				contractTerms.maturityDate,
-				contractTerms.cycleOfInterestPayment,
-				contractTerms.endOfMonthConvention,
-				true,
-				segmentStart,
-				segmentEnd
-			);
-			if (contractTerms.capitalizationEndDate != 0) {
-				uint256 shiftedIPCITime = shiftEventTime(
-					contractTerms.capitalizationEndDate,
-					contractTerms.businessDayConvention,
-					contractTerms.calendar
-				);
-				if (isInPeriod(shiftedIPCITime, segmentStart, segmentEnd)) {
-					protoEventSchedule[index] = ProtoEvent(
-						shiftedIPCITime,
-						shiftedIPCITime.add(getEpochOffset(EventType.IPCI)),
-						contractTerms.capitalizationEndDate,
-						EventType.IPCI,
-						contractTerms.currency,
-						EventType.IPCI,
-						EventType.IPCI
-					);
-					index++;
-				}
-			}
-			for (uint8 i = 0; i < MAX_CYCLE_SIZE; i++) {
-				if (interestPaymentSchedule[i] == 0) break;
-				uint256 shiftedIPDate = shiftEventTime(
-					interestPaymentSchedule[i],
-					contractTerms.businessDayConvention,
-					contractTerms.calendar
-				);
-				if (isInPeriod(shiftedIPDate, segmentStart, segmentEnd) == false) continue;
-				if (
-					contractTerms.capitalizationEndDate != 0 &&
-					interestPaymentSchedule[i] <= contractTerms.capitalizationEndDate
-				) {
-					if (interestPaymentSchedule[i] == contractTerms.capitalizationEndDate) continue;
-					protoEventSchedule[index] = ProtoEvent(
-						shiftedIPDate,
-						shiftedIPDate.add(getEpochOffset(EventType.IPCI)),
-						interestPaymentSchedule[i],
-						EventType.IPCI,
-						contractTerms.currency,
-						EventType.IPCI,
-						EventType.IPCI
-					);
-					index++;
-				} else {
-					protoEventSchedule[index] = ProtoEvent(
-						shiftedIPDate,
-						shiftedIPDate.add(getEpochOffset(EventType.IP)),
-						interestPaymentSchedule[i],
-						EventType.IP,
-						contractTerms.currency,
-						EventType.IP,
-						EventType.IP
-					);
-					index++;
-				}
-			}
-		}
-		// capitalization end date
-		else if (contractTerms.capitalizationEndDate != 0) {
-			uint256 shiftedIPCIDate = shiftEventTime(
-				contractTerms.capitalizationEndDate,
-				contractTerms.businessDayConvention,
-				contractTerms.calendar
-			);
-			if (isInPeriod(shiftedIPCIDate, segmentStart, segmentEnd)) {
-				protoEventSchedule[index] = ProtoEvent(
-					shiftedIPCIDate,
-					shiftedIPCIDate.add(getEpochOffset(EventType.IPCI)),
-					contractTerms.capitalizationEndDate,
-					EventType.IPCI,
-					contractTerms.currency,
-					EventType.IPCI,
-					EventType.IPCI
-				);
-				index++;
-			}
-		}
+        if (eventType == EventType.RR) {
+            uint256 index = 0;
 
-		// rate reset
-		if (contractTerms.cycleOfRateReset.isSet == true && contractTerms.cycleAnchorDateOfRateReset != 0) {
-			uint256[MAX_CYCLE_SIZE] memory rateResetSchedule = computeDatesFromCycleSegment(
-				contractTerms.cycleAnchorDateOfRateReset,
-				contractTerms.maturityDate,
-				contractTerms.cycleOfRateReset,
-				contractTerms.endOfMonthConvention,
-				false,
-				segmentStart,
-				segmentEnd
-			);
-			for (uint8 i = 0; i < MAX_CYCLE_SIZE; i++) {
-				if (rateResetSchedule[i] == 0) break;
-				uint256 shiftedRRDate = shiftEventTime(
-					rateResetSchedule[i],
-					contractTerms.businessDayConvention,
-					contractTerms.calendar
-				);
-				if (isInPeriod(shiftedRRDate, segmentStart, segmentEnd) == false) continue;
-				protoEventSchedule[index] = ProtoEvent(
-					shiftedRRDate,
-					shiftedRRDate.add(getEpochOffset(EventType.RR)),
-					rateResetSchedule[i],
-					EventType.RR,
-					contractTerms.currency,
-					EventType.RR,
-					EventType.RR
-				);
-				index++;
-			}
-			// ... nextRateReset
-		}
+            // rate reset
+            if (terms.cycleOfRateReset.isSet == true && terms.cycleAnchorDateOfRateReset != 0) {
+                uint256[MAX_CYCLE_SIZE] memory rateResetSchedule = computeDatesFromCycleSegment(
+                    terms.cycleAnchorDateOfRateReset,
+                    terms.maturityDate,
+                    terms.cycleOfRateReset,
+                    false,
+                    segmentStart,
+                    segmentEnd
+                );
+                for (uint8 i = 0; i < MAX_CYCLE_SIZE; i++) {
+                    if (rateResetSchedule[i] == 0) break;
+                    if (isInSegment(rateResetSchedule[i], segmentStart, segmentEnd) == false) continue;
+                    _eventSchedule[index] = encodeEvent(EventType.RR, rateResetSchedule[i]);
+                    index++;
+                }
+            }
+            // ... nextRateReset
+        }
 
-		// fees
-		if (contractTerms.cycleOfFee.isSet == true && contractTerms.cycleAnchorDateOfFee != 0) {
-			uint256[MAX_CYCLE_SIZE] memory feeSchedule = computeDatesFromCycleSegment(
-				contractTerms.cycleAnchorDateOfFee,
-				contractTerms.maturityDate,
-				contractTerms.cycleOfFee,
-				contractTerms.endOfMonthConvention,
-				true,
-				segmentStart,
-				segmentEnd
-			);
-			for (uint8 i = 0; i < MAX_CYCLE_SIZE; i++) {
-				if (feeSchedule[i] == 0) break;
-				uint256 shiftedFPDate = shiftEventTime(
-					feeSchedule[i],
-					contractTerms.businessDayConvention,
-					contractTerms.calendar
-				);
-				if (isInPeriod(shiftedFPDate, segmentStart, segmentEnd) == false) continue;
-				protoEventSchedule[index] = ProtoEvent(
-					shiftedFPDate,
-					shiftedFPDate.add(getEpochOffset(EventType.FP)),
-					feeSchedule[i],
-					EventType.FP,
-					contractTerms.currency,
-					EventType.FP,
-					EventType.FP
-				);
-				index++;
-			}
-		}
+        if (eventType == EventType.FP) {
+            uint256 index = 0;
 
-		// scaling
-		if ((contractTerms.scalingEffect != ScalingEffect._000 || contractTerms.scalingEffect != ScalingEffect._00M)
-			&& contractTerms.cycleAnchorDateOfScalingIndex != 0
-		) {
-			uint256[MAX_CYCLE_SIZE] memory scalingSchedule = computeDatesFromCycleSegment(
-				contractTerms.cycleAnchorDateOfScalingIndex,
-				contractTerms.maturityDate,
-				contractTerms.cycleOfScalingIndex,
-				contractTerms.endOfMonthConvention,
-				true,
-				segmentStart,
-				segmentEnd
-			);
-			for (uint8 i = 0; i < MAX_CYCLE_SIZE; i++) {
-				if (scalingSchedule[i] == 0) break;
-				uint256 shiftedSCDate = shiftEventTime(
-					scalingSchedule[i],
-					contractTerms.businessDayConvention,
-					contractTerms.calendar
-				);
-				if (isInPeriod(shiftedSCDate, segmentStart, segmentEnd) == false) continue;
-				protoEventSchedule[index] = ProtoEvent(
-					shiftedSCDate,
-					shiftedSCDate.add(getEpochOffset(EventType.SC)),
-					scalingSchedule[i],
-					EventType.SC,
-					contractTerms.currency,
-					EventType.SC,
-					EventType.SC
-				);
-				index++;
-			}
-		}
+            // fees
+            if (terms.cycleOfFee.isSet == true && terms.cycleAnchorDateOfFee != 0) {
+                uint256[MAX_CYCLE_SIZE] memory feeSchedule = computeDatesFromCycleSegment(
+                    terms.cycleAnchorDateOfFee,
+                    terms.maturityDate,
+                    terms.cycleOfFee,
+                    true,
+                    segmentStart,
+                    segmentEnd
+                );
+                for (uint8 i = 0; i < MAX_CYCLE_SIZE; i++) {
+                    if (feeSchedule[i] == 0) break;
+                    if (isInSegment(feeSchedule[i], segmentStart, segmentEnd) == false) continue;
+                    _eventSchedule[index] = encodeEvent(EventType.FP, feeSchedule[i]);
+                    index++;
+                }
+            }
+        }
 
-		// termination
-		if (contractTerms.terminationDate != 0) {
-			if (isInPeriod(contractTerms.terminationDate, segmentStart, segmentEnd)) {
-				protoEventSchedule[index] = ProtoEvent(
-					contractTerms.terminationDate,
-					contractTerms.terminationDate.add(getEpochOffset(EventType.TD)),
-					contractTerms.terminationDate,
-					EventType.TD,
-					contractTerms.currency,
-					EventType.TD,
-					EventType.TD
-				);
-				index++;
-			}
-		}
+        if (eventType == EventType.SC) {
+            uint256 index;
 
-		// principal redemption
-		if (isInPeriod(contractTerms.maturityDate, segmentStart, segmentEnd)) {
-			protoEventSchedule[index] = ProtoEvent(
-				contractTerms.maturityDate,
-				contractTerms.maturityDate.add(getEpochOffset(EventType.PR)),
-				contractTerms.maturityDate,
-				EventType.PR,
-				contractTerms.currency,
-				EventType.PR,
-				EventType.PR
-			);
-			index++;
-		}
+            // scaling
+            if ((terms.scalingEffect != ScalingEffect._000 || terms.scalingEffect != ScalingEffect._00M)
+                && terms.cycleAnchorDateOfScalingIndex != 0
+            ) {
+                uint256[MAX_CYCLE_SIZE] memory scalingSchedule = computeDatesFromCycleSegment(
+                    terms.cycleAnchorDateOfScalingIndex,
+                    terms.maturityDate,
+                    terms.cycleOfScalingIndex,
+                    true,
+                    segmentStart,
+                    segmentEnd
+                );
+                for (uint8 i = 0; i < MAX_CYCLE_SIZE; i++) {
+                    if (scalingSchedule[i] == 0) break;
+                    if (isInSegment(scalingSchedule[i], segmentStart, segmentEnd) == false) continue;
+                    _eventSchedule[index] = encodeEvent(EventType.SC, scalingSchedule[i]);
+                    index++;
+                }
+            }
+        }
 
-		sortProtoEventSchedule(protoEventSchedule, index);
+        return _eventSchedule;
+    }
 
-		return protoEventSchedule;
-	}
+    /**
+     * @notice Verifies that the provided event is still scheduled under the terms, the current state of the
+     * contract and the current state of the underlying.
+     * @param _event event for which to check if its still scheduled
+     * @param terms terms of the contract
+     * @param state current state of the contract
+     * @param hasUnderlying boolean indicating whether the contract has an underlying contract
+     * @param underlyingState state of the underlying (empty state object if non-existing)
+     * @return boolean indicating whether event is still scheduled
+     */
+    function isEventScheduled(
+        bytes32 _event,
+        LifecycleTerms memory terms,
+        State memory state,
+        bool hasUnderlying,
+        State memory underlyingState
+    )
+        public
+        pure
+        returns (bool)
+    {
+        return true;
+    }
 
-	/**
-	 * initialize contract state space based on the contract terms
-	 * @dev see initStateSpace()
-	 * @param contractTerms terms of the contract
-	 * @return initial contract state
-	 */
-	function initializeContractState(ContractTerms memory contractTerms)
-		private
-		pure
-		returns (ContractState memory)
-	{
-		ContractState memory contractState;
+    /**
+     * @notice Implements abstract method which is defined in BaseEngine.
+     * Applies an event to the current state of the contract and returns the resulting state.
+     * The inheriting Engine contract has to map the events type to the designated STF.
+     * todo Annuity calculator for RR/RRF events, IPCB events and ICB state variable
+     * @param terms terms of the contract
+     * @param state current state of the contract
+     * @param _event event for which to evaluate the next state for
+     * @param externalData external data needed for STF evaluation (e.g. rate for RR events)
+     * @return the resulting contract state
+     */
+    function stateTransitionFunction(
+        LifecycleTerms memory terms,
+        State memory state,
+        bytes32 _event,
+        bytes32 externalData
+    )
+        private
+        pure
+        returns (State memory)
+    {
+        (EventType eventType, uint256 scheduleTime) = decodeEvent(_event);
+        /*
+         * Note:
+         * Not supported: PRD events
+         */
+		if (eventType == EventType.AD) return STF_PAM_AD(terms, state, scheduleTime, externalData);
+		if (eventType == EventType.FP) return STF_PAM_FP(terms, state, scheduleTime, externalData);
+		if (eventType == EventType.IED) return STF_PAM_IED(terms, state, scheduleTime, externalData);
+		if (eventType == EventType.IPCI) return STF_PAM_IPCI(terms, state, scheduleTime, externalData);
+		if (eventType == EventType.IP) return STF_PAM_IP(terms, state, scheduleTime, externalData);
+		if (eventType == EventType.PP) return STF_PAM_PP(terms, state, scheduleTime, externalData);
+		//if (eventType == EventType.PRD) return STF_PAM_PRD(terms, state, scheduleTime, externalData);
+		if (eventType == EventType.MD) return STF_PAM_PR(terms, state, scheduleTime, externalData);
+		if (eventType == EventType.PY) return STF_PAM_PY(terms, state, scheduleTime, externalData);
+		if (eventType == EventType.RRF) return STF_PAM_RRF(terms, state, scheduleTime, externalData);
+		if (eventType == EventType.RR) return STF_PAM_RR(terms, state, scheduleTime, externalData);
+		if (eventType == EventType.SC) return STF_PAM_SC(terms, state, scheduleTime, externalData);
+		if (eventType == EventType.TD) return STF_PAM_TD(terms, state, scheduleTime, externalData);
+		if (eventType == EventType.CE)  return STF_PAM_CE(terms, state, scheduleTime, externalData);
 
-		contractState.contractStatus = ContractStatus.PF;
-		contractState.nominalScalingMultiplier = int256(1 * 10 ** PRECISION);
-		contractState.interestScalingMultiplier = int256(1 * 10 ** PRECISION);
-		contractState.contractRoleSign = contractTerms.contractRole;
-		contractState.lastEventTime = contractTerms.statusDate;
-		contractState.nominalValue = contractTerms.notionalPrincipal;
-		contractState.nominalRate = contractTerms.nominalInterestRate;
-		contractState.nominalAccrued = contractTerms.accruedInterest;
-		contractState.feeAccrued = contractTerms.feeAccrued;
+        revert("PAMEngine.stateTransitionFunction: ATTRIBUTE_NOT_FOUND");
+    }
 
-		return contractState;
-	}
+    /**
+     * @notice Implements abstract method which is defined in BaseEngine.
+     * Computes the payoff for an event under the current state of the contract.
+     * The inheriting Engine contract has to map the events type to the designated POF.
+     * todo IPCB events and Icb state variable, Icb state variable updates in IP-paying events
+     * @param terms terms of the contract
+     * @param state current state of the contract
+     * @param _event event for which the payoff should be evaluated
+     * @param externalData external data needed for POF evaluation (e.g. fxRate)
+     * @return the payoff of the event
+     */
+    function payoffFunction(
+        LifecycleTerms memory terms,
+        State memory state,
+        bytes32 _event,
+        bytes32 externalData
+    )
+        private
+        pure
+        returns (int256)
+    {
+        (EventType eventType, uint256 scheduleTime) = decodeEvent(_event);
 
-	/**
-	 * computes the next contract state based on the contract terms, state and the event type
-	 * @param timestamp current timestamp
-	 * @param contractTerms terms of the contract
-	 * @param contractState current state of the contract
-	 * @param eventType event type
-	 * @return next contract state
-	 */
-	function stateTransitionFunction(
-		uint256 timestamp,
-		ContractTerms memory contractTerms,
-		ContractState memory contractState,
-		EventType eventType
-	)
-		private
-		pure
-		returns (ContractState memory)
-	{
-		if (eventType == EventType.AD) return STF.STF_PAM_AD(timestamp, contractTerms, contractState);
-		if (eventType == EventType.CD) return STF.STF_PAM_CD(timestamp, contractTerms, contractState);
-		if (eventType == EventType.FP) return STF.STF_PAM_FP(timestamp, contractTerms, contractState);
-		if (eventType == EventType.IED) return STF.STF_PAM_IED(timestamp, contractTerms, contractState);
-		if (eventType == EventType.IPCI) return STF.STF_PAM_IPCI(timestamp, contractTerms, contractState);
-		if (eventType == EventType.IP) return STF.STF_PAM_IP(timestamp, contractTerms, contractState);
-		if (eventType == EventType.PP) return STF.STF_PAM_PP(timestamp, contractTerms, contractState);
-		if (eventType == EventType.PRD) return STF.STF_PAM_PRD(timestamp, contractTerms, contractState);
-		if (eventType == EventType.PR) return STF.STF_PAM_PR(timestamp, contractTerms, contractState);
-		if (eventType == EventType.PY) return STF.STF_PAM_PY(timestamp, contractTerms, contractState);
-		if (eventType == EventType.RRF) return STF.STF_PAM_RRF(timestamp, contractTerms, contractState);
-		if (eventType == EventType.RR) return STF.STF_PAM_RR(timestamp, contractTerms, contractState);
-		if (eventType == EventType.SC) return STF.STF_PAM_SC(timestamp, contractTerms, contractState);
-		if (eventType == EventType.TD) return STF.STF_PAM_TD(timestamp, contractTerms, contractState);
+		/*
+		 * Note: PAM contracts don't have IPCB and PR events.
+         * Not supported: PRD events
+		 */
 
-		revert("PAMEngine.stateTransitionFunction: ATTRIBUTE_NOT_FOUND");
-	}
+		if (eventType == EventType.AD) return 0; // Analysis Event
+		if (eventType == EventType.IPCI) return 0; // Interest Capitalization Event
+		if (eventType == EventType.RRF) return 0; // Rate Reset Fixed
+		if (eventType == EventType.RR) return 0; // Rate Reset Variable
+		if (eventType == EventType.SC) return 0; // Scaling Index Revision
+		if (eventType == EventType.CE) return 0; // Credit Event
+		if (eventType == EventType.FP) return POF_PAM_FP(terms, state, scheduleTime, externalData); // Fee Payment
+		if (eventType == EventType.IED) return POF_PAM_IED(terms, state, scheduleTime, externalData); // Intital Exchange
+		if (eventType == EventType.IP) return POF_PAM_IP(terms, state, scheduleTime, externalData); // Interest Payment
+		if (eventType == EventType.PP) return POF_PAM_PP(terms, state, scheduleTime, externalData); // Principal Prepayment
+		//if (eventType == EventType.PRD) return POF_PAM_PRD(terms, state, scheduleTime, externalData); // Purchase
+		if (eventType == EventType.MD) return POF_PAM_MD(terms, state, scheduleTime, externalData); // Maturity
+		if (eventType == EventType.PY) return POF_PAM_PY(terms, state, scheduleTime, externalData); // Penalty Payment
+		if (eventType == EventType.TD) return POF_PAM_TD(terms, state, scheduleTime, externalData); // Termination
 
-	/**
-	 * calculates the payoff for the current time based on the contract terms,
-	 * state and the event type
-	 * @param timestamp current timestamp
-	 * @param contractTerms terms of the contract
-	 * @param contractState current state of the contract
-	 * @param eventType event type
-	 * @return payoff
-	 */
-	function payoffFunction(
-		uint256 timestamp,
-		ContractTerms memory contractTerms,
-		ContractState memory contractState,
-		EventType eventType
-	)
-		private
-		pure
-		returns (int256)
-	{
-		if (eventType == EventType.AD) return 0;
-		if (eventType == EventType.CD) return 0;
-		if (eventType == EventType.IPCI) return 0;
-		if (eventType == EventType.RRF) return 0;
-		if (eventType == EventType.RR) return 0;
-		if (eventType == EventType.SC) return 0;
-		if (eventType == EventType.FP) return POF_PAM_FP(timestamp, contractTerms, contractState);
-		if (eventType == EventType.IED) return POF_PAM_IED(timestamp, contractTerms, contractState);
-		if (eventType == EventType.IP) return POF_PAM_IP(timestamp, contractTerms, contractState);
-		if (eventType == EventType.PP) return POF_PAM_PP(timestamp, contractTerms, contractState);
-		if (eventType == EventType.PRD) return POF_PAM_PRD(timestamp, contractTerms, contractState);
-		if (eventType == EventType.PR) return POF_PAM_PR(timestamp, contractTerms, contractState);
-		if (eventType == EventType.PY) return POF_PAM_PY(timestamp, contractTerms, contractState);
-		if (eventType == EventType.TD) return POF_PAM_TD(timestamp, contractTerms, contractState);
-
-		revert("PAMEngine.payoffFunction: ATTRIBUTE_NOT_FOUND");
-	}
+        revert("PAMEngine.payoffFunction: ATTRIBUTE_NOT_FOUND");
+    }
 }

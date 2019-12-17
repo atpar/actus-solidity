@@ -27,129 +27,129 @@
         "eventDate": "2012-12-31T00:00",
         "eventType": "AD",
         "eventValue": 0,
-        "nominalValue": 0,
-        "nominalRate": 0,
-        "nominalAccrued": 0
+        "notionalPrincipal": 0,
+        "nominalInterestRate": 0,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-01-01T00:00",
         "eventType": "IED",
         "eventValue": -3000,
-        "nominalValue": 3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-01-01T00:00",
         "eventType": "IP",
         "eventValue": 0,
-        "nominalValue": 3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-02-01T00:00",
         "eventType": "IP",
         "eventValue": 25.4794520547945,
-        "nominalValue": 3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-03-01T00:00",
         "eventType": "IP",
         "eventValue": 23.013698630137,
-        "nominalValue": 3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-04-01T00:00",
         "eventType": "IP",
         "eventValue": 25.4794520547945,
-        "nominalValue": 3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-05-01T00:00",
         "eventType": "IP",
         "eventValue": 24.6575342465753,
-        "nominalValue": 3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-06-01T00:00",
         "eventType": "IP",
         "eventValue": 25.4794520547945,
-        "nominalValue": 3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-07-01T00:00",
         "eventType": "IP",
         "eventValue": 24.6575342465753,
-        "nominalValue": 3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-08-01T00:00",
         "eventType": "IP",
         "eventValue": 25.4794520547945,
-        "nominalValue": 3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-09-01T00:00",
         "eventType": "IP",
         "eventValue": 25.4794520547945,
-        "nominalValue": 3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-10-01T00:00",
         "eventType": "IP",
         "eventValue": 24.6575342465753,
-        "nominalValue": 3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-11-01T00:00",
         "eventType": "IP",
         "eventValue": 25.4794520547945,
-        "nominalValue": 3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-12-01T00:00",
         "eventType": "IP",
         "eventValue": 24.6575342465753,
-        "nominalValue": 3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
-      },
-      {
-        "eventDate": "2014-01-01T00:00",
-        "eventType": "PR",
-        "eventValue": 3000,
-        "nominalValue": 0,
-        "nominalRate": 0.1,
-        "nominalAccrued": 25.4794520547945
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2014-01-01T00:00",
         "eventType": "IP",
         "eventValue": 25.4794520547945,
-        "nominalValue": 0,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
+      },
+      {
+        "eventDate": "2014-01-01T00:00",
+        "eventType": "MD",
+        "eventValue": 3000,
+        "notionalPrincipal": 0,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       }
     ]
   },
@@ -181,81 +181,81 @@
         "eventDate": "2012-12-31T00:00",
         "eventType": "AD",
         "eventValue": 0,
-        "nominalValue": 0,
-        "nominalRate": 0,
-        "nominalAccrued": 0
+        "notionalPrincipal": 0,
+        "nominalInterestRate": 0,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-01-01T00:00",
         "eventType": "IED",
         "eventValue": -2800,
-        "nominalValue": 3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-01-01T00:00",
         "eventType": "IP",
         "eventValue": 0,
-        "nominalValue": 3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-03-01T00:00",
         "eventType": "IP",
         "eventValue": 49.1666666666667,
-        "nominalValue": 3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-05-01T00:00",
         "eventType": "IP",
         "eventValue": 50.8333333333333,
-        "nominalValue": 3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-07-01T00:00",
         "eventType": "IP",
         "eventValue": 50.8333333333333,
-        "nominalValue": 3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-09-01T00:00",
         "eventType": "IP",
         "eventValue": 51.6666666666667,
-        "nominalValue": 3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-11-01T00:00",
         "eventType": "IP",
         "eventValue": 50.8333333333333,
-        "nominalValue": 3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
-      },
-      {
-        "eventDate": "2014-01-01T00:00",
-        "eventType": "PR",
-        "eventValue": 3000,
-        "nominalValue": 0,
-        "nominalRate": 0.1,
-        "nominalAccrued": 50.8333333333333
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2014-01-01T00:00",
         "eventType": "IP",
         "eventValue": 50.8333333333333,
-        "nominalValue": 0,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
+      },
+      {
+        "eventDate": "2014-01-01T00:00",
+        "eventType": "MD",
+        "eventValue": 3000,
+        "notionalPrincipal": 0,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       }
     ]
   },
@@ -287,121 +287,121 @@
         "eventDate": "2013-01-01T00:00",
         "eventType": "IED",
         "eventValue": 3000,
-        "nominalValue": -3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": -3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-01-01T00:00",
         "eventType": "IP",
         "eventValue": 0,
-        "nominalValue": -3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": -3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-02-01T00:00",
         "eventType": "IP",
         "eventValue": -25.4794520547945,
-        "nominalValue": -3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": -3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-03-01T00:00",
         "eventType": "IP",
         "eventValue": -23.013698630137,
-        "nominalValue": -3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": -3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-04-01T00:00",
         "eventType": "IP",
         "eventValue": -25.4794520547945,
-        "nominalValue": -3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": -3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-05-01T00:00",
         "eventType": "IP",
         "eventValue": -24.6575342465753,
-        "nominalValue": -3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": -3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-06-01T00:00",
         "eventType": "IP",
         "eventValue": -25.4794520547945,
-        "nominalValue": -3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": -3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-07-01T00:00",
         "eventType": "IP",
         "eventValue": -24.6575342465753,
-        "nominalValue": -3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": -3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-08-01T00:00",
         "eventType": "IP",
         "eventValue": -25.4794520547945,
-        "nominalValue": -3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": -3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-09-01T00:00",
         "eventType": "IP",
         "eventValue": -25.4794520547945,
-        "nominalValue": -3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": -3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-10-01T00:00",
         "eventType": "IP",
         "eventValue": -24.6575342465753,
-        "nominalValue": -3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": -3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-11-01T00:00",
         "eventType": "IP",
         "eventValue": -25.4794520547945,
-        "nominalValue": -3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": -3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-12-01T00:00",
         "eventType": "IP",
         "eventValue": -24.6575342465753,
-        "nominalValue": -3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
-      },
-      {
-        "eventDate": "2014-01-01T00:00",
-        "eventType": "PR",
-        "eventValue": -3000,
-        "nominalValue": 0,
-        "nominalRate": 0.1,
-        "nominalAccrued": -25.4794520547945
+        "notionalPrincipal": -3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2014-01-01T00:00",
         "eventType": "IP",
         "eventValue": -25.4794520547945,
-        "nominalValue": 0,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": -3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
+      },
+      {
+        "eventDate": "2014-01-01T00:00",
+        "eventType": "MD",
+        "eventValue": -3000,
+        "notionalPrincipal": 0,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       }
     ]
   },
@@ -433,129 +433,129 @@
         "eventDate": "2012-12-31T00:00",
         "eventType": "AD",
         "eventValue": 0,
-        "nominalValue": 0,
-        "nominalRate": 0,
-        "nominalAccrued": 0
+        "notionalPrincipal": 0,
+        "nominalInterestRate": 0,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-01-01T00:00",
         "eventType": "IED",
         "eventValue": -2800,
-        "nominalValue": 3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-01-01T00:00",
         "eventType": "IP",
         "eventValue": 0,
-        "nominalValue": 3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-02-01T00:00",
         "eventType": "IP",
         "eventValue": 25,
-        "nominalValue": 3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-03-01T00:00",
         "eventType": "IP",
         "eventValue": 25,
-        "nominalValue": 3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-04-01T00:00",
         "eventType": "IP",
         "eventValue": 25,
-        "nominalValue": 3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-05-01T00:00",
         "eventType": "IP",
         "eventValue": 25,
-        "nominalValue": 3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-06-01T00:00",
         "eventType": "IP",
         "eventValue": 25,
-        "nominalValue": 3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-07-01T00:00",
         "eventType": "IP",
         "eventValue": 25,
-        "nominalValue": 3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-08-01T00:00",
         "eventType": "IP",
         "eventValue": 25,
-        "nominalValue": 3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-09-01T00:00",
         "eventType": "IP",
         "eventValue": 25,
-        "nominalValue": 3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-10-01T00:00",
         "eventType": "IP",
         "eventValue": 25,
-        "nominalValue": 3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-11-01T00:00",
         "eventType": "IP",
         "eventValue": 25,
-        "nominalValue": 3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-12-01T00:00",
         "eventType": "IP",
         "eventValue": 25,
-        "nominalValue": 3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
-      },
-      {
-        "eventDate": "2014-01-01T00:00",
-        "eventType": "PR",
-        "eventValue": 3000,
-        "nominalValue": 0,
-        "nominalRate": 0.1,
-        "nominalAccrued": 25
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2014-01-01T00:00",
         "eventType": "IP",
         "eventValue": 25,
-        "nominalValue": 0,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
+      },
+      {
+        "eventDate": "2014-01-01T00:00",
+        "eventType": "MD",
+        "eventValue": 3000,
+        "notionalPrincipal": 0,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       }
     ]
   },
@@ -588,113 +588,113 @@
         "eventDate": "2013-01-30T00:00",
         "eventType": "IED",
         "eventValue": -2800,
-        "nominalValue": 3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-01-30T00:00",
         "eventType": "IP",
         "eventValue": 0,
-        "nominalValue": 3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-02-28T00:00",
         "eventType": "IP",
         "eventValue": 23.3333333333333,
-        "nominalValue": 3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-03-30T00:00",
         "eventType": "IP",
         "eventValue": 26.6666666666667,
-        "nominalValue": 3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-04-30T00:00",
         "eventType": "IP",
         "eventValue": 25,
-        "nominalValue": 3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-05-30T00:00",
         "eventType": "IP",
         "eventValue": 25,
-        "nominalValue": 3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-06-30T00:00",
         "eventType": "IP",
         "eventValue": 25,
-        "nominalValue": 3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-07-30T00:00",
         "eventType": "IP",
         "eventValue": 25,
-        "nominalValue": 3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-08-30T00:00",
         "eventType": "IP",
         "eventValue": 25,
-        "nominalValue": 3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-09-30T00:00",
         "eventType": "IP",
         "eventValue": 25,
-        "nominalValue": 3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-10-30T00:00",
         "eventType": "IP",
         "eventValue": 25,
-        "nominalValue": 3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-11-30T00:00",
         "eventType": "IP",
         "eventValue": 25,
-        "nominalValue": 3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
-      },
-      {
-        "eventDate": "2014-01-01T00:00",
-        "eventType": "PR",
-        "eventValue": 3000,
-        "nominalValue": 0,
-        "nominalRate": 0.1,
-        "nominalAccrued": 25.8333333333333
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2014-01-01T00:00",
         "eventType": "IP",
         "eventValue": 25.8333333333333,
-        "nominalValue": 0,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
+      },
+      {
+        "eventDate": "2014-01-01T00:00",
+        "eventType": "MD",
+        "eventValue": 3000,
+        "notionalPrincipal": 0,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       }
     ]
   },
@@ -728,113 +728,113 @@
         "eventDate": "2013-01-31T00:00",
         "eventType": "IED",
         "eventValue": -2800,
-        "nominalValue": 3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-01-31T00:00",
         "eventType": "IP",
         "eventValue": 0,
-        "nominalValue": 3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-02-28T00:00",
         "eventType": "IP",
         "eventValue": 23.3333333333333,
-        "nominalValue": 3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-03-29T00:00",
         "eventType": "IP",
         "eventValue": 26.6666666666667,
-        "nominalValue": 3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-04-30T00:00",
         "eventType": "IP",
         "eventValue": 25,
-        "nominalValue": 3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-05-31T00:00",
         "eventType": "IP",
         "eventValue": 25,
-        "nominalValue": 3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-06-28T00:00",
         "eventType": "IP",
         "eventValue": 25,
-        "nominalValue": 3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-07-31T00:00",
         "eventType": "IP",
         "eventValue": 25,
-        "nominalValue": 3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-08-30T00:00",
         "eventType": "IP",
         "eventValue": 25,
-        "nominalValue": 3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-09-30T00:00",
         "eventType": "IP",
         "eventValue": 25,
-        "nominalValue": 3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-10-31T00:00",
         "eventType": "IP",
         "eventValue": 25,
-        "nominalValue": 3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-11-29T00:00",
         "eventType": "IP",
         "eventValue": 25,
-        "nominalValue": 3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
-      },
-      {
-        "eventDate": "2014-01-01T00:00",
-        "eventType": "PR",
-        "eventValue": 3000,
-        "nominalValue": 0,
-        "nominalRate": 0.1,
-        "nominalAccrued": 25.8333333333333
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2014-01-01T00:00",
         "eventType": "IP",
         "eventValue": 25.8333333333333,
-        "nominalValue": 0,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
+      },
+      {
+        "eventDate": "2014-01-01T00:00",
+        "eventType": "MD",
+        "eventValue": 3000,
+        "notionalPrincipal": 0,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       }
     ]
   },
@@ -868,113 +868,113 @@
         "eventDate": "2013-01-31T00:00",
         "eventType": "IED",
         "eventValue": -2800,
-        "nominalValue": 3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-01-31T00:00",
         "eventType": "IP",
         "eventValue": 0,
-        "nominalValue": 3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-02-28T00:00",
         "eventType": "IP",
         "eventValue": 23.3333333333333,
-        "nominalValue": 3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-03-29T00:00",
         "eventType": "IP",
         "eventValue": 25.8333333333333,
-        "nominalValue": 3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-04-30T00:00",
         "eventType": "IP",
         "eventValue": 25.8333333333333,
-        "nominalValue": 3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-05-31T00:00",
         "eventType": "IP",
         "eventValue": 25,
-        "nominalValue": 3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-06-28T00:00",
         "eventType": "IP",
         "eventValue": 23.3333333333333,
-        "nominalValue": 3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-07-31T00:00",
         "eventType": "IP",
         "eventValue": 26.6666666666667,
-        "nominalValue": 3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-08-30T00:00",
         "eventType": "IP",
         "eventValue": 25,
-        "nominalValue": 3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-09-30T00:00",
         "eventType": "IP",
         "eventValue": 25,
-        "nominalValue": 3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-10-31T00:00",
         "eventType": "IP",
         "eventValue": 25,
-        "nominalValue": 3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-11-29T00:00",
         "eventType": "IP",
         "eventValue": 24.1666666666667,
-        "nominalValue": 3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
-      },
-      {
-        "eventDate": "2014-01-01T00:00",
-        "eventType": "PR",
-        "eventValue": 3000,
-        "nominalValue": 0,
-        "nominalRate": 0.1,
-        "nominalAccrued": 26.6666666666667
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2014-01-01T00:00",
         "eventType": "IP",
         "eventValue": 26.6666666666667,
-        "nominalValue": 0,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
+      },
+      {
+        "eventDate": "2014-01-01T00:00",
+        "eventType": "MD",
+        "eventValue": 3000,
+        "notionalPrincipal": 0,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       }
     ]
   },
@@ -1008,113 +1008,113 @@
         "eventDate": "2013-01-31T00:00",
         "eventType": "IED",
         "eventValue": -2800,
-        "nominalValue": 3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-01-31T00:00",
         "eventType": "IP",
         "eventValue": 0,
-        "nominalValue": 3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-02-28T00:00",
         "eventType": "IP",
         "eventValue": 23.3333333333333,
-        "nominalValue": 3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-04-01T00:00",
         "eventType": "IP",
         "eventValue": 26.6666666666667,
-        "nominalValue": 3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-04-30T00:00",
         "eventType": "IP",
         "eventValue": 25,
-        "nominalValue": 3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-05-31T00:00",
         "eventType": "IP",
         "eventValue": 25,
-        "nominalValue": 3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-07-01T00:00",
         "eventType": "IP",
         "eventValue": 25,
-        "nominalValue": 3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-07-31T00:00",
         "eventType": "IP",
         "eventValue": 25,
-        "nominalValue": 3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-09-02T00:00",
         "eventType": "IP",
         "eventValue": 25,
-        "nominalValue": 3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-09-30T00:00",
         "eventType": "IP",
         "eventValue": 25,
-        "nominalValue": 3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-10-31T00:00",
         "eventType": "IP",
         "eventValue": 25,
-        "nominalValue": 3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-12-02T00:00",
         "eventType": "IP",
         "eventValue": 25,
-        "nominalValue": 3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
-      },
-      {
-        "eventDate": "2014-01-01T00:00",
-        "eventType": "PR",
-        "eventValue": 3000,
-        "nominalValue": 0,
-        "nominalRate": 0.1,
-        "nominalAccrued": 25.8333333333333
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2014-01-01T00:00",
         "eventType": "IP",
         "eventValue": 25.8333333333333,
-        "nominalValue": 0,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
+      },
+      {
+        "eventDate": "2014-01-01T00:00",
+        "eventType": "MD",
+        "eventValue": 3000,
+        "notionalPrincipal": 0,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       }
     ]
   },
@@ -1148,113 +1148,113 @@
         "eventDate": "2013-01-31T00:00",
         "eventType": "IED",
         "eventValue": -2800,
-        "nominalValue": 3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-01-31T00:00",
         "eventType": "IP",
         "eventValue": 0,
-        "nominalValue": 3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-02-28T00:00",
         "eventType": "IP",
         "eventValue": 23.3333333333333,
-        "nominalValue": 3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-04-01T00:00",
         "eventType": "IP",
         "eventValue": 27.5,
-        "nominalValue": 3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-04-30T00:00",
         "eventType": "IP",
         "eventValue": 24.1666666666667,
-        "nominalValue": 3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-05-31T00:00",
         "eventType": "IP",
         "eventValue": 25,
-        "nominalValue": 3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-07-01T00:00",
         "eventType": "IP",
         "eventValue": 25.8333333333333,
-        "nominalValue": 3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-07-31T00:00",
         "eventType": "IP",
         "eventValue": 24.1666666666667,
-        "nominalValue": 3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-09-02T00:00",
         "eventType": "IP",
         "eventValue": 26.6666666666667,
-        "nominalValue": 3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-09-30T00:00",
         "eventType": "IP",
         "eventValue": 23.3333333333333,
-        "nominalValue": 3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-10-31T00:00",
         "eventType": "IP",
         "eventValue": 25,
-        "nominalValue": 3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-12-02T00:00",
         "eventType": "IP",
         "eventValue": 26.6666666666667,
-        "nominalValue": 3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
-      },
-      {
-        "eventDate": "2014-01-01T00:00",
-        "eventType": "PR",
-        "eventValue": 3000,
-        "nominalValue": 0,
-        "nominalRate": 0.1,
-        "nominalAccrued": 24.1666666666667
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2014-01-01T00:00",
         "eventType": "IP",
         "eventValue": 24.1666666666667,
-        "nominalValue": 0,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
+      },
+      {
+        "eventDate": "2014-01-01T00:00",
+        "eventType": "MD",
+        "eventValue": 3000,
+        "notionalPrincipal": 0,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       }
     ]
   },
@@ -1288,113 +1288,113 @@
         "eventDate": "2013-01-31T00:00",
         "eventType": "IED",
         "eventValue": -2800,
-        "nominalValue": 3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-01-31T00:00",
         "eventType": "IP",
         "eventValue": 0,
-        "nominalValue": 3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-02-28T00:00",
         "eventType": "IP",
         "eventValue": 23.3333333333333,
-        "nominalValue": 3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-03-29T00:00",
         "eventType": "IP",
         "eventValue": 25.8333333333333,
-        "nominalValue": 3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-04-30T00:00",
         "eventType": "IP",
         "eventValue": 25.8333333333333,
-        "nominalValue": 3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-05-31T00:00",
         "eventType": "IP",
         "eventValue": 25,
-        "nominalValue": 3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-06-28T00:00",
         "eventType": "IP",
         "eventValue": 23.3333333333333,
-        "nominalValue": 3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-07-31T00:00",
         "eventType": "IP",
         "eventValue": 26.6666666666667,
-        "nominalValue": 3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-08-30T00:00",
         "eventType": "IP",
         "eventValue": 25,
-        "nominalValue": 3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-09-30T00:00",
         "eventType": "IP",
         "eventValue": 25,
-        "nominalValue": 3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-10-31T00:00",
         "eventType": "IP",
         "eventValue": 25,
-        "nominalValue": 3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-11-29T00:00",
         "eventType": "IP",
         "eventValue": 24.1666666666667,
-        "nominalValue": 3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
-      },
-      {
-        "eventDate": "2014-01-01T00:00",
-        "eventType": "PR",
-        "eventValue": 3000,
-        "nominalValue": 0,
-        "nominalRate": 0.1,
-        "nominalAccrued": 26.6666666666667
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2014-01-01T00:00",
         "eventType": "IP",
         "eventValue": 26.6666666666667,
-        "nominalValue": 0,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
+      },
+      {
+        "eventDate": "2014-01-01T00:00",
+        "eventType": "MD",
+        "eventValue": 3000,
+        "notionalPrincipal": 0,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       }
     ]
   },
@@ -1428,113 +1428,113 @@
         "eventDate": "2013-01-31T00:00",
         "eventType": "IED",
         "eventValue": -2800,
-        "nominalValue": 3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-01-31T00:00",
         "eventType": "IP",
         "eventValue": 0,
-        "nominalValue": 3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-02-28T00:00",
         "eventType": "IP",
         "eventValue": 23.3333333333333,
-        "nominalValue": 3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-03-29T00:00",
         "eventType": "IP",
         "eventValue": 25.8333333333333,
-        "nominalValue": 3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-04-30T00:00",
         "eventType": "IP",
         "eventValue": 25.8333333333333,
-        "nominalValue": 3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-05-31T00:00",
         "eventType": "IP",
         "eventValue": 25,
-        "nominalValue": 3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-06-28T00:00",
         "eventType": "IP",
         "eventValue": 23.3333333333333,
-        "nominalValue": 3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-07-31T00:00",
         "eventType": "IP",
         "eventValue": 26.6666666666667,
-        "nominalValue": 3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-08-30T00:00",
         "eventType": "IP",
         "eventValue": 25,
-        "nominalValue": 3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-09-30T00:00",
         "eventType": "IP",
         "eventValue": 25,
-        "nominalValue": 3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-10-31T00:00",
         "eventType": "IP",
         "eventValue": 25,
-        "nominalValue": 3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-11-29T00:00",
         "eventType": "IP",
         "eventValue": 24.1666666666667,
-        "nominalValue": 3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
-      },
-      {
-        "eventDate": "2014-01-01T00:00",
-        "eventType": "PR",
-        "eventValue": 3000,
-        "nominalValue": 0,
-        "nominalRate": 0.1,
-        "nominalAccrued": 26.6666666666667
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2014-01-01T00:00",
         "eventType": "IP",
         "eventValue": 26.6666666666667,
-        "nominalValue": 0,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
+      },
+      {
+        "eventDate": "2014-01-01T00:00",
+        "eventType": "MD",
+        "eventValue": 3000,
+        "notionalPrincipal": 0,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       }
     ]
   },
@@ -1567,100 +1567,92 @@
       },
     "results": [
       {
-        "eventDate": "2012-12-31T00:00",
-        "eventType": "AD",
-        "eventValue": 0,
-        "nominalValue": 0,
-        "nominalRate": 0,
-        "nominalAccrued": 0
-      },
-      {
         "eventDate": "2013-01-30T00:00",
         "eventType": "PRD",
         "eventValue": -1023.83561643836,
-        "nominalValue": 3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 23.8356164383562
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 23.8356164383562
       },
       {
         "eventDate": "2013-01-31T00:00",
         "eventType": "IP",
         "eventValue": 24.6575342465753,
-        "nominalValue": 3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-02-28T00:00",
         "eventType": "IP",
         "eventValue": 23.013698630137,
-        "nominalValue": 3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-03-31T00:00",
         "eventType": "IP",
         "eventValue": 25.4794520547945,
-        "nominalValue": 3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-04-30T00:00",
         "eventType": "IP",
         "eventValue": 24.6575342465753,
-        "nominalValue": 3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-05-31T00:00",
         "eventType": "IP",
         "eventValue": 25.4794520547945,
-        "nominalValue": 3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-06-30T00:00",
         "eventType": "IP",
         "eventValue": 24.6575342465753,
-        "nominalValue": 3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-07-31T00:00",
         "eventType": "IP",
         "eventValue": 25.4794520547945,
-        "nominalValue": 3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-08-31T00:00",
         "eventType": "IP",
         "eventValue": 25.4794520547945,
-        "nominalValue": 3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-09-30T00:00",
         "eventType": "IP",
         "eventValue": 24.6575342465753,
-        "nominalValue": 3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-10-17T00:00",
         "eventType": "TD",
         "eventValue": 2913.97260273973,
-        "nominalValue": 0,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": 0,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       }
     ]
   },
@@ -1693,49 +1685,49 @@
         "eventDate": "2012-12-31T00:00",
         "eventType": "AD",
         "eventValue": 0,
-        "nominalValue": 3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0.819672131147541
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0.819672131147541
       },
       {
         "eventDate": "2013-01-09T00:00",
         "eventType": "IP",
         "eventValue": 8.21468672807955,
-        "nominalValue": 3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-04-09T00:00",
         "eventType": "IP",
         "eventValue": 73.972602739726,
-        "nominalValue": 3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-07-09T00:00",
         "eventType": "IP",
         "eventValue": 74.7945205479452,
-        "nominalValue": 3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
-      },
-      {
-        "eventDate": "2014-01-01T00:00",
-        "eventType": "PR",
-        "eventValue": 3000,
-        "nominalValue": 0,
-        "nominalRate": 0.1,
-        "nominalAccrued": 144.657534246575
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2014-01-01T00:00",
         "eventType": "IP",
         "eventValue": 144.657534246575,
-        "nominalValue": 0,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
+      },
+      {
+        "eventDate": "2014-01-01T00:00",
+        "eventType": "MD",
+        "eventValue": 3000,
+        "notionalPrincipal": 0,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       }
     ]
   },
@@ -1768,129 +1760,129 @@
         "eventDate": "2012-12-31T00:00",
         "eventType": "AD",
         "eventValue": 0,
-        "nominalValue": 0,
-        "nominalRate": 0,
-        "nominalAccrued": 0
+        "notionalPrincipal": 0,
+        "nominalInterestRate": 0,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-01-01T00:00",
         "eventType": "IED",
         "eventValue": -3000,
-        "nominalValue": 3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 50
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 50
       },
       {
         "eventDate": "2013-01-01T00:00",
         "eventType": "IP",
         "eventValue": 50,
-        "nominalValue": 3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-02-01T00:00",
         "eventType": "IP",
         "eventValue": 25.4794520547945,
-        "nominalValue": 3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-03-01T00:00",
         "eventType": "IP",
         "eventValue": 23.013698630137,
-        "nominalValue": 3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-04-01T00:00",
         "eventType": "IP",
         "eventValue": 25.4794520547945,
-        "nominalValue": 3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-05-01T00:00",
         "eventType": "IP",
         "eventValue": 24.6575342465753,
-        "nominalValue": 3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-06-01T00:00",
         "eventType": "IP",
         "eventValue": 25.4794520547945,
-        "nominalValue": 3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-07-01T00:00",
         "eventType": "IP",
         "eventValue": 24.6575342465753,
-        "nominalValue": 3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-08-01T00:00",
         "eventType": "IP",
         "eventValue": 25.4794520547945,
-        "nominalValue": 3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-09-01T00:00",
         "eventType": "IP",
         "eventValue": 25.4794520547945,
-        "nominalValue": 3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-10-01T00:00",
         "eventType": "IP",
         "eventValue": 24.6575342465753,
-        "nominalValue": 3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-11-01T00:00",
         "eventType": "IP",
         "eventValue": 25.4794520547945,
-        "nominalValue": 3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-12-01T00:00",
         "eventType": "IP",
         "eventValue": 24.6575342465753,
-        "nominalValue": 3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
-      },
-      {
-        "eventDate": "2014-01-01T00:00",
-        "eventType": "PR",
-        "eventValue": 3000,
-        "nominalValue": 0,
-        "nominalRate": 0.1,
-        "nominalAccrued": 25.4794520547945
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2014-01-01T00:00",
         "eventType": "IP",
         "eventValue": 25.4794520547945,
-        "nominalValue": 0,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
+      },
+      {
+        "eventDate": "2014-01-01T00:00",
+        "eventType": "MD",
+        "eventValue": 3000,
+        "notionalPrincipal": 0,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       }
     ]
   },
@@ -1922,121 +1914,121 @@
         "eventDate": "2012-12-31T00:00",
         "eventType": "AD",
         "eventValue": 0,
-        "nominalValue": 0,
-        "nominalRate": 0,
-        "nominalAccrued": 0
+        "notionalPrincipal": 0,
+        "nominalInterestRate": 0,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-01-01T00:00",
         "eventType": "IED",
         "eventValue": -3000,
-        "nominalValue": 3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-01-01T00:00",
         "eventType": "IP",
         "eventValue": 0,
-        "nominalValue": 3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-02-01T00:00",
         "eventType": "IP",
         "eventValue": 25.4794520547945,
-        "nominalValue": 3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-03-01T00:00",
         "eventType": "IP",
         "eventValue": 23.013698630137,
-        "nominalValue": 3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-04-01T00:00",
         "eventType": "IP",
         "eventValue": 25.4794520547945,
-        "nominalValue": 3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-05-01T00:00",
         "eventType": "IP",
         "eventValue": 24.6575342465753,
-        "nominalValue": 3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-06-01T00:00",
         "eventType": "IP",
         "eventValue": 25.4794520547945,
-        "nominalValue": 3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-07-01T00:00",
         "eventType": "IP",
         "eventValue": 24.6575342465753,
-        "nominalValue": 3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-08-01T00:00",
         "eventType": "IP",
         "eventValue": 25.4794520547945,
-        "nominalValue": 3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-09-01T00:00",
         "eventType": "IP",
         "eventValue": 25.4794520547945,
-        "nominalValue": 3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-10-01T00:00",
         "eventType": "IP",
         "eventValue": 24.6575342465753,
-        "nominalValue": 3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-11-01T00:00",
         "eventType": "IP",
         "eventValue": 25.4794520547945,
-        "nominalValue": 3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
-      },
-      {
-        "eventDate": "2013-12-31T00:00",
-        "eventType": "PR",
-        "eventValue": 3000,
-        "nominalValue": 0,
-        "nominalRate": 0.1,
-        "nominalAccrued": 49.3150684931507
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-12-31T00:00",
         "eventType": "IP",
         "eventValue": 49.3150684931507,
-        "nominalValue": 0,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
+      },
+      {
+        "eventDate": "2013-12-31T00:00",
+        "eventType": "MD",
+        "eventValue": 3000,
+        "notionalPrincipal": 0,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       }
     ]
   },
@@ -2068,57 +2060,57 @@
         "eventDate": "2012-12-31T00:00",
         "eventType": "AD",
         "eventValue": 0,
-        "nominalValue": 0,
-        "nominalRate": 0,
-        "nominalAccrued": 0
+        "notionalPrincipal": 0,
+        "nominalInterestRate": 0,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-01-01T00:00",
         "eventType": "IED",
         "eventValue": -3000,
-        "nominalValue": 3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-01-01T00:00",
         "eventType": "IP",
         "eventValue": 0,
-        "nominalValue": 3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2014-01-01T00:00",
         "eventType": "IP",
         "eventValue": 300,
-        "nominalValue": 3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2015-01-01T00:00",
         "eventType": "IP",
         "eventValue": 300,
-        "nominalValue": 3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
-      },
-      {
-        "eventDate": "2016-01-01T00:00",
-        "eventType": "PR",
-        "eventValue": 3000,
-        "nominalValue": 0,
-        "nominalRate": 0.1,
-        "nominalAccrued": 300
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2016-01-01T00:00",
         "eventType": "IP",
         "eventValue": 300,
-        "nominalValue": 0,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
+      },
+      {
+        "eventDate": "2016-01-01T00:00",
+        "eventType": "MD",
+        "eventValue": 3000,
+        "notionalPrincipal": 0,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       }
     ]
   },
@@ -2150,145 +2142,145 @@
         "eventDate": "2012-12-31T00:00",
         "eventType": "AD",
         "eventValue": 0,
-        "nominalValue": 0,
-        "nominalRate": 0,
-        "nominalAccrued": 0
+        "notionalPrincipal": 0,
+        "nominalInterestRate": 0,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-01-01T00:00",
         "eventType": "IED",
         "eventValue": -3000,
-        "nominalValue": 3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-01-01T00:00",
         "eventType": "IP",
         "eventValue": 0,
-        "nominalValue": 3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-01-28T00:00",
         "eventType": "IP",
         "eventValue": 22.1917808219178,
-        "nominalValue": 3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-02-24T00:00",
         "eventType": "IP",
         "eventValue": 22.1917808219178,
-        "nominalValue": 3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-03-23T00:00",
         "eventType": "IP",
         "eventValue": 22.1917808219178,
-        "nominalValue": 3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-04-19T00:00",
         "eventType": "IP",
         "eventValue": 22.1917808219178,
-        "nominalValue": 3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-05-16T00:00",
         "eventType": "IP",
         "eventValue": 22.1917808219178,
-        "nominalValue": 3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-06-12T00:00",
         "eventType": "IP",
         "eventValue": 22.1917808219178,
-        "nominalValue": 3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-07-09T00:00",
         "eventType": "IP",
         "eventValue": 22.1917808219178,
-        "nominalValue": 3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-08-05T00:00",
         "eventType": "IP",
         "eventValue": 22.1917808219178,
-        "nominalValue": 3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-09-01T00:00",
         "eventType": "IP",
         "eventValue": 22.1917808219178,
-        "nominalValue": 3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-09-28T00:00",
         "eventType": "IP",
         "eventValue": 22.1917808219178,
-        "nominalValue": 3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-10-25T00:00",
         "eventType": "IP",
         "eventValue": 22.1917808219178,
-        "nominalValue": 3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-11-21T00:00",
         "eventType": "IP",
         "eventValue": 22.1917808219178,
-        "nominalValue": 3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-12-18T00:00",
         "eventType": "IP",
         "eventValue": 22.1917808219178,
-        "nominalValue": 3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
-      },
-      {
-        "eventDate": "2014-01-01T00:00",
-        "eventType": "PR",
-        "eventValue": 3000,
-        "nominalValue": 0,
-        "nominalRate": 0.1,
-        "nominalAccrued": 11.5068493150685
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2014-01-01T00:00",
         "eventType": "IP",
         "eventValue": 11.5068493150685,
-        "nominalValue": 0,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
+      },
+      {
+        "eventDate": "2014-01-01T00:00",
+        "eventType": "MD",
+        "eventValue": 3000,
+        "notionalPrincipal": 0,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       }
     ]
   },
@@ -2321,129 +2313,129 @@
         "eventDate": "2013-01-01T00:00",
         "eventType": "IED",
         "eventValue": -3000,
-        "nominalValue": 3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-01-01T00:00",
         "eventType": "IPCI",
         "eventValue": 0,
-        "nominalValue": 3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-02-01T00:00",
         "eventType": "IPCI",
         "eventValue": 0,
-        "nominalValue": 3025.47945205479,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3025.47945205479,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-03-01T00:00",
         "eventType": "IPCI",
         "eventValue": 0,
-        "nominalValue": 3048.68860949521,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3048.68860949521,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-04-01T00:00",
         "eventType": "IPCI",
         "eventValue": 0,
-        "nominalValue": 3074.58158124709,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3074.58158124709,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-05-01T00:00",
         "eventType": "IPCI",
         "eventValue": 0,
-        "nominalValue": 3099.85211479158,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3099.85211479158,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-05-20T00:00",
         "eventType": "IPCI",
         "eventValue": 0,
-        "nominalValue": 3115.98833127954,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3115.98833127954,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-06-01T00:00",
         "eventType": "IP",
         "eventValue": 10.2443451987273,
-        "nominalValue": 3115.98833127954,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3115.98833127954,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-07-01T00:00",
         "eventType": "IP",
         "eventValue": 25.6108629968182,
-        "nominalValue": 3115.98833127954,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3115.98833127954,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-08-01T00:00",
         "eventType": "IP",
         "eventValue": 26.4645584300454,
-        "nominalValue": 3115.98833127954,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3115.98833127954,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-09-01T00:00",
         "eventType": "IP",
         "eventValue": 26.4645584300454,
-        "nominalValue": 3115.98833127954,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3115.98833127954,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-10-01T00:00",
         "eventType": "IP",
         "eventValue": 25.6108629968182,
-        "nominalValue": 3115.98833127954,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3115.98833127954,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-11-01T00:00",
         "eventType": "IP",
         "eventValue": 26.4645584300454,
-        "nominalValue": 3115.98833127954,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3115.98833127954,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-12-01T00:00",
         "eventType": "IP",
         "eventValue": 25.6108629968182,
-        "nominalValue": 3115.98833127954,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
-      },
-      {
-        "eventDate": "2014-01-01T00:00",
-        "eventType": "PR",
-        "eventValue": 3115.98833127954,
-        "nominalValue": 0,
-        "nominalRate": 0.1,
-        "nominalAccrued": 26.4645584300454
+        "notionalPrincipal": 3115.98833127954,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2014-01-01T00:00",
         "eventType": "IP",
         "eventValue": 26.4645584300454,
-        "nominalValue": 0,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3115.98833127954,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
+      },
+      {
+        "eventDate": "2014-01-01T00:00",
+        "eventType": "MD",
+        "eventValue": 3115.98833127954,
+        "notionalPrincipal": 0,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       }
     ]
   },
@@ -2479,97 +2471,97 @@
         "eventDate": "2012-12-31T00:00",
         "eventType": "AD",
         "eventValue": 0,
-        "nominalValue": 0,
-        "nominalRate": 0,
-        "nominalAccrued": 0
+        "notionalPrincipal": 0,
+        "nominalInterestRate": 0,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-01-30T00:00",
         "eventType": "PRD",
         "eventValue": -1023.83561643836,
-        "nominalValue": 3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 23.8356164383562
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 23.8356164383562
       },
       {
         "eventDate": "2013-02-01T00:00",
         "eventType": "IP",
         "eventValue": 25.4794520547945,
-        "nominalValue": 3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-03-01T00:00",
         "eventType": "IP",
         "eventValue": 23.013698630137,
-        "nominalValue": 3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-04-01T00:00",
         "eventType": "IP",
         "eventValue": 25.4794520547945,
-        "nominalValue": 3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-05-01T00:00",
         "eventType": "IP",
         "eventValue": 24.6575342465753,
-        "nominalValue": 3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-06-01T00:00",
         "eventType": "IP",
         "eventValue": 25.4794520547945,
-        "nominalValue": 3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-07-01T00:00",
         "eventType": "IP",
         "eventValue": 24.6575342465753,
-        "nominalValue": 3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-08-01T00:00",
         "eventType": "IP",
         "eventValue": 25.4794520547945,
-        "nominalValue": 3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-09-01T00:00",
         "eventType": "IP",
         "eventValue": 25.4794520547945,
-        "nominalValue": 3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-10-01T00:00",
         "eventType": "IP",
         "eventValue": 24.6575342465753,
-        "nominalValue": 3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-10-17T00:00",
         "eventType": "TD",
         "eventValue": 2913.15068493151,
-        "nominalValue": 0,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": 0,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       }
     ]
   },
@@ -2599,169 +2591,183 @@
         "cyclePointOfInterestPayment": "1",
         "fixingDays": "0D",
         "contractRole": "RPA",
-        "interestRateDates": "2013-02-01T00:00:00,2013-05-01T00:00:00,2013-08-01T00:00:00,2013-11-01T00:00:00",
-        "interestRateValues": "0.0098271604945178,0.0109382716029818,0.0120493827160494,0.0131604938271605"
+        "periodFloor": "-.5",
+        "lifeFloor": "0",
+        "periodCap": ".5",
+        "lifeCap": ".5"
+      },
+    "externalData": {
+      "interestRateDates": [
+        "2013-02-01T00:00:00",
+        "2013-05-01T00:00:00",
+        "2013-08-01T00:00:00",
+        "2013-11-01T00:00:00"],
+      "interestRateValues": [
+        "0.0098271604945178",
+        "0.0109382716029818",
+        "0.0120493827160494",
+        "0.0131604938271605"]
       },
     "results": [
       {
         "eventDate": "2012-12-31T00:00",
         "eventType": "AD",
         "eventValue": 0,
-        "nominalValue": 0,
-        "nominalRate": 0,
-        "nominalAccrued": 0
+        "notionalPrincipal": 0,
+        "nominalInterestRate": 0,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-01-01T00:00",
         "eventType": "IED",
         "eventValue": -2800,
-        "nominalValue": 3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-01-01T00:00",
         "eventType": "IP",
         "eventValue": 0,
-        "nominalValue": 3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-02-01T00:00",
         "eventType": "IP",
         "eventValue": 25,
-        "nominalValue": 3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-02-01T00:00",
         "eventType": "RR",
         "eventValue": 0,
-        "nominalValue": 3000,
-        "nominalRate": 0.0298271604945178,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.0298271604945178,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-03-01T00:00",
         "eventType": "IP",
         "eventValue": 7.45679012362945,
-        "nominalValue": 3000,
-        "nominalRate": 0.0298271604945178,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.0298271604945178,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-04-01T00:00",
         "eventType": "IP",
         "eventValue": 7.45679012362945,
-        "nominalValue": 3000,
-        "nominalRate": 0.0298271604945178,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.0298271604945178,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-05-01T00:00",
         "eventType": "IP",
         "eventValue": 7.45679012362945,
-        "nominalValue": 3000,
-        "nominalRate": 0.0298271604945178,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.0298271604945178,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-05-01T00:00",
         "eventType": "RR",
         "eventValue": 0,
-        "nominalValue": 3000,
-        "nominalRate": 0.0309382716029818,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.0309382716029818,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-06-01T00:00",
         "eventType": "IP",
         "eventValue": 7.73456790074544,
-        "nominalValue": 3000,
-        "nominalRate": 0.0309382716029818,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.0309382716029818,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-07-01T00:00",
         "eventType": "IP",
         "eventValue": 7.73456790074544,
-        "nominalValue": 3000,
-        "nominalRate": 0.0309382716029818,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.0309382716029818,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-08-01T00:00",
         "eventType": "IP",
         "eventValue": 7.73456790074544,
-        "nominalValue": 3000,
-        "nominalRate": 0.0309382716029818,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.0309382716029818,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-08-01T00:00",
         "eventType": "RR",
         "eventValue": 0,
-        "nominalValue": 3000,
-        "nominalRate": 0.0320493827160494,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.0320493827160494,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-09-01T00:00",
         "eventType": "IP",
         "eventValue": 8.01234567901235,
-        "nominalValue": 3000,
-        "nominalRate": 0.0320493827160494,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.0320493827160494,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-10-01T00:00",
         "eventType": "IP",
         "eventValue": 8.01234567901235,
-        "nominalValue": 3000,
-        "nominalRate": 0.0320493827160494,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.0320493827160494,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-11-01T00:00",
         "eventType": "IP",
         "eventValue": 8.01234567901235,
-        "nominalValue": 3000,
-        "nominalRate": 0.0320493827160494,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.0320493827160494,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-11-01T00:00",
         "eventType": "RR",
         "eventValue": 0,
-        "nominalValue": 3000,
-        "nominalRate": 0.0331604938271605,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.0331604938271605,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-12-01T00:00",
         "eventType": "IP",
         "eventValue": 8.29012345679013,
-        "nominalValue": 3000,
-        "nominalRate": 0.0331604938271605,
-        "nominalAccrued": 0
-      },
-      {
-        "eventDate": "2014-01-01T00:00",
-        "eventType": "PR",
-        "eventValue": 3000,
-        "nominalValue": 0,
-        "nominalRate": 0.0331604938271605,
-        "nominalAccrued": 8.29012345679013
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.0331604938271605,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2014-01-01T00:00",
         "eventType": "IP",
         "eventValue": 8.29012345679013,
-        "nominalValue": 0,
-        "nominalRate": 0.0331604938271605,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.0331604938271605,
+        "accruedInterest": 0
+      },
+      {
+        "eventDate": "2014-01-01T00:00",
+        "eventType": "MD",
+        "eventValue": 3000,
+        "notionalPrincipal": 0,
+        "nominalInterestRate": 0.0331604938271605,
+        "accruedInterest": 0
       }
     ]
   },
@@ -2791,169 +2797,183 @@
         "cyclePointOfInterestPayment": "1",
         "fixingDays": "0D",
         "contractRole": "RPA",
-        "interestRateDates": "2013-02-01T00:00:00,2013-05-01T00:00:00,2013-08-01T00:00:00,2013-11-01T00:00:00",
-        "interestRateValues": "0.009827160493827161,0.01093827160493827,0.01204938271604938,0.0131604938271605"
+        "periodFloor": "-.5",
+        "lifeFloor": "0",
+        "periodCap": ".5",
+        "lifeCap": ".5"
+      },
+      "externalData": {
+        "interestRateDates": [
+          "2013-02-01T00:00:00",
+          "2013-05-01T00:00:00",
+          "2013-08-01T00:00:00",
+          "2013-11-01T00:00:00"],
+        "interestRateValues": [
+          "0.009827160493827161",
+          "0.01093827160493827",
+          "0.01204938271604938",
+          "0.0131604938271605"]
       },
     "results": [
       {
         "eventDate": "2012-12-31T00:00",
         "eventType": "AD",
         "eventValue": 0,
-        "nominalValue": 0,
-        "nominalRate": 0,
-        "nominalAccrued": 0
+        "notionalPrincipal": 0,
+        "nominalInterestRate": 0,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-01-01T00:00",
         "eventType": "IED",
         "eventValue": -2800,
-        "nominalValue": 3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-01-01T00:00",
         "eventType": "IP",
         "eventValue": 0,
-        "nominalValue": 3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-02-01T00:00",
         "eventType": "IP",
         "eventValue": 25,
-        "nominalValue": 3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-02-01T00:00",
         "eventType": "RR",
         "eventValue": 0,
-        "nominalValue": 3000,
-        "nominalRate": 0.0445679012362945,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.0445679012345679,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-03-01T00:00",
         "eventType": "IP",
-        "eventValue": 11.1419753090736,
-        "nominalValue": 3000,
-        "nominalRate": 0.0445679012362945,
-        "nominalAccrued": 0
+        "eventValue": 11.14197530864,
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.0445679012345679,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-04-01T00:00",
         "eventType": "IP",
-        "eventValue": 11.1419753090736,
-        "nominalValue": 3000,
-        "nominalRate": 0.0445679012362945,
-        "nominalAccrued": 0
+        "eventValue": 11.14197530864,
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.0445679012345679,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-05-01T00:00",
         "eventType": "IP",
-        "eventValue": 11.1419753090736,
-        "nominalValue": 3000,
-        "nominalRate": 0.0445679012362945,
-        "nominalAccrued": 0
+        "eventValue": 11.14197530864,
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.0445679012345679,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-05-01T00:00",
         "eventType": "RR",
         "eventValue": 0,
-        "nominalValue": 3000,
-        "nominalRate": 0.0473456790074544,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.047345679012345675,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-06-01T00:00",
         "eventType": "IP",
-        "eventValue": 11.8364197518636,
-        "nominalValue": 3000,
-        "nominalRate": 0.0473456790074544,
-        "nominalAccrued": 0
+        "eventValue": 11.83641975309,
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.047345679012345675,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-07-01T00:00",
         "eventType": "IP",
-        "eventValue": 11.8364197518636,
-        "nominalValue": 3000,
-        "nominalRate": 0.0473456790074544,
-        "nominalAccrued": 0
+        "eventValue": 11.83641975309,
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.047345679012345675,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-08-01T00:00",
         "eventType": "IP",
-        "eventValue": 11.8364197518636,
-        "nominalValue": 3000,
-        "nominalRate": 0.0473456790074544,
-        "nominalAccrued": 0
+        "eventValue": 11.83641975309,
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.047345679012345675,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-08-01T00:00",
         "eventType": "RR",
         "eventValue": 0,
-        "nominalValue": 3000,
-        "nominalRate": 0.0501234567901235,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.05012345679012345,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-09-01T00:00",
         "eventType": "IP",
         "eventValue": 12.5308641975309,
-        "nominalValue": 3000,
-        "nominalRate": 0.0501234567901235,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.05012345679012345,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-10-01T00:00",
         "eventType": "IP",
         "eventValue": 12.5308641975309,
-        "nominalValue": 3000,
-        "nominalRate": 0.0501234567901235,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.05012345679012345,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-11-01T00:00",
         "eventType": "IP",
         "eventValue": 12.5308641975309,
-        "nominalValue": 3000,
-        "nominalRate": 0.0501234567901235,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.05012345679012345,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-11-01T00:00",
         "eventType": "RR",
         "eventValue": 0,
-        "nominalValue": 3000,
-        "nominalRate": 0.0529012345679012,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.05290123456790125,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-12-01T00:00",
         "eventType": "IP",
         "eventValue": 13.2253086419753,
-        "nominalValue": 3000,
-        "nominalRate": 0.0529012345679012,
-        "nominalAccrued": 0
-      },
-      {
-        "eventDate": "2014-01-01T00:00",
-        "eventType": "PR",
-        "eventValue": 3000,
-        "nominalValue": 0,
-        "nominalRate": 0.0529012345679012,
-        "nominalAccrued": 13.2253086419753
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.05290123456790125,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2014-01-01T00:00",
         "eventType": "IP",
         "eventValue": 13.2253086419753,
-        "nominalValue": 0,
-        "nominalRate": 0.0529012345679012,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.05290123456790125,
+        "accruedInterest": 0
+      },
+      {
+        "eventDate": "2014-01-01T00:00",
+        "eventType": "MD",
+        "eventValue": 3000,
+        "notionalPrincipal": 0,
+        "nominalInterestRate": 0.05290123456790125,
+        "accruedInterest": 0
       }
     ]
   },
@@ -2983,169 +3003,183 @@
         "cyclePointOfInterestPayment": "1",
         "fixingDays": "0D",
         "contractRole": "RPA",
-        "interestRateDates": "2013-02-01T00:00:00,2013-05-01T00:00:00,2013-08-01T00:00:00,2013-11-01T00:00:00",
-        "interestRateValues": "0.015938271604938273,0.017049382716049385,0.018160493827160496,0.019271604938271607"
+        "periodFloor": "-.5",
+        "lifeFloor": "0",
+        "periodCap": ".5",
+        "lifeCap": ".5"
+      },
+    "externalData": {
+        "interestRateDates": [
+          "2013-02-01T00:00:00",
+          "2013-05-01T00:00:00",
+          "2013-08-01T00:00:00",
+          "2013-11-01T00:00:00"],
+        "interestRateValues": [
+          "0.015938271604938273",
+          "0.017049382716049385",
+          "0.018160493827160496",
+          "0.019271604938271607"]
       },
     "results": [
       {
         "eventDate": "2012-12-31T00:00",
         "eventType": "AD",
         "eventValue": 0,
-        "nominalValue": 0,
-        "nominalRate": 0,
-        "nominalAccrued": 0
+        "notionalPrincipal": 0,
+        "nominalInterestRate": 0,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-01-01T00:00",
         "eventType": "IED",
         "eventValue": -2800,
-        "nominalValue": 3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-01-01T00:00",
         "eventType": "IP",
         "eventValue": 0,
-        "nominalValue": 3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-02-01T00:00",
         "eventType": "IP",
         "eventValue": 25,
-        "nominalValue": 3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-02-01T00:00",
         "eventType": "RR",
         "eventValue": 0,
-        "nominalValue": 3000,
-        "nominalRate": 0.0359382716049383,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.035938271604938274,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-03-01T00:00",
         "eventType": "IP",
         "eventValue": 8.98456790123457,
-        "nominalValue": 3000,
-        "nominalRate": 0.0359382716049383,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.035938271604938274,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-04-01T00:00",
         "eventType": "IP",
         "eventValue": 8.98456790123457,
-        "nominalValue": 3000,
-        "nominalRate": 0.0359382716049383,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.035938271604938274,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-05-01T00:00",
         "eventType": "IP",
         "eventValue": 8.98456790123457,
-        "nominalValue": 3000,
-        "nominalRate": 0.0359382716049383,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.035938271604938274,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-05-01T00:00",
         "eventType": "RR",
         "eventValue": 0,
-        "nominalValue": 3000,
-        "nominalRate": 0.0370493827160494,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.037049382716049385,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-06-01T00:00",
         "eventType": "IP",
         "eventValue": 9.26234567901235,
-        "nominalValue": 3000,
-        "nominalRate": 0.0370493827160494,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.037049382716049385,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-07-01T00:00",
         "eventType": "IP",
         "eventValue": 9.26234567901234,
-        "nominalValue": 3000,
-        "nominalRate": 0.0370493827160494,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.037049382716049385,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-08-01T00:00",
         "eventType": "IP",
         "eventValue": 9.26234567901235,
-        "nominalValue": 3000,
-        "nominalRate": 0.0370493827160494,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.037049382716049385,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-08-01T00:00",
         "eventType": "RR",
         "eventValue": 0,
-        "nominalValue": 3000,
-        "nominalRate": 0.0381604938271605,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.0381604938271605,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-09-01T00:00",
         "eventType": "IP",
         "eventValue": 9.54012345679012,
-        "nominalValue": 3000,
-        "nominalRate": 0.0381604938271605,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.0381604938271605,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-10-01T00:00",
         "eventType": "IP",
         "eventValue": 9.54012345679013,
-        "nominalValue": 3000,
-        "nominalRate": 0.0381604938271605,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.0381604938271605,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-11-01T00:00",
         "eventType": "IP",
         "eventValue": 9.54012345679013,
-        "nominalValue": 3000,
-        "nominalRate": 0.0381604938271605,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.0381604938271605,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-11-01T00:00",
         "eventType": "RR",
         "eventValue": 0,
-        "nominalValue": 3000,
-        "nominalRate": 0.0392716049382716,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.03927160493827161,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-12-01T00:00",
         "eventType": "IP",
         "eventValue": 9.8179012345679,
-        "nominalValue": 3000,
-        "nominalRate": 0.0392716049382716,
-        "nominalAccrued": 0
-      },
-      {
-        "eventDate": "2014-01-01T00:00",
-        "eventType": "PR",
-        "eventValue": 3000,
-        "nominalValue": 0,
-        "nominalRate": 0.0392716049382716,
-        "nominalAccrued": 9.8179012345679
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.03927160493827161,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2014-01-01T00:00",
         "eventType": "IP",
         "eventValue": 9.8179012345679,
-        "nominalValue": 0,
-        "nominalRate": 0.0392716049382716,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.03927160493827161,
+        "accruedInterest": 0
+      },
+      {
+        "eventDate": "2014-01-01T00:00",
+        "eventType": "MD",
+        "eventValue": 3000,
+        "notionalPrincipal": 0,
+        "nominalInterestRate": 0.03927160493827161,
+        "accruedInterest": 0
       }
     ]
   },
@@ -3175,193 +3209,213 @@
         "cyclePointOfInterestPayment": "1",
         "fixingDays": "0D",
         "contractRole": "RPA",
-        "interestRateDates": "2013-05-20T00:00:00,2013-06-18T00:00:00,2013-07-17T00:00:00,2013-08-15T00:00:00,2013-09-13T00:00:00,2013-10-12T00:00:00,2013-11-10T00:00:00",
-        "interestRateValues": "0.01079012345679013,0.011141975308641978,0.011493827160493818,0.011839506172839513,0.012191358024691361,0.012543209876543192,0.012895061728395062"
+        "periodFloor": "-.5",
+        "lifeFloor": "0",
+        "periodCap": ".5",
+        "lifeCap": ".5"
       },
+    "externalData": {
+        "interestRateDates": [
+          "2013-05-20T00:00:00",
+          "2013-06-18T00:00:00",
+          "2013-07-17T00:00:00",
+          "2013-08-15T00:00:00",
+          "2013-09-13T00:00:00",
+          "2013-10-12T00:00:00",
+          "2013-11-10T00:00:00"],
+        "interestRateValues": [
+          "0.01079012345679013",
+          "0.011141975308641978",
+          "0.011493827160493818",
+          "0.011839506172839513",
+          "0.012191358024691361",
+          "0.012543209876543192",
+          "0.012895061728395062"]
+        },
     "results": [
       {
         "eventDate": "2012-12-31T00:00",
         "eventType": "AD",
         "eventValue": 0,
-        "nominalValue": 0,
-        "nominalRate": 0,
-        "nominalAccrued": 0
+        "notionalPrincipal": 0,
+        "nominalInterestRate": 0,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-01-01T00:00",
         "eventType": "IED",
         "eventValue": -2800,
-        "nominalValue": 3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-01-01T00:00",
         "eventType": "IP",
         "eventValue": 0,
-        "nominalValue": 3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-02-01T00:00",
         "eventType": "IP",
         "eventValue": 25,
-        "nominalValue": 3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-03-01T00:00",
         "eventType": "IP",
         "eventValue": 25,
-        "nominalValue": 3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-04-01T00:00",
         "eventType": "IP",
         "eventValue": 25,
-        "nominalValue": 3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-05-01T00:00",
         "eventType": "IP",
         "eventValue": 25,
-        "nominalValue": 3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-05-20T00:00",
         "eventType": "RR",
         "eventValue": 0,
-        "nominalValue": 3000,
-        "nominalRate": 0.0307901234536329,
-        "nominalAccrued": 15.8333333333333
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.03079012345679013,
+        "accruedInterest": 15.8333333333333
       },
       {
         "eventDate": "2013-06-01T00:00",
         "eventType": "IP",
-        "eventValue": 18.655761316583,
-        "nominalValue": 3000,
-        "nominalRate": 0.0307901234536329,
-        "nominalAccrued": 0
+        "eventValue": 18.6557613169,
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.03079012345679013,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-06-18T00:00",
         "eventType": "RR",
         "eventValue": 0,
-        "nominalValue": 3000,
-        "nominalRate": 0.0311419753069273,
-        "nominalAccrued": 4.36193415593133
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.03114197530864198,
+        "accruedInterest": 4.361934156379
       },
       {
         "eventDate": "2013-07-01T00:00",
         "eventType": "IP",
-        "eventValue": 7.73564814751513,
-        "nominalValue": 3000,
-        "nominalRate": 0.0311419753069273,
-        "nominalAccrued": 0
+        "eventValue": 7.735648148148,
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.03114197530864198,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-07-17T00:00",
         "eventType": "RR",
         "eventValue": 0,
-        "nominalValue": 3000,
-        "nominalRate": 0.0314938271604938,
-        "nominalAccrued": 4.15226337425697
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.031493827160493818,
+        "accruedInterest": 4.152263374486
       },
       {
         "eventDate": "2013-08-01T00:00",
         "eventType": "IP",
-        "eventValue": 7.82654320964792,
-        "nominalValue": 3000,
-        "nominalRate": 0.0314938271604938,
-        "nominalAccrued": 0
+        "eventValue": 7.826543209877,
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.031493827160493818,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-08-15T00:00",
         "eventType": "RR",
         "eventValue": 0,
-        "nominalValue": 3000,
-        "nominalRate": 0.0318395061728395,
-        "nominalAccrued": 3.67427983539095
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.031839506172839513,
+        "accruedInterest": 3.67427983539095
       },
       {
         "eventDate": "2013-09-01T00:00",
         "eventType": "IP",
         "eventValue": 7.91954732510288,
-        "nominalValue": 3000,
-        "nominalRate": 0.0318395061728395,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.031839506172839513,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-09-13T00:00",
         "eventType": "RR",
         "eventValue": 0,
-        "nominalValue": 3000,
-        "nominalRate": 0.0321913580246914,
-        "nominalAccrued": 3.18395061728395
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.032191358024691361,
+        "accruedInterest": 3.18395061728395
       },
       {
         "eventDate": "2013-10-01T00:00",
         "eventType": "IP",
         "eventValue": 8.01265432098766,
-        "nominalValue": 3000,
-        "nominalRate": 0.0321913580246914,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.032191358024691361,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-10-12T00:00",
         "eventType": "RR",
         "eventValue": 0,
-        "nominalValue": 3000,
-        "nominalRate": 0.0325432098765432,
-        "nominalAccrued": 2.95087448559671
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.032543209876543192,
+        "accruedInterest": 2.95087448559671
       },
       {
         "eventDate": "2013-11-01T00:00",
         "eventType": "IP",
         "eventValue": 8.10354938271605,
-        "nominalValue": 3000,
-        "nominalRate": 0.0325432098765432,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.032543209876543192,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-11-10T00:00",
         "eventType": "RR",
         "eventValue": 0,
-        "nominalValue": 3000,
-        "nominalRate": 0.0328950617283951,
-        "nominalAccrued": 2.44074074074074
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.032895061728395062,
+        "accruedInterest": 2.44074074074074
       },
       {
         "eventDate": "2013-12-01T00:00",
         "eventType": "IP",
         "eventValue": 8.19737654320988,
-        "nominalValue": 3000,
-        "nominalRate": 0.0328950617283951,
-        "nominalAccrued": 0
-      },
-      {
-        "eventDate": "2014-01-01T00:00",
-        "eventType": "PR",
-        "eventValue": 3000,
-        "nominalValue": 0,
-        "nominalRate": 0.0328950617283951,
-        "nominalAccrued": 8.22376543209876
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.032895061728395062,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2014-01-01T00:00",
         "eventType": "IP",
         "eventValue": 8.22376543209876,
-        "nominalValue": 0,
-        "nominalRate": 0.0328950617283951,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.032895061728395062,
+        "accruedInterest": 0
+      },
+      {
+        "eventDate": "2014-01-01T00:00",
+        "eventType": "MD",
+        "eventValue": 3000,
+        "notionalPrincipal": 0,
+        "nominalInterestRate": 0.032895061728395062,
+        "accruedInterest": 0
       }
     ]
   },
@@ -3393,121 +3447,121 @@
         "eventDate": "2012-12-31T00:00",
         "eventType": "AD",
         "eventValue": 0,
-        "nominalValue": 0,
-        "nominalRate": 0,
-        "nominalAccrued": 0
+        "notionalPrincipal": 0,
+        "nominalInterestRate": 0,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-01-01T00:00",
         "eventType": "IED",
         "eventValue": -3000,
-        "nominalValue": 3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-01-01T00:00",
         "eventType": "IP",
         "eventValue": 0,
-        "nominalValue": 3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-02-01T00:00",
         "eventType": "IP",
         "eventValue": 25.4794520547945,
-        "nominalValue": 3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-03-01T00:00",
         "eventType": "IP",
         "eventValue": 23.013698630137,
-        "nominalValue": 3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-04-01T00:00",
         "eventType": "IP",
         "eventValue": 25.4794520547945,
-        "nominalValue": 3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-05-01T00:00",
         "eventType": "IP",
         "eventValue": 24.6575342465753,
-        "nominalValue": 3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-06-01T00:00",
         "eventType": "IP",
         "eventValue": 25.4794520547945,
-        "nominalValue": 3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-07-01T00:00",
         "eventType": "IP",
         "eventValue": 24.6575342465753,
-        "nominalValue": 3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-08-01T00:00",
         "eventType": "IP",
         "eventValue": 25.4794520547945,
-        "nominalValue": 3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-09-01T00:00",
         "eventType": "IP",
         "eventValue": 25.4794520547945,
-        "nominalValue": 3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-10-01T00:00",
         "eventType": "IP",
         "eventValue": 24.6575342465753,
-        "nominalValue": 3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-11-01T00:00",
         "eventType": "IP",
         "eventValue": 25.4794520547945,
-        "nominalValue": 3000,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
-      },
-      {
-        "eventDate": "2013-12-31T23:59:59",
-        "eventType": "PR",
-        "eventValue": 3000,
-        "nominalValue": 0,
-        "nominalRate": 0.1,
-        "nominalAccrued": 50.1369863013699
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       },
       {
         "eventDate": "2013-12-31T23:59:59",
         "eventType": "IP",
         "eventValue": 50.1369863013699,
-        "nominalValue": 0,
-        "nominalRate": 0.1,
-        "nominalAccrued": 0
+        "notionalPrincipal": 3000,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
+      },
+      {
+        "eventDate": "2013-12-31T23:59:59",
+        "eventType": "MD",
+        "eventValue": 3000,
+        "notionalPrincipal": 0,
+        "nominalInterestRate": 0.1,
+        "accruedInterest": 0
       }
     ]
   }

@@ -4,6 +4,20 @@
     {
       "constant": true,
       "inputs": [],
+      "name": "ONE_POINT_ZERO",
+      "outputs": [
+        {
+          "name": "",
+          "type": "int256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
       "name": "PRECISION",
       "outputs": [
         {
@@ -16,12 +30,12 @@
       "type": "function"
     }
   ],
-  "metadata": "{\"compiler\":{\"version\":\"0.5.2+commit.1df8f40c\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"constant\":true,\"inputs\":[],\"name\":\"PRECISION\",\"outputs\":[{\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"}],\"devdoc\":{\"methods\":{}},\"userdoc\":{\"methods\":{}}},\"settings\":{\"compilationTarget\":{\"/Users/johannes/Documents/dev/actus-protocol/actus-solidity/contracts/Core/Conventions/DayCountConvention.sol\":\"DayCountConvention\"},\"evmVersion\":\"byzantium\",\"libraries\":{},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[]},\"sources\":{\"/Users/johannes/Documents/dev/actus-protocol/actus-solidity/contracts/Core/Conventions/DayCountConvention.sol\":{\"keccak256\":\"0x71532d0a0ddfd273c8e1e5b0476335600e045b0432db88c38ea0dd7aa4e3e5b9\",\"urls\":[\"bzzr://90a7540d010eee4e633e5237f046fd0ee005f4d83619415ca8694578e88e3eb6\"]},\"/Users/johannes/Documents/dev/actus-protocol/actus-solidity/contracts/Core/Definitions.sol\":{\"keccak256\":\"0xa3214610069b96cbcf16177ddf1c6723c2692faf081946af9dccf8ad0da57ae4\",\"urls\":[\"bzzr://7da7e021462547e3bd620dab26c6b7c763c24e3bac224770cc7ca5eb0bf7ee50\"]},\"/Users/johannes/Documents/dev/actus-protocol/actus-solidity/contracts/Core/SignedMath.sol\":{\"keccak256\":\"0x087ce99293084f1440d9005e9888bd12aff770f72ee0ff977adae1255ce899e6\",\"urls\":[\"bzzr://682c9a17df08c3c0e121abaf5b55f15752c0543fcbb45cdcaa7ddf545e688b30\"]},\"/Users/johannes/Documents/dev/actus-protocol/actus-solidity/contracts/external/BokkyPooBah/BokkyPooBahsDateTimeLibrary.sol\":{\"keccak256\":\"0x55ce115963ca5ee7a98b7b2e644e6decfbfdd70ada0b18e09a60344d9cdfe345\",\"urls\":[\"bzzr://9e24ebbec8dc7775ab45c4e41f9ac1958bb5710daf538df1f5cfd70b27650cb1\"]},\"openzeppelin-solidity/contracts/drafts/SignedSafeMath.sol\":{\"keccak256\":\"0xb4b45cd5475c318722ac0f8d7e2b9e77fee6f4f36374c1110fe615d50fbc0650\",\"urls\":[\"bzzr://a90fb457269c8a03ec5b811c71acef08a2751a4d2019b0661328610f9357dae7\"]},\"openzeppelin-solidity/contracts/math/SafeMath.sol\":{\"keccak256\":\"0x4ccf2d7b51873db1ccfd54ca2adae5eac3b184f9699911ed4490438419f1c690\",\"urls\":[\"bzzr://1604f5b6d6e916c154efd8c6720cda069e5ba32dfa0a9dedf2b42e5b02d07f89\"]}},\"version\":1}",
-  "bytecode": "0x6080604052348015600f57600080fd5b5060928061001e6000396000f3fe6080604052348015600f57600080fd5b50600436106044577c01000000000000000000000000000000000000000000000000000000006000350463aaf5eb6881146049575b600080fd5b604f6061565b60408051918252519081900360200190f35b60128156fea165627a7a72305820f9b02b6a11dc1af99b3c1f0d074fba12a823bf0b88d135fca547c87ccb9629c80029",
+  "metadata": "{\"compiler\":{\"version\":\"0.5.2+commit.1df8f40c\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"constant\":true,\"inputs\":[],\"name\":\"ONE_POINT_ZERO\",\"outputs\":[{\"name\":\"\",\"type\":\"int256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"PRECISION\",\"outputs\":[{\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"}],\"devdoc\":{\"methods\":{},\"title\":\"DayCountConvention\"},\"userdoc\":{\"methods\":{},\"notice\":\"Implements various ISDA day count conventions as specified by ACTUS\"}},\"settings\":{\"compilationTarget\":{\"/Users/johannes/Documents/dev/actus-protocol/actus-solidity/contracts/Core/Conventions/DayCountConvention.sol\":\"DayCountConvention\"},\"evmVersion\":\"byzantium\",\"libraries\":{},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[]},\"sources\":{\"/Users/johannes/Documents/dev/actus-protocol/actus-solidity/contracts/Core/ACTUSTypes.sol\":{\"keccak256\":\"0x7203a6ea07686313a33592e24c6144985f8d9a8f25b84293285bcb70d2fa9dcf\",\"urls\":[\"bzzr://78522b40fed87c6d4ab14731e2c19268f5255dc4263040941978dc355ed1f3d7\"]},\"/Users/johannes/Documents/dev/actus-protocol/actus-solidity/contracts/Core/Conventions/DayCountConvention.sol\":{\"keccak256\":\"0xe962b3fcd2fefb6b4c05b13e920e6cd2e56d10a7143288326f64515fe84fd2db\",\"urls\":[\"bzzr://b93e75d9b73a7918dfdbc8946ad1ecd36cc1e691f79b489b9fba4d7697ede4f1\"]},\"/Users/johannes/Documents/dev/actus-protocol/actus-solidity/contracts/Core/SignedMath.sol\":{\"keccak256\":\"0xe0bc246fe159a45274b6cb3f8519f23a498ef75d75825a75a7794bb6264f89ef\",\"urls\":[\"bzzr://1d5d074780800d20837fb029b23d59973b66b9adb4180195db88990f51f3fc6f\"]},\"/Users/johannes/Documents/dev/actus-protocol/actus-solidity/contracts/external/BokkyPooBah/BokkyPooBahsDateTimeLibrary.sol\":{\"keccak256\":\"0x7162caa2f09437b4d09f5a33e20a249f1e6a53c4afb3934cdea86fdba3591347\",\"urls\":[\"bzzr://780e5ff6c452639b751083da979392fbe1d98adf6772d794d084a1632873ad21\"]},\"openzeppelin-solidity/contracts/drafts/SignedSafeMath.sol\":{\"keccak256\":\"0xf1587a6daea33c93e85fff4e205967183de459159aafcb01b7397fb7ec1f9f77\",\"urls\":[\"bzzr://3fa5ad67118819b61448882baec9ca9964dde65630f574ab3c38841110082923\"]},\"openzeppelin-solidity/contracts/math/SafeMath.sol\":{\"keccak256\":\"0x640b6dee7a4b830bdfd52b5031a07fc2b12209f5b2e29e5d364a7d37f69d8076\",\"urls\":[\"bzzr://292843005e754e752644f767477ec5ad7a1ffc91ddb18c38b8079c62f3993cad\"]}},\"version\":1}",
+  "bytecode": "0x608060405234801561001057600080fd5b5060ae8061001f6000396000f3fe6080604052348015600f57600080fd5b5060043610604e577c010000000000000000000000000000000000000000000000000000000060003504636f37e55b81146053578063aaf5eb6814606b575b600080fd5b60596071565b60408051918252519081900360200190f35b6059607d565b670de0b6b3a764000081565b60128156fea165627a7a7230582090c4b70f5e34c20bfec4eb17c7e4c8ea097dbf9641a9744d97dcdd1923db468e0029",
   "compiler": {
     "name": "solc",
     "version": "0.5.2+commit.1df8f40c.Emscripten.clang"
   },
   "networks": {},
-  "updatedAt": "2019-10-17T09:48:57.879Z"
+  "updatedAt": "2019-12-16T15:04:44.128Z"
 }
