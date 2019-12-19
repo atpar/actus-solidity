@@ -3,7 +3,7 @@
 [![Build Status](https://travis-ci.org/atpar/actus-solidity.svg?branch=MS1)](https://travis-ci.org/atpar/actus-solidity)
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 [![npm version](http://img.shields.io/npm/v/actus-solidity.svg?style=flat)](https://npmjs.org/package/actus-solidity "View this project on npm")
-[![Coverage Status](https://coveralls.io/repos/github/atpar/actus-solidity/badge.svg?branch=MS1)](https://coveralls.io/github/atpar/actus-solidity?branch=MS1)
+[![Coverage Status](https://coveralls.io/repos/github/atpar/actus-solidity/badge.svg?branch=master)](https://coveralls.io/github/atpar/actus-solidity?branch=master)
 
 **DISCLAIMER: THIS IS A WORK IN PROGRESS AND NOT AUDITED. USE IT AT YOUR OWN RISK.**
 
