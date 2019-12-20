@@ -15,6 +15,7 @@ module.exports = {
       provider: () =>
         new HDWalletProvider(require('./mnemonic.js'), 'https://goerli.infura.io/v3/a5d418a8a94240fa8d067ed1ac2313fa'),
       network_id: '5',
+      skipDryRun: true
     },
     kovan: {
       provider: () =>

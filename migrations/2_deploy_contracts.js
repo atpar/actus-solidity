@@ -19,4 +19,14 @@ module.exports = async (deployer) => {
 
   await deployer.link(SignedMath, CECEngine);
   await deployer.deploy(CECEngine);
+
+  console.log(`
+    Deployments:
+    
+      ANNEngine: ${ANNEngine.address}
+      CECEngine: ${CECEngine.address}
+      CEGEngine: ${CEGEngine.address}
+      PAMEngine: ${PAMEngine.address}
+      SignedMath: ${SignedMath.address}
+  `);
 }
