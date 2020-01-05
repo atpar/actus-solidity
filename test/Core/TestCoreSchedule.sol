@@ -126,15 +126,16 @@ contract TestCoreSchedule is Core {
         uint256[MAX_CYCLE_SIZE] memory dates_t7;
         dates_t7 = computeDatesFromCycleSegment(cStart, cEnd, c, addEndTime, sStart, sEnd);
 
-        result_t7[0] = uint256(1527811200); // Friday, 2018-06-01 00:00:00 UTC
-        result_t7[1] = uint256(1530403200); // Sunday, 2018-07-01 00:00:00 UTC
-        result_t7[2] = uint256(1533081600); // Wednesday, 2018-08-01 00:00:00 UTC
-        result_t7[3] = uint256(1535760000); // Saturday, 2018-09-01 00:00:00 UTC
+        result_t7[0] = uint256(1525132800); // Tuesday, 2018-05-01 00:00:00 UTC
+        result_t7[1] = uint256(1527811200); // Friday, 2018-06-01 00:00:00 UTC
+        result_t7[2] = uint256(1530403200); // Sunday, 2018-07-01 00:00:00 UTC
+        result_t7[3] = uint256(1533081600); // Wednesday, 2018-08-01 00:00:00 UTC
+        result_t7[4] = uint256(1535760000); // Saturday, 2018-09-01 00:00:00 UTC
 
         Assert.equal(
             keccak256(abi.encode(dates_t7)),
             keccak256(abi.encode(result_t7)),
-            "Should return 1527811200, 1530403200, 1533081600, 1535760000"
+            "Should return 152513280, 1527811200, 1530403200, 1533081600, 1535760000"
         );
 
         // Segment lies in cycle, addEndTime = false

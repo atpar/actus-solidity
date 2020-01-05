@@ -117,7 +117,8 @@ contract Utils is ACTUSTypes, BusinessDayConvention {
         pure
         returns (bool)
     {
-        if (startTimestamp < timestamp && endTimestamp >= timestamp) return true;
+        if (startTimestamp > endTimestamp) return false;
+        if (startTimestamp <= timestamp && timestamp <= endTimestamp) return true;
         return false;
     }
 }

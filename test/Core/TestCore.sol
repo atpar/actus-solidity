@@ -373,7 +373,8 @@ contract TestCore is Core {
     function testisInSegment() public {
         Assert.equal(isInSegment(uint256(100), uint256(99), uint256(101)), true, "Timestamp should be contained in the period");
         Assert.equal(isInSegment(uint256(100), uint256(99), uint256(100)), true, "Timestamp should be contained in the period");
-        Assert.equal(isInSegment(uint256(100), uint256(100), uint256(100)), false, "Timestamp should not be contained in the period");
+        Assert.equal(isInSegment(uint256(100), uint256(100), uint256(100)), true, "Timestamp should be contained in the period");
+        Assert.equal(isInSegment(uint256(101), uint256(100), uint256(100)), false, "Timestamp should not be contained in the period");
         Assert.equal(isInSegment(uint256(100), uint256(100), uint256(99)), false, "Timestamp should not be contained in the period");
     }
 
