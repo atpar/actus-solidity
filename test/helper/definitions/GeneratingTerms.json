@@ -1,9 +1,5 @@
 [
-  "calendar",
-  "businessDayConvention",
-  "endOfMonthConvention",
   "scalingEffect",
-  "penaltyType",
   "contractDealDate",
   "statusDate",
   "initialExchangeDate",
@@ -16,7 +12,6 @@
   "cycleAnchorDateOfScalingIndex",
   "cycleAnchorDateOfFee",
   "cycleAnchorDateOfPrincipalRedemption",
-  "nominalInterestRate",
   "cycleOfInterestPayment",
   "cycleOfRateReset",
   "cycleOfScalingIndex",

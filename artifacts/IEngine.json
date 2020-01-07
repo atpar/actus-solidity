@@ -978,10 +978,6 @@
               "type": "uint256"
             },
             {
-              "name": "nominalInterestRate",
-              "type": "int256"
-            },
-            {
               "components": [
                 {
                   "name": "i",
@@ -1207,10 +1203,6 @@
             {
               "name": "cycleAnchorDateOfPrincipalRedemption",
               "type": "uint256"
-            },
-            {
-              "name": "nominalInterestRate",
-              "type": "int256"
             },
             {
               "components": [
@@ -1735,5 +1727,5 @@
     "version": "0.5.2+commit.1df8f40c.Emscripten.clang"
   },
   "networks": {},
-  "updatedAt": "2019-12-17T14:30:56.681Z"
+  "updatedAt": "2020-01-07T14:44:19.130Z"
 }

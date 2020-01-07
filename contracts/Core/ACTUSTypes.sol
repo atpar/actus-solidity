@@ -152,8 +152,6 @@ contract ACTUSTypes {
         uint256 cycleAnchorDateOfFee;
         uint256 cycleAnchorDateOfPrincipalRedemption;
 
-        int256 nominalInterestRate;
-
         IPS cycleOfInterestPayment;
         IPS cycleOfRateReset;
         IPS cycleOfScalingIndex;

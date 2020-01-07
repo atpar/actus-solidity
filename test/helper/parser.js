@@ -4,9 +4,9 @@ const BigNumber = require('bignumber.js');
 const EventDefinitions = require('actus-dictionary/actus-dictionary-event.json').event;
 const TermsDefinitions = require('actus-dictionary/actus-dictionary-terms.json').terms;
 
-const Terms = require('../../actus-resources/definitions/terms.json');
-const LifecycleTerms = require('../../actus-resources/definitions/lifecycle-terms.json');
-const GeneratingTerms = require('../../actus-resources/definitions/generating-terms.json');
+const Terms = require('./definitions/Terms.json');
+const LifecycleTerms = require('./definitions/LifecycleTerms.json');
+const GeneratingTerms = require('./definitions/GeneratingTerms.json');
 
 const PRECISION = 18; // solidity precision
 
