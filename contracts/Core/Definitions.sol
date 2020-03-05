@@ -11,8 +11,8 @@ contract Definitions {
 
 	uint256 constant public PRECISION = 18;
 
-	uint256 constant MAX_CYCLE_SIZE = 16;
-	uint256 constant MAX_EVENT_SCHEDULE_SIZE = 64; // 4x MAX_CYCLE_SIZE for IP, RR, FP and SC
+	uint256 constant MAX_CYCLE_SIZE = 24;
+	uint256 constant MAX_EVENT_SCHEDULE_SIZE = 96; // 4x MAX_CYCLE_SIZE for IP, RR, FP and SC
 
 	// IPS
 	enum P {D, W, M, Q, H, Y} // P=[D=Days, W=Weeks, M=Months, Q=Quarters, H=Halfyear, Y=Year]
