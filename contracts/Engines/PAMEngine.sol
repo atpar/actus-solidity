@@ -59,7 +59,11 @@ contract PAMEngine is Core, IEngine {
 
 		ProtoEvent[MAX_EVENT_SCHEDULE_SIZE] memory pendingProtoEventSchedule = computeProtoEventScheduleSegment(
 			contractTerms,
-			shiftEventTime(contractState.lastEventTime, contractTerms.businessDayConvention, contractTerms.calendar),
+			shiftEventTime(
+				contractState.lastEventTime, 
+				contractTerms.businessDayConvention, 
+				contractTerms.calendar,
+				contractTerms.maturityDate),
 			timestamp
 		);
 
@@ -193,7 +197,8 @@ contract PAMEngine is Core, IEngine {
 				uint256 shiftedIPCITime = shiftEventTime(
 					contractTerms.capitalizationEndDate,
 					contractTerms.businessDayConvention,
-					contractTerms.calendar
+					contractTerms.calendar,
+					contractTerms.maturityDate
 				);
 				if (isInPeriod(shiftedIPCITime, segmentStart, segmentEnd)) {
 					protoEventSchedule[index] = ProtoEvent(
@@ -213,7 +218,8 @@ contract PAMEngine is Core, IEngine {
 				uint256 shiftedIPDate = shiftEventTime(
 					interestPaymentSchedule[i],
 					contractTerms.businessDayConvention,
-					contractTerms.calendar
+					contractTerms.calendar,
+					contractTerms.maturityDate
 				);
 				if (isInPeriod(shiftedIPDate, segmentStart, segmentEnd) == false) continue;
 				if (
@@ -250,7 +256,8 @@ contract PAMEngine is Core, IEngine {
 			uint256 shiftedIPCIDate = shiftEventTime(
 				contractTerms.capitalizationEndDate,
 				contractTerms.businessDayConvention,
-				contractTerms.calendar
+				contractTerms.calendar,
+					contractTerms.maturityDate
 			);
 			if (isInPeriod(shiftedIPCIDate, segmentStart, segmentEnd)) {
 				protoEventSchedule[index] = ProtoEvent(
@@ -282,7 +289,8 @@ contract PAMEngine is Core, IEngine {
 				uint256 shiftedRRDate = shiftEventTime(
 					rateResetSchedule[i],
 					contractTerms.businessDayConvention,
-					contractTerms.calendar
+					contractTerms.calendar,
+					contractTerms.maturityDate
 				);
 				if (isInPeriod(shiftedRRDate, segmentStart, segmentEnd) == false) continue;
 				protoEventSchedule[index] = ProtoEvent(
@@ -315,7 +323,8 @@ contract PAMEngine is Core, IEngine {
 				uint256 shiftedFPDate = shiftEventTime(
 					feeSchedule[i],
 					contractTerms.businessDayConvention,
-					contractTerms.calendar
+					contractTerms.calendar,
+					contractTerms.maturityDate
 				);
 				if (isInPeriod(shiftedFPDate, segmentStart, segmentEnd) == false) continue;
 				protoEventSchedule[index] = ProtoEvent(
@@ -349,7 +358,8 @@ contract PAMEngine is Core, IEngine {
 				uint256 shiftedSCDate = shiftEventTime(
 					scalingSchedule[i],
 					contractTerms.businessDayConvention,
-					contractTerms.calendar
+					contractTerms.calendar,
+					contractTerms.maturityDate
 				);
 				if (isInPeriod(shiftedSCDate, segmentStart, segmentEnd) == false) continue;
 				protoEventSchedule[index] = ProtoEvent(
@@ -446,8 +456,8 @@ contract PAMEngine is Core, IEngine {
 	{
 		if (eventType == EventType.AD) {
 			contractState.timeFromLastEvent = yearFraction(
-				shiftCalcTime(contractState.lastEventTime, contractTerms.businessDayConvention, contractTerms.calendar),
-				shiftCalcTime(timestamp, contractTerms.businessDayConvention, contractTerms.calendar),
+				shiftCalcTime(contractState.lastEventTime, contractTerms.businessDayConvention, contractTerms.calendar,contractTerms.maturityDate),
+				shiftCalcTime(timestamp, contractTerms.businessDayConvention, contractTerms.calendar,contractTerms.maturityDate),
 				contractTerms.dayCountConvention,
 				contractTerms.maturityDate
 			);
@@ -458,8 +468,8 @@ contract PAMEngine is Core, IEngine {
 		}
 		if (eventType == EventType.CD) {
 			contractState.timeFromLastEvent = yearFraction(
-				shiftCalcTime(contractState.lastEventTime, contractTerms.businessDayConvention, contractTerms.calendar),
-				shiftCalcTime(timestamp, contractTerms.businessDayConvention, contractTerms.calendar),
+				shiftCalcTime(contractState.lastEventTime, contractTerms.businessDayConvention, contractTerms.calendar,contractTerms.maturityDate),
+				shiftCalcTime(timestamp, contractTerms.businessDayConvention, contractTerms.calendar,contractTerms.maturityDate),
 				contractTerms.dayCountConvention,
 				contractTerms.maturityDate
 			);
@@ -471,8 +481,8 @@ contract PAMEngine is Core, IEngine {
 		}
 		if (eventType == EventType.FP) {
 			contractState.timeFromLastEvent = yearFraction(
-				shiftCalcTime(contractState.lastEventTime, contractTerms.businessDayConvention, contractTerms.calendar),
-				shiftCalcTime(timestamp, contractTerms.businessDayConvention, contractTerms.calendar),
+				shiftCalcTime(contractState.lastEventTime, contractTerms.businessDayConvention, contractTerms.calendar,contractTerms.maturityDate),
+				shiftCalcTime(timestamp, contractTerms.businessDayConvention, contractTerms.calendar,contractTerms.maturityDate),
 				contractTerms.dayCountConvention,
 				contractTerms.maturityDate
 			);
@@ -483,8 +493,8 @@ contract PAMEngine is Core, IEngine {
 		}
 		if (eventType == EventType.IED) {
 			contractState.timeFromLastEvent = yearFraction(
-				shiftCalcTime(contractState.lastEventTime, contractTerms.businessDayConvention, contractTerms.calendar),
-				shiftCalcTime(timestamp, contractTerms.businessDayConvention, contractTerms.calendar),
+				shiftCalcTime(contractState.lastEventTime, contractTerms.businessDayConvention, contractTerms.calendar,contractTerms.maturityDate),
+				shiftCalcTime(timestamp, contractTerms.businessDayConvention, contractTerms.calendar,contractTerms.maturityDate),
 				contractTerms.dayCountConvention,
 				contractTerms.maturityDate
 			);
@@ -510,8 +520,8 @@ contract PAMEngine is Core, IEngine {
 		}
 		if (eventType == EventType.IPCI) {
 			contractState.timeFromLastEvent = yearFraction(
-				shiftCalcTime(contractState.lastEventTime, contractTerms.businessDayConvention, contractTerms.calendar),
-				shiftCalcTime(timestamp, contractTerms.businessDayConvention, contractTerms.calendar),
+				shiftCalcTime(contractState.lastEventTime, contractTerms.businessDayConvention, contractTerms.calendar,contractTerms.maturityDate),
+				shiftCalcTime(timestamp, contractTerms.businessDayConvention, contractTerms.calendar,contractTerms.maturityDate),
 				contractTerms.dayCountConvention,
 				contractTerms.maturityDate
 			);
@@ -523,8 +533,8 @@ contract PAMEngine is Core, IEngine {
 		}
 		if (eventType == EventType.IP) {
 			contractState.timeFromLastEvent = yearFraction(
-				shiftCalcTime(contractState.lastEventTime, contractTerms.businessDayConvention, contractTerms.calendar),
-				shiftCalcTime(timestamp, contractTerms.businessDayConvention, contractTerms.calendar),
+				shiftCalcTime(contractState.lastEventTime, contractTerms.businessDayConvention, contractTerms.calendar,contractTerms.maturityDate),
+				shiftCalcTime(timestamp, contractTerms.businessDayConvention, contractTerms.calendar,contractTerms.maturityDate),
 				contractTerms.dayCountConvention,
 				contractTerms.maturityDate
 			);
@@ -535,8 +545,8 @@ contract PAMEngine is Core, IEngine {
 		}
 		if (eventType == EventType.PP) {
 			contractState.timeFromLastEvent = yearFraction(
-				shiftCalcTime(contractState.lastEventTime, contractTerms.businessDayConvention, contractTerms.calendar),
-				shiftCalcTime(timestamp, contractTerms.businessDayConvention, contractTerms.calendar),
+				shiftCalcTime(contractState.lastEventTime, contractTerms.businessDayConvention, contractTerms.calendar,contractTerms.maturityDate),
+				shiftCalcTime(timestamp, contractTerms.businessDayConvention, contractTerms.calendar,contractTerms.maturityDate),
 				contractTerms.dayCountConvention,
 				contractTerms.maturityDate
 			);
@@ -548,8 +558,8 @@ contract PAMEngine is Core, IEngine {
 		}
 		if (eventType == EventType.PRD) {
 			contractState.timeFromLastEvent = yearFraction(
-				shiftCalcTime(contractState.lastEventTime, contractTerms.businessDayConvention, contractTerms.calendar),
-				shiftCalcTime(timestamp, contractTerms.businessDayConvention, contractTerms.calendar),
+				shiftCalcTime(contractState.lastEventTime, contractTerms.businessDayConvention, contractTerms.calendar,contractTerms.maturityDate),
+				shiftCalcTime(timestamp, contractTerms.businessDayConvention, contractTerms.calendar,contractTerms.maturityDate),
 				contractTerms.dayCountConvention,
 				contractTerms.maturityDate
 			);
@@ -560,8 +570,8 @@ contract PAMEngine is Core, IEngine {
 		}
 		if (eventType == EventType.PR) {
 			contractState.timeFromLastEvent = yearFraction(
-				shiftCalcTime(contractState.lastEventTime, contractTerms.businessDayConvention, contractTerms.calendar),
-				shiftCalcTime(timestamp, contractTerms.businessDayConvention, contractTerms.calendar),
+				shiftCalcTime(contractState.lastEventTime, contractTerms.businessDayConvention, contractTerms.calendar,contractTerms.maturityDate),
+				shiftCalcTime(timestamp, contractTerms.businessDayConvention, contractTerms.calendar,contractTerms.maturityDate),
 				contractTerms.dayCountConvention,
 				contractTerms.maturityDate
 			);
@@ -573,8 +583,8 @@ contract PAMEngine is Core, IEngine {
 		}
 		if (eventType == EventType.PY) {
 			contractState.timeFromLastEvent = yearFraction(
-				shiftCalcTime(contractState.lastEventTime, contractTerms.businessDayConvention, contractTerms.calendar),
-				shiftCalcTime(timestamp, contractTerms.businessDayConvention, contractTerms.calendar),
+				shiftCalcTime(contractState.lastEventTime, contractTerms.businessDayConvention, contractTerms.calendar,contractTerms.maturityDate),
+				shiftCalcTime(timestamp, contractTerms.businessDayConvention, contractTerms.calendar,contractTerms.maturityDate),
 				contractTerms.dayCountConvention,
 				contractTerms.maturityDate
 			);
@@ -585,8 +595,8 @@ contract PAMEngine is Core, IEngine {
 		}
 		if (eventType == EventType.RRF) {
 			contractState.timeFromLastEvent = yearFraction(
-				shiftCalcTime(contractState.lastEventTime, contractTerms.businessDayConvention, contractTerms.calendar),
-				shiftCalcTime(timestamp, contractTerms.businessDayConvention, contractTerms.calendar),
+				shiftCalcTime(contractState.lastEventTime, contractTerms.businessDayConvention, contractTerms.calendar,contractTerms.maturityDate),
+				shiftCalcTime(timestamp, contractTerms.businessDayConvention, contractTerms.calendar,contractTerms.maturityDate),
 				contractTerms.dayCountConvention,
 				contractTerms.maturityDate
 			);
@@ -618,8 +628,8 @@ contract PAMEngine is Core, IEngine {
 			}
 
 			contractState.timeFromLastEvent = yearFraction(
-				shiftCalcTime(contractState.lastEventTime, contractTerms.businessDayConvention, contractTerms.calendar),
-				shiftCalcTime(timestamp, contractTerms.businessDayConvention, contractTerms.calendar),
+				shiftCalcTime(contractState.lastEventTime, contractTerms.businessDayConvention, contractTerms.calendar,contractTerms.maturityDate),
+				shiftCalcTime(timestamp, contractTerms.businessDayConvention, contractTerms.calendar,contractTerms.maturityDate),
 				contractTerms.dayCountConvention,
 				contractTerms.maturityDate
 			);
@@ -630,8 +640,8 @@ contract PAMEngine is Core, IEngine {
 		}
 		if (eventType == EventType.SC) {
 			contractState.timeFromLastEvent = yearFraction(
-				shiftCalcTime(contractState.lastEventTime, contractTerms.businessDayConvention, contractTerms.calendar),
-				shiftCalcTime(timestamp, contractTerms.businessDayConvention, contractTerms.calendar),
+				shiftCalcTime(contractState.lastEventTime, contractTerms.businessDayConvention, contractTerms.calendar,contractTerms.maturityDate),
+				shiftCalcTime(timestamp, contractTerms.businessDayConvention, contractTerms.calendar,contractTerms.maturityDate),
 				contractTerms.dayCountConvention,
 				contractTerms.maturityDate
 			);
@@ -658,8 +668,8 @@ contract PAMEngine is Core, IEngine {
 		}
 		if (eventType == EventType.TD) {
 			contractState.timeFromLastEvent = yearFraction(
-				shiftCalcTime(contractState.lastEventTime, contractTerms.businessDayConvention, contractTerms.calendar),
-				shiftCalcTime(timestamp, contractTerms.businessDayConvention, contractTerms.calendar),
+				shiftCalcTime(contractState.lastEventTime, contractTerms.businessDayConvention, contractTerms.calendar,contractTerms.maturityDate),
+				shiftCalcTime(timestamp, contractTerms.businessDayConvention, contractTerms.calendar,contractTerms.maturityDate),
 				contractTerms.dayCountConvention,
 				contractTerms.maturityDate
 			);
@@ -710,8 +720,8 @@ contract PAMEngine is Core, IEngine {
 					* contractState.feeAccrued
 						.add(
 							yearFraction(
-								shiftCalcTime(contractState.lastEventTime, contractTerms.businessDayConvention, contractTerms.calendar),
-								shiftCalcTime(timestamp, contractTerms.businessDayConvention, contractTerms.calendar),
+								shiftCalcTime(contractState.lastEventTime, contractTerms.businessDayConvention, contractTerms.calendar,contractTerms.maturityDate),
+								shiftCalcTime(timestamp, contractTerms.businessDayConvention, contractTerms.calendar,contractTerms.maturityDate),
 								contractTerms.dayCountConvention,
 								contractTerms.maturityDate
 							)
@@ -738,8 +748,8 @@ contract PAMEngine is Core, IEngine {
 						contractState.nominalAccrued
 						.add(
 							yearFraction(
-								shiftCalcTime(contractState.lastEventTime, contractTerms.businessDayConvention, contractTerms.calendar),
-								shiftCalcTime(timestamp, contractTerms.businessDayConvention, contractTerms.calendar),
+								shiftCalcTime(contractState.lastEventTime, contractTerms.businessDayConvention, contractTerms.calendar,contractTerms.maturityDate),
+								shiftCalcTime(timestamp, contractTerms.businessDayConvention, contractTerms.calendar,contractTerms.maturityDate),
 								contractTerms.dayCountConvention,
 								contractTerms.maturityDate
 							)
@@ -766,8 +776,8 @@ contract PAMEngine is Core, IEngine {
 					.add(contractState.nominalAccrued)
 					.add(
 						yearFraction(
-							shiftCalcTime(contractState.lastEventTime, contractTerms.businessDayConvention, contractTerms.calendar),
-							shiftCalcTime(timestamp, contractTerms.businessDayConvention, contractTerms.calendar),
+							shiftCalcTime(contractState.lastEventTime, contractTerms.businessDayConvention, contractTerms.calendar,contractTerms.maturityDate),
+							shiftCalcTime(timestamp, contractTerms.businessDayConvention, contractTerms.calendar,contractTerms.maturityDate),
 							contractTerms.dayCountConvention,
 							contractTerms.maturityDate
 						)
@@ -795,8 +805,8 @@ contract PAMEngine is Core, IEngine {
 					performanceIndicator(contractState.contractStatus)
 					* roleSign(contractTerms.contractRole)
 					* yearFraction(
-							shiftCalcTime(contractState.lastEventTime, contractTerms.businessDayConvention, contractTerms.calendar),
-							shiftCalcTime(timestamp, contractTerms.businessDayConvention, contractTerms.calendar),
+							shiftCalcTime(contractState.lastEventTime, contractTerms.businessDayConvention, contractTerms.calendar,contractTerms.maturityDate),
+							shiftCalcTime(timestamp, contractTerms.businessDayConvention, contractTerms.calendar,contractTerms.maturityDate),
 							contractTerms.dayCountConvention,
 							contractTerms.maturityDate
 						)
@@ -812,8 +822,8 @@ contract PAMEngine is Core, IEngine {
 					performanceIndicator(contractState.contractStatus)
 					* roleSign(contractTerms.contractRole)
 					* yearFraction(
-							shiftCalcTime(contractState.lastEventTime, contractTerms.businessDayConvention, contractTerms.calendar),
-							shiftCalcTime(timestamp, contractTerms.businessDayConvention, contractTerms.calendar),
+							shiftCalcTime(contractState.lastEventTime, contractTerms.businessDayConvention, contractTerms.calendar,contractTerms.maturityDate),
+							shiftCalcTime(timestamp, contractTerms.businessDayConvention, contractTerms.calendar,contractTerms.maturityDate),
 							contractTerms.dayCountConvention,
 							contractTerms.maturityDate
 						)
@@ -830,8 +840,8 @@ contract PAMEngine is Core, IEngine {
 					.add(contractState.nominalAccrued)
 					.add(
 						yearFraction(
-							shiftCalcTime(contractState.lastEventTime, contractTerms.businessDayConvention, contractTerms.calendar),
-							shiftCalcTime(timestamp, contractTerms.businessDayConvention, contractTerms.calendar),
+							shiftCalcTime(contractState.lastEventTime, contractTerms.businessDayConvention, contractTerms.calendar,contractTerms.maturityDate),
+							shiftCalcTime(timestamp, contractTerms.businessDayConvention, contractTerms.calendar,contractTerms.maturityDate),
 							contractTerms.dayCountConvention,
 							contractTerms.maturityDate
 						)

@@ -11,7 +11,8 @@ contract BusinessDayConvention is Definitions {
 	function shiftCalcTime(
 		uint256 timestamp,
 		BusinessDayConvention convention,
-		Calendar calendar
+		Calendar calendar,
+		uint256 maturityDate
 	)
 		internal
 		pure
@@ -26,7 +27,7 @@ contract BusinessDayConvention is Definitions {
 			return timestamp;
 		}
 
-		return shiftEventTime(timestamp, convention, calendar);
+		return shiftEventTime(timestamp, convention, calendar, maturityDate);
 	}
 
 	// used in ProtoEvent schedule generation (for single events and event cycles schedules)
@@ -34,12 +35,14 @@ contract BusinessDayConvention is Definitions {
 	function shiftEventTime(
 		uint256 timestamp,
 		BusinessDayConvention convention,
-		Calendar calendar
+		Calendar calendar,
+		uint256 maturityDate
 	)
 		internal
 		pure
 		returns (uint256)
 	{
+		if (timestamp == maturityDate) return timestamp;
 		if (convention == BusinessDayConvention.SCF || convention == BusinessDayConvention.CSF) {
 			return getClosestBusinessDaySameDayOrFollowing(timestamp, calendar);
 		} else if (convention == BusinessDayConvention.SCMF || convention == BusinessDayConvention.CSMF) {
