@@ -11,7 +11,7 @@ contract Definitions {
 
 	uint256 constant public PRECISION = 18;
 
-	uint256 constant MAX_CYCLE_SIZE = 30;
+	uint256 constant MAX_CYCLE_SIZE = 60;
 	uint256 constant MAX_EVENT_SCHEDULE_SIZE = 120; // 4x MAX_CYCLE_SIZE for IP, RR, FP and SC
 
 	// IPS
